@@ -19,6 +19,10 @@ box2d_2_1_1ios
 	ios용 Box2d 라이브러리(2d 물리엔진)
 Tweener
 	CppTweener(에니메이션 라이브러리)
+IbizaEngine
+	예전버전 에니메이션 렌더링 엔진
+TalkingLibrary
+	음성변조 라이브러리 
 
 
 프로젝트셋팅에 추가
