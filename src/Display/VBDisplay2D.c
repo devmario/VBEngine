@@ -65,10 +65,11 @@ void _VBDisplay2DSetDrawableListTowardChildsRecursive(VBDisplay2D* _display, VBM
                 VBDrawable2DAppend(_display->drawable, _model->drawable);
             }
         }
-        VBULong i;
-        for(i = 0; i < VBModel2DGetChildNum(_model); i++) {
-            VBModel2D* child = VBModel2DGetChildModelAt(_model, i);
-            _VBDisplay2DSetDrawableListTowardChildsRecursive(_display, child);
+        VBArrayListNode* _node = VBArrayListGetFirstNode(_model->child);
+        while(_node) {
+            VBModel2D* _child = VBArrayListNodeGetData(_node);
+            _VBDisplay2DSetDrawableListTowardChildsRecursive(_display, _child);
+            _node = VBArrayListNodeGetNextNode(_node);
         }
     }
 }
@@ -153,9 +154,7 @@ void VBDisplay2DUpdate(VBDisplay2D* _display, VBFloat _tick) {
     
     //에니메이션 업데이트
     _VBModel2DAnimationUpdateTowardChildsRecursive(VBDisplay2DGetTopModel(_display) , _tick, VBTrue);
-}
-
-void VBDisplay2DDraw(VBDisplay2D* _display) {
+    
     //모델의 색상과 변환행렬을 모델트리구조에서 혼합하고 모든 모델의 Drawable을 만든다.
     //추가로 AABB생성을 위한 최하위 모델들도 수집한다.
     _VBModel2DUpdateColorAndMatrixAndDrawableTowardChildsRecursive(VBDisplay2DGetTopModel(_display), VBColorRGBALoadIdentity(), VBCamera2DGetMatrix(_display->camera), _display, _VBDisplay2DEventLeafModel);
@@ -164,9 +163,11 @@ void VBDisplay2DDraw(VBDisplay2D* _display) {
     _VBModel2DSetVertexAABBTowardChildsRecursive(VBDisplay2DGetTopModel(_display));
     
     //AABB 설정
-    for(int i = 0; i < VBArrayListGetLength(_display->leaf_list); i++) {
-        VBModel2D* _model = VBArrayListDataAtIndex(_display->leaf_list, i);
+    VBArrayListNode* _node = VBArrayListGetFirstNode(_display->leaf_list);
+    while(_node) {
+        VBModel2D* _model = VBArrayListNodeGetData(_node);
         _VBModel2DSetAABBTowardParentsRecursive(_model, _model->vertex_aabb);
+        _node = VBArrayListNodeGetNextNode(_node);
     }
     
     //모델을 그릴것인가 말것인가를 스크린의 AABB와 모델트리의 AABB들과 판단하여 플래그 값을 설정한다.
@@ -175,10 +176,13 @@ void VBDisplay2DDraw(VBDisplay2D* _display) {
     
     //디스플레이의 모델들을 최소 갯수의 Drawable로 병합한다.
     _VBDisplay2DSetDrawableListTowardChildsRecursive(_display, VBDisplay2DGetTopModel(_display));
-    
+}
+
+void VBDisplay2DDraw(VBDisplay2D* _display) {
     //OpenGL 좌표계 설정
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+    VBVector2D _screen_size = VBEngineGetScreenSize();
     glOrthof(0, _screen_size.x, _screen_size.y, 0, -1, 1);
     
     //ModelView전환

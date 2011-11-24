@@ -15,8 +15,11 @@ void _VBModel2DSetVertexAABBTowardChildsRecursive(VBModel2D* _model) {
         _model->vertex_aabb = VBAABBLoadIndentity();
     _model->aabb = _model->vertex_aabb;
     
-    for(int i = 0; i < VBModel2DGetChildNum(_model); i++)
-        _VBModel2DSetVertexAABBTowardChildsRecursive(VBModel2DGetChildModelAt(_model, i));
+    VBArrayListNode* _node = VBArrayListGetFirstNode(_model->child);
+    while(_node) {
+        _VBModel2DSetVertexAABBTowardChildsRecursive(VBArrayListNodeGetData(_node));
+        _node = VBArrayListNodeGetNextNode(_node);
+    }
 }
 
 //모델의 AABB(모든 자식들의 AABB를 포함)를 설정합니다.(이메소드 호출시 모든 부모들의 AABB도 설정됨)
@@ -34,8 +37,11 @@ void _VBModel2DSetDrawFlagAsAABBTowardChildsRecursive(VBModel2D* _model, VBAABB 
     _model->is_aabb_draw = VBAABBHitTest(_model->aabb, _screen_aabb);
     _model->is_vertex_aabb_draw = VBAABBHitTest(_model->vertex_aabb, _screen_aabb);
     if(_model->is_aabb_draw) {
-        for(int i = 0; i < VBModel2DGetChildNum(_model); ++i)
-            _VBModel2DSetDrawFlagAsAABBTowardChildsRecursive(VBModel2DGetChildModelAt(_model, i), _screen_aabb);
+        VBArrayListNode* _node = VBArrayListGetFirstNode(_model->child);
+        while(_node) {
+            _VBModel2DSetDrawFlagAsAABBTowardChildsRecursive(VBArrayListNodeGetData(_node), _screen_aabb);
+            _node = VBArrayListNodeGetNextNode(_node);
+        }
     }
 }
 
@@ -61,14 +67,19 @@ void _VBModel2DUpdateColorAndMatrixAndDrawableTowardChildsRecursive(VBModel2D* _
             _color[i] = _model->multiply_color;
             origin_vtx++;
         }
-        _model->drawable = VBDrawable2DInitWithData(_model->drawable, _model->origin_drawable->draw_type,
-                                                    _model->origin_drawable->tex, _model->origin_drawable->poly_len, _color, vtx, _model->origin_drawable->txc,
-                                                    _model->origin_drawable->idx_len, _model->origin_drawable->idx);
+        VBDrawable2DSetData(_model->drawable, _model->origin_drawable->draw_type,
+                            _model->origin_drawable->tex, _model->origin_drawable->poly_len, _color, vtx, _model->origin_drawable->txc,
+                            _model->origin_drawable->idx_len, _model->origin_drawable->idx);
     }
     if(VBModel2DGetChildNum(_model) == 0)
         _leaf_tree_child_func(_user_reference, _model);
-    for(int i = 0; i < VBModel2DGetChildNum(_model); ++i)
-        _VBModel2DUpdateColorAndMatrixAndDrawableTowardChildsRecursive(VBModel2DGetChildModelAt(_model, i), _model->multiply_color, _model->multiply_matrix, _user_reference, _leaf_tree_child_func);
+    
+    
+    VBArrayListNode* _node = VBArrayListGetFirstNode(_model->child);
+    while(_node) {
+        _VBModel2DUpdateColorAndMatrixAndDrawableTowardChildsRecursive(VBArrayListNodeGetData(_node), _model->multiply_color, _model->multiply_matrix, _user_reference, _leaf_tree_child_func);
+        _node = VBArrayListNodeGetNextNode(_node);
+    }
 }
 
 #pragma mark - VBModel2D의 에니메이션 업데이트(private한 재귀 method)
@@ -214,8 +225,10 @@ void _VBModel2DAnimationUpdateTowardChildsRecursive(VBModel2D* _model, VBFloat _
         }
     }
     if(_is_update_child) {
-        for(int i = 0; i < VBModel2DGetChildNum(_model); i++) {
-            _VBModel2DAnimationUpdateTowardChildsRecursive(VBModel2DGetChildModelAt(_model, i), _tick, _is_update_child);
+        VBArrayListNode* _node = VBArrayListGetFirstNode(_model->child);
+        while(_node) {
+            _VBModel2DAnimationUpdateTowardChildsRecursive(VBArrayListNodeGetData(_node), _tick, _is_update_child);
+            _node = VBArrayListNodeGetNextNode(_node);
         }
     }
 }

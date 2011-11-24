@@ -199,6 +199,46 @@ VBDrawable2D* VBDrawable2DInitWithData(VBDrawable2D* _drawable, VBDrawable2DType
 	return _drawable;
 }
 
+
+void VBDrawable2DSetData(VBDrawable2D* _drawable, VBDrawable2DType _draw_type,
+                         VBTexture* _tex, VBUShort _poly_len, 
+                         VBColorRGBA* _color, VBVector2D* _vtx, VBVector2D* _txc, 
+                         VBUShort _idx_len, VBUShort* _idx) {
+	_drawable->tex = _tex;
+	_drawable->draw_type = _draw_type;
+    
+    if(_drawable->poly_len != _poly_len) {
+        _drawable->poly_len = _poly_len;
+        
+        if(_drawable->vtx == NULL)
+            _drawable->vtx = calloc(_poly_len, sizeof(VBVector2D));
+        else
+            _drawable->vtx = realloc(_drawable->vtx, _poly_len * sizeof(VBVector2D));
+        
+        if(_drawable->color == NULL)
+            _drawable->color = calloc(_poly_len, VBColorTypeGetSize(VBColorType_RGBA));
+        else
+            _drawable->color = realloc(_drawable->color, _poly_len * VBColorTypeGetSize(VBColorType_RGBA));
+        
+        if(_drawable->txc == NULL)
+            _drawable->txc = calloc(_poly_len, sizeof(VBVector2D));
+        else
+            _drawable->txc = realloc(_drawable->txc, _poly_len * sizeof(VBVector2D));
+    }
+    
+    if(_drawable->idx_len != _idx_len) {
+        _drawable->idx_len = _idx_len;
+        if(_drawable->idx == NULL)
+            _drawable->idx = calloc(_idx_len, sizeof(VBUShort));
+        else
+            _drawable->idx = realloc(_drawable->txc, _idx_len * sizeof(VBUShort));
+    }
+	memcpy(_drawable->color, _color, _poly_len * VBColorTypeGetSize(VBColorType_RGBA));
+	memcpy(_drawable->vtx, _vtx, _poly_len * sizeof(VBVector2D));
+	memcpy(_drawable->txc, _txc, _poly_len * sizeof(VBVector2D));
+	memcpy(_drawable->idx, _idx, _idx_len * sizeof(VBUShort));
+}
+
 void VBDrawable2DFree(VBDrawable2D** _drawable) {
 #ifdef _VB_DEBUG_
 	if(*_drawable == VBNull)

@@ -168,6 +168,11 @@ extern "C" {
 										   VBTexture* _tex, VBUShort _poly_len, 
 										   VBColorRGBA* _color, VBVector2D* _vtx, VBVector2D* _txc, 
 										   VBUShort _idx_len, VBUShort* _idx);
+    
+    void VBDrawable2DSetData(VBDrawable2D* _drawable, VBDrawable2DType _draw_type,
+                             VBTexture* _tex, VBUShort _poly_len, 
+                             VBColorRGBA* _color, VBVector2D* _vtx, VBVector2D* _txc, 
+                             VBUShort _idx_len, VBUShort* _idx);
 	
 	/**
 	 @brief VBDrawable2D의 메모리를 해제합니다.

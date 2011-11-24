@@ -1,4 +1,5 @@
 #include "VBMatrix2DWrapper.h"
+#include <math.h>
 
 VBMatrix2DWrapper VBMatrix2DWrapperLoadIdentity(void) {
 	VBMatrix2DWrapper _wrapp;
@@ -165,9 +166,14 @@ VBMatrix2DWrapper VBMatrix2DWrapperUpdate(VBMatrix2DWrapper _wrapp) {
 		_wrapp.mat = VBMatrix2DLoadIdentity();
 		
 		_wrapp.mat = VBMatrix2DTranslateV(_wrapp.mat, _wrapp.position);
+        
         _wrapp.mat = VBMatrix2DScaleV(_wrapp.mat, _wrapp.scale);
-		_wrapp.mat = VBMatrix2DRotate(_wrapp.mat, _wrapp.rotation);
-		_wrapp.mat = VBMatrix2DShearV(_wrapp.mat, _wrapp.shear);
+        
+        if(!isnan(_wrapp.rotation)) {
+            _wrapp.mat = VBMatrix2DRotate(_wrapp.mat, _wrapp.rotation);
+        } else {
+            _wrapp.mat = VBMatrix2DShearV(_wrapp.mat, _wrapp.shear);
+        }
 		
 		_wrapp.mat = VBMatrix2DTranslateV(_wrapp.mat, VBVector2DSubtract(VBVector2DZero(), _wrapp.anchor));
 		
