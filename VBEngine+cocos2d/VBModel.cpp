@@ -214,14 +214,14 @@ void VBModel::VBModelUpdate(float _tick) {
                             VBObjectFile2DKeyFrameElement* _element = VBObjectFile2DKeyFrameGetElement(_key_frame);
                             if(VBObjectFile2DKeyFrameElementType_Bitmap == VBObjectFile2DKeyFrameElementGetType(_element)) {
                                 VBObjectFile2DKeyFrameElementBitmap* _bitmap = (VBObjectFile2DKeyFrameElementBitmap*)VBObjectFile2DKeyFrameElementGetBaseElement(_element);
-                                VBMatrix2DWrapper mat = _bitmap->matrix;
-                                child->setPosition(CCPoint(mat.position.x , -mat.position.y));
-                                child->setAnchorPoint(CCPoint(mat.anchor.x, -mat.anchor.y));
+                                VBMatrix2DWrapper mat = _bitmap->matrix; 
+                                child->setPosition(CCPoint(mat.position.x, mat.position.y));
+                                child->setAnchorPoint(CCPoint(mat.anchor.x, mat.anchor.y));
                                 child->setScaleX(mat.scale.x);
                                 child->setScaleY(mat.scale.y);
                                 child->setSkewX(mat.shear.x);
-                                child->setSkewY(-mat.shear.y);
-                                child->setRotation(-mat.rotation);
+                                child->setSkewY(mat.shear.y);
+                                child->setRotation(mat.rotation);
                             } else if(VBObjectFile2DKeyFrameElementType_Graphic == VBObjectFile2DKeyFrameElementGetType(_element)) {
                                 VBMatrix2DWrapper mat;
                                 VBColorRGBA color;
@@ -229,14 +229,14 @@ void VBModel::VBModelUpdate(float _tick) {
                                 VBFloat t = (_e - _b) == 0.0f ? 0.0 : (this->cur_frame - _b) / (_e - _b);
                                 if(t > 1.0)
                                     t = 1.0;
-                                VBObjectFile2DKeyFrameElementGraphicGetTransitionProperties(_graphic, t, &mat, &color);
-                                child->setPosition(CCPoint(mat.position.x, -mat.position.y));
-                                child->setAnchorPoint(CCPoint(mat.anchor.x, -mat.anchor.y));
+                                VBObjectFile2DKeyFrameElementGraphicGetTransitionProperties(_graphic, t, &mat, &color); 
+                                child->setPosition(CCPoint(mat.position.x, mat.position.y));
+                                child->setAnchorPoint(CCPoint(mat.anchor.x, mat.anchor.y));
                                 child->setScaleX(mat.scale.x);
                                 child->setScaleY(mat.scale.y);
                                 child->setSkewX(mat.shear.x);
-                                child->setSkewY(-mat.shear.y);
-                                child->setRotation(-mat.rotation);
+                                child->setSkewY(mat.shear.y);
+                                child->setRotation(mat.rotation);
                                 ccColor3B _color3B;
                                 _color3B.r = color.r;
                                 _color3B.g = color.g;
@@ -251,13 +251,13 @@ void VBModel::VBModelUpdate(float _tick) {
                                 if(t > 1.0)
                                     t = 1.0;
                                 VBObjectFile2DKeyFrameElementMovieClipGetTransitionProperties(_movie_clip, t, &mat, &color); 
-                                child->setPosition(CCPoint(mat.position.x, -mat.position.y));
-                                child->setAnchorPoint(CCPoint(mat.anchor.x, -mat.anchor.y));
+                                child->setPosition(CCPoint(mat.position.x, mat.position.y));
+                                child->setAnchorPoint(CCPoint(mat.anchor.x, mat.anchor.y));
                                 child->setScaleX(mat.scale.x);
                                 child->setScaleY(mat.scale.y);
                                 child->setSkewX(mat.shear.x);
-                                child->setSkewY(-mat.shear.y);
-                                child->setRotation(-mat.rotation);
+                                child->setSkewY(mat.shear.y);
+                                child->setRotation(mat.rotation);
                                 ccColor3B _color3B;
                                 _color3B.r = color.r;
                                 _color3B.g = color.g;
@@ -349,11 +349,11 @@ CCAffineTransform VBModel::nodeToParentTransform(void) {
 	if (m_bIsTransformDirty) {
         mat = VBMatrix2DWrapperLoadIdentity();
 		
-        mat = VBMatrix2DWrapperSetPosition(mat, VBVector2DCreate(m_tPosition.x, m_tPosition.y));
+        mat = VBMatrix2DWrapperSetPosition(mat, VBVector2DCreate(m_tPosition.x, -m_tPosition.y));
         mat = VBMatrix2DWrapperSetScale(mat, VBVector2DCreate(m_fScaleX, m_fScaleY));
-        mat = VBMatrix2DWrapperSetShear(mat, VBVector2DCreate(m_fSkewX, m_fSkewY));
-        mat = VBMatrix2DWrapperSetRotation(mat, m_fRotation);
-        mat = VBMatrix2DWrapperSetAnchor(mat, VBVector2DCreate(m_tAnchorPoint.x, m_tAnchorPoint.y));
+        mat = VBMatrix2DWrapperSetShear(mat, VBVector2DCreate(m_fSkewX, -m_fSkewY));
+        mat = VBMatrix2DWrapperSetRotation(mat, -m_fRotation);
+        mat = VBMatrix2DWrapperSetAnchor(mat, VBVector2DCreate(m_tAnchorPoint.x, -m_tAnchorPoint.y));
         mat = VBMatrix2DWrapperUpdate(mat);
         
 		m_tTransform = CCAffineTransformMake(mat.mat.m11, mat.mat.m21, mat.mat.m12, mat.mat.m22, mat.mat.m13, mat.mat.m23);
