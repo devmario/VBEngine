@@ -36,7 +36,7 @@ VBModel::VBModel() {
     this->frame_current_key_frame = VBArrayVectorInit(VBArrayVectorAlloc());
 }
 
-VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_name_id, VBTexture* _texture, VBBool _is_realtime_animation) {
+VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_name_id, CCTexture2D* _texture, VBBool _is_realtime_animation) {
     init();
     this->setAnchorPoint(ccp(0,0));
     is_animation_update = 0;
@@ -108,24 +108,11 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_n
             _txc_ptr->y = _uv[_i].y;
             _txc_ptr++;
         }
-        tex = new cocos2d::CCTexture2D();
-        
-        tex->m_bPVRHaveAlphaPremultiplied = false;
-        tex->m_bHasPremultipliedAlpha = false;
-        if(_texture->color_type == VBColorType_RGBA)
-            tex->m_ePixelFormat = kCCTexture2DPixelFormat_RGBA8888;
-        tex->m_uName = _texture->tid;
-        tex->m_fMaxS = 1.0;
-        tex->m_fMaxT = 1.0;
-        tex->m_uPixelsWide = _texture->width;
-        tex->m_uPixelsHigh = _texture->height;
-        tex->m_tContentSize.width = _texture->width;
-        tex->m_tContentSize.height = _texture->height;
-        this->setTexture(tex);
-        this->setTextureRect( cocos2d::CCRectMake(_txc[0].x * tex->getPixelsWide()
-                                                  ,_txc[0].y * tex->getPixelsHigh()
-                                                  ,_txc[2].x * tex->getPixelsWide() - _txc[0].x * tex->getPixelsWide()
-                                                  ,_txc[2].y  * tex->getPixelsHigh() - _txc[0].y * tex->getPixelsHigh() ) );
+        this->setTexture(_texture);
+        this->setTextureRect( cocos2d::CCRectMake(_txc[0].x * _texture->getPixelsWide()
+                                                  ,_txc[0].y * _texture->getPixelsHigh()
+                                                  ,_txc[2].x * _texture->getPixelsWide() - _txc[0].x * _texture->getPixelsWide()
+                                                  ,_txc[2].y  * _texture->getPixelsHigh() - _txc[0].y * _texture->getPixelsHigh() ) );
         
     } else if(VBObjectFile2DLibraryType_Graphic == VBObjectFile2DLibraryGetType(_library) || VBObjectFile2DLibraryType_MovieClip == VBObjectFile2DLibraryGetType(_library)) {
         if(VBObjectFile2DLibraryType_Graphic == VBObjectFile2DLibraryGetType(_library)) {
@@ -147,6 +134,21 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_n
         }
     }
     VBModelUpdate(0.0f);
+}
+
+VBModel::~VBModel(void) {
+    int i;
+    for(i = 0; i < VBArrayVectorGetLength(this->frame_current_key_frame); i++) {
+        VBSystemFree(this->frame_all_allocated_child_models->data[i]);
+    }
+    for(i = 0; i < VBArrayVectorGetLength(this->frame_all_allocated_child_models); i++) {
+        delete (VBModel*)this->frame_all_allocated_child_models->data[i];
+    }
+    
+    VBArrayVectorFree(&this->frame_all_allocated_child_models);
+    VBArrayVectorFree(&this->frame_current_key_frame);
+    
+    this->cleanup();
 }
 
 void VBModel::VBModelUpdate(float _tick) {

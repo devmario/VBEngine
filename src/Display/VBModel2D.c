@@ -417,6 +417,14 @@ void VBModel2DFree(VBModel2D** _model) {
 										 "VBEngine Log: VBModel2DFree() - VBNull인 Model요소를 해제 할수 없습니다. VBModel2DAlloc하지 않았거나 이미 VBModel2DFree했을 수 있습니다.");
 #endif
     
+    int i;
+    for(i = 0; i < VBArrayVectorGetLength((*_model)->frame_current_key_frame); i++) {
+        VBSystemFree((*_model)->frame_all_allocated_child_models->data[i]);
+    }
+    for(i = 0; i < VBArrayVectorGetLength((*_model)->frame_all_allocated_child_models); i++) {
+        VBModel2DFree((VBModel2D**)&(*_model)->frame_all_allocated_child_models->data[i]);
+    }
+    
     *_model = VBModel2DInit(*_model);
     VBArrayListFree(&(*_model)->child);
     VBArrayVectorFree(&(*_model)->frame_all_allocated_child_models);

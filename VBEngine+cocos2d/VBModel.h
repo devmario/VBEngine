@@ -28,10 +28,9 @@ public:
     VBFloat cur_frame;
     VBMatrix2DWrapper mat;
     
-    CCTexture2D* tex;
-    
     VBModel();
-    VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_name_id, VBTexture* _texture, VBBool _is_realtime_animation);
+    VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_name_id, CCTexture2D* _texture, VBBool _is_realtime_animation);
+    virtual ~VBModel(void);
     
     void VBModelUpdate(float _tick);
     
