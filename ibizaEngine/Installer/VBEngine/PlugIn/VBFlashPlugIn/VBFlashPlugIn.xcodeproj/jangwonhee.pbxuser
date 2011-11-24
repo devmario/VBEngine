@@ -1,0 +1,99 @@
+// !$*UTF8*$!
+{
+	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeTarget = 8D57630D048677EA00EA77CD /* VBFlashPlugIn */;
+		addToTargets = (
+			8D57630D048677EA00EA77CD /* VBFlashPlugIn */,
+		);
+		codeSenseManager = BC83BA9912EEE6DA001B6BCE /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					341,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 317646550;
+			PBXWorkspaceStateSaveDate = 317646550;
+		};
+		sourceControlManager = BC83BA9812EEE6DA001B6BCE /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	8D57630D048677EA00EA77CD /* VBFlashPlugIn */ = {
+		activeExec = 0;
+	};
+	BC83BA9812EEE6DA001B6BCE /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	BC83BA9912EEE6DA001B6BCE /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	BC83BA9A12EEE6EB001B6BCE /* CAPIUtil.c */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 666}}";
+			sepNavSelRange = "{270, 6}";
+			sepNavVisRange = "{22, 744}";
+		};
+	};
+	BC83BA9B12EEE6EB001B6BCE /* CAPIUtil.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 500}}";
+			sepNavSelRange = "{223, 15}";
+			sepNavVisRange = "{0, 368}";
+		};
+	};
+	BC83BA9C12EEE6EB001B6BCE /* VBFlashPlugIn.c */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 8590}}";
+			sepNavSelRange = "{23, 0}";
+			sepNavVisRange = "{0, 778}";
+		};
+	};
+	BC83BA9D12EEE6EB001B6BCE /* VBFlashPlugIn.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 681}}";
+			sepNavSelRange = "{255, 0}";
+			sepNavVisRange = "{0, 678}";
+		};
+	};
+	BC83BA9E12EEE6EB001B6BCE /* mm_jsapi.c */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 681}}";
+			sepNavSelRange = "{678, 19}";
+			sepNavVisRange = "{0, 1477}";
+		};
+	};
+	BC83BA9F12EEE6EB001B6BCE /* mm_jsapi.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 2171}}";
+			sepNavSelRange = "{547, 0}";
+			sepNavVisRange = "{0, 1815}";
+		};
+	};
+}

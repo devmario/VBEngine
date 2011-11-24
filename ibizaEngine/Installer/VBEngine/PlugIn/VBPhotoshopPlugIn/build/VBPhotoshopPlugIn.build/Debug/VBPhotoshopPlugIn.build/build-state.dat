@@ -1,0 +1,295 @@
+TVBPhotoshopPlugIn
+v7
+r0
+t317650246.181322
+cCheck dependencies
+cSymLink /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/Current A
+cSymLink /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Resources Versions/Current/Resources
+cSymLink /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/VBPhotoshopPlugIn Versions/Current/VBPhotoshopPlugIn
+cProcessInfoPlistFile /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/Info.plist Info.plist
+cCopyStringsFile /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+cProcessPCH++ /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/VBPhotoshopPlugIn_Prefix-hewcgvnvqedfojazzzsfkpdjvlml/VBPhotoshopPlugIn_Prefix.pch.gch VBPhotoshopPlugIn_Prefix.pch normal x86_64 c++ com.apple.compilers.gcc.4_2
+cCompileC build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/Objects-normal/x86_64/VBCExternalForPhotoshop.o /VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cLd /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/VBPhotoshopPlugIn normal x86_64
+cTouch /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework
+
+N/Developer/SDKs/MacOSX10.6.sdk
+c000000004D09F3B900000000000000EE
+t1292497849
+s238
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
+c0000000040C4AA6800000000000001E5
+t1086630504
+s485
+
+N/System/Library/Frameworks/Cocoa.framework/Cocoa
+c000000004D005D57000000000000A5E0
+t1291869527
+s42464
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/English.lproj/InfoPlist.strings
+c000000004D3EBD8E0000000000000030
+t1295957390
+s48
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/VBExternalForPhotoshop/SoSharedLibDefs.h
+c000000004D254852000000000000197E
+t1294288978
+s6526
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.cpp
+c000000004D2548520000000000000713
+t1294288978
+s1811
+i"VBCExternalForPhotoshop.h"
+i"SoSharedLibDefs.h"
+i<iostream>
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.h
+c000000004D25485200000000000000AA
+t1294288978
+s170
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/VBPhotoshopPlugIn_Prefix.pch
+c000000004D3EBD8E00000000000000A6
+t1295957390
+s166
+i<Cocoa/Cocoa.h>
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework
+t1295957446
+s170
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Resources
+t3
+s26
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/VBPhotoshopPlugIn
+t3
+s34
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/English.lproj/InfoPlist.strings
+t1295957445
+s92
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/Info.plist
+t1295957445
+s744
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/VBPhotoshopPlugIn
+t1295957446
+s11536
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/Current
+t3
+s1
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/Objects-normal/x86_64/VBCExternalForPhotoshop.o
+t1295957446
+s51904
+
+N/Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/Objects-normal/x86_64/VBPhotoshopPlugIn.LinkFileList
+c000000004D3EBDC5000000000000007F
+t1295957445
+s127
+
+N/VBPhotoshopPlugIn/English.lproj/InfoPlist.strings
+c000000004D3EBD8E0000000000000030
+t1295957390
+s48
+
+N/VBPhotoshopPlugIn/VBExternalForPhotoshop/SoSharedLibDefs.h
+c000000004D254852000000000000197E
+t1294288978
+s6526
+
+N/VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.cpp
+c000000004D2548520000000000000713
+t1294288978
+s1811
+i"VBCExternalForPhotoshop.h"
+i"SoSharedLibDefs.h"
+i<iostream>
+
+N/VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.h
+c000000004D25485200000000000000AA
+t1294288978
+s170
+
+N/VBPhotoshopPlugIn/VBPhotoshopPlugIn_Prefix.pch
+c000000004D3EBD8E00000000000000A6
+t1295957390
+s166
+i<Cocoa/Cocoa.h>
+
+N/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework
+t1295957446
+s170
+
+N/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Resources
+t3
+s26
+
+N/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/VBPhotoshopPlugIn
+t3
+s34
+
+N/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/English.lproj/InfoPlist.strings
+t1295957445
+s92
+
+N/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/Info.plist
+t1295957445
+s744
+
+N/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/VBPhotoshopPlugIn
+t1295957446
+s11536
+
+N/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/Current
+t3
+s1
+
+N/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/Objects-normal/x86_64/VBCExternalForPhotoshop.o
+t1295957446
+s51904
+
+N/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/Objects-normal/x86_64/VBPhotoshopPlugIn.LinkFileList
+c000000004D3EBDC5000000000000007F
+t1295957445
+s127
+
+N/var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/VBPhotoshopPlugIn_Prefix-fvhczapqmabkgvezylfofxozxila/VBPhotoshopPlugIn_Prefix.pch.gch
+t2
+s0
+
+N/var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/VBPhotoshopPlugIn_Prefix-hewcgvnvqedfojazzzsfkpdjvlml/VBPhotoshopPlugIn_Prefix.pch.gch
+t1295957445
+s2523504
+
+NInfo.plist
+c000000004D3EBD8E0000000000000357
+t1295957390
+s855
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies317650245#317650245#0(0"0(0#1#0"8616079168#0"0#
+
+CCompileC build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/Objects-normal/x86_64/VBCExternalForPhotoshop.o /Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/Objects-normal/x86_64/VBCExternalForPhotoshop.o /VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s317650245.565494
+e317650246.025878
+r1
+xCompileC
+xbuild/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/Objects-normal/x86_64/VBCExternalForPhotoshop.o
+x/VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@77"Compile /VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.cpp317650245#317650246#0(0"0(0#0#69"/VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.cpp8616065472#1502"    cd /VBPhotoshopPlugIn    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote /VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/VBPhotoshopPlugIn-generated-files.hmap -I/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/VBPhotoshopPlugIn-own-target-headers.hmap -I/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/VBPhotoshopPlugIn-all-target-headers.hmap -iquote /VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/VBPhotoshopPlugIn-project-headers.hmap -F/VBPhotoshopPlugIn/build/Debug -I/VBPhotoshopPlugIn/build/Debug/include -I/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/DerivedSources/x86_64 -I/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/VBPhotoshopPlugIn_Prefix-hewcgvnvqedfojazzzsfkpdjvlml/VBPhotoshopPlugIn_Prefix.pch -c /VBPhotoshopPlugIn/VBExternalForPhotoshop/VBCExternalForPhotoshop.cpp -o /VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/Objects-normal/x86_64/VBCExternalForPhotoshop.o0#
+
+CCopyStringsFile /Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+r0
+
+CCopyStringsFile /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+s317650245.463932
+e317650245.493471
+r1
+xCopyStringsFile
+x/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/English.lproj/InfoPlist.strings
+xEnglish.lproj/InfoPlist.strings
+lSLF07#2@36"Copy English.lproj/InfoPlist.strings317650245#317650245#0(0"0(0#0#50"/VBPhotoshopPlugIn/English.lproj/InfoPlist.strings8616221216#343"    cd /VBPhotoshopPlugIn    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/English.lproj0#
+
+CLd /Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/VBPhotoshopPlugIn normal x86_64
+r0
+
+CLd /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/VBPhotoshopPlugIn normal x86_64
+s317650246.025968
+e317650246.158907
+r1
+xLd
+x/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/VBPhotoshopPlugIn
+xnormal
+xx86_64
+lSLF07#2@92"Link /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/VBPhotoshopPlugIn317650246#317650246#0(0"0(0#0#0"8615768192#673"    cd /VBPhotoshopPlugIn    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch x86_64 -dynamiclib -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/VBPhotoshopPlugIn/build/Debug -F/VBPhotoshopPlugIn/build/Debug -filelist /VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/Objects-normal/x86_64/VBPhotoshopPlugIn.LinkFileList -install_name /Users/jangwonhee/Library/Frameworks/VBPhotoshopPlugIn.framework/Versions/A/VBPhotoshopPlugIn -mmacosx-version-min=10.6 -framework Cocoa -single_module -compatibility_version 1 -current_version 1 -o /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/VBPhotoshopPlugIn0#
+
+CProcessInfoPlistFile /Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/Info.plist Info.plist
+r0
+
+CProcessInfoPlistFile /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/Info.plist Info.plist
+s317650245.461262
+e317650245.463865
+r1
+xProcessInfoPlistFile
+x/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/Info.plist
+xInfo.plist
+lSLF07#2@18"Process Info.plist317650245#317650245#0(0"0(0#0#29"/VBPhotoshopPlugIn/Info.plist8616350912#198"    cd /VBPhotoshopPlugIn    builtin-infoPlistUtility Info.plist -expandbuildsettings -platform macosx -o /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/A/Resources/Info.plist0#
+
+CProcessPCH++ /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/VBPhotoshopPlugIn_Prefix-fvhczapqmabkgvezylfofxozxila/VBPhotoshopPlugIn_Prefix.pch.gch VBPhotoshopPlugIn_Prefix.pch normal x86_64 c++ com.apple.compilers.gcc.4_2
+r0
+
+CProcessPCH++ /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/VBPhotoshopPlugIn_Prefix-hewcgvnvqedfojazzzsfkpdjvlml/VBPhotoshopPlugIn_Prefix.pch.gch VBPhotoshopPlugIn_Prefix.pch normal x86_64 c++ com.apple.compilers.gcc.4_2
+s317650245.493619
+e317650245.565387
+r1
+xProcessPCH++
+x/var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/VBPhotoshopPlugIn_Prefix-hewcgvnvqedfojazzzsfkpdjvlml/VBPhotoshopPlugIn_Prefix.pch.gch
+xVBPhotoshopPlugIn_Prefix.pch
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@39"Precompile VBPhotoshopPlugIn_Prefix.pch317650245#317650245#0(0"0(0#0#47"/VBPhotoshopPlugIn/VBPhotoshopPlugIn_Prefix.pch8616147712#1355"    cd /VBPhotoshopPlugIn    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++-header -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote /VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/VBPhotoshopPlugIn-generated-files.hmap -I/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/VBPhotoshopPlugIn-own-target-headers.hmap -I/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/VBPhotoshopPlugIn-all-target-headers.hmap -iquote /VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/VBPhotoshopPlugIn-project-headers.hmap -F/VBPhotoshopPlugIn/build/Debug -I/VBPhotoshopPlugIn/build/Debug/include -I/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/DerivedSources/x86_64 -I/VBPhotoshopPlugIn/build/VBPhotoshopPlugIn.build/Debug/VBPhotoshopPlugIn.build/DerivedSources -c /VBPhotoshopPlugIn/VBPhotoshopPlugIn_Prefix.pch -o /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/VBPhotoshopPlugIn_Prefix-hewcgvnvqedfojazzzsfkpdjvlml/VBPhotoshopPlugIn_Prefix.pch.gch0#
+
+CSymLink /Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Resources Versions/Current/Resources
+r0
+
+CSymLink /Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/VBPhotoshopPlugIn Versions/Current/VBPhotoshopPlugIn
+r0
+
+CSymLink /Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/Current A
+r0
+
+CSymLink /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Resources Versions/Current/Resources
+s317650245.452916
+e317650245.459316
+r1
+xSymLink
+x/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Resources
+xVersions/Current/Resources
+lSLF07#2@76"Process /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Resources317650245#317650245#0(0"0(0#0#0"8616433408#138"    cd /VBPhotoshopPlugIn    /bin/ln -sf Versions/Current/Resources /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Resources0#
+
+CSymLink /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/VBPhotoshopPlugIn Versions/Current/VBPhotoshopPlugIn
+s317650245.458531
+e317650245.461189
+r1
+xSymLink
+x/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/VBPhotoshopPlugIn
+xVersions/Current/VBPhotoshopPlugIn
+lSLF07#2@84"Process /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/VBPhotoshopPlugIn317650245#317650245#0(0"0(0#0#0"8616380352#154"    cd /VBPhotoshopPlugIn    /bin/ln -sf Versions/Current/VBPhotoshopPlugIn /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/VBPhotoshopPlugIn0#
+
+CSymLink /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/Current A
+s317650245.445883
+e317650245.458437
+r1
+xSymLink
+x/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/Current
+xA
+lSLF07#2@83"Process /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/Current317650245#317650245#0(0"0(0#0#0"8613901984#120"    cd /VBPhotoshopPlugIn    /bin/ln -sf A /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework/Versions/Current0#
+
+CTouch /Users/jangwonhee/Desktop/VBEngine/PlugIn/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework
+r0
+
+CTouch /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework
+s317650246.158998
+e317650246.181274
+r1
+xTouch
+x/VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework
+lSLF07#2@64"Touch /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework317650246#317650246#0(0"0(0#0#0"8615306464#107"    cd /VBPhotoshopPlugIn    /usr/bin/touch -c /VBPhotoshopPlugIn/build/Debug/VBPhotoshopPlugIn.framework0#
+

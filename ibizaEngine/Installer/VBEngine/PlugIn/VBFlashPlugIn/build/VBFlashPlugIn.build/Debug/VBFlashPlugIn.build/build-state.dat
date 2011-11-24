@@ -1,0 +1,223 @@
+TVBFlashPlugIn
+v7
+r0
+t317648663.554455
+cCheck dependencies
+cProcessInfoPlistFile /VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/Info.plist Info.plist
+cCopyStringsFile /VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+cCompileC build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/CAPIUtil.o /VBFlashPlugIn/CAPIUtil.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/VBFlashPlugIn.o /VBFlashPlugIn/VBFlashPlugIn.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/mm_jsapi.o /VBFlashPlugIn/mm_jsapi.c normal x86_64 c com.apple.compilers.gcc.4_2
+
+N/Developer/SDKs/MacOSX10.6.sdk
+c000000004D09F3B900000000000000EE
+t1292497849
+s238
+
+N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdio.h
+c000000004BBD2CE90000000000004174
+t1270689001
+s16756
+
+N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdlib.h
+c000000004BBD2CE90000000000002DF5
+t1270689001
+s11765
+
+N/Developer/SDKs/MacOSX10.6.sdk/usr/include/string.h
+c000000004BBD2CE90000000000001731
+t1270689001
+s5937
+
+N/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+c000000004D005D560000000000781330
+t1291869526
+s7869232
+
+N/VBFlashPlugIn/CAPIUtil.c
+c000000004D3EAF8A0000000000000432
+t1295953802
+s1074
+i"CAPIUtil.h"
+
+N/VBFlashPlugIn/CAPIUtil.h
+c000000004D3EAF7600000000000001B2
+t1295953782
+s434
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+
+N/VBFlashPlugIn/English.lproj/InfoPlist.strings
+c000000004D3EAF560000000000000030
+t1295953750
+s48
+
+N/VBFlashPlugIn/FlashCS5extension.c
+c000000004D3EAFF20000000000004C97
+t1295953906
+s19607
+i"VBFlashPlugIn.h"
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i"CAPIUtil.h"
+
+N/VBFlashPlugIn/FlashCS5extension.h
+c000000004D254852000000000000030E
+t1294288978
+s782
+i"mm_jsapi.h"
+
+N/VBFlashPlugIn/VBFlashPlugIn.c
+c000000004D3EB7960000000000004C97
+t1295955862
+s19607
+i"VBFlashPlugIn.h"
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i"CAPIUtil.h"
+
+N/VBFlashPlugIn/VBFlashPlugIn.h
+c000000004D3EAFEA00000000000002F6
+t1295953898
+s758
+i"mm_jsapi.h"
+
+N/VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle
+t2
+s0
+
+N/VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/Info.plist
+t1295955863
+s1215
+
+N/VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/MacOS/VBFlashPlugIn
+t2
+s0
+
+N/VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/Resources/English.lproj/InfoPlist.strings
+t1295955863
+s92
+
+N/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/CAPIUtil.o
+t1295955863
+s5280
+
+N/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/FlashCS5extension.o
+t2
+s0
+
+N/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/VBFlashPlugIn.LinkFileList
+c000000004D3EB7970000000000000131
+t1295955863
+s305
+
+N/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/VBFlashPlugIn.o
+t1295955863
+s32684
+
+N/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/mm_jsapi.o
+t2
+s0
+
+N/VBFlashPlugIn/mm_jsapi.c
+c000000004D25485200000000000005C5
+t1294288978
+s1477
+i<stdlib.h>
+i<string.h>
+i<stdio.h>
+i"mm_jsapi.h"
+i"FlashCS5extension.h"
+
+N/VBFlashPlugIn/mm_jsapi.h
+c000000004D3EB01200000000000018F3
+t1295953938
+s6387
+i<stdio.h>
+
+NInfo.plist
+c000000004D3EAF56000000000000050A
+t1295953750
+s1290
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies317648663#317648663#0(0"0(0#1#0"32651513917735028#0"0#
+
+CCompileC build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/CAPIUtil.o /VBFlashPlugIn/CAPIUtil.c normal x86_64 c com.apple.compilers.gcc.4_2
+s317648663.396788
+e317648663.468515
+r1
+xCompileC
+xbuild/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/CAPIUtil.o
+x/VBFlashPlugIn/CAPIUtil.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@33"Compile /VBFlashPlugIn/CAPIUtil.c317648663#317648663#0(0"0(0#0#25"/VBFlashPlugIn/CAPIUtil.c8612882432#1122"    cd /VBFlashPlugIn    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-generated-files.hmap -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-own-target-headers.hmap -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-all-target-headers.hmap -iquote /VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-project-headers.hmap -F/VBFlashPlugIn/build/Debug -I/VBFlashPlugIn/build/Debug/include -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/DerivedSources/x86_64 -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/DerivedSources -c /VBFlashPlugIn/CAPIUtil.c -o /VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/CAPIUtil.o0#
+
+CCompileC build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/FlashCS5extension.o /VBFlashPlugIn/FlashCS5extension.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/VBFlashPlugIn.o /VBFlashPlugIn/VBFlashPlugIn.c normal x86_64 c com.apple.compilers.gcc.4_2
+s317648663.397653
+e317648663.554373
+r1
+xCompileC
+xbuild/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/VBFlashPlugIn.o
+x/VBFlashPlugIn/VBFlashPlugIn.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@38"Compile /VBFlashPlugIn/VBFlashPlugIn.c317648663#317648663#0(0"0(0#0#30"/VBFlashPlugIn/VBFlashPlugIn.c8612673984#1132"    cd /VBFlashPlugIn    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-generated-files.hmap -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-own-target-headers.hmap -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-all-target-headers.hmap -iquote /VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-project-headers.hmap -F/VBFlashPlugIn/build/Debug -I/VBFlashPlugIn/build/Debug/include -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/DerivedSources/x86_64 -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/DerivedSources -c /VBFlashPlugIn/VBFlashPlugIn.c -o /VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/VBFlashPlugIn.o0#
+
+CCompileC build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/mm_jsapi.o /VBFlashPlugIn/mm_jsapi.c normal x86_64 c com.apple.compilers.gcc.4_2
+s317648663.468609
+e317648663.513879
+r0
+xCompileC
+xbuild/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/mm_jsapi.o
+x/VBFlashPlugIn/mm_jsapi.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+o/VBFlashPlugIn/mm_jsapi.c:8:31: error: FlashCS5extension.h: No such file or directory
+o/VBFlashPlugIn/mm_jsapi.c: In function 'MM_Init':
+o/VBFlashPlugIn/mm_jsapi.c:26: error: 'StartMakeObjectFile' undeclared (first use in this function)
+o/VBFlashPlugIn/mm_jsapi.c:26: error: (Each undeclared identifier is reported only once
+o/VBFlashPlugIn/mm_jsapi.c:26: error: for each function it appears in.)
+o/VBFlashPlugIn/mm_jsapi.c:27: error: 'EndMakeObjectFile' undeclared (first use in this function)
+o/VBFlashPlugIn/mm_jsapi.c:28: error: 'WriteObject' undeclared (first use in this function)
+o/VBFlashPlugIn/mm_jsapi.c:29: error: 'WriteDynamic' undeclared (first use in this function)
+lSLF07#2@33"Compile /VBFlashPlugIn/mm_jsapi.c317648663#317648663#0(673"/VBFlashPlugIn/mm_jsapi.c:8:31: error: FlashCS5extension.h: No such file or directory/VBFlashPlugIn/mm_jsapi.c: In function 'MM_Init':/VBFlashPlugIn/mm_jsapi.c:26: error: 'StartMakeObjectFile' undeclared (first use in this function)/VBFlashPlugIn/mm_jsapi.c:26: error: (Each undeclared identifier is reported only once/VBFlashPlugIn/mm_jsapi.c:26: error: for each function it appears in.)/VBFlashPlugIn/mm_jsapi.c:27: error: 'EndMakeObjectFile' undeclared (first use in this function)/VBFlashPlugIn/mm_jsapi.c:28: error: 'WriteObject' undeclared (first use in this function)/VBFlashPlugIn/mm_jsapi.c:29: error: 'WriteDynamic' undeclared (first use in this function)5(4@46"FlashCS5extension.h: No such file or directory317648663#0#86#0(6@25"/VBFlashPlugIn/mm_jsapi.c315981778#8#0#8#0#28"*: No such file or directory0(4@61"'StartMakeObjectFile' undeclared (first use in this function)317648663#136#99#0(6@25"/VBFlashPlugIn/mm_jsapi.c315981778#26#0#26#0#43"'*' undeclared (first use in this function)0(4@59"'EndMakeObjectFile' undeclared (first use in this function)317648663#393#97#0(6@25"/VBFlashPlugIn/mm_jsapi.c315981778#27#0#27#0#43"'*' undeclared (first use in this function)0(4@53"'WriteObject' undeclared (first use in this function)317648663#490#91#0(6@25"/VBFlashPlugIn/mm_jsapi.c315981778#28#0#28#0#43"'*' undeclared (first use in this function)0(4@54"'WriteDynamic' undeclared (first use in this function)317648663#581#92#0(6@25"/VBFlashPlugIn/mm_jsapi.c315981778#29#0#29#0#43"'*' undeclared (first use in this function)0(0#0#25"/VBFlashPlugIn/mm_jsapi.c8611879456#1122"    cd /VBFlashPlugIn    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-generated-files.hmap -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-own-target-headers.hmap -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-all-target-headers.hmap -iquote /VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/VBFlashPlugIn-project-headers.hmap -F/VBFlashPlugIn/build/Debug -I/VBFlashPlugIn/build/Debug/include -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/DerivedSources/x86_64 -I/VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/DerivedSources -c /VBFlashPlugIn/mm_jsapi.c -o /VBFlashPlugIn/build/VBFlashPlugIn.build/Debug/VBFlashPlugIn.build/Objects-normal/x86_64/mm_jsapi.o1#
+
+CCopyStringsFile /VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+s317648663.334335
+e317648663.396690
+r1
+xCopyStringsFile
+x/VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/Resources/English.lproj/InfoPlist.strings
+xEnglish.lproj/InfoPlist.strings
+lSLF07#2@36"Copy English.lproj/InfoPlist.strings317648663#317648663#0(0"0(0#0#46"/VBFlashPlugIn/English.lproj/InfoPlist.strings8612976000#326"    cd /VBFlashPlugIn    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir /VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/Resources/English.lproj0#
+
+CLd /VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/MacOS/VBFlashPlugIn normal x86_64
+r0
+
+CProcessInfoPlistFile /VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/Info.plist Info.plist
+s317648663.306741
+e317648663.334231
+r1
+xProcessInfoPlistFile
+x/VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/Info.plist
+xInfo.plist
+lSLF07#2@18"Process Info.plist317648663#317648663#0(0"0(0#0#25"/VBFlashPlugIn/Info.plist32651569751457908#171"    cd /VBFlashPlugIn    builtin-infoPlistUtility Info.plist -expandbuildsettings -platform macosx -o /VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle/Contents/Info.plist0#
+
+CTouch /VBFlashPlugIn/build/Debug/VBFlashPlugIn.bundle
+r0
+

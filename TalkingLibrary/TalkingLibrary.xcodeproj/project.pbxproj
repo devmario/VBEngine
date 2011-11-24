@@ -1,0 +1,284 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA747D9F0F9514B9006C5449 /* TalkingLibrary_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TalkingLibrary_Prefix.pch */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		AC4788C412E5A64E009CABE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC4788C012E5A64E009CABE7 /* AVFoundation.framework */; };
+		AC47894D12E5A72D009CABE7 /* Talking.h in Headers */ = {isa = PBXBuildFile; fileRef = AC47894112E5A72D009CABE7 /* Talking.h */; };
+		AC47894E12E5A72D009CABE7 /* AudioInput.c in Sources */ = {isa = PBXBuildFile; fileRef = AC47894212E5A72D009CABE7 /* AudioInput.c */; };
+		AC47894F12E5A72D009CABE7 /* Talking.c in Sources */ = {isa = PBXBuildFile; fileRef = AC47894312E5A72D009CABE7 /* Talking.c */; };
+		AC47895012E5A72D009CABE7 /* AudioRecoder.c in Sources */ = {isa = PBXBuildFile; fileRef = AC47894412E5A72D009CABE7 /* AudioRecoder.c */; };
+		AC47895112E5A72D009CABE7 /* AudioPlayer.c in Sources */ = {isa = PBXBuildFile; fileRef = AC47894512E5A72D009CABE7 /* AudioPlayer.c */; };
+		AC47895212E5A72D009CABE7 /* AudioRecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = AC47894612E5A72D009CABE7 /* AudioRecoder.h */; };
+		AC47895312E5A72D009CABE7 /* Equalizer.h in Headers */ = {isa = PBXBuildFile; fileRef = AC47894712E5A72D009CABE7 /* Equalizer.h */; };
+		AC47895412E5A72D009CABE7 /* Equalizer.c in Sources */ = {isa = PBXBuildFile; fileRef = AC47894812E5A72D009CABE7 /* Equalizer.c */; };
+		AC47895512E5A72D009CABE7 /* AudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = AC47894912E5A72D009CABE7 /* AudioPlayer.h */; };
+		AC47895612E5A72D009CABE7 /* AudioInput.h in Headers */ = {isa = PBXBuildFile; fileRef = AC47894A12E5A72D009CABE7 /* AudioInput.h */; };
+		AC47895712E5A72D009CABE7 /* chuck_fft.h in Headers */ = {isa = PBXBuildFile; fileRef = AC47894B12E5A72D009CABE7 /* chuck_fft.h */; };
+		AC47895812E5A72D009CABE7 /* chuck_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = AC47894C12E5A72D009CABE7 /* chuck_fft.c */; };
+		BC4FA2BC13137419001517DE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4FA2BB13137419001517DE /* AudioToolbox.framework */; };
+		BC4FA2BE13137419001517DE /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4FA2BD13137419001517DE /* AudioUnit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA747D9E0F9514B9006C5449 /* TalkingLibrary_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingLibrary_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AC4788C012E5A64E009CABE7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AC47894112E5A72D009CABE7 /* Talking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Talking.h; sourceTree = "<group>"; };
+		AC47894212E5A72D009CABE7 /* AudioInput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AudioInput.c; sourceTree = "<group>"; };
+		AC47894312E5A72D009CABE7 /* Talking.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Talking.c; sourceTree = "<group>"; };
+		AC47894412E5A72D009CABE7 /* AudioRecoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AudioRecoder.c; sourceTree = "<group>"; };
+		AC47894512E5A72D009CABE7 /* AudioPlayer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AudioPlayer.c; sourceTree = "<group>"; };
+		AC47894612E5A72D009CABE7 /* AudioRecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioRecoder.h; sourceTree = "<group>"; };
+		AC47894712E5A72D009CABE7 /* Equalizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equalizer.h; sourceTree = "<group>"; };
+		AC47894812E5A72D009CABE7 /* Equalizer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Equalizer.c; sourceTree = "<group>"; };
+		AC47894912E5A72D009CABE7 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		AC47894A12E5A72D009CABE7 /* AudioInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInput.h; sourceTree = "<group>"; };
+		AC47894B12E5A72D009CABE7 /* chuck_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chuck_fft.h; sourceTree = "<group>"; };
+		AC47894C12E5A72D009CABE7 /* chuck_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = chuck_fft.c; sourceTree = "<group>"; };
+		BC4FA2BB13137419001517DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BC4FA2BD13137419001517DE /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		D2AAC07E0554694100DB518D /* libTalkingLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTalkingLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+				AC4788C412E5A64E009CABE7 /* AVFoundation.framework in Frameworks */,
+				BC4FA2BC13137419001517DE /* AudioToolbox.framework in Frameworks */,
+				BC4FA2BE13137419001517DE /* AudioUnit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libTalkingLibrary.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* TalkingLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = TalkingLibrary;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC4788C012E5A64E009CABE7 /* AVFoundation.framework */,
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+				BC4FA2BB13137419001517DE /* AudioToolbox.framework */,
+				BC4FA2BD13137419001517DE /* AudioUnit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AA747D9E0F9514B9006C5449 /* TalkingLibrary_Prefix.pch */,
+				AC47894112E5A72D009CABE7 /* Talking.h */,
+				AC47894212E5A72D009CABE7 /* AudioInput.c */,
+				AC47894312E5A72D009CABE7 /* Talking.c */,
+				AC47894412E5A72D009CABE7 /* AudioRecoder.c */,
+				AC47894512E5A72D009CABE7 /* AudioPlayer.c */,
+				AC47894612E5A72D009CABE7 /* AudioRecoder.h */,
+				AC47894712E5A72D009CABE7 /* Equalizer.h */,
+				AC47894812E5A72D009CABE7 /* Equalizer.c */,
+				AC47894912E5A72D009CABE7 /* AudioPlayer.h */,
+				AC47894A12E5A72D009CABE7 /* AudioInput.h */,
+				AC47894B12E5A72D009CABE7 /* chuck_fft.h */,
+				AC47894C12E5A72D009CABE7 /* chuck_fft.c */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA747D9F0F9514B9006C5449 /* TalkingLibrary_Prefix.pch in Headers */,
+				AC47894D12E5A72D009CABE7 /* Talking.h in Headers */,
+				AC47895212E5A72D009CABE7 /* AudioRecoder.h in Headers */,
+				AC47895312E5A72D009CABE7 /* Equalizer.h in Headers */,
+				AC47895512E5A72D009CABE7 /* AudioPlayer.h in Headers */,
+				AC47895612E5A72D009CABE7 /* AudioInput.h in Headers */,
+				AC47895712E5A72D009CABE7 /* chuck_fft.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* TalkingLibrary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "TalkingLibrary" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TalkingLibrary;
+			productName = TalkingLibrary;
+			productReference = D2AAC07E0554694100DB518D /* libTalkingLibrary.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TalkingLibrary" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* TalkingLibrary */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* TalkingLibrary */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC47894E12E5A72D009CABE7 /* AudioInput.c in Sources */,
+				AC47894F12E5A72D009CABE7 /* Talking.c in Sources */,
+				AC47895012E5A72D009CABE7 /* AudioRecoder.c in Sources */,
+				AC47895112E5A72D009CABE7 /* AudioPlayer.c in Sources */,
+				AC47895412E5A72D009CABE7 /* Equalizer.c in Sources */,
+				AC47895812E5A72D009CABE7 /* chuck_fft.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/TalkingLibrary.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TalkingLibrary_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = TalkingLibrary;
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/TalkingLibrary.dst;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TalkingLibrary_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = TalkingLibrary;
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "TalkingLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TalkingLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

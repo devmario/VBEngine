@@ -1,0 +1,2 @@
+/Users/mario/Desktop/ibiza/branch/ibizaSimulator/../ibizaFactory/Display/Object/ObjFileForModel.c: In function 'ModelGetChildWithInstanceName':
+/Users/mario/Desktop/ibiza/branch/ibizaSimulator/../ibizaFactory/Display/Object/ObjFileForModel.c:478: warning: passing argument 2 of 'ObjectFileFindInstanceIDWithName' discards qualifiers from pointer target type

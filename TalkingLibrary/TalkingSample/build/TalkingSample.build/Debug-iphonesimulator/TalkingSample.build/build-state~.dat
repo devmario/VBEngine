@@ -1,0 +1,511 @@
+TTalkingSample
+v7
+r0
+t316330084.240733
+cCheck dependencies
+cProcessInfoPlistFile /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/Info.plist TalkingSample-Info.plist
+cCpResource build/Debug-iphonesimulator/TalkingSample.app/Shader.fsh Shaders/Shader.fsh
+cCpResource build/Debug-iphonesimulator/TalkingSample.app/Shader.vsh Shaders/Shader.vsh
+cCompileXIB /Users/mario/Desktop/TalkingSample/MainWindow.xib
+cCompileXIB /Users/mario/Desktop/TalkingSample/TalkingSampleViewController.xib
+cProcessPCH /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-ggrvfxkczwbbyecumpspdgimciwj/TalkingSample_Prefix.pch.gch TalkingSample_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+cProcessPCH /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-dlffhaosfjywfzgxkjqnuuknmaim/TalkingSample_Prefix.pch.gch TalkingSample_Prefix.pch normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/main.o /Users/mario/Desktop/TalkingSample/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSampleAppDelegate.o /Users/mario/Desktop/TalkingSample/Classes/TalkingSampleAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/EAGLView.o /Users/mario/Desktop/TalkingSample/Classes/EAGLView.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSampleViewController.o /Users/mario/Desktop/TalkingSample/Classes/TalkingSampleViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/AudioInput.o /Users/mario/Desktop/TalkingSample/talking/AudioInput.c normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/Equalizer.o /Users/mario/Desktop/TalkingSample/talking/Equalizer.c normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/AudioRecoder.o /Users/mario/Desktop/TalkingSample/talking/AudioRecoder.c normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/Talking.o /Users/mario/Desktop/TalkingSample/talking/Talking.c normal i386 c com.apple.compilers.gcc.4_2
+cLd /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample normal i386
+cGenerateDSYMFile /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app.dSYM /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample
+cTouch /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk
+c000000004CC128950000000000000110
+t1287727253
+s272
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004CC1226D000000000029D5D0
+t1287725677
+s2741712
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004CC1225F0000000000001466
+t1287725663
+s5222
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/EAGL.h
+c000000004CC12308000000000000094F
+t1287725832
+s2383
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/ES1/gl.h
+c000000004CC123080000000000009369
+t1287725832
+s37737
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/ES1/glext.h
+c000000004CC123080000000000003C4A
+t1287725832
+s15434
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/ES2/gl.h
+c000000004CC1230800000000000092AA
+t1287725832
+s37546
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/ES2/glext.h
+c000000004CC1230800000000000026AA
+t1287725832
+s9898
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/OpenGLES.framework/OpenGLES
+c000000004CC1230E0000000000019D40
+t1287725838
+s105792
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.h
+c000000004CC1233C00000000000000C4
+t1287725884
+s196
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/QuartzCore.framework/QuartzCore
+c000000004CC12431000000000015CDB0
+t1287726129
+s1428912
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004CC1281F0000000000000AA1
+t1287727135
+s2721
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004CC12883000000000074D7B0
+t1287727235
+s7657392
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/usr/include/Availability.h
+c000000004CB3FA080000000000001ADD
+t1286863368
+s6877
+
+N/Users/mario/Desktop/TalkingSample/Classes/EAGLView.h
+c000000004D2A97E300000000000003DD
+t1294637027
+s989
+i<UIKit/UIKit.h>
+i<OpenGLES/ES1/gl.h>
+i<OpenGLES/ES1/glext.h>
+i<OpenGLES/ES2/gl.h>
+i<OpenGLES/ES2/glext.h>
+
+N/Users/mario/Desktop/TalkingSample/Classes/EAGLView.m
+c000000004D2A97E30000000000000EE5
+t1294637027
+s3813
+i<QuartzCore/QuartzCore.h>
+i"EAGLView.h"
+
+N/Users/mario/Desktop/TalkingSample/Classes/TalkingSampleAppDelegate.h
+c000000004D2A97E300000000000001FC
+t1294637027
+s508
+i<UIKit/UIKit.h>
+
+N/Users/mario/Desktop/TalkingSample/Classes/TalkingSampleAppDelegate.m
+c000000004D2A97E300000000000004CA
+t1294637027
+s1226
+i"TalkingSampleAppDelegate.h"
+i"TalkingSampleViewController.h"
+
+N/Users/mario/Desktop/TalkingSample/Classes/TalkingSampleViewController.h
+c000000004D2A97E300000000000002C3
+t1294637027
+s707
+i<UIKit/UIKit.h>
+i<OpenGLES/EAGL.h>
+i<OpenGLES/ES1/gl.h>
+i<OpenGLES/ES1/glext.h>
+i<OpenGLES/ES2/gl.h>
+i<OpenGLES/ES2/glext.h>
+
+N/Users/mario/Desktop/TalkingSample/Classes/TalkingSampleViewController.m
+c000000004D2A97E30000000000002730
+t1294637027
+s10032
+i<QuartzCore/QuartzCore.h>
+i"TalkingSampleViewController.h"
+i"EAGLView.h"
+
+N/Users/mario/Desktop/TalkingSample/MainWindow.xib
+c000000004D2A97E30000000000005562
+t1294637027
+s21858
+
+N/Users/mario/Desktop/TalkingSample/Shaders/Shader.fsh
+c000000004D2A97E300000000000000D9
+t1294637027
+s217
+
+N/Users/mario/Desktop/TalkingSample/Shaders/Shader.vsh
+c000000004D2A97E3000000000000015F
+t1294637027
+s351
+
+N/Users/mario/Desktop/TalkingSample/TalkingSampleViewController.xib
+c000000004D2A97E300000000000043FD
+t1294637027
+s17405
+
+N/Users/mario/Desktop/TalkingSample/TalkingSample_Prefix.pch
+c000000004D2A97E30000000000000144
+t1294637027
+s324
+i<Availability.h>
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app
+t1294637284
+s306
+
+N/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app.dSYM
+t1294637284
+s102
+
+N/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/Info.plist
+t1294637282
+s642
+
+N/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/MainWindow.nib
+t1294637282
+s1183
+
+N/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/PkgInfo
+t1294637282
+s8
+
+N/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/Shader.fsh
+t1294637282
+s217
+
+N/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/Shader.vsh
+t1294637282
+s351
+
+N/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample
+t1294637284
+s34472
+
+N/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSampleViewController.nib
+t1294637282
+s873
+
+N/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/AudioInput.o
+t1294637283
+s1336
+
+N/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/AudioRecoder.o
+t1294637283
+s1340
+
+N/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/EAGLView.o
+t1294637283
+s47792
+
+N/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/Equalizer.o
+t1294637283
+s1332
+
+N/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/Talking.o
+t1294637283
+s1328
+
+N/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSample.LinkFileList
+c000000004D2A98E10000000000000455
+t1294637281
+s1109
+
+N/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSampleAppDelegate.o
+t1294637283
+s51732
+
+N/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSampleViewController.o
+t1294637283
+s61696
+
+N/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/main.o
+t1294637283
+s6296
+
+N/Users/mario/Desktop/TalkingSample/main.m
+c000000004D2A97E30000000000000168
+t1294637027
+s360
+i<UIKit/UIKit.h>
+
+N/Users/mario/Desktop/TalkingSample/talking/AudioInput.c
+c000000004D2A982900000000000000A6
+t1294637097
+s166
+i"AudioInput.h"
+
+N/Users/mario/Desktop/TalkingSample/talking/AudioInput.h
+c000000004D2A98CA000000000000007F
+t1294637258
+s127
+
+N/Users/mario/Desktop/TalkingSample/talking/AudioRecoder.c
+c000000004D2A985F00000000000000AA
+t1294637151
+s170
+i"AudioRecoder.h"
+
+N/Users/mario/Desktop/TalkingSample/talking/AudioRecoder.h
+c000000004D2A98E10000000000000083
+t1294637281
+s131
+
+N/Users/mario/Desktop/TalkingSample/talking/Equalizer.c
+c000000004D2A983800000000000000A4
+t1294637112
+s164
+i"Equalizer.h"
+
+N/Users/mario/Desktop/TalkingSample/talking/Equalizer.h
+c000000004D2A98D5000000000000007D
+t1294637269
+s125
+
+N/Users/mario/Desktop/TalkingSample/talking/Talking.c
+c000000004D2A986C00000000000000A0
+t1294637164
+s160
+i"Talking.h"
+
+N/Users/mario/Desktop/TalkingSample/talking/Talking.h
+c000000004D2A98B50000000000000079
+t1294637237
+s121
+
+N/var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-dlffhaosfjywfzgxkjqnuuknmaim/TalkingSample_Prefix.pch.gch
+t1294637282
+s2167216
+
+N/var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-ggrvfxkczwbbyecumpspdgimciwj/TalkingSample_Prefix.pch.gch
+t1294637283
+s15441104
+
+NTalkingSample-Info.plist
+c000000004D2A97E300000000000003B4
+t1294637027
+s948
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies316330081#316330082#0(0"0(0#1#0"8624052960#0"0#
+
+CCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/AudioInput.o /Users/mario/Desktop/TalkingSample/talking/AudioInput.c normal i386 c com.apple.compilers.gcc.4_2
+s316330083.856550
+e316330083.892138
+r1
+xCompileC
+xbuild/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/AudioInput.o
+x/Users/mario/Desktop/TalkingSample/talking/AudioInput.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@63"Compile /Users/mario/Desktop/TalkingSample/talking/AudioInput.c316330083#316330083#0(0"0(0#0#55"/Users/mario/Desktop/TalkingSample/talking/AudioInput.c8622863328#1964"    cd /Users/mario/Desktop/TalkingSample    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-generated-files.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-own-target-headers.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-all-target-headers.hmap -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-project-headers.hmap -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -I/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/include -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources/i386 -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-dlffhaosfjywfzgxkjqnuuknmaim/TalkingSample_Prefix.pch -c /Users/mario/Desktop/TalkingSample/talking/AudioInput.c -o /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/AudioInput.o0#
+
+CCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/AudioRecoder.o /Users/mario/Desktop/TalkingSample/talking/AudioRecoder.c normal i386 c com.apple.compilers.gcc.4_2
+s316330083.919651
+e316330083.950820
+r1
+xCompileC
+xbuild/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/AudioRecoder.o
+x/Users/mario/Desktop/TalkingSample/talking/AudioRecoder.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@65"Compile /Users/mario/Desktop/TalkingSample/talking/AudioRecoder.c316330083#316330083#0(0"0(0#0#57"/Users/mario/Desktop/TalkingSample/talking/AudioRecoder.c8617153024#1968"    cd /Users/mario/Desktop/TalkingSample    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-generated-files.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-own-target-headers.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-all-target-headers.hmap -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-project-headers.hmap -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -I/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/include -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources/i386 -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-dlffhaosfjywfzgxkjqnuuknmaim/TalkingSample_Prefix.pch -c /Users/mario/Desktop/TalkingSample/talking/AudioRecoder.c -o /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/AudioRecoder.o0#
+
+CCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/EAGLView.o /Users/mario/Desktop/TalkingSample/Classes/EAGLView.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s316330083.751145
+e316330083.856449
+r1
+xCompileC
+xbuild/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/EAGLView.o
+x/Users/mario/Desktop/TalkingSample/Classes/EAGLView.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@61"Compile /Users/mario/Desktop/TalkingSample/Classes/EAGLView.m316330083#316330083#0(0"0(0#0#53"/Users/mario/Desktop/TalkingSample/Classes/EAGLView.m8623719040#2014"    cd /Users/mario/Desktop/TalkingSample    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-generated-files.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-own-target-headers.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-all-target-headers.hmap -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-project-headers.hmap -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -I/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/include -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources/i386 -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-ggrvfxkczwbbyecumpspdgimciwj/TalkingSample_Prefix.pch -c /Users/mario/Desktop/TalkingSample/Classes/EAGLView.m -o /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/EAGLView.o0#
+
+CCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/Equalizer.o /Users/mario/Desktop/TalkingSample/talking/Equalizer.c normal i386 c com.apple.compilers.gcc.4_2
+s316330083.892242
+e316330083.925520
+r1
+xCompileC
+xbuild/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/Equalizer.o
+x/Users/mario/Desktop/TalkingSample/talking/Equalizer.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@62"Compile /Users/mario/Desktop/TalkingSample/talking/Equalizer.c316330083#316330083#0(0"0(0#0#54"/Users/mario/Desktop/TalkingSample/talking/Equalizer.c8622236032#1962"    cd /Users/mario/Desktop/TalkingSample    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-generated-files.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-own-target-headers.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-all-target-headers.hmap -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-project-headers.hmap -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -I/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/include -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources/i386 -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-dlffhaosfjywfzgxkjqnuuknmaim/TalkingSample_Prefix.pch -c /Users/mario/Desktop/TalkingSample/talking/Equalizer.c -o /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/Equalizer.o0#
+
+CCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/Talking.o /Users/mario/Desktop/TalkingSample/talking/Talking.c normal i386 c com.apple.compilers.gcc.4_2
+s316330083.925617
+e316330083.951059
+r1
+xCompileC
+xbuild/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/Talking.o
+x/Users/mario/Desktop/TalkingSample/talking/Talking.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@60"Compile /Users/mario/Desktop/TalkingSample/talking/Talking.c316330083#316330083#0(0"0(0#0#52"/Users/mario/Desktop/TalkingSample/talking/Talking.c8615962560#1958"    cd /Users/mario/Desktop/TalkingSample    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-generated-files.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-own-target-headers.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-all-target-headers.hmap -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-project-headers.hmap -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -I/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/include -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources/i386 -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-dlffhaosfjywfzgxkjqnuuknmaim/TalkingSample_Prefix.pch -c /Users/mario/Desktop/TalkingSample/talking/Talking.c -o /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/Talking.o0#
+
+CCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSampleAppDelegate.o /Users/mario/Desktop/TalkingSample/Classes/TalkingSampleAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s316330083.468654
+e316330083.780739
+r1
+xCompileC
+xbuild/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSampleAppDelegate.o
+x/Users/mario/Desktop/TalkingSample/Classes/TalkingSampleAppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@77"Compile /Users/mario/Desktop/TalkingSample/Classes/TalkingSampleAppDelegate.m316330083#316330083#0(0"0(0#0#69"/Users/mario/Desktop/TalkingSample/Classes/TalkingSampleAppDelegate.m8622829280#2046"    cd /Users/mario/Desktop/TalkingSample    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-generated-files.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-own-target-headers.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-all-target-headers.hmap -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-project-headers.hmap -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -I/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/include -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources/i386 -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-ggrvfxkczwbbyecumpspdgimciwj/TalkingSample_Prefix.pch -c /Users/mario/Desktop/TalkingSample/Classes/TalkingSampleAppDelegate.m -o /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSampleAppDelegate.o0#
+
+CCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSampleViewController.o /Users/mario/Desktop/TalkingSample/Classes/TalkingSampleViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s316330083.780836
+e316330083.919547
+r1
+xCompileC
+xbuild/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSampleViewController.o
+x/Users/mario/Desktop/TalkingSample/Classes/TalkingSampleViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@80"Compile /Users/mario/Desktop/TalkingSample/Classes/TalkingSampleViewController.m316330083#316330083#0(0"0(0#0#72"/Users/mario/Desktop/TalkingSample/Classes/TalkingSampleViewController.m8623408448#2052"    cd /Users/mario/Desktop/TalkingSample    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-generated-files.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-own-target-headers.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-all-target-headers.hmap -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-project-headers.hmap -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -I/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/include -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources/i386 -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-ggrvfxkczwbbyecumpspdgimciwj/TalkingSample_Prefix.pch -c /Users/mario/Desktop/TalkingSample/Classes/TalkingSampleViewController.m -o /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSampleViewController.o0#
+
+CCompileC build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/main.o /Users/mario/Desktop/TalkingSample/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s316330083.467652
+e316330083.750948
+r1
+xCompileC
+xbuild/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/main.o
+x/Users/mario/Desktop/TalkingSample/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@49"Compile /Users/mario/Desktop/TalkingSample/main.m316330083#316330083#0(0"0(0#0#41"/Users/mario/Desktop/TalkingSample/main.m8623386112#1998"    cd /Users/mario/Desktop/TalkingSample    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-generated-files.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-own-target-headers.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-all-target-headers.hmap -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-project-headers.hmap -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -I/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/include -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources/i386 -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-ggrvfxkczwbbyecumpspdgimciwj/TalkingSample_Prefix.pch -c /Users/mario/Desktop/TalkingSample/main.m -o /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/main.o0#
+
+CCompileXIB /Users/mario/Desktop/TalkingSample/MainWindow.xib
+s316330082.032049
+e316330082.539695
+r1
+xCompileXIB
+x/Users/mario/Desktop/TalkingSample/MainWindow.xib
+lSLF07#2@25"CompileXIB MainWindow.xib316330082#316330082#0(0"0(0#0#49"/Users/mario/Desktop/TalkingSample/MainWindow.xib8622295968#564"    cd /Users/mario/Desktop/TalkingSample    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/MainWindow.nib /Users/mario/Desktop/TalkingSample/MainWindow.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk0#
+
+CCompileXIB /Users/mario/Desktop/TalkingSample/TalkingSampleViewController.xib
+s316330082.046330
+e316330082.539513
+r1
+xCompileXIB
+x/Users/mario/Desktop/TalkingSample/TalkingSampleViewController.xib
+lSLF07#2@42"CompileXIB TalkingSampleViewController.xib316330082#316330082#0(0"0(0#0#66"/Users/mario/Desktop/TalkingSample/TalkingSampleViewController.xib8622291104#598"    cd /Users/mario/Desktop/TalkingSample    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSampleViewController.nib /Users/mario/Desktop/TalkingSample/TalkingSampleViewController.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk0#
+
+CCpResource build/Debug-iphonesimulator/TalkingSample.app/Shader.fsh Shaders/Shader.fsh
+s316330082.029176
+e316330082.037534
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/TalkingSample.app/Shader.fsh
+xShaders/Shader.fsh
+lSLF07#2@23"Copy Shaders/Shader.fsh316330082#316330082#0(0"0(0#0#53"/Users/mario/Desktop/TalkingSample/Shaders/Shader.fsh8622487712#470"    cd /Users/mario/Desktop/TalkingSample    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/mario/Desktop/TalkingSample/Shaders/Shader.fsh /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app0#
+
+CCpResource build/Debug-iphonesimulator/TalkingSample.app/Shader.vsh Shaders/Shader.vsh
+s316330082.030135
+e316330082.046243
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/TalkingSample.app/Shader.vsh
+xShaders/Shader.vsh
+lSLF07#2@23"Copy Shaders/Shader.vsh316330082#316330082#0(0"0(0#0#53"/Users/mario/Desktop/TalkingSample/Shaders/Shader.vsh8622435360#470"    cd /Users/mario/Desktop/TalkingSample    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/mario/Desktop/TalkingSample/Shaders/Shader.vsh /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app0#
+
+CGenerateDSYMFile /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app.dSYM /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample
+s316330084.217687
+e316330084.237883
+r1
+xGenerateDSYMFile
+x/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app.dSYM
+x/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample
+lSLF07#2@127"GenerateDSYMFile build/Debug-iphonesimulator/TalkingSample.app.dSYM build/Debug-iphonesimulator/TalkingSample.app/TalkingSample316330084#316330084#0(0"0(0#0#94"/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample8623603520#389"    cd /Users/mario/Desktop/TalkingSample    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample -o /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app.dSYM0#
+
+CLd /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample normal i386
+s316330083.951119
+e316330084.217592
+r1
+xLd
+x/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample
+xnormal
+xi386
+lSLF07#2@99"Link /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample316330083#316330084#0(0"0(0#0#0"8607511392#928"    cd /Users/mario/Desktop/TalkingSample    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -L/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -filelist /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/Objects-normal/i386/TalkingSample.LinkFileList -mmacosx-version-min=10.6 -Xlinker -objc_abi_version -Xlinker 2 -framework Foundation -framework UIKit -framework OpenGLES -framework QuartzCore -o /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/TalkingSample0#
+
+CProcessInfoPlistFile /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/Info.plist TalkingSample-Info.plist
+s316330082.006110
+e316330082.029082
+r1
+xProcessInfoPlistFile
+x/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/Info.plist
+xTalkingSample-Info.plist
+lSLF07#2@32"Process TalkingSample-Info.plist316330082#316330082#0(0"0(0#0#59"/Users/mario/Desktop/TalkingSample/TalkingSample-Info.plist8622242368#485"    cd /Users/mario/Desktop/TalkingSample    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility TalkingSample-Info.plist -genpkginfo /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app/Info.plist0#
+
+CProcessPCH /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-dlffhaosfjywfzgxkjqnuuknmaim/TalkingSample_Prefix.pch.gch TalkingSample_Prefix.pch normal i386 c com.apple.compilers.gcc.4_2
+s316330082.540934
+e316330082.774897
+r1
+xProcessPCH
+x/var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-dlffhaosfjywfzgxkjqnuuknmaim/TalkingSample_Prefix.pch.gch
+xTalkingSample_Prefix.pch
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@35"Precompile TalkingSample_Prefix.pch316330082#316330082#0(0"0(0#0#59"/Users/mario/Desktop/TalkingSample/TalkingSample_Prefix.pch8623632320#1834"    cd /Users/mario/Desktop/TalkingSample    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-generated-files.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-own-target-headers.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-all-target-headers.hmap -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-project-headers.hmap -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -I/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/include -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources/i386 -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources -c /Users/mario/Desktop/TalkingSample/TalkingSample_Prefix.pch -o /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-dlffhaosfjywfzgxkjqnuuknmaim/TalkingSample_Prefix.pch.gch0#
+
+CProcessPCH /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-ggrvfxkczwbbyecumpspdgimciwj/TalkingSample_Prefix.pch.gch TalkingSample_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s316330082.539820
+e316330083.467537
+r1
+xProcessPCH
+x/var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-ggrvfxkczwbbyecumpspdgimciwj/TalkingSample_Prefix.pch.gch
+xTalkingSample_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@35"Precompile TalkingSample_Prefix.pch316330082#316330083#0(0"0(0#0#59"/Users/mario/Desktop/TalkingSample/TalkingSample_Prefix.pch8623719232#1888"    cd /Users/mario/Desktop/TalkingSample    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-generated-files.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-own-target-headers.hmap -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-all-target-headers.hmap -iquote /Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/TalkingSample-project-headers.hmap -F/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator -I/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/include -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources/i386 -I/Users/mario/Desktop/TalkingSample/build/TalkingSample.build/Debug-iphonesimulator/TalkingSample.build/DerivedSources -c /Users/mario/Desktop/TalkingSample/TalkingSample_Prefix.pch -o /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingSample_Prefix-ggrvfxkczwbbyecumpspdgimciwj/TalkingSample_Prefix.pch.gch0#
+
+CTouch /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app
+s316330084.237967
+e316330084.240696
+r1
+xTouch
+x/Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app
+lSLF07#2@86"Touch /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app316330084#316330084#0(0"0(0#0#0"8623420320#276"    cd /Users/mario/Desktop/TalkingSample    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/mario/Desktop/TalkingSample/build/Debug-iphonesimulator/TalkingSample.app0#
+
