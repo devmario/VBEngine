@@ -36,4 +36,7 @@
 //이옵션을 키면 모든 drawable을 텍스쳐없이 GL_LINE_LOOP로 그립니다.
 //#define _VB_VISIBLE_VERTEX_LINE_
 
+//바운딩 박스 컬링을 사용할 것인가
+//#define _VB_USE_BBTREE_
+
 #endif

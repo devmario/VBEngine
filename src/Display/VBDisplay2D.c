@@ -149,8 +149,10 @@ void VBDisplay2DUpdate(VBDisplay2D* _display, VBFloat _tick) {
     VBArrayListInit(_display->drawable_list);
     _display->drawable = VBDrawable2DAlloc();
     
+#ifdef _VB_USE_BBTREE_
     //AABB생성을 위한 최하위 모델리스트 초기화
     VBArrayListInit(_display->leaf_list);
+#endif
     
     //에니메이션 업데이트
     _VBModel2DAnimationUpdateTowardChildsRecursive(VBDisplay2DGetTopModel(_display) , _tick, VBTrue);
@@ -159,6 +161,7 @@ void VBDisplay2DUpdate(VBDisplay2D* _display, VBFloat _tick) {
     //추가로 AABB생성을 위한 최하위 모델들도 수집한다.
     _VBModel2DUpdateColorAndMatrixAndDrawableTowardChildsRecursive(VBDisplay2DGetTopModel(_display), VBColorRGBALoadIdentity(), VBCamera2DGetMatrix(_display->camera), _display, _VBDisplay2DEventLeafModel);
     
+#ifdef _VB_USE_BBTREE_
     //버텍스 AABB 설정
     _VBModel2DSetVertexAABBTowardChildsRecursive(VBDisplay2DGetTopModel(_display));
     
@@ -173,6 +176,7 @@ void VBDisplay2DUpdate(VBDisplay2D* _display, VBFloat _tick) {
     //모델을 그릴것인가 말것인가를 스크린의 AABB와 모델트리의 AABB들과 판단하여 플래그 값을 설정한다.
     VBVector2D _screen_size = VBEngineGetScreenSize();
     _VBModel2DSetDrawFlagAsAABBTowardChildsRecursive(_display->top, VBAABBCreate(0.0f, 0.0f, _screen_size.x, _screen_size.y));
+#endif
     
     //디스플레이의 모델들을 최소 갯수의 Drawable로 병합한다.
     _VBDisplay2DSetDrawableListTowardChildsRecursive(_display, VBDisplay2DGetTopModel(_display));

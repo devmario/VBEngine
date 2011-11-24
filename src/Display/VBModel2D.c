@@ -270,6 +270,14 @@ VBModel2D* VBModel2DInit(VBModel2D* _model) {
     while(VBModel2DGetChildNum(_model)) {
         VBModel2DRemoveChildModelAt(_model, 0);
     }
+#ifdef _VB_USE_BBTREE_
+    _model->is_aabb_draw = VBFalse;
+    _model->is_vertex_aabb_draw = VBFalse;
+#endif
+#ifndef _VB_USE_BBTREE_
+    _model->is_aabb_draw = VBTrue;
+    _model->is_vertex_aabb_draw = VBTrue;
+#endif
     _model->child = VBArrayListInit(_model->child);
     _model->is_show = VBTrue;
     _model->is_tree_updated = VBTrue;
