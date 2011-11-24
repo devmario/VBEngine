@@ -11,8 +11,6 @@
 		ACF6AFC4127EBFF700275A48 /* FlashCS5extension.c in Sources */ = {isa = PBXBuildFile; fileRef = ACF6AFC3127EBFF700275A48 /* FlashCS5extension.c */; };
 		ACF6B201127F221200275A48 /* mm_jsapi.c in Sources */ = {isa = PBXBuildFile; fileRef = ACF6B200127F221200275A48 /* mm_jsapi.c */; };
 		ACF6B571127F5CBD00275A48 /* CAPIUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = ACF6B570127F5CBD00275A48 /* CAPIUtil.c */; };
-		BCD1311013DD1D5F00BF6802 /* VBImportObj.jsfl in Resources */ = {isa = PBXBuildFile; fileRef = BCD1310E13DD1D5F00BF6802 /* VBImportObj.jsfl */; };
-		BCD1311113DD1D5F00BF6802 /* VBExportObj.jsfl in Resources */ = {isa = PBXBuildFile; fileRef = BCD1310F13DD1D5F00BF6802 /* VBExportObj.jsfl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +25,6 @@
 		ACF6B200127F221200275A48 /* mm_jsapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mm_jsapi.c; sourceTree = "<group>"; };
 		ACF6B56F127F5CBD00275A48 /* CAPIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPIUtil.h; sourceTree = "<group>"; };
 		ACF6B570127F5CBD00275A48 /* CAPIUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CAPIUtil.c; sourceTree = "<group>"; };
-		BCD1310E13DD1D5F00BF6802 /* VBImportObj.jsfl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VBImportObj.jsfl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
-		BCD1310F13DD1D5F00BF6802 /* VBExportObj.jsfl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VBExportObj.jsfl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +70,6 @@
 		08FB77AFFE84173DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				BCD1310E13DD1D5F00BF6802 /* VBImportObj.jsfl */,
-				BCD1310F13DD1D5F00BF6802 /* VBExportObj.jsfl */,
 				ACF6AFBD127EBF2F00275A48 /* mm_jsapi.h */,
 				ACF6B200127F221200275A48 /* mm_jsapi.c */,
 				ACF6B1D3127F1E9400275A48 /* FlashCS5extension.h */,
@@ -146,8 +140,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
-				BCD1311013DD1D5F00BF6802 /* VBImportObj.jsfl in Resources */,
-				BCD1311113DD1D5F00BF6802 /* VBExportObj.jsfl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
