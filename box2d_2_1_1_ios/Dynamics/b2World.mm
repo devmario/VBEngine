@@ -34,7 +34,6 @@
 #include "b2Timer.h"
 #include <new>
 #define WORLDB2
-#import "GameObject.h"
 
 b2World::b2World(const b2Vec2& gravity)
 {

@@ -427,7 +427,7 @@ void VBModel2DFree(VBModel2D** _model) {
     
     int i;
     for(i = 0; i < VBArrayVectorGetLength((*_model)->frame_current_key_frame); i++) {
-        VBSystemFree((*_model)->frame_all_allocated_child_models->data[i]);
+        VBSystemFree((*_model)->frame_current_key_frame->data[i]);
     }
     for(i = 0; i < VBArrayVectorGetLength((*_model)->frame_all_allocated_child_models); i++) {
         VBModel2DFree((VBModel2D**)&(*_model)->frame_all_allocated_child_models->data[i]);
