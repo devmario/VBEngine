@@ -158,10 +158,10 @@ void VBPNGFileLoad(VBPNGFile* _png, VBString* _path) {
 #endif
             }
 			
-			png_bytep* _row_pointers = (png_bytep*)VBSystemMalloc(sizeof(png_bytep) * _png->height);
+			png_bytep* _row_pointers = (png_bytep*)VBSystemCalloc(sizeof(png_bytep), _png->height);
 			VBULong _y;
 			for(_y = 0; _y < _png->height; _y++)
-				_row_pointers[_y] = (png_byte*)VBSystemMalloc(png_get_rowbytes(_png_ptr, _info_ptr));
+				_row_pointers[_y] = (png_byte*)VBSystemCalloc(1, png_get_rowbytes(_png_ptr, _info_ptr));
 			
 			png_read_image(_png_ptr, _row_pointers);
 			

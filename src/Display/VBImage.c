@@ -188,7 +188,7 @@ void VBImageLoad(VBImage* _img, VBString* _path) {
 			VBULong _size = VBPNGFileGetDataSize(_png);
 			void* _data = VBPNGFileGetData(_png);
 			
-			_img->data = VBSystemMalloc(_size);
+			_img->data = VBSystemCalloc(1, _size);
 			memcpy(_img->data, _data, _size);
 			
 			VBPNGFileFree(&_png);

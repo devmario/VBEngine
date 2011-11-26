@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include <OpenGLES/ES1/gl.h>
+#include <OpenGLES/ES1/glext.h>
 
 #define _DEFAULT_STEPSIZE_ 100
 
@@ -577,9 +578,6 @@ void VBDrawable2DClear(VBDrawable2D* _drawable) {
 }
 
 void VBDrawable2DDraw(VBDrawable2D* _drawable) {
-    if(VBDrawable2DGetTexture(_drawable) == VBNull)
-        return;
-    
 #ifdef _VB_DEBUG_
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
@@ -587,6 +585,20 @@ void VBDrawable2DDraw(VBDrawable2D* _drawable) {
 										 "VBEngine Log: VBDrawable2DDraw() - VBNull인 Draw요소는 그릴수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
 #endif
 	GLboolean _state;
+    
+	_state = glIsEnabled(GL_BLEND);
+	if(!_state)
+		glEnable(GL_BLEND);
+    
+    GLint _bendSRC, _bendDST;
+    glGetIntegerv(GL_BLEND_SRC, &_bendSRC);
+    glGetIntegerv(GL_BLEND_DST, &_bendDST);
+    if(_bendSRC != GL_SRC_ALPHA || _bendDST != GL_ONE_MINUS_SRC_ALPHA)
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+	_state = glIsEnabled(GL_COLOR_MATERIAL);
+	if(!_state)
+		glEnable(GL_COLOR_MATERIAL);
 	
 	_state = glIsEnabled(GL_TEXTURE_2D);
 	if(!_state)
@@ -594,8 +606,16 @@ void VBDrawable2DDraw(VBDrawable2D* _drawable) {
     
     GLint _texID  = 0;
     glGetIntegerv(GL_TEXTURE_BINDING_2D, &_texID);
-    if(_texID != VBTextureGetID(VBDrawable2DGetTexture(_drawable)))
+    if(_texID != VBTextureGetID(VBDrawable2DGetTexture(_drawable))) {
         glBindTexture(GL_TEXTURE_2D, VBTextureGetID(VBDrawable2DGetTexture(_drawable)));
+#ifdef _VB_UNITY_3D_
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_FALSE);
+#endif
+    }
 	
     _state = glIsEnabled(GL_COLOR_ARRAY);
     if(_drawable->color) {

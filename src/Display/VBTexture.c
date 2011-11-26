@@ -3,6 +3,7 @@
 #include "../VBEngine.h"
 
 #include <OpenGLES/ES1/gl.h>
+#include <OpenGLES/ES1/glext.h>
 
 VBTexture* VBTextureAlloc(void) {
 	VBTexture* _tex = VBSystemCalloc(1, sizeof(VBTexture));
@@ -83,10 +84,13 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
         glGenTextures(1, (GLuint*)&_tex->tid);
 	glBindTexture(GL_TEXTURE_2D, _tex->tid);
     
+#ifdef _VB_UNITY_3D_
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_FALSE);
+#endif
 	
 #ifdef _VB_DEBUG_
 	if(VBImageGetWidth(_img) < 32 || VBImageGetHeight(_img) < 32)
@@ -94,7 +98,6 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
 										 "VBEngine Log: VBTextureLoadImage() - 텍스쳐는 가로와 세로가 32pixel 이상이어야 합니다");
 	
 #define _IsPower(_num) (!((_num - 1) & _num))
-	
 	
 	
 #undef _IsPower

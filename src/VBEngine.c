@@ -50,10 +50,6 @@ VBBool VBEngineStart(const VBChar* _res_path, const VBChar* _rw_doc_path, VBUSho
         _vb_engine_default_resource_screen_width = _default_resource_screen_width;
         _vb_engine_default_resource_screen_height = _default_resource_screen_height;
         
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_COLOR_MATERIAL);
-        
 		_vb_engine_inited = VBTrue;
         
         return VBTrue;

@@ -1149,7 +1149,8 @@ void b2World::DrawDebugData()
 			const b2Transform& xf = b->GetTransform();
 			for (b2Fixture* f = b->GetFixtureList(); f; f = f->GetNext())
 			{
-                DrawShape(f, xf, b2Color(1.0, 1.0, 1.0, 1.0));
+                float color = b->IsAwake() ? 1.0 : 0.5;
+                    DrawShape(f, xf, b2Color(color, color, color, 0.5));
 			}
 		}
 	}

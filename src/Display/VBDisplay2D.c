@@ -140,7 +140,7 @@ void VBDisplay2DUpdate(VBDisplay2D* _display, VBFloat _tick) {
 #endif
     
     //모든 Drawable 리스트 초기화
-    VBArrayListNode* node = VBArrayListGetNodeAt(_display->drawable_list, 0);
+    VBArrayListNode* node = VBArrayListGetFirstNode(_display->drawable_list);
     while(node) {
         VBDrawable2D* drawable = VBArrayListNodeGetData(node);
         VBDrawable2DFree(&drawable);

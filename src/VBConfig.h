@@ -27,6 +27,7 @@
 //#define _VB_ANDROID_
 //#define _VB_MAC_
 //#define _VB_WINDOW_
+#define _VB_UNITY_3D_
 
 //이옵션을 키면 디버그 모드로 작동합니다.(로그출력 및 로그파일에 로그 쓰기)
 //#define _VB_DEBUG_
