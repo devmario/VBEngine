@@ -102,11 +102,16 @@ VBDisplay2D* VBDisplay2DInit(VBDisplay2D* _display) {
 										 "VBEngine Log: VBDisplay2DInit() - VBNull인 Display요소는 초기화 할 수 없습니다. VBDisplayAlloc()하지 않았을 수 있습니다.");
 #endif
     
-    _display->drawable_list = VBArrayListInit(_display->drawable_list);
-    _display->drawable = VBDrawable2DInit(_display->drawable);
-    _display->leaf_list = VBArrayListInit(_display->leaf_list);
-    _display->top = VBModel2DInit(_display->top);
-    _display->camera = VBCamera2DInitWithMode(_display->camera, VBCamera2DMode_Default);
+    if(_display->drawable_list)
+        _display->drawable_list = VBArrayListInit(_display->drawable_list);
+    if(_display->drawable)
+        _display->drawable = VBDrawable2DInit(_display->drawable);
+    if(_display->leaf_list)
+        _display->leaf_list = VBArrayListInit(_display->leaf_list);
+    if(_display->top)
+        _display->top = VBModel2DInit(_display->top);
+    if(_display->camera)
+        _display->camera = VBCamera2DInitWithMode(_display->camera, VBCamera2DMode_Default);
     
     return _display;
 }

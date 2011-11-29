@@ -440,6 +440,7 @@ void VBModel2DFree(VBModel2D** _model) {
     VBDrawable2DFree(&(*_model)->origin_drawable);
     VBDrawable2DFree(&(*_model)->drawable);
     VBSystemFree(*_model);
+    *_model = VBNull;
 }
 
 #pragma mark - VBModel2D 변환행렬
