@@ -608,13 +608,10 @@ void VBDrawable2DDraw(VBDrawable2D* _drawable) {
     glGetIntegerv(GL_TEXTURE_BINDING_2D, &_texID);
     if(_texID != VBTextureGetID(VBDrawable2DGetTexture(_drawable))) {
         glBindTexture(GL_TEXTURE_2D, VBTextureGetID(VBDrawable2DGetTexture(_drawable)));
-#ifdef _VB_UNITY_3D_
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_FALSE);
-#endif
     }
 	
     _state = glIsEnabled(GL_COLOR_ARRAY);

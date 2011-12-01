@@ -157,7 +157,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "osascript -e 'tell application \"Adobe Flash CS5\" to quit'\n\ncp -r \"/Users/jangwonhee/Library/Developer/Xcode/DerivedData/FlashCS5extension-hhrqxjghvugpvbehakgaegrwpczs/Build/Products/Debug/FlashCS5extension.bundle\" \"/Users/jangwonhee/Library/Application Support/Adobe/Flash CS5/en_US/Configuration/External Libraries/FlashCS5extension.bundle\"\n\ncp \"/Users/jangwonhee/Desktop/VBEngineProject/trunk/VBEngineProject_0_5/VBFlashPlugIn/VBImportObj.jsfl\" \"/Users/jangwonhee/Library/Application Support/Adobe/Flash CS5/en_US/Configuration/Commands/VBImportObj.jsfl\"\n\ncp \"/Users/jangwonhee/Desktop/VBEngineProject/trunk/VBEngineProject_0_5/VBFlashPlugIn/VBExportObj.jsfl\" \"/Users/jangwonhee/Library/Application Support/Adobe/Flash CS5/en_US/Configuration/Commands/VBExportObj.jsfl\"\n\nosascript -e 'tell application \"Adobe Flash CS5\" to activate'\n";
+			shellScript = "/*\n osascript -e 'tell application \"Adobe Flash CS5\" to quit'\n\ncp -r \"/Users/jangwonhee/Library/Developer/Xcode/DerivedData/FlashCS5extension-hhrqxjghvugpvbehakgaegrwpczs/Build/Products/Debug/FlashCS5extension.bundle\" \"/Users/jangwonhee/Library/Application Support/Adobe/Flash CS5/en_US/Configuration/External Libraries/FlashCS5extension.bundle\"\n\ncp \"/Users/jangwonhee/Desktop/VBEngineProject/trunk/VBEngineProject_0_5/VBFlashPlugIn/VBImportObj.jsfl\" \"/Users/jangwonhee/Library/Application Support/Adobe/Flash CS5/en_US/Configuration/Commands/VBImportObj.jsfl\"\n\ncp \"/Users/jangwonhee/Desktop/VBEngineProject/trunk/VBEngineProject_0_5/VBFlashPlugIn/VBExportObj.jsfl\" \"/Users/jangwonhee/Library/Application Support/Adobe/Flash CS5/en_US/Configuration/Commands/VBExportObj.jsfl\"\n\nosascript -e 'tell application \"Adobe Flash CS5\" to activate'\n */\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
