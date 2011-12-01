@@ -114,12 +114,12 @@ void _VBModel2DAnimationUpdateTowardChildsRecursive(VBModel2D* _model, VBFloat _
                 } else {
                     //모델의 애니메이션이 루핑 되지 않으면 플레이 되지 않도록 설정한다.
                     _model->is_play = VBFalse;
-                    _model->cur_frame = _model->frame->total_frame - 1;
+                    _model->cur_frame = _model->frame->total_frame - 1.001;
                 }
             } else if(_model->cur_frame < 0.0) {
                 if(_model->is_play_loop) { //모델의 애니메이션이 루핑되는지 검사한다.
                     //모델의 애니메이션이 루핑 된다면 마지막 프레임으로 변경한다.
-                    _model->cur_frame = _model->frame->total_frame - 1;
+                    _model->cur_frame = _model->frame->total_frame - 1.001;
                 } else {
                     //모델의 애니메이션이 루핑 되지 않으면 플레이 되지 않도록 설정한다.
                     _model->is_play = VBFalse;
