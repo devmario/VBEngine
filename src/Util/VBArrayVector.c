@@ -84,6 +84,8 @@ void* VBArrayVectorGetDataAt(VBArrayVector* _vec, VBULong _at) {
 										 "VBEngine Log: VBArrayVectorGetDataAt() - VBNull인 Vector요소의 데이터의 위치를 구할 수 없습니다. VBArrayVectorAlloc()하지 않았을 수 있습니다.");
 #endif
     
+    if(_vec->len == 0)
+        return NULL;
 	if(_at > _vec->len - 1)
 		_at = _vec->len - 1;
 	return *(_vec->data + _at);
