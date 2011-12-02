@@ -428,15 +428,21 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                            _key_frame_element_type == VBObjectFile2DKeyFrameElementType_MovieClip) {
                             //색상 읽기
                             /******************************READ FILE******************************/
+                            
+                            printf("color detail ");
                             VBChar _color_code;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_code, sizeof(VBChar));
-                            _color.r = ((_color_code / 100.0f) + 1.0f) * 0xFF;
+                            printf("%i ", _color_code);
+                            _color.r = (_color_code / 100.0f) * 0xFF;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_code, sizeof(VBChar));
-                            _color.g = ((_color_code / 100.0f) + 1.0f) * 0xFF;
+                            printf("%i ", _color_code);
+                            _color.g = (_color_code / 100.0f) * 0xFF;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_code, sizeof(VBChar));
-                            _color.b = ((_color_code / 100.0f) + 1.0f) * 0xFF;
+                            printf("%i ", _color_code);
+                            _color.b = (_color_code / 100.0f) * 0xFF;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_code, sizeof(VBChar));
-                            _color.a = ((_color_code / 100.0f) + 1.0f) * 0xFF;
+                            printf("%i\n", _color_code);
+                            _color.a = (_color_code / 100.0f) * 0xFF;
                             VBShort _color_add_code;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_add_code, sizeof(VBShort));
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_add_code, sizeof(VBShort));
@@ -444,9 +450,6 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_add_code, sizeof(VBShort));
                             VBUChar _blend_mode_code;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_blend_mode_code, sizeof(VBUChar));
-                            
-                            printf("color detail %x %x %x %x\n",
-                                   _color.r, _color.g, _color.b, _color.a);
                             
                             //트렌지션 타입 읽기
                             /******************************READ FILE******************************/
