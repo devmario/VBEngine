@@ -140,7 +140,7 @@ void _VBModel2DAnimationUpdateTowardChildsRecursive(VBModel2D* _model, VBFloat _
                 }
                 for(int i = 0; i < _model->frame->key_frame->len; i++) {
                     VBObjectFile2DKeyFrame* _key_frame = _model->frame->key_frame->data[i];
-                    if((float)_key_frame->end_frame <  floorf(_model->cur_frame)) {
+                    if((float)_key_frame->end_frame <=  floorf(_model->cur_frame)) {
                         continue;
                     }
                     if((float)_key_frame->begin_frame > floorf(_model->cur_frame)) {
