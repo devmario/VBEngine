@@ -86,7 +86,7 @@ VBDisplay2D* VBDisplay2DAlloc(void) {
 #endif
     
     _display->drawable_list = VBArrayListAlloc();
-    _display->drawable = VBDrawable2DAlloc();
+    _display->drawable = VBNull;
     _display->leaf_list = VBArrayListAlloc();
     _display->top = VBModel2DAlloc();
     _display->camera = VBCamera2DAlloc();
@@ -104,8 +104,6 @@ VBDisplay2D* VBDisplay2DInit(VBDisplay2D* _display) {
     
     if(_display->drawable_list)
         _display->drawable_list = VBArrayListInit(_display->drawable_list);
-    if(_display->drawable)
-        _display->drawable = VBDrawable2DInit(_display->drawable);
     if(_display->leaf_list)
         _display->leaf_list = VBArrayListInit(_display->leaf_list);
     if(_display->top)
@@ -125,7 +123,6 @@ void VBDisplay2DFree(VBDisplay2D** _display) {
 #endif 
     
     VBArrayListFree(&(*_display)->drawable_list);
-    VBDrawable2DFree(&(*_display)->drawable);
     VBArrayListFree(&(*_display)->leaf_list);
     VBModel2DFree(&(*_display)->top);
     VBCamera2DFree(&(*_display)->camera);
@@ -152,7 +149,7 @@ void VBDisplay2DUpdate(VBDisplay2D* _display, VBFloat _tick) {
         node = VBArrayListNodeGetNextNode(node);
     }
     VBArrayListInit(_display->drawable_list);
-    _display->drawable = VBDrawable2DAlloc();
+    VBDrawable2D* _tmpDrawable = _display->drawable = VBDrawable2DAlloc();
     
 #ifdef _VB_USE_BBTREE_
     //AABB생성을 위한 최하위 모델리스트 초기화
@@ -185,6 +182,8 @@ void VBDisplay2DUpdate(VBDisplay2D* _display, VBFloat _tick) {
     
     //디스플레이의 모델들을 최소 갯수의 Drawable로 병합한다.
     _VBDisplay2DSetDrawableListTowardChildsRecursive(_display, VBDisplay2DGetTopModel(_display));
+    
+    VBDrawable2DFree(&_tmpDrawable);
 }
 
 void VBDisplay2DDraw(VBDisplay2D* _display) {

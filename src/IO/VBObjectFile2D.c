@@ -215,6 +215,8 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
             VBObjectFile2DLibraryNameID* _library_name_id = VBObjectFile2DLibraryNameIDInitWithIDAndName(VBObjectFile2DLibraryNameIDAlloc(), _library_id, _library_name);
             VBArrayVectorAddBack(_obj2D->library_name_id, _library_name_id);
             printf("%ld\n", _library_name_id->libraryID);
+            
+            VBStringFree(&_library_name);
         }
         
         //UV(vertex, texcoord)가 있는 라이브러리의 길이 읽기(플래쉬의 비트맵)
