@@ -548,10 +548,9 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                     _key_frame = VBObjectFile2DKeyFrameInitWithData(VBObjectFile2DKeyFrameAlloc(), _key_frame_element_library_name_id, _begin_frame, _end_frame, _key_frame_element);
                     _key_frame->depth = _depth;
                     VBArrayListAddBack(_obj2D->key_frame, _key_frame);
+                    VBArrayVectorAddBack(_frame->key_frame, _key_frame);
                     
                     _key_frame_arr[_j] = _key_frame;
-                    
-                    VBArrayVectorAddBack(_frame->key_frame, _key_frame);
                     
                     //메모리 점유하고 있는 필요없는 포인터들 메모리 해제
                     if(_instance_name)
@@ -588,7 +587,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                         //트렌지션이 있고 링크드리스트가 연결이 안되어 있을경우만 검색
                         if(VBObjectFile2DKeyFrameElementGraphicGetTransition(_graphic) && VBObjectFile2DKeyFrameElementGraphicGetNext(_graphic) == VBNull && _next_key_frame_id_arr[_j] != 0) {
                             //검색하여서 다음프레임의 아이디랑 같은 키프레임의 포인터를 링크드 리스트로 연결
-                            for(_k = 0; _k < _key_frame_length; _k++) {
+                            for(_k = _j; _k < _key_frame_length; _k++) {
                                 if(_key_frame_id_arr[_k] == _next_key_frame_id_arr[_j]) {
                                     VBObjectFile2DKeyFrameElementGraphicSetNext(_graphic, VBObjectFile2DKeyFrameElementGetBaseElement(VBObjectFile2DKeyFrameGetElement(_key_frame_arr[_k])));
                                     break;
@@ -600,7 +599,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                         //트렌지션이 있고 링크드리스트가 연결이 안되어 있을경우만 검색
                         if(VBObjectFile2DKeyFrameElementMovieClipGetTransition(_movie_clip) && VBObjectFile2DKeyFrameElementMovieClipGetNext(_movie_clip) == VBNull && _next_key_frame_id_arr[_j] != 0) {
                             //검색하여서 다음프레임의 아이디랑 같은 키프레임의 포인터를 링크드 리스트로 연결
-                            for(_k = 0; _k < _key_frame_length; _k++) {
+                            for(_k = _j; _k < _key_frame_length; _k++) {
                                 if(_key_frame_id_arr[_k] == _next_key_frame_id_arr[_j]) {
                                     VBObjectFile2DKeyFrameElementMovieClipSetNext(_movie_clip, VBObjectFile2DKeyFrameElementGetBaseElement(VBObjectFile2DKeyFrameGetElement(_key_frame_arr[_k])));
                                     break;
