@@ -98,7 +98,6 @@
 				8D57630F048677EA00EA77CD /* Resources */,
 				8D576311048677EA00EA77CD /* Sources */,
 				8D576313048677EA00EA77CD /* Frameworks */,
-				BCD1311313DD1D6A00BF6802 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -144,23 +143,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		BCD1311313DD1D6A00BF6802 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/*\n osascript -e 'tell application \"Adobe Flash CS5\" to quit'\n\ncp -r \"/Users/jangwonhee/Library/Developer/Xcode/DerivedData/FlashCS5extension-hhrqxjghvugpvbehakgaegrwpczs/Build/Products/Debug/FlashCS5extension.bundle\" \"/Users/jangwonhee/Library/Application Support/Adobe/Flash CS5/en_US/Configuration/External Libraries/FlashCS5extension.bundle\"\n\ncp \"/Users/jangwonhee/Desktop/VBEngineProject/trunk/VBEngineProject_0_5/VBFlashPlugIn/VBImportObj.jsfl\" \"/Users/jangwonhee/Library/Application Support/Adobe/Flash CS5/en_US/Configuration/Commands/VBImportObj.jsfl\"\n\ncp \"/Users/jangwonhee/Desktop/VBEngineProject/trunk/VBEngineProject_0_5/VBFlashPlugIn/VBExportObj.jsfl\" \"/Users/jangwonhee/Library/Application Support/Adobe/Flash CS5/en_US/Configuration/Commands/VBExportObj.jsfl\"\n\nosascript -e 'tell application \"Adobe Flash CS5\" to activate'\n */\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D576311048677EA00EA77CD /* Sources */ = {
