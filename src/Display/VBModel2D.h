@@ -188,6 +188,7 @@ extern "C" {
     VBModel2D* VBModel2DInitWithLibraryNameIDAndTexture(VBModel2D* _model, VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_name_id, VBTexture* _texture, VBBool _is_realtime_animation);
     
     void VBModel2DSetTexture(VBModel2D* _model, VBTexture* _tex);
+    VBTexture* VBModel2DGetTexture(VBModel2D* _model);
     
     /**
      @brief VBModel2D의 메모리와 에니메이션 관련 자식들 모델의 메모리를 모두 해제합니다.

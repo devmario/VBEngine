@@ -59,3 +59,33 @@ VBColorRGBA VBColorRGBAMultiply(VBColorRGBA _color1, VBColorRGBA _color2) {
     _color.a = _color1.a * ((float)_color2.a / 0xFF);
     return _color;
 }
+
+
+
+VBColorRGBA VBColorRGBADrawNormal(VBColorRGBA _color1, VBColorRGBA _color2) {
+    float _ap = _color1.a + (_color2.a/(float)0xFF)*(0xFF-_color1.a);
+    float _a = _color2.a / _ap;
+    float _aI = 1.0 - _a;
+    
+    _color1.r = (_color2.r * _a) + (_color1.r * _aI);
+    _color1.g = (_color2.g * _a) + (_color1.g * _aI);
+    _color1.b = (_color2.b * _a) + (_color1.b * _aI);
+    _color1.a = _ap;
+    return _color1;
+}
+
+VBColorRGBA VBColorRGBADrawColor(VBColorRGBA _color1, int _hex, int _maxDark, int _minDark) {
+    VBUChar r = (_hex & 0xFF0000) >> 16;
+    VBUChar g = (_hex & 0x00FF00) >> 8;
+    VBUChar b = (_hex & 0x0000FF);
+    
+    float _miRGB = _minDark - _maxDark;
+    
+    int ir = r + (((_color1.r - _maxDark) / _miRGB) * (_minDark - r));
+    int ig = g + (((_color1.g - _maxDark) / _miRGB) * (_minDark - g));
+    int ib = b + (((_color1.b - _maxDark) / _miRGB) * (_minDark - b));
+    _color1.r = ir > 0xFF ? 0xFF : (ir < 0x00 ? 0x00 : ir);
+    _color1.g = ig > 0xFF ? 0xFF : (ig < 0x00 ? 0x00 : ig);
+    _color1.b = ib > 0xFF ? 0xFF : (ib < 0x00 ? 0x00 : ib);
+    return _color1;
+}

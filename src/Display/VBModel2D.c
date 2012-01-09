@@ -4,6 +4,11 @@
 #include <limits.h>
 #include <math.h>
 
+void _VBModel2DSetVertexAABBTowardChildsRecursive(VBModel2D* _model);
+void _VBModel2DSetAABBTowardParentsRecursive(VBModel2D* _model, VBAABB _child_aabb);
+void _VBModel2DSetDrawFlagAsAABBTowardChildsRecursive(VBModel2D* _model, VBAABB _screen_aabb);
+void _VBModel2DUpdateColorAndMatrixAndDrawableTowardChildsRecursive(VBModel2D* _model, VBColorRGBA _parent_color, VBMatrix2D _parent_mat, void* _user_reference, void _leaf_tree_child_func(void*,VBModel2D*));
+
 #pragma mark - AABB처리로 속도를 빠르게 하기위해 VBDisplay2D에서 VBModel2D로 접근이 필요한 private한 재귀 method
 
 //모델의 Vertex의 AABB를 설정합니다.(이메소드 호출시 하위의 모든 자식의 Vertex들도 AABB가 설정됨)
@@ -90,6 +95,9 @@ struct _key_sort {
     VBModel2D* _child;
     VBObjectFile2DKeyFrame* _key;
 };
+
+VBLong _key_sort_func(const void* _a, const void* _b);
+void _VBModel2DAnimationUpdateTowardChildsRecursive(VBModel2D* _model, VBFloat _tick, VBBool _is_update_child);
 
 VBLong _key_sort_func(const void* _a, const void* _b) {
     _key_sort** _key_a = (_key_sort**)_a;

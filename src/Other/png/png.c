@@ -816,6 +816,8 @@ AC || CB || 0
 */
 
 void png_64bit_product (long v1, long v2, unsigned long *hi_product,
+                        unsigned long *lo_product);
+void png_64bit_product (long v1, long v2, unsigned long *hi_product,
    unsigned long *lo_product)
 {
  int a, b, c, d;

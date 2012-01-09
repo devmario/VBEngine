@@ -319,15 +319,15 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                     VBMatrix2DWrapper _matrix_wrapper;
                     VBColorRGBA _color;
                     VBObjectFile2DTransitionType _transition_type;
-                    VBULong _transition_single_bezier_vector_length;
+                    VBULong _transition_single_bezier_vector_length = 0;
                     VBVector2D* _transition_single_bezier_vector = VBNull;
-                    VBULong _transition_position_bezier_vector_length;
+                    VBULong _transition_position_bezier_vector_length = 0;
                     VBVector2D* _transition_position_bezier_vector = VBNull;
-                    VBULong _transition_rotation_bezier_vector_length;
+                    VBULong _transition_rotation_bezier_vector_length = 0;
                     VBVector2D* _transition_rotation_bezier_vector = VBNull;
-                    VBULong _transition_scale_bezier_vector_length;
+                    VBULong _transition_scale_bezier_vector_length = 0;
                     VBVector2D* _transition_scale_bezier_vector = VBNull;
-                    VBULong _transition_color_bezier_vector_length;
+                    VBULong _transition_color_bezier_vector_length = 0;
                     VBVector2D* _transition_color_bezier_vector = VBNull;
                     VBObjectFile2DTransition* _transition = VBNull;
                     
@@ -360,10 +360,10 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                             printf("    instance name:\"%s\"\n", _instance_name_byte);
                             _instance_name = VBStringInitWithCString(VBStringAlloc(), _instance_name_byte);
                             printf("    instance name:\"%s\"\n", (char*)_instance_name->data);
-                            VBSystemFree(_instance_name_byte);
                         } else {
                             _instance_name = VBStringInitWithCString(VBStringAlloc(), "");
                         }
+                        VBSystemFree(_instance_name_byte);
                     }
                     
                     //depth
@@ -473,6 +473,8 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                                 
                                 //읽은 정보로 싱글 트렌지션 생성
                                 _transition = VBObjectFile2DTransitionInitWithSingleData(VBObjectFile2DTransitionAlloc(), _transition_single_bezier_vector_length, _transition_single_bezier_vector);
+                                
+                                VBArrayListAddBack(_obj2D->transition, _transition);
                             } else if(_transition_type == VBObjectFile2DTransitionType_MultiBezier) {
                                 //위치 트렌지션 베지어 곡선의 길이 읽기
                                 /******************************READ FILE******************************/
@@ -521,6 +523,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                                 
                                 //읽은 정보로 멀티 트렌지션 생성하고 배열에 저장
                                 _transition = VBObjectFile2DTransitionInitWithMultiData(VBObjectFile2DTransitionAlloc(), _transition_position_bezier_vector_length, _transition_position_bezier_vector, _transition_rotation_bezier_vector_length, _transition_rotation_bezier_vector, _transition_scale_bezier_vector_length, _transition_scale_bezier_vector, _transition_color_bezier_vector_length, _transition_color_bezier_vector);
+                                
                                 VBArrayListAddBack(_obj2D->transition, _transition);
                             }
                         }
@@ -568,8 +571,10 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                 //프레임있는 라이브러리 생성
                 if(_library_type == VBObjectFile2DLibraryType_Graphic) {
                     _library_base = VBObjectFile2DLibraryGraphicInitWithData(VBObjectFile2DLibraryGraphicAlloc(), _frame);
+                    VBArrayListAddBack(_obj2D->library_graphic, _library_base);
                 } else if(_library_type == VBObjectFile2DLibraryType_MovieClip) {
                     _library_base = VBObjectFile2DLibraryMovieClipInitWithData(VBObjectFile2DLibraryMovieClipAlloc(), _frame);
+                    VBArrayListAddBack(_obj2D->library_movie_clip, _library_base);
                 }
                 
                 //라이브러리 생성후 내부 키프레임 요소가 그래픽이나 무비클립일 경우 

@@ -62,6 +62,11 @@ VBObjectFile2DTransition* VBObjectFile2DTransitionInitWithSingleData(VBObjectFil
 
 void VBObjectFile2DTransitionFree(VBObjectFile2DTransition** _transition) {
     VBObjectFile2DTransitionInit(*_transition);
+    VBArrayVectorFree(&(*_transition)->single_transition_bezier);
+    VBArrayVectorFree(&(*_transition)->position_transition_bezier);
+    VBArrayVectorFree(&(*_transition)->rotation_transition_bezier);
+    VBArrayVectorFree(&(*_transition)->scale_transition_bezier);
+    VBArrayVectorFree(&(*_transition)->color_transition_bezier);
     VBSystemFree(*_transition);
     *_transition = VBNull;
 }
@@ -117,7 +122,6 @@ void _VBObjectFile2DTransitionSetBezier(VBArrayVector* _bezier, VBULong _bezier_
     if(_bezier_vector_length) {
         for(_i = 0; _i < _bezier_vector_length - 1; _i += 3) {
             VBArrayVectorAddBack(_bezier, VBSpline2DBezierCubicInitWithVector(VBSpline2DBezierCubicAlloc(), _bezier_vector[_i], _bezier_vector[_i + 1], _bezier_vector[_i + 2], _bezier_vector[_i + 3]));
-                //            printf("ttttttt %f,%f,%f,%f,%f,%f,%f,%f\n",_bezier_vector[_i].x,_bezier_vector[_i].y, _bezier_vector[_i + 1].x, _bezier_vector[_i + 1].y, _bezier_vector[_i + 2].x, _bezier_vector[_i + 2].y, _bezier_vector[_i + 3].x, _bezier_vector[_i + 3].y);
         }    
     }
 }

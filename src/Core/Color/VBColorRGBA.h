@@ -126,6 +126,12 @@ extern "C" {
      @return 연산이 적용된 color를 반환합니다.
      */
     VBColorRGBA VBColorRGBAMultiply(VBColorRGBA _color1, VBColorRGBA _color2);
+    
+    
+    
+    VBColorRGBA VBColorRGBADrawNormal(VBColorRGBA _color1, VBColorRGBA _color2);
+    
+    VBColorRGBA VBColorRGBADrawColor(VBColorRGBA _color1, int _hex, int _maxDark, int _minDark);
 	
 #ifdef __cplusplus
 }

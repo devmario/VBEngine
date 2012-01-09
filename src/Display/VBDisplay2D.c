@@ -32,6 +32,9 @@ void _VBModel2DUpdateColorAndMatrixAndDrawableTowardChildsRecursive(VBModel2D* _
 
 #pragma mark - private 모델의 모델트리가 최하위 일때 콜백
 
+void _VBDisplay2DEventLeafModel(void* _user_reference, VBModel2D* _leaf_model);
+void _VBDisplay2DSetDrawableListTowardChildsRecursive(VBDisplay2D* _display, VBModel2D* _model);
+
 //VBDisplay2DDraw실행중 모델의 모든 Drawable을 만들다가 최하위 모델을 만났을경우 호출
 //AABB를 만들기 위해 최하위 모델 리스트를 만든다.
 void _VBDisplay2DEventLeafModel(void* _user_reference, VBModel2D* _leaf_model) {
