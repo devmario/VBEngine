@@ -75,6 +75,7 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
 										 "VBEngine Log: VBTextureLoadImage() - VBNull인 텍스쳐를 Load 하려고 합니다. VBTextureAlloc하지 않은 이미지를 사용했을 수 있습니다.");
 #endif
 	
+	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 	GLboolean _state;
 	glGetBooleanv(GL_TEXTURE_2D, &_state);
 	if(_state == VBFalse)
