@@ -4,6 +4,8 @@
 
 #include <OpenGLES/ES1/gl.h>
 #include <OpenGLES/ES1/glext.h>
+#include <string.h>
+#include <stdlib.h>
 
 VBTexture* VBTextureAlloc(void) {
 	VBTexture* _tex = VBSystemCalloc(1, sizeof(VBTexture));
@@ -104,18 +106,23 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
 	_img->color_type = VBImageGetColorType(_img);
 	
 	GLenum _format;
+    int _byte = 0;
 	switch(_img->color_type) {
 		case VBColorType_G:
 			_format = GL_LUMINANCE;
+            _byte = 1;
 			break;
 		case VBColorType_GA:
 			_format = GL_LUMINANCE_ALPHA;
+            _byte = 2;
 			break;
 		case VBColorType_RGB:
 			_format = GL_RGB;
+            _byte = 3;
 			break;
 		case VBColorType_RGBA:
 			_format = GL_RGBA;
+            _byte = 4;
 			break;
 		default:
 			break;
@@ -127,10 +134,27 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
 										 "VBEngine Log: VBTextureLoadImage() - 텍스쳐로 사용될 이미지의 비트수가 지원하지 않는 비트수 입니다.(현재 8비트만 가능함.)");
 #endif
     
-    glTexImage2D(GL_TEXTURE_2D, 0, _format, VBImageGetWidth(_img), VBImageGetHeight(_img), 0, _format, GL_UNSIGNED_BYTE, VBImageGetImageData(_img));
+    _tex->width = 2;
+    while(_tex->width < VBImageGetWidth(_img))
+        _tex->width *= 2;
+    _tex->shiftX = _tex->width / 2 - VBImageGetWidth(_img) / 2;
     
-    _tex->width = VBImageGetWidth(_img);
-    _tex->height = VBImageGetHeight(_img);
+    _tex->height = 2;
+    while(_tex->height < VBImageGetHeight(_img))
+        _tex->height *= 2;
+    _tex->shiftY = _tex->height / 2 - VBImageGetHeight(_img) / 2;
+    
+    unsigned char* _data = calloc(_tex->width * _tex->height, _byte);
+    unsigned char* _ptr = _data + _tex->shiftX * _byte;
+    
+    for(int i = 0; i < _tex->height; i++) {
+        int _y = i - _tex->shiftY;
+        if(_y >= 0 && _y < VBImageGetHeight(_img))
+            memcpy(_ptr, VBImageGetPixelColor(_img, 0, _y), VBImageGetWidth(_img) * _byte);
+        _ptr += _tex->width * _byte;
+    }
+    glTexImage2D(GL_TEXTURE_2D, 0, _format, _tex->width, _tex->height, 0, _format, GL_UNSIGNED_BYTE, _data);
+    free(_data);
     
 #ifdef _VB_DEBUG_
 	if(glGetError() != GL_NO_ERROR)
