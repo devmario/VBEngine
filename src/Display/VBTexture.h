@@ -50,8 +50,6 @@ extern "C" {
 		 길이
 		 */
 		VBULong height;
-        
-        VBULong shiftX, shiftY;
 	};
 	
 	/**
