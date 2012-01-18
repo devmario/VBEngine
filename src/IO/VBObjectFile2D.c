@@ -183,28 +183,28 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
         VBFileReadLong(_obj2D->file, &_obj2D->uv_h);
         VBFileReadLong(_obj2D->file, &_obj2D->fl_w);
         VBFileReadLong(_obj2D->file, &_obj2D->fl_h);
-        printf("stage : %ld %ld %ld %ld\n", _obj2D->uv_w, _obj2D->uv_h, _obj2D->fl_w, _obj2D->fl_h);
+        //printf("stage : %ld %ld %ld %ld\n", _obj2D->uv_w, _obj2D->uv_h, _obj2D->fl_w, _obj2D->fl_h);
         
         VBFileReadFloat(_obj2D->file, &_obj2D->frame_rate);
-        printf("frame rate : %f\n", _obj2D->frame_rate);
+        //printf("frame rate : %f\n", _obj2D->frame_rate);
         
         //Library Name ID길이 읽기
         /******************************READ FILE******************************/
         VBFileReadULong(_obj2D->file, &_length);
-        printf("library length: %ld\n", _length);
+        //printf("library length: %ld\n", _length);
         for(_i = 0; _i < _length; _i++) {
             VBULong _library_name_data_length;
             //Library Name ID의 name문자열 길이 읽기
             /******************************READ FILE******************************/
             VBFileReadULong(_obj2D->file, &_library_name_data_length);
             VBByte* _library_name_data = VBSystemCalloc(_library_name_data_length + 1, sizeof(VBChar));
-            printf("%ld ", _library_name_data_length);
+            //printf("%ld ", _library_name_data_length);
             //Library Name ID의 name문자열 읽기
             /******************************READ FILE******************************/
             VBFileReadBytes(_obj2D->file, _library_name_data, _library_name_data_length * sizeof(VBChar));
             VBString* _library_name = VBStringInitWithCString(VBStringAlloc(), (VBChar*)_library_name_data);
             VBSystemFree(_library_name_data);
-            printf("%s ", (char*)_library_name_data);
+            //printf("%s ", (char*)_library_name_data);
             
             VBULong _library_id;
             //Library Name ID의 id 읽기
@@ -214,7 +214,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
             //Library Name ID생성하고 저장
             VBObjectFile2DLibraryNameID* _library_name_id = VBObjectFile2DLibraryNameIDInitWithIDAndName(VBObjectFile2DLibraryNameIDAlloc(), _library_id, _library_name);
             VBArrayVectorAddBack(_obj2D->library_name_id, _library_name_id);
-            printf("%ld\n", _library_name_id->libraryID);
+            //printf("%ld\n", _library_name_id->libraryID);
             
             VBStringFree(&_library_name);
         }
@@ -222,7 +222,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
         //UV(vertex, texcoord)가 있는 라이브러리의 길이 읽기(플래쉬의 비트맵)
         /******************************READ FILE******************************/
         VBFileReadULong(_obj2D->file, &_length);
-        printf("bitmap length %ld\n", _length);
+        //printf("bitmap length %ld\n", _length);
         for(_i = 0; _i < _length; _i++) {
             VBULong _library_id;
             //매치시킬 해당 Library Name ID를 찾기위해 id 읽기
@@ -247,19 +247,19 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
             //라이브러리 생성하고 저장
             VBObjectFile2DLibrary* _library = VBObjectFile2DLibraryInitWithType(VBObjectFile2DLibraryAlloc(), _library_name_id, VBObjectFile2DLibraryType_Bitmap, _bitmap);
             VBArrayVectorAddBack(_obj2D->library, _library);
-            printf("bitmap uv %s %ld ", (char*)_library_name_id->libraryName->data, _library_name_id->libraryID);
+            //printf("bitmap uv %s %ld ", (char*)_library_name_id->libraryName->data, _library_name_id->libraryID);
             float* _tt = (float*)_texcoord_vector;
             for(int i = 0; i < _texcoord_vector_length; i++) {
-                printf("%f,%f,", *(_tt), *(_tt+1));
+                //printf("%f,%f,", *(_tt), *(_tt+1));
                 _tt+=2;
             }
-            printf("\n");
+            //printf("\n");
         }
         
         //비트맵을 제외한 모든 라이브러리의 길이 읽기(그래픽 또는 무비클립)
         /******************************READ FILE******************************/
         VBFileReadULong(_obj2D->file, &_length);
-        printf("none bitmap length: %ld\n", _length);
+        //printf("none bitmap length: %ld\n", _length);
         for(_i = 0; _i < _length; _i++) {
             VBObjectFile2DLibraryNameID* _library_name_id = VBNull;
             VBObjectFile2DLibraryType _library_type = VBObjectFile2DLibraryType_None;
@@ -277,7 +277,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
             VBULong _tmp_lib_type;
             VBFileReadULong(_obj2D->file, &_tmp_lib_type);
             _library_type = _tmp_lib_type;
-            printf("none bitmap %s %ld %ld, ", (char*)_library_name_id->libraryName->data, _tmp_lib_type, _library_name_id->libraryID);
+            //printf("none bitmap %s %ld %ld, ", (char*)_library_name_id->libraryName->data, _tmp_lib_type, _library_name_id->libraryID);
             
             if(_library_type == VBObjectFile2DLibraryType_Graphic || _library_type == VBObjectFile2DLibraryType_MovieClip) {
                 VBObjectFile2DFrame* _frame = VBNull;
@@ -286,7 +286,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                 //프레임 갯수 읽기
                 /******************************READ FILE******************************/
                 VBFileReadULong(_obj2D->file, &_frame_total);
-                printf("%ld,", _frame_total);
+                //printf("%ld,", _frame_total);
                 
                 //타입이 그래픽이나 무비클립일 경우 프레임이 존재하므로 프래임 생성후 배열에 저장함
                 _frame = VBObjectFile2DFrameInit(VBObjectFile2DFrameAlloc());
@@ -297,7 +297,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                 //키프레임의 갯수 읽기
                 /******************************READ FILE******************************/
                 VBFileReadULong(_obj2D->file, &_key_frame_length);
-                printf("%ld\n", _key_frame_length);
+                //printf("%ld\n", _key_frame_length);
                 
                 //키프레임과 키프레임을 연결하기위한 배열
                 VBULong _key_frame_id_arr[_key_frame_length];
@@ -342,7 +342,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                     /******************************READ FILE******************************/
                     VBFileReadULong(_obj2D->file, &_key_frame_element_library_id);
                     _key_frame_element_library_name_id = VBObjectFile2DGetLibraryNameIDByID(_obj2D, _key_frame_element_library_id);
-                    printf("    %s %ld %ld\n", (char*)_key_frame_element_library_name_id->libraryName->data, _key_frame_element_library_name_id->libraryID, _tmp_element_type);
+                    //printf("    %s %ld %ld\n", (char*)_key_frame_element_library_name_id->libraryName->data, _key_frame_element_library_name_id->libraryID, _tmp_element_type);
                     
                     //키프레임의 오브젝트가 무비클립일 경우
                     if(_key_frame_element_type == VBObjectFile2DKeyFrameElementType_MovieClip) {
@@ -352,14 +352,14 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                         /******************************READ FILE******************************/
                         VBFileReadULong(_obj2D->file, &_instance_name_byte_length);
                         _instance_name_byte = VBSystemCalloc(_instance_name_byte_length + 1, sizeof(VBChar));
-                        printf("    instance name len:%ld\n", _instance_name_byte_length);
+                        //printf("    instance name len:%ld\n", _instance_name_byte_length);
                         //인스턴스네임 읽기
                         /******************************READ FILE******************************/
                         if(_instance_name_byte_length) {
                             VBFileReadBytes(_obj2D->file, (VBByte*)_instance_name_byte, _instance_name_byte_length * sizeof(VBChar));
-                            printf("    instance name:\"%s\"\n", _instance_name_byte);
+                            //printf("    instance name:\"%s\"\n", _instance_name_byte);
                             _instance_name = VBStringInitWithCString(VBStringAlloc(), _instance_name_byte);
-                            printf("    instance name:\"%s\"\n", (char*)_instance_name->data);
+                            //printf("    instance name:\"%s\"\n", (char*)_instance_name->data);
                         } else {
                             _instance_name = VBStringInitWithCString(VBStringAlloc(), "");
                         }
@@ -369,14 +369,14 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                     //depth
                     /******************************READ FILE******************************/
                     VBFileReadULong(_obj2D->file, &_depth);
-                    printf(" depth:%ld, ", _depth);
+                    //printf(" depth:%ld, ", _depth);
                     //키프레임의 시작프레임과 끝나는 프레임 읽기
                     /******************************READ FILE******************************/
                     VBFileReadULong(_obj2D->file, &_begin_frame);
                     /******************************READ FILE******************************/
                     VBFileReadULong(_obj2D->file, &_end_frame);
                     _end_frame++;
-                    printf(" %ld~%ld ", _begin_frame, _end_frame);
+                    //printf(" %ld~%ld ", _begin_frame, _end_frame);
                     
                     //키프레임의 오브젝트가 비트맵이나 그래픽 또는 무비클립일 경우
                     if(_key_frame_element_type == VBObjectFile2DKeyFrameElementType_Bitmap ||
@@ -387,7 +387,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                         VBFileReadULong(_obj2D->file, &_key_frame_id_arr[_j]);
                         /******************************READ FILE******************************/
                         VBFileReadULong(_obj2D->file, &_next_key_frame_id_arr[_j]);
-                        printf("%ld %ld\n", _key_frame_id_arr[_j], _next_key_frame_id_arr[_j]);
+                        //printf("%ld %ld\n", _key_frame_id_arr[_j], _next_key_frame_id_arr[_j]);
                         
                         _matrix_wrapper = VBMatrix2DWrapperLoadIdentity();
                         
@@ -398,32 +398,32 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                         /******************************READ FILE******************************/
                         VBFileReadBytes(_obj2D->file, (VBByte*)&_vector, _vector_size);
                         _matrix_wrapper = VBMatrix2DWrapperSetPosition(_matrix_wrapper, _vector);
-                        printf("    position %f, %f\n", _vector.x, _vector.y);
+                        //printf("    position %f, %f\n", _vector.x, _vector.y);
                         
                         //앵커 읽기
                         /******************************READ FILE******************************/
                         VBFileReadBytes(_obj2D->file, (VBByte*)&_vector, _vector_size);
                         _matrix_wrapper = VBMatrix2DWrapperSetAnchor(_matrix_wrapper, _vector);
-                        printf("    anchor %f, %f\n", _vector.x, _vector.y);
+                        //printf("    anchor %f, %f\n", _vector.x, _vector.y);
                         
                         VBFloat _rotation;
                         //각도 읽기
                         /******************************READ FILE******************************/
                         VBFileReadBytes(_obj2D->file, (VBByte*)&_rotation, sizeof(VBFloat));
                         _matrix_wrapper = VBMatrix2DWrapperSetRotation(_matrix_wrapper, _rotation);
-                        printf("    rotation %f\n", _rotation);
+                        //printf("    rotation %f\n", _rotation);
                         
                         //스케일 읽기
                         /******************************READ FILE******************************/
                         VBFileReadBytes(_obj2D->file, (VBByte*)&_vector, _vector_size);
                         _matrix_wrapper = VBMatrix2DWrapperSetScale(_matrix_wrapper, _vector);
-                        printf("    scale %f, %f\n", _vector.x, _vector.y);
+                        //printf("    scale %f, %f\n", _vector.x, _vector.y);
                         
                         //찌그러짐 읽기
                         /******************************READ FILE******************************/
                         VBFileReadBytes(_obj2D->file, (VBByte*)&_vector, _vector_size);
                         _matrix_wrapper = VBMatrix2DWrapperSetShear(_matrix_wrapper, _vector);
-                        printf("    skew %f, %f\n", _vector.x, _vector.y);
+                        //printf("    skew %f, %f\n", _vector.x, _vector.y);
                         
                         //키프레임의 오브젝트가 그래픽 또는 무비클립일 경우
                         if(_key_frame_element_type == VBObjectFile2DKeyFrameElementType_Graphic ||
@@ -431,19 +431,19 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                             //색상 읽기
                             /******************************READ FILE******************************/
                             
-                            printf("color detail ");
+                            //printf("color detail ");
                             VBChar _color_code;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_code, sizeof(VBChar));
-                            printf("%i ", _color_code);
+                            //printf("%i ", _color_code);
                             _color.r = (_color_code / 100.0f) * 0xFF;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_code, sizeof(VBChar));
-                            printf("%i ", _color_code);
+                            //printf("%i ", _color_code);
                             _color.g = (_color_code / 100.0f) * 0xFF;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_code, sizeof(VBChar));
-                            printf("%i ", _color_code);
+                            //printf("%i ", _color_code);
                             _color.b = (_color_code / 100.0f) * 0xFF;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_code, sizeof(VBChar));
-                            printf("%i\n", _color_code);
+                            //printf("%i\n", _color_code);
                             _color.a = (_color_code / 100.0f) * 0xFF;
                             VBShort _color_add_code;
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_color_add_code, sizeof(VBShort));
@@ -456,12 +456,12 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                             //트렌지션 타입 읽기
                             /******************************READ FILE******************************/
                             VBFileReadBytes(_obj2D->file, (VBByte*)&_transition_type, sizeof(VBObjectFile2DTransitionType));
-                            printf("    transition type %i\n", _transition_type);
+                            //printf("    transition type %i\n", _transition_type);
                             if(_transition_type == VBObjectFile2DTransitionType_SingleBezier) {
                                 //베지어 곡선의 길이 읽기
                                 /******************************READ FILE******************************/
                                 VBFileReadULong(_obj2D->file, &_transition_single_bezier_vector_length);
-                                printf("    transition length %ld\n", _transition_single_bezier_vector_length);
+                                //printf("    transition length %ld\n", _transition_single_bezier_vector_length);
                                 VBSize _bezier_data_size;
                                 if(_transition_single_bezier_vector_length) { 
                                     _bezier_data_size = _transition_single_bezier_vector_length * sizeof(VBVector2D);

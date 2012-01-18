@@ -270,11 +270,13 @@ void* VBImageGetPixelColor(VBImage* _img, VBULong _x, VBULong _y) {
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
 										 "VBEngine Log: VBImageGetPixelColor() - VBNull인 이미지에 접근하려고 합니다. VBImageAlloc하지 않은 이미지를 사용했을 수 있습니다.");
     
-	if(_x >= _img->width && _y >= _img->height)
+	if(_x >= _img->width || _y >= _img->height)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
 										 "VBEngine Log: VBImageGetPixelColor() - 가져오려는 픽셀이 이미지 사이즈보다 큽니다.");
 #endif
 	
+	if(_x >= _img->width || _y >= _img->height)
+        return NULL;
 	return _img->data + ( _img->color_bit / 8 * VBColorTypeGetSize(_img->color_type) * _y * _img->width) + ( _img->color_bit / 8 * VBColorTypeGetSize(_img->color_type) * _x);
 }
 

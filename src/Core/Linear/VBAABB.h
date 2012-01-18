@@ -14,6 +14,10 @@ extern "C" {
     
     VBAABB VBAABBCreateWithVertex(VBVector2D* _vtx, VBULong _vtx_len);
     
+    float VBAABBGetWidth(VBAABB _aabb);
+    
+    float VBAABBGetHeight(VBAABB _aabb);
+    
     VBAABB VBAABBLoadIndentity(void);
     
     VBAABB VBAABBCreate(VBFloat _l, VBFloat _t, VBFloat _r, VBFloat _b);

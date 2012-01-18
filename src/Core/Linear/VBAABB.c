@@ -19,6 +19,14 @@ VBAABB VBAABBCreateWithVertex(VBVector2D* _vtx, VBULong _vtx_len) {
     return _aabb;
 }
 
+float VBAABBGetWidth(VBAABB _aabb) {
+    return _aabb.r - _aabb.l;
+}
+
+float VBAABBGetHeight(VBAABB _aabb) {
+    return _aabb.b - _aabb.t;
+}
+
 VBAABB VBAABBLoadIndentity(void) {
     return VBAABBCreate(__FLT_MAX__, __FLT_MAX__, __FLT_MIN__, __FLT_MIN__);
 }
