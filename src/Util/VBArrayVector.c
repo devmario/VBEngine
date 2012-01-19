@@ -274,10 +274,11 @@ void VBArrayVectorReplaceAt(VBArrayVector* _vec, void* _data, VBULong _at) {
                                          "VBEngine Log: VBArrayVectorReplaceAt() - VBNull인 Data는 Vector에서 교환할 수 없습니다.");
 #endif
     
-	void** newData = VBArrayVectorGetDataAt(_vec, _at);
-	if (*newData) {
-		*newData = _data;
-	}
+    if(_vec->len == 0)
+        return;
+	if(_at > _vec->len - 1)
+		_at = _vec->len - 1;
+    *(_vec->data + _at) = _data;
 }
 
 void VBArrayVectorSwapAt(VBArrayVector* _vec, VBULong _at_1, VBULong _at_2) {
