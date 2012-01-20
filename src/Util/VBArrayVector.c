@@ -103,14 +103,14 @@ void VBArrayVectorAddBack(VBArrayVector* _vec, void* _data) {
                                          "VBEngine Log: VBArrayVectorAddBack() - VBNull인 Data는 Vector에 추가할 수 없습니다.");
 #endif
     
+    _vec->len++;
     if(_vec->len > _vec->stepSize) {
         _vec->stepSize = _vec->len + _STEPSIZE_;
         _vec->data = (void**)VBSystemRealloc(_vec->data, sizeof(void*) * _vec->stepSize);
     }
     void** _in_data = _vec->data;
-    _in_data += _vec->len;
+    _in_data += _vec->len - 1;
     *_in_data = _data;
-    _vec->len++;
 }
 
 void VBArrayVectorAddFront(VBArrayVector* _vec, void* _data) {
