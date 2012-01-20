@@ -4,8 +4,15 @@
 #include <string.h>
 #include <stdlib.h>
 
+#ifdef _VB_IPHONE_
 #include <OpenGLES/ES1/gl.h>
-#include <OpenGLES/ES1/glext.h>
+#include <OpenGLEs/ES2/gl.h>
+#endif
+
+#ifdef _VB_ANDROID_
+#include <GLES/gl.h>
+#include <GLES/glext.h>
+#endif
 
 #define _DEFAULT_STEPSIZE_ 100
 
@@ -16,7 +23,7 @@ VBDrawable2D* VBDrawable2DAlloc(void) {
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAlloc() - 메모리 할당에 실패하였습니다.");
+										 "VBEngine Log: VBDrawable2DAlloc() - 메모�??�당???�패?��??�니??");
 #endif
     	
 	return _drawable;
@@ -27,7 +34,7 @@ VBDrawable2D* VBDrawable2DInit(VBDrawable2D* _drawable) {
     if(_drawable == VBNull)
         VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
                                          VBTrue, 
-                                         "VBEngine Log: VBDrawable2DInit() - 초기화에 실패하였습니다.");
+                                         "VBEngine Log: VBDrawable2DInit() - 초기?�에 ?�패?��??�니??");
     
 #endif
     
@@ -64,7 +71,7 @@ VBDrawable2D* VBDrawable2DInitWithStepSize(VBDrawable2D* _drawable) {
     if(_drawable == VBNull)
         VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
                                          VBTrue, 
-                                         "VBEngine Log: VBDrawable2DInit() - 초기화에 실패하였습니다.");
+                                         "VBEngine Log: VBDrawable2DInit() - 초기?�에 ?�패?��??�니??");
     
 #endif
     
@@ -118,7 +125,7 @@ VBDrawable2D* VBDrawable2DInitWithTexture(VBDrawable2D* _drawable, VBDrawable2DT
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DInitWithTexture() - VBNull인 Draw요소는 초기화 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DInitWithTexture() - VBNull??Draw?�소??초기???�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
     
     _drawable = VBDrawable2DInit(_drawable);
@@ -137,42 +144,42 @@ VBDrawable2D* VBDrawable2DInitWithData(VBDrawable2D* _drawable, VBDrawable2DType
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DInitWithData() - VBNull인 Draw요소는 초기화 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DInitWithData() - VBNull??Draw?�소??초기???�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(_tex == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DInitWithData() - 텍스쳐가 없는 Draw요소는 초기화 할수 없습니다.");
+										 "VBEngine Log: VBDrawable2DInitWithData() - ?�스쳐�? ?�는 Draw?�소??초기???�수 ?�습?�다.");
 	
 	if(_poly_len == 0)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DInitWithData() - 폴리곤이 없는 Draw요소는 초기화 할수 없습니다.");
+										 "VBEngine Log: VBDrawable2DInitWithData() - ?�리곤이 ?�는 Draw?�소??초기???�수 ?�습?�다.");
 	
 	if(_color == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DInitWithData() - 칼라가 없는 Draw요소는 초기화 할수 없습니다.");
+										 "VBEngine Log: VBDrawable2DInitWithData() - 칼라가 ?�는 Draw?�소??초기???�수 ?�습?�다.");
 	
 	if(_vtx == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DInitWithData() - 버텍스가 없는 Draw요소는 초기화 할수 없습니다.");
+										 "VBEngine Log: VBDrawable2DInitWithData() - 버텍?��? ?�는 Draw?�소??초기???�수 ?�습?�다.");
 	
 	if(_txc == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DInitWithData() - 텍스쳐좌표가 없는 Draw요소는 초기화 할수 없습니다.");
+										 "VBEngine Log: VBDrawable2DInitWithData() - ?�스쳐좌?��? ?�는 Draw?�소??초기???�수 ?�습?�다.");
 	
 	if(_idx_len == 0)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DInitWithData() - 폴리곤인덱스가 없는 Draw요소는 초기화 할수 없습니다.");
+										 "VBEngine Log: VBDrawable2DInitWithData() - ?�리곤인?�스가 ?�는 Draw?�소??초기???�수 ?�습?�다.");
 	
 	if(_idx == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DInitWithData() - 폴리곤인덱스가 없는 Draw요소는 초기화 할수 없습니다.");
+										 "VBEngine Log: VBDrawable2DInitWithData() - ?�리곤인?�스가 ?�는 Draw?�소??초기???�수 ?�습?�다.");
 #endif
 	
 	_drawable = VBDrawable2DInitWithTexture(_drawable, _draw_type, _tex);
@@ -245,7 +252,7 @@ void VBDrawable2DFree(VBDrawable2D** _drawable) {
 	if(*_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DFree() - VBNull인 Draw요소는 해제 할수 없습니다. VBDrawable2DAlloc()하지 않았거나 이미 VBDrawable2DFree()했을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DFree() - VBNull??Draw?�소???�제 ?�수 ?�습?�다. VBDrawable2DAlloc()?��? ?�았거나 ?��? VBDrawable2DFree()?�을 ???�습?�다.");
 #endif
 	
 	VBDrawable2DInit(*_drawable);
@@ -258,16 +265,16 @@ void VBDrawable2DAppend(VBDrawable2D* _drawable_1, VBDrawable2D* _drawable_2) {
     if(_drawable_1 == VBNull) 
         VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAppend() - VBNull인 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc()하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAppend() - VBNull??Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc()?��? ?�았?????�습?�다.");
     if(_drawable_2 == VBNull)
         VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAppend() - VBNull인 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc()하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAppend() - VBNull??Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc()?��? ?�았?????�습?�다.");
 
     if(VBDrawable2DGetTexture(_drawable_2) == VBNull)
         VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAppend() - 텍스쳐가 없거나 다른 2개의 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc()하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAppend() - ?�스쳐�? ?�거???�른 2개의 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc()?��? ?�았?????�습?�다.");
         
 #endif
     if(_drawable_1->tex == VBNull) {
@@ -281,37 +288,37 @@ void VBDrawable2DAppend(VBDrawable2D* _drawable_1, VBDrawable2D* _drawable_2) {
 	if(_drawable_1 == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAppend() - VBNull인 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAppend() - VBNull??Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(_drawable_2 == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAppend() - VBNull인 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAppend() - VBNull??Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetTexture(_drawable_1) != VBDrawable2DGetTexture(_drawable_2))
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAppend() - 텍스쳐가 없거나 다른 2개의 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAppend() - ?�스쳐�? ?�거???�른 2개의 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetColor(_drawable_1) == VBNull || VBDrawable2DGetColor(_drawable_2) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAppend() - 칼라가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAppend() - 칼라가 ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetVertex(_drawable_1) == VBNull || VBDrawable2DGetVertex(_drawable_2) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAppend() - 버텍스가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAppend() - 버텍?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetTexcoord(_drawable_1) == VBNull || VBDrawable2DGetTexcoord(_drawable_2) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAppend() - 텍스쳐좌표가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAppend() - ?�스쳐좌?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetIndex(_drawable_1) == VBNull || VBDrawable2DGetIndex(_drawable_2) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAppend() - 인덱스가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAppend() - ?�덱?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
     
     VBSize _prev_poly_len = _drawable_1->poly_len;
@@ -380,32 +387,32 @@ void VBDrawable2DBegin(VBDrawable2D* _drawable, VBColorRGBA _color, VBVector2D _
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DBegin() - VBNull인 Draw요소는 설정 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DBegin() - VBNull??Draw?�소???�정 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetTexture(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DBegin() - 텍스쳐가 없는 Draw요소는 설정 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DBegin() - ?�스쳐�? ?�는 Draw?�소???�정 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetColor(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DBegin() - 칼라가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DBegin() - 칼라가 ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetVertex(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DBegin() - 버텍스가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DBegin() - 버텍?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetTexcoord(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DBegin() - 텍스쳐좌표가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DBegin() - ?�스쳐좌?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetIndex(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DBegin() - 인덱스가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DBegin() - ?�덱?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	VBSize _prev_poly_len = _drawable->poly_len;
@@ -446,32 +453,32 @@ void VBDrawable2DAdd(VBDrawable2D* _drawable, VBColorRGBA _color, VBVector2D _vt
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAdd() - VBNull인 Draw요소는 설정 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAdd() - VBNull??Draw?�소???�정 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetTexture(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAdd() - 텍스쳐가 없는 Draw요소는 설정 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAdd() - ?�스쳐�? ?�는 Draw?�소???�정 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetColor(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAdd() - 칼라가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAdd() - 칼라가 ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetVertex(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAdd() - 버텍스가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAdd() - 버텍?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetTexcoord(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAdd() - 텍스쳐좌표가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAdd() - ?�스쳐좌?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetIndex(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DAdd() - 인덱스가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DAdd() - ?�덱?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	VBSize _prev_poly_len = _drawable->poly_len;
@@ -512,32 +519,32 @@ void VBDrawable2DEnd(VBDrawable2D* _drawable, VBColorRGBA _color, VBVector2D _vt
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DEnd() - VBNull인 Draw요소는 설정 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DEnd() - VBNull??Draw?�소???�정 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetTexture(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DEnd() - 텍스쳐가 없는 Draw요소는 설정 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DEnd() - ?�스쳐�? ?�는 Draw?�소???�정 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetColor(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DEnd() - 칼라가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DEnd() - 칼라가 ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetVertex(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DEnd() - 버텍스가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DEnd() - 버텍?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetTexcoord(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DEnd() - 텍스쳐좌표가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DEnd() - ?�스쳐좌?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 	
 	if(VBDrawable2DGetIndex(_drawable) == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DEnd() - 인덱스가 없는 Draw요소는 연결 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DEnd() - ?�덱?��? ?�는 Draw?�소???�결 ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	VBSize _prev_poly_len = _drawable->poly_len;
@@ -571,7 +578,7 @@ void VBDrawable2DClear(VBDrawable2D* _drawable) {
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DClear() - VBNull인 Draw요소는 Clear 할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DClear() - VBNull??Draw?�소??Clear ?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	VBDrawable2DInitWithTexture(_drawable, _drawable->draw_type, _drawable->tex);
@@ -582,7 +589,7 @@ void VBDrawable2DDraw(VBDrawable2D* _drawable) {
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DDraw() - VBNull인 Draw요소는 그릴수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DDraw() - VBNull??Draw?�소??그릴???�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	GLboolean _state;
     
@@ -680,7 +687,7 @@ VBTexture* VBDrawable2DGetTexture(VBDrawable2D* _drawable) {
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DGetTexture() - VBNull인 Draw요소는 접근할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DGetTexture() - VBNull??Draw?�소???�근?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	return _drawable->tex;
@@ -691,7 +698,7 @@ VBUShort VBDrawable2DGetPolygonLength(VBDrawable2D* _drawable) {
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DGetPolygonLength() - VBNull인 Draw요소는 접근할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DGetPolygonLength() - VBNull??Draw?�소???�근?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	return _drawable->poly_len;
@@ -702,7 +709,7 @@ VBColorRGBA* VBDrawable2DGetColor(VBDrawable2D* _drawable) {
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DGetColor() - VBNull인 Draw요소는 접근할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DGetColor() - VBNull??Draw?�소???�근?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	return _drawable->color;
@@ -713,7 +720,7 @@ VBVector2D* VBDrawable2DGetVertex(VBDrawable2D* _drawable) {
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DGetVertex() - VBNull인 Draw요소는 접근할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DGetVertex() - VBNull??Draw?�소???�근?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	return _drawable->vtx;
@@ -724,7 +731,7 @@ VBVector2D* VBDrawable2DGetTexcoord(VBDrawable2D* _drawable) {
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DGetTexcoord() - VBNull인 Draw요소는 접근할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DGetTexcoord() - VBNull??Draw?�소???�근?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	return _drawable->txc;
@@ -735,7 +742,7 @@ VBUShort VBDrawable2DGetIndexLength(VBDrawable2D* _drawable) {
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DGetIndexLength() - VBNull인 Draw요소는 접근할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DGetIndexLength() - VBNull??Draw?�소???�근?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	return _drawable->idx_len;
@@ -746,7 +753,7 @@ VBUShort* VBDrawable2DGetIndex(VBDrawable2D* _drawable) {
 	if(_drawable == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBDrawable2DGetIndex() - VBNull인 Draw요소는 접근할수 없습니다. VBDrawable2DAlloc하지 않았을 수 있습니다.");
+										 "VBEngine Log: VBDrawable2DGetIndex() - VBNull??Draw?�소???�근?�수 ?�습?�다. VBDrawable2DAlloc?��? ?�았?????�습?�다.");
 #endif
 	
 	return _drawable->idx;

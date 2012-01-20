@@ -22,8 +22,9 @@
 #include "../Util/VBString.h"
 
 #ifdef _VB_ANDROID_
-#include "../VBEngineFileInfo.h"
+#include "../IO/VBEngineFileInfo.h"
 #endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

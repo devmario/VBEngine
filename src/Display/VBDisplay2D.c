@@ -3,7 +3,14 @@
 #include "VBConfig.h"
 #include <math.h>
 
+#ifdef _VB_IPHONE_
 #include <OpenGLES/ES1/gl.h>
+#endif
+
+#ifdef _VB_ANDROID_
+#include <GLES/gl.h>
+#include <GLES/glext.h>
+#endif
 
 #pragma mark - private 접근
 

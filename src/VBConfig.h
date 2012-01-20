@@ -23,8 +23,8 @@
 //#define _VB_OS64_
 
 //플랫폼: 아래위 옵션중 하나만 킬수 있습니다.(한개도 켜지 않을경우 빌드에러가 납니다.)
-#define _VB_IPHONE_
-//#define _VB_ANDROID_
+//#define _VB_IPHONE_
+#define _VB_ANDROID_
 //#define _VB_MAC_
 //#define _VB_WINDOW_
 //#define _VB_UNITY_3D_

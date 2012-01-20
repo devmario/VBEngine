@@ -1,6 +1,7 @@
 #include "VBFile.h"
 #include <string.h>
 #include <stdio.h>
+#include <unistd.h>  
 #include "../VBEngine.h"
 
 VBFile* VBFileAlloc(void) {
@@ -10,7 +11,7 @@ VBFile* VBFileAlloc(void) {
 	if(_file == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBFileAlloc() - 메모리할당에 실패하였습니다.");
+										 "VBEngine Log: VBFileAlloc() - 메모리할?�에 ?�패?��??�니??");
 #endif
     
 	return _file;
@@ -32,7 +33,7 @@ VBFile* VBFileInit(VBFile* _file) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBFalse, 
-										 "VBEngine Log: VBFileInit() - VBNull인 파일을 초기화 하려고 합니다. VBFileAlloc하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileInit() - VBNull???�일??초기???�려�??�니?? VBFileAlloc?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 	return _file;
@@ -53,7 +54,7 @@ void VBFileFree(VBFile** _file) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileInitWithOpen() - VBNull인 파일을 Free하려고 합니다. 이미 VBFileFree하였거나 VBFileAlloc하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileInitWithOpen() - VBNull???�일??Free?�려�??�니?? ?��? VBFileFree?��?거나 VBFileAlloc?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 }
@@ -75,14 +76,14 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 					VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 													 VBFalse,
-													 "VBEngine Log: VBFileOpen() - VBFileMode_None모드로는 파일을 열 수 없습니다.");
+													 "VBEngine Log: VBFileOpen() - VBFileMode_None모드로는 ?�일???????�습?�다.");
 #endif
 					break;
 				default:
 #ifdef _VB_DEBUG_
 					VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 													 VBFalse,
-													 "VBEngine Log: VBFileOpen() - VBFileMode에 지정되지 않은 모드를 사용하여서 파일을 열 수 없습니다.");
+													 "VBEngine Log: VBFileOpen() - VBFileMode??지?�되지 ?��? 모드�??�용?�여???�일???????�습?�다.");
 #endif
 					break;
 					
@@ -101,7 +102,7 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 												 VBFalse, 
-												 "VBEngine Log: VBFileOpen() - 파일이 열리지 않습니다. 경로랑 권한이 문제가 있을 수 있습니다.");
+												 "VBEngine Log: VBFileOpen() - ?�일???�리지 ?�습?�다. 경로??권한??문제가 ?�을 ???�습?�다.");
 #endif
 			}
 		}
@@ -109,7 +110,7 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileOpen() - VBNull인 파일을 Open하려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileOpen() - VBNull???�일??Open?�려�??�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 #ifdef _VB_ANDROID_
@@ -155,14 +156,14 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 						VBFalse,
-						"VBEngine Log: VBFileOpen() - VBFileMode_None모드로는 파일을 열 수 없습니다.");
+						"VBEngine Log: VBFileOpen() - VBFileMode_None모드로는 ?�일???????�습?�다.");
 #endif
 				break;
 			default:
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 						VBFalse,
-						"VBEngine Log: VBFileOpen() - VBFileMode에 지정되지 않은 모드를 사용하여서 파일을 열 수 없습니다.");
+						"VBEngine Log: VBFileOpen() - VBFileMode??지?�되지 ?��? 모드�??�용?�여???�일???????�습?�다.");
 #endif
 				break;
 
@@ -180,7 +181,7 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 						VBFalse,
-						"VBEngine Log: VBFileOpen() - 파일이 열리지 않습니다. 경로랑 권한이 문제가 있을 수 있습니다.");
+						"VBEngine Log: VBFileOpen() - ?�일???�리지 ?�습?�다. 경로??권한??문제가 ?�을 ???�습?�다.");
 #endif
 			}
 		}
@@ -188,7 +189,7 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileOpen() - VBNull인 파일을 Open하려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileOpen() - VBNull???�일??Open?�려�??�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 #endif
@@ -200,14 +201,14 @@ void VBFileClose(VBFile* _file) {
 #ifdef _VB_DEBUG_
 			VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 											 VBFalse,
-											 "VBEngine Log: VBFileClose() - 열려있지 않은 파일을 Close하려고 합니다.\n");
+											 "VBEngine Log: VBFileClose() - ?�려?��? ?��? ?�일??Close?�려�??�니??\n");
 #endif
 		_file = VBFileInit(_file);
 	} else {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse,
-										 "VBEngine Log: VBFileClose() - VBNull인 파일을 Close하려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileClose() - VBNull???�일??Close?�려�??�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 }
@@ -220,7 +221,7 @@ VBBool VBFileGetIsOpen(VBFile* _file) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetIsOpen() - VBNull인 파일의 Open여부를 가져오려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileGetIsOpen() - VBNull???�일??Open?��?�?가?�오?�고 ?�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 	return VBFalse;
@@ -233,7 +234,7 @@ VBFileMode VBFileGetMode(VBFile* _file) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetMode() - VBNull인 파일의 모드를 가져오려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileGetMode() - VBNull???�일??모드�?가?�오?�고 ?�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 	return VBFileMode_None;
@@ -246,7 +247,7 @@ void VBFileSetEndian(VBFile* _file, VBSystemEndian _endian) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileSetEndian() - VBNull인 파일에 인디안을 설정하려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileSetEndian() - VBNull???�일???�디?�을 ?�정?�려�??�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 }
@@ -257,7 +258,7 @@ VBSystemEndian VBFileGetEndian(VBFile* _file) {
 	} else {
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetEndian() - VBNull인 파일의 인디안을 가져오려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileGetEndian() - VBNull???�일???�디?�을 가?�오?�고 ?�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 	}
 	return VBSystemEndian_None;
 }
@@ -272,21 +273,21 @@ void VBFileSetOffset(VBFile* _file, VBUShort _offset) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 												 VBFalse,
-												 "VBEngine Log: VBFileSetOffset() - 파일의 사이즈를 벗어나는 오프셋을 설정하였습니다.(이경우 오프셋의 변화는 없습니다.)");
+												 "VBEngine Log: VBFileSetOffset() - ?�일???�이즈�? 벗어?�는 ?�프?�을 ?�정?��??�니??(?�경???�프?�의 변?�는 ?�습?�다.)");
 #endif
 			}
 		} else {
 #ifdef _VB_DEBUG_
 			VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 											 VBFalse,
-											 "VBEngine Log: VBFileSetOffset() - 파일이 열려있어야 합니다.");
+											 "VBEngine Log: VBFileSetOffset() - ?�일???�려?�어???�니??");
 #endif
 		}
 	} else {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileSetOffset() - VBNull인 파일의 오프셋을 설정하려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileSetOffset() - VBNull???�일???�프?�을 ?�정?�려�??�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 }
@@ -297,7 +298,7 @@ VBUShort VBFileGetOffset(VBFile* _file) {
 	else
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetOffset() - VBNull인 파일의 오프셋을 가져오려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileGetOffset() - VBNull???�일???�프?�을 가?�오?�고 ?�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 	return 0;
 }
 
@@ -308,7 +309,7 @@ VBUShort VBFileGetSize(VBFile* _file) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetSize() - VBNull인 파일의 사이즈를 가져오려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileGetSize() - VBNull???�일???�이즈�? 가?�오?�고 ?�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
     }
 	return 0;
@@ -328,21 +329,21 @@ VBUShort VBFileWrite(VBFile* _file, void* _ptr, VBUShort _size, VBUShort _len) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 												 VBFalse, 
-												 "VBEngine Log: VBFileWrite() - Write할 수 없습니다. 파일모드 확인을 해주세요.");
+												 "VBEngine Log: VBFileWrite() - Write?????�습?�다. ?�일모드 ?�인???�주?�요.");
 #endif
 			}
 		} else {
 #ifdef _VB_DEBUG_
 			VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 											 VBFalse, 
-											 "VBEngine Log: VBFileWrite() - 열려있지 않은 파일에 Write할 수 없습니다.");
+											 "VBEngine Log: VBFileWrite() - ?�려?��? ?��? ?�일??Write?????�습?�다.");
 #endif
 		}
 	} else {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileWrite() - VBNull인 파일에 Write하려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileWrite() - VBNull???�일??Write?�려�??�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 	return 0;
@@ -361,21 +362,21 @@ VBUShort VBFileRead(VBFile* _file, void* _ptr, VBUShort _size, VBUShort _len) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 												 VBFalse, 
-												 "VBEngine Log: VBFileRead() - Write할 수 없습니다. 파일모드 확인을 해주세요.");
+												 "VBEngine Log: VBFileRead() - Write?????�습?�다. ?�일모드 ?�인???�주?�요.");
 #endif
 			}
 		} else {
 #ifdef _VB_DEBUG_
 			VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 											 VBFalse, 
-											 "VBEngine Log: VBFileRead() - 열려있지 않은 파일은 Read할 수 없습니다.");
+											 "VBEngine Log: VBFileRead() - ?�려?��? ?��? ?�일?� Read?????�습?�다.");
 #endif
 		}
 	} else {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileRead() - VBNull인 파일을 Read하려고 합니다. VBFileInit(VBFileAlloc())하지 않은 파일을 사용했을 수 있습니다.");
+										 "VBEngine Log: VBFileRead() - VBNull???�일??Read?�려�??�니?? VBFileInit(VBFileAlloc())?��? ?��? ?�일???�용?�을 ???�습?�다.");
 #endif
 	}
 	return 0;
@@ -395,7 +396,7 @@ void VBFileCopy(VBString* _src, VBString* _des) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileCopy() - _src(source file) VBFileOpen에 실패하였습니다.");
+										 "VBEngine Log: VBFileCopy() - _src(source file) VBFileOpen???�패?��??�니??");
 #endif
 		return;
 	}
@@ -430,7 +431,7 @@ VBSize VBFileCopyToMemory(VBString* _src, void** _buffer) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileCopyToMemory() - _src(source file) VBFileOpen에 실패하였습니다.");
+										 "VBEngine Log: VBFileCopyToMemory() - _src(source file) VBFileOpen???�패?��??�니??");
 #endif
 		return 0;
 	}
@@ -443,7 +444,7 @@ VBSize VBFileCopyToMemory(VBString* _src, void** _buffer) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileCopyToMemory() - _src(source file) VBFileRead에 실패하였습니다.");
+										 "VBEngine Log: VBFileCopyToMemory() - _src(source file) VBFileRead???�패?��??�니??");
 #endif
 		return 0;
 	}

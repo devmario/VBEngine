@@ -4,7 +4,14 @@
 #include <stdio.h>
 #include "IO/VBSystem.h"
 
+#ifdef _VB_IPHONE_
 #include <OpenGLES/ES1/gl.h>
+#endif
+
+#ifdef _VB_ANDROID_
+#include <GLES/gl.h>
+#include <GLES/glext.h>
+#endif
 
 VBString* _vb_engine_default_res_path = VBNull;
 VBString* _vb_engine_default_rw_doc_path = VBNull;
