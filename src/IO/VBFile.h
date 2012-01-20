@@ -21,7 +21,7 @@
 #include "VBSystem.h"
 #include "../Util/VBString.h"
 
-#ifdef _VB_ANDROID_
+#ifdef __ANDROID__
 #include "../IO/VBEngineFileInfo.h"
 #endif
 
