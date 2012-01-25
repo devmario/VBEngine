@@ -30,12 +30,20 @@ Core/Linear/VBMatrix2DWrapper.c\
 Core/Linear/VBSpline2DBezierCubic.c\
 Core/Linear/VBTriangle2D.c\
 Core/Linear/VBVector2D.c\
+CppModule/IZModel2D.cpp\
+CppModule/UI/NumberText.cpp\
+CppModule/UI/Pages.cpp\
+CppModule/UI/Popup.cpp\
+CppModule/UI/Scroller.cpp\
+CppModule/UI/ScrollerContainer.cpp\
+CppModule/UI/View.cpp\
 Display/VBCamera2D.c\
 Display/VBDisplay2D.c\
 Display/VBDrawable2D.c\
 Display/VBImage.c\
 Display/VBModel2D.c\
 Display/VBTexture.c\
+IO/VBEngineFileInfo.c\
 IO/VBFile.c\
 IO/VBObjectFile2D.c\
 IO/VBObjectFile2DFrame.c\
@@ -48,7 +56,6 @@ IO/VBObjectFile2DTransition.c\
 IO/VBPNGFile.c\
 IO/VBSystem.c\
 IO/VBTouch.c\
-IO/VBEngineFileInfo.c\
 Other/png/png.c\
 Other/png/pngerror.c\
 Other/png/pnggccrd.c\
@@ -85,8 +92,8 @@ Util/VBArrayVector.c\
 Util/VBDebug.c\
 Util/VBMath.c\
 Util/VBString.c\
-VBEngine.c\
-   
+VBEngine.c
+
 LOCAL_CFLAGS := -std=c99 -DANDROID_NDK -DDISABLE_IMPORTGL -DUSE_FILE32API
 
 LOCAL_LDLIBS := -lz -lGLESv1_CM -ldl -llog
