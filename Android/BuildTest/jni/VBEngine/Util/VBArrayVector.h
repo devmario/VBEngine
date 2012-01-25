@@ -25,7 +25,7 @@ extern "C" {
 	/**
 	 @brief 정렬 관련 함수 타입.
 	 */
-	typedef VBLong (*VBArrayVectorSortFunc)(const void* _a, const void* _b);
+	typedef int (*VBArrayVectorSortFunc)(const void* _a, const void* _b);
 	
 	/**
 	 @brief VBArrayVector 관련 구조체 타입.

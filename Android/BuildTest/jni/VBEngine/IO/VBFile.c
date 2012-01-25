@@ -113,7 +113,7 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 										 "VBEngine Log: VBFileOpen() - VBNull???Œì¼??Open?˜ë ¤ê³??©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
 #endif
 	}
-#ifdef _VB_ANDROID_
+#ifdef __ANDROID__
 	if (_file->file != VBNull || _mode != VBFileMode_Read)
 		return;
 

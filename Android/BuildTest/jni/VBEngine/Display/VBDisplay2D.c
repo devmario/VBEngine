@@ -7,7 +7,7 @@
 #include <OpenGLES/ES1/gl.h>
 #endif
 
-#ifdef _VB_ANDROID_
+#ifdef __ANDROID__
 #include <GLES/gl.h>
 #include <GLES/glext.h>
 #endif

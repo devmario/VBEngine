@@ -96,10 +96,10 @@ struct _key_sort {
     VBObjectFile2DKeyFrame* _key;
 };
 
-VBLong _key_sort_func(const void* _a, const void* _b);
+int _key_sort_func(const void* _a, const void* _b);
 void _VBModel2DAnimationUpdateTowardChildsRecursive(VBModel2D* _model, VBFloat _tick, VBBool _is_update_child);
 
-VBLong _key_sort_func(const void* _a, const void* _b) {
+int _key_sort_func(const void* _a, const void* _b) {
     _key_sort** _key_a = (_key_sort**)_a;
     _key_sort** _key_b = (_key_sort**)_b;
     if((*_key_a)->_key->depth > (*_key_b)->_key->depth) {
