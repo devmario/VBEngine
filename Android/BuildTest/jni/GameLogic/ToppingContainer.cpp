@@ -7,11 +7,9 @@ ToppingContainerCellData* ToppingContainerCellDataInit(int _type) {
     _data->type = _type;
     char* _topping_name = cJSON_GetArrayItem(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "topping"), _data->type), 0)->valuestring;
     _data->texPath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/decomp_%s.png", VBStringGetCString(VBEngineGetDocumentPath()), _topping_name);
-#ifdef _ANDROID_
-    if(VBStringGetCString(_data->texPath) == 0) {
-#else
+
     if(access(VBStringGetCString(_data->texPath), F_OK) != 0) {
-#endif
+
         _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s.png", VBStringGetCString(VBEngineGetResourcePath()), _topping_name);
         VBImage* _img = VBImageInitWithPath(VBImageAlloc(), _str);
         VBStringFree(&_str);

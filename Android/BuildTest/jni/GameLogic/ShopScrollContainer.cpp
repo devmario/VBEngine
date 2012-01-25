@@ -111,11 +111,9 @@ ShopCellData* ShopCellDataInit(int idx, VBObjectFile2D *_obj, VBTexture *_tex) {
      char *cellDescription = cJSON_GetArrayItem(inAppCellData, 3+localization_idx)->valuestring;
      */
     data->thumbnailPath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/decomp_%s.png", VBStringGetCString(VBEngineGetDocumentPath()), thumbFileName);
-#ifdef _ANDROID_
-    if(VBStringGetCString(data->thumbnailPath) == 0) {
-#else
+
     if(access(VBStringGetCString(data->thumbnailPath), F_OK) != 0) {
-#endif
+
         _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s.png", VBStringGetCString(VBEngineGetResourcePath()), thumbFileName);
         VBImage *_img = VBImageInitWithPath(VBImageAlloc(), _str);
         VBStringFree(&_str);

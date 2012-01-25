@@ -113,11 +113,9 @@ RecipeContainerCellData* RecipeContainerCellDataInit(int _recipeIdx) {
     
     _data->texPath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/decomp_%s.png", VBStringGetCString(VBEngineGetDocumentPath()), _recipe_name);
 
-#ifdef _ANDROID_
-    if(VBStringGetCString(_data->texPath) == 0) {
-#else
+
     if(access(VBStringGetCString(_data->texPath), F_OK) != 0) {
-#endif
+
         _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s.png", VBStringGetCString(VBEngineGetResourcePath()), _recipe_name);
         VBImage* _img = VBImageInitWithPath(VBImageAlloc(), _str);
         VBStringFree(&_str);

@@ -8,6 +8,10 @@
 
 #define GAME_FRAME 60.0
 
+#ifdef __ANDROID__
+extern int access(const char *, int);
+#endif
+
 VBObjectFile2D* ShareDataGetTitleObjFile();
 const char* ShareDataGetLoadingLibraryName();
 VBTexture* ShareDataGetTitleTexture();
