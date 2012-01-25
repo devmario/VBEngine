@@ -206,9 +206,9 @@ void* VBArrayVectorRemoveAt(VBArrayVector* _vec, VBULong _at) {
 #endif
     
     void* _returnData = VBArrayVectorDataAtIndex(_vec, _at);
+    if(_returnData == NULL) 
+        return NULL;
     VBLong i;
-    if(_at > _vec->len) 
-        _at = _vec->len - 1;
     for(i = _at; i < _vec->len - 1; i++) {
           _vec->data[i] = _vec->data[i + 1];
     }
