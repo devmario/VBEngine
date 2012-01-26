@@ -8,16 +8,6 @@
 
 #define GAME_FRAME 60.0
 
-#ifdef __ANDROID__
-/* access function */
-#define	F_OK		0	/* test for existence of file */
-#define	X_OK		0x01	/* test for execute or search permission */
-#define	W_OK		0x02	/* test for write permission */
-#define	R_OK		0x04	/* test for read permission */
-
-extern int access(const char *, int);
-#endif
-
 VBObjectFile2D* ShareDataGetTitleObjFile();
 const char* ShareDataGetLoadingLibraryName();
 VBTexture* ShareDataGetTitleTexture();

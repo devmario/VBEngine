@@ -97,6 +97,17 @@
 #include "Other/zlib/zlib.h"
 #include "Other/png/png.h"
 
+// Use #include <unistd.h>  
+#ifdef __ANDROID__
+#include <unistd.h>  
+/* access function */
+// #define	F_OK		0	/* test for existence of file */
+// #define	X_OK		0x01	/* test for execute or search permission */
+// #define	W_OK		0x02	/* test for write permission */
+// #define	R_OK		0x04	/* test for read permission */
+// extern int access(const char *, int);
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

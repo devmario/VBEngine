@@ -7,6 +7,7 @@
 #include "../VBConfig.h"
 #include "../VBEngine.h"
 
+
 VBSystemEndian _system_endian_type = VBSystemEndian_None;
 
 VBSystemEndian VBSystemGetEndian(void) {
