@@ -16,11 +16,12 @@ typedef struct ToppingContainerCellData {
     CCTouch* touch;
     
     int step;
+    int stepTotal;
     VBModel* innerModel;
-    int status;
 } ToppingContainerCellData;
 
-ToppingContainerCellData* ToppingContainerCellDataInit(int _type);
+ToppingContainerCellData* ToppingContainerCellDataInit(int _type, int _stepTotal);
+void ToppingContainerCellDataReset(ToppingContainerCellData* _data);
 void ToppingContainerCellDataFree(ToppingContainerCellData** _data);
 
 class ToppingContainer : public ScrollerContainer {

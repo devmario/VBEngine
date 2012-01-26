@@ -45,8 +45,6 @@ public:
     Tweener showTween;
     TweenerParam slideParam;
     TweenerParam* runslideParam;
-    TweenerParam alphaParam;
-    TweenerParam* runalphaParam;
     PopupTweenListener* listner;
     
     VBObjectFile2D* obj;

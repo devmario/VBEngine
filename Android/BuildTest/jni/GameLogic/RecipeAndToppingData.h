@@ -10,9 +10,10 @@ typedef struct Thumbs {
     int attach;
     void* targ;
     int type;
+    bool isR;
 } Thumbs;
 
-Thumbs* ThumbsInit(VBTexture* _tex, VBAABB _aabb, int _type, void* _targ);
+Thumbs* ThumbsInit(VBTexture* _tex, VBAABB _aabb, int _type, void* _targ, bool _isR);
 void ThumbsFree(Thumbs** _t);
 
 typedef struct RT {

@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include "VBEngine.h"
 #include "ShareData.h"
+#include "SubMenu.h"
 
 MainMenu::MainMenu() {
     //View::View();
@@ -91,12 +92,12 @@ void MainMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
     if(touchPlayBT == _touch) {
         playBT->gotoAndPlay(6);
         touchPlayBT = NULL;
-        ShareDataGetRoot()->ShowLoading(PackAndStageSelectPage);
+        ShareDataGetRoot()->ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypePackSelect, 0);
     }
     
-    TOUCHENDBT(touchRank, rankBT, _location, _touch, ShareDataGetRoot()->OpenPopup(rand() % 2, rand() % 4, rand() % 99999),rankBT->gotoAndStop(0));
-    TOUCHENDBT(touchArch, archBT, _location, _touch, ShareDataGetRoot()->OpenPopup(rand() % 2, rand() % 4, rand() % 99999),archBT->gotoAndStop(0));
-    TOUCHENDBT(touchInfo, infoBT, _location, _touch, ShareDataGetRoot()->OpenPopup(rand() % 2, rand() % 4, rand() % 99999),infoBT->gotoAndStop(0));
+    TOUCHENDBT(touchRank, rankBT, _location, _touch, ,rankBT->gotoAndStop(0));
+    TOUCHENDBT(touchArch, archBT, _location, _touch, ,archBT->gotoAndStop(0));
+    TOUCHENDBT(touchInfo, infoBT, _location, _touch, ,infoBT->gotoAndStop(0));
 }
 
 void MainMenu::touchEnd(CCTouch* _touch, CCPoint _location) {

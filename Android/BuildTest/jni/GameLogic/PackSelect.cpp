@@ -1,9 +1,10 @@
 #include "PackSelect.h"
 #include "ShareData.h"
 #include "PackThumb.h"
+#include "SubMenu.h"
 
 PackSelect::PackSelect(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex,
-                       int _totalIdx) : Pages(_obj, _tex, _totalIdx, 60.0, 600.0, -25, 357, 240-85, -280) {
+                       int _totalIdx, SubMenu* _subMenu) : Pages(_obj, _tex, _totalIdx, 60.0, 600.0, -25, 357, 240-85, -280) {
     packs = VBArrayVectorInit(VBArrayVectorAlloc());
     for(int i = 0; i < ShareDataGetPackLength(); i++) {
         PackThumb* _pack = new PackThumb(obj, tex, _fontObj, _fontTex, i);
@@ -15,6 +16,7 @@ PackSelect::PackSelect(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _f
     }
     touchM = NULL;
     touchMd = NULL;
+    subMenu = _subMenu;
 }
 
 PackSelect::~PackSelect() {
@@ -30,6 +32,24 @@ void PackSelect::Reset() {
     for(int i = 0; i < VBArrayVectorGetLength(packs); i++) {
         PackThumb* _pack = (PackThumb*)VBArrayVectorGetDataAt(packs, i);
         _pack->Reset();
+    }
+}
+
+void PackSelect::GoPage(int _idx, void (*_pageFunc)(void* _pageFuncRef), void* _pageFuncRef) {
+    Pages::GoPage(_idx, _pageFunc, _pageFuncRef);
+    if(_idx != -1) {
+        history* _preH = ShareDataGetRoot()->GetLastHistory();
+        int _hi = 0;
+        if(_preH->args[_hi] == PopupTypeClear)
+            _hi += 3;
+        else
+            _hi++;
+        _hi++;
+        if(_preH->args[_hi] != SubMenuTypePackSelect)
+            return;
+        _hi++;
+        if(_hi < _preH->count)
+            _preH->args[_hi] = _idx;
     }
 }
 
@@ -78,8 +98,16 @@ void PackSelect::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
         touchMd->color.b = 0xFF;
         touchMd = NULL;
         _setpid(selectedIdx);
-        if(ShateDataGetHaveStage(selectedIdx))
-            GoPage(-1, selectedFunc, pss);
+        if(ShareDataGetHaveStage(selectedIdx)) {
+            int _lastLockedStage = 0;
+            for(int i = 0; i < ShareDataGetStageLength(selectedIdx); i++) {
+                if(ShareDataGetStageLockAt(selectedIdx, i)) {
+                    _lastLockedStage = i;
+                    break;
+                }
+            }
+            ShareDataGetRoot()->ChangePage(6, LoadingTypeNone, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypeStageSelect, selectedIdx, _lastLockedStage / 18);
+        }
     } else {
         Pages::touchEndAndCancel(_touch, _location);
     }

@@ -9,7 +9,7 @@ Shop::Shop(VBObjectFile2D* _obj, VBTexture* _tex) : Pages(_obj, _tex, 1, 0.0, 60
     LIBNAMEFIND(_library_name_id, _obj, "shop", _str);
     
     backgroundModel = new VBModel(_obj, _library_name_id, _tex, true);
-    slideM->addChild((CCSprite *)backgroundModel);
+    slideM->addChild(backgroundModel);
     backgroundModel->setPosition(CCPointMake(0, 0));
     
     OBJLOAD(objScroll, "scroller.obj", _str);
@@ -27,7 +27,6 @@ Shop::Shop(VBObjectFile2D* _obj, VBTexture* _tex) : Pages(_obj, _tex, 1, 0.0, 60
 }
 
 Shop::~Shop() {
-    
     containerModel->removeChild(container, false);
     delete container;
     slideM->removeChild(backgroundModel, false);

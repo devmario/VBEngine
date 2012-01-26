@@ -244,7 +244,7 @@ bool ShareDataGetStageLockAt(int _packID, int _stageID) {
     return _json->valueint;
 }
 
-bool ShateDataGetHaveStage(int _idx) {
+bool ShareDataGetHaveStage(int _idx) {
     cJSON* _packData = ShareDataGetPackDataJSONAt(_idx);
     if(_packData)
         return true;

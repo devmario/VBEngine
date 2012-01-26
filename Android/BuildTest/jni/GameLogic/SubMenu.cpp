@@ -3,7 +3,7 @@
 
 void ChangeView(void* _ref);
 
-SubMenu::SubMenu(int _packID, int _stageID) {
+SubMenu::SubMenu() {
     //View::View();
     
     VBString* _str = NULL;
@@ -19,14 +19,10 @@ SubMenu::SubMenu(int _packID, int _stageID) {
     bg = new VBModel(stageObj, _library_name_id, stageTex, true);
     ((CCSprite*)top)->addChild((CCSprite*)bg);
     
-    packView = new PackSelect(packObj, packTex, fontObj, fontTex, ShareDataGetPackLength());
-    ((CCSprite*)top)->addChild((CCSprite*)packView->top);
-    packView->pss = this;
-    packView->selectedFunc = ChangeView;
-    
+    packView = new PackSelect(packObj, packTex, fontObj, fontTex, ShareDataGetPackLength(), this);
     stageView = new StageSelect(stageObj, stageTex, fontObj, fontTex, 2);
-    ((CCSprite*)top)->addChild((CCSprite*)stageView->top);
     
+#ifndef SHOP_EMPTY
     //add shop
     OBJLOAD(shopMaskObj, "shop_mask.obj", _str);
     TEXLOAD(shopMaskTex, "shop_mask.png", _str);
@@ -40,6 +36,7 @@ SubMenu::SubMenu(int _packID, int _stageID) {
     TEXLOAD(shopTex, "shop.png", _str);
     shopView = new Shop(shopObj, shopTex);
     //
+#endif
     
     LIBNAMEFIND(_library_name_id, packObj, "Menu", _str);
     ui = new VBModel(packObj, _library_name_id, packTex, true);
@@ -65,21 +62,62 @@ SubMenu::SubMenu(int _packID, int _stageID) {
     btFree->gotoAndStop(0);
     btFreeTouch = NULL;
     
-    if(_stageID >= 0) {
-        stageView->SetPack(_packID);
-        stageView->GoPage(_stageID, NULL, NULL);
-        currentPage = (Pages*)stageView;
-    } else {
-        packView->GoPage(_packID, NULL, NULL);
-        currentPage = (Pages*)packView;
+    type = SubMenuTypeNone;
+    arg0 = -1;
+    arg1 = -1;
+    currentPage = NULL;
+}
+
+
+void SubMenu::SetMenuType(SubMenuType _type, int _arg0, int _arg1) {
+    printf("set sub menu type: %i %i %i\n", _type, _arg0, _arg1);
+    if(type != _type || arg0 != _arg0 || arg1 != _arg1) {
+        switch (type) {
+            case SubMenuTypePackSelect:
+                if(type != _type)
+                    packView->GoPage(-1, ChangeView, this);
+                break;
+            case SubMenuTypeStageSelect:
+                if(type != _type)
+                    stageView->GoPage(-1, ChangeView, this);
+                break;
+            case SubMenuTypeShop:
+#ifndef SHOP_EMPTY
+                if(type != _type)
+                    shopView->GoPage(-1, ChangeView, this);
+#endif
+                break;
+            default:
+                break;
+        }
+        type = _type;
+        arg0 = _arg0;
+        arg1 = _arg1;
+        if(currentPage == NULL)
+            ChangeView(this);
     }
 }
 
 SubMenu::~SubMenu() {
-    top->removeChild(packView->top, false);
+    if(currentPage)
+        top->removeChild(currentPage->top, false);
+    
     delete packView;
-    top->removeChild(stageView->top, false);
     delete stageView;
+    
+    //shop
+    //top->removeChild(shopMaskBg, false);
+    //top->removeChild(shopMaskMask, false);
+#ifndef SHOP_EMPTY
+    delete shopMaskMask;
+    delete shopMaskBg;
+    VBObjectFile2DFree(&shopObj);
+    VBTextureFree(&shopTex);
+    VBObjectFile2DFree(&shopMaskObj);
+    VBTextureFree(&shopMaskTex);
+    
+    delete shopView;
+#endif
     
     top->removeChild(ui, false);
     delete ui;
@@ -93,25 +131,12 @@ SubMenu::~SubMenu() {
     VBObjectFile2DFree(&fontObj);
     VBTextureFree(&fontTex);
     
-    //shop
-    top->removeChild(shopMaskBg, false);
-    top->removeChild(shopMaskMask, false);
-    delete shopMaskMask;
-    delete shopMaskBg;
-    VBObjectFile2DFree(&shopObj);
-    VBTextureFree(&shopTex);
-    VBObjectFile2DFree(&shopMaskObj);
-    VBTextureFree(&shopMaskTex);
-    top->removeChild(shopView->top, false);
-    delete shopView;
-    
     //View::~View();
 }
 
 void SubMenu::Update(float _deltaTime) {
-    packView->Update(_deltaTime);
-    stageView->Update(_deltaTime);
-    shopView->Update(_deltaTime);
+    if(currentPage)
+        currentPage->Update(_deltaTime);
 }
 
 void SubMenu::touchBegin(CCTouch* _touch, CCPoint _location) {
@@ -133,63 +158,63 @@ void SubMenu::touchMove(CCTouch* _touch, CCPoint _location) {
 
 void ChangeView(void* _ref) {
     SubMenu* pss = (SubMenu*)_ref;
-    if(pss->currentPage == pss->packView) {
-        int _stagePage = 0;
-        for(int i = 0; i < ShareDataGetStageLength(pss->packView->preIdx); i++) {
-            if(ShareDataGetStageLockAt(pss->packView->preIdx, i) == false) {
-                _stagePage = floorf(i / 18.0);
-            } else {
-                break;
-            }
-        }
-        pss->stageView->GoPage(_stagePage, NULL, NULL);
-        pss->stageView->SetPack(pss->packView->preIdx);
-        pss->currentPage = pss->stageView;
-    } else if(pss->currentPage == pss->stageView) {
-        pss->packView->GoPage(pss->stageView->packIdx, NULL, NULL);
-        pss->packView->Reset();
-        pss->currentPage = pss->packView;
-    } else if(pss->currentPage == pss->shopView) {
-        pss->top->removeChild(pss->shopMaskMask, false);
-        pss->top->removeChild(pss->shopMaskBg, false);
-        pss->top->removeChild(pss->shopView->top, false);
-        pss->packView->GoPage(1, NULL, NULL);
-        pss->packView->Reset();
-        pss->currentPage = pss->packView;
+    printf("set sub menu type callback: %i %i %i\n", pss->type, pss->arg0, pss->arg1);
+    
+    if(pss->currentPage) {
+        pss->top->removeChild(pss->currentPage->top, false);
+        pss->currentPage = NULL;
+    }
+    
+    switch (pss->type) {
+        case SubMenuTypePackSelect:
+            pss->packView->Reset();
+            pss->packView->GoPage(pss->arg0, NULL, NULL);
+            pss->currentPage = pss->packView;
+            pss->top->addChild(pss->currentPage->top);
+            break;
+        case SubMenuTypeStageSelect:
+            pss->stageView->SetPack(pss->arg0);
+            pss->stageView->GoPage(pss->arg1, NULL, NULL);
+            pss->currentPage = pss->stageView;
+            pss->top->addChild(pss->currentPage->top);
+            break;
+        case SubMenuTypeShop:
+            
+#ifndef SHOP_EMPTY
+            pss->shopView->GoPage(pss->arg0, NULL, NULL);
+            pss->currentPage = pss->shopView;
+            pss->top->addChild(pss->currentPage->top);
+#endif
+            break;
+        default:
+            break;
     }
 }
 
 void GotoShop(void* _ref) {
     SubMenu *pss = (SubMenu *)_ref;
+#ifndef SHOP_EMPTY
     
     pss->top->addChild((CCSprite*)pss->shopMaskBg);
     pss->top->addChild((CCSprite*)pss->shopView->top);
     pss->top->addChild((CCSprite*)pss->shopMaskMask);
     pss->shopView->GoPage(0, NULL, NULL);
     pss->currentPage = pss->shopView;
-}
-
-void SubMenu::packSelect(int _pack) {
-    currentPage->GoPage(-1, ChangeView, this);
+#endif
 }
 
 void SubMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
     TOUCHENDBT(btBackTouch, btBack, _location, _touch, 
-               if(currentPage == packView) {
-                   currentPage->GoPage(-1, ChangeView, this);
-                   ShareDataGetRoot()->ShowLoading(MainMenuPage);
-               } else if(currentPage == stageView) {
-                   currentPage->GoPage(-1, ChangeView, this);
-               } else if(currentPage == shopView) {
-                   currentPage->GoPage(-1, ChangeView, this);
-               },
+               ShareDataGetRoot()->PrevPage(1);,
                btBack->gotoAndStop(0););
-    TOUCHENDBT(btGiftTouch, btGift, _location, _touch, ShareDataGetRoot()->OpenPopup(rand() % 2, rand() % 4, rand() % 99999), btGift->gotoAndStop(0));
+    TOUCHENDBT(btGiftTouch, btGift, _location, _touch, , btGift->gotoAndStop(0));
     
-    TOUCHENDBT(btShopTouch, btShop, _location, _touch, currentPage->GoPage(-1, GotoShop, this), btShop->gotoAndStop(0));
-//    TOUCHENDBT(btShopTouch, btShop, _location, _touch, ShareDataGetRoot()->OpenPopup(rand() % 2, rand() % 4, rand() % 99999), btShop->gotoAndStop(0));
+    TOUCHENDBT(btShopTouch, btShop, _location, _touch, 
+               ShareDataGetRoot()->ChangePage(4, LoadingTypeNone, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypeShop);
+               , btShop->gotoAndStop(0));
+//    TOUCHENDBT(btShopTouch, btShop, _location, _touch, ShareDataGetRoot()->OpenPopup(rand() % 2 + 1, rand() % 4, rand() % 99999), btShop->gotoAndStop(0));
     
-    TOUCHENDBT(btFreeTouch, btFree, _location, _touch, ShareDataGetRoot()->OpenPopup(rand() % 2, rand() % 4, rand() % 99999), btFree->gotoAndStop(0));
+    TOUCHENDBT(btFreeTouch, btFree, _location, _touch, , btFree->gotoAndStop(0));
 }
 
 void SubMenu::touchEnd(CCTouch* _touch, CCPoint _location) {

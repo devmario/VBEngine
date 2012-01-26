@@ -1,15 +1,13 @@
 #include "ToppingContainer.h"
 #include "ShareData.h"
 
-ToppingContainerCellData* ToppingContainerCellDataInit(int _type) {
+ToppingContainerCellData* ToppingContainerCellDataInit(int _type, int _stepTotal) {
     ToppingContainerCellData* _data = (ToppingContainerCellData*)calloc(1, sizeof(ToppingContainerCellData));
     VBString* _str;
     _data->type = _type;
     char* _topping_name = cJSON_GetArrayItem(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "topping"), _data->type), 0)->valuestring;
     _data->texPath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/decomp_%s.png", VBStringGetCString(VBEngineGetDocumentPath()), _topping_name);
-
     if(access(VBStringGetCString(_data->texPath), F_OK) != 0) {
-
         _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s.png", VBStringGetCString(VBEngineGetResourcePath()), _topping_name);
         VBImage* _img = VBImageInitWithPath(VBImageAlloc(), _str);
         VBStringFree(&_str);
@@ -36,7 +34,13 @@ ToppingContainerCellData* ToppingContainerCellDataInit(int _type) {
     
     LIBNAMEFIND(_data->name_id, _data->obj, "obj", _str);
     
+    _data->stepTotal = _stepTotal;
+    
     return _data;
+}
+
+void ToppingContainerCellDataReset(ToppingContainerCellData* _data) {
+    _data->step = 0;
 }
 
 void ToppingContainerCellDataFree(ToppingContainerCellData** _data) {
@@ -75,6 +79,14 @@ void ToppingContainer::CellAlloc(CellData* _cell) {
         _cell->modelCell->addChild(_data->model);
         
         _data->innerModel = _data->model->getVBModelByInstanceName("inner");
+        
+        if(_data->step > 0) {
+            if(_data->innerModel == NULL) {
+                _data->model->gotoAndStop(_data->model->frame->total_frame - 1.0);
+            } else {
+                _data->innerModel->gotoAndStop(_data->step);
+            }
+        }
     }
 }
 
@@ -104,7 +116,8 @@ void ToppingContainer::CellTouchEnd(CellData* _cell, CCTouch* _touch, CCPoint _l
     ToppingContainerCellData* _data = (ToppingContainerCellData*)_cell->data;
     
     TOUCHENDBT(_data->touch, _data->model, _location, _touch, 
-               if(selectModel == NULL) {
+               if(selectModel == NULL && _data->step < _data->stepTotal && iceCream->IsPossibleTopping(_data->type)) {
+                   _data->step++;
                    selectInnerModel = _data->innerModel;
                    if(_data->innerModel) {
                        if(_data->innerModel->cur_frame == selectInnerModel->frame->total_frame - 1) {
@@ -135,7 +148,11 @@ void ToppingContainer::CellTouchCancel(CellData* _cell, CCTouch* _touch, CCPoint
 
 void ToppingContainer::CellUpdate(CellData *_cell, float _deltaTime) {
     ToppingContainerCellData* _data = (ToppingContainerCellData*)_cell->data;
-    
+    if(selectModel == _data->model) {
+        _data->model->color.r = _data->model->color.g = _data->model->color.b = 0xFF;
+    } else {
+        _data->model->color.r = _data->model->color.g = _data->model->color.b = (iceCream->IsPossibleTopping(_data->type) && _data->step < _data->stepTotal) ? 0xFF : 0x88;
+    }
     if(selectModel == _data->model && selectTweener == NULL) {
         if(!selectModel->is_play) {
             iceCream->AddTopping(_data->type);

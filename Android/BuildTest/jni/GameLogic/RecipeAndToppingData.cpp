@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include "ShareData.h"
 
-Thumbs* ThumbsInit(VBTexture* _tex, VBAABB _aabb, int _type, void* _targ) {
+Thumbs* ThumbsInit(VBTexture* _tex, VBAABB _aabb, int _type, void* _targ, bool _isR) {
     Thumbs* _t = (Thumbs*)malloc(sizeof(Thumbs));
     _t->attach = 1;
     _t->model = new VBModel(_tex);
     _t->model->setPosition(CCPointMake(_aabb.l - _tex->shiftX, -_aabb.t + _tex->shiftY));
     _t->targ = _targ;
     _t->type = _type;
+    _t->isR = _isR;
     return _t;
 }
 
@@ -19,7 +20,7 @@ void ThumbsFree(Thumbs** _t) {
 }
 
 RT* RTInit(int _isR, int _idx, int _type, void* _data) {
-    RT* _rt = (RT*)malloc(sizeof(RT));
+    RT* _rt = (RT*)calloc(1, sizeof(RT));
     _rt->isR = _isR;
     _rt->type = _type;
     _rt->data = _data;

@@ -13,8 +13,8 @@ Pages::Pages(VBObjectFile2D* _obj, VBTexture* _tex,
     slideXThumb = targetX = slideX = endX;
     totalIdx = _totalIdx;
     preIdx = idx = -1;
-    elapseTime = 0.0;
-    elapseTimeThumb = 0.0;
+    elapseTimeTotal = elapseTime = 0.0;
+    elapseTimeThumbTotal = elapseTimeThumb = 0.0;
     listener = NULL;
     pageFunc = NULL;
     pageFuncRef = NULL;
@@ -86,31 +86,35 @@ void Pages::GoPage(int _idx, void (*_pageFunc)(void* _pageFuncRef), void* _pageF
         delete listener;
         listener = NULL;
     }
-    
     if(runparam) {
         slideTween.removeTween(runparam);
         runparam = NULL;
     }
     
-    param = TweenerParam(1000 * (_idx < 0 ? 0.25 : 0.5), EXPO, _idx < 0 ? EASE_IN : EASE_OUT);
+    elapseTime = 0.0;
+    elapseTimeTotal = _idx < 0 ? 0.25 : 0.5;
+    slideTween = Tweener();
+    param = TweenerParam(1000 * elapseTimeTotal, EXPO, _idx < 0 ? EASE_IN : EASE_OUT);
     runparam = &param;
-    param.addProperty(&slideX, targetX);
+    last = targetX;
+    param.addProperty(&slideX, last);
     slideTween.addTween(param);
-    
     if(idx < 0) {
         listener = new PagesTweenListener(this);
         slideTween.addListener(listener);
     }
     
-    
     if(runparamThumb) {
         slideTweenThumb.removeTween(runparamThumb);
         runparamThumb = NULL;
     }
-    
-    paramThumb = TweenerParam(1000 * (_idx < 0 ? 0.25 : 0.5), EXPO, _idx < 0 ? EASE_IN : EASE_OUT);
+    elapseTimeThumb = 0.0;
+    elapseTimeThumbTotal = _idx < 0 ? 0.25 : 0.5;
+    slideTweenThumb = Tweener();
+    paramThumb = TweenerParam(1000 * elapseTimeThumbTotal, EXPO, _idx < 0 ? EASE_IN : EASE_OUT);
     runparamThumb = &paramThumb;
-    paramThumb.addProperty(&slideXThumb, _idx < 0 ? endX : thumbX);
+    lastThumb = _idx < 0 ? endX : thumbX;
+    paramThumb.addProperty(&slideXThumb, lastThumb);
     slideTweenThumb.addTween(paramThumb);
     
     if(idx >= 0 && totalIdx > idx) {
@@ -137,14 +141,41 @@ void Pages::GoPage(int _idx, void (*_pageFunc)(void* _pageFuncRef), void* _pageF
 
 void Pages::Update(float _deltaTime) {
     if(touchSlide == NULL) {
-        elapseTime += _deltaTime;
-        slideTween.step(1000 * elapseTime);
-        slideM->setPosition(CCPointMake(slideX, startY));
+        if(runparam) {
+            if(elapseTime + _deltaTime < elapseTimeTotal) {
+                elapseTime += _deltaTime;
+                slideTween.step(1000 * elapseTime);
+            } else {
+                if(listener) {
+                    listener->onComplete(*runparam);
+                    slideTween.removeListener(listener);
+                    delete listener;
+                    listener = NULL;
+                }
+                if(runparam) {
+                    slideTween.removeTween(runparam);
+                    runparam = NULL;
+                }
+                slideX = last;
+                
+            }
+            slideM->setPosition(CCPointMake(slideX, startY));
+        }
     }
-    elapseTimeThumb += _deltaTime;
-    slideTweenThumb.step(1000 * elapseTimeThumb);
-    if(thumb)
-        thumb->setPosition(CCPointMake(slideXThumb, thumbY));
+    if(runparamThumb) {
+        if(elapseTimeThumb + _deltaTime < elapseTimeThumbTotal) {
+            elapseTimeThumb += _deltaTime;
+            slideTweenThumb.step(1000 * elapseTimeThumb);
+        } else {
+            if(runparamThumb) {
+                slideTweenThumb.removeTween(runparamThumb);
+                runparamThumb = NULL;
+            }
+            slideXThumb = lastThumb;
+        }
+        if(thumb)
+            thumb->setPosition(CCPointMake(slideXThumb, thumbY));
+    }
 }
 
 void Pages::touchBegin(CCTouch* _touch, CCPoint _location) {

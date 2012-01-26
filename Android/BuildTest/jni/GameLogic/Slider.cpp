@@ -23,7 +23,8 @@ void Slider::BeginSliderTween(float _value, float _time, bool _is_elastic, bool 
     sliderTweenerTimeCount = 0.0;
     sliderTweenerTime = _time + _delayTime;
     sliderTweenerParam = new TweenerParam(sliderTweenerTime * 1000, _is_elastic ? ELASTIC : EXPO, EASE_OUT, _delayTime * 1000);
-    sliderTweenerParam->addProperty(&value, _value);
+    valueLast = _value;
+    sliderTweenerParam->addProperty(&value, valueLast);
     sliderTweener->addTween(*sliderTweenerParam);
     readyTweenCompleteCallback = _use_callback;
 }
@@ -34,6 +35,7 @@ void Slider::UpdateSliderTween(float _deltaTime) {
         sliderTweener->step(sliderTweenerTimeCount * 1000);
         if(sliderTweenerTimeCount > sliderTweenerTime) {
             ClearSliderTween();
+            value = valueLast;
             if(readyTweenCompleteCallback) {
                 if(enable) {
                     if(enableCompleteCallback)

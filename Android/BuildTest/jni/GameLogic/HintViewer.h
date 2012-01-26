@@ -1,24 +1,8 @@
-//
-//  HintViewer.h
-//  gelatomania
-//
-//  Created by Kyung Gak Nam on 12. 1. 17..
-//  Copyright (c) 2012년 VanillaBreeze. All rights reserved.
-//
-
-
-//setter, getter
-
 #ifndef gelatomania_HintViewer_h
 #define gelatomania_HintViewer_h
 
 #include "VBEngine.h"
 #include "VBModel.h"
-//typedef enum//{
-//    hintStateItem = 1 << 0,
-//    hintStateIceCream = 1 << 1,
-//	hintStateTopDown = (hintStateIceCream | hintStateItem),
-//} hintStateFlag;
 
 class GameMain;
 
@@ -31,7 +15,7 @@ typedef enum hintStateFlag
 } hintStateFlag;
 
 
-class HintViewer : public VBModel {
+class HintViewer {
     int solutionLen;
     int currentSolutionIdx;
     int* solution;
@@ -57,7 +41,8 @@ public:
     
     void show();
     void hide();
-    void step(int itemIdx);
+    void initStep();
+    bool step(int itemIdx);
     void setSolution(int** recipe, int recipeLen, int* recipeArrLen, int* topping, int toppingLen);
     void setPosition(cocos2d::CCPoint _position);
     void update(float _deltaTime);

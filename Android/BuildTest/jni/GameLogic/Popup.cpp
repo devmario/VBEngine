@@ -1,5 +1,6 @@
 #include "Popup.h"
 #include "ShareData.h"
+#include "SubMenu.h"
 
 #define ENDY_POPUP 320
 #define ENDALPHA_POPUP 0x88
@@ -25,7 +26,6 @@ void Popup::init() {
         popupY = ENDY_POPUP;
         bgAlpha = 0.0;
         runslideParam = NULL;
-        runalphaParam = NULL;
         listner = NULL;
         
         reBT = plBT = meBT = shBT = frBT = NULL;
@@ -68,6 +68,7 @@ void Popup::init() {
 }
 
 Popup::~Popup() {
+
     //cout << "delete Popup\n";
     ClearTween();
     if(listner) {
@@ -94,10 +95,9 @@ void Popup::ClearTween() {
         runslideParam = NULL;
     }
     
-    if(runalphaParam) {
-        showTween.removeTween(runalphaParam);
-        runalphaParam = NULL;
-    }
+    elapseTime = 0.0;
+    
+    showTween = Tweener();
 }
 
 void Popup::Update(float _deltaTime) {
@@ -134,13 +134,9 @@ void Popup::Open(void (*_closeFunc)(void* _closeFuncRef), void* _closeFuncRef) {
     
     slideParam = TweenerParam(1000 * 0.5, EXPO, EASE_OUT);
     runslideParam = &slideParam;
+    slideParam.addProperty(&bgAlpha, ENDALPHA_POPUP);
     slideParam.addProperty(&popupY, 0);
     showTween.addTween(slideParam);
-    
-    alphaParam = TweenerParam(1000 * 0.25, LINEAR, EASE_IN_OUT);
-    runalphaParam = &alphaParam;
-    alphaParam.addProperty(&bgAlpha, ENDALPHA_POPUP);
-    showTween.addTween(alphaParam);
 }
 
 void Popup::Close() {
@@ -149,12 +145,8 @@ void Popup::Close() {
     slideParam = TweenerParam(1000 * 0.5, EXPO, EASE_OUT);
     runslideParam = &slideParam;
     slideParam.addProperty(&popupY, ENDY_POPUP);
+    slideParam.addProperty(&bgAlpha, 0x00);
     showTween.addTween(slideParam);
-    
-    alphaParam = TweenerParam(1000 * 0.25, LINEAR, EASE_IN_OUT);
-    runalphaParam = &alphaParam;
-    alphaParam.addProperty(&bgAlpha, 0x00);
-    showTween.addTween(alphaParam);
     
     listner = new PopupTweenListener(this);
     showTween.addListener(listner);
@@ -177,11 +169,13 @@ void Popup::touchMove(CCTouch* _touch, CCPoint _location) {
 }
 
 void Popup::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
-    TOUCHENDBT(reTouch, reBT, _location, _touch, Close(),reBT->gotoAndStop(0));
-    TOUCHENDBT(plTouch, plBT, _location, _touch, Close(),plBT->gotoAndStop(0));
-    TOUCHENDBT(meTouch, meBT, _location, _touch, Close(); ShareDataGetRoot()->ShowLoading(PackAndStageSelectPage);,meBT->gotoAndStop(0));
-    TOUCHENDBT(shTouch, shBT, _location, _touch, Close(),shBT->gotoAndStop(0));
-    TOUCHENDBT(frTouch, frBT, _location, _touch, Close(),frBT->gotoAndStop(0));
+    TOUCHENDBT(reTouch, reBT, _location, _touch, ShareDataGetRoot()->ClosePopup(),reBT->gotoAndStop(0));
+    TOUCHENDBT(plTouch, plBT, _location, _touch, ShareDataGetRoot()->ClosePopup(),plBT->gotoAndStop(0));
+    TOUCHENDBT(meTouch, meBT, _location, _touch, ShareDataGetRoot()->OutGoingAtGameMain(),meBT->gotoAndStop(0));
+    TOUCHENDBT(shTouch, shBT, _location, _touch, 
+               ShareDataGetRoot()->ChangePage(4, LoadingTypeFull, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypeShop);
+               ,shBT->gotoAndStop(0));
+    TOUCHENDBT(frTouch, frBT, _location, _touch, ShareDataGetRoot()->ClosePopup(),frBT->gotoAndStop(0));
 }
 
 void Popup::touchEnd(CCTouch* _touch, CCPoint _location) {

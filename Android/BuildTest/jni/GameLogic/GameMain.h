@@ -18,6 +18,8 @@ private:
     int* td;
     int tdLen;
     
+    int bgLen;
+    
     VBArrayVector* rdVec;
     VBArrayVector* tdVec;
     
@@ -37,6 +39,7 @@ private:
     VBTexture* texFont;
     
     void LoadResource(cJSON* _layer, cJSON* _ui);
+    void UnloadResource();
     
     VBModel** modelBg;
     VBModel* modelUI;
@@ -52,6 +55,7 @@ private:
     VBModel* modelRailIce[2];
     
     void InitModel(cJSON* _layer, cJSON* _ui);
+    void FreeModel();
     
     VBModel* dragIce;
     CCPoint dragPre;
@@ -69,6 +73,7 @@ private:
     IceCream* nextIceCreamMotion;
     
     void InitCook(int** _rtc, int _rtcLen, int* _rtcArrLen, int* _tc, int _tcLen);
+    void FreeCook();
     
     bool isRecipeMode;
     
@@ -76,11 +81,13 @@ private:
     RecipeContainer* recipeContainer;
     
     void InitRecipe();
+    void FreeRecipe();
     
     VBArrayVector* toppingData;
     ToppingContainer* toppingContainer;
     
     void InitTopping();
+    void FreeTopping();
     
     Tweener* toppingTweener;
     TweenerParam* toppingTweenerParam;
@@ -96,6 +103,7 @@ private:
     Slider* toppingRopeSlider;
     
     void InitRope();
+    void FreeRope();
     
     static void CallbackSlideNextRope(void* _obj);
     static void CallbackSlideToppingRope(void* _obj);
@@ -112,7 +120,7 @@ private:
     
     bool IsActiveUI();
     
-    HintViewer *hintViewer;
+    //HintViewer *hintViewer;
 public:
     
     GameMain(int _packIdx, int _stageIdx);

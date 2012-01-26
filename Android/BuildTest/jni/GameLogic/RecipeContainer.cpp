@@ -112,10 +112,8 @@ RecipeContainerCellData* RecipeContainerCellDataInit(int _recipeIdx) {
     char* _recipe_name = cJSON_GetArrayItem(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "recipe"), _recipeIdx), 0)->valuestring;
     
     _data->texPath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/decomp_%s.png", VBStringGetCString(VBEngineGetDocumentPath()), _recipe_name);
-
-
+    
     if(access(VBStringGetCString(_data->texPath), F_OK) != 0) {
-
         _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s.png", VBStringGetCString(VBEngineGetResourcePath()), _recipe_name);
         VBImage* _img = VBImageInitWithPath(VBImageAlloc(), _str);
         VBStringFree(&_str);

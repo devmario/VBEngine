@@ -1,11 +1,3 @@
-//
-//  HintViewer.cpp
-//  gelatomania
-//
-//  Created by Kyung Gak Nam on 12. 1. 17..
-//  Copyright (c) 2012년 VanillaBreeze. All rights reserved.
-//
-
 #include "HintViewer.h"
 #include "ShareData.h"
 #include "GameMain.h"
@@ -17,8 +9,8 @@ HintViewer::HintViewer(GameMain *_parentModel, bool _showFlag, VBObjectFile2D *_
         VBString *_str = NULL;
         state = hintStateItem;
         rotationR = 0.0;
-        showFlag = _showFlag;
         solutionFlag = false;
+        initStep();
         
         if (_obj && _tex) {
             object = _obj;
@@ -53,20 +45,22 @@ HintViewer::HintViewer(GameMain *_parentModel, bool _showFlag, VBObjectFile2D *_
             arrowModel[i]->setPosition(position[i]);
         }
         
-        
-        if (showFlag) {
-            HintViewer::show();
+        showFlag = false;
+        if(_showFlag) {
+            show();
         }
+        
+        solution = NULL;
     }
 }
 
 HintViewer::~HintViewer()
 {
+    hide();
+    
     for (int i=0; i<4; i++) {
-        parent->top->removeChild(arrowModel[i], false);
         delete arrowModel[i];
     }
-    parent = NULL;
     
     VBObjectFile2DFree(&object);
     VBTextureFree(&texture);
@@ -78,15 +72,19 @@ HintViewer::~HintViewer()
 
 void HintViewer::show()
 {
-    showFlag = true;
-    parent->top->addChild(arrowModel[state]);
+    if(!showFlag) {
+        showFlag = true;
+        parent->top->addChild(arrowModel[state]);
+    }
     
 }
 
 void HintViewer::hide()
 {
-    showFlag = false;
-    parent->top->removeChild(arrowModel[state], false);
+    if(showFlag) {
+        showFlag = false;
+        parent->top->removeChild(arrowModel[state], false);
+    }
 }
 
 void HintViewer::setState(hintStateFlag newState)
@@ -142,59 +140,84 @@ void HintViewer::update(float _deltaTime)
     }
 }
 
-void HintViewer::step(int itemIdx)
+void HintViewer::initStep() {
+    currentSolutionIdx = 0;
+}
+
+bool HintViewer::step(int itemIdx)
 {
-    printf("hint step: %d, %d\n", currentSolutionIdx, solution[currentSolutionIdx]);
-    if (itemIdx == solution[currentSolutionIdx]) {
+    if(solution[currentSolutionIdx] == itemIdx) { 
         currentSolutionIdx++;
+        if(currentSolutionIdx < solutionLen) {
+            if(solution[currentSolutionIdx] == -1) {
+                currentSolutionIdx++;
+            }
+            if(currentSolutionIdx >= solutionLen) {
+                initStep();
+            } else {
+                /*********************
+                 토핑으로 전환하여야 함
+                 *********************/
+            }
+            printf("hint step: %d, %d\n", currentSolutionIdx, solution[currentSolutionIdx]);
+        }
+        return true;
     } else {
-        currentSolutionIdx = 0;
+        /**********************************************
+         새로운 아이스크림 나오는 버튼으로 힌트 전환 하여야 함
+         **********************************************/
+        initStep();
+        return false;
     }
 }
 
 void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int* topping, int toppingLen)
 {
+    int preFlag = showFlag;
+    if(preFlag)
+        hide();
     // -1: add icecream
     // -2: topping
     // -3: reset icecream
-    solutionLen = recipeArrLen[0];
-    if (recipeLen) {
-        for (int i=1; i<recipeLen; i++) {
-            solutionLen += recipeArrLen[i] + 1;
-        }
+    solutionLen = 0;
+    for(int i = 0; i < recipeLen; i++) {
+        solutionLen += recipeArrLen[i];
     }
-    if (toppingLen) {
-        solutionLen = toppingLen+1;
-        
+    if(toppingLen > 0) {
+        solutionLen++;
+        solutionLen += toppingLen;
     }
     
+    if(solution)
+        free(solution);
     solution = (int*)malloc(sizeof(int)*solutionLen);
     
     int idx=0;
-    for (int i=0; i<recipeLen; i++) {
-        if (i != 0) {
-            solution[idx] = -1;
-            idx++;
-        }
+    for (int i=0; i < recipeLen; i++) {
         for (int j=0; j<recipeArrLen[i]; j++) {
             solution[idx] = recipe[i][j];
             idx++;
         }
     }
-    if (toppingLen) {
-        solution[idx] = -2;
+    if(toppingLen > 0) {
+        /**************************
+         -1은 토핑이 시작된다는 의미
+         **************************/
+        solution[idx] = -1;
         idx++;
-        for (int i=0; i<toppingLen; i++) {
+        for(int i=0; i<toppingLen; i++) {
             solution[idx] = topping[i];
             idx++;
         }
     }
-    solutionFlag = true;
-    currentSolutionIdx = 1;
+    initStep();
     
     printf("solution: ");
     for (int i=0; i<solutionLen; i++) {
         printf("%d ", solution[i]);
     }
     printf("\n");
+    
+    if(preFlag)
+        show();
 }

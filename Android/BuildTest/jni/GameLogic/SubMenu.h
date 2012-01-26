@@ -6,7 +6,16 @@
 #include "StageSelect.h"
 #include "Shop.h"
 
+//#define SHOP_EMPTY
+
 using namespace cocos2d;
+
+typedef enum SubMenuType {
+    SubMenuTypeNone = 0,
+    SubMenuTypePackSelect = 1,
+    SubMenuTypeStageSelect = 2,
+    SubMenuTypeShop = 3
+} SubMenuType;
 
 class SubMenu : public View {
     void touchEndAndCancel(CCTouch* _touch, CCPoint _location);
@@ -36,6 +45,7 @@ public:
     StageSelect* stageView;
     Pages* currentPage;
 	
+#ifndef SHOP_EMPTY
     //shop
     VBObjectFile2D *shopMaskObj;
     VBTexture *shopMaskTex;
@@ -48,11 +58,16 @@ public:
     VBModel *vtShopBack;
     VBModel *vtShopRecipe;
 	//
+#endif
     
-    SubMenu(int _packID, int _stageID);
+    SubMenuType type;
+    int arg0;
+    int arg1;
+    
+    SubMenu();
     ~SubMenu();
     
-    void packSelect(int _pack);
+    void SetMenuType(SubMenuType _type, int _arg0, int _arg1);
     
     virtual void Update(float _deltaTime);
     

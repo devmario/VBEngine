@@ -103,14 +103,24 @@ IceCream::~IceCream() {
             removeChild((VBModel*)getChildren()->objectAtIndex(0), false);
         }
     }
+    
+    if(next) {
+        delete next;
+        next = NULL;
+    }
+    
     while(VBArrayVectorGetLength(subToppingFlow)) {
         VBArrayVector* _vec = (VBArrayVector*)VBArrayVectorRemoveBack(subToppingFlow);
         VBArrayVectorFree(&_vec);
     }
     VBArrayVectorFree(&subToppingFlow);
+    
     VBArrayVectorFree(&subTopping);
     
     VBArrayVectorFree(&topping);
+    
+    ClearMask(NULL, -1);
+    VBArrayVectorFree(&mask);
     
     while(VBArrayVectorGetLength(thumbs)) {
         Thumbs* _t = (Thumbs*)VBArrayVectorRemoveBack(thumbs);
@@ -118,15 +128,7 @@ IceCream::~IceCream() {
     }
     VBArrayVectorFree(&thumbs);
     
-    
-    ClearMask(NULL, -1);
-    VBArrayVectorFree(&mask);
     VBImageFree(&imgBitmask);
-    
-    if(next) {
-        delete next;
-        next = NULL;
-    }
     
     delete modelBridge;
     delete modelBridgeOutline;
@@ -218,15 +220,29 @@ void IceCream::Reshape() {
 
 float IceCream::GetClear() {
     Reshape();
+    
     unsigned long _clear = 0;
     unsigned long _totalClear = 0;
+    
+    unsigned long _subTopping = 0;
+    unsigned long _subToppingTotal = 0;
+    
+    unsigned long _subToppingFlow = 0;
+    unsigned long _subToppingFlowTotal = 0;
+    
     IceCream* _link = this;
-    while(_link) {
+    IceCream* _linkBase = baseIceCream;
+    while(_link && _linkBase) {
+        for(int i = 0; i < _link->subToppingFlow->len; i++) {
+            RecipeSubToppingFlow* _r = (RecipeSubToppingFlow*)VBArrayVectorGetDataAt(_link->subToppingFlow, i);
+        }
         _clear += _link->isClear;
         _totalClear += _link->totalClear;
         _link = _link->next;
+        _linkBase = _linkBase->next;
     }
-    return 1.0 - (float)_clear / _totalClear;
+    float _bgPer = 1.0 - (float)_clear / _totalClear;
+    return _bgPer;
 }
 
 unsigned int IceCream::GetHeight() {
@@ -478,7 +494,7 @@ void IceCream::AddMask(RecipeMask* _rm) {
     if(next) {
         next->AddMask(_rm);
     } else {
-        VBArrayVectorAddBack(thumbs, ThumbsInit(_rm->texThumb, _rm->aabbThumb, 1, _rm));
+        VBArrayVectorAddBack(thumbs, ThumbsInit(_rm->texThumb, _rm->aabbThumb, 1, _rm, true));
         VBArrayVectorAddBack(mask, _rm);
     }
 }
@@ -520,7 +536,7 @@ bool IceCream::AddSubTopping(RecipeSubTopping* _rst) {
     } else {
         VBArrayVector* _vec = (VBArrayVector*)VBArrayVectorGetDataAt(subToppingFlow, _rst->idx);
         if(VBArrayVectorGetDataAt(subTopping, _rst->idx) == NULL && VBArrayVectorGetLength(_vec) == 0) {
-            VBArrayVectorAddBack(thumbs, ThumbsInit(_rst->texThumb, _rst->aabbThumb, 3, _rst));
+            VBArrayVectorAddBack(thumbs, ThumbsInit(_rst->texThumb, _rst->aabbThumb, 3, _rst, true));
             VBArrayVectorReplaceAt(subTopping, _rst, _rst->idx);
             return true;
         } else {
@@ -535,7 +551,7 @@ bool IceCream::AddSubToppingFlow(RecipeSubToppingFlow* _rstf) {
     } else {
         VBArrayVector* _vec = (VBArrayVector*)VBArrayVectorGetDataAt(subToppingFlow, _rstf->idx);
         if(_vec->len < _rstf->len && VBArrayVectorGetDataAt(subTopping, _rstf->idx) == NULL) {
-            VBArrayVectorAddBack(thumbs, ThumbsInit(_rstf->texThumb[_vec->len], _rstf->aabbThumb[_vec->len], 2, _rstf));
+            VBArrayVectorAddBack(thumbs, ThumbsInit(_rstf->texThumb[_vec->len], _rstf->aabbThumb[_vec->len], 2, _rstf, true));
             VBArrayVectorAddBack(_vec, _rstf);
             return true;
         } else {
@@ -752,19 +768,65 @@ bool IceCream::IsPossibleRecipe(int _recipe) {
     }
 }
 
+bool IceCream::IsPossibleTopping(int _topping) {
+    if(next) {
+        return next->IsPossibleTopping(_topping);
+    } else {
+        
+        RT* _rtF = NULL;
+        for(int i = 0; i < VBArrayVectorGetLength(tdVec); i++) {
+            RT* _rt = (RT*)VBArrayVectorGetDataAt(tdVec, i);
+            if(_rt->idx == _topping) {
+                _rtF = _rt;
+                break;
+            }
+        }
+        
+        if(_rtF) {
+            switch(_rtF->type) {
+                case 0:
+                {
+                }
+                    break;
+                case 1:
+                {
+                }
+                    break;
+                case 2:
+                {
+                }
+                    break;
+                case 3:
+                {
+                }
+                    break;
+            }
+        }
+        
+        return true;
+    }
+}
+
+bool IceCream::IsPossibleNext() {
+    if(next) {
+        return next->IsPossibleNext();
+    } else {
+        return true;
+    }
+}
+
 void IceCream::AddToppingSpuit(ToppingSpuit* _ts) {
     if(next) {
         next->AddToppingSpuit(_ts);
     } else {
         int _rs_count = 0;
         for(int i = 0; i < topping->len; i++) {
-            Thumbs* _t = (Thumbs*)VBArrayVectorGetDataAt(thumbs, i);
-            if(_t->targ == _ts) {
+            if(VBArrayVectorGetDataAt(topping, i) == _ts) {
                 _rs_count++;
             }
         }
         if(_rs_count < _ts->len) {
-            VBArrayVectorAddBack(thumbs, ThumbsInit(_ts->texThumb[_rs_count], _ts->aabbThumb[_rs_count], 0, _ts));
+            VBArrayVectorAddBack(thumbs, ThumbsInit(_ts->texThumb[_rs_count], _ts->aabbThumb[_rs_count], 0, _ts, false));
             VBArrayVectorAddBack(topping, _ts);
         }
     }
@@ -776,13 +838,12 @@ void IceCream::AddToppingFlow(ToppingFlow* _tf) {
     } else {
         int _rs_count = 0;
         for(int i = 0; i < topping->len; i++) {
-            Thumbs* _t = (Thumbs*)VBArrayVectorGetDataAt(thumbs, i);
-            if(_t->targ == _tf) {
+            if(VBArrayVectorGetDataAt(topping, i) == _tf) {
                 _rs_count++;
             }
         }
         if(_rs_count < _tf->len) {
-            VBArrayVectorAddBack(thumbs, ThumbsInit(_tf->texThumb[_rs_count], _tf->aabbThumb[_rs_count], 1, _tf));
+            VBArrayVectorAddBack(thumbs, ThumbsInit(_tf->texThumb[_rs_count], _tf->aabbThumb[_rs_count], 1, _tf, false));
             VBArrayVectorAddBack(topping, _tf);
         }
     }
@@ -799,12 +860,12 @@ void IceCream::AddToppingCream(ToppingCream* _tc) {
             if(_t->targ == _tc) {
                 _rs_count++;
             }
-            if(_t->type == 3) {
+            if(_t->isR == false && _t->type == 3) {
                 _t_count++;
             }
         }
         if(_rs_count < 1 && _t_count == 0) {
-            VBArrayVectorAddBack(thumbs, ThumbsInit(_tc->texThumb, _tc->aabbThumb, 2, _tc));
+            VBArrayVectorAddBack(thumbs, ThumbsInit(_tc->texThumb, _tc->aabbThumb, 2, _tc, false));
             VBArrayVectorAddBack(topping, _tc);
         }
     }
@@ -822,7 +883,7 @@ void IceCream::AddToppingCherry(ToppingCherry* _tc) {
             if(_t->targ == _tc) {
                 _rs_count++;
             }
-            if(_t->type == 2) {
+            if(_t->isR == false && _t->type == 2) {
                 _tt = _t;
                 _t_count++;
             }
@@ -836,7 +897,7 @@ void IceCream::AddToppingCherry(ToppingCherry* _tc) {
                 VBArrayVectorRemove(thumbs, _tt);
                 ThumbsFree(&_tt);
             }
-            VBArrayVectorAddBack(thumbs, ThumbsInit(_tc->texThumb[_t_count], _tc->aabbThumb[_t_count], 3, _tc));
+            VBArrayVectorAddBack(thumbs, ThumbsInit(_tc->texThumb[_t_count], _tc->aabbThumb[_t_count], 3, _tc, false));
             VBArrayVectorAddBack(topping, _tc);
         }
     }
@@ -854,6 +915,7 @@ bool IceCream::AddTopping(int _topping) {
                 break;
             }
         }
+        
         if(_rtF) {
             switch(_rtF->type) {
                 case 0:

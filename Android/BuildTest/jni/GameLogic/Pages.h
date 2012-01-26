@@ -24,6 +24,8 @@ public:
     VBModel* slideM;
     
     float elapseTime;
+    float elapseTimeTotal;
+    float last;
     
     Tweener slideTween;
     TweenerParam param;
@@ -32,6 +34,8 @@ public:
     PagesTweenListener* listener;
     
     float elapseTimeThumb;
+    float elapseTimeThumbTotal;
+    float lastThumb;
     
     Tweener slideTweenThumb;
     TweenerParam paramThumb;

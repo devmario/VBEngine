@@ -69,6 +69,7 @@ private:
     CCTouch* touch;
     CCPoint preLocation;
     
+    float valueLast;
     float value;
     
     bool IsHorizontal();

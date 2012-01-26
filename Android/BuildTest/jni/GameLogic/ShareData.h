@@ -18,7 +18,7 @@ cJSON* ShareDataGetJSON();
 int ShareDataGetPackLength();
 char* ShareDataGetPackLibraryName(int _idx);
 void ShareDataSave();
-bool ShateDataGetHaveStage(int _idx);
+bool ShareDataGetHaveStage(int _idx);
 int ShareDataGetStageLengthAt(int _idx);
 int ShareDataGetStageLength(int _idx);
 cJSON* ShareDataGetStageDataJSONAt(int _packID, int _stageID);
@@ -55,23 +55,13 @@ touchPtr = touch;\
 
 #define TOUCHENDBT(touchPtr, modelPtr, location, touch, code, mustCode)\
 if(touchPtr == touch) {\
+mustCode;\
 if(modelPtr->checkCollisionWithButton(location)) {\
 code;\
 }\
-mustCode;\
 touchPtr = NULL;\
 }
 
-#ifdef _VB_ANDROID_
-#define OBJLOAD(_obj, _resChar, _str)\
-_str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
-if(VBStringGetCString(_str) != NULL) {\
-_obj = VBObjectFile2DInitAndLoad(VBObjectFile2DAlloc(), _str);\
-} else {\
-_obj = NULL;\
-}\
-VBStringFree(&_str)
-#else
 #define OBJLOAD(_obj, _resChar, _str)\
 _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
 if(access(VBStringGetCString(_str), F_OK) == 0) {\
@@ -80,18 +70,7 @@ _obj = VBObjectFile2DInitAndLoad(VBObjectFile2DAlloc(), _str);\
 _obj = NULL;\
 }\
 VBStringFree(&_str)
-#endif
 
-#ifdef _VB_ANDROID_
-#define TEXLOAD(_tex, _resChar, _str)\
-_str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
-if(VBStringGetCString(_str) != NULL) {\
-_tex = VBTextureInitAndLoadWithImagePath(VBTextureAlloc(), _str);\
-} else {\
-_tex = NULL;\
-}\
-VBStringFree(&_str)
-#else
 #define TEXLOAD(_tex, _resChar, _str)\
 _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
 if(access(VBStringGetCString(_str), F_OK) == 0) {\
@@ -100,7 +79,6 @@ _tex = VBTextureInitAndLoadWithImagePath(VBTextureAlloc(), _str);\
 _tex = NULL;\
 }\
 VBStringFree(&_str)
-#endif
 
 #define IMGLOAD(_img, _resChar, _str)\
 _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\

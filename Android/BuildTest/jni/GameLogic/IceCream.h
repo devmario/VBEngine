@@ -81,7 +81,6 @@ public:
     bool IsEqual(IceCream* _other);
     void SaveImage(char* _fileName);
     
-    
     void Mix(RecipeMix* _rm);
     void AddMask(RecipeMask* _rm);
     int ClearMask(RecipeMask* _rm, int _num);
@@ -94,6 +93,8 @@ public:
     
     bool IsHaveSubTopping();
     bool IsPossibleRecipe(int _recipe);
+    bool IsPossibleTopping(int _topping);
+    bool IsPossibleNext();
     
     void AddToppingSpuit(ToppingSpuit* _ts);
     void AddToppingFlow(ToppingFlow* _tf);

@@ -1,6 +1,7 @@
 #include "StageSelect.h"
 #include "ShareData.h"
 #include "StageThumb.h"
+#include "SubMenu.h"
 
 StageSelect::StageSelect(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex, 
                          int _totalIdx) : Pages(_obj, _tex, _totalIdx, 30, 600.0, -40, 480, 240, -280 + 8) {
@@ -31,7 +32,7 @@ StageSelect::~StageSelect() {
     delete bg[0];
     delete bg[1];
     while(VBArrayVectorGetLength(stages)) {
-        StageThumb* _stage = (StageThumb*)VBArrayVectorRemoveAt(stages, 0);
+        StageThumb* _stage = (StageThumb*)VBArrayVectorRemoveBack(stages);
         slideM->removeChild(_stage, false);
         delete _stage;
     }
@@ -84,6 +85,20 @@ void StageSelect::GoPage(int _idx, void (*_pageFunc)(void* _pageFuncRef), void* 
         }
         thumb->gotoAndStop(thumbFrame + idx);
     }
+    if(_idx != -1) {
+        history* _preH = ShareDataGetRoot()->GetLastHistory();
+        int _hi = 0;
+        if(_preH->args[_hi] == PopupTypeClear)
+            _hi += 3;
+        else
+            _hi++;
+        _hi++;
+        if(_preH->args[_hi] != SubMenuTypeStageSelect)
+            return;
+        _hi += 2;
+        if(_hi < _preH->count)
+            _preH->args[_hi] = _idx;
+    }
 }
 
 void StageSelect::touchBegin(CCTouch* _touch, CCPoint _location) {
@@ -133,7 +148,7 @@ void StageSelect::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
         touchMd->color.g = 0xFF;
         touchMd->color.b = 0xFF;
         touchMd = NULL;
-        ShareDataGetRoot()->ShowLoading(GameMainPage);
+        ShareDataGetRoot()->ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeGameMain, _getpid(), _getsid());
     } else {
         Pages::touchEndAndCancel(_touch, _location);
     }
