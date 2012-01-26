@@ -1,0 +1,185 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora
+END
+dequant.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/dequant.c
+END
+fragment.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/fragment.c
+END
+theoradec.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/theoradec.h
+END
+huffdec.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/huffdec.c
+END
+dequant.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/dequant.h
+END
+decinfo.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/decinfo.c
+END
+huffdec.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/huffdec.h
+END
+apiwrapper.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/apiwrapper.c
+END
+os_types.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/os_types.h
+END
+decint.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/decint.h
+END
+internal.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/internal.c
+END
+bitpack.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/bitpack.c
+END
+dct.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/dct.h
+END
+apiwrapper.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/apiwrapper.h
+END
+state.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/state.c
+END
+internal.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/internal.h
+END
+ogg.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/ogg.h
+END
+codec.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/codec.h
+END
+bitpack.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/bitpack.h
+END
+decode.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/decode.c
+END
+idct copy.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/idct%20copy.h
+END
+idct.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/idct.c
+END
+decapiwrapper.c
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/decapiwrapper.c
+END
+theora.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/theora.h
+END
+idct.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/idct.h
+END
+quant.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/quant.c
+END
+huffman.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/huffman.h
+END
+ocintrin.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/ocintrin.h
+END
+info.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/info.c
+END
+quant.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/theora/quant.h
+END

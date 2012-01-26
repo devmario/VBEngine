@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Collision/Shapes
+END
+b2PolygonShape.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Collision/Shapes/b2PolygonShape.h
+END
+b2CircleShape.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Collision/Shapes/b2CircleShape.cpp
+END
+b2Shape.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Collision/Shapes/b2Shape.h
+END
+b2CircleShape.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Collision/Shapes/b2CircleShape.h
+END
+b2PolygonShape.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Collision/Shapes/b2PolygonShape.cpp
+END

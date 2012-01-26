@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/repos/lowmans/!svn/ver/56/VBEngineTest/jni/Native
+END
+TypoGraphyMotionSample.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/Native/TypoGraphyMotionSample.c
+END
+QuadtreeMapSample.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/Native/QuadtreeMapSample.h
+END
+ColorTransitionSample.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/Native/ColorTransitionSample.h
+END
+TypoGraphyMotionSample.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/Native/TypoGraphyMotionSample.h
+END
+Android.mk
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/repos/lowmans/!svn/ver/43/VBEngineTest/jni/Native/Android.mk
+END
+AndroidNaitve.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/repos/lowmans/!svn/ver/56/VBEngineTest/jni/Native/AndroidNaitve.cpp
+END
+EngineSample.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/lowmans/!svn/ver/47/VBEngineTest/jni/Native/EngineSample.c
+END
+QuadtreeMapSample.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/Native/QuadtreeMapSample.c
+END
+ColorTransitionSample.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/Native/ColorTransitionSample.c
+END
+EngineSample.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/Native/EngineSample.h
+END

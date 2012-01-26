@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib
+END
+inffast.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/inffast.h
+END
+inffixed.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/inffixed.h
+END
+ioapi.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/ioapi.c
+END
+deflate.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/deflate.c
+END
+unzip.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/unzip.c
+END
+zlib.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/zlib.h
+END
+crypt.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/crypt.h
+END
+ioapi.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/ioapi.h
+END
+zutil.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/zutil.c
+END
+gzio.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/gzio.c
+END
+deflate.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/deflate.h
+END
+unzip.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/unzip.h
+END
+crc32.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/crc32.c
+END
+zutil.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/zutil.h
+END
+inftrees.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/inftrees.c
+END
+crc32.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/crc32.h
+END
+inflate.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/inflate.c
+END
+trees.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/trees.c
+END
+uncompr.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/uncompr.c
+END
+inftrees.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/inftrees.h
+END
+zconf.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/zconf.h
+END
+inflate.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/inflate.h
+END
+trees.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/trees.h
+END
+inffast.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/inffast.c
+END
+compress.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/compress.c
+END
+adler32.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/adler32.c
+END
+infback.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/zlib/infback.c
+END

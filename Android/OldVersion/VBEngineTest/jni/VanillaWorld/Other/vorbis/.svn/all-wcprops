@@ -1,0 +1,287 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis
+END
+masking.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/masking.h
+END
+lsp.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/lsp.c
+END
+misc.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/misc.h
+END
+floor0.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/floor0.c
+END
+floor1.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/floor1.c
+END
+lsp.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/lsp.h
+END
+registry.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/registry.c
+END
+os_types.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/os_types.h
+END
+mapping0.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/mapping0.c
+END
+psy.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/psy.c
+END
+envelope.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/envelope.c
+END
+registry.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/registry.h
+END
+lpc.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/lpc.c
+END
+codec_internal.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/codec_internal.h
+END
+backends.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/backends.h
+END
+psy.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/psy.h
+END
+codec.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/codec.h
+END
+envelope.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/envelope.h
+END
+lpc.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/lpc.h
+END
+framing.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/framing.c
+END
+codebook.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/codebook.c
+END
+os.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/os.h
+END
+synthesis.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/synthesis.c
+END
+bitrate.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/bitrate.c
+END
+codebook.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/codebook.h
+END
+info.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/info.c
+END
+bitrate.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/bitrate.h
+END
+vorbisenc.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/vorbisenc.h
+END
+smallft.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/smallft.c
+END
+vorbisfile.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/vorbisfile.c
+END
+bitwise.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/bitwise.c
+END
+lookup_data.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/lookup_data.h
+END
+smallft.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/smallft.h
+END
+window.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/window.c
+END
+lookup.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/lookup.c
+END
+res0.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/res0.c
+END
+vorbisfile.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/vorbisfile.h
+END
+highlevel.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/highlevel.h
+END
+window.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/window.h
+END
+lookup.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/lookup.h
+END
+scales.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/scales.h
+END
+ogg.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/ogg.h
+END
+sharedbook.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/sharedbook.c
+END
+analysis.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/analysis.c
+END
+mdct.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/mdct.c
+END
+block.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/block.c
+END
+mdct.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/vorbis/mdct.h
+END
