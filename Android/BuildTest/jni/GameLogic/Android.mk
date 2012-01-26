@@ -9,7 +9,6 @@ CppTweener.cpp\
 GameMain.cpp\
 HintViewer.cpp\
 IceCream.cpp\
-main.cpp\
 MainMenu.cpp\
 NumberText.cpp\
 PackSelect.cpp\
@@ -19,6 +18,7 @@ Popup.cpp\
 PopupClear.cpp\
 RecipeAndToppingData.cpp\
 RecipeContainer.cpp\
+Root.cpp\
 Scroller.cpp\
 ScrollerContainer.cpp\
 ShareData.cpp\
@@ -30,8 +30,10 @@ StageSelect.cpp\
 StageThumb.cpp\
 SubMenu.cpp\
 ToppingContainer.cpp\
-View.cpp \
-VBModel.cpp
+Tweener.cpp\
+VBModel.cpp\
+View.cpp
+
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../Cocos2dx \
                     $(LOCAL_PATH)/../Cocos2dx/platform \

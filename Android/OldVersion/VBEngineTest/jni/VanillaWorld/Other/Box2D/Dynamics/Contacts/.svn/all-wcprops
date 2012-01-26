@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts
+END
+b2Contact.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2Contact.cpp
+END
+b2ContactSolver.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2ContactSolver.h
+END
+b2TOISolver.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2TOISolver.h
+END
+b2CircleContact.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2CircleContact.cpp
+END
+b2PolygonAndCircleContact.h
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.h
+END
+b2Contact.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2Contact.h
+END
+b2CircleContact.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2CircleContact.h
+END
+b2PolygonContact.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2PolygonContact.cpp
+END
+b2ContactSolver.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2ContactSolver.cpp
+END
+b2TOISolver.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2TOISolver.cpp
+END
+b2PolygonAndCircleContact.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp
+END
+b2PolygonContact.h
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/Box2D/Dynamics/Contacts/b2PolygonContact.h
+END

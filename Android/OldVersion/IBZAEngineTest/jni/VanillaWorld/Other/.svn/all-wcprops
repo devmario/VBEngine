@@ -1,0 +1,281 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other
+END
+pngerror.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngerror.c
+END
+pngwtran.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngwtran.c
+END
+ioapi.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/ioapi.c
+END
+inffixed.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/inffixed.h
+END
+pngvcrd.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngvcrd.c
+END
+deflate.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/deflate.c
+END
+ioapi.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/ioapi.h
+END
+crypt.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/crypt.h
+END
+zutil.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/zutil.c
+END
+gzio.c
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/gzio.c
+END
+deflate.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/deflate.h
+END
+crc32.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/crc32.c
+END
+zutil.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/zutil.h
+END
+pngread.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngread.c
+END
+crc32.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/crc32.h
+END
+trees.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/trees.c
+END
+pngmem.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngmem.c
+END
+pngget.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngget.c
+END
+png.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/png.c
+END
+zconf.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/zconf.h
+END
+pnggccrd.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pnggccrd.c
+END
+trees.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/trees.h
+END
+png.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/png.h
+END
+inffast.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/inffast.c
+END
+compress.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/compress.c
+END
+pngtrans.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngtrans.c
+END
+pngrio.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngrio.c
+END
+pngconf.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngconf.h
+END
+inffast.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/inffast.h
+END
+pngwrite.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngwrite.c
+END
+pngset.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngset.c
+END
+pngpread.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngpread.c
+END
+pngwio.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngwio.c
+END
+pngrutil.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngrutil.c
+END
+unzip.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/unzip.c
+END
+zlib.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/zlib.h
+END
+pngwutil.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngwutil.c
+END
+unzip.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/unzip.h
+END
+inftrees.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/inftrees.c
+END
+inflate.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/inflate.c
+END
+uncompr.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/uncompr.c
+END
+inftrees.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/inftrees.h
+END
+inflate.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/inflate.h
+END
+pngrtran.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/pngrtran.c
+END
+adler32.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/adler32.c
+END
+infback.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Other/infback.c
+END

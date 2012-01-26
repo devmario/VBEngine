@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline
+END
+VBSpline3D.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSpline3D.h
+END
+VBSpline2DBezierCubic.c
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSpline2DBezierCubic.c
+END
+VBSpline.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSpline.c
+END
+VBSpline2DBezierCubic.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSpline2DBezierCubic.h
+END
+VBSpline.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSpline.h
+END
+VBSpline2DBezierQuadratic.c
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSpline2DBezierQuadratic.c
+END
+VBSplineBlend.c
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSplineBlend.c
+END
+VBSpline2D.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSpline2D.c
+END
+VBSpline3D.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSpline3D.c
+END
+VBSpline2DBezierQuadratic.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSpline2DBezierQuadratic.h
+END
+VBSplineBlend.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSplineBlend.h
+END
+VBSpline2D.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/Spline/VBSpline2D.h
+END

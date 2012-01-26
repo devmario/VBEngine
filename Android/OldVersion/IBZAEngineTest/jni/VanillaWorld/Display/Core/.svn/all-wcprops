@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core
+END
+Color.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Color.c
+END
+Math.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Math.h
+END
+Plane.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Plane.c
+END
+Vector.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Vector.c
+END
+Color.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Color.h
+END
+Matrix.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Matrix.c
+END
+Plane.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Plane.h
+END
+Quaternion.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Quaternion.c
+END
+Polygon.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Polygon.c
+END
+Vector.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Vector.h
+END
+Matrix.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Matrix.h
+END
+Quaternion.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Quaternion.h
+END
+Polygon.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Display/Core/Polygon.h
+END

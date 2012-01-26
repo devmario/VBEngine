@@ -1,0 +1,197 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/repos/lowmans/!svn/ver/42/VBEngineTest/jni/VanillaWorld/IO
+END
+VBObjectFile.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile.c
+END
+VBObjectFile2DTransition.c
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DTransition.c
+END
+VBObjectFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile.h
+END
+VBObjectFile2DTransition.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DTransition.h
+END
+VBObjectFile2DLibrary.c
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DLibrary.c
+END
+VBSystem.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBSystem.c
+END
+VBPNGFile.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/lowmans/!svn/ver/34/VBEngineTest/jni/VanillaWorld/IO/VBPNGFile.c
+END
+VBObjectFile2DLibrary.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DLibrary.h
+END
+VBSystem.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBSystem.h
+END
+VBPNGFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBPNGFile.h
+END
+VBObjectFile3D.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile3D.c
+END
+VBObjectFile2DLibraryNameID.c
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DLibraryNameID.c
+END
+VBObjectFile3D.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile3D.h
+END
+VBObjectFile2DTexcoord.c
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DTexcoord.c
+END
+VBObjectFile2DLibraryNameID.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DLibraryNameID.h
+END
+VBThread.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBThread.c
+END
+VBObjectFile2DFrame.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DFrame.c
+END
+VBObjectFile2DTexcoord.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DTexcoord.h
+END
+VBThread.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBThread.h
+END
+VBObjectFile2DFrame.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DFrame.h
+END
+VBFile.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/repos/lowmans/!svn/ver/42/VBEngineTest/jni/VanillaWorld/IO/VBFile.c
+END
+VBObjectFile2DKeyFrame.c
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DKeyFrame.c
+END
+VBTouch.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBTouch.c
+END
+VBFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBFile.h
+END
+VBJPEGFile.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBJPEGFile.c
+END
+VBObjectFile2DKeyFrame.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DKeyFrame.h
+END
+VBTouch.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBTouch.h
+END
+VBJPEGFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBJPEGFile.h
+END
+VBObjectFile2DKeyFrameElement.c
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DKeyFrameElement.c
+END
+VBObjectFile2D.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2D.c
+END
+VBObjectFile2DKeyFrameElement.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2DKeyFrameElement.h
+END
+VBObjectFile2D.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/IO/VBObjectFile2D.h
+END

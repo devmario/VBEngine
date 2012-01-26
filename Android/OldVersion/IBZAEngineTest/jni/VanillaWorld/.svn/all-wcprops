@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld
+END
+Android.mk
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/Android.mk
+END
+world.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/repos/lowmans/!svn/ver/59/Gelato/jni/VanillaWorld/world.h
+END

@@ -1,0 +1,341 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg
+END
+jddctmgr.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jddctmgr.c
+END
+jdatadst.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdatadst.c
+END
+jerror.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jerror.c
+END
+jmemansi.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jmemansi.c
+END
+jchuff.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jchuff.c
+END
+jdtrans.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdtrans.c
+END
+jdhuff.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdhuff.c
+END
+jfdctfst.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jfdctfst.c
+END
+jcmaster.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcmaster.c
+END
+jerror.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jerror.h
+END
+jdmaster.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdmaster.c
+END
+jchuff.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jchuff.h
+END
+jidctfst.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jidctfst.c
+END
+jdhuff.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdhuff.h
+END
+jcparam.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcparam.c
+END
+jcinit.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcinit.c
+END
+jquant1.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jquant1.c
+END
+jquant2.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jquant2.c
+END
+jcphuff.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcphuff.c
+END
+jdct.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdct.h
+END
+jdatasrc.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdatasrc.c
+END
+jccolor.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jccolor.c
+END
+jcsample.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcsample.c
+END
+jcmarker.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcmarker.c
+END
+jmemmgr.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jmemmgr.c
+END
+jdmarker.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdmarker.c
+END
+jdsample.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdsample.c
+END
+jfdctflt.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jfdctflt.c
+END
+jcapistd.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcapistd.c
+END
+jmorecfg.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jmorecfg.h
+END
+jdapistd.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdapistd.c
+END
+jinclude.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jinclude.h
+END
+jidctflt.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jidctflt.c
+END
+jversion.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jversion.h
+END
+jfdctint.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jfdctint.c
+END
+jpegint.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jpegint.h
+END
+jidctint.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jidctint.c
+END
+jcprepct.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcprepct.c
+END
+jutils.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jutils.c
+END
+jdmerge.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdmerge.c
+END
+jdinput.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdinput.c
+END
+jccoefct.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jccoefct.c
+END
+jdcoefct.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdcoefct.c
+END
+jpeglib.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jpeglib.h
+END
+jcomapi.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcomapi.c
+END
+jconfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jconfig.h
+END
+jdphuff.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdphuff.c
+END
+jcmainct.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcmainct.c
+END
+jidctred.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jidctred.c
+END
+jdmainct.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdmainct.c
+END
+jcapimin.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcapimin.c
+END
+jdpostct.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdpostct.c
+END
+jdapimin.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdapimin.c
+END
+jdcolor.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jdcolor.c
+END
+jmemsys.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jmemsys.h
+END
+jcdctmgr.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Other/jpeg/jcdctmgr.c
+END

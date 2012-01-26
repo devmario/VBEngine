@@ -1,0 +1,305 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/repos/lowmans/!svn/ver/41/VBEngineTest/jni/VanillaWorld/Core
+END
+VBEasing.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBEasing.c
+END
+VBArrayVector.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBArrayVector.h
+END
+VBString.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBString.c
+END
+VBColorRGB.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorRGB.c
+END
+VBColorAdvanced.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorAdvanced.h
+END
+VBColorRGBA.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorRGBA.c
+END
+VBArrayList.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBArrayList.c
+END
+VBQuadtree.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBQuadtree.c
+END
+VBTriangle.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBTriangle.h
+END
+VBEasing.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBEasing.h
+END
+VBString.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBString.h
+END
+VBColorRGB.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorRGB.h
+END
+VBArray.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBArray.c
+END
+VBColorRGBA.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorRGBA.h
+END
+VBArrayList.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBArrayList.h
+END
+VBQuadtree.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBQuadtree.h
+END
+VBArray.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBArray.h
+END
+VBAABB.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBAABB.c
+END
+VBColorG.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorG.c
+END
+VBColorGA.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorGA.c
+END
+VBVector2D.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBVector2D.c
+END
+VBMath.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBMath.c
+END
+VBMatrix2D.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBMatrix2D.c
+END
+VBAABB.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBAABB.h
+END
+VBColorG.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorG.h
+END
+VBColorGA.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorGA.h
+END
+VBVector2D.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBVector2D.h
+END
+VBMath.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBMath.h
+END
+VBColorHSV.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorHSV.c
+END
+VBMatrix2D.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBMatrix2D.h
+END
+VBVector.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBVector.c
+END
+VBMatrix.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBMatrix.c
+END
+VBColorHSV.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorHSV.h
+END
+VBVector.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBVector.h
+END
+VBMatrix.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBMatrix.h
+END
+VBLine2D.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBLine2D.c
+END
+VBColor.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColor.c
+END
+VBLine2D.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBLine2D.h
+END
+VBColor.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColor.h
+END
+VBVector3D.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBVector3D.c
+END
+VBMatrix2DWrapper.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBMatrix2DWrapper.c
+END
+VBMatrix3D.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBMatrix3D.c
+END
+VBTriangle2D.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBTriangle2D.c
+END
+VBVector3D.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBVector3D.h
+END
+VBMatrix2DWrapper.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBMatrix2DWrapper.h
+END
+VBMatrix3D.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBMatrix3D.h
+END
+VBTriangle2D.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBTriangle2D.h
+END
+VBArrayVector.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/lowmans/!svn/ver/41/VBEngineTest/jni/VanillaWorld/Core/VBArrayVector.c
+END
+VBColorAdvanced.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBColorAdvanced.c
+END
+VBTriangle.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/lowmans/!svn/ver/24/VBEngineTest/jni/VanillaWorld/Core/VBTriangle.c
+END
