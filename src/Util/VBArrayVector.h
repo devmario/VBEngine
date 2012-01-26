@@ -74,6 +74,9 @@ extern "C" {
 	 */
 	void VBArrayVectorFree(VBArrayVector** _vec);
 	
+    //두번째 인자로온 포인터가 배열안에 몇개가 있나 갯수를 리턴
+    int VBArrayVectorGetDataAmount(VBArrayVector* _vec, void* _data);
+    
 	/**
 	 @brief VBArrayVector에서 지정된 위치의 데이터를 반환합니다. 
 	 @param _vec 메모리가 할당된 VBArrayVector.

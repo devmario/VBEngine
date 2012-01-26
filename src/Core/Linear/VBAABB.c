@@ -1,5 +1,16 @@
 #include "VBAABB.h"
 #include <limits.h>
+#include <math.h>
+#include <stdlib.h>
+
+VBAABB* VBAABBMemResizeAndSet(VBAABB* aabb, VBAABB aabbVal, int idx, int size) {
+    if(aabb == NULL)
+        aabb = malloc(sizeof(VBAABB) * size);
+    else
+        aabb = realloc(aabb, sizeof(VBAABB) * size);
+    aabb[idx] = aabbVal;
+    return aabb;
+}
 
 VBAABB VBAABBCreateWithVertex(VBVector2D* _vtx, VBULong _vtx_len) {
     VBULong _i;
@@ -62,6 +73,81 @@ VBBool VBAABBHitTest(VBAABB _aabb1, VBAABB _aabb2) {
     if(_aabb1.t > _aabb2.b)
         return VBFalse;
     return VBTrue;
+}
+
+VBAABB VBAABBShift(VBAABB _aabb, VBVector2D _vec) {
+    _aabb.l += _vec.x;
+    _aabb.t += _vec.y;
+    _aabb.r += _vec.x;
+    _aabb.b += _vec.y;
+    return _aabb;
+}
+
+float VBAABBGetAmount(VBAABB _aabb) {
+    return VBAABBGetWidth(_aabb) * VBAABBGetHeight(_aabb);
+}
+
+bool VBAABBGetHitAABB(VBAABB _aabb1, VBAABB _aabb2, VBAABB* _hitAABB) {
+    bool isHit = VBAABBHitTest(_aabb1, _aabb2);
+    if(isHit) {
+        _hitAABB->l = fmaxf(_aabb1.l, _aabb2.l);
+        _hitAABB->t = fmaxf(_aabb1.t, _aabb2.t);
+        _hitAABB->r = fminf(_aabb1.r, _aabb2.r);
+        _hitAABB->b = fminf(_aabb1.b, _aabb2.b);
+    }
+    return isHit;
+}
+
+bool VBAABBIsEqual(VBAABB _aabb1, VBAABB _aabb2) {
+    if(_aabb1.l != _aabb2.l)
+        return false;
+    if(_aabb1.t != _aabb2.t)
+        return false;
+    if(_aabb1.r != _aabb2.r)
+        return false;
+    if(_aabb1.b != _aabb2.b)
+        return false;
+    return true;
+}
+
+float VBAABBGetAmountAtManyBox(int count, VBAABB* _aabb) {
+    if(count == 0 || _aabb == NULL)
+        return 0;
+    
+    //가장마지막 검사인지 확인
+    int idx = 1;
+    bool isLast = true;
+    while(idx < count) {
+        if(VBAABBIsEqual(_aabb[idx], _aabb[idx - 1]) == false) {
+            isLast = false;
+            break;
+        }
+        idx++;
+    }
+    if(isLast)
+        return VBAABBGetAmount(_aabb[0]);
+    
+    //넓이 구하기 루프
+    VBAABB* hitaabb = NULL;
+    int hitaabbIdx = 0;
+    float _amount = 0;
+    for(int i = 0; i < count; i++) {
+        _amount += VBAABBGetAmount(_aabb[i]);
+        if(i != 0) {
+            VBAABB hit;
+            if(VBAABBGetHitAABB(_aabb[i], _aabb[i - 1], &hit)) {
+                hitaabb = VBAABBMemResizeAndSet(hitaabb, hit, hitaabbIdx, ++hitaabbIdx);
+            }
+        }
+    }
+    
+    //충돌되는 영역이 있을경우
+    if(hitaabb) {
+        _amount -= VBAABBGetAmountAtManyBox(hitaabbIdx, hitaabb);
+        free(hitaabb);
+    }
+    
+    return _amount;
 }
 
 VBAABB VBAABBMerge(VBAABB _aabb1, VBAABB _aabb2) {

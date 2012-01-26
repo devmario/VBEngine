@@ -12,6 +12,8 @@ extern "C" {
         VBFloat l, t, r, b;
     };
     
+    VBAABB* VBAABBMemResizeAndSet(VBAABB* aabb, VBAABB aabbVal, int idx, int size);
+    
     VBAABB VBAABBCreateWithVertex(VBVector2D* _vtx, VBULong _vtx_len);
     
     float VBAABBGetWidth(VBAABB _aabb);
@@ -25,6 +27,16 @@ extern "C" {
     VBBool VBAABBHitTestWithVector2D(VBAABB _aabb, VBVector2D _position);
     
     VBBool VBAABBHitTest(VBAABB _aabb1, VBAABB _aabb2);
+    
+    VBAABB VBAABBShift(VBAABB _aabb, VBVector2D _vec);
+    
+    float VBAABBGetAmount(VBAABB _aabb);
+    
+    bool VBAABBGetHitAABB(VBAABB _aabb1, VBAABB _aabb2, VBAABB* _hitAABB);
+    
+    bool VBAABBIsEqual(VBAABB _aabb1, VBAABB _aabb2);
+    
+    float VBAABBGetAmountAtManyBox(int count, VBAABB* _aabb);
     
     VBAABB VBAABBMerge(VBAABB _aabb1, VBAABB _aabb2);
     
