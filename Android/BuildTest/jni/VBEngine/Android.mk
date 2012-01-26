@@ -30,13 +30,6 @@ Core/Linear/VBMatrix2DWrapper.c\
 Core/Linear/VBSpline2DBezierCubic.c\
 Core/Linear/VBTriangle2D.c\
 Core/Linear/VBVector2D.c\
-CppModule/IZModel2D.cpp\
-CppModule/UI/NumberText.cpp\
-CppModule/UI/Pages.cpp\
-CppModule/UI/Popup.cpp\
-CppModule/UI/Scroller.cpp\
-CppModule/UI/ScrollerContainer.cpp\
-CppModule/UI/View.cpp\
 Display/VBCamera2D.c\
 Display/VBDisplay2D.c\
 Display/VBDrawable2D.c\

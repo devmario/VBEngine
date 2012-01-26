@@ -9,7 +9,6 @@ CppTweener.cpp\
 GameMain.cpp\
 HintViewer.cpp\
 IceCream.cpp\
-main.cpp\
 MainMenu.cpp\
 NumberText.cpp\
 PackSelect.cpp\
