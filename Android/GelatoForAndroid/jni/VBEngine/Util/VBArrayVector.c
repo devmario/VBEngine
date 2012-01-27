@@ -76,6 +76,17 @@ void VBArrayVectorFree(VBArrayVector** _vec) {
 	}
 }
 
+int VBArrayVectorGetDataAmount(VBArrayVector* _vec, void* _data) {
+    void** _indata = _vec->data;
+    int _count = 0;
+    for(int i = 0; i < _vec->len; i++) {
+        if(_data == *_indata)
+            _count++;
+        _indata++;
+    }
+    return _count;
+}
+
 void* VBArrayVectorGetDataAt(VBArrayVector* _vec, VBULong _at) {
 #ifdef _VB_DEBUG_
 	if(_vec == VBNull)
@@ -206,9 +217,9 @@ void* VBArrayVectorRemoveAt(VBArrayVector* _vec, VBULong _at) {
 #endif
     
     void* _returnData = VBArrayVectorDataAtIndex(_vec, _at);
+    if(_returnData == NULL) 
+        return NULL;
     VBLong i;
-    if(_at > _vec->len) 
-        _at = _vec->len - 1;
     for(i = _at; i < _vec->len - 1; i++) {
           _vec->data[i] = _vec->data[i + 1];
     }

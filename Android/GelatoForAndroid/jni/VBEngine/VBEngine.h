@@ -97,17 +97,6 @@
 #include "Other/zlib/zlib.h"
 #include "Other/png/png.h"
 
-// Use #include <unistd.h>  
-#ifdef __ANDROID__
-#include <unistd.h>  
-/* access function */
-// #define	F_OK		0	/* test for existence of file */
-// #define	X_OK		0x01	/* test for execute or search permission */
-// #define	W_OK		0x02	/* test for write permission */
-// #define	R_OK		0x04	/* test for read permission */
-// extern int access(const char *, int);
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -182,6 +171,23 @@ extern "C" {
     void VBEngineClearDisplay(void);
     
     /**
+     @brief 엔진해상도의 사이즈를 반환합니다.
+     @return 스크린 사이즈.
+     */
+    VBVector2D VBEngineGetScreenSize(void);
+    
+    /**
+     @brief 기준이 되는 좌표계의 사이즈를 반환합니다.
+     @return 좌표계.
+     */
+    VBVector2D VBEngineGetDefaultResourceScreenSize(void);
+    
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+*
      @brief 엔진해상도의 사이즈를 반환합니다.
      @return 스크린 사이즈.
      */

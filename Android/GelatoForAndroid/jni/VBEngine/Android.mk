@@ -87,6 +87,7 @@ Util/VBMath.c\
 Util/VBString.c\
 VBEngine.c
 
+
 LOCAL_CFLAGS := -std=c99 -DANDROID_NDK -DDISABLE_IMPORTGL -DUSE_FILE32API
 
 LOCAL_LDLIBS := -lz -lGLESv1_CM -ldl -llog
