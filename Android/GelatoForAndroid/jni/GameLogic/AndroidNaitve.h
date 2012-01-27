@@ -28,7 +28,6 @@ void nativePause(JNIEnv* env,jobject thiz);
 void nativeDestroy(JNIEnv* env,jobject thiz);
 void nativeResize(JNIEnv* env,jobject thiz, jint w, jint h);
 void nativeRender(JNIEnv* env,jobject thiz);
-void nativeDone(JNIEnv* env,jobject thiz);
 
 void nativeResourceInit(JNIEnv* env,jobject thiz, jstring jpath, jobject jfd, jlong joff, jlong jlen) {
 	//LOGV("nativeResourceInit");
@@ -102,7 +101,6 @@ int registerNatives(JNIEnv* env)
 	  {"nativeInit", "()V", (void*)nativeInit},
 	  {"nativeResize", "(II)V", (void*)nativeResize},
 	  {"nativeRender", "()V", (void*)nativeRender},
-	  {"nativeDone", "()V", (void*)nativeDone},
 	  {"nativeResourceInit", "(Ljava/lang/String;Ljava/io/FileDescriptor;JJ)V", (void*)nativeResourceInit},
 	  
 	};

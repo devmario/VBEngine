@@ -61,7 +61,7 @@ class VBGLSurfaceViewRenderer implements GLSurfaceView.Renderer {
 
 	public native void nativeRender();
 
-	public native void nativeDone();
+	// public native void nativeDone();
 
 	public native void nativeResourceInit(String path, FileDescriptor fd, long offset, long length);
 }
