@@ -173,7 +173,7 @@ RecipeContainer::RecipeContainer(VBObjectFile2D* _objShelf, VBTexture* _texShelf
         }
     }
     
-    for (int i=0; i<VBArrayVectorGetLength(_data); i++) {
+    for (int i=0; i<recipeLen; i++) {
         RecipeContainerCellData* _cellData = (RecipeContainerCellData*)VBArrayVectorGetDataAt(_data, i);
         recipeIndex[i] = _cellData->recipeIdx;
     }

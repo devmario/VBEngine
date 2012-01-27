@@ -91,15 +91,38 @@ Root::Root() {
     view = NULL;
     top = NULL;
     
-    #ifdef _VB_IPHONE_
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString* documentDirectory = [paths objectAtIndex:0];
-    VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [documentDirectory UTF8String], 480, 320, 480, 320);
-    #endif
     
-    #ifdef __ANDROID__
     
-    #endif
+    //    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //    NSString* documentDirectory = [paths objectAtIndex:0];
+    
+    // instead of nsdocumentdirectory
+    // get resource, document path
+    const char* appName = "GelatoMania.app";
+    int appNameLen = strlen(appName);
+    
+    const char* tempPath = CCFileUtils::fullPathFromRelativePath("Info.plist");
+    int tempLen = strlen(tempPath);
+    
+    //get resource path
+    char* resourcePath = (char*)malloc(sizeof(char)*(tempLen-10));
+    strncpy(resourcePath, tempPath, tempLen-11);
+    resourcePath[tempLen-11] = '\0';
+    int resourceLen = strlen(resourcePath);
+    //    cout << resourcePath << '\n';
+    
+    //get document path
+    char* documentsPath = (char*)malloc(sizeof(char)*(resourceLen-appNameLen+9));
+    strncpy(documentsPath, resourcePath, resourceLen-appNameLen);
+    documentsPath[resourceLen-appNameLen] = '\0';
+    strcat(documentsPath, "Documents");
+    //    cout << documentsPath << '\n';
+    
+    //    VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [documentDirectory UTF8String], 480, 320, 480, 320);
+    VBEngineStart(resourcePath, documentsPath, 480, 320, 480, 320);
+    
+    free(resourcePath);
+    free(documentsPath);
     
     top = new VBModel();
     this->addChild((CCLayer*)top);

@@ -6,7 +6,6 @@ LOCAL_SRC_FILES := \
 AppDelegate.cpp\
 cJSON.c\
 CppTweener.cpp\
-GameMain.cpp\
 HintViewer.cpp\
 IceCream.cpp\
 MainMenu.cpp\
@@ -18,7 +17,6 @@ Popup.cpp\
 PopupClear.cpp\
 RecipeAndToppingData.cpp\
 RecipeContainer.cpp\
-Root.cpp\
 Scroller.cpp\
 ScrollerContainer.cpp\
 ShareData.cpp\
@@ -32,7 +30,9 @@ SubMenu.cpp\
 ToppingContainer.cpp\
 Tweener.cpp\
 VBModel.cpp\
-View.cpp \
+View.cpp\
+Root.cpp\
+GameMain.cpp\
 AndroidNaitve.cpp
 
 

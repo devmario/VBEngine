@@ -39,11 +39,14 @@ private:
     void UpdateSelectTween(float _deltaTime);
     
     IceCream* iceCream;
+    
 public:
     ToppingContainer(VBObjectFile2D* _objScroller, VBTexture* _texScroller, VBArrayVector* _data, IceCream* _iceCream);
     ~ToppingContainer();
     
     void SetCook(IceCream* _iceCream);
+    
+    float getToppingPositionX(int itemIdx);
     
     virtual void Update(float _deltaTime);
     

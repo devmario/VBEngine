@@ -187,20 +187,3 @@ extern "C" {
 #endif
 
 #endif
-*
-     @brief 엔진해상도의 사이즈를 반환합니다.
-     @return 스크린 사이즈.
-     */
-    VBVector2D VBEngineGetScreenSize(void);
-    
-    /**
-     @brief 기준이 되는 좌표계의 사이즈를 반환합니다.
-     @return 좌표계.
-     */
-    VBVector2D VBEngineGetDefaultResourceScreenSize(void);
-    
-#ifdef __cplusplus
-}
-#endif
-
-#endif

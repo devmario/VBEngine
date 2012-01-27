@@ -229,6 +229,7 @@ ToppingContainer::ToppingContainer(VBObjectFile2D* _objScroller, VBTexture* _tex
     selectTweenerParam = NULL;
     selectInnerModel = selectModel = NULL;
     SetCook(_iceCream);
+        
     printf("new topping container\n");
 }
 
@@ -246,3 +247,9 @@ ToppingContainer::~ToppingContainer() {
     }
     printf("topping container free\n");
 }
+
+float ToppingContainer::getToppingPositionX(int itemIdx)
+{
+    return (pageValue + itemIdx*cellSize);
+}
+

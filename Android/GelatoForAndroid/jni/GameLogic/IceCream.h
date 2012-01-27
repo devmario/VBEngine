@@ -7,6 +7,8 @@
 #include "ShareData.h"
 #include "RecipeAndToppingData.h"
 
+class GameMain;
+
 class IceCream : public VBModel {
 private:
     VBArrayVector* rdVec;
@@ -50,7 +52,11 @@ private:
     VBArrayVector* subTopping;
     VBArrayVector* subToppingFlow;
     
-    VBArrayVector* topping;
+    VBArrayVector* toppingSpuitL;
+    VBArrayVector* toppingSpuitR;
+    VBArrayVector* toppingFlow;
+    void* toppingCream;
+    void* toppingCherry;
     
     VBArrayVector* thumbs;
     
@@ -67,8 +73,10 @@ private:
     void FillCream(int _bitmask, bool _isMix = false);
     void Reshape();
     
+    GameMain *gameMain;
+    
 public:
-    IceCream(VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCream* _baseIceCream = NULL, int* _recipe = NULL, int _recipe_len = 0);
+    IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCream* _baseIceCream = NULL, int* _recipe = NULL, int _recipe_len = 0);
     ~IceCream();
     
     float GetClear();

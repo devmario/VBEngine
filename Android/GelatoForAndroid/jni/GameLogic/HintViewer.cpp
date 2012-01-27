@@ -1,8 +1,9 @@
 #include "HintViewer.h"
 #include "ShareData.h"
 #include "GameMain.h"
+#include "cJSON.h"
 
-HintViewer::HintViewer(GameMain *_parentModel, bool _showFlag, VBObjectFile2D *_obj, VBTexture *_tex, const char *iceModelName, const char *itemModelName, const char *topModelName, const char *downModelName)
+HintViewer::HintViewer(GameMain *_parentModel, bool _showFlag, VBObjectFile2D *_obj, VBTexture *_tex)
 {
     if (_parentModel) {
         VBObjectFile2DLibraryNameID *_library_name_id = NULL;
@@ -20,27 +21,35 @@ HintViewer::HintViewer(GameMain *_parentModel, bool _showFlag, VBObjectFile2D *_
             TEXLOAD(texture, "hintPoint.png", _str);
         }
         parent = _parentModel;
-        
-        const char *iceName = iceModelName ? iceModelName : "pointIce";
-        const char *itemName = itemModelName ? itemModelName : "pointItem";
-        const char *topName = topModelName ? topModelName : "pointTop";
-        const char *downName = downModelName ? downModelName : "pointDown";
-        
-        LIBNAMEFIND(_library_name_id, object, iceName, _str);
+                
+        LIBNAMEFIND(_library_name_id, object, "pointIce", _str);
         arrowModel[hintStateIceCream] = new VBModel(object, _library_name_id, texture, true);
-        LIBNAMEFIND(_library_name_id, object, itemName, _str);
+        LIBNAMEFIND(_library_name_id, object, "pointItem", _str);
         arrowModel[hintStateItem] = new VBModel(object, _library_name_id, texture, true);
-        LIBNAMEFIND(_library_name_id, object, topName, _str);
+        LIBNAMEFIND(_library_name_id, object, "pointTop", _str);
         arrowModel[hintStateTop] = new VBModel(object, _library_name_id, texture, true);
-        LIBNAMEFIND(_library_name_id, object, downName, _str);
+        LIBNAMEFIND(_library_name_id, object, "pointDown", _str);
         arrowModel[hintStateDown] = new VBModel(object, _library_name_id, texture, true);
+        LIBNAMEFIND(_library_name_id, object, "pointTopping", _str);
+        arrowModel[hintStateTopping] = new VBModel(object, _library_name_id, texture, true);
+        LIBNAMEFIND(_library_name_id, object, "pointLeft", _str);
+        arrowModel[hintStateLeft] = new VBModel(object, _library_name_id, texture, true);
+        LIBNAMEFIND(_library_name_id, object, "pointRight", _str);
+        arrowModel[hintStateRight] = new VBModel(object, _library_name_id, texture, true);
+        LIBNAMEFIND(_library_name_id, object, "pointReset", _str);
+        arrowModel[hintStateReset] = new VBModel(object, _library_name_id, texture, true);
         
         //TODO: set arrow position        
         position[hintStateItem] = CCPointMake(350.0, 0.0);
+        position[hintStateIceCream] = CCPointMake(250, -170);
         position[hintStateTop] = CCPointMake(350.0, 0.0);
         position[hintStateDown] = CCPointMake(350.0, -260.0);
-        position[hintStateIceCream] = CCPointMake(200, -200);
-        for (int i=0; i<4; i++) {
+        position[hintStateTopping] = CCPointMake(350.0, 0.0);
+        position[hintStateLeft] = CCPointMake(350.0, 0.0);
+        position[hintStateRight] = CCPointMake(350.0, 0.0);
+        position[hintStateReset] = CCPointMake(40.0, -205.0);
+        
+        for (int i=0; i<8; i++) {
             arrowModel[i]->setScale(0.5f);
             arrowModel[i]->setPosition(position[i]);
         }
@@ -51,6 +60,22 @@ HintViewer::HintViewer(GameMain *_parentModel, bool _showFlag, VBObjectFile2D *_
         }
         
         solution = NULL;
+        
+        cJSON *recipeJSON = cJSON_GetObjectItem(ShareDataGetRes(), "recipe");
+        int recipeLen = cJSON_GetArraySize(recipeJSON);
+        
+        isMask = (bool*)malloc(sizeof(bool)*recipeLen);
+        for (int i=0; i<recipeLen; i++) {
+            int temp = cJSON_GetArrayItem(cJSON_GetArrayItem(recipeJSON, i), 1)->valueint;
+            if (temp == 1) {
+                isMask[i] = true;
+            } else {
+                isMask[i] = false;
+            }
+        }
+        maskStack[0] = -1;
+        maskStack[1] = -1;
+        maskOn = false;
     }
 }
 
@@ -58,7 +83,7 @@ HintViewer::~HintViewer()
 {
     hide();
     
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<8; i++) {
         delete arrowModel[i];
     }
     
@@ -68,6 +93,7 @@ HintViewer::~HintViewer()
     if (solutionFlag) {
         free(solution);
     }
+    free(isMask);
 }
 
 void HintViewer::show()
@@ -135,40 +161,91 @@ void HintViewer::update(float _deltaTime)
                 setState(hintStateItem);
             }
             break;
+        case hintStateTopping:
+            break;
+        case hintStateLeft:
+            break;
+        case hintStateRight:
+            break;
+        case hintStateReset:
+            break;
         default:
             break;
     }
 }
 
 void HintViewer::initStep() {
-    currentSolutionIdx = 0;
+    currentSolutionIdx = 1;
+}
+
+void HintViewer::complete() {
+    
 }
 
 bool HintViewer::step(int itemIdx)
 {
-    if(solution[currentSolutionIdx] == itemIdx) { 
+    // -1: add icecream
+    // -2: topping
+    // -3: reset icecream
+    // -4: remove mask
+    
+//    cout << "hintViewer::step(" << itemIdx << ") ==> " << solution[currentSolutionIdx];
+//    cout << "\n  next ==> " << solution[currentSolutionIdx+1];
+    bool returnValue = false;
+    if (itemIdx == -3) {
+        initStep();
+        setState(hintStateItem);
+        returnValue = true;
+    } else if (itemIdx == -4) {
+        int i = maskStack[1] == -1 ? 0 : 1;
+        if (solution[currentSolutionIdx] == maskStack[i]) {
+            currentSolutionIdx++;
+            maskStack[i] = -1;
+            if (i) {
+                maskOn = true;
+            } else {
+                maskOn = false;
+            }
+        }
+        returnValue = true;
+    } else if(solution[currentSolutionIdx] == itemIdx) {
+        if (isMask[itemIdx]) {
+            int i = maskStack[0] == -1 ? 0 : 1;
+            maskStack[i] = itemIdx;
+            maskOn = true;
+        }
         currentSolutionIdx++;
         if(currentSolutionIdx < solutionLen) {
             if(solution[currentSolutionIdx] == -1) {
                 currentSolutionIdx++;
             }
             if(currentSolutionIdx >= solutionLen) {
-                initStep();
+                complete();
             } else {
                 /*********************
                  토핑으로 전환하여야 함
                  *********************/
             }
-            printf("hint step: %d, %d\n", currentSolutionIdx, solution[currentSolutionIdx]);
+            
+            if (maskOn) {
+                int i = maskStack[1] == -1 ? 0 : 1;
+                if (solution[currentSolutionIdx] == maskStack[i]) {
+                    setState(hintStateIceCream);
+                }
+            }
         }
-        return true;
+        
+        returnValue = true;
     } else {
-        /**********************************************
-         새로운 아이스크림 나오는 버튼으로 힌트 전환 하여야 함
-         **********************************************/
+        setState(hintStateReset);
         initStep();
-        return false;
+        returnValue = false;
     }
+    
+    if (currentSolutionIdx >= solutionLen) {
+        hide();
+    }
+    return returnValue;
 }
 
 void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int* topping, int toppingLen)
@@ -176,9 +253,6 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
     int preFlag = showFlag;
     if(preFlag)
         hide();
-    // -1: add icecream
-    // -2: topping
-    // -3: reset icecream
     solutionLen = 0;
     for(int i = 0; i < recipeLen; i++) {
         solutionLen += recipeArrLen[i];

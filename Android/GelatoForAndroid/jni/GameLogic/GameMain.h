@@ -120,7 +120,7 @@ private:
     
     bool IsActiveUI();
     
-    //HintViewer *hintViewer;
+    HintViewer *hintViewer;
 public:
     
     GameMain(int _packIdx, int _stageIdx);
@@ -128,6 +128,8 @@ public:
     
     float getRecipePositionY(int recipeIdx);
     void recipeContainerCallBack(int recipeIdx);
+    float getToppingPositionX(int toppingIdx);
+    void iceCreamMaskCallBack();
     
     virtual void Update(float _deltaTime);
     

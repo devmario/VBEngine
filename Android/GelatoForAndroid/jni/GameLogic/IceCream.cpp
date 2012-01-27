@@ -2,12 +2,50 @@
 #include "ShareData.h"
 #include "png.h"
 #include "zlib.h"
+#include "GameMain.h"
+
+typedef struct TS_idx {
+    ToppingSpuit* _t;
+    int _idx;
+    VBAABB _aabb;
+} TS_idx;
 
 void IceCream::VBModelUpdate(float _tick) {
     Reshape();
 }
 
-IceCream::IceCream(VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCream* _baseIceCream, int* _recipe, int _recipe_len) : VBModel(NULL) {
+IceCream::IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCream* _baseIceCream, int* _recipe, int _recipe_len) : VBModel(NULL) {
+    
+#ifdef TEST_AABB_AMOUNT
+    VBAABB test1 = {0, 0, 10, 10};
+    VBAABB test2 = {5, 5, 15, 15};
+    VBAABB test3 = {5, 5, 15, 15};
+    VBAABB test[3] = {test1, test2, test3};
+    cout << VBAABBGetAmount(test1) << "\n";
+    cout << VBAABBGetAmount(test2) << "\n";
+    cout << VBAABBGetAmount(test3) << "\n";
+    cout << "\n";
+    
+    VBAABB hit;
+    bool isHit = VBAABBGetHitAABB(test1, test2, &hit);
+    cout << isHit << "," << hit.l << "," << hit.t << "," << hit.r << "," << hit.b << "\n";
+    cout << VBAABBGetAmount(hit) << "\n";
+    cout << "\n";
+    
+    isHit = VBAABBGetHitAABB(test2, test3, &hit);
+    cout << isHit << "," << hit.l << "," << hit.t << "," << hit.r << "," << hit.b << "\n";
+    cout << VBAABBGetAmount(hit) << "\n";
+    cout << "\n";
+    
+    isHit = VBAABBGetHitAABB(test1, test3, &hit);
+    cout << isHit << "," << hit.l << "," << hit.t << "," << hit.r << "," << hit.b << "\n";
+    cout << VBAABBGetAmount(hit) << "\n";
+    cout << "\n";
+    
+    cout << VBAABBGetAmountAtManyBox(3, test) << "\n";
+#endif
+    
+    gameMain = _gameMain;
     rdVec = _rdVec;
     tdVec = _tdVec;
     
@@ -76,7 +114,11 @@ IceCream::IceCream(VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCream* _base
     VBArrayVectorAddBack(subToppingFlow, VBArrayVectorInit(VBArrayVectorAlloc()));
     VBArrayVectorAddBack(subToppingFlow, VBArrayVectorInit(VBArrayVectorAlloc()));
     
-    topping = VBArrayVectorInit(VBArrayVectorAlloc());
+    toppingSpuitL = VBArrayVectorInit(VBArrayVectorAlloc());
+    toppingSpuitR = VBArrayVectorInit(VBArrayVectorAlloc());
+    toppingFlow = VBArrayVectorInit(VBArrayVectorAlloc());
+    toppingCream = NULL;
+    toppingCherry = NULL;
     
     thumbs = VBArrayVectorInit(VBArrayVectorAlloc());
     
@@ -117,7 +159,16 @@ IceCream::~IceCream() {
     
     VBArrayVectorFree(&subTopping);
     
-    VBArrayVectorFree(&topping);
+    while (VBArrayVectorGetLength(toppingSpuitL)) {
+        free((void*)VBArrayVectorRemoveBack(toppingSpuitL));
+    }
+    VBArrayVectorFree(&toppingSpuitL);
+    while (VBArrayVectorGetLength(toppingSpuitR)) {
+        free((void*)VBArrayVectorRemoveBack(toppingSpuitR));
+    }
+    VBArrayVectorFree(&toppingSpuitR);
+    
+    VBArrayVectorFree(&toppingFlow);
     
     ClearMask(NULL, -1);
     VBArrayVectorFree(&mask);
@@ -159,20 +210,19 @@ void IceCream::Reshape() {
         if(need_update_bitmask) {
             bitmaskMerge = 0;
             
-            if(baseIceCream) {
-                isClear = 0;
-                totalClear = 0;
-            }
+            isClear = 0;
+            totalClear = 0;
             
             for(int i = 0; i < VBImageGetWidth(imgBitmask); i++) {
                 for(int j = 0; j < VBImageGetHeight(imgBitmask); j++) {
                     unsigned long* _bm = (unsigned long*)VBImageGetPixelColor(imgBitmask, i, j);
                     bitmaskMerge |= *_bm;
+                    if(*_bm != 0)
+                        totalClear++;
                     if(baseIceCream) {
                         unsigned long* _base_bm = (unsigned long*)VBImageGetPixelColor(baseIceCream->imgBitmask, i, j);
-                        if(*_base_bm != 0 || *_bm != 0) {
-                            totalClear++;
-                            if(*_bm != *_base_bm)
+                        if(*_base_bm != 0 && *_bm != 0) {
+                            if(*_bm == *_base_bm)
                                 isClear++;
                         }
                     }
@@ -218,30 +268,319 @@ void IceCream::Reshape() {
     }
 }
 
+int GetToppingSpuitLastIdx(VBArrayVector* _vec, ToppingSpuit* _t) {
+    int idx = -1;
+    for (int i = 0; i < _vec->len; i++) {
+        if(_t == _vec->data[i])
+            idx++;
+    }
+    return idx;
+}
+
 float IceCream::GetClear() {
+    cout << "\n";
+    
+    VBAABB* aabb = NULL;
+    int aabbIdx = 0;
+    
+    /*******************bg***********************/
+    cout << "\n";
+    cout << "< GetClear bg >\n";
+    
     Reshape();
     
     unsigned long _clear = 0;
     unsigned long _totalClear = 0;
     
+    IceCream* _link = this;
+    IceCream* _linkBase = baseIceCream;
+    
+    VBVector2D _vec = VBVector2DCreate(0, 0);
+    
+    while(_link || _linkBase) {
+//        if(_link)
+//            aabb = VBAABBMemResizeAndSet(aabb, VBAABBShift(_link->aabbBG, _vec), aabbIdx, ++aabbIdx);
+        if(_linkBase)
+            aabb = VBAABBMemResizeAndSet(aabb, VBAABBShift(_linkBase->aabbBG, _vec), aabbIdx, ++aabbIdx);
+        
+        if(_link)
+            _clear += _link->isClear;
+        _totalClear += _link ? _link->totalClear : _linkBase->totalClear;
+        
+        _vec = VBVector2DSubtract(_vec, VBVector2DCreate(0, -NEXT_ICECREAM_Y));
+        
+        if(_link)
+            _link = _link->next;
+        if(_linkBase)
+            _linkBase = _linkBase->next;
+    }
+    
+    float bg_amount = VBAABBGetAmountAtManyBox(aabbIdx, aabb);
+    
+    float _bgPer = (float)_clear / _totalClear;
+    _bgPer = isnan(_bgPer) ? 0 : _bgPer;
+    cout << "_bgPer:" << _bgPer << "\n";
+    
+    
+    
+    /*******************maskThumb***********************/
+    cout << "\n";
+    cout << "< GetClear maskThumb >\n";
+    
+    VBAABB* mask_aabb = NULL;
+    int mask_aabbIdx = 0;
+    
+    unsigned long _maskThumb = 0;
+    unsigned long _maskThumbTotal = 0;
+    
+    _link = this;
+    _linkBase = baseIceCream;
+    
+    _vec = VBVector2DCreate(0, 0);
+    
+    while (_link || _linkBase) {
+        for(int i = 0; i < MAX((_link ? _link->mask->len : 0), (_linkBase ? _linkBase->mask->len : 0)); i++) {
+            void* _data = NULL;
+            if(i < (_link ? _link->mask->len : 0)) {
+                _data = _link->mask->data[i];
+//                RecipeMask* _r = (RecipeMask*)_data;
+//                aabb = VBAABBMemResizeAndSet(aabb, VBAABBShift(_r->aabbThumb, _vec), aabbIdx, ++aabbIdx);
+//                mask_aabb = VBAABBMemResizeAndSet(mask_aabb, VBAABBShift(_r->aabbThumb, _vec), mask_aabbIdx, ++mask_aabbIdx);
+            }
+            void* _dataBase = NULL;
+            if(i < (_linkBase ? _linkBase->mask->len : 0)) {
+                _dataBase = _linkBase->mask->data[i];
+                RecipeMask* _r = (RecipeMask*)_dataBase;
+                aabb = VBAABBMemResizeAndSet(aabb, VBAABBShift(_r->aabbThumb, _vec), aabbIdx, ++aabbIdx);
+                mask_aabb = VBAABBMemResizeAndSet(mask_aabb, VBAABBShift(_r->aabbThumb, _vec), mask_aabbIdx, ++mask_aabbIdx);
+            }
+            if(_data && _dataBase) {
+                if(_data == _dataBase)
+                    _maskThumb++;
+            }
+            _maskThumbTotal++;
+        }
+        
+        _vec = VBVector2DSubtract(_vec, VBVector2DCreate(0, -NEXT_ICECREAM_Y));
+        if(_link)
+            _link = _link->next;
+        if(_linkBase)
+            _linkBase = _linkBase->next;
+    }
+    
+    float mask_amount = VBAABBGetAmountAtManyBox(mask_aabbIdx, mask_aabb);
+    
+    float _maskThumbPer = (float)_maskThumb / (float)_maskThumbTotal;
+    _maskThumbPer = isnan(_maskThumbPer) ? 0 : _maskThumbPer;
+    cout << "_maskThumbPer:" << _maskThumbPer << ", _maskThumb:" << _maskThumb << ", _maskThumbTotal:" << _maskThumbTotal << "\n";
+    
+    if(mask_aabb)
+        free(mask_aabb);
+    
+    
+    /*******************subTopping***********************/
+    cout << "\n";
+    cout << "< GetClear subTopping >\n";
+    
+    VBAABB* subTopping_aabb = NULL;
+    int subTopping_aabbIdx = 0;
+    
     unsigned long _subTopping = 0;
     unsigned long _subToppingTotal = 0;
+    
+    _link = this;
+    _linkBase = baseIceCream;
+    
+    _vec = VBVector2DCreate(0, 0);
+    
+    while (_link || _linkBase) {
+        for(int i = MAX((_link ? _link->subTopping->len : 0), (_linkBase ? _linkBase->subTopping->len : 0)) - 1; i > -1 ; i--) {
+            void* _data = NULL;
+            if(i < (_link ? _link->subTopping->len : 0)) {
+                _data = _link->subTopping->data[i];
+            }
+            void* _dataBase = NULL;
+            if(i < (_linkBase ? _linkBase->subTopping->len : 0)) {
+                _dataBase = _linkBase->subTopping->data[i];
+            }
+            if(_data) {
+//                RecipeSubTopping* _r = (RecipeSubTopping*)_data;
+//                aabb = VBAABBMemResizeAndSet(aabb, VBAABBShift(_r->aabbThumb, _vec), aabbIdx, ++aabbIdx);
+//                subTopping_aabb = VBAABBMemResizeAndSet(subTopping_aabb, VBAABBShift(_r->aabbThumb, _vec), subTopping_aabbIdx, ++subTopping_aabbIdx);
+            }
+            if(_dataBase) {
+                RecipeSubTopping* _r = (RecipeSubTopping*)_dataBase;
+                aabb = VBAABBMemResizeAndSet(aabb, VBAABBShift(_r->aabbThumb, _vec), aabbIdx, ++aabbIdx);
+                subTopping_aabb = VBAABBMemResizeAndSet(subTopping_aabb, VBAABBShift(_r->aabbThumb, _vec), subTopping_aabbIdx, ++subTopping_aabbIdx);
+            }
+            if(_data && _dataBase) {
+                if(_data == _dataBase)
+                    _subTopping++;
+            }
+            _subToppingTotal++;
+        }
+        
+        _vec = VBVector2DSubtract(_vec, VBVector2DCreate(0, -NEXT_ICECREAM_Y));
+        if(_link)
+            _link = _link->next;
+        if(_linkBase)
+            _linkBase = _linkBase->next;
+    }
+    
+    float subTopping_amount = VBAABBGetAmountAtManyBox(subTopping_aabbIdx, subTopping_aabb);
+    
+    float _subToppingPer = (float)_subTopping / (float)_subToppingTotal;
+    _subToppingPer = isnan(_subToppingPer) ? 0 : _subToppingPer;
+    cout << "_subToppingPer:" << _subToppingPer << ", _subTopping:" << _subTopping << ", _subToppingTotal:" << _subToppingTotal << "\n";
+    
+    if(subTopping_aabb)
+        free(subTopping_aabb);
+    
+    
+    /*******************subToppingFlow***********************/
+    cout << "\n";
+    cout << "< GetClear subToppingFlow >\n";
+    
+    VBAABB* subToppingFlow_aabb = NULL;
+    int subToppingFlow_aabbIdx = 0;
     
     unsigned long _subToppingFlow = 0;
     unsigned long _subToppingFlowTotal = 0;
     
-    IceCream* _link = this;
-    IceCream* _linkBase = baseIceCream;
-    while(_link && _linkBase) {
-        for(int i = 0; i < _link->subToppingFlow->len; i++) {
-            RecipeSubToppingFlow* _r = (RecipeSubToppingFlow*)VBArrayVectorGetDataAt(_link->subToppingFlow, i);
+    _link = this;
+    _linkBase = baseIceCream;
+    
+    _vec = VBVector2DCreate(0, 0);
+    
+    while (_link || _linkBase) {
+        for(int i = 0; i < MAX((_link ? _link->subToppingFlow->len : _linkBase->subToppingFlow->len), (_linkBase ? _linkBase->subToppingFlow->len : _link->subToppingFlow->len)); i++) {
+            VBArrayVector* _arr = NULL;
+            if(_link)
+                _arr = (VBArrayVector*)VBArrayVectorGetDataAt(_link->subToppingFlow, i);
+            VBArrayVector* _arrBase = NULL;
+            if(_linkBase)
+                _arrBase = (VBArrayVector*)VBArrayVectorGetDataAt(_linkBase->subToppingFlow, i);
+            for(int j = 0; j < MAX((_arr ? _arr->len : 0), (_arrBase ? _arrBase->len : 0)); j++) {
+                void* _data = NULL;
+                if(j < (_arr ? _arr->len : 0)) {
+                    _data = _arr->data[j];
+                    //                    RecipeSubToppingFlow* _r = (RecipeSubToppingFlow*)_data;
+                    //                    aabb = VBAABBMemResizeAndSet(aabb, VBAABBShift(_r->aabbThumb[j], _vec), aabbIdx, ++aabbIdx);
+                    //                    subToppingFlow_aabb = VBAABBMemResizeAndSet(subToppingFlow_aabb, VBAABBShift(_r->aabbThumb[j], _vec), subToppingFlow_aabbIdx, ++subToppingFlow_aabbIdx);
+                }
+                void* _dataBase = NULL;
+                if(j < (_arrBase ? _arrBase->len : 0)) {
+                    _dataBase = _arrBase->data[j];
+                    RecipeSubToppingFlow* _r = (RecipeSubToppingFlow*)_dataBase;
+                    aabb = VBAABBMemResizeAndSet(aabb, VBAABBShift(_r->aabbThumb[j], _vec), aabbIdx, ++aabbIdx);
+                    subToppingFlow_aabb = VBAABBMemResizeAndSet(subToppingFlow_aabb, VBAABBShift(_r->aabbThumb[j], _vec), subToppingFlow_aabbIdx, ++subToppingFlow_aabbIdx);
+                }
+                //cout << j << ":" << _data << ", " << _dataBase;
+                if(_data && _dataBase) {
+                    if(_data == _dataBase) {
+                        _subToppingFlow++;
+                        //cout << " is Equal";
+                    }
+                }
+                //cout << "\n";
+                _subToppingFlowTotal++;
+            }
         }
-        _clear += _link->isClear;
-        _totalClear += _link->totalClear;
-        _link = _link->next;
-        _linkBase = _linkBase->next;
+        
+        _vec = VBVector2DSubtract(_vec, VBVector2DCreate(0, -NEXT_ICECREAM_Y));
+        
+        if(_link)
+            _link = _link->next;
+        if(_linkBase)
+            _linkBase = _linkBase->next;
     }
-    float _bgPer = 1.0 - (float)_clear / _totalClear;
+    
+    float subToppingFlow_amount = VBAABBGetAmountAtManyBox(subToppingFlow_aabbIdx, subToppingFlow_aabb);
+    
+    float _subToppingFlowPer = (float)_subToppingFlow / (float)_subToppingFlowTotal;
+    _subToppingFlowPer = isnan(_subToppingFlowPer) ? 0 : _subToppingFlowPer;
+    cout << "_subToppingFlowPer:" << _subToppingFlowPer << ", _subToppingFlow:" << _subToppingFlow << ", _subToppingFlowTotal:" << _subToppingFlowTotal << "\n";
+    
+    if(subToppingFlow_aabb)
+        free(subToppingFlow_aabb);
+//    
+//    
+//    while (_link || _linkBase) {
+//        TS_idx _tiL[0xFF] = {NULL,};
+//        int _tiL_idx = 0;
+//        TS_idx _tiLBase[0xFF] = {NULL,};
+//        int _tiLBase_idx = 0;
+//        
+//        TS_idx _tiR[0xFF] = {NULL,};
+//        int _tiR_idx = 0;
+//        TS_idx _tiRBase[0xFF] = {NULL,};
+//        int _tiRBase_idx = 0;
+//        
+//        int _lid = 0;
+//        int _rid = 0;
+//        
+//        if(_link) {
+//            _lid = 0;
+//            for(int i = _link->toppingSpuitL->len - 1; i < -1; i--) {
+//                TS_idx* _ti = (TS_idx*)_link->toppingSpuitL->data[i];
+//                if(_lid < _ti->_idx) {
+//                    _lid = _ti->_idx;
+//                    _tiL[_tiL_idx] = *_ti;
+//                    _tiL_idx++;
+//                }
+//            }
+//            _rid = 0;
+//            for(int i = _link->toppingSpuitR->len - 1; i < -1; i--) {
+//                TS_idx* _ti = (TS_idx*)_link->toppingSpuitR->data[i];
+//                if(_rid < _ti->_idx) {
+//                    _rid = _ti->_idx;
+//                    _tiR[_tiR_idx] = *_ti;
+//                    _tiR_idx++;
+//                }
+//            }
+//        }
+//        
+//        if(_linkBase) {
+//            _lid = 0;
+//            for(int i = _linkBase->toppingSpuitL->len - 1; i < -1; i--) {
+//                TS_idx* _ti = (TS_idx*)_linkBase->toppingSpuitL->data[i];
+//                if(_lid < _ti->_idx) {
+//                    _lid = _ti->_idx;
+//                    _tiLBase[_tiLBase_idx] = *_ti;
+//                    _tiLBase_idx++;
+//                }
+//            }
+//            _rid = 0;
+//            for(int i = _linkBase->toppingSpuitR->len - 1; i < -1; i--) {
+//                TS_idx* _ti = (TS_idx*)_linkBase->toppingSpuitR->data[i];
+//                if(_rid < _ti->_idx) {
+//                    _rid = _ti->_idx;
+//                    _tiRBase[_tiRBase_idx] = *_ti;
+//                    _tiRBase_idx++;
+//                }
+//            }
+//        }
+//    }
+//    
+//    
+    
+    float amount = VBAABBGetAmountAtManyBox(aabbIdx, aabb);
+    if(aabb)
+        free(aabb);
+    
+    
+    
+    
+    /*******************print***********************/
+    cout << "\n";
+    int sum = bg_amount + subToppingFlow_amount + subTopping_amount + mask_amount;
+    cout << amount << ", " << bg_amount << ", " << subToppingFlow_amount << ", " << subTopping_amount << ", " << mask_amount << "\n";
+    
+    cout << "아이스크림 기본 색상 칼라 일치율:" << _bgPer * 100 << "%, 해답에서의 영역비율:" << (100 * (bg_amount / sum)) << "%\n";
+    cout << "여러개 쌓을수 있는 작은 아이스크림 일치율:" << _subToppingFlowPer * 100 << "%, 해답에서의 영역비율:" << (100 * (subToppingFlow_amount / sum)) << "%\n";
+    cout << "한개만 쌓을수 있는 작은 쿠키 일치율:" << _subToppingPer * 100 << "%, 해답에서의 영역비율:" << (100 * (subTopping_amount / sum)) << "%\n";
+    cout << "마스크 올라간 상태 일치율:" << _maskThumbPer * 100 << "%, 해답에서의 영역비율:" << (100 * (mask_amount / sum)) << "%\n";
+    
     return _bgPer;
 }
 
@@ -819,15 +1158,31 @@ void IceCream::AddToppingSpuit(ToppingSpuit* _ts) {
     if(next) {
         next->AddToppingSpuit(_ts);
     } else {
-        int _rs_count = 0;
-        for(int i = 0; i < topping->len; i++) {
-            if(VBArrayVectorGetDataAt(topping, i) == _ts) {
-                _rs_count++;
+        int _l_count = 0;
+        int _r_count = 0;
+        for(int i = 0; i < toppingSpuitL->len; i++) {
+            if(VBArrayVectorGetDataAt(toppingSpuitL, i) == _ts) {
+                _l_count++;
             }
         }
-        if(_rs_count < _ts->len) {
-            VBArrayVectorAddBack(thumbs, ThumbsInit(_ts->texThumb[_rs_count], _ts->aabbThumb[_rs_count], 0, _ts, false));
-            VBArrayVectorAddBack(topping, _ts);
+        for(int i = 0; i < toppingSpuitR->len; i++) {
+            if(VBArrayVectorGetDataAt(toppingSpuitR, i) == _ts) {
+                _r_count++;
+            }
+        }
+        if(_l_count + _r_count < _ts->len) {
+            int _idx = _l_count + _r_count;
+            VBAABB _aabb = _ts->aabbThumb[_idx];
+            VBArrayVectorAddBack(thumbs, ThumbsInit(_ts->texThumb[_idx], _aabb, 0, _ts, false));
+            TS_idx* _ti = (TS_idx*)malloc(sizeof(TS_idx));
+            _ti->_t = _ts;
+            _ti->_idx = _idx;
+            _ti->_aabb = _aabb;
+            if(_idx % 2) {
+                VBArrayVectorAddBack(toppingSpuitR, _ti);
+            } else {
+                VBArrayVectorAddBack(toppingSpuitL, _ti);
+            }
         }
     }
 }
@@ -837,14 +1192,14 @@ void IceCream::AddToppingFlow(ToppingFlow* _tf) {
         next->AddToppingFlow(_tf);
     } else {
         int _rs_count = 0;
-        for(int i = 0; i < topping->len; i++) {
-            if(VBArrayVectorGetDataAt(topping, i) == _tf) {
+        for(int i = 0; i < toppingFlow->len; i++) {
+            if(VBArrayVectorGetDataAt(toppingFlow, i) == _tf) {
                 _rs_count++;
             }
         }
         if(_rs_count < _tf->len) {
             VBArrayVectorAddBack(thumbs, ThumbsInit(_tf->texThumb[_rs_count], _tf->aabbThumb[_rs_count], 1, _tf, false));
-            VBArrayVectorAddBack(topping, _tf);
+            VBArrayVectorAddBack(toppingFlow, _tf);
         }
     }
 }
@@ -866,7 +1221,7 @@ void IceCream::AddToppingCream(ToppingCream* _tc) {
         }
         if(_rs_count < 1 && _t_count == 0) {
             VBArrayVectorAddBack(thumbs, ThumbsInit(_tc->texThumb, _tc->aabbThumb, 2, _tc, false));
-            VBArrayVectorAddBack(topping, _tc);
+            toppingCream = _tc;
         }
     }
 }
@@ -898,7 +1253,7 @@ void IceCream::AddToppingCherry(ToppingCherry* _tc) {
                 ThumbsFree(&_tt);
             }
             VBArrayVectorAddBack(thumbs, ThumbsInit(_tc->texThumb[_t_count], _tc->aabbThumb[_t_count], 3, _tc, false));
-            VBArrayVectorAddBack(topping, _tc);
+            toppingCherry = _tc;
         }
     }
 }
@@ -961,9 +1316,9 @@ bool IceCream::AddNextIceCream(int* _recipe, int _recipe_len) {
         return next->AddNextIceCream(_recipe, _recipe_len);
     else {
         if(baseIceCream)
-            return AddNextIceCream(new IceCream(rdVec, tdVec, baseIceCream->next, _recipe, _recipe_len));
+            return AddNextIceCream(new IceCream(gameMain, rdVec, tdVec, baseIceCream->next, _recipe, _recipe_len));
         else
-            return AddNextIceCream(new IceCream(rdVec, tdVec, NULL, _recipe, _recipe_len));
+            return AddNextIceCream(new IceCream(gameMain, rdVec, tdVec, NULL, _recipe, _recipe_len));
     }
 }
 
@@ -1035,8 +1390,10 @@ void IceCream::DragEndMount(bool _success) {
                             modelTop = NULL;
                         }
                         
-                        if(_success)
+                        if(_success) {
                             ClearMask(NULL, 1);
+                            gameMain->iceCreamMaskCallBack();
+                        }
                         
                         need_update_model = true;
                         Reshape();

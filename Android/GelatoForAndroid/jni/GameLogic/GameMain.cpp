@@ -2,6 +2,7 @@
 #include "ShareData.h"
 
 //#define GAME_MAIN_EMPTY
+//#define HINT_COMPLETE
 
 int RecipeSort(const void* _a, const void* _b) {
     RecipeContainerCellData** _cd1 = (RecipeContainerCellData**)_a;
@@ -207,7 +208,7 @@ void GameMain::InitCook(int** _rtc, int _rtcLen, int* _rtcArrLen, int* _tc, int 
 #endif
     for(int i = 0; i < _rtcLen; i++) {
         if(i == 0)
-            baseIceCream = new IceCream(rdVec, tdVec, NULL, _rtc[i], _rtcArrLen[i]);
+            baseIceCream = new IceCream(this, rdVec, tdVec, NULL, _rtc[i], _rtcArrLen[i]);
         else
             baseIceCream->AddNextIceCream(_rtc[i], _rtcArrLen[i]);
     }
@@ -220,7 +221,7 @@ void GameMain::InitCook(int** _rtc, int _rtcLen, int* _rtcArrLen, int* _tc, int 
     baseIceCream->setPosition(CCPointMake(40, -90-63));
     top->addChild(baseIceCream);
     
-    iceCream = new IceCream(rdVec, tdVec, baseIceCream);
+    iceCream = new IceCream(this, rdVec, tdVec, baseIceCream);
     iceCream->setScale(0.5);
     iceCream->setPosition(CCPointMake(-2, 92-63));
     modelRailIce[0]->addChild(iceCream);
@@ -559,8 +560,10 @@ GameMain::GameMain(int _packIdx, int _stageIdx) {
     InitRecipe();
     InitTopping();
     
-    //hintViewer = new HintViewer(this, true);
-    //hintViewer->setSolution(_cook_rd, _cook_rdLen, _cook_rdArrLen, _cook_td, _cook_tdLen);
+#ifdef HINT_COMPLETE
+    hintViewer = new HintViewer(this, true);
+    hintViewer->setSolution(_cook_rd, _cook_rdLen, _cook_rdArrLen, _cook_td, _cook_tdLen);
+#endif
     
     InitRope();
     
@@ -676,14 +679,15 @@ GameMain::~GameMain() {
     FreeModel();
     UnloadResource();
     
-    
-    //delete hintViewer;
+#ifdef HINT_COMPLETE
+    delete hintViewer;
+#endif
     
     printf("delete GameMain\n");
 }
 
 void GameMain::NextIceCream() {
-    nextIceCream = new IceCream(rdVec, tdVec, NULL);
+    nextIceCream = new IceCream(this, rdVec, tdVec, NULL);
     nextIceCream->setScale(0.5);
     nextIceCream->setPosition(CCPointMake(0, -63));
     if(modelArm) {
@@ -731,7 +735,7 @@ void GameMain::NextIceCreamUpdate(float _deltaTime) {
 
 void GameMain::NewIceCream() {
     delIceCream = iceCream;
-    iceCream = new IceCream(rdVec, tdVec, baseIceCream);
+    iceCream = new IceCream(this, rdVec, tdVec, baseIceCream);
     if(recipeContainer)
         recipeContainer->hitTarget = iceCream;
     if(toppingContainer)
@@ -823,7 +827,9 @@ void GameMain::Update(float _deltaTime) {
     NewIceCreamUpdate(_deltaTime);
     SwapRecipeAndToppingModeUpdate(_deltaTime);
     
-    //hintViewer->update(_deltaTime);
+#ifdef HINT_COMPLETE
+    hintViewer->update(_deltaTime);
+#endif
 }
 
 void GameMain::touchBegin(CCTouch* _touch, CCPoint _location) {
@@ -908,9 +914,11 @@ void GameMain::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
                    }
                    NewIceCream();
                    //for hintviewer
-                   //if(hintViewer) {
-                   //    hintViewer->initStep();
-                   //}
+#ifdef HINT_COMPLETE
+                   if(hintViewer) {
+                       hintViewer->step(-3);
+                   }
+#endif
                }
                , modelNewButton->gotoAndStop(0.0));
 }
@@ -952,7 +960,19 @@ float GameMain::getRecipePositionY(int recipeIdx)
 
 void GameMain::recipeContainerCallBack(int recipeIdx)
 {
-    printf("clear %f\n", iceCream->GetClear());
-    //printf("step %s\n", hintViewer->step(recipeIdx) ? "ok" : "no");
+    iceCream->GetClear();
+#ifdef HINT_COMPLETE
+    printf("step %s\n", hintViewer->step(recipeIdx) ? "ok" : "no");
+#endif
+}
+
+float GameMain::getToppingPositionX(int toppingIdx)
+{
+    return 0.0;
+}
+
+void GameMain::iceCreamMaskCallBack()
+{
+    hintViewer->step(-4);
 }
 
