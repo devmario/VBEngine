@@ -8,7 +8,6 @@ AppDelegate.cpp\
 cJSON.c\
 CppTweener.cpp\
 GameMain.cpp\
-HelloWorldScene.cpp\
 HintViewer.cpp\
 IceCream.cpp\
 IceCreamClearChecker.cpp\
