@@ -129,7 +129,7 @@ public:
     float getRecipePositionY(int recipeIdx);
     void recipeContainerCallBack(int recipeIdx);
     float getToppingPositionX(int toppingIdx);
-    void iceCreamMaskCallBack();
+    void iceCreamMaskCallBack(int recipeIdx);
     
     virtual void Update(float _deltaTime);
     

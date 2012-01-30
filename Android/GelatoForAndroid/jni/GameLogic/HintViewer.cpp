@@ -38,18 +38,23 @@ HintViewer::HintViewer(GameMain *_parentModel, bool _showFlag, VBObjectFile2D *_
         arrowModel[hintStateRight] = new VBModel(object, _library_name_id, texture, true);
         LIBNAMEFIND(_library_name_id, object, "pointReset", _str);
         arrowModel[hintStateReset] = new VBModel(object, _library_name_id, texture, true);
-        
+        LIBNAMEFIND(_library_name_id, object, "pointAdd", _str);
+        arrowModel[hintStateAdd] = new VBModel(object, _library_name_id, texture, true);
+        LIBNAMEFIND(_library_name_id, object, "pointTopping", _str);
+        arrowModel[hintStateToppingItem] = new VBModel(object, _library_name_id, texture, true);
         //TODO: set arrow position        
-        position[hintStateItem] = CCPointMake(350.0, 0.0);
-        position[hintStateIceCream] = CCPointMake(250, -170);
-        position[hintStateTop] = CCPointMake(350.0, 0.0);
-        position[hintStateDown] = CCPointMake(350.0, -260.0);
-        position[hintStateTopping] = CCPointMake(350.0, 0.0);
-        position[hintStateLeft] = CCPointMake(350.0, 0.0);
-        position[hintStateRight] = CCPointMake(350.0, 0.0);
-        position[hintStateReset] = CCPointMake(40.0, -205.0);
+        position[hintStateItem] = CCPointMake(364.0, 0.0);
+        position[hintStateIceCream] = CCPointMake(280, -178);
+        position[hintStateTop] = CCPointMake(395.0, -36.0);
+        position[hintStateDown] = CCPointMake(395.0, -258.0);
+        position[hintStateTopping] = CCPointMake(320.0, -66.0);
+        position[hintStateLeft] = CCPointMake(119.0, -24.0);
+        position[hintStateRight] = CCPointMake(337.0, -24.0);
+        position[hintStateReset] = CCPointMake(52.0, -203.0);
+        position[hintStateAdd] = CCPointMake(186.0, -72.0);
+        position[hintStateToppingItem] = CCPointMake(0.0, -77.0);
         
-        for (int i=0; i<8; i++) {
+        for (int i=0; i<HINTSTATELEN; i++) {
             arrowModel[i]->setScale(0.5f);
             arrowModel[i]->setPosition(position[i]);
         }
@@ -83,7 +88,7 @@ HintViewer::~HintViewer()
 {
     hide();
     
-    for (int i=0; i<8; i++) {
+    for (int i=0; i<HINTSTATELEN; i++) {
         delete arrowModel[i];
     }
     
@@ -135,6 +140,7 @@ void HintViewer::update(float _deltaTime)
 {
     int screenHeight = 260;
     switch (state) {
+        //Recipe Container Point
         case hintStateItem:
             if (position[state].y > 0) {
                 setState(hintStateTop);
@@ -146,8 +152,6 @@ void HintViewer::update(float _deltaTime)
                 arrowModel[state]->setRotation(rotationR);
             }
             
-            break;
-        case hintStateIceCream:
             break;
         case hintStateTop:
             position[hintStateItem] = CCPointMake(350, parent->getRecipePositionY(solution[currentSolutionIdx])-30);
@@ -161,26 +165,27 @@ void HintViewer::update(float _deltaTime)
                 setState(hintStateItem);
             }
             break;
-        case hintStateTopping:
+            
+        //Topping Container Point
+        case hintStateToppingItem:
+            cout << parent->getToppingPositionX(0) << '\n';
             break;
         case hintStateLeft:
             break;
         case hintStateRight:
             break;
-        case hintStateReset:
-            break;
-        default:
-            break;
+            
+        case hintStateIceCream:case hintStateTopping:case hintStateReset:default:break;
     }
 }
 
 void HintViewer::initStep() {
     currentSolutionIdx = 1;
+    maskStack[0] = -1;
+    maskStack[1] = -1;
+    maskOn = false;
 }
 
-void HintViewer::complete() {
-    
-}
 
 bool HintViewer::step(int itemIdx)
 {
@@ -188,64 +193,113 @@ bool HintViewer::step(int itemIdx)
     // -2: topping
     // -3: reset icecream
     // -4: remove mask
+    bool returnValue = true;
+    int tempI = 0;
     
-//    cout << "hintViewer::step(" << itemIdx << ") ==> " << solution[currentSolutionIdx];
-//    cout << "\n  next ==> " << solution[currentSolutionIdx+1];
-    bool returnValue = false;
     if (itemIdx == -3) {
-        initStep();
         setState(hintStateItem);
-        returnValue = true;
-    } else if (itemIdx == -4) {
-        int i = maskStack[1] == -1 ? 0 : 1;
-        if (solution[currentSolutionIdx] == maskStack[i]) {
-            currentSolutionIdx++;
-            maskStack[i] = -1;
-            if (i) {
-                maskOn = true;
-            } else {
-                maskOn = false;
-            }
-        }
-        returnValue = true;
-    } else if(solution[currentSolutionIdx] == itemIdx) {
-        if (isMask[itemIdx]) {
-            int i = maskStack[0] == -1 ? 0 : 1;
-            maskStack[i] = itemIdx;
-            maskOn = true;
-        }
-        currentSolutionIdx++;
-        if(currentSolutionIdx < solutionLen) {
-            if(solution[currentSolutionIdx] == -1) {
+        initStep();
+        return false;
+    }
+    
+    switch (state) {
+        case hintStateItem:
+            if (solution[currentSolutionIdx] == itemIdx) {
+                //check mask
+                if (isMask[itemIdx]) {
+                    tempI = maskStack[0] == -1 ? 0 : 1;
+                    maskStack[tempI] = itemIdx;
+                    maskOn = true;
+                    printf("mask[0]: %d, mask[1]: %d, maskOn: %s\n", maskStack[0], maskStack[1], maskOn ? "true" : "false");
+                }
                 currentSolutionIdx++;
-            }
-            if(currentSolutionIdx >= solutionLen) {
-                complete();
-            } else {
-                /*********************
-                 토핑으로 전환하여야 함
-                 *********************/
-            }
-            
-            if (maskOn) {
-                int i = maskStack[1] == -1 ? 0 : 1;
-                if (solution[currentSolutionIdx] == maskStack[i]) {
+                
+                tempI = maskStack[1] == -1 ? 0 : 1;
+                
+                if (solution[currentSolutionIdx] == -1) {
+                    //go to add
+                    setState(hintStateAdd);
+                } else if (solution[currentSolutionIdx] == -2) {
+                    //go to topping
+                    setState(hintStateTopping);
+                } else if (isMask[solution[currentSolutionIdx]] && solution[currentSolutionIdx] == maskStack[tempI]) {
+                    //go to mask off
                     setState(hintStateIceCream);
                 }
+            } else {
+                returnValue = wrongStep();
             }
-        }
-        
-        returnValue = true;
-    } else {
-        setState(hintStateReset);
-        initStep();
-        returnValue = false;
+            break;
+        case hintStateAdd:
+            if (solution[currentSolutionIdx] == itemIdx) {
+                currentSolutionIdx++;
+                switch (solution[currentSolutionIdx]) {
+                    //go to add (not change state)
+                    case -1:
+                        break;
+                    //go to topping
+                    case -2:
+                        setState(hintStateTopping);
+                        break;
+                    //go to item
+                    case 0:
+                        currentSolutionIdx++;
+                        setState(hintStateItem);
+                    default:
+                        setState(hintStateItem);
+                        break;
+                }
+            } else {
+                returnValue = wrongStep();
+            }
+            break;
+        case hintStateIceCream:
+            //mask off
+            if (solution[currentSolutionIdx] == itemIdx) {
+                currentSolutionIdx++;
+                tempI = maskStack[1] == -1 ? 0 : 1;
+                maskStack[tempI] = -1;
+                if (tempI == 0) {
+                    maskOn = false;
+                }
+                printf("mask[0]: %d, mask[1]: %d, maskOn: %s\n", maskStack[0], maskStack[1], maskOn ? "true" : "false");
+                if (isMask[solution[currentSolutionIdx]] && solution[currentSolutionIdx] == maskStack[0]){
+                    
+                }
+                else if (solution[currentSolutionIdx] == -1) {
+                    setState(hintStateAdd);
+                } else if (solution[currentSolutionIdx] == -2) {
+                    setState(hintStateTopping);
+                } else {
+                    setState(hintStateItem);
+                }
+            } else {
+                returnValue = wrongStep();
+            }
+            break;
+        case hintStateTopping:
+            if (itemIdx == -2) {
+                currentSolutionIdx++;
+                setState(hintStateToppingItem);
+            } else {
+                returnValue = wrongStep();
+            }
+            break;
+        case hintStateToppingItem:
+            if (solution[currentSolutionIdx] == itemIdx) {
+                currentSolutionIdx++;
+            } else {
+                returnValue = wrongStep();
+            }
+            break;
+        default:
+            break;
     }
     
-    if (currentSolutionIdx >= solutionLen) {
-        hide();
-    }
+    checkAndFinish();
     return returnValue;
+    
+    
 }
 
 void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int* topping, int toppingLen)
@@ -256,6 +310,9 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
     solutionLen = 0;
     for(int i = 0; i < recipeLen; i++) {
         solutionLen += recipeArrLen[i];
+        if (i < recipeLen-1) {
+            solutionLen++;
+        }
     }
     if(toppingLen > 0) {
         solutionLen++;
@@ -272,12 +329,16 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
             solution[idx] = recipe[i][j];
             idx++;
         }
+        if (i < recipeLen - 1) {
+            solution[idx] = -1;
+            idx++;
+        }
     }
     if(toppingLen > 0) {
         /**************************
-         -1은 토핑이 시작된다는 의미
+         -2 토핑 시작
          **************************/
-        solution[idx] = -1;
+        solution[idx] = -2;
         idx++;
         for(int i=0; i<toppingLen; i++) {
             solution[idx] = topping[i];
@@ -294,4 +355,20 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
     
     if(preFlag)
         show();
+    
+}
+
+bool HintViewer::wrongStep()
+{
+    setState(hintStateReset);
+    initStep();
+    return false;
+}
+
+void HintViewer::checkAndFinish()
+{
+    if (currentSolutionIdx >= solutionLen) {
+        hide();
+        currentSolutionIdx = 0;
+    }
 }

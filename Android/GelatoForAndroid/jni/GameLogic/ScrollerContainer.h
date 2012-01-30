@@ -29,6 +29,8 @@ class ScrollerContainer : public VBModel {
     void SetCellValue(CellData* _cell, float _value);
     float GetCellValue(CellData* _cell);
 public:
+    virtual void ResetData();
+    
     //눈에 보이는 Cell: CellData*가 들어있음
     VBArrayVector* cell;
     //UserData

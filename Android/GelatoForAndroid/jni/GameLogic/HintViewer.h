@@ -4,6 +4,8 @@
 #include "VBEngine.h"
 #include "VBModel.h"
 
+#define HINTSTATELEN 10
+
 class GameMain;
 
 typedef enum hintStateFlag
@@ -15,7 +17,9 @@ typedef enum hintStateFlag
     hintStateTopping = 4,
     hintStateLeft = 5,
     hintStateRight = 6,
-    hintStateReset = 7
+    hintStateReset = 7,
+    hintStateAdd = 8,
+    hintStateToppingItem = 9
 } hintStateFlag;
 
 
@@ -30,15 +34,17 @@ class HintViewer {
     GameMain *parent;
     VBObjectFile2D *object;
     VBTexture *texture;
-    CCPoint position[8];
+    CCPoint position[HINTSTATELEN];
     hintStateFlag state;
     bool showFlag;
     
     void setState(hintStateFlag newState);
-    void complete();
+    
+    bool wrongStep();
+    void checkAndFinish();
     
 public:
-    VBModel *arrowModel[8];
+    VBModel *arrowModel[HINTSTATELEN];
     VBModel *pointIceModel;
     VBModel *pointItemModel;
     VBModel *pointTopDownModel;

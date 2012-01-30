@@ -661,6 +661,7 @@ VBModel::VBModel() {
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_name_id, VBTexture* _texture, VBBool _is_realtime_animation) {
+
     tex = NULL;
     is_bitmap = false;
     color = mix_color = VBColorRGBALoadIdentity();
@@ -690,7 +691,7 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_n
         
         is_bitmap = true;
         VBObjectFile2DLibraryBitmap* _bitmap = (VBObjectFile2DLibraryBitmap*)_library_base;
-        
+
         VBULong _poly_len = VBObjectFile2DLibraryBitmapGetUVInfoLength(_bitmap);
         
         VBVector2D _txc[_poly_len];
@@ -706,7 +707,7 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_n
             _txc_ptr++;
         }
         tex = new cocos2d::CCTexture2D();
-        
+
         tex->m_bPVRHaveAlphaPremultiplied = false;
         tex->m_bHasPremultipliedAlpha = false;
         if(_texture->color_type == VBColorType_RGBA)
@@ -725,11 +726,11 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_n
                                                   ,_txc[2].y  * tex->getPixelsHigh() - _txc[0].y * tex->getPixelsHigh() ) );
         
     } else if(VBObjectFile2DLibraryType_Graphic == VBObjectFile2DLibraryGetType(_library) || VBObjectFile2DLibraryType_MovieClip == VBObjectFile2DLibraryGetType(_library)) {
-        
+
         this->frame_all_allocated_child_models = VBArrayVectorInit(VBArrayVectorAlloc());
         this->frame_willFree_child_models = VBArrayVectorInit(VBArrayVectorAlloc());
         this->frame_current_key_frame = VBArrayVectorInit(VBArrayVectorAlloc());
-        
+
         if(VBObjectFile2DLibraryType_Graphic == VBObjectFile2DLibraryGetType(_library)) {
             VBObjectFile2DLibraryGraphic* _graphic = (VBObjectFile2DLibraryGraphic*)_library_base;
             this->frame = VBObjectFile2DLibraryGraphicGetFrame(_graphic);
@@ -741,7 +742,7 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_n
         this->is_play = VBTrue;
         this->is_play_loop = VBTrue;
         this->is_animation_update = VBTrue;
-        
+
         while (frame_all_allocated_child_models->len < frame->key_frame->len) {
             VBArrayVectorAddBack(frame_all_allocated_child_models, NULL);
         }

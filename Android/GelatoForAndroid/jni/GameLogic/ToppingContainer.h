@@ -41,6 +41,8 @@ private:
     IceCream* iceCream;
     
 public:
+    virtual void ResetData();
+    
     ToppingContainer(VBObjectFile2D* _objScroller, VBTexture* _texScroller, VBArrayVector* _data, IceCream* _iceCream);
     ~ToppingContainer();
     

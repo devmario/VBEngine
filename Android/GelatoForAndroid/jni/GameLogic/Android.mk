@@ -3,11 +3,17 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := gamelogic
 
 LOCAL_SRC_FILES := \
+AndroidNaitve.cpp\
 AppDelegate.cpp\
 cJSON.c\
 CppTweener.cpp\
+GameMain.cpp\
+HelloWorldScene.cpp\
 HintViewer.cpp\
 IceCream.cpp\
+IceCreamClearChecker.cpp\
+IceCreamRecipe.cpp\
+IceCreamTopping.cpp\
 MainMenu.cpp\
 NumberText.cpp\
 PackSelect.cpp\
@@ -17,6 +23,7 @@ Popup.cpp\
 PopupClear.cpp\
 RecipeAndToppingData.cpp\
 RecipeContainer.cpp\
+Root.cpp\
 Scroller.cpp\
 ScrollerContainer.cpp\
 ShareData.cpp\
@@ -29,11 +36,10 @@ StageThumb.cpp\
 SubMenu.cpp\
 ToppingContainer.cpp\
 Tweener.cpp\
+vbHTTP.c\
 VBModel.cpp\
-View.cpp\
-Root.cpp\
-GameMain.cpp\
-AndroidNaitve.cpp
+View.cpp
+
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../Cocos2dx \

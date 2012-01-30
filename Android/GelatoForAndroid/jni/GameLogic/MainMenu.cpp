@@ -2,6 +2,7 @@
 #include "VBEngine.h"
 #include "ShareData.h"
 #include "SubMenu.h"
+#include "vbHTTP.h"
 
 MainMenu::MainMenu() {
     //View::View();
@@ -88,11 +89,26 @@ void MainMenu::touchMove(CCTouch* _touch, CCPoint _location) {
     
 }
 
+void ErrorHTTP(unsigned char _code);
+void SuccessHTTP(void);
+
+void ErrorHTTP(unsigned char _code) {
+    printf("\n\nErrorHTTP\n");
+}
+
+void SuccessHTTP(void) {
+    printf("\n\nSuccessHTTP\n");
+}
+
 void MainMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
     if(touchPlayBT == _touch) {
         playBT->gotoAndPlay(6);
         touchPlayBT = NULL;
         ShareDataGetRoot()->ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypePackSelect, 0);
+        VBHTTP* http = VBHTTPCreateByJS("user.js", ErrorHTTP, SuccessHTTP);
+        while(!http->complete) {
+        }
+        VBHTTPRelease(&http);
     }
     
     TOUCHENDBT(touchRank, rankBT, _location, _touch, ,rankBT->gotoAndStop(0));

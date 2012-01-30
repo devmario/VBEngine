@@ -2,7 +2,7 @@
 #include "ShareData.h"
 
 //#define GAME_MAIN_EMPTY
-//#define HINT_COMPLETE
+#define HINT_COMPLETE
 
 int RecipeSort(const void* _a, const void* _b) {
     RecipeContainerCellData** _cd1 = (RecipeContainerCellData**)_a;
@@ -415,6 +415,7 @@ void GameMain::FreeRope() {
 }
 
 GameMain::GameMain(int _packIdx, int _stageIdx) {
+    hintViewer = NULL;
     cJSON* _j = cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetJSON(), "pack"), _packIdx);
     cJSON* _layer = cJSON_GetObjectItem(_j, "objLayer");
     cJSON* _ui = cJSON_GetObjectItem(_j, "objUI");
@@ -768,6 +769,9 @@ void GameMain::SwapRecipeAndToppingMode() {
     
     if(!IsRecipeMode()) {
         BeginToppingTween(0, 0.5, true);
+        if(toppingContainer) {
+            toppingContainer->ResetData();
+        }
         if(toppingContainer)
             toppingContainer->ShowScrollBarMoment(1.0);
     } else {
@@ -913,7 +917,7 @@ void GameMain::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
                        if(toppingRopeSlider) toppingRopeSlider->SetEnable(true);
                    }
                    NewIceCream();
-                   //for hintviewer
+//for hintviewer
 #ifdef HINT_COMPLETE
                    if(hintViewer) {
                        hintViewer->step(-3);
@@ -968,11 +972,15 @@ void GameMain::recipeContainerCallBack(int recipeIdx)
 
 float GameMain::getToppingPositionX(int toppingIdx)
 {
-    return 0.0;
+    return toppingContainer->getToppingPositionX(toppingIdx);
 }
 
-void GameMain::iceCreamMaskCallBack()
+void GameMain::iceCreamMaskCallBack(int recipeIdx)
 {
-    hintViewer->step(-4);
+#ifdef HINT_COMPLETE
+    if (hintViewer) {
+        hintViewer->step(recipeIdx);
+    }
+#endif
 }
 

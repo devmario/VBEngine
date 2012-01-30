@@ -122,4 +122,10 @@ typedef struct ToppingCherry {
 ToppingCherry* ToppingCherryInit(cJSON* _js0, cJSON* _js1);
 void ToppingCherryFree(ToppingCherry** _tc);
 
+typedef struct TS_idx {
+    void* _t;
+    int _idx;
+    VBAABB _aabb;
+} TS_idx;
+
 #endif

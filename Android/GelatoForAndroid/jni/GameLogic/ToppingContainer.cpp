@@ -1,6 +1,15 @@
 #include "ToppingContainer.h"
 #include "ShareData.h"
 
+void ToppingContainer::ResetData() {
+    if(data) {
+        for(int i = 0; i < data->len; i++) {
+            ToppingContainerCellDataReset((ToppingContainerCellData*)data->data[i]);
+        }
+    }
+    ScrollerContainer::ResetData();
+}
+
 ToppingContainerCellData* ToppingContainerCellDataInit(int _type, int _stepTotal) {
     ToppingContainerCellData* _data = (ToppingContainerCellData*)calloc(1, sizeof(ToppingContainerCellData));
     VBString* _str;
@@ -156,6 +165,7 @@ void ToppingContainer::CellUpdate(CellData *_cell, float _deltaTime) {
     if(selectModel == _data->model && selectTweener == NULL) {
         if(!selectModel->is_play) {
             iceCream->AddTopping(_data->type);
+            iceCream->GetClear();
             selectModel = NULL;
             SetEnable(true);
         } else {

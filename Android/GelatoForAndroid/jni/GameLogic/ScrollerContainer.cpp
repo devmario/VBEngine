@@ -165,6 +165,16 @@ void ScrollerContainer::ShowScrollBarMoment(float _time) {
     scroller_showTime = _time;
 }
 
+void ScrollerContainer::ResetData() {
+    for(int i = 0; i < VBArrayVectorGetLength(cell); i++) {
+        CellData* _cellData = (CellData*)VBArrayVectorGetDataAt(cell, i);
+        if(_cellData->index >= 0 && _cellData->index < VBArrayVectorGetLength(data)){
+            CellFree(_cellData);
+            CellAlloc(_cellData);
+        }
+    }
+}
+
 void ScrollerContainer::ReloadData() {
     float _m = pageValue - prePageValue;
     for(int i = 0; i < VBArrayVectorGetLength(cell); i++) {

@@ -4,6 +4,9 @@
 #include "MainMenu.h"
 #include "SubMenu.h"
 #include "GameMain.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 bool IsEqualHistory(history* _h0, history* _h1) {
     if(_h0 == NULL || _h1 == NULL)
@@ -80,10 +83,9 @@ void Root::ClosePopup() {
 }
 
 Root::Root() {
+    
     backHistory = false;
     //CCLayer();
-    
-    gettimeofday(&curTime, NULL);
     
     CCSize size = CCDirector::sharedDirector()->getWinSize();
     loading = NULL;
@@ -98,13 +100,13 @@ Root::Root() {
     
     // instead of nsdocumentdirectory
     // get resource, document path
+    /*
     const char* appName = "GelatoMania.app";
     int appNameLen = strlen(appName);
     
     const char* tempPath = CCFileUtils::fullPathFromRelativePath("Info.plist");
     int tempLen = strlen(tempPath);
     
-#ifdef __VB_IPHONE__
     //get resource path
     char* resourcePath = (char*)malloc(sizeof(char)*(tempLen-10));
     strncpy(resourcePath, tempPath, tempLen-11);
@@ -118,23 +120,19 @@ Root::Root() {
     documentsPath[resourceLen-appNameLen] = '\0';
     strcat(documentsPath, "Documents");
     //    cout << documentsPath << '\n';
+    */
     
-    VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [documentDirectory UTF8String], 480, 320, 480, 320);
-
-    free(resourcePath);
-    free(documentsPath);
-#endif
-
-#ifdef __ANDROID__
-    const char* resourcePath = "/mnt/sdcard/GelatoMania/resource";
-    const char* documentsPath = "/mnt/sdcard/GelatoMania/document";
-
-    VBEngineStart(resourcePath, documentsPath, 480, 320, 480, 320);
-#endif
+    //    VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [documentDirectory UTF8String], 480, 320, 480, 320);
+    VBEngineStart("/mnt/sdcard/GelatoMania/resource", "/mnt/sdcard/GelatoMania/document", 800, 480, 480, 320);//VBEngineStart(resourcePath, documentsPath, 480, 320, 480, 320);
+    
+    //free(resourcePath);
+    //free(documentsPath);
+    
+    gettimeofday(&curTime, NULL);
     
     top = new VBModel();
     this->addChild((CCLayer*)top);
-    ((CCSprite*)top)->setPosition(ccp(0, 320));
+    ((CCSprite*)top)->setPosition(ccp(0, 480));//((CCSprite*)top)->setPosition(ccp(0, 320));
     //top->setScaleY(768.0/320.0);
     //top->setScaleX(1024.0/480.0);
     
