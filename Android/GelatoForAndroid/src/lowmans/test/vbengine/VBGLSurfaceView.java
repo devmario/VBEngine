@@ -85,7 +85,7 @@ public class VBGLSurfaceView extends GLSurfaceView {
 		while ((error = egl.eglGetError()) != EGL10.EGL_SUCCESS) {
 			Log.e(TAG, String.format("%s: EGL error: 0x%x", prompt, error));
 		}
-	}
+	} 
 
 	private static class ConfigChooser implements GLSurfaceView.EGLConfigChooser {
 

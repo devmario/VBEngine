@@ -37,7 +37,8 @@ public:
 
     static CCAccelerometer* sharedAccelerometer();
 
-    void setDelegate(CCAccelerometerDelegate* pDelegate);
+    void removeDelegate(CCAccelerometerDelegate* pDelegate);
+    void addDelegate(CCAccelerometerDelegate* pDelegate);
     
 private:
     static CCAccelerometer* m_spUIAccelerometer;

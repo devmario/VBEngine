@@ -50,7 +50,6 @@ THE SOFTWARE.
 #include "CCImage.h"
 #include "platform/platform.h"
 #include "support/zip_support/ZipUtils.h"
-#include "CCDirector.h"
 
 // opengl
 #include "platform/CCGL.h"
@@ -142,15 +141,11 @@ CCParticleSystem * CCParticleSystem::particleWithFile(const char *plistFile)
 }
 bool CCParticleSystem::initWithFile(const char *plistFile)
 {
-	bool bRet = false;
 	m_sPlistFile = CCFileUtils::fullPathFromRelativePath(plistFile);
-	CCDictionary<std::string, CCObject*> *dict = CCFileUtils::dictionaryWithContentsOfFileThreadSafe(m_sPlistFile.c_str());
+	CCDictionary<std::string, CCObject*> *dict = CCFileUtils::dictionaryWithContentsOfFile(m_sPlistFile.c_str());
 
 	CCAssert( dict != NULL, "Particles: file not found");
-	bRet = this->initWithDictionary(dict);
-	dict->release();
-
-	return bRet;
+	return this->initWithDictionary(dict);
 }
 
 bool CCParticleSystem::initWithDictionary(CCDictionary<std::string, CCObject*> *dictionary)
@@ -292,7 +287,7 @@ bool CCParticleSystem::initWithDictionary(CCDictionary<std::string, CCObject*> *
 			else
 			{						
                 char *textureData = (char*)valueForKey("textureImageData", dictionary);
-				CCAssert(textureData, "");
+				assert(textureData);
 
 				int dataLen = strlen(textureData);
 				if(dataLen != 0)
@@ -676,7 +671,7 @@ void CCParticleSystem::update(ccTime dt)
 	this->postStep();
 //#endif
 }
-void CCParticleSystem::updateQuadWithParticle(tCCParticle* particle, const CCPoint& newPosition)
+void CCParticleSystem::updateQuadWithParticle(tCCParticle* particle, CCPoint newPosition)
 {
     CC_UNUSED_PARAM(particle);
     CC_UNUSED_PARAM(newPosition);
@@ -775,12 +770,12 @@ float CCParticleSystem::getRadialAccelVar()
 	CCAssert( m_nEmitterMode == kCCParticleModeGravity, "Particle Mode should be Gravity");
 	return modeA.radialAccelVar;
 }
-void CCParticleSystem::setGravity(const CCPoint& g)
+void CCParticleSystem::setGravity(CCPoint g)
 {
 	CCAssert( m_nEmitterMode == kCCParticleModeGravity, "Particle Mode should be Gravity");
 	modeA.gravity = g;
 }
-const CCPoint& CCParticleSystem::getGravity()
+CCPoint CCParticleSystem::getGravity()
 {
 	CCAssert( m_nEmitterMode == kCCParticleModeGravity, "Particle Mode should be Gravity");
 	return modeA.gravity;
@@ -883,19 +878,19 @@ void CCParticleSystem::setDuration(float var)
 {
 	m_fDuration = var;
 }
-const CCPoint& CCParticleSystem::getSourcePosition()
+CCPoint CCParticleSystem::getSourcePosition()
 {
 	return m_tSourcePosition;
 }
-void CCParticleSystem::setSourcePosition(const CCPoint& var)
+void CCParticleSystem::setSourcePosition(CCPoint var)
 {
 	m_tSourcePosition = var;
 }
-const CCPoint& CCParticleSystem::getPosVar()
+CCPoint CCParticleSystem::getPosVar()
 {
 	return m_tPosVar;
 }
-void CCParticleSystem::setPosVar(const CCPoint& var)
+void CCParticleSystem::setPosVar(CCPoint var)
 {
 	m_tPosVar = var;
 }
@@ -963,35 +958,35 @@ void CCParticleSystem::setEndSizeVar(float var)
 {
 	m_fEndSizeVar = var;
 }
-const ccColor4F& CCParticleSystem::getStartColor()
+ccColor4F CCParticleSystem::getStartColor()
 {
 	return m_tStartColor;
 }
-void CCParticleSystem::setStartColor(const ccColor4F& var)
+void CCParticleSystem::setStartColor(ccColor4F var)
 {
 	m_tStartColor = var;
 }
-const ccColor4F& CCParticleSystem::getStartColorVar()
+ccColor4F CCParticleSystem::getStartColorVar()
 {
 	return m_tStartColorVar;
 }
-void CCParticleSystem::setStartColorVar(const ccColor4F& var)
+void CCParticleSystem::setStartColorVar(ccColor4F var)
 {
 	m_tStartColorVar = var;
 }
-const ccColor4F& CCParticleSystem::getEndColor()
+ccColor4F CCParticleSystem::getEndColor()
 {
 	return m_tEndColor;
 }
-void CCParticleSystem::setEndColor(const ccColor4F& var)
+void CCParticleSystem::setEndColor(ccColor4F var)
 {
 	m_tEndColor = var;
 }
-const ccColor4F& CCParticleSystem::getEndColorVar()
+ccColor4F CCParticleSystem::getEndColorVar()
 {
 	return m_tEndColorVar;
 }
-void CCParticleSystem::setEndColorVar(const ccColor4F& var)
+void CCParticleSystem::setEndColorVar(ccColor4F var)
 {
 	m_tEndColorVar = var;
 }

@@ -80,23 +80,19 @@ extern "C"
             , "showMessageBox"
             , "(Ljava/lang/String;Ljava/lang/String;)V"))
 		{
-			jstring stringArg1;
+			jstring StringArg1;
 
 			if (! pszTitle)
 			{
-				stringArg1 = t.env->NewStringUTF("");
+				StringArg1 = t.env->NewStringUTF("");
 			}
 			else
 			{
-				stringArg1 = t.env->NewStringUTF(pszTitle);
+				StringArg1 = t.env->NewStringUTF(pszTitle);
 			}
 
-			jstring stringArg2 = t.env->NewStringUTF(pszMsg);
-			t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1, stringArg2);
-
-			t.env->DeleteLocalRef(stringArg1);
-            t.env->DeleteLocalRef(stringArg2);
-			t.env->DeleteLocalRef(t.classID);
+			jstring StringArg2 = t.env->NewStringUTF(pszMsg);
+			t.env->CallStaticVoidMethod(t.classID, t.methodID, StringArg1, StringArg2);
 		}
 	}
 
@@ -113,8 +109,7 @@ extern "C"
 			, "terminateProcess"
 			, "()V"))
 		{
-			t.env->CallStaticVoidMethod(t.classID, t.methodID);
-			t.env->DeleteLocalRef(t.classID);
+			t.env->CallStaticObjectMethod(t.classID, t.methodID);
 		}
 	}
 

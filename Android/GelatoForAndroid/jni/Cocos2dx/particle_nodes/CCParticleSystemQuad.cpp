@@ -29,7 +29,6 @@ THE SOFTWARE.
 
 #include "CCParticleSystemQuad.h"
 #include "CCSpriteFrame.h"
-#include "CCDirector.h"
 
 namespace cocos2d {
 
@@ -68,15 +67,13 @@ bool CCParticleSystemQuad::initWithTotalParticles(unsigned int numberOfParticles
 		this->initIndices();
 
 #if CC_USES_VBO
-		glEnable(GL_VERTEX_ARRAY);
-
 		// create the VBO buffer
 		glGenBuffers(1, &m_uQuadsID);
 
 		// initial binding
 		glBindBuffer(GL_ARRAY_BUFFER, m_uQuadsID);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(m_pQuads[0])*m_uTotalParticles, m_pQuads, GL_DYNAMIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(m_pQuads[0])*m_uTotalParticles, m_pQuads, GL_DYNAMIC_DRAW);	
+		glBindBuffer(GL_ARRAY_BUFFER, 0);	
 #endif
 		return true;
 	}
@@ -105,7 +102,7 @@ CCParticleSystemQuad * CCParticleSystemQuad::particleWithFile(const char *plistF
 }
 
 // pointRect should be in Texture coordinates, not pixel coordinates
-void CCParticleSystemQuad::initTexCoordsWithRect(const CCRect& pointRect)
+void CCParticleSystemQuad::initTexCoordsWithRect(CCRect pointRect)
 {
     // convert to pixels coords
 
@@ -155,7 +152,7 @@ void CCParticleSystemQuad::initTexCoordsWithRect(const CCRect& pointRect)
 		m_pQuads[i].tr.texCoords.v = top;
 	}
 }
-void CCParticleSystemQuad::setTextureWithRect(CCTexture2D *texture, const CCRect& rect)
+void CCParticleSystemQuad::setTextureWithRect(CCTexture2D *texture, CCRect rect)
 {
 	// Only update the texture if is different from the current one
 	if( !m_pTexture || texture->getName() != m_pTexture->getName() )
@@ -167,7 +164,7 @@ void CCParticleSystemQuad::setTextureWithRect(CCTexture2D *texture, const CCRect
 }
 void CCParticleSystemQuad::setTexture(CCTexture2D* texture)
 {
-	const CCSize& s = texture->getContentSize();
+	CCSize s = texture->getContentSize();
 	this->setTextureWithRect(texture, CCRectMake(0, 0, s.width, s.height));
 }
 void CCParticleSystemQuad::setDisplayFrame(CCSpriteFrame *spriteFrame)
@@ -195,7 +192,7 @@ void CCParticleSystemQuad::initIndices()
 		m_pIndices[i6+3] = (GLushort) i4+3;
 	}
 }
-void CCParticleSystemQuad::updateQuadWithParticle(tCCParticle* particle, const CCPoint& newPosition)
+void CCParticleSystemQuad::updateQuadWithParticle(tCCParticle* particle, CCPoint newPosition)
 {
 	// colors
     ccV2F_C4B_T2F_Quad *quad = &(m_pQuads[m_uParticleIdx]);

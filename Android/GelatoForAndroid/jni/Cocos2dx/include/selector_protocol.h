@@ -42,6 +42,10 @@ namespace   cocos2d {
 		virtual void callfunc(CCNode* pSender, void* pData){CC_UNUSED_PARAM(pSender);CC_UNUSED_PARAM(pData);};
 		virtual void menuHandler(CCObject* pSender){CC_UNUSED_PARAM(pSender);};
 		virtual void eventHandler(CCEvent* pEvent) {CC_UNUSED_PARAM(pEvent);};
+
+		// the child call responding retain/release function
+		virtual void selectorProtocolRetain(void) {};
+		virtual void selectorProtocolRelease(void) {};
 	};
 
 	class CCNode;

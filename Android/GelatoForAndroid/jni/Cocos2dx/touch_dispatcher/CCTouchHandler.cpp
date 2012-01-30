@@ -35,34 +35,14 @@ CCTouchDelegate* CCTouchHandler::getDelegate(void)
 
 void CCTouchHandler::setDelegate(CCTouchDelegate *pDelegate)
 {
-	/*
-	 * RTTI may return null on android. More info please refer issue #926(cocos2d-x)
-	 */
 	if (pDelegate)
 	{
-		if (dynamic_cast<CCObject*>(pDelegate))
-		{
-			dynamic_cast<CCObject*>(pDelegate)->retain();
-		}
-		else
-		{
-			pDelegate->touchDelegateRetain();
-		}
+		pDelegate->keep();
     }
 
-	/*
-	 * RTTI may return null on android. More info please refer issue #926(cocos2d-x)
-	 */
     if (m_pDelegate)
     {
-		if (dynamic_cast<CCObject*>(m_pDelegate))
-		{
-			dynamic_cast<CCObject*>(m_pDelegate)->release();
-		}
-		else
-		{
-			m_pDelegate->touchDelegateRelease();
-		}
+        m_pDelegate->destroy();
     }
 	m_pDelegate = pDelegate;
 }
@@ -108,23 +88,9 @@ CCTouchHandler* CCTouchHandler::handlerWithDelegate(CCTouchDelegate *pDelegate, 
 
 bool CCTouchHandler::initWithDelegate(CCTouchDelegate *pDelegate, int nPriority)
 {
-	CCAssert(pDelegate != NULL, "touch delegate should not be null");
+	assert(pDelegate != NULL);
 
-	m_pDelegate = pDelegate; 
-
-
-	/*
-	 * RTTI may return null on android. More info please refer issue #926(cocos2d-x)
-	 */
-	if (dynamic_cast<CCObject*>(pDelegate))
-	{
-		dynamic_cast<CCObject*>(pDelegate)->retain();
-	}
-	else
-	{
-		pDelegate->touchDelegateRetain();
-	}
-
+	m_pDelegate = pDelegate; pDelegate->keep();
 	m_nPriority = nPriority;
 	m_nEnabledSelectors = 0;
 
@@ -135,17 +101,7 @@ CCTouchHandler::~CCTouchHandler(void)
 {
 	if (m_pDelegate)
 	{
-		/*
-	     * RTTI may return null on android. More info please refer issue #926(cocos2d-x)
-	     */
-		if (dynamic_cast<CCObject*>(m_pDelegate))
-		{
-			dynamic_cast<CCObject*>(m_pDelegate)->release();
-		}
-		else
-		{
-			m_pDelegate->touchDelegateRelease();
-		}
+		m_pDelegate->destroy();
 	}   
 }
 
@@ -154,6 +110,18 @@ bool CCStandardTouchHandler::initWithDelegate(CCTouchDelegate *pDelegate, int nP
 {
 	if (CCTouchHandler::initWithDelegate(pDelegate, nPriority))
 	{
+		/*
+		 * we can not do this in c++
+		if( [del respondsToSelector:@selector(ccTouchesBegan:withEvent:)] )
+			enabledSelectors_ |= ccTouchSelectorBeganBit;
+		if( [del respondsToSelector:@selector(ccTouchesMoved:withEvent:)] )
+			enabledSelectors_ |= ccTouchSelectorMovedBit;
+		if( [del respondsToSelector:@selector(ccTouchesEnded:withEvent:)] )
+			enabledSelectors_ |= ccTouchSelectorEndedBit;
+		if( [del respondsToSelector:@selector(ccTouchesCancelled:withEvent:)] )
+			enabledSelectors_ |= ccTouchSelectorCancelledBit;
+		*/
+
 		return true;
 	}
 
@@ -221,6 +189,16 @@ bool CCTargetedTouchHandler::initWithDelegate(CCTouchDelegate *pDelegate, int nP
 		m_pClaimedTouches = new NSMutableSet();
 		m_bSwallowsTouches = bSwallow;
 
+		/*
+		if( [aDelegate respondsToSelector:@selector(ccTouchBegan:withEvent:)] )
+			enabledSelectors_ |= ccTouchSelectorBeganBit;
+		if( [aDelegate respondsToSelector:@selector(ccTouchMoved:withEvent:)] )
+			enabledSelectors_ |= ccTouchSelectorMovedBit;
+		if( [aDelegate respondsToSelector:@selector(ccTouchEnded:withEvent:)] )
+			enabledSelectors_ |= ccTouchSelectorEndedBit;
+		if( [aDelegate respondsToSelector:@selector(ccTouchCancelled:withEvent:)] )
+			enabledSelectors_ |= ccTouchSelectorCancelledBit;
+		*/
 		return true;
 	}
 

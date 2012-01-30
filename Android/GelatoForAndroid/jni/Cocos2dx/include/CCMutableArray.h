@@ -22,12 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#ifndef __COCOA_CC_MUTABLE_ARRAY_H__
-#define __COCOA_CC_MUTABLE_ARRAY_H__
+#ifndef __COCOA_CC_MUTATLE_ARRAY_H__
+#define __COCOA_CC_MUTATLE_ARRAY_H__
 
 #include "CCObject.h"
-#include "ccMacros.h"
 #include <vector>
+#include <assert.h>
 #include <stdarg.h>
 
 namespace   cocos2d {
@@ -44,8 +44,7 @@ public:
 public:
 	CCMutableArray(unsigned int uSize = 0)
 	{
-		if (uSize != 0)
-			m_array.reserve(uSize);
+		m_array.resize(uSize);
 	}
 
 	virtual ~CCMutableArray(void)
@@ -53,21 +52,37 @@ public:
 		removeAllObjects();
 	}
 
-	inline unsigned int count(void)
+	unsigned int count(void)
 	{
-		return (unsigned int)m_array.size();
+		unsigned int uCount = 0;
+		
+		if (!m_array.empty())
+		{
+			CCMutableArrayIterator it;
+			for (it = m_array.begin(); it != m_array.end(); ++it)
+			{
+				if (*it == NULL)
+				{
+					break;
+				}
+
+				++uCount;
+			}
+		}
+
+		return uCount;
 	}
 
 	unsigned int getIndexOfObject(T pObject)
 	{
-                if (m_array.empty() || (pObject == 0))
+		if (m_array.empty() || (pObject == NULL))
 		{
 			return 0;
 		}
 
 		CCMutableArrayIterator iter;
 		unsigned int uRet = 0;
-		unsigned int i;
+		int i;
 		for (iter = m_array.begin(), i = 0; iter != m_array.end(); ++iter, ++i)
 		{
 			if (*iter == pObject)
@@ -103,21 +118,24 @@ public:
 
 	T getLastObject(void)
 	{
-		CCMutableArrayRevIterator iter = rbegin();
+        T pObject = NULL;
+		int count = this->count();
 
-		if (iter != m_array.rend())
-			return *iter;
+		if (count > 0)
+		{
+			pObject = m_array[count - 1];
+		}
 
-                return 0;
+		return pObject;
 	}
 
 	T getObjectAtIndex(unsigned int uIndex)
 	{
-		CCAssert(uIndex < count(), "");
+		assert(uIndex < count());
 
 		if (uIndex >= count())
 		{
-                        return 0;
+			return NULL;
 		}
 
 		return m_array[uIndex];
@@ -127,7 +145,7 @@ public:
 	void addObject(T pObject)
 	{
 		// make sure the pointer is not null
-                if (pObject == 0)
+		if (pObject == NULL)
 		{
 			return;
 		}
@@ -135,6 +153,28 @@ public:
 		// add the refrence
 		pObject->retain();
 
+		// if the vector is empty, push back
+		if (m_array.empty())
+		{
+			m_array.push_back(pObject);
+			return;
+		}
+
+		// find a position to store
+		int count = 0;;
+        CCMutableArrayIterator it;
+		for (it = m_array.begin(); it != m_array.end(); ++it)
+		{
+			if (*it == NULL)
+			{
+				m_array[count] = pObject;
+				return;
+			}
+            
+			++count;
+		} 
+
+		// the array is full, push back
 		m_array.push_back(pObject);
 	}
 
@@ -142,48 +182,47 @@ public:
 	{
 		if (pArray && pArray->count() > 0)
 		{
-			m_array.reserve(count() + pArray->count());
 			CCMutableArrayIterator iter;
 			for (iter = pArray->begin(); iter != pArray->end(); ++iter)
 			{
 				if (*iter)
+				{
                     (*iter)->retain();
-				m_array.push_back(*iter);
+					m_array.push_back(*iter);
+				}
 			}
 		}
 	}
 
     void insertObjectAtIndex(T pObject, unsigned int uIndex)
 	{
-		CCAssert(uIndex <= count(), "");
 		// make sure the object is not null
-                if (pObject == 0)
+		if (pObject == NULL)
 		{
 			return;
 		}
 
-		// add the reference of the object
+		// add the refrence of the object
 		pObject->retain();
 
 		// resize the capacity if the index out of it
 		if (uIndex >= m_array.capacity())
 		{
-			m_array.reserve(uIndex + 1);
-			m_array.push_back(pObject);
+			m_array.resize(uIndex + 4);
 		}
-		else	// insert the object
-			m_array.insert(m_array.begin() + uIndex, pObject);
+
+		// insert the object
+		m_array.insert(m_array.begin() + uIndex, pObject);
 	}
 
 	// Removing objects
 	void removeLastObject(bool bDeleteObject = true)
 	{
-		CCMutableArrayRevIterator it = m_array.rbegin();
-		if (it != m_array.rend())
+		int count = this->count();
+
+		if (count > 0)
 		{
-			if (bDeleteObject)
-				(*it)->release();
-			m_array.pop_back();
+			removeObjectAtIndex(count - 1, bDeleteObject);
 		}
 	}
 
@@ -249,7 +288,12 @@ public:
 		{
 			CCMutableArrayIterator iter;
 			for (iter = m_array.begin(); iter != m_array.end(); ++iter)
-				(*iter)->release();
+			{
+				if (*iter)
+				{
+					(*iter)->release();
+				}
+			}
 		}		
 
 		m_array.clear();
@@ -257,7 +301,7 @@ public:
 
 	void replaceObjectAtIndex(unsigned int uIndex, T pObject, bool bDeleteObject = true)
 	{
-		if (bDeleteObject && m_array[uIndex])
+		if (m_array[uIndex] && bDeleteObject)
 		{
 			m_array[uIndex]->release();
 		}
@@ -271,12 +315,12 @@ public:
 		}
 	}
 
-	inline CCMutableArrayIterator begin(void)
+	CCMutableArrayIterator begin(void)
 	{
 		return m_array.begin();
 	}
 
-	inline CCMutableArrayRevIterator rbegin(void)
+	CCMutableArrayRevIterator rbegin(void)
 	{
 		return m_array.rbegin();
 	}
@@ -301,17 +345,17 @@ public:
 	 * end is a keyword of lua, so should use other name
 	 * to export to lua
 	*/
-	inline CCMutableArrayIterator endToLua(void)
+	CCMutableArrayIterator endToLua(void)
 	{
 		return m_array.end();
 	}
 
-	inline CCMutableArrayIterator end(void)
+	CCMutableArrayIterator end(void)
 	{
 		return m_array.end();
 	}
 
-	inline CCMutableArrayRevIterator rend(void)
+	CCMutableArrayRevIterator rend(void)
 	{
 		return m_array.rend();
 	}
@@ -360,9 +404,9 @@ public:
 
 	static CCMutableArray<T>* arrayWithArray(CCMutableArray<T> *pSrcArray)
 	{
-        CCMutableArray<T> *pDestArray = 0;
+        CCMutableArray<T> *pDestArray = NULL;
         
-                if (pSrcArray == 0)
+		if (pSrcArray == NULL)
 		{
             pDestArray = new CCMutableArray<T>();
 		}
@@ -382,4 +426,4 @@ private:
 
 }//namespace   cocos2d 
 
-#endif // __COCOA_CC_MUTABLE_ARRAY_H__
+#endif // __COCOA_CC_MUTATLE_ARRAY_H__

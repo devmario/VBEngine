@@ -137,7 +137,7 @@ CCSpeed * CCSpeed::actionWithAction(CCActionInterval *pAction, float fRate)
 
 bool CCSpeed::initWithAction(CCActionInterval *pAction, float fRate)
 {
-	CCAssert(pAction != NULL, "");
+	assert(pAction != NULL);
 	pAction->retain();
 	m_pInnerAction = pAction;
 	m_fSpeed = fRate;	
@@ -221,7 +221,7 @@ CCFollow *CCFollow::actionWithTarget(CCNode *pFollowedNode)
 	CC_SAFE_DELETE(pRet)
 	return NULL;
 }
-CCFollow *CCFollow::actionWithTarget(CCNode *pFollowedNode, const CCRect& rect)
+CCFollow *CCFollow::actionWithTarget(CCNode *pFollowedNode, CCRect rect)
 {
 	CCFollow *pRet = new CCFollow();
 	if (pRet && pRet->initWithTarget(pFollowedNode, rect))
@@ -235,7 +235,7 @@ CCFollow *CCFollow::actionWithTarget(CCNode *pFollowedNode, const CCRect& rect)
 
 bool CCFollow::initWithTarget(CCNode *pFollowedNode)
 {
-	CCAssert(pFollowedNode != NULL, "");
+	assert(pFollowedNode != NULL);
 	pFollowedNode->retain();
 	m_pobFollowedNode = pFollowedNode;
 	m_bBoundarySet = false;
@@ -247,9 +247,9 @@ bool CCFollow::initWithTarget(CCNode *pFollowedNode)
 	return true;
 }
 
-bool CCFollow::initWithTarget(CCNode *pFollowedNode, const CCRect& rect)
+bool CCFollow::initWithTarget(CCNode *pFollowedNode, CCRect rect)
 {
-	CCAssert(pFollowedNode != NULL, "");
+	assert(pFollowedNode != NULL);
 	pFollowedNode->retain();
 	m_pobFollowedNode = pFollowedNode;
 	m_bBoundarySet = true;

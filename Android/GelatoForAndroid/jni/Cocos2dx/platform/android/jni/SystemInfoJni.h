@@ -29,8 +29,8 @@ THE SOFTWARE.
 extern "C"
 
 {
-    extern const char* getCurrentLanguageJNI();
-    extern const char* getPackageNameJNI();
+    extern char* getCurrentLanguageJNI();
+	extern char* getPackageNameJNI();
 }
 
 #endif // __ANDROID_SYSTEM_INFO_JNI_H__

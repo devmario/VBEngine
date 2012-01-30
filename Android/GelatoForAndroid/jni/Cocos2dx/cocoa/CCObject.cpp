@@ -25,14 +25,14 @@ THE SOFTWARE.
 
 #include "CCObject.h"
 #include "CCAutoreleasePool.h"
-#include "ccMacros.h"
+#include <assert.h>
 namespace   cocos2d {
 
 CCObject* CCCopying::copyWithZone(CCZone *pZone)
 {
     CC_UNUSED_PARAM(pZone);
-	CCAssert(0, "not implement");
-    return 0;
+	assert(0);
+	return NULL;
 }
 
 
@@ -59,12 +59,12 @@ CCObject::~CCObject(void)
 
 CCObject* CCObject::copy()
 {
-        return copyWithZone(0);
+	return copyWithZone(NULL);
 }
 
 void CCObject::release(void)
 {
-	CCAssert(m_uReference > 0, "reference count should greater than 0");
+	assert(m_uReference > 0);
 	--m_uReference;
 
 	if (m_uReference == 0)
@@ -75,7 +75,7 @@ void CCObject::release(void)
 
 void CCObject::retain(void)
 {
-	CCAssert(m_uReference > 0, "reference count should greater than 0");
+	assert(m_uReference > 0);
 
 	++m_uReference;
 }

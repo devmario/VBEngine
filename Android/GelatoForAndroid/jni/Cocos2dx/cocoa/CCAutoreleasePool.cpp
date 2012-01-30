@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "CCAutoreleasePool.h"
-#include "ccMacros.h"
 
 namespace cocos2d 
 {
@@ -43,7 +42,7 @@ void CCAutoreleasePool::addObject(CCObject* pObject)
 {
 	m_pManagedObjectArray->addObject(pObject);
 
-	CCAssert(pObject->m_uReference > 1, "reference count should greager than 1");
+	assert(pObject->m_uReference > 1);
 
 	pObject->release(); // no ref count, in this case autorelease pool added.
 }
@@ -94,7 +93,7 @@ CCPoolManager* CCPoolManager::getInstance()
 CCPoolManager::CCPoolManager()
 {
 	m_pReleasePoolStack = new CCMutableArray<CCAutoreleasePool*>();	
-        m_pCurReleasePool = 0;
+	m_pCurReleasePool = NULL;
 }
 
 CCPoolManager::~CCPoolManager()
@@ -103,7 +102,7 @@ CCPoolManager::~CCPoolManager()
 	finalize();
 
 	// we only release the last autorelease pool here 
-        m_pCurReleasePool = 0;
+	m_pCurReleasePool = NULL;
 	m_pReleasePoolStack->removeObjectAtIndex(0);
 
 	CC_SAFE_DELETE(m_pReleasePoolStack);
@@ -163,7 +162,7 @@ void CCPoolManager::pop()
 
 void CCPoolManager::removeObject(CCObject* pObject)
 {
-	CCAssert(m_pCurReleasePool, "current auto release pool should not be null");
+	assert(m_pCurReleasePool);
 
 	m_pCurReleasePool->removeObject(pObject);
 }
@@ -177,11 +176,9 @@ void CCPoolManager::addObject(CCObject* pObject)
 CCAutoreleasePool* CCPoolManager::getCurReleasePool()
 {
 	if(!m_pCurReleasePool)
-	{
 		push();
-	}
 
-	CCAssert(m_pCurReleasePool, "current auto release pool should not be null");
+	assert(m_pCurReleasePool);
 
 	return m_pCurReleasePool;
 }

@@ -31,6 +31,8 @@ THE SOFTWARE.
 #include "CCMutableArray.h"
 #include "CCScriptSupport.h"
 
+#include <assert.h>
+
 using namespace std;
 
 namespace   cocos2d {
@@ -80,11 +82,11 @@ typedef struct _hashScriptFuncEntry
 // implementation CCTimer
 
 CCTimer::CCTimer()
-: m_pfnSelector(NULL)
-, m_fInterval(0.0f)
+: m_pTarget(NULL)
 , m_scriptFunc("")
-, m_pTarget(NULL)
+, m_fInterval(0.0f)
 , m_fElapsed(0.0f)
+, m_pfnSelector(NULL)
 {
 
 }
@@ -119,7 +121,7 @@ CCTimer* CCTimer::timerWithTarget(SelectorProtocol *pTarget, SEL_SCHEDULE pfnSel
 	return pTimer;
 }
 
-bool CCTimer::initWithScriptFuncName(const char *pszFuncName, ccTime fSeconds)
+bool CCTimer::initWithScriptFuncName(const char *pszFuncName, cocos2d::ccTime fSeconds)
 {
 	m_scriptFunc = string(pszFuncName);
 	m_fInterval = fSeconds;
@@ -187,7 +189,7 @@ CCScheduler::CCScheduler(void)
 , m_bCurrentTargetSalvaged(false)
 , m_pHashForScriptFunctions(NULL)
 {
-	CCAssert(pSharedScheduler == NULL, "");
+	assert(pSharedScheduler == NULL);
 }
 
 CCScheduler::~CCScheduler(void)
@@ -235,7 +237,7 @@ bool CCScheduler::init(void)
 void CCScheduler::removeHashElement(_hashSelectorEntry *pElement)
 {
 	ccArrayFree(pElement->timers);
-	dynamic_cast<CCObject*>(pElement->target)->release();
+	pElement->target->selectorProtocolRelease();
 	pElement->target = NULL;
 	HASH_DEL(m_pHashForSelectors, pElement);
 	free(pElement);
@@ -243,8 +245,8 @@ void CCScheduler::removeHashElement(_hashSelectorEntry *pElement)
 
 void CCScheduler::scheduleSelector(SEL_SCHEDULE pfnSelector, SelectorProtocol *pTarget, float fInterval, bool bPaused)
 {
-	CCAssert(pfnSelector, "");
-	CCAssert(pTarget, "");
+	assert(pfnSelector);
+	assert(pTarget);
 
 	tHashSelectorEntry *pElement = NULL;
 	HASH_FIND_INT(m_pHashForSelectors, &pTarget, pElement);
@@ -255,7 +257,7 @@ void CCScheduler::scheduleSelector(SEL_SCHEDULE pfnSelector, SelectorProtocol *p
 		pElement->target = pTarget;
 		if (pTarget)
 		{
-		    dynamic_cast<CCObject*>(pTarget)->retain();
+		    pTarget->selectorProtocolRetain();
 		}
 		HASH_ADD_INT(m_pHashForSelectors, target, pElement);
 
@@ -264,7 +266,7 @@ void CCScheduler::scheduleSelector(SEL_SCHEDULE pfnSelector, SelectorProtocol *p
 	}
 	else
 	{
-		CCAssert(pElement->paused == bPaused, "");
+		assert(pElement->paused == bPaused);
 	}
 
 	if (pElement->timers == NULL)
@@ -295,8 +297,8 @@ void CCScheduler::scheduleSelector(SEL_SCHEDULE pfnSelector, SelectorProtocol *p
 
 void CCScheduler::scheduleScriptFunc(const char *pszFuncName, ccTime fInterval, bool bPaused)
 {
-	//CCAssert(pfnSelector);
-	CCAssert(pszFuncName, "");
+	//assert(pfnSelector);
+	assert(pszFuncName);
 
 	tHashScriptFuncEntry *pElement = NULL;
 	HASH_FIND_INT(m_pHashForScriptFunctions, &pszFuncName, pElement);
@@ -313,7 +315,7 @@ void CCScheduler::scheduleScriptFunc(const char *pszFuncName, ccTime fInterval, 
 	}
 	else
 	{
-		CCAssert(pElement->paused == bPaused, "");
+		assert(pElement->paused == bPaused);
 	}	
 }
 
@@ -325,8 +327,8 @@ void CCScheduler::unscheduleSelector(SEL_SCHEDULE pfnSelector, SelectorProtocol 
 		return;
 	}
 
-	//CCAssert(pTarget);
-	//CCAssert(pfnSelector);
+	//assert(pTarget);
+	//assert(pfnSelector);
 
 	tHashSelectorEntry *pElement = NULL;
 	HASH_FIND_INT(m_pHashForSelectors, &pTarget, pElement);
@@ -442,7 +444,7 @@ void CCScheduler::priorityIn(tListEntry **ppList, SelectorProtocol *pTarget, int
 	// update hash entry for quick access
 	tHashUpdateEntry *pHashElement = (tHashUpdateEntry *)calloc(sizeof(*pHashElement), 1);
 	pHashElement->target = pTarget;
-	dynamic_cast<CCObject*>(pTarget)->retain();
+	pTarget->selectorProtocolRetain();
 	pHashElement->list = ppList;
 	pHashElement->entry = pListElement;
 	HASH_ADD_INT(m_pHashForUpdates, target, pHashElement);
@@ -461,7 +463,7 @@ void CCScheduler::appendIn(_listEntry **ppList, SelectorProtocol *pTarget, bool 
 	// update hash entry for quicker access
 	tHashUpdateEntry *pHashElement = (tHashUpdateEntry *)calloc(sizeof(*pHashElement), 1);
 	pHashElement->target = pTarget;
-	dynamic_cast<CCObject*>(pTarget)->retain();
+	pTarget->selectorProtocolRetain();
 	pHashElement->list = ppList;
 	pHashElement->entry = pListElement;
 	HASH_ADD_INT(m_pHashForUpdates, target, pHashElement);
@@ -475,7 +477,7 @@ void CCScheduler::scheduleUpdateForTarget(SelectorProtocol *pTarget, int nPriori
 	if (pHashElement)
 	{
 #if COCOS2D_DEBUG >= 1
-		CCAssert(pHashElement->entry->markedForDeletion,"");
+		assert(pHashElement->entry->markedForDeletion);
 #endif
 		// TODO: check if priority has changed!
 
@@ -512,7 +514,7 @@ void CCScheduler::removeUpdateFromHash(struct _listEntry *entry)
 		free(element->entry);
 
 		// hash entry
-		dynamic_cast<CCObject*>(element->target)->release();
+		element->target->selectorProtocolRelease();
 		HASH_DEL(m_pHashForUpdates, element);
 		free(element);
 	}
@@ -568,16 +570,6 @@ void CCScheduler::unscheduleAllSelectors(void)
 	{
         unscheduleUpdateForTarget(pEntry->target);
 	}
-
-	// unschedule all script functions
-	for (tHashScriptFuncEntry *elt = m_pHashForScriptFunctions; elt != NULL; )
-	{
-		tHashScriptFuncEntry *pNextElement = (tHashScriptFuncEntry *)elt->hh.next;
-		elt->timer->release();
-		HASH_DEL(m_pHashForScriptFunctions, elt);
-		free(elt);
-		elt = pNextElement;
-	}
 }
 
 void CCScheduler::unscheduleAllSelectorsForTarget(SelectorProtocol *pTarget)
@@ -618,7 +610,7 @@ void CCScheduler::unscheduleAllSelectorsForTarget(SelectorProtocol *pTarget)
 
 void CCScheduler::resumeTarget(SelectorProtocol *pTarget)
 {
-	CCAssert(pTarget != NULL, "");
+	assert(pTarget != NULL);
 
 	// custom selectors
 	tHashSelectorEntry *pElement = NULL;
@@ -633,14 +625,14 @@ void CCScheduler::resumeTarget(SelectorProtocol *pTarget)
 	HASH_FIND_INT(m_pHashForUpdates, &pTarget, pElementUpdate);
 	if (pElementUpdate)
 	{
-		CCAssert(pElementUpdate->entry != NULL, "");
+		assert(pElementUpdate->entry != NULL);
 		pElementUpdate->entry->paused = false;
 	}
 }
 
 void CCScheduler::pauseTarget(SelectorProtocol *pTarget)
 {
-	CCAssert(pTarget != NULL, "");
+	assert(pTarget != NULL);
 
 	// custom selectors
 	tHashSelectorEntry *pElement = NULL;
@@ -655,7 +647,7 @@ void CCScheduler::pauseTarget(SelectorProtocol *pTarget)
 	HASH_FIND_INT(m_pHashForUpdates, &pTarget, pElementUpdate);
 	if (pElementUpdate)
 	{
-		CCAssert(pElementUpdate->entry != NULL, "");
+		assert(pElementUpdate->entry != NULL);
 		pElementUpdate->entry->paused = true;
 	}
 }

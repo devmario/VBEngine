@@ -48,7 +48,7 @@ THE SOFTWARE.
 #include "CCAnimationCache.h"
 #include "CCTouch.h"
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_MARMALADE)
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_AIRPLAY)
 #include "CCUserDefault.h"
 #endif
 
@@ -156,7 +156,7 @@ CCDirector::~CCDirector(void)
 void CCDirector::setGLDefaultValues(void)
 {
 	// This method SHOULD be called only after openGLView_ was initialized
-	CCAssert(m_pobOpenGLView, "opengl view should not be null");
+	assert(m_pobOpenGLView);
 
 	setAlphaBlending(true);
 	setDepthTest(true);
@@ -275,7 +275,7 @@ void CCDirector::calculateDeltaTime(void)
 
 void CCDirector::setOpenGLView(CC_GLVIEW *pobOpenGLView)
 {
-	CCAssert(pobOpenGLView, "opengl view should not be null");
+	assert(pobOpenGLView);
 
 	if (m_pobOpenGLView != pobOpenGLView)
 	{
@@ -393,7 +393,7 @@ void CCDirector::setDepthTest(bool bOn)
 	}
 }
 
-CCPoint CCDirector::convertToGL(const CCPoint& obPoint)
+CCPoint CCDirector::convertToGL(CCPoint obPoint)
 {
 	CCSize s = m_obWinSizeInPoints;
 	float newY = s.height - obPoint.y;
@@ -421,7 +421,7 @@ CCPoint CCDirector::convertToGL(const CCPoint& obPoint)
 	return ret;
 }
 
-CCPoint CCDirector::convertToUI(const CCPoint& obPoint)
+CCPoint CCDirector::convertToUI(CCPoint obPoint)
 {
 	CCSize winSize = m_obWinSizeInPoints;
 	float oppositeX = winSize.width - obPoint.x;
@@ -480,7 +480,7 @@ CCSize CCDirector::getDisplaySizeInPixels(void)
 	return m_obWinSizeInPixels;
 }
 
-void CCDirector::reshapeProjection(const CCSize& newWindowSize)
+void CCDirector::reshapeProjection(CCSize newWindowSize)
 {
     CC_UNUSED_PARAM(newWindowSize);
     m_obWinSizeInPoints = m_pobOpenGLView->getSize();
@@ -494,8 +494,8 @@ void CCDirector::reshapeProjection(const CCSize& newWindowSize)
 
 void CCDirector::runWithScene(CCScene *pScene)
 {
-	CCAssert(pScene != NULL, "running scene should not be null");
-	CCAssert(m_pRunningScene == NULL, "m_pRunningScene should be null");
+	assert(pScene != NULL);
+	assert(m_pRunningScene == NULL);
 
 	pushScene(pScene);
 	startAnimation();
@@ -503,7 +503,7 @@ void CCDirector::runWithScene(CCScene *pScene)
 
 void CCDirector::replaceScene(CCScene *pScene)
 {
-	CCAssert(pScene != NULL, "the scene should not be null");
+	assert(pScene != NULL);
 
 	unsigned int index = m_pobScenesStack->count();
 
@@ -515,7 +515,7 @@ void CCDirector::replaceScene(CCScene *pScene)
 
 void CCDirector::pushScene(CCScene *pScene)
 {
-	CCAssert(pScene, "the scene should not null");
+	assert(pScene);
 
 	m_bSendCleanupToScene = false;
 
@@ -525,7 +525,7 @@ void CCDirector::pushScene(CCScene *pScene)
 
 void CCDirector::popScene(void)
 {
-	CCAssert(m_pRunningScene != NULL, "running scene should not null");
+	assert(m_pRunningScene != NULL);
 
 	m_pobScenesStack->removeLastObject();
 	unsigned int c = m_pobScenesStack->count();
@@ -545,44 +545,7 @@ void CCDirector::end()
 {
 	m_bPurgeDirecotorInNextLoop = true;
 }
-
-
-void CCDirector::resetDirector()
-{
-	// don't release the event handlers
-	// They are needed in case the director is run again
-	CCTouchDispatcher::sharedDispatcher()->removeAllDelegates();
-
-    if (m_pRunningScene)
-    {
-    	m_pRunningScene->onExit();
-    	m_pRunningScene->cleanup();
-    	m_pRunningScene->release();
-    }
-    
-	m_pRunningScene = NULL;
-	m_pNextScene = NULL;
-
-	// remove all objects, but don't release it.
-	// runWithScene might be executed after 'end'.
-	m_pobScenesStack->removeAllObjects();
-
-	stopAnimation();
-
-	CC_SAFE_RELEASE_NULL(m_pProjectionDelegate);
-
-	// purge bitmap cache
-	CCLabelBMFont::purgeCachedData();
-
-	// purge all managers
-	CCAnimationCache::purgeSharedAnimationCache();
- 	CCSpriteFrameCache::purgeSharedSpriteFrameCache();
-	CCActionManager::sharedManager()->purgeSharedManager();
-	CCScheduler::purgeSharedScheduler();
-	CCTextureCache::purgeSharedTextureCache();
-}
-
-
+	
 void CCDirector::purgeDirector()
 {
 	// don't release the event handlers
@@ -621,7 +584,7 @@ void CCDirector::purgeDirector()
 	CCScheduler::purgeSharedScheduler();
 	CCTextureCache::purgeSharedTextureCache();
 	
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_MARMALADE)	
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_AIRPLAY)	
 	CCUserDefault::purgeSharedUserDefault();
 #endif
 	// OpenGL view
@@ -631,11 +594,17 @@ void CCDirector::purgeDirector()
 
 void CCDirector::setNextScene(void)
 {
-	bool runningIsTransition = dynamic_cast<CCTransitionScene*>(m_pRunningScene) != NULL;
-	bool newIsTransition = dynamic_cast<CCTransitionScene*>(m_pNextScene) != NULL;
+	ccSceneFlag runningSceneType = ccNormalScene;
+	ccSceneFlag newSceneType = m_pNextScene->getSceneType();
+
+	if (m_pRunningScene)
+	{
+		runningSceneType = m_pRunningScene->getSceneType();
+	}
 
 	// If it is not a transition, call onExit/cleanup
- 	if (! newIsTransition)
+ 	/*if (! newIsTransition)*/
+	if (! (newSceneType & ccTransitionScene))
  	{
          if (m_pRunningScene)
          {
@@ -658,7 +627,7 @@ void CCDirector::setNextScene(void)
 	m_pNextScene->retain();
 	m_pNextScene = NULL;
 
-	if ((! runningIsTransition) && m_pRunningScene)
+	if (! (runningSceneType & ccTransitionScene) && m_pRunningScene)
 	{
 		m_pRunningScene->onEnter();
 		m_pRunningScene->onEnterTransitionDidFinish();
@@ -827,18 +796,6 @@ void CCDirector::setContentScaleFactor(CGFloat scaleFactor)
 		// update projection
 		setProjection(m_eProjection);
 	}
-}
-
-CCNode* CCDirector::getNotificationNode() 
-{ 
-	return m_pNotificationNode; 
-}
-
-void CCDirector::setNotificationNode(CCNode *node)
-{
-	CC_SAFE_RELEASE(m_pNotificationNode);
-	m_pNotificationNode = node;
-	CC_SAFE_RETAIN(m_pNotificationNode);
 }
 
 void CCDirector::applyOrientation(void)

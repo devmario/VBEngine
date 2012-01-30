@@ -24,14 +24,8 @@ THE SOFTWARE.
 #include "CCUserDefault.h"
 #include "platform/CCFileUtils.h"
 
-//#if (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
 #include <libxml/parser.h>
 #include <libxml/tree.h>
-//#else
-//#include <libxml/parser.h>
-//#include <libxml/tree.h>
-//#endif
-
 
 // root name of xml
 #define USERDEFAULT_ROOT_NAME	"userDefaultRoot"
@@ -91,7 +85,7 @@ static xmlNodePtr getXMLNodeForKey(const char* pKey, xmlNodePtr *rootNode, xmlDo
 	return curNode;
 }
 
-static inline const char* getValueForKey(const char* pKey)
+const char* getValueForKey(const char* pKey)
 {
 	const char* ret = NULL;
 	xmlNodePtr rootNode;
@@ -113,7 +107,7 @@ static inline const char* getValueForKey(const char* pKey)
 	return ret;
 }
 
-static void setValueForKey(const char* pKey, const char* pValue)
+void setValueForKey(const char* pKey, const char* pValue)
 {
 	xmlNodePtr rootNode;
 	xmlDocPtr doc;

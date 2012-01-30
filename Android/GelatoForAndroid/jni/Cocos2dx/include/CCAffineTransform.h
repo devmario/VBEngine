@@ -26,8 +26,6 @@ THE SOFTWARE.
 #define __COCOA_CGAFFINETRANSFORM_H__
 
 #include "CCGeometry.h"
-#include "CCPlatformMacros.h"
-
 namespace   cocos2d {
 
 struct CCAffineTransform {
@@ -35,24 +33,24 @@ struct CCAffineTransform {
   CGFloat tx, ty;
 };
 
-CC_DLL CCAffineTransform __CCAffineTransformMake(CGFloat a, CGFloat b, CGFloat c, CGFloat d, CGFloat tx, CGFloat ty);
+CCAffineTransform __CCAffineTransformMake(CGFloat a, CGFloat b, CGFloat c, CGFloat d, CGFloat tx, CGFloat ty);
 #define CCAffineTransformMake __CCAffineTransformMake
 
-CC_DLL CCPoint __CCPointApplyAffineTransform(const CCPoint& point, const CCAffineTransform& t);
+CCPoint __CCPointApplyAffineTransform(CCPoint point, CCAffineTransform t);
 #define CCPointApplyAffineTransform __CCPointApplyAffineTransform
 
-CC_DLL CCSize __CCSizeApplyAffineTransform(const CCSize& size, const CCAffineTransform& t);
+CCSize __CCSizeApplyAffineTransform(CCSize size, CCAffineTransform t);
 #define CCSizeApplyAffineTransform __CCSizeApplyAffineTransform
 
-CC_DLL CCAffineTransform CCAffineTransformMakeIdentity();
-CC_DLL CCRect CCRectApplyAffineTransform(const CCRect& rect, const CCAffineTransform& anAffineTransform);
+CCAffineTransform CCAffineTransformMakeIdentity();
+CCRect CCRectApplyAffineTransform(CCRect rect, CCAffineTransform anAffineTransform);
 
-CC_DLL CCAffineTransform CCAffineTransformTranslate(const CCAffineTransform& t, float tx, float ty);
-CC_DLL CCAffineTransform CCAffineTransformRotate(const CCAffineTransform& aTransform, CGFloat anAngle);
-CC_DLL CCAffineTransform CCAffineTransformScale(const CCAffineTransform& t, CGFloat sx, CGFloat sy);
-CC_DLL CCAffineTransform CCAffineTransformConcat(const CCAffineTransform& t1, const CCAffineTransform& t2);
-CC_DLL bool CCAffineTransformEqualToTransform(const CCAffineTransform& t1, const CCAffineTransform& t2);
-CC_DLL CCAffineTransform CCAffineTransformInvert(const CCAffineTransform& t);
+CCAffineTransform CCAffineTransformTranslate(CCAffineTransform t, float tx, float ty);
+CCAffineTransform CCAffineTransformRotate(CCAffineTransform aTransform, CGFloat anAngle);
+CCAffineTransform CCAffineTransformScale(CCAffineTransform t, CGFloat sx, CGFloat sy);
+CCAffineTransform CCAffineTransformConcat(CCAffineTransform t1,CCAffineTransform t2);
+bool CCAffineTransformEqualToTransform(CCAffineTransform t1,CCAffineTransform t2);
+CCAffineTransform CCAffineTransformInvert(CCAffineTransform t);
 
 extern const CCAffineTransform CCAffineTransformIdentity;
 }//namespace   cocos2d 

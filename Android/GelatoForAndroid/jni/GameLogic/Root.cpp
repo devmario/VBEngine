@@ -104,6 +104,7 @@ Root::Root() {
     const char* tempPath = CCFileUtils::fullPathFromRelativePath("Info.plist");
     int tempLen = strlen(tempPath);
     
+#ifdef __VB_IPHONE__
     //get resource path
     char* resourcePath = (char*)malloc(sizeof(char)*(tempLen-10));
     strncpy(resourcePath, tempPath, tempLen-11);
@@ -118,11 +119,18 @@ Root::Root() {
     strcat(documentsPath, "Documents");
     //    cout << documentsPath << '\n';
     
-    //    VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [documentDirectory UTF8String], 480, 320, 480, 320);
-    VBEngineStart(resourcePath, documentsPath, 480, 320, 480, 320);
-    
+    VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [documentDirectory UTF8String], 480, 320, 480, 320);
+
     free(resourcePath);
     free(documentsPath);
+#endif
+
+#ifdef __ANDROID__
+    const char* resourcePath = "/mnt/sdcard/GelatoMania/resource";
+    const char* documentsPath = "/mnt/sdcard/GelatoMania/document";
+
+    VBEngineStart(resourcePath, documentsPath, 480, 320, 480, 320);
+#endif
     
     top = new VBModel();
     this->addChild((CCLayer*)top);

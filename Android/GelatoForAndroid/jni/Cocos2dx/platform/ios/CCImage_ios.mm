@@ -328,55 +328,6 @@ static bool _isValidFontName(const char *fontName)
     return ret;
 }
 
-static CGSize _caculateStringSizeWithFontOrZFont(NSString *str, id font, CGSize *constrainSize, bool isZfont)
-{
-    NSArray *listItems = [str componentsSeparatedByString: @"\n"];
-    CGSize dim = CGSizeZero;
-    
-    for (NSString *s in listItems)
-    {
-        CGSize tmp;
-        if (isZfont)
-        {
-            tmp = [FontLabelStringDrawingHelper sizeWithZFont:str zfont:font];
-        }
-        else
-        {
-           tmp = [s sizeWithFont:font]; 
-        }
-        
-        if (tmp.width > dim.width)
-        {
-           dim.width = tmp.width; 
-        }
-        
-        // Should break the string into more lines, so should add the height
-        if (constrainSize->width > 0 && constrainSize->width < tmp.width)
-        {
-            int lines = ceil(tmp.width / constrainSize->width);
-            dim.height += tmp.height * lines;
-        }
-        else
-        {
-            dim.height += tmp.height;
-        }
-    }
-    
-    // Should not exceed the height
-    if (constrainSize->height > 0)
-    {
-        dim.height = constrainSize->height;
-    }
-    
-    // Should not exceed the width;
-    if (constrainSize->width > 0)
-    {
-        dim.width = constrainSize->width;
-    }
-    
-    return dim;
-}
-
 static bool _initWithString(const char * pText, cocos2d::CCImage::ETextAlign eAlign, const char * pFontName, int nSize, tImageInfo* pInfo)
 {
     bool bRet = false;
@@ -386,16 +337,14 @@ static bool _initWithString(const char * pText, cocos2d::CCImage::ETextAlign eAl
         
         NSString * str  = [NSString stringWithUTF8String:pText];
         NSString * fntName = [NSString stringWithUTF8String:pFontName];
-        CGSize dim, constrainSize;
-        constrainSize.width = pInfo->width;
-        constrainSize.height = pInfo->height;
+        CGSize dim;
         
         // create the font   
         id font;
         font = [UIFont fontWithName:fntName size:nSize];  
         if (font)
         {
-                dim = _caculateStringSizeWithFontOrZFont(str, font, &constrainSize, false);
+                dim = [str sizeWithFont:font];
         }      
         
 #if CC_FONT_LABEL_SUPPORT
@@ -404,8 +353,8 @@ static bool _initWithString(const char * pText, cocos2d::CCImage::ETextAlign eAl
 		        font = [[FontManager sharedManager] zFontWithName:fntName pointSize:nSize];
 		        if (font)
                 {
-                    //dim = [str sizeWithZFont:font];
-                    dim =_caculateStringSizeWithFontOrZFont(str, font, &constrainSize, true);
+                        //dim = [str sizeWithZFont:font];
+                        dim = [FontLabelStringDrawingHelper sizeWithZFont:str zfont:font];
                 }  
 	    }
 #endif // CC_FONT_LABEL_SUPPORT
@@ -422,14 +371,25 @@ static bool _initWithString(const char * pText, cocos2d::CCImage::ETextAlign eAl
                 
                 if (font)
                 {
-                    dim = _caculateStringSizeWithFontOrZFont(str, font, &constrainSize, false);
+                        dim = [str sizeWithFont:font];
                 }  
+        }
+        
+        if (pInfo->width != 0 || pInfo->height != 0)
+        {
+                dim.width = pInfo->width;
+                dim.height = pInfo->height;
+        }
+        else
+        {
+                pInfo->width = dim.width;
+                pInfo->height = dim.height;
         }
 
         CC_BREAK_IF(! font);
         
-        unsigned char* data = new unsigned char[(int)(dim.width * dim.height * 4)];
-        memset(data, 0, (int)(dim.width * dim.height * 4));
+        unsigned char* data = new unsigned char[pInfo->width * pInfo->height * 4];
+        memset(data, 0, pInfo->width * pInfo->height * 4);
         
         // draw text
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();    
@@ -475,8 +435,6 @@ static bool _initWithString(const char * pText, cocos2d::CCImage::ETextAlign eAl
         pInfo->hasAlpha = true;
         pInfo->isPremultipliedAlpha = true;
         pInfo->bitsPerComponent = 8;
-        pInfo->width = dim.width;
-        pInfo->height = dim.height;
         bRet = true;
     } while (0);
 
@@ -505,16 +463,6 @@ bool CCImage::initWithImageFile(const char * strPath, EImageFormat eImgFmt/* = e
 {
     CCFileData data(CCFileUtils::fullPathFromRelativePath(strPath), "rb");
     return initWithImageData(data.getBuffer(), data.getSize(), eImgFmt);
-}
-
-bool CCImage::initWithImageFileThreadSafe(const char *fullpath, EImageFormat imageType)
-{
-	  CC_UNUSED_PARAM(imageType);
-	  /*
-	   * CCFileUtils::fullPathFromRelativePath() is not thread-safe, it use autorelease().
-	   */
-    CCFileData data(fullpath, "rb");
-    return initWithImageData(data.getBuffer(), data.getSize(), imageType);
 }
 
 bool CCImage::initWithImageData(void * pData, 

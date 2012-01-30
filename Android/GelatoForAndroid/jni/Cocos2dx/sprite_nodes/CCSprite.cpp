@@ -37,7 +37,6 @@ THE SOFTWARE.
 #include "CCGeometry.h"
 #include "CCTexture2D.h"
 #include "CCAffineTransform.h"
-#include "CCDirector.h"
 
 #include <string.h>
 
@@ -60,8 +59,7 @@ struct transformValues_ {
 	bool    visible;    
 };
 
-
-CCSprite* CCSprite::spriteWithBatchNode(CCSpriteBatchNode *batchNode, const CCRect& rect)
+CCSprite* CCSprite::spriteWithBatchNode(CCSpriteBatchNode *batchNode, CCRect rect)
 {
 	CCSprite *pobSprite = new CCSprite();
 	if (pobSprite && pobSprite->initWithBatchNode(batchNode, rect))
@@ -73,7 +71,7 @@ CCSprite* CCSprite::spriteWithBatchNode(CCSpriteBatchNode *batchNode, const CCRe
 	return NULL;
 }
 
-bool CCSprite::initWithBatchNode(CCSpriteBatchNode *batchNode, const CCRect& rect)
+bool CCSprite::initWithBatchNode(CCSpriteBatchNode *batchNode, CCRect rect)
 {
 	if (initWithTexture(batchNode->getTexture(), rect))
     {
@@ -83,7 +81,7 @@ bool CCSprite::initWithBatchNode(CCSpriteBatchNode *batchNode, const CCRect& rec
 	return false;
 }
 
-bool CCSprite::initWithBatchNodeRectInPixels(CCSpriteBatchNode *batchNode, const CCRect& rect)
+bool CCSprite::initWithBatchNodeRectInPixels(CCSpriteBatchNode *batchNode, CCRect rect)
 {
 	if (initWithTexture(batchNode->getTexture()))
     {
@@ -106,7 +104,7 @@ CCSprite* CCSprite::spriteWithTexture(CCTexture2D *pTexture)
 	return NULL;
 }
 
-CCSprite* CCSprite::spriteWithTexture(CCTexture2D *pTexture, const CCRect& rect)
+CCSprite* CCSprite::spriteWithTexture(CCTexture2D *pTexture, CCRect rect)
 {
     CCSprite *pobSprite = new CCSprite();
 	if (pobSprite && pobSprite->initWithTexture(pTexture, rect))
@@ -118,13 +116,13 @@ CCSprite* CCSprite::spriteWithTexture(CCTexture2D *pTexture, const CCRect& rect)
 	return NULL;
 }
 
-CCSprite* CCSprite::spriteWithTexture(CCTexture2D *pTexture, const CCRect& rect, const CCPoint& offset)
+CCSprite* CCSprite::spriteWithTexture(CCTexture2D *pTexture, CCRect rect, CCPoint offset)
 {
     CC_UNUSED_PARAM(pTexture);
     CC_UNUSED_PARAM(rect);
     CC_UNUSED_PARAM(offset);
 	// not implement
-	CCAssert(0, "");
+	assert(0);
 	return NULL;
 }
 
@@ -140,7 +138,7 @@ CCSprite* CCSprite::spriteWithFile(const char *pszFileName)
 	return NULL;
 }
 
-CCSprite* CCSprite::spriteWithFile(const char *pszFileName, const CCRect& rect)
+CCSprite* CCSprite::spriteWithFile(const char *pszFileName, CCRect rect)
 {
     CCSprite *pobSprite = new CCSprite();
 	if (pobSprite && pobSprite->initWithFile(pszFileName, rect))
@@ -223,9 +221,9 @@ bool CCSprite::init(void)
 	return true;
 }
 
-bool CCSprite::initWithTexture(CCTexture2D *pTexture, const CCRect& rect)
+bool CCSprite::initWithTexture(CCTexture2D *pTexture, CCRect rect)
 {
-	CCAssert(pTexture != NULL, "");
+	assert(pTexture != NULL);
 	// IMPORTANT: [self init] and not [super init];
 	init();
 	setTexture(pTexture);
@@ -236,7 +234,7 @@ bool CCSprite::initWithTexture(CCTexture2D *pTexture, const CCRect& rect)
 
 bool CCSprite::initWithTexture(CCTexture2D *pTexture)
 {
-	CCAssert(pTexture != NULL, "");
+	assert(pTexture != NULL);
 
 	CCRect rect = CCRectZero;
 	rect.size = pTexture->getContentSize();
@@ -246,7 +244,7 @@ bool CCSprite::initWithTexture(CCTexture2D *pTexture)
 
 bool CCSprite::initWithFile(const char *pszFilename)
 {
-	CCAssert(pszFilename != NULL, "");
+	assert(pszFilename != NULL);
 
 	CCTexture2D *pTexture = CCTextureCache::sharedTextureCache()->addImage(pszFilename);
 	if (pTexture)
@@ -262,9 +260,9 @@ bool CCSprite::initWithFile(const char *pszFilename)
 	return false;
 }
 
-bool CCSprite::initWithFile(const char *pszFilename, const CCRect& rect)
+bool CCSprite::initWithFile(const char *pszFilename, CCRect rect)
 {
-	CCAssert(pszFilename != NULL, "");
+	assert(pszFilename != NULL);
 
 	CCTexture2D *pTexture = CCTextureCache::sharedTextureCache()->addImage(pszFilename);
 	if (pTexture)
@@ -280,7 +278,7 @@ bool CCSprite::initWithFile(const char *pszFilename, const CCRect& rect)
 
 bool CCSprite::initWithSpriteFrame(CCSpriteFrame *pSpriteFrame)
 {
-	CCAssert(pSpriteFrame != NULL, "");
+	assert(pSpriteFrame != NULL);
 
 	bool bRet = initWithTexture(pSpriteFrame->getTexture(), pSpriteFrame->getRect());
 	setDisplayFrame(pSpriteFrame);
@@ -290,7 +288,7 @@ bool CCSprite::initWithSpriteFrame(CCSpriteFrame *pSpriteFrame)
 
 bool CCSprite::initWithSpriteFrameName(const char *pszSpriteFrameName)
 {
-	CCAssert(pszSpriteFrameName != NULL, "");
+	assert(pszSpriteFrameName != NULL);
 
 	CCSpriteFrame *pFrame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(pszSpriteFrameName);
 	return initWithSpriteFrame(pFrame);
@@ -310,12 +308,12 @@ CCSprite* CCSprite::initWithCGImage(CGImageRef pImage)
 /*
 CCSprite* CCSprite::initWithCGImage(CGImageRef pImage, const char *pszKey)
 {
-	CCAssert(pImage != NULL);
+	assert(pImage != NULL);
 
 	// XXX: possible bug. See issue #349. New API should be added
 	CCTexture2D *pTexture = CCTextureCache::sharedTextureCache()->addCGImage(pImage, pszKey);
 
-	const CCSize& size = pTexture->getContentSize();
+	CCSize size = pTexture->getContentSize();
 	CCRect rect = CCRectMake(0 ,0, size.width, size.height);
 
 	return initWithTexture(texture, rect);
@@ -325,6 +323,7 @@ CCSprite* CCSprite::initWithCGImage(CGImageRef pImage, const char *pszKey)
 CCSprite::CCSprite()
 : m_pobTexture(NULL)
 {
+    init();
 }
 
 CCSprite::~CCSprite(void)
@@ -357,14 +356,14 @@ void CCSprite::useBatchNode(CCSpriteBatchNode *batchNode)
     m_pobBatchNode = batchNode;
 }
 
-void CCSprite::setTextureRect(const CCRect& rect)
+void CCSprite::setTextureRect(CCRect rect)
 {
 	CCRect rectInPixels = CC_RECT_POINTS_TO_PIXELS(rect);
 	setTextureRectInPixels(rectInPixels, false, rectInPixels.size);
 }
 
 
-void CCSprite::setTextureRectInPixels(const CCRect& rect, bool rotated, const CCSize& size)
+void CCSprite::setTextureRectInPixels(CCRect rect, bool rotated, CCSize size)
 {
 	m_obRectInPixels = rect;
 	m_obRect = CC_RECT_PIXELS_TO_POINTS(rect);
@@ -413,7 +412,7 @@ void CCSprite::setTextureRectInPixels(const CCRect& rect, bool rotated, const CC
 }
 
 
-void CCSprite::updateTextureCoords(const CCRect& rect)
+void CCSprite::updateTextureCoords(CCRect rect)
 {
 	CCTexture2D *tex = m_bUsesBatchNode ? m_pobTextureAtlas->getTexture() : m_pobTexture;
 	if (! tex)
@@ -496,7 +495,7 @@ void CCSprite::updateTextureCoords(const CCRect& rect)
 
 void CCSprite::updateTransform(void)
 {
-	CCAssert(m_bUsesBatchNode, "");
+	assert(m_bUsesBatchNode);
 
 	// optimization. Quick return if not dirty
 	if (! m_bDirty)
@@ -589,7 +588,7 @@ void CCSprite::updateTransform(void)
 			// 4th: Matrix multiplication
 			matrix = CCAffineTransformConcat( matrix, newMatrix);
 
-			prevHonor = ((CCSprite*)p)->getHonorParentTransform();
+			prevHonor = ((CCSprite*)p)->getHornorParentTransform();
 		}
 	}
 
@@ -651,7 +650,7 @@ void CCSprite::draw(void)
 {
 	CCNode::draw();
 
-	CCAssert(! m_bUsesBatchNode, "");
+	assert(! m_bUsesBatchNode);
 
 	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
 	// Needed states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
@@ -703,8 +702,8 @@ void CCSprite::draw(void)
     ccDrawPoly(vertices, 4, true);
 #elif CC_SPRITE_DEBUG_DRAW == 2
     // draw texture box
-    const CCSize& s = m_obRect.size;
-    const CCPoint& offsetPix = getOffsetPositionInPixels();
+    CCSize s = m_obRect.size;
+    CCPoint offsetPix = getOffsetPositionInPixels();
     CCPoint vertices[4] = {
         ccp(offsetPix.x,offsetPix.y), ccp(offsetPix.x+s.width,offsetPix.y),
         ccp(offsetPix.x+s.width,offsetPix.y+s.height), ccp(offsetPix.x,offsetPix.y+s.height)
@@ -727,12 +726,12 @@ void CCSprite::addChild(CCNode *pChild, int zOrder)
 
 void CCSprite::addChild(CCNode *pChild, int zOrder, int tag)
 {
-	CCAssert(pChild != NULL, "");
+	assert(pChild != NULL);
 	CCNode::addChild(pChild, zOrder, tag);
 
 	if (m_bUsesBatchNode)
 	{
-		CCAssert(((CCSprite*)pChild)->getTexture()->getName() == m_pobTextureAtlas->getTexture()->getName(), "");
+		assert(((CCSprite*)pChild)->getTexture()->getName() == m_pobTextureAtlas->getTexture()->getName());
 		unsigned int index = m_pobBatchNode->atlasIndexForChild((CCSprite*)(pChild), zOrder);
 		m_pobBatchNode->insertChild((CCSprite*)(pChild), index);
 	}
@@ -742,8 +741,8 @@ void CCSprite::addChild(CCNode *pChild, int zOrder, int tag)
 
 void CCSprite::reorderChild(CCNode *pChild, int zOrder)
 {
-    CCAssert(pChild != NULL, "");
-	CCAssert(m_pChildren->containsObject(pChild), "");
+    assert(pChild != NULL);
+	assert(m_pChildren->containsObject(pChild));
 
 	if (zOrder == pChild->getZOrder())
 	{
@@ -782,7 +781,7 @@ void CCSprite::removeAllChildrenWithCleanup(bool bCleanup)
         CCObject* pObject = NULL;
         CCARRAY_FOREACH(m_pChildren, pObject)
         {
-            CCSprite* pChild = dynamic_cast<CCSprite*>(pObject);
+            CCSprite* pChild = (CCSprite*) pObject;
             if (pChild)
             {
                 m_pobBatchNode->removeSpriteFromAtlas(pChild);
@@ -809,7 +808,7 @@ void CCSprite::setDirtyRecursively(bool bValue)
         CCObject* pObject = NULL;
         CCARRAY_FOREACH(m_pChildren, pObject)
         {
-            CCSprite* pChild = dynamic_cast<CCSprite*>(pObject);
+            CCSprite* pChild = (CCSprite*) pObject;
             if (pChild)
             {
                 pChild->setDirtyRecursively(true);
@@ -827,13 +826,13 @@ void CCSprite::setDirtyRecursively(bool bValue)
 						}											\
 					}
 
-void CCSprite::setPosition(const CCPoint& pos)
+void CCSprite::setPosition(CCPoint pos)
 {
 	CCNode::setPosition(pos);
     SET_DIRTY_RECURSIVELY();
 }
 
-void CCSprite::setPositionInPixels(const CCPoint& pos)
+void CCSprite::setPositionInPixels(CCPoint pos)
 {
 	CCNode::setPositionInPixels(pos);
 	SET_DIRTY_RECURSIVELY();
@@ -881,7 +880,7 @@ void CCSprite::setVertexZ(float fVertexZ)
 	SET_DIRTY_RECURSIVELY();
 }
 
-void CCSprite::setAnchorPoint(const CCPoint& anchor)
+void CCSprite::setAnchorPoint(CCPoint anchor)
 {
 	CCNode::setAnchorPoint(anchor);
 	SET_DIRTY_RECURSIVELY();
@@ -889,7 +888,7 @@ void CCSprite::setAnchorPoint(const CCPoint& anchor)
 
 void CCSprite::setIsRelativeAnchorPoint(bool bRelative)
 {
-	CCAssert(! m_bUsesBatchNode, "");
+	assert(! m_bUsesBatchNode);
 	CCNode::setIsRelativeAnchorPoint(bRelative);
 }
 
@@ -977,7 +976,7 @@ void CCSprite::setOpacity(GLubyte opacity)
 	updateColor();
 }
 
-const ccColor3B& CCSprite::getColor(void)
+ccColor3B CCSprite::getColor(void)
 {
 	if (m_bOpacityModifyRGB)
 	{
@@ -987,7 +986,7 @@ const ccColor3B& CCSprite::getColor(void)
 	return m_sColor;
 }
 
-void CCSprite::setColor(const ccColor3B& color3)
+void CCSprite::setColor(ccColor3B color3)
 {
     m_sColor = m_sColorUnmodified = color3;
 
@@ -1033,15 +1032,15 @@ void CCSprite::setDisplayFrame(CCSpriteFrame *pNewFrame)
 
 void CCSprite::setDisplayFrameWithAnimationName(const char *animationName, int frameIndex)
 {
-	CCAssert(animationName, "");
+	assert(animationName);
 
 	CCAnimation *a = CCAnimationCache::sharedAnimationCache()->animationByName(animationName);
 
-	CCAssert(a, "");
+	assert(a);
 
 	CCSpriteFrame *frame = a->getFrames()->getObjectAtIndex(frameIndex);
 
-	CCAssert(frame, "");
+	assert(frame);
 
 	setDisplayFrame(frame);
 }
@@ -1067,7 +1066,8 @@ CCSpriteFrame* CCSprite::displayedFrame(void)
 
 void CCSprite::updateBlendFunc(void)
 {
-	CCAssert (! m_bUsesBatchNode, "CCSprite: updateBlendFunc doesn't work when the sprite is rendered using a CCSpriteSheet");
+	// CCSprite: updateBlendFunc doesn't work when the sprite is rendered using a CCSpriteSheet
+	assert (! m_bUsesBatchNode);
 
 	// it's possible to have an untextured sprite
 	if (! m_pobTexture || ! m_pobTexture->getHasPremultipliedAlpha())
@@ -1087,11 +1087,11 @@ void CCSprite::updateBlendFunc(void)
 void CCSprite::setTexture(CCTexture2D *texture)
 {
 	// CCSprite: setTexture doesn't work when the sprite is rendered using a CCSpriteSheet
-	CCAssert(! m_bUsesBatchNode, "setTexture doesn't work when the sprite is rendered using a CCSpriteSheet");
+	assert(! m_bUsesBatchNode);
 
 	// we can not use RTTI, so we do not known the type of object
 	// accept texture==nil as argument
-	/*CCAssert((! texture) || dynamic_cast<CCTexture2D*>(texture));*/
+	/*assert((! texture) || dynamic_cast<CCTexture2D*>(texture));*/
 
 	CC_SAFE_RELEASE(m_pobTexture);
 

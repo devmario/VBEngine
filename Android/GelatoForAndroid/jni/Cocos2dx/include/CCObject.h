@@ -52,13 +52,13 @@ public:
 	CCObject(void);
 	virtual ~CCObject(void);
     
-    void release(void);
-	void retain(void);
+	virtual void release(void);
+	virtual void retain(void);
 	CCObject* autorelease(void);
 	CCObject* copy(void);
 	bool isSingleRefrence(void);
 	unsigned int retainCount(void);
-	virtual bool isEqual(const CCObject* pObject);
+	bool isEqual(const CCObject* pObject);
 
 	friend class CCAutoreleasePool;
 };

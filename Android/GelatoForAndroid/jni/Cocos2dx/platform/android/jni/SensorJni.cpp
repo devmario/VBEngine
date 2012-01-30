@@ -52,11 +52,10 @@ extern "C"
         // We need to invert to make it compatible with iOS.
         CCRect rcRect = CCEGLView::sharedOpenGLView().getViewPort();
         float fScreenScaleFactor = CCEGLView::sharedOpenGLView().getScreenScaleFactor();
-//         cocos2d::CCAccelerometer::sharedAccelerometer()->update((x - rcRect.origin.x) / fScreenScaleFactor,
-//             (y - rcRect.origin.y) / fScreenScaleFactor, 
-//             z, 
-//             timeStamp);
-		cocos2d::CCAccelerometer::sharedAccelerometer()->update(x, y, z, timeStamp);
+        cocos2d::CCAccelerometer::sharedAccelerometer()->update((x - rcRect.origin.x) / fScreenScaleFactor,
+            (y - rcRect.origin.y) / fScreenScaleFactor, 
+            z, 
+            timeStamp);
     }	
 
 	void enableAccelerometerJNI()
@@ -69,7 +68,6 @@ extern "C"
 									 "()V"))
 		{
 			t.env->CallStaticVoidMethod(t.classID, t.methodID);
-			t.env->DeleteLocalRef(t.classID);
 		}
 	}
 
@@ -83,7 +81,6 @@ extern "C"
 			"()V"))
 		{
 			t.env->CallStaticVoidMethod(t.classID, t.methodID);
-			t.env->DeleteLocalRef(t.classID);
 		}
 	}
 }

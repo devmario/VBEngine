@@ -54,7 +54,6 @@ extern "C"
 			"()V"))
 		{
 			t.env->CallStaticVoidMethod(t.classID, t.methodID);
-			t.env->DeleteLocalRef(t.classID);
 		}
     }
 

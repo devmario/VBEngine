@@ -88,6 +88,7 @@ bool CCTransitionScene::initWithDuration(ccTime t, CCScene *scene)
 		m_pInScene->retain();
 		m_pOutScene = CCDirector::sharedDirector()->getRunningScene();
 		m_pOutScene->retain();
+		m_eSceneType = ccTransitionScene;
 
 		CCAssert( m_pInScene != m_pOutScene, "Incoming scene must be different from the outgoing scene" );
 
@@ -1034,7 +1035,7 @@ CCTransitionFade::~CCTransitionFade()
 }
 
 
-CCTransitionFade * CCTransitionFade::transitionWithDuration(ccTime duration, CCScene *scene, const ccColor3B& color)
+CCTransitionFade * CCTransitionFade::transitionWithDuration(ccTime duration, CCScene *scene, ccColor3B color)
 {
 	CCTransitionFade * pTransition = new CCTransitionFade();
 	pTransition->initWithDuration(duration, scene, color);
@@ -1042,7 +1043,7 @@ CCTransitionFade * CCTransitionFade::transitionWithDuration(ccTime duration, CCS
 	return pTransition;
 }
 
-bool CCTransitionFade::initWithDuration(ccTime duration, CCScene *scene, const ccColor3B& color)
+bool CCTransitionFade::initWithDuration(ccTime duration, CCScene *scene, ccColor3B color)
 {
 	if (CCTransitionScene::initWithDuration(duration, scene))
 	{
@@ -1349,7 +1350,7 @@ void CCTransitionFadeTR::onEnter()
 }
 
 
-CCActionInterval*  CCTransitionFadeTR::actionWithSize(const ccGridSize& size)
+CCActionInterval*  CCTransitionFadeTR::actionWithSize(ccGridSize size)
 {
 	return CCFadeOutTRTiles::actionWithSize(size, m_fDuration);
 }
@@ -1373,7 +1374,7 @@ CCTransitionFadeBL::~CCTransitionFadeBL()
 {
 }
 
-CCActionInterval*  CCTransitionFadeBL::actionWithSize(const ccGridSize& size)
+CCActionInterval*  CCTransitionFadeBL::actionWithSize(ccGridSize size)
 {
 	return CCFadeOutBLTiles::actionWithSize(size, m_fDuration);
 }
@@ -1390,7 +1391,7 @@ CCTransitionFadeUp::~CCTransitionFadeUp()
 {
 }
 
-CCActionInterval* CCTransitionFadeUp::actionWithSize(const ccGridSize& size)
+CCActionInterval* CCTransitionFadeUp::actionWithSize(ccGridSize size)
 {
 	return CCFadeOutUpTiles::actionWithSize(size, m_fDuration);
 }
@@ -1407,7 +1408,7 @@ CCTransitionFadeDown::~CCTransitionFadeDown()
 {
 }
 
-CCActionInterval* CCTransitionFadeDown::actionWithSize(const ccGridSize& size)
+CCActionInterval* CCTransitionFadeDown::actionWithSize(ccGridSize size)
 {
 	return CCFadeOutDownTiles::actionWithSize(size, m_fDuration);
 }

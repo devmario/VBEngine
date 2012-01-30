@@ -85,9 +85,7 @@ bool CCSAXParser::parse(const char *pszFile)
 	/*
 	 * this is to debug memory for regression tests
 	 */
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_BADA)
 	xmlMemoryDump();
-#endif
 	
 	return true;
 }

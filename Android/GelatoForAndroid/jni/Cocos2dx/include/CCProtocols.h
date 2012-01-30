@@ -39,12 +39,12 @@ public:
     /** sets Color
      @since v0.8
      */
-    virtual void setColor(const ccColor3B& color) = 0;
+    virtual void setColor(ccColor3B color) = 0;
 
 	/** returns the color
 	 @since v0.8
 	 */
-	virtual const ccColor3B& getColor(void) = 0;
+	virtual ccColor3B getColor(void) = 0;
 
     // returns the opacity
     virtual GLubyte getOpacity(void) = 0;
@@ -63,12 +63,12 @@ public:
 	 Textures with premultiplied alpha will have this property by default on YES. Otherwise the default value is NO
 	 @since v0.8
 	 */
-	virtual void setIsOpacityModifyRGB(bool bValue) = 0;
+	virtual void setIsOpacityModifyRGB(bool bValue) {CC_UNUSED_PARAM(bValue);}
 
 	/** returns whether or not the opacity will be applied using glColor(R,G,B,opacity) or glColor(opacity, opacity, opacity, opacity);
 	 @since v0.8
 	 */
-	virtual bool getIsOpacityModifyRGB(void) = 0;
+	virtual bool getIsOpacityModifyRGB(void) { return false;}
 };
 
 /**
@@ -101,7 +101,7 @@ public:
 	virtual CCTexture2D* getTexture(void) = 0;
 
 	// sets a new texture. it will be retained
-    virtual void setTexture(CCTexture2D *texture) = 0;
+    virtual void setTexture(CCTexture2D *texture) {CC_UNUSED_PARAM(texture);}
 };
 
 //! @brief Common interface for Labels

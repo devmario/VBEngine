@@ -23,9 +23,8 @@ THE SOFTWARE.
 ****************************************************************************/
 
 #include "CCFileUtils.h"
-#include "CCDirector.h"
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_IOS)
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_IOS) && (CC_TARGET_PLATFORM != CC_PLATFORM_AIRPLAY)
 
 #include <stack>
 #include <libxml/parser.h>
@@ -99,9 +98,7 @@ public:
             m_pCurDict = new CCDictionary<std::string, CCObject*>();
             if(! m_pRootDict)
             {
-				// Because it will call m_pCurDict->release() later, so retain here.
                 m_pRootDict = m_pCurDict;
-				m_pRootDict->retain();
             }
             m_tState = SAX_DICT;
 
@@ -123,8 +120,7 @@ public:
                 CCDictionary<std::string, CCObject*>* pPreDict = m_tDictStack.top();
                 pPreDict->setObject(m_pCurDict, m_sCurKey);
             }
-
-			m_pCurDict->release();
+            m_pCurDict->autorelease();
 
             // record the dict state
             m_tStateStack.push(m_tState);
@@ -289,15 +285,7 @@ std::string& CCFileUtils::ccRemoveHDSuffixFromFile(std::string& path)
 
 CCDictionary<std::string, CCObject*> *CCFileUtils::dictionaryWithContentsOfFile(const char *pFileName)
 {
-	CCDictionary<std::string, CCObject*> *ret = dictionaryWithContentsOfFileThreadSafe(pFileName);
-	ret->autorelease();
-
-	return ret;
-}
-
-CCDictionary<std::string, CCObject*> *CCFileUtils::dictionaryWithContentsOfFileThreadSafe(const char *pFileName)
-{
-	CCDictMaker tMaker;
+    CCDictMaker tMaker;
     return tMaker.dictionaryWithContentsOfFile(pFileName);
 }
 
@@ -372,20 +360,4 @@ NS_CC_END;
 #include "android/CCFileUtils_android.cpp"
 #endif
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE)
-#include "marmalade/CCFileUtils_marmalade.cpp"
-#endif
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_BADA)
-#include "bada/CCFileUtils_bada.cpp"
-#endif
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_QNX)
-#include "qnx/CCFileUtils_qnx.cpp"
-#endif
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-#include "Linux/CCFileUtils_Linux.cpp"
-#endif
-
-#endif // (CC_TARGET_PLATFORM != CC_PLATFORM_IOS)
+#endif // (CC_TARGET_PLATFORM != CC_PLATFORM_IOS && CC_TARGET_PLATFORM != CC_PLATFORM_AIRPLAY)

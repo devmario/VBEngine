@@ -28,7 +28,6 @@ THE SOFTWARE.
 #include "CCGL.h"
 
 #include "CCDrawingPrimitives.h"
-#include "CCDirector.h"
 
 using namespace std;
 namespace   cocos2d {

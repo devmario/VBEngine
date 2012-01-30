@@ -33,7 +33,6 @@ THE SOFTWARE.
 #include "CCFileUtils.h"
 #include "CCDirector.h"
 #include "CCSAXParser.h"
-#include "support/zip_support/unzip.h"
 
 #define MAX_PATH 260
 
@@ -238,9 +237,15 @@ static void static_addValueToCCDict(id key, id value, CCDictionary<std::string, 
 
 namespace cocos2d {
 
+    // record the resource path
+    static char s_pszResourcePath[MAX_PATH] = {0};
+
     void CCFileUtils::setResourcePath(const char *pszResourcePath)
     {
-        assert(0);
+        // NSAssert(pszResourcePath != NULL, "[FileUtils setResourcePath] -- wrong resource path");
+        // NSAssert(strlen(pszResourcePath) <= MAX_PATH, "[FileUtils setResourcePath] -- resource path too long");
+
+        strcpy(s_pszResourcePath, pszResourcePath);
     }
     
     int CCFileUtils::ccLoadFileIntoMemory(const char *filename, unsigned char **out)
@@ -292,16 +297,7 @@ namespace cocos2d {
         pRet->m_sString += pszFilename;
         return pRet->m_sString.c_str();
     }
-    
     CCDictionary<std::string, CCObject*> *CCFileUtils::dictionaryWithContentsOfFile(const char *pFileName)
-    {
-        CCDictionary<std::string, CCObject*> *ret = dictionaryWithContentsOfFileThreadSafe(pFileName);
-	      ret->autorelease();
-	      
-	      return ret;
-    }
-    
-    CCDictionary<std::string, CCObject*> *CCFileUtils::dictionaryWithContentsOfFileThreadSafe(const char *pFileName)
     {
         NSString* pPath = [NSString stringWithUTF8String:pFileName];
         NSDictionary* pDict = [NSDictionary dictionaryWithContentsOfFile:pPath];
@@ -311,10 +307,9 @@ namespace cocos2d {
             id value = [pDict objectForKey:key];
             static_addValueToCCDict(key, value, pRet);
         }
-
+        pRet->autorelease();
         return pRet;
     }
-    
     unsigned char* CCFileUtils::getFileData(const char* pszFileName, const char* pszMode, unsigned long * pSize)
     {
         unsigned char * pBuffer = NULL;
@@ -369,48 +364,6 @@ namespace cocos2d {
         std::string strRet = [documentsDirectory UTF8String];
         strRet.append("/");
         return strRet;
-    }
-    
-    unsigned char* CCFileUtils::getFileDataFromZip(const char* pszZipFilePath, const char* pszFileName, unsigned long * pSize)
-    {
-		    unsigned char * pBuffer = NULL;
-		    unzFile pFile = NULL;
-		    *pSize = 0;
-		
-		    do 
-		    {
-		        CC_BREAK_IF(!pszZipFilePath || !pszFileName);
-		        CC_BREAK_IF(strlen(pszZipFilePath) == 0);
-		
-		        pFile = unzOpen(pszZipFilePath);
-		        CC_BREAK_IF(!pFile);
-		
-		        int nRet = unzLocateFile(pFile, pszFileName, 1);
-		        CC_BREAK_IF(UNZ_OK != nRet);
-		
-		        char szFilePathA[260];
-		        unz_file_info FileInfo;
-		        nRet = unzGetCurrentFileInfo(pFile, &FileInfo, szFilePathA, sizeof(szFilePathA), NULL, 0, NULL, 0);
-		        CC_BREAK_IF(UNZ_OK != nRet);
-		
-		        nRet = unzOpenCurrentFile(pFile);
-		        CC_BREAK_IF(UNZ_OK != nRet);
-		
-		        pBuffer = new unsigned char[FileInfo.uncompressed_size];
-		        int nSize = 0;
-		        nSize = unzReadCurrentFile(pFile, pBuffer, FileInfo.uncompressed_size);
-		        CCAssert(nSize == 0 || nSize == (int)FileInfo.uncompressed_size, "the file size is wrong");
-		
-		        *pSize = FileInfo.uncompressed_size;
-		        unzCloseCurrentFile(pFile);
-		    } while (0);
-		
-		    if (pFile)
-		    {
-		        unzClose(pFile);
-		    }
-
-				return pBuffer;
     }
 
 }//namespace cocos2d

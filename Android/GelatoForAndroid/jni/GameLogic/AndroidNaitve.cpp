@@ -1,5 +1,10 @@
 #include "AndroidNaitve.h"
 
+#include "Root.h"
+#include "cocos2d.h"
+#include "AppDelegate.h"
+using namespace cocos2d;
+
 // ========================= JNI Function =================================
 
 // 프로세스 실행 후 한번만 실행
@@ -7,6 +12,27 @@ void nativeInit(JNIEnv* env,jobject thiz)
 {
 	// LOGV("nativeInit");
 	java_dismissDialog();  // dismiss dialog in java area
+
+	int w = 480;
+	int h = 320;
+
+    if (!cocos2d::CCDirector::sharedDirector()->getOpenGLView())
+    {
+	cocos2d::CCEGLView *view = &cocos2d::CCEGLView::sharedOpenGLView();
+        view->setFrameWidthAndHeight(w, h);
+        // if you want to run in WVGA with HVGA resource, set it
+        // view->create(480, 320);
+        cocos2d::CCDirector::sharedDirector()->setOpenGLView(view);
+
+        AppDelegate *pAppDelegate = new AppDelegate();
+        cocos2d::CCApplication::sharedApplication().run();
+    }
+    else
+    {
+        cocos2d::CCTextureCache::reloadAllTextures();
+        cocos2d::CCDirector::sharedDirector()->setGLDefaultValues();
+    }
+
 }
 
 // 화면 크기 변환시 (ex:가로,세로 전환)

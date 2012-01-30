@@ -30,7 +30,8 @@ THE SOFTWARE.
 #include "CCTouch.h"
 #include "CCTexture2D.h"
 #include "support/data_support/ccCArray.h"
-#include "ccMacros.h"
+
+#include <assert.h>
 #include <algorithm>
 
 /**
@@ -130,7 +131,7 @@ void CCTouchDispatcher::forceAddHandler(CCTouchHandler *pHandler, CCMutableArray
  
  		    if (h->getDelegate() == pHandler->getDelegate())
  		    {
- 			    CCAssert(0, "");
+ 			    assert(0);
  			    return;
  		    }
          }
@@ -140,7 +141,9 @@ void CCTouchDispatcher::forceAddHandler(CCTouchHandler *pHandler, CCMutableArray
 }
 
 void CCTouchDispatcher::addStandardDelegate(CCTouchDelegate *pDelegate, int nPriority)
-{	
+{
+	pDelegate->m_eTouchDelegateType = ccTouchDelegateStandardBit;
+	
 	CCTouchHandler *pHandler = CCStandardTouchHandler::handlerWithDelegate(pDelegate, nPriority);
 	if (! m_bLocked)
 	{
@@ -148,22 +151,15 @@ void CCTouchDispatcher::addStandardDelegate(CCTouchDelegate *pDelegate, int nPri
 	}
 	else
 	{
-		/* If pHandler is contained in m_pHandlersToRemove, if so remove it from m_pHandlersToRemove and retrun.
-		 * Refer issue #752(cocos2d-x)
-		 */
-		if (ccCArrayContainsValue(m_pHandlersToRemove, pDelegate))
-		{
-			ccCArrayRemoveValue(m_pHandlersToRemove, pDelegate);
-			return;
-		}
-
 		m_pHandlersToAdd->addObject(pHandler);
 		m_bToAdd = true;
 	}
 }
 
 void CCTouchDispatcher::addTargetedDelegate(CCTouchDelegate *pDelegate, int nPriority, bool bSwallowsTouches)
-{	
+{
+	pDelegate->m_eTouchDelegateType = ccTouchDelegateTargetedBit;
+	
 	CCTouchHandler *pHandler = CCTargetedTouchHandler::handlerWithDelegate(pDelegate, nPriority, bSwallowsTouches);
 	if (! m_bLocked)
 	{
@@ -171,15 +167,6 @@ void CCTouchDispatcher::addTargetedDelegate(CCTouchDelegate *pDelegate, int nPri
 	}
 	else
 	{
-		/* If pHandler is contained in m_pHandlersToRemove, if so remove it from m_pHandlersToRemove and retrun.
-		 * Refer issue #752(cocos2d-x)
-		 */
-		if (ccCArrayContainsValue(m_pHandlersToRemove, pDelegate))
-		{
-			ccCArrayRemoveValue(m_pHandlersToRemove, pDelegate);
-			return;
-		}
-		
 		m_pHandlersToAdd->addObject(pHandler);
 		m_bToAdd = true;
 	}
@@ -202,6 +189,7 @@ void CCTouchDispatcher::forceRemoveDelegate(CCTouchDelegate *pDelegate)
 			break;
 		}
 	}
+
 
     // remove handler from m_pTargetedHandlers
 	for (iter = m_pTargetedHandlers->begin(); iter != m_pTargetedHandlers->end(); ++iter)
@@ -228,16 +216,6 @@ void CCTouchDispatcher::removeDelegate(CCTouchDelegate *pDelegate)
 	}
 	else
 	{
-		/* If pHandler is contained in m_pHandlersToAdd, if so remove it from m_pHandlersToAdd and retrun.
-		 * Refer issue #752(cocos2d-x)
-		 */
-		CCTouchHandler *pHandler = findHandler(m_pHandlersToAdd, pDelegate);
-		if (pHandler)
-		{
-			m_pHandlersToAdd->removeObject(pHandler);
-			return;
-		}
-
 		ccCArrayAppendValue(m_pHandlersToRemove, pDelegate);
 		m_bToRemove = true;
 	}
@@ -284,37 +262,20 @@ CCTouchHandler* CCTouchDispatcher::findHandler(CCTouchDelegate *pDelegate)
 	return NULL;
 }
 
-CCTouchHandler* CCTouchDispatcher::findHandler(CCMutableArray<CCTouchHandler*> *pArray, CCTouchDelegate *pDelegate)
-{
-	CCAssert(pArray != NULL && pDelegate != NULL, "");
-
-	CCMutableArray<CCTouchHandler*>::CCMutableArrayIterator iter;
-
-	for (iter = pArray->begin(); iter != pArray->end(); ++iter)
-	{
-		if ((*iter)->getDelegate() == pDelegate)
-		{
-			return *iter;
-		}
-	}
-
-	return NULL;
-}
-
 void CCTouchDispatcher::rearrangeHandlers(CCMutableArray<CCTouchHandler*> *pArray)
 {
-	std::sort(pArray->begin(), pArray->end(), less);
+	std::sort(pArray->begin(), pArray->getLastValidIterator(), less);
 }
 
 void CCTouchDispatcher::setPriority(int nPriority, CCTouchDelegate *pDelegate)
 {
-    CCAssert(pDelegate != NULL, "");
+    assert(pDelegate != NULL);
 
 	CCTouchHandler *handler = NULL;
 
 	handler = this->findHandler(pDelegate);
 
-	CCAssert(handler != NULL, "");
+	assert(handler != NULL);
 
 	handler->setPriority(nPriority);
 
@@ -327,7 +288,7 @@ void CCTouchDispatcher::setPriority(int nPriority, CCTouchDelegate *pDelegate)
 //
 void CCTouchDispatcher::touches(CCSet *pTouches, CCEvent *pEvent, unsigned int uIndex)
 {
-	CCAssert(uIndex >= 0 && uIndex < 4, "");
+	assert(uIndex >= 0 && uIndex < 4);
 
 	CCSet *pMutableTouches;
 	m_bLocked = true;
@@ -473,7 +434,7 @@ void CCTouchDispatcher::touches(CCSet *pTouches, CCEvent *pEvent, unsigned int u
                 break;
             }
 
-		    if (dynamic_cast<CCTargetedTouchHandler*>(pHandler) != NULL)
+			if (pHandler->getDelegate()->getTouchDelegateType() & ccTouchDelegateTargetedBit)
 			{				
 				forceAddHandler(pHandler, m_pTargetedHandlers);
 			}

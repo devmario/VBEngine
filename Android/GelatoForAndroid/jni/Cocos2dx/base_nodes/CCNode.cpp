@@ -51,8 +51,6 @@ CCNode::CCNode(void)
 , m_fScaleY(1.0f)
 , m_tPosition(CCPointZero)
 , m_tPositionInPixels(CCPointZero)
-, m_fSkewX(0.0)
-, m_fSkewY(0.0)
 // children (lazy allocs)
 , m_pChildren(NULL)
 // lazy alloc
@@ -72,6 +70,8 @@ CCNode::CCNode(void)
 , m_pUserData(NULL)
 , m_bIsTransformDirty(true)
 , m_bIsInverseDirty(true)
+, m_fSkewX(0.0)
+, m_fSkewY(0.0)
 #ifdef CC_NODE_TRANSFORM_USING_AFFINE_MATRIX
 , m_bIsTransformGLDirty(true)
 #endif
@@ -243,13 +243,13 @@ void CCNode::setScaleY(float newScaleY)
 }
 
 /// position getter
-const CCPoint& CCNode::getPosition()
+CCPoint CCNode::getPosition()
 {
 	return m_tPosition;
 }
 
 /// position setter
-void CCNode::setPosition(const CCPoint& newPosition)
+void CCNode::setPosition(CCPoint newPosition)
 {
 	m_tPosition = newPosition;
 	if (CC_CONTENT_SCALE_FACTOR() == 1)
@@ -267,7 +267,7 @@ void CCNode::setPosition(const CCPoint& newPosition)
 #endif
 }
 
-void CCNode::setPositionInPixels(const CCPoint& newPosition)
+void CCNode::setPositionInPixels(CCPoint newPosition)
 {
     m_tPositionInPixels = newPosition;
 
@@ -287,7 +287,7 @@ void CCNode::setPositionInPixels(const CCPoint& newPosition)
 #endif // CC_NODE_TRANSFORM_USING_AFFINE_MATRIX
 }
 
-const CCPoint& CCNode::getPositionInPixels()
+CCPoint CCNode::getPositionInPixels()
 {
 	return m_tPositionInPixels;
 }
@@ -339,12 +339,12 @@ void CCNode::setIsVisible(bool var)
 
 
 /// anchorPoint getter
-const CCPoint& CCNode::getAnchorPoint()
+CCPoint CCNode::getAnchorPoint()
 {
 	return m_tAnchorPoint;
 }
 
-void CCNode::setAnchorPoint(const CCPoint& point)
+void CCNode::setAnchorPoint(CCPoint point)
 {
 	if( ! CCPoint::CCPointEqualToPoint(point, m_tAnchorPoint) ) 
 	{
@@ -358,18 +358,18 @@ void CCNode::setAnchorPoint(const CCPoint& point)
 }
 
 /// anchorPointInPixels getter
-const CCPoint& CCNode::getAnchorPointInPixels()
+CCPoint CCNode::getAnchorPointInPixels()
 {
 	return m_tAnchorPointInPixels;
 }
 
 /// contentSize getter
-const CCSize& CCNode::getContentSize()
+CCSize CCNode::getContentSize()
 {
 	return m_tContentSize;
 }
 
-void CCNode::setContentSize(const CCSize& size)
+void CCNode::setContentSize(CCSize size)
 {
 	if( ! CCSize::CCSizeEqualToSize(size, m_tContentSize) ) 
 	{
@@ -392,7 +392,7 @@ void CCNode::setContentSize(const CCSize& size)
 	}
 }
 
-void CCNode::setContentSizeInPixels(const CCSize& size)
+void CCNode::setContentSizeInPixels(CCSize size)
 {
 	if (! CCSize::CCSizeEqualToSize(size, m_tContentSizeInPixels))
 	{
@@ -416,7 +416,7 @@ void CCNode::setContentSizeInPixels(const CCSize& size)
 	}
 }
 
-const CCSize& CCNode::getContentSizeInPixels()
+CCSize CCNode::getContentSizeInPixels()
 {
 	return m_tContentSizeInPixels;
 }
@@ -718,7 +718,7 @@ void CCNode::reorderChild(CCNode *child, int zOrder)
 
  void CCNode::draw()
  {
-	 //CCAssert(0);
+	 //assert(0);
  	// override me
  	// Only use- this function to draw your staff.
  	// DON'T draw your stuff outside this method
@@ -991,6 +991,16 @@ void CCNode::pauseSchedulerAndActions()
 	CCActionManager::sharedManager()->pauseTarget(this);
 }
 
+void CCNode::selectorProtocolRetain(void)
+{
+	retain();
+}
+
+void CCNode::selectorProtocolRelease(void)
+{
+	release();
+}
+
 CCAffineTransform CCNode::nodeToParentTransform(void)
 {
 	if (m_bIsTransformDirty) {
@@ -1061,7 +1071,7 @@ CCAffineTransform CCNode::worldToNodeTransform(void)
 	return CCAffineTransformInvert(this->nodeToWorldTransform());
 }
 
-CCPoint CCNode::convertToNodeSpace(const CCPoint& worldPoint)
+CCPoint CCNode::convertToNodeSpace(CCPoint worldPoint)
 {
 	CCPoint ret;
 	if(CC_CONTENT_SCALE_FACTOR() == 1)
@@ -1078,7 +1088,7 @@ CCPoint CCNode::convertToNodeSpace(const CCPoint& worldPoint)
 	return ret;
 }
 
-CCPoint CCNode::convertToWorldSpace(const CCPoint& nodePoint)
+CCPoint CCNode::convertToWorldSpace(CCPoint nodePoint)
 {
 	CCPoint ret;
 	if(CC_CONTENT_SCALE_FACTOR() == 1)
@@ -1095,7 +1105,7 @@ CCPoint CCNode::convertToWorldSpace(const CCPoint& nodePoint)
 	return ret;
 }
 
-CCPoint CCNode::convertToNodeSpaceAR(const CCPoint& worldPoint)
+CCPoint CCNode::convertToNodeSpaceAR(CCPoint worldPoint)
 {
 	CCPoint nodePoint = convertToNodeSpace(worldPoint);
 	CCPoint anchorInPoints;
@@ -1111,7 +1121,7 @@ CCPoint CCNode::convertToNodeSpaceAR(const CCPoint& worldPoint)
 	return ccpSub(nodePoint, anchorInPoints);
 }
 
-CCPoint CCNode::convertToWorldSpaceAR(const CCPoint& nodePoint)
+CCPoint CCNode::convertToWorldSpaceAR(CCPoint nodePoint)
 {
 	CCPoint anchorInPoints;
 	if( CC_CONTENT_SCALE_FACTOR() == 1 )
@@ -1123,10 +1133,10 @@ CCPoint CCNode::convertToWorldSpaceAR(const CCPoint& nodePoint)
 		anchorInPoints = ccpMult( m_tAnchorPointInPixels, 1/CC_CONTENT_SCALE_FACTOR() );
 	}
 
-	CCPoint pt = ccpAdd(nodePoint, anchorInPoints);
-	return convertToWorldSpace(pt);
+	nodePoint = ccpAdd(nodePoint, anchorInPoints);
+	return convertToWorldSpace(nodePoint);
 }
-CCPoint CCNode::convertToWindowSpace(const CCPoint& nodePoint)
+CCPoint CCNode::convertToWindowSpace(CCPoint nodePoint)
 {
 	CCPoint worldPoint = this->convertToWorldSpace(nodePoint);
 	return CCDirector::sharedDirector()->convertToUI(worldPoint);

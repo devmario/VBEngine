@@ -40,7 +40,6 @@ public:
         kFmtJpg = 0,
         kFmtPng,
 		kFmtRawData,
-		kFmtUnKnown
     }EImageFormat;
 
     typedef enum
@@ -63,15 +62,6 @@ public:
     @return  true if load correctly
     */
     bool initWithImageFile(const char * strPath, EImageFormat imageType = kFmtPng);
-
-	/*
-	 @brief The same meaning as initWithImageFile, but it is thread safe. It is casued by
-	        loadImage() in CCTextureCache.cpp.
-	 @param fullpath  full path of the file   
-     @param imageType the type of image, now only support tow types.
-     @return  true if load correctly
-	 */
-	bool initWithImageFileThreadSafe(const char *fullpath, EImageFormat imageType = kFmtPng);
 
     /**
     @brief  Load image from stream buffer.

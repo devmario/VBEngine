@@ -39,7 +39,7 @@ namespace cocos2d
 	/*
 	* creation with CCTexture2D
 	*/
-	CCSpriteBatchNode* CCSpriteBatchNode::batchNodeWithTexture(CCTexture2D *tex)
+	CCSpriteBatchNode* CCSpriteBatchNode::batchNodeWithTexture(cocos2d::CCTexture2D *tex)
 	{
 		CCSpriteBatchNode *batchNode = new CCSpriteBatchNode();
 		batchNode->initWithTexture(tex, defaultCapacity);
@@ -81,7 +81,7 @@ namespace cocos2d
 	/*
 	* init with CCTexture2D
 	*/
-	bool CCSpriteBatchNode::initWithTexture(CCTexture2D *tex, unsigned int capacity)
+	bool CCSpriteBatchNode::initWithTexture(cocos2d::CCTexture2D *tex, unsigned int capacity)
 	{
 		m_blendFunc.src = CC_BLEND_SRC;
 		m_blendFunc.dst = CC_BLEND_DST;
@@ -152,11 +152,11 @@ namespace cocos2d
 
 	void CCSpriteBatchNode::addChild(CCNode *child, int zOrder, int tag)
 	{
-		CCAssert(child != NULL, "child should not be null");
+		assert(child != NULL);
 
 		CCSprite *pSprite = (CCSprite*)(child);
 		// check CCSprite is using the same texture id
-		CCAssert(pSprite->getTexture()->getName() == m_pobTextureAtlas->getTexture()->getName(), "");
+		assert(pSprite->getTexture()->getName() == m_pobTextureAtlas->getTexture()->getName());
 
 		CCNode::addChild(child, zOrder, tag);
 
@@ -177,8 +177,8 @@ namespace cocos2d
 	// override reorderChild
 	void CCSpriteBatchNode::reorderChild(CCNode *child, int zOrder)
 	{
-		CCAssert(child != NULL, "the child should not be null");
-		CCAssert(m_pChildren->containsObject(child), "sprite batch node should contain the child");
+		assert(child != NULL);
+		assert(m_pChildren->containsObject(child));
 
 		if (zOrder == child->getZOrder())
 		{
@@ -203,7 +203,7 @@ namespace cocos2d
 			return;
 		}
 
-		CCAssert(m_pChildren->containsObject(pSprite), "sprite batch node should contain the child");
+		assert(m_pChildren->containsObject(pSprite));
 
 		// cleanup before removing
 		removeSpriteFromAtlas(pSprite);
@@ -307,7 +307,7 @@ namespace cocos2d
 		{
 			// serious problems
 			CCLOG("cocos2d: WARNING: Not enough memory to resize the atlas");
-			CCAssert(false, "Not enough memory to resize the atla");
+			assert(false);
 		}
 	}
 
@@ -435,7 +435,7 @@ namespace cocos2d
 		}
 
 		// Should not happen. Error calculating Z on SpriteSheet
-		CCAssert(0, "should not run here");
+		assert(0);
 		return 0;
 	}
 

@@ -85,7 +85,7 @@ To enabled set it to 1. Disabled by default.
  Default value: 0.1f
  */
 #ifndef CC_DIRECTOR_FPS_INTERVAL
-#define CC_DIRECTOR_FPS_INTERVAL (0.5f)
+#define CC_DIRECTOR_FPS_INTERVAL (0.1f)
 #endif
 
 /** @def CC_DIRECTOR_DISPATCH_FAST_EVENTS
@@ -147,7 +147,7 @@ Disabled by default on iPhone with ARMv6 processors.
 @since v0.99.5
 */
 #ifndef CC_USES_VBO
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_AIRPLAY)
 #define CC_USES_VBO 0
 #else
 #define CC_USES_VBO 1

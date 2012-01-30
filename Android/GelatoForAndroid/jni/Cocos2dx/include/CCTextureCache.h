@@ -31,7 +31,6 @@ THE SOFTWARE.
 #include "CCObject.h"
 #include "CCMutableDictionary.h"
 #include "CCTexture2D.h"
-#include "selector_protocol.h"
 
 #if CC_ENABLE_CACHE_TEXTTURE_DATA
     #include "CCImage.h"
@@ -39,23 +38,25 @@ THE SOFTWARE.
 #endif
 
 namespace   cocos2d {
+class CCAsyncObject;
 class CCLock;
 class CCImage;
+
+typedef void (*fpAsyncCallback)(CCTexture2D*, void*);
 
 /** @brief Singleton that handles the loading of textures
 * Once the texture is loaded, the next time it will return
 * a reference of the previously loaded texture reducing GPU & CPU memory
 */
-class CC_DLL CCTextureCache : public SelectorProtocol, public CCObject
+class CC_DLL CCTextureCache : public CCObject
 {
 protected:
 	CCMutableDictionary<std::string, CCTexture2D*> * m_pTextures;
-	//pthread_mutex_t				*m_pDictLock;
-
+	CCLock				*m_pDictLock;
+	CCLock				*m_pContextLock;
 
 private:
 	// @todo void addImageWithAsyncObject(CCAsyncObject* async);
-    void addImageAsyncCallBack(ccTime dt);
 
 public:
 
@@ -88,7 +89,7 @@ public:
 	* @since v0.8
 	*/
 	
-	void addImageAsync(const char *path, SelectorProtocol *target, SEL_CallFuncO selector);
+	// @todo void addImageAsync(const char* filename, CCObject*target, fpAsyncCallback func);
 
 	/* Returns a Texture2D object given an CGImageRef image
 	* If the image was not previously loaded, it will create a new CCTexture2D object and it will return it.
@@ -181,8 +182,8 @@ public:
     ~VolatileTexture();
 
     static void addImageTexture(CCTexture2D *tt, const char* imageFileName, CCImage::EImageFormat format);
-    static void addStringTexture(CCTexture2D *tt, const char* text, const CCSize& dimensions, CCTextAlignment alignment, const char *fontName, float fontSize);
-	static void addDataTexture(CCTexture2D *tt, void* data, CCTexture2DPixelFormat pixelFormat, const CCSize& contentSize);
+    static void addStringTexture(CCTexture2D *tt, const char* text, CCSize dimensions, CCTextAlignment alignment, const char *fontName, float fontSize);
+	static void addDataTexture(CCTexture2D *tt, void* data, CCTexture2DPixelFormat pixelFormat, CCSize contentSize);
 
     static void removeTexture(CCTexture2D *t);
     static void reloadAllTextures();

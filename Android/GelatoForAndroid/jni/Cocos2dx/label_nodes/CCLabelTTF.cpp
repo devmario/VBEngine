@@ -23,7 +23,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "CCLabelTTF.h"
-#include "CCDirector.h"
 
 namespace cocos2d{
 	//
@@ -43,7 +42,7 @@ namespace cocos2d{
 		CC_SAFE_DELETE(m_pString);        
     }
 
-	CCLabelTTF * CCLabelTTF::labelWithString(const char *label, const CCSize& dimensions, CCTextAlignment alignment, const char *fontName, float fontSize)
+	CCLabelTTF * CCLabelTTF::labelWithString(const char *label, CCSize dimensions, CCTextAlignment alignment, const char *fontName, float fontSize)
 	{
 		CCLabelTTF *pRet = new CCLabelTTF();
 		if(pRet && pRet->initWithString(label, dimensions, alignment, fontName, fontSize))
@@ -66,9 +65,9 @@ namespace cocos2d{
 		return NULL;
 	}
 
-	bool CCLabelTTF::initWithString(const char *label, const CCSize& dimensions, CCTextAlignment alignment, const char *fontName, float fontSize)
+	bool CCLabelTTF::initWithString(const char *label, CCSize dimensions, CCTextAlignment alignment, const char *fontName, float fontSize)
 	{
-		CCAssert(label != NULL, "");
+		assert(label != NULL);
 		if (CCSprite::init())
 		{
 			m_tDimensions = CCSizeMake( dimensions.width * CC_CONTENT_SCALE_FACTOR(), dimensions.height * CC_CONTENT_SCALE_FACTOR() );
@@ -89,7 +88,7 @@ namespace cocos2d{
 	}
 	bool CCLabelTTF::initWithString(const char *label, const char *fontName, float fontSize)
 	{
-		CCAssert(label != NULL, "");
+		assert(label != NULL);
 		if (CCSprite::init())
 		{
 			m_tDimensions = CCSizeZero;

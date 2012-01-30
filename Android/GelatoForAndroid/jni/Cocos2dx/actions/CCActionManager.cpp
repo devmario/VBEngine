@@ -74,12 +74,22 @@ void CCActionManager::purgeSharedManager(void)
 	CC_SAFE_RELEASE(gSharedManager);
 }
 
+void CCActionManager::selectorProtocolRetain()
+{
+	retain();
+}
+
+void CCActionManager::selectorProtocolRelease()
+{
+	release();
+}
+
 CCActionManager::CCActionManager(void)
 : m_pTargets(NULL), 
   m_pCurrentTarget(NULL),
   m_bCurrentTargetSalvaged(false)
 {
-	CCAssert(gSharedManager == NULL, "");
+	assert(gSharedManager == NULL);
 }
 
 CCActionManager::~CCActionManager(void)
@@ -179,10 +189,10 @@ void CCActionManager::resumeTarget(CCObject *pTarget)
 
 // run
 
-void CCActionManager::addAction(CCAction *pAction, CCNode *pTarget, bool paused)
+void CCActionManager::addAction(cocos2d::CCAction *pAction, CCNode *pTarget, bool paused)
 {
-	CCAssert(pAction != NULL, "");
-	CCAssert(pTarget != NULL, "");
+	assert(pAction != NULL);
+	assert(pTarget != NULL);
 
 	tHashElement *pElement = NULL;
 	// we should convert it to CCObject*, because we save it as CCObject*
@@ -199,7 +209,7 @@ void CCActionManager::addAction(CCAction *pAction, CCNode *pTarget, bool paused)
 
  	actionAllocWithHashElement(pElement);
  
- 	CCAssert(! ccArrayContainsObject(pElement->actions, pAction), "");
+ 	assert(! ccArrayContainsObject(pElement->actions, pAction));
  	ccArrayAppendObject(pElement->actions, pAction);
  
  	pAction->startWithTarget(pTarget);
@@ -251,7 +261,7 @@ void CCActionManager::removeAllActionsFromTarget(CCObject *pTarget)
 	}
 }
 
-void CCActionManager::removeAction(CCAction *pAction)
+void CCActionManager::removeAction(cocos2d::CCAction *pAction)
 {
 	// explicit null handling
 	if (pAction == NULL)
@@ -278,8 +288,8 @@ void CCActionManager::removeAction(CCAction *pAction)
 
 void CCActionManager::removeActionByTag(unsigned int tag, CCObject *pTarget)
 {
-    CCAssert((int)tag != kCCActionTagInvalid, "");
-	CCAssert(pTarget != NULL, "");
+	assert(tag != kCCActionTagInvalid);
+	assert(pTarget != NULL);
 
 	tHashElement *pElement = NULL;
 	HASH_FIND_INT(m_pTargets, &pTarget, pElement);
@@ -291,7 +301,7 @@ void CCActionManager::removeActionByTag(unsigned int tag, CCObject *pTarget)
 		{
 			CCAction *pAction = (CCAction*)pElement->actions->arr[i];
 
-            if (pAction->getTag() == (int)tag && pAction->getOriginalTarget() == pTarget)
+			if (pAction->getTag() == tag && pAction->getOriginalTarget() == pTarget)
 			{
 				removeActionAtIndex(i, pElement);
 				break;
@@ -304,7 +314,7 @@ void CCActionManager::removeActionByTag(unsigned int tag, CCObject *pTarget)
 
 CCAction* CCActionManager::getActionByTag(unsigned int tag, CCObject *pTarget)
 {
-    CCAssert((int)tag != kCCActionTagInvalid, "");
+	assert(tag != kCCActionTagInvalid);
 
 	tHashElement *pElement = NULL;
 	HASH_FIND_INT(m_pTargets, &pTarget, pElement);
@@ -318,7 +328,7 @@ CCAction* CCActionManager::getActionByTag(unsigned int tag, CCObject *pTarget)
 			{
 				CCAction *pAction = (CCAction*)pElement->actions->arr[i];
 
-                if (pAction->getTag() == (int)tag)
+				if (pAction->getTag() == tag)
 				{
 					return pAction;
 				}
@@ -347,7 +357,7 @@ unsigned int CCActionManager::numberOfRunningActionsInTarget(CCObject *pTarget)
 }
 
 // main loop
-void CCActionManager::update(ccTime dt)
+void CCActionManager::update(cocos2d::ccTime dt)
 {
 	for (tHashElement *elt = m_pTargets; elt != NULL; )
 	{

@@ -186,40 +186,9 @@ NS_CC_END;
 
 #endif // CC_PLATFORM_ANDROID
 /****************************************************
- * linux
+ * airplay
  ***************************************************/
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-
-#include <stdio.h>
-#include "CCStdC.h"
-
-NS_CC_BEGIN;
-
-void CCLog(const char * pszFormat, ...)
-{
-	char buf[MAX_LEN];
-	
-	va_list args;
-	va_start(args, pszFormat);    	
-	vsprintf(buf, pszFormat, args);
-	va_end(args);
-	
-	//TODO will copy how orx do
-	printf(buf);
-}
-
-// marmalade no MessageBox, use CCLog instead
-void CCMessageBox(const char * pszMsg, const char * pszTitle)
-{
-    CCLog("%s: %s", pszTitle, pszMsg);
-}
-
-NS_CC_END;
-#endif
-/****************************************************
- * marmalade
- ***************************************************/
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_AIRPLAY)
 
 #include <s3e.h>
 #include "IwUtil.h"
@@ -232,16 +201,16 @@ NS_CC_BEGIN;
 void CCLog(const char * pszFormat, ...)
 {
 	char buf[MAX_LEN];
-
+	
 	va_list args;
-	va_start(args, pszFormat);
+	va_start(args, pszFormat);    	
 	vsprintf(buf, pszFormat, args);
 	va_end(args);
-
+	
 	IwTrace(GAME, (buf));
 }
 
-// marmalade no MessageBox, use CCLog instead
+// airplay no MessageBox, use CCLog instead
 void CCMessageBox(const char * pszMsg, const char * pszTitle)
 {
     CCLog("%s: %s", pszTitle, pszMsg);
@@ -249,77 +218,4 @@ void CCMessageBox(const char * pszMsg, const char * pszTitle)
 
 NS_CC_END;
 
-#endif // CC_PLATFORM_MARMALADE
-
-/****************************************************
- * bada
- ***************************************************/
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_BADA)
-#include <FBaseSys.h>
-#include <FUi.h>
-#include <stdio.h>
-#include <stdarg.h>
-
-using namespace Osp::Ui::Controls;
-
-NS_CC_BEGIN;
-
-void CCLog(const char * pszFormat, ...)
-{
-	char buf[MAX_LEN] = {0};
-
-	va_list args;
-	va_start(args, pszFormat);
-	vsnprintf(buf, MAX_LEN, pszFormat, args);
-	va_end(args);
-	__App_info(__PRETTY_FUNCTION__ , __LINE__, buf);
-}
-
-void CCMessageBox(const char * pszMsg, const char * pszTitle)
-{
-	if (pszMsg != NULL && pszTitle != NULL)
-	{
-		int iRet = 0;
-		MessageBox msgBox;
-		msgBox.Construct(pszTitle, pszMsg, MSGBOX_STYLE_OK);
-		msgBox.ShowAndWait(iRet);
-	}
-}
-
-NS_CC_END;
-
-#endif // CC_PLATFORM_BADA
-
-
-/****************************************************
- * qnx
- ***************************************************/
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_QNX)
-#include <cstdio>
-#include <cstdarg>
-#include <stdio.h>
-#include <stdarg.h>
-using namespace std;
-
-NS_CC_BEGIN;
-
-void CCLog(const char * pszFormat, ...)
-{
-	char buf[MAX_LEN];
-
-	va_list args;
-	va_start(args, pszFormat);
-	vsprintf(buf, pszFormat, args);
-	va_end(args);
-
-	fprintf(stderr, "cocos2d-x debug info [%s]\n",  buf);
-}
-
-void CCMessageBox(const char * pszMsg, const char * pszTitle)
-{
-	CCLog("%s: %s", pszTitle, pszMsg);
-}
-
-NS_CC_END;
-
-#endif // CC_PLATFORM_QNX
+#endif // CC_PLATFORM_AIRPLAY

@@ -28,8 +28,7 @@
 
 static AccelerometerDispatcher* s_pAccelerometerDispatcher;
 
-@synthesize delegate_;
-@synthesize acceleration_;
+@synthesize delegateWrappers;
 
 + (id) sharedAccelerometerDispather
 {
@@ -42,69 +41,107 @@ static AccelerometerDispatcher* s_pAccelerometerDispatcher;
 
 - (id) init
 {
-    acceleration_ = new cocos2d::CCAcceleration();
+    self.delegateWrappers = [NSMutableArray arrayWithCapacity:4];
+    [[UIAccelerometer sharedAccelerometer] setDelegate: self];
+    
     return self;
 }
 
 - (void) dealloc
 {
-    s_pAccelerometerDispatcher = 0;
-    delegate_ = 0;
-    delete acceleration_;
+    [[UIAccelerometer sharedAccelerometer] setDelegate: nil];
+    [delegateWrappers release];
     [super dealloc];
+}
+
+- (id) findDelegateWrapperByDelegate: (cocos2d::CCAccelerometerDelegate *) delegate
+{
+    for (AccelerometerDelegateWrapper *wrapper in delegateWrappers) {
+        if (wrapper.delegate_ == delegate) {
+            return wrapper;
+        }
+    }
+    
+    return nil;
 }
 
 - (void) addDelegate: (cocos2d::CCAccelerometerDelegate *) delegate
 {
-    delegate_ = delegate;
-    
-    if (delegate_)
-    {
-        [[UIAccelerometer sharedAccelerometer] setDelegate:self];
-    }
-    else 
-    {
-        [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
-    }
+    [delegateWrappers addObject: [AccelerometerDelegateWrapper delegateWrapperWithDelegate:delegate]];
+}
+
+- (void) removeDelegate: (cocos2d::CCAccelerometerDelegate *) delegate
+{
+    [delegateWrappers removeObject:[self findDelegateWrapperByDelegate:delegate]];
 }
 
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
-{   
-    if (! delegate_)
-    {
-        return;
-    }
+{
+    cocos2d::CCAcceleration accelerationCpp;
     
-    acceleration_->x = acceleration.x;
-    acceleration_->y = acceleration.y;
-    acceleration_->z = acceleration.z;
-    acceleration_->timestamp = acceleration.timestamp;
+    accelerationCpp.x = acceleration.x;
+    accelerationCpp.y = acceleration.y;
+    accelerationCpp.z = acceleration.z;
+    accelerationCpp.timestamp = acceleration.timestamp;
     
-    double tmp = acceleration_->x;
+    double tmp = accelerationCpp.x;
     
     switch ([[UIApplication sharedApplication] statusBarOrientation]) 
     {
     case UIInterfaceOrientationLandscapeRight:
-        acceleration_->x = -acceleration_->y;
-        acceleration_->y = tmp;
+        accelerationCpp.x = -acceleration.y;
+        accelerationCpp.y = tmp;
         break;
         
     case UIInterfaceOrientationLandscapeLeft:
-        acceleration_->x = acceleration_->y;
-        acceleration_->y = -tmp;
+        accelerationCpp.x = acceleration.y;
+        accelerationCpp.y = -tmp;
         break;
         
     case UIInterfaceOrientationPortraitUpsideDown:
-        acceleration_->x = -acceleration_->y;
-        acceleration_->y = -tmp;
+        accelerationCpp.x = -accelerationCpp.y;
+        accelerationCpp.y = -tmp;
         break;
             
     case UIInterfaceOrientationPortrait:
         break;
     }
     
-    delegate_->didAccelerate(acceleration_);
+    for (AccelerometerDelegateWrapper *wrapper in delegateWrappers) {
+        [wrapper didAccelerate: &accelerationCpp];
+    }
 }
 
 @end
 
+
+@implementation AccelerometerDelegateWrapper
+
+@synthesize delegate_;
+
++ (id)delegateWrapperWithDelegate:(cocos2d::CCAccelerometerDelegate *)delegate
+{
+    return [[self alloc] initWithDelegate: delegate];
+}
+
+-  (id) initWithDelegate: (cocos2d::CCAccelerometerDelegate *)delegate
+{
+    delegate->AccelerometerKeep();
+    self.delegate_ = delegate;
+    
+    return self;
+}
+
+-  (void) didAccelerate: (cocos2d::CCAcceleration *)acceleration
+{
+    self.delegate_->didAccelerate(acceleration);
+}
+
+-  (void) dealloc
+{
+    self.delegate_->AccelerometerDestroy();
+    
+    [super dealloc];
+}
+
+@end

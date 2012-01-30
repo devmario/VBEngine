@@ -28,8 +28,6 @@ THE SOFTWARE.
 
 namespace cocos2d {
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX) && (CC_TARGET_PLATFORM != CC_PLATFORM_QNX)
-
 //implementation CCParticleSystemPoint
 bool CCParticleSystemPoint::initWithTotalParticles(unsigned int numberOfParticles)
 {
@@ -77,7 +75,7 @@ CCParticleSystemPoint * CCParticleSystemPoint::particleWithFile(const char *plis
         return pRet;
 }
 
-void CCParticleSystemPoint::updateQuadWithParticle(tCCParticle* particle, const CCPoint& newPosition)
+void CCParticleSystemPoint::updateQuadWithParticle(tCCParticle* particle, CCPoint newPosition)
 {
 	// place vertices and colos in array
     m_pVertices[m_uParticleIdx].pos = vertex2(newPosition.x, newPosition.y);
@@ -127,9 +125,7 @@ void CCParticleSystemPoint::draw()
 	glColorPointer(4, GL_UNSIGNED_BYTE, kPointSize,(GLvoid*)offsetof(ccPointSprite,color) );
 
 	glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
-
 	glPointSizePointerOES(GL_FLOAT,kPointSize,(GLvoid*) offsetof(ccPointSprite,size) );
-
 #else // Uses Vertex Array List
     int offset = (int)m_pVertices;
     glVertexPointer(2,GL_FLOAT, kPointSize, (GLvoid*) offset);
@@ -205,7 +201,5 @@ void CCParticleSystemPoint::setEndSize(float size)
 		( size >= 0 && size <= CC_MAX_PARTICLE_SIZE), "PointParticleSystem only supports 0 <= size <= 64");
 	CCParticleSystem::setEndSize(size);
 }
-
-#endif // (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
 
 }// namespace cocos2d

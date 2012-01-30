@@ -92,7 +92,7 @@ namespace cocos2d{
                     m_pTMXLayers->setObject(child, layerName);
 
 					// update content size with the max size
-					const CCSize& childSize = child->getContentSize();
+					CCSize childSize = child->getContentSize();
 					CCSize currentSize = this->getContentSize();
 					currentSize.width = MAX( currentSize.width, childSize.width );
 					currentSize.height = MAX( currentSize.height, childSize.height );
@@ -183,7 +183,7 @@ namespace cocos2d{
 							if( gid != 0 ) 
 							{
 								// Optimization: quick return
-								// if the layer is invalid (more than 1 tileset per layer) an CCAssert will be thrown later
+								// if the layer is invalid (more than 1 tileset per layer) an assert will be thrown later
 								if( gid >= tileset->m_uFirstGid )
 									return tileset;
 							}

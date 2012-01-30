@@ -92,10 +92,6 @@ typedef enum {
 */
 class CC_DLL CCSprite : public CCNode, public CCTextureProtocol, public CCRGBAProtocol
 {
-	/** Opacity: conforms to CCRGBAProtocol protocol */
-	CC_PROPERTY(GLubyte, m_nOpacity, Opacity)
-	/** Color: conforms with CCRGBAProtocol protocol */
-	CC_PROPERTY_PASS_BY_REF(ccColor3B, m_sColor, Color);
 public:
 	virtual void draw(void);
 
@@ -121,7 +117,7 @@ public:
 	inline void setAtlasIndex(unsigned int uAtlasIndex) { m_uAtlasIndex = uAtlasIndex; }
 
 	/** returns the rect of the CCSprite in points */
-	inline const CCRect& getTextureRect(void) { return m_obRect; }
+	inline CCRect getTextureRect(void) { return m_obRect; }
 
 	/** whether or not the Sprite is rendered using a CCSpriteBatchNode */
 	inline bool isUsesBatchNode(void) { return m_bUsesBatchNode; }
@@ -139,18 +135,18 @@ public:
 	 IMPORTANT: Only valid if it is rendered using an CCSpriteSheet.
 	 @since v0.99.0
 	 */
-	inline ccHonorParentTransform getHonorParentTransform(void) { return m_eHonorParentTransform; }
+	inline ccHonorParentTransform getHornorParentTransform(void) { return m_eHonorParentTransform; }
 	/** whether or not to transform according to its parent transformations.
 	Useful for health bars. eg: Don't rotate the health bar, even if the parent rotates.
 	IMPORTANT: Only valid if it is rendered using an CCSpriteSheet.
 	@since v0.99.0
 	*/
-	inline void setHonorParentTransform(ccHonorParentTransform eHonorParentTransform) { m_eHonorParentTransform = eHonorParentTransform; }
+	inline void setHornorParentTransform(ccHonorParentTransform eHonorParentTransform) { m_eHonorParentTransform = eHonorParentTransform; }
 
 	/** Get offset position of the sprite. Calculated automatically by editors like Zwoptex.
 	 @since v0.99.0
 	 */
-	inline const CCPoint& getOffsetPositionInPixels(void) { return m_obOffsetPositionInPixels; }
+	inline CCPoint getOffsetPositionInPixels(void) { return m_obOffsetPositionInPixels; }
 
 	/** conforms to CCTextureProtocol protocol */
 	inline ccBlendFunc getBlendFunc(void) { return m_sBlendFunc; }
@@ -167,10 +163,10 @@ public:
 	/** Creates an sprite with a texture and a rect.
 	 The offset will be (0,0).
 	 */
-	static CCSprite* spriteWithTexture(CCTexture2D *pTexture, const CCRect& rect);
+	static CCSprite* spriteWithTexture(CCTexture2D *pTexture, CCRect rect);
 
 	/** Creates an sprite with a texture, a rect and offset. */
-    static CCSprite* spriteWithTexture(CCTexture2D *pTexture, const CCRect& rect, const CCPoint& offset);
+    static CCSprite* spriteWithTexture(CCTexture2D *pTexture, CCRect rect, CCPoint offset);
 
 	/** Creates an sprite with an sprite frame. */
 	static CCSprite* spriteWithSpriteFrame(CCSpriteFrame *pSpriteFrame);
@@ -191,13 +187,14 @@ public:
 	/** Creates an sprite with an image filename and a rect.
 	 The offset will be (0,0).
 	 */
-	static CCSprite* spriteWithFile(const char *pszFileName, const CCRect& rect);
+	static CCSprite* spriteWithFile(const char *pszFileName, CCRect rect);
     
 	/** Creates an sprite with an CCBatchNode and a rect
 	*/
-	static CCSprite* spriteWithBatchNode(CCSpriteBatchNode *batchNode, const CCRect& rect);
+	static CCSprite* spriteWithBatchNode(CCSpriteBatchNode *batchNode, CCRect rect);
+
 public:
-	virtual bool init(void);
+	bool init(void);
 	virtual ~CCSprite(void);
 	CCSprite();
 
@@ -209,8 +206,8 @@ public:
 	virtual void addChild(CCNode *pChild, int zOrder, int tag);
 
 	virtual void setDirtyRecursively(bool bValue);
-	virtual void setPosition(const CCPoint& pos);
-	virtual void setPositionInPixels(const CCPoint& pos);
+	virtual void setPosition(CCPoint pos);
+	virtual void setPositionInPixels(CCPoint pos);
 	virtual void setRotation(float fRotation);
     virtual void setSkewX(float sx);
     virtual void setSkewY(float sy);
@@ -218,7 +215,7 @@ public:
 	virtual void setScaleY(float fScaleY);
 	virtual void setScale(float fScale);
 	virtual void setVertexZ(float fVertexZ);
-	virtual void setAnchorPoint(const CCPoint& anchor);
+	virtual void setAnchorPoint(CCPoint anchor);
 	virtual void setIsRelativeAnchorPoint(bool bRelative);
 	virtual void setIsVisible(bool bVisible);
 	void setFlipX(bool bFlipX);
@@ -243,8 +240,15 @@ public:
 	void updateColor(void);
 	// RGBAProtocol
 	/** opacity: conforms to CCRGBAProtocol protocol */
+	virtual GLubyte getOpacity(void);
+	virtual void setOpacity(GLubyte opacity);
+	/** RGB colors: conforms to CCRGBAProtocol protocol */
+	virtual ccColor3B getColor(void);
+	virtual void setColor(ccColor3B color3);
 	virtual void setIsOpacityModifyRGB(bool bValue);
 	virtual bool getIsOpacityModifyRGB(void);
+
+	virtual CCRGBAProtocol* convertToRGBAProtocol() { return (CCRGBAProtocol *)this; }
 
 	// CCTextureProtocol
     virtual void setTexture(CCTexture2D *texture);
@@ -259,7 +263,7 @@ public:
 	/** Initializes an sprite with a texture and a rect.
 	 The offset will be (0,0).
 	 */
-    bool initWithTexture(CCTexture2D *pTexture, const CCRect& rect);
+    bool initWithTexture(CCTexture2D *pTexture, CCRect rect);
 
 	// Initializes an sprite with an sprite frame.
     bool initWithSpriteFrame(CCSpriteFrame *pSpriteFrame);
@@ -280,20 +284,20 @@ public:
 	/** Initializes an sprite with an image filename, and a rect.
 	 The offset will be (0,0).
 	 */
-    bool initWithFile(const char *pszFilename, const CCRect& rect);
+    bool initWithFile(const char *pszFilename, CCRect rect);
 
 	/** Initializes an sprite with an CCSpriteBatchNode and a rect in points */
-	bool initWithBatchNode(CCSpriteBatchNode *batchNode, const CCRect& rect);
+	bool initWithBatchNode(CCSpriteBatchNode *batchNode, CCRect rect);
 
 	/** Initializes an sprite with an CCSpriteBatchNode and a rect in pixels
 	@since v0.99.5
 	*/
-	bool initWithBatchNodeRectInPixels(CCSpriteBatchNode *batchNode, const CCRect& rect);
+	bool initWithBatchNodeRectInPixels(CCSpriteBatchNode *batchNode, CCRect rect);
 
 	// BatchNode methods
 
 	/** updates the quad according the the rotation, position, scale values. */
-	void updateTransform(void);
+	virtual void updateTransform(void);
 
 	/** tell the sprite to use self-render.
 	 @since v0.99.0
@@ -301,11 +305,11 @@ public:
 	void useSelfRender(void);
 
 	/** updates the texture rect of the CCSprite in points. */
-     void setTextureRect(const CCRect& rect);
+     void setTextureRect(CCRect rect);
 
 	 /** updates the texture rect, rectRotated and untrimmed size of the CCSprite in pixels
 	 */
-	 void setTextureRectInPixels(const CCRect& rect, bool rotated, const CCSize& size);
+	 virtual void setTextureRectInPixels(CCRect rect, bool rotated, CCSize size);
 
 	/** tell the sprite to use batch node render.
 	 @since v0.99.0
@@ -331,8 +335,8 @@ public:
 	*/
 	void setDisplayFrameWithAnimationName(const char *animationName, int frameIndex);
 
-protected:
-	void updateTextureCoords(const CCRect& rect);
+public:
+	virtual void updateTextureCoords(CCRect rect);
 	void updateBlendFunc(void);
     void getTransformValues(struct transformValues_ *tv); // optimization
 
@@ -374,6 +378,8 @@ protected:
 	ccV3F_C4B_T2F_Quad m_sQuad;
 
 	// opacity and RGB protocol
+	GLubyte m_nOpacity;
+	ccColor3B m_sColor;
 	ccColor3B m_sColorUnmodified;
 	bool m_bOpacityModifyRGB;
 
