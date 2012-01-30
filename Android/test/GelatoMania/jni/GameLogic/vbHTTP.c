@@ -31,9 +31,17 @@ void* VBHTTPResponseRead(void* _arg) {
     unsigned int _interval = 0;
     printf("\nResponse Header\n\n");
     fflush(stdout);
+    unsigned long _tl = 0;
     while(_interval < http->break_time) {
         char buf[0xFF] = {'\0',};
 		unsigned long _read_len = read(http->sock, buf, 0xF);
+		_tl += _read_len;
+		if(http->response) {
+			http->response = realloc(http->response, (_tl + 1) * sizeof(char));
+		} else {
+			http->response = calloc((_tl + 1), sizeof(char));
+		}
+		sprintf(http->response + _tl - _read_len, "%s\0", buf);
         printf("%s", buf);
         fflush(stdout);
 		if(_read_len < 1) {
@@ -50,7 +58,7 @@ void* VBHTTPResponseRead(void* _arg) {
     }
     //타임아웃
     http->complete = 1;
-    http->error_handle(0);
+    //for DEBUG http->error_handle(0);
     printf("포트 없음\n");
     fflush(stdout);
     http->tid = NULL;
@@ -188,6 +196,8 @@ void VBHTTPRelease(VBHTTP** http) {
             free((*http)->port);
         if((*http)->host_name)
             free((*http)->host_name);
+        if((*http)->response)
+        	free((*http)->response);
         if((*http)->tid)
             pthread_detach((*http)->tid);
         free(*http);

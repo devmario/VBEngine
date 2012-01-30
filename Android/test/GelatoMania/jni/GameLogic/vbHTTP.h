@@ -18,6 +18,7 @@ extern "C" {
         char* method;
         char* request;
         char* header;
+        char* response;
         pthread_t tid;
         int complete;
     } VBHTTP;

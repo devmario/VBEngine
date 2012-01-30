@@ -93,10 +93,12 @@ void ErrorHTTP(unsigned char _code);
 void SuccessHTTP(void);
 
 void ErrorHTTP(unsigned char _code) {
+	LOGD("ErrorHTTP");
     printf("\n\nErrorHTTP\n");
 }
 
 void SuccessHTTP(void) {
+	LOGD("SuccessHTTP");
     printf("\n\nSuccessHTTP\n");
 }
 
@@ -108,6 +110,7 @@ void MainMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
         VBHTTP* http = VBHTTPCreateByJS("user.js", ErrorHTTP, SuccessHTTP);
         while(!http->complete) {
         }
+        LOGD("HTTP RESPONSE : %s", http->response);
         VBHTTPRelease(&http);
     }
     
