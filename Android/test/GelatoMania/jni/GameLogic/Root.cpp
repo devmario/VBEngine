@@ -107,6 +107,14 @@ void RootFacebookLoginComplete(cJSON* _info) {
     printf("%s\n", cJSON_Print(_info));
 }
 
+void RootGameCenterLoginComplete(cJSON* _info) {
+    printf("%s\n", cJSON_Print(_info));
+}
+
+void RootFacebookLoginComplete(cJSON* _info) {
+    printf("%s\n", cJSON_Print(_info));
+}
+
 Root::Root() {
 <<<<<<< HEAD
 
@@ -178,6 +186,10 @@ Root::Root() {
 
 	popup = NULL;
 =======
+    
+    //PlatformGameCenterLogin(RootGameCenterLoginComplete);
+    
+    //PlatformFacebookLogin(RootFacebookLoginComplete);
     
     //PlatformGameCenterLogin(RootGameCenterLoginComplete);
     
@@ -858,6 +870,39 @@ void Root::PrevPage(int _step) {
 		backHistoryStep = _step;
 		ChangePageVALIST(_preHistory->count + 1, _h);
 	}
+}
+
+void Root::goFowardStage()
+{
+    history* _ptr = GetLastHistory();
+    if (_ptr) {
+        int pageStateIndex = 0;
+        switch (_ptr->args[0]) {
+            case PopupTypeNone:case PopupTypePause:
+                pageStateIndex = 1;
+                break;
+            case PopupTypeClear:
+                pageStateIndex = 3;
+                break;
+            default: break;
+        }
+        if (_ptr->args[pageStateIndex] == RootPageTypeGameMain) {
+            
+//            PopHistory(<#int _idx#>);
+            if (_getpid() == ShareDataGetNextPack()) {
+                //reset
+                _setsid(_getsid()+1);
+                ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeGameMain, _getpid(), _getsid());
+            } else {
+                //new
+                _setpid(_getpid()+1);
+                _setsid(0);
+                ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeGameMain, _getpid(), _getsid());
+            }
+        }
+    }
+    
+    PopupClose(this);
 }
 
 void Root::goFowardStage()
