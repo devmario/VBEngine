@@ -1,5 +1,6 @@
 #include "ToppingContainer.h"
 #include "ShareData.h"
+#include "GameMain.h"
 
 void ToppingContainer::ResetData() {
     if(data) {
@@ -147,6 +148,8 @@ void ToppingContainer::CellTouchEnd(CellData* _cell, CCTouch* _touch, CCPoint _l
                            BeginSelectTween(_at, fabsf(_at / (size * 0.5) * 0.75), true);
                        }
                    }
+                   
+                   gameMain->toppingContainerCallBack(_data->type);
                }
                , );
 }
@@ -227,7 +230,10 @@ void ToppingContainer::Update(float _deltaTime) {
     UpdateSelectTween(_deltaTime);
 }
 
-ToppingContainer::ToppingContainer(VBObjectFile2D* _objScroller, VBTexture* _texScroller, VBArrayVector* _data, IceCream* _iceCream) : ScrollerContainer(_objScroller, _texScroller, _data, 80, 270, 90, 5, 5, 5, ScrollerContainerAlign_HI, _data->len * 80 < 270) {
+ToppingContainer::ToppingContainer(GameMain* _gameMain, VBObjectFile2D* _objScroller, VBTexture* _texScroller, VBArrayVector* _data, IceCream* _iceCream) : ScrollerContainer(_objScroller, _texScroller, _data, 80, 270, 90, 5, 5, 5, ScrollerContainerAlign_HI, _data->len * 80 < 270) {
+    
+    gameMain = _gameMain;
+    
     for(int i = 0; i < VBArrayVectorGetLength(cell); i++) {
         CellData* _cellData = (CellData*)VBArrayVectorGetDataAt(cell, i);
         if(_cellData->index >= 0 && _cellData->index < VBArrayVectorGetLength(data)) {

@@ -13,6 +13,8 @@ using namespace tween;
 
 class GameMain : public View {
 private:
+    int packIdx;
+    int stageIdx;
     int* rd;
     int rdLen;
     int* td;
@@ -126,9 +128,12 @@ public:
     GameMain(int _packIdx, int _stageIdx);
     ~GameMain();
     
+    void resetOtherStage(int _packIdx, int _stageIdx);
+    
     float getRecipePositionY(int recipeIdx);
     void recipeContainerCallBack(int recipeIdx);
     float getToppingPositionX(int toppingIdx);
+    void toppingContainerCallBack(int recipeIdx);
     void iceCreamMaskCallBack(int recipeIdx);
     
     virtual void Update(float _deltaTime);

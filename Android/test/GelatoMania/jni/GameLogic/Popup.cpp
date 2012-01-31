@@ -7,6 +7,7 @@
 
 Popup::Popup(VBObjectFile2D* _obj, VBTexture* _tex, VBModel* _topView) : View() {
     //cout << "new Popup\n";
+    isClearPopup = false;
     obj = _obj;
     tex = _tex;
     topView = _topView;
@@ -170,7 +171,7 @@ void Popup::touchMove(CCTouch* _touch, CCPoint _location) {
 
 void Popup::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
     TOUCHENDBT(reTouch, reBT, _location, _touch, ShareDataGetRoot()->ClosePopup(),reBT->gotoAndStop(0));
-    TOUCHENDBT(plTouch, plBT, _location, _touch, ShareDataGetRoot()->ClosePopup(),plBT->gotoAndStop(0));
+    TOUCHENDBT(plTouch, plBT, _location, _touch, playButtonClick(),plBT->gotoAndStop(0));
     TOUCHENDBT(meTouch, meBT, _location, _touch, ShareDataGetRoot()->OutGoingAtGameMain(),meBT->gotoAndStop(0));
     TOUCHENDBT(shTouch, shBT, _location, _touch, 
                ShareDataGetRoot()->ChangePage(4, LoadingTypeFull, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypeShop);
@@ -186,3 +187,10 @@ void Popup::touchCancel(CCTouch* _touch, CCPoint _location) {
     touchEndAndCancel(_touch, _location);
 }
 
+void Popup::playButtonClick() {
+    if (isClearPopup) {
+        ShareDataGetRoot()->goFowardStage();
+    } else {
+        ShareDataGetRoot()->ClosePopup();
+    }
+}

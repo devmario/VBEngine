@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "PlatformFunctions.h"
 
 bool IsEqualHistory(history* _h0, history* _h1) {
 	if (_h0 == NULL || _h1 == NULL)
@@ -28,6 +29,7 @@ void PopupClose(void* _ref) {
 }
 
 void Root::OpenPopupAlloc(int _type, int _star, int _score) {
+<<<<<<< HEAD
 	popupType = _type;
 	switch (_type) {
 	case PopupTypePause:
@@ -40,6 +42,21 @@ void Root::OpenPopupAlloc(int _type, int _star, int _score) {
 	popup->Open(PopupClose, this);
 	popupClear = false;
 
+=======
+    popupType = _type;
+//    popupType = PopupTypeClear;
+    switch (_type) {
+        case PopupTypePause:
+            popup = new Popup(NULL, NULL, top);
+            break;
+        case PopupTypeClear:
+            popup = new PopupClear(NULL, NULL, top, _star, _score, NULL, NULL);
+            break;
+    }
+    popup->Open(PopupClose, this);
+    popupClear = false;
+    
+>>>>>>> a095b8df74e657191e6b69cd873db14d8e410f1d
 }
 
 void Root::OpenPopup(int _type, int _star, int _score) {
@@ -82,7 +99,16 @@ void Root::ClosePopup() {
 	//printf("history len:%i\n", vecHistory->len);
 }
 
+void RootGameCenterLoginComplete(cJSON* _info) {
+    printf("%s\n", cJSON_Print(_info));
+}
+
+void RootFacebookLoginComplete(cJSON* _info) {
+    printf("%s\n", cJSON_Print(_info));
+}
+
 Root::Root() {
+<<<<<<< HEAD
 
 	backHistory = false;
 	//CCLayer();
@@ -151,6 +177,82 @@ Root::Root() {
 	ChangePage(3, LoadingTypeNone, PopupTypeNone, RootPageTypeMainMenu);
 
 	popup = NULL;
+=======
+    
+    //PlatformGameCenterLogin(RootGameCenterLoginComplete);
+    
+    //PlatformFacebookLogin(RootFacebookLoginComplete);
+    
+    backHistory = false;
+    //CCLayer();
+    
+    CCSize size = CCDirector::sharedDirector()->getWinSize();
+    loading = NULL;
+    loadFlag = 0;
+    view = NULL;
+    top = NULL;
+    
+    
+    
+    //    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //    NSString* documentDirectory = [paths objectAtIndex:0];
+    
+    // instead of nsdocumentdirectory
+    // get resource, document path
+#ifdef ANDROID_USE
+    VBEngineStart("/mnt/sdcard/GelatoMania/resource", "/mnt/sdcard/GelatoMania/document", 800, 480, 480, 320);
+#else
+    const char* appName = "GelatoMania.app";
+    int appNameLen = strlen(appName);
+    
+    const char* tempPath = CCFileUtils::fullPathFromRelativePath("Info.plist");
+    int tempLen = strlen(tempPath);
+    
+    //get resource path
+    char* resourcePath = (char*)malloc(sizeof(char)*(tempLen-10));
+    strncpy(resourcePath, tempPath, tempLen-11);
+    resourcePath[tempLen-11] = '\0';
+    int resourceLen = strlen(resourcePath);
+    //    cout << resourcePath << '\n';
+    
+    //get document path
+    char* documentsPath = (char*)malloc(sizeof(char)*(resourceLen-appNameLen+9));
+    strncpy(documentsPath, resourcePath, resourceLen-appNameLen);
+    documentsPath[resourceLen-appNameLen] = '\0';
+    strcat(documentsPath, "Documents");
+    //    cout << documentsPath << '\n';
+    
+    VBEngineStart(resourcePath, documentsPath, 480, 320, 480, 320);
+
+    free(resourcePath);
+    free(documentsPath);
+#endif
+
+    
+    gettimeofday(&curTime, NULL);
+    
+    top = new VBModel();
+    this->addChild((CCLayer*)top);
+#ifdef ANDROID_USE
+    ((CCSprite*)top)->setPosition(ccp(0, 480));
+#else
+    ((CCSprite*)top)->setPosition(ccp(0, 320));
+#endif
+    //top->setScaleY(768.0/320.0);
+    //top->setScaleX(1024.0/480.0);
+    
+    this->setIsTouchEnabled(true);
+    this->schedule(schedule_selector(Root::Update), 1.f/GAME_FRAME);
+    
+    vecHistory = VBArrayVectorInit(VBArrayVectorAlloc());
+    
+    historyNext.count = 0;
+    historyNext.args = NULL;
+    
+    ChangePage(3, LoadingTypeNone, PopupTypeNone, RootPageTypeMainMenu);
+    
+    popup = NULL;
+>>>>>>> a095b8df74e657191e6b69cd873db14d8e410f1d
 }
 
 Root::~Root() {
@@ -355,6 +457,7 @@ bool Root::IsGameMainHistory(int _h_idx) {
 }
 
 void Root::ChangePageARGSonUpdate() {
+<<<<<<< HEAD
 	//기존 마지막 히스토리 가져오기
 	history* _ptr = GetLastHistory();
 
@@ -501,6 +604,164 @@ void Root::ChangePageARGSonUpdate() {
 		backHistory = false;
 	}
 	printf("history len:%i\n", vecHistory->len);
+=======
+    //기존 마지막 히스토리 가져오기
+    history* _ptr = GetLastHistory();
+    
+    //새로운 인자 인덱스
+    int _argIdx = 0;
+    //이전인자 인덱스
+    int _preIdx = 0;
+    
+    int _prePopupType = 0;
+    if(_ptr)
+        _prePopupType = _ptr->args[_preIdx];
+    int _nextPopupType = historyNext.args[_argIdx];
+    if(_prePopupType != _nextPopupType) {
+        //팝업상태가 틀릴때
+        switch(_prePopupType) {
+            case PopupTypePause:
+            {
+                if(popup) {
+                    top->removeChild(popup->top, false);
+                    delete (Popup*)popup;
+                    popup = NULL;
+                    popupClear = false;
+                    popupType = PopupTypeNone;
+                }
+            }
+                break;
+            case PopupTypeClear:
+            {
+                if(popup) {
+                    top->removeChild(popup->top, false);
+                    delete (PopupClear*)popup;
+                    popup = NULL;
+                    popupClear = false;
+                    popupType = PopupTypeNone;
+                }
+            }
+                break;
+        }
+        switch(_nextPopupType) {
+            case PopupTypePause:
+            {
+                OpenPopupAlloc(historyNext.args[_argIdx], 0, 0);
+            }
+                break;
+            case PopupTypeClear:
+            {
+                OpenPopupAlloc(historyNext.args[_argIdx], historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2]);
+            }
+                break;
+        }
+    } else if(_nextPopupType == PopupTypeClear) {
+        //팝업상태는 같지만 인자가 틀릴경우(Clear일 경우 점수가 틀릴수 있음)
+    }
+    
+    //인자 인덱스 증가
+    if(_prePopupType == PopupTypeClear)
+        _preIdx += 3;
+    else
+        _preIdx++;
+    
+    if(_nextPopupType == PopupTypeClear)
+        _argIdx += 3;
+    else
+        _argIdx++;
+    
+    bool _needAdd = false;
+    bool _needRemove = false;
+    int prePage = RootPageTypeNone;
+    if(_ptr)
+        prePage = _ptr->args[_preIdx];
+    int newPage = historyNext.args[_argIdx];
+    if(_ptr) {
+        if(prePage != newPage) {
+            //페이지 상태가 틀릴때
+            _needRemove = true;
+            _needAdd = true;
+        }
+    } else {
+        //최초
+        _needAdd = true;
+    }
+    if(_needRemove) {
+        if(view) {
+            top->removeChild(view->top, false);
+            if(prePage == RootPageTypeMainMenu)
+                delete (MainMenu*)view;
+            else if(prePage == RootPageTypeSubMenu)
+                delete (SubMenu*)view;
+            else if(prePage == RootPageTypeGameMain)
+                delete (GameMain*)view;
+            view = NULL;
+        }
+    }
+    if(_needAdd) {
+        switch(newPage) {
+            case RootPageTypeMainMenu:
+                view = (View*)new MainMenu();
+                break;
+            case RootPageTypeSubMenu:
+                view = (View*)new SubMenu();
+                break;
+            case RootPageTypeGameMain:
+                view = (View*)new GameMain(historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2]);
+                break;
+        }
+        if(view)
+            top->addChild(view->top, -1);
+    }
+    if (!_needRemove && !_needAdd && prePage == newPage) {
+        if (newPage == RootPageTypeGameMain) {
+            GameMain *gameMain = (GameMain*)view;
+            gameMain->resetOtherStage(historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2]);
+            PopHistory(vecHistory->len - 1);
+            PopHistory(vecHistory->len - 1);
+        }
+    }
+    //인자 인덱스 증가
+    _preIdx++;
+    _argIdx++;
+    
+    if(_argIdx < historyNext.count) {
+        //페이지 관련인자 이후
+        switch(historyNext.args[_argIdx - 1]) {
+            case RootPageTypeSubMenu:
+            {
+                int _arg0 = 0;
+                if(_argIdx < historyNext.count)
+                    _arg0 = historyNext.args[_argIdx];
+                
+                int _arg1 = 0;
+                if(_argIdx + 1 < historyNext.count)
+                    _arg1 = historyNext.args[_argIdx + 1];
+                
+                int _arg2 = 0;
+                if(_argIdx + 2 < historyNext.count)
+                    _arg2 = historyNext.args[_argIdx + 2];
+                
+                ((SubMenu*)view)->SetMenuType((SubMenuType)(_arg0), _arg1, _arg2);
+            }
+                break;
+            case RootPageTypeGameMain:
+                break;
+        }
+    }
+    
+    PushHistory(&historyNext);
+    
+    if(backHistory) {
+        for(int i = 0; i < backHistoryStep; i++) {
+            PopHistory(vecHistory->len - 2);
+        }
+        PopHistory(vecHistory->len - 2);
+        backHistoryStep = 0;
+        backHistory = false;
+    }
+    printf("history len:%i\n", vecHistory->len);
+>>>>>>> a095b8df74e657191e6b69cd873db14d8e410f1d
 }
 
 void Root::ChangePageVALIST(int _count, int* _args) {
@@ -597,4 +858,37 @@ void Root::PrevPage(int _step) {
 		backHistoryStep = _step;
 		ChangePageVALIST(_preHistory->count + 1, _h);
 	}
+}
+
+void Root::goFowardStage()
+{
+    history* _ptr = GetLastHistory();
+    if (_ptr) {
+        int pageStateIndex = 0;
+        switch (_ptr->args[0]) {
+            case PopupTypeNone:case PopupTypePause:
+                pageStateIndex = 1;
+                break;
+            case PopupTypeClear:
+                pageStateIndex = 3;
+                break;
+            default: break;
+        }
+        if (_ptr->args[pageStateIndex] == RootPageTypeGameMain) {
+            
+//            PopHistory(<#int _idx#>);
+            if (_getpid() == ShareDataGetNextPack()) {
+                //reset
+                _setsid(_getsid()+1);
+                ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeGameMain, _getpid(), _getsid());
+            } else {
+                //new
+                _setpid(_getpid()+1);
+                _setsid(0);
+                ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeGameMain, _getpid(), _getsid());
+            }
+        }
+    }
+    
+    PopupClose(this);
 }

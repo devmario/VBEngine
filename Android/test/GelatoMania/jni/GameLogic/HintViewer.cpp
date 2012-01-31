@@ -138,29 +138,32 @@ void HintViewer::setPosition(cocos2d::CCPoint _position)
 
 void HintViewer::update(float _deltaTime)
 {
-    int screenHeight = 260;
+    float screenHeight = 260.0;
+    float screenWidth = 255.0;
+    float recipeContainerInterval = -30.0;
+    float toppingContainerInterval = 90.0;
     switch (state) {
         //Recipe Container Point
         case hintStateItem:
-            if (position[state].y > 0) {
+            if (position[state].y >= 0) {
                 setState(hintStateTop);
-            } else if (position[state].y < screenHeight*(-1)) {
+            } else if (position[state].y <= screenHeight*(-1)) {
                 setState(hintStateDown);
             } else {
-                position[state] = CCPointMake(350, parent->getRecipePositionY(solution[currentSolutionIdx])-30);
+                position[state].y = parent->getRecipePositionY(solution[currentSolutionIdx]) + recipeContainerInterval;
                 arrowModel[state]->setPosition(position[state]);
                 arrowModel[state]->setRotation(rotationR);
             }
             
             break;
         case hintStateTop:
-            position[hintStateItem] = CCPointMake(350, parent->getRecipePositionY(solution[currentSolutionIdx])-30);
+            position[hintStateItem].y = parent->getRecipePositionY(solution[currentSolutionIdx]) + recipeContainerInterval;
             if (position[hintStateItem].y < 0) {
                 setState(hintStateItem);
             }
             break;
         case hintStateDown:
-            position[hintStateItem] = CCPointMake(350, parent->getRecipePositionY(solution[currentSolutionIdx])-30);
+            position[hintStateItem].y = parent->getRecipePositionY(solution[currentSolutionIdx]) + recipeContainerInterval;
             if (position[hintStateItem].y > screenHeight*(-1)) {
                 setState(hintStateItem);
             }
@@ -168,11 +171,26 @@ void HintViewer::update(float _deltaTime)
             
         //Topping Container Point
         case hintStateToppingItem:
-            cout << parent->getToppingPositionX(0) << '\n';
+            if (position[state].x <= toppingContainerInterval - 5) {
+                setState(hintStateLeft);
+            } else if (position[state].x >= screenWidth + toppingContainerInterval) {
+                setState(hintStateRight);
+            } else {
+                position[state].x = parent->getToppingPositionX(solution[currentSolutionIdx]) + toppingContainerInterval;
+                arrowModel[state]->setPosition(position[state]);
+            }
             break;
         case hintStateLeft:
+            position[hintStateToppingItem].x = parent->getToppingPositionX(solution[currentSolutionIdx]) + toppingContainerInterval;
+            if (position[hintStateToppingItem].x > toppingContainerInterval - 5) {
+                setState(hintStateToppingItem);
+            }
             break;
         case hintStateRight:
+            position[hintStateToppingItem].x = parent->getToppingPositionX(solution[currentSolutionIdx]) + toppingContainerInterval;
+            if (position[hintStateToppingItem].x < screenWidth + toppingContainerInterval) {
+                setState(hintStateToppingItem);
+            }
             break;
             
         case hintStateIceCream:case hintStateTopping:case hintStateReset:default:break;
@@ -319,8 +337,10 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
         solutionLen += toppingLen;
     }
     
-    if(solution)
+    if(solution) {
         free(solution);
+    }
+    solution = NULL;
     solution = (int*)malloc(sizeof(int)*solutionLen);
     
     int idx=0;
@@ -335,9 +355,6 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
         }
     }
     if(toppingLen > 0) {
-        /**************************
-         -2 토핑 시작
-         **************************/
         solution[idx] = -2;
         idx++;
         for(int i=0; i<toppingLen; i++) {

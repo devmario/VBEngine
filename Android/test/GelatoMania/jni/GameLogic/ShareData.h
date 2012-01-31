@@ -45,6 +45,7 @@ cJSON* ShareDataSearchJSON(cJSON* _js, int _len, ...);
 cJSON* ShareDataGetTemplateData(cJSON* _idx);
 int hexToInt(char* szHex);
 VBAABB JStoAABB(cJSON* _js);
+int ShareDataGetNextPack();
 
 #define TOUCHBEGINBT(touchPtr, modelPtr, location, touch, code) \
 if(touchPtr == NULL) {\

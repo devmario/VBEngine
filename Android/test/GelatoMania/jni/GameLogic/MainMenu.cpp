@@ -3,6 +3,7 @@
 #include "ShareData.h"
 #include "SubMenu.h"
 #include "vbHTTP.h"
+#include "PlatformFunctions.h"
 
 MainMenu::MainMenu() {
     //View::View();
@@ -93,12 +94,10 @@ void ErrorHTTP(unsigned char _code);
 void SuccessHTTP(void);
 
 void ErrorHTTP(unsigned char _code) {
-	LOGD("ErrorHTTP");
     printf("\n\nErrorHTTP\n");
 }
 
 void SuccessHTTP(void) {
-	LOGD("SuccessHTTP");
     printf("\n\nSuccessHTTP\n");
 }
 
@@ -107,11 +106,38 @@ void MainMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
         playBT->gotoAndPlay(6);
         touchPlayBT = NULL;
         ShareDataGetRoot()->ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypePackSelect, 0);
-        VBHTTP* http = VBHTTPCreateByJS("user.js", ErrorHTTP, SuccessHTTP);
+        
+        //VBHTTP* http = VBHTTPCreateByJS("user.js", "setUser", ErrorHTTP, SuccessHTTP);
+        VBHTTP* http = VBHTTPCreateByJS("user.js", "updateUser?_id=4f261ebe878573ac2f000006&money=100", ErrorHTTP, SuccessHTTP);
         while(!http->complete) {
         }
-        LOGD("HTTP RESPONSE : %s", http->response);
         VBHTTPRelease(&http);
+        
+        http = VBHTTPCreateByJS("user.js", "getUser?_id=4f261ebe878573ac2f000006", ErrorHTTP, SuccessHTTP);
+        while(!http->complete) {
+        }
+        VBHTTPRelease(&http);
+//        http = VBHTTPCreateByJS("user.js", "addFriend?_id=4f261ebe878573ac2f000006&f_id=4f261ebe878573ac2f000006", ErrorHTTP, SuccessHTTP);
+//        while(!http->complete) {
+//        }
+//        VBHTTPRelease(&http);
+        
+//        http = VBHTTPCreateByJS("user.js", "acceptFriend?f_id=4f263a70c1c401d12f0000fd", ErrorHTTP, SuccessHTTP);
+//        while(!http->complete) {
+//        }
+//        VBHTTPRelease(&http);
+        
+//        http = VBHTTPCreateByJS("user.js", "showFriendList", ErrorHTTP, SuccessHTTP);
+//        while(!http->complete) {
+//        }
+//        VBHTTPRelease(&http);
+        
+        
+        //PlatformFacebookRequestGraphPath(FacebookGraphPathRequestTypeMe, NULL);
+        //PlatformFacebookRequestGraphPath(FacebookGraphPathRequestTypePlatformPosts, NULL);
+        PlatformFacebookRequestGraphPath(FacebookGraphPathRequestTypeMeFriends, NULL);
+        //PlatformFacebookAppRequest("초대메세지", NULL, NULL, NULL);
+        PlatformFacebookFeed("GelatoMania 팬페이지 link", "아이스 크림 퍼즐게임", "재미있어요\n아직은 개발중~!", "https://apps.facebook.com/gelatomania/", "https://fbcdn-photos-a.akamaihd.net/photos-ak-snc1/v85005/196/243309602411008/app_1_243309602411008_3398.gif", NULL);
     }
     
     TOUCHENDBT(touchRank, rankBT, _location, _touch, ,rankBT->gotoAndStop(0));

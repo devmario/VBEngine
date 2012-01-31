@@ -10,8 +10,10 @@ class PopupTweenListener;
 
 class Popup : public View {
     void ClearTween();
+    void playButtonClick();
 public:
     bool inited;
+    bool isClearPopup;
     
     VBModel* topView;
     

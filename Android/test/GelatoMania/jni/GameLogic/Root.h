@@ -88,6 +88,8 @@ public:
     void OpenPopup(int _type, int _star, int _score);
     void ClosePopup();
     
+    void goFowardStage();
+    
 	LAYER_NODE_FUNC(Root);
 };
 

@@ -32,14 +32,6 @@ THE SOFTWARE.
 
 #include <stdlib.h>
 
-#include <android/log.h>
-#define LOG_TAG  "CCEGLView_android"
-#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , LOG_TAG, __VA_ARGS__)
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO   , LOG_TAG, __VA_ARGS__)
-#define LOGW(...) __android_log_print(ANDROID_LOG_WARN   , LOG_TAG, __VA_ARGS__)
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , LOG_TAG, __VA_ARGS__)
-
 
 namespace cocos2d {
 
@@ -137,8 +129,7 @@ void CCEGLView::setContentScaleFactor(float contentScaleFactor)
 
 void CCEGLView::setViewPortInPoints(float x, float y, float w, float h)
 {
-	LOGD("#@@# setViewPortInPoints %f, %f, %f, %f", x, y, w, h);
-    if (m_bNotHVGA)
+	if (m_bNotHVGA)
     {
         float factor = m_fScreenScaleFactor / CC_CONTENT_SCALE_FACTOR();
         glViewport((GLint)(x * factor) + m_rcViewPort.origin.x,

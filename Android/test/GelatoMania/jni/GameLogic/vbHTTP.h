@@ -17,8 +17,9 @@ extern "C" {
         int sock;
         char* method;
         char* request;
-        char* header;
         char* response;
+        char* data;
+        char* header;
         pthread_t tid;
         int complete;
     } VBHTTP;
@@ -28,13 +29,16 @@ extern "C" {
                          const char* _port,
                          double _break_time, //최대 응답대기시간
                          double _read_interval, //응답확인 인터벌
-                         const char* _method, //GET
+                         const char* _method, //GET, POST
                          const char* _request, //request
+                         const char* _data, //POST시 데이터
+                         size_t _data_len, //POST시 데이터 길이
                          void (_error_handle)(unsigned char error_code), 
                          void (_success_handle)(void));
     
     //js
-    VBHTTP* VBHTTPCreateByJS(const char* _js_fileName, //request
+    VBHTTP* VBHTTPCreateByJS(const char* _js_fileName,
+                             const char* _request,
                              void (_error_handle)(unsigned char error_code), 
                              void (_success_handle)(void));
     

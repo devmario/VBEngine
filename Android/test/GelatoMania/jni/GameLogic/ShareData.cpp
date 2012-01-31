@@ -497,5 +497,13 @@ cJSON* ShareDataGetInApp() {
     return _shareInAppJSON;
 }
 
+int ShareDataGetNextPack(){
+    int stage_per_pack = 36;
+    if (_getsid() < stage_per_pack-1) {
+        return _getpid();
+    } else {
+        return _getpid()+1;
+    }
+}
 
 
