@@ -10,6 +10,8 @@ import java.util.Date;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +19,9 @@ import android.widget.EditText;
 
 public class GelatoManiaActivity extends Cocos2dxActivity {
 	private Cocos2dxGLSurfaceView mGLView;
-
+	private SharedPreferences sp;
+	private SharedPreferences.Editor e;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -25,8 +29,13 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		String packageName = getApplication().getPackageName();
 		super.setPackageName(packageName);
 
-		CopyAssets();
-
+		sp = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+		e = sp.edit();
+		
+		if(sp.getBoolean("isFirst", true)){
+			CopyAssets();
+		}
+			
 		setContentView(R.layout.game_demo);
 		mGLView = (Cocos2dxGLSurfaceView) findViewById(R.id.game_gl_surfaceview);
 		mGLView.setTextField((EditText) findViewById(R.id.textField));
@@ -97,7 +106,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 				in = assetManager.open(filename);
 				// String tmp = "/sdcard/.vanillaworld/gelatomania/resource/" + filename;
 				String tmp = "/data/data/com.vanillabreeze.gelatomania/files/resource/" + filename;
-				Log.i("#@#", tmp);
+				Log.i("#@#" ,tmp);
 				out = new FileOutputStream(tmp);
 				copyFile(in, out);
 				in.close();
@@ -109,6 +118,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 				Log.e("tag", e.getMessage());
 			}
 		}
+		e.putBoolean("isFirst", false);
 	}
 
 	private void copyFile(InputStream in, OutputStream out) throws IOException {

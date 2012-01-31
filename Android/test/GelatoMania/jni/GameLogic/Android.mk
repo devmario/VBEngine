@@ -55,7 +55,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../Cocos2dx \
                     $(LOCAL_PATH)/../VBEngine/Other/zlib \
                     $(LOCAL_PATH)/../VBEngine/Util
 
-LOCAL_CFLAGS := -DANDROID_USE
+LOCAL_CFLAGS := -DANDROID_NDK
 
 LOCAL_LDLIBS := -L$(call host-path, $(LOCAL_PATH)/../../libs/$(TARGET_ARCH_ABI)) \
                 -lcocos2d -lcocosdenshion -lvanillaworld -llog 

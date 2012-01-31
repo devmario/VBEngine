@@ -1,4 +1,4 @@
-#ifdef ANDROID_USE
+#ifdef __ANDROID__
 
 #include "PlatformFunctions.h"
 
