@@ -8,6 +8,7 @@
 #define TW_Y -244
 
 PopupClear::PopupClear(VBObjectFile2D* _obj, VBTexture* _tex, VBModel* _topView, int _starScore, int _score, VBObjectFile2D* _fontObj, VBTexture* _fontTex) : Popup(_obj, _tex, _topView) {
+    isClearPopup = true;
     initedPopupClear = false;
     starScore = _starScore;
     score = _score;

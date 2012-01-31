@@ -3,6 +3,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := gamelogic
 
 LOCAL_SRC_FILES := \
+Android_PlatformFunctions.c\
 AppDelegate.cpp\
 cJSON.c\
 CppTweener.cpp\
@@ -53,6 +54,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../Cocos2dx \
                     $(LOCAL_PATH)/../VBEngine/Other/png \
                     $(LOCAL_PATH)/../VBEngine/Other/zlib \
                     $(LOCAL_PATH)/../VBEngine/Util
+
+LOCAL_CFLAGS := -DANDROID_USE
 
 LOCAL_LDLIBS := -L$(call host-path, $(LOCAL_PATH)/../../libs/$(TARGET_ARCH_ABI)) \
                 -lcocos2d -lcocosdenshion -lvanillaworld -llog 

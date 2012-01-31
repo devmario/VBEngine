@@ -4,6 +4,8 @@
 #include "ScrollerContainer.h"
 #include "IceCream.h"
 
+class GameMain;
+
 typedef struct ToppingContainerCellData {
     int type;
     
@@ -39,11 +41,12 @@ private:
     void UpdateSelectTween(float _deltaTime);
     
     IceCream* iceCream;
+    GameMain* gameMain;
     
 public:
     virtual void ResetData();
     
-    ToppingContainer(VBObjectFile2D* _objScroller, VBTexture* _texScroller, VBArrayVector* _data, IceCream* _iceCream);
+    ToppingContainer(GameMain* _gameMain, VBObjectFile2D* _objScroller, VBTexture* _texScroller, VBArrayVector* _data, IceCream* _iceCream);
     ~ToppingContainer();
     
     void SetCook(IceCream* _iceCream);

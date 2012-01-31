@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "PlatformFunctions.h"
 
 bool IsEqualHistory(history* _h0, history* _h1) {
     if(_h0 == NULL || _h1 == NULL)
@@ -29,6 +30,7 @@ void PopupClose(void* _ref) {
 
 void Root::OpenPopupAlloc(int _type, int _star, int _score) {
     popupType = _type;
+//    popupType = PopupTypeClear;
     switch (_type) {
         case PopupTypePause:
             popup = new Popup(NULL, NULL, top);
@@ -82,7 +84,19 @@ void Root::ClosePopup() {
     //printf("history len:%i\n", vecHistory->len);
 }
 
+void RootGameCenterLoginComplete(cJSON* _info) {
+    printf("%s\n", cJSON_Print(_info));
+}
+
+void RootFacebookLoginComplete(cJSON* _info) {
+    printf("%s\n", cJSON_Print(_info));
+}
+
 Root::Root() {
+    
+    //PlatformGameCenterLogin(RootGameCenterLoginComplete);
+    
+    //PlatformFacebookLogin(RootFacebookLoginComplete);
     
     backHistory = false;
     //CCLayer();
@@ -100,7 +114,9 @@ Root::Root() {
     
     // instead of nsdocumentdirectory
     // get resource, document path
-    /*
+#ifdef ANDROID_USE
+    VBEngineStart("/mnt/sdcard/GelatoMania/resource", "/mnt/sdcard/GelatoMania/document", 800, 480, 480, 320);
+#else
     const char* appName = "GelatoMania.app";
     int appNameLen = strlen(appName);
     
@@ -120,19 +136,23 @@ Root::Root() {
     documentsPath[resourceLen-appNameLen] = '\0';
     strcat(documentsPath, "Documents");
     //    cout << documentsPath << '\n';
-    */
     
-    //    VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [documentDirectory UTF8String], 480, 320, 480, 320);
-    VBEngineStart("/mnt/sdcard/GelatoMania/resource", "/mnt/sdcard/GelatoMania/document", 800, 480, 480, 320);//VBEngineStart(resourcePath, documentsPath, 480, 320, 480, 320);
-    
-    //free(resourcePath);
-    //free(documentsPath);
+    VBEngineStart(resourcePath, documentsPath, 480, 320, 480, 320);
+
+    free(resourcePath);
+    free(documentsPath);
+#endif
+
     
     gettimeofday(&curTime, NULL);
     
     top = new VBModel();
     this->addChild((CCLayer*)top);
-    ((CCSprite*)top)->setPosition(ccp(0, 480));//((CCSprite*)top)->setPosition(ccp(0, 320));
+#ifdef ANDROID_USE
+    ((CCSprite*)top)->setPosition(ccp(0, 480));
+#else
+    ((CCSprite*)top)->setPosition(ccp(0, 320));
+#endif
     //top->setScaleY(768.0/320.0);
     //top->setScaleX(1024.0/480.0);
     
@@ -458,6 +478,14 @@ void Root::ChangePageARGSonUpdate() {
         if(view)
             top->addChild(view->top, -1);
     }
+    if (!_needRemove && !_needAdd && prePage == newPage) {
+        if (newPage == RootPageTypeGameMain) {
+            GameMain *gameMain = (GameMain*)view;
+            gameMain->resetOtherStage(historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2]);
+            PopHistory(vecHistory->len - 1);
+            PopHistory(vecHistory->len - 1);
+        }
+    }
     //인자 인덱스 증가
     _preIdx++;
     _argIdx++;
@@ -592,4 +620,37 @@ void Root::PrevPage(int _step) {
         backHistoryStep = _step;
         ChangePageVALIST(_preHistory->count + 1, _h);
     }
+}
+
+void Root::goFowardStage()
+{
+    history* _ptr = GetLastHistory();
+    if (_ptr) {
+        int pageStateIndex = 0;
+        switch (_ptr->args[0]) {
+            case PopupTypeNone:case PopupTypePause:
+                pageStateIndex = 1;
+                break;
+            case PopupTypeClear:
+                pageStateIndex = 3;
+                break;
+            default: break;
+        }
+        if (_ptr->args[pageStateIndex] == RootPageTypeGameMain) {
+            
+//            PopHistory(<#int _idx#>);
+            if (_getpid() == ShareDataGetNextPack()) {
+                //reset
+                _setsid(_getsid()+1);
+                ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeGameMain, _getpid(), _getsid());
+            } else {
+                //new
+                _setpid(_getpid()+1);
+                _setsid(0);
+                ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeGameMain, _getpid(), _getsid());
+            }
+        }
+    }
+    
+    PopupClose(this);
 }

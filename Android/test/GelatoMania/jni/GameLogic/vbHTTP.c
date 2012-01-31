@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 #include "VBEngine.h"
 
+#define VBHTTP_MAXTK 0xFF
 #define GET_HEADER "GET /%s HTTP/1.0\nAccept:text/plain\nAccept-Language:en\nConnection:Close\nHost:%s\nUser-Agen:Mozilla/4.0\n\n"
 #define POST_HEADER "POST /%s HTTP/1.0\r\nContent-Length: %ld\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n%s"
 
@@ -35,7 +36,7 @@ void* VBHTTPResponseRead(void* _arg) {
     while(_interval < http->break_time) {
         char buf[0xFF] = {'\0',};
 		unsigned long _read_len = read(http->sock, buf, 0xF);
-		_tl += _read_len;
+        _tl += _read_len;
 		if(http->response) {
 			http->response = realloc(http->response, (_tl + 1) * sizeof(char));
 		} else {
@@ -58,7 +59,7 @@ void* VBHTTPResponseRead(void* _arg) {
     }
     //타임아웃
     http->complete = 1;
-    //for DEBUG http->error_handle(0);
+    http->error_handle(0);
     printf("포트 없음\n");
     fflush(stdout);
     http->tid = NULL;
@@ -66,6 +67,7 @@ void* VBHTTPResponseRead(void* _arg) {
 }
 
 VBHTTP* VBHTTPCreateByJS(const char* _js_fileName,
+                         const char* _request,
                          void (_error_handle)(unsigned char error_code), 
                          void (_success_handle)(void)) {
     VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _js_fileName);
@@ -79,7 +81,7 @@ VBHTTP* VBHTTPCreateByJS(const char* _js_fileName,
     fread(_buf, _size, sizeof(char), _f);
     fclose(_f);
     
-    VBHTTP* http = VBHTTPCreate("ec2-23-20-6-240.compute-1.amazonaws.com", "80", 5.0, 0, "POST", _buf, _error_handle, _success_handle);
+    VBHTTP* http = VBHTTPCreate("ec2-23-20-6-240.compute-1.amazonaws.com", "80", 5.0, 0, "POST", _request, _buf, _size, _error_handle, _success_handle);
     free(_buf);
     
     return http;
@@ -89,8 +91,10 @@ VBHTTP* VBHTTPCreate(const char* _host_name,
                      const char* _port,
                      double _break_time, //최대 응답대기시간
                      double _read_interval, //응답확인 인터벌
-                     const char* _method, //GET
+                     const char* _method, //GET, POST
                      const char* _request, //request
+                     const char* _data, //POST시 데이터
+                     size_t _data_len, //POST시 데이터 길이
                      void (_error_handle)(unsigned char error_code), 
                      void (_success_handle)(void)) {
     VBHTTP* http = calloc(sizeof(VBHTTP), 1);
@@ -110,8 +114,15 @@ VBHTTP* VBHTTPCreate(const char* _host_name,
     http->method = calloc(sizeof(char), (strlen(_method) + 1));
     memmove(http->method, _method, sizeof(char) * (strlen(_method)));
     
-    http->request = calloc(sizeof(char), (strlen(_request) + 1));
-    memmove(http->request, _request, sizeof(char) * (strlen(_request)));
+    if(_request) {
+        http->request = calloc(sizeof(char), (strlen(_request) + 1));
+        memmove(http->request, _request, sizeof(char) * (strlen(_request)));
+    }
+    
+    if(_data) {
+        http->data = calloc(sizeof(char), (strlen(_data) + 1));
+        memmove(http->data, _data, sizeof(char) * (strlen(_data)));
+    }
     
 	struct hostent *__hostent_pnt;
 	struct servent *__servent_pnt;
@@ -127,6 +138,7 @@ VBHTTP* VBHTTPCreate(const char* _host_name,
         http->error_handle(0);
         printf("포트 없음\n");
         fflush(stdout);
+        return http;
     }
     
     __hostent_pnt = gethostbyname(http->host_name);
@@ -137,6 +149,7 @@ VBHTTP* VBHTTPCreate(const char* _host_name,
         http->error_handle(0);
         printf("호스트 또는 포트 없음\n");
         fflush(stdout);
+        return http;
 	}
 	
     if((http->sock = socket(PF_INET,SOCK_STREAM,0)) < 0) {
@@ -144,6 +157,7 @@ VBHTTP* VBHTTPCreate(const char* _host_name,
         http->error_handle(0);
         printf("소켓 생성 실패\n");
         fflush(stdout);
+        return http;
     }
 	
     if(connect(http->sock,(struct sockaddr*)&__sockaddr_in, sizeof(__sockaddr_in)) < 0) {
@@ -151,10 +165,11 @@ VBHTTP* VBHTTPCreate(const char* _host_name,
         http->error_handle(0);
         printf("연결 실패\n");
         fflush(stdout);
+        return http;
     }
     
     if(strcmp(http->method, "GET") == 0) {
-        http->header = calloc(sizeof(char), (strlen(GET_HEADER) + strlen(http->host_name) + strlen(http->request) + 0xFF));
+        http->header = calloc(sizeof(char), (strlen(GET_HEADER) + strlen(http->host_name) + strlen(http->request) + VBHTTP_MAXTK));
         sprintf(http->header, GET_HEADER, http->request, http->host_name);
         size_t _len = strlen(http->header);
         if(_len != write(http->sock, http->header, _len)) {
@@ -162,10 +177,11 @@ VBHTTP* VBHTTPCreate(const char* _host_name,
             http->error_handle(0);
             printf("헤더전송 실패\n");
             fflush(stdout);
+            return http;
         }
     } else if(strcmp(http->method, "POST") == 0) {
-        http->header = calloc(sizeof(char), (strlen(POST_HEADER) + strlen(http->host_name) + strlen(http->request) + 0xFF));
-        sprintf(http->header, POST_HEADER, "", strlen(http->request), http->request);
+        http->header = calloc(sizeof(char), (strlen(POST_HEADER) + strlen(http->host_name) + (http->request ? strlen(http->request) : 0) + (http->data ? strlen(http->data) : 0) + VBHTTP_MAXTK));
+        sprintf(http->header, POST_HEADER, http->request, _data_len, http->data);
         printf("Request Header\n\n%s\n\n\n\n", http->header);
         fflush(stdout);
         size_t _len = strlen(http->header);
@@ -174,6 +190,7 @@ VBHTTP* VBHTTPCreate(const char* _host_name,
             http->error_handle(0);
             printf("헤더전송 실패\n");
             fflush(stdout);
+            return http;
         }
     }
     
