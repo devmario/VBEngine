@@ -29,6 +29,7 @@ ShareData.cpp\
 Shop.cpp\
 ShopScrollContainer.cpp\
 ShopThumb.cpp\
+Social.cpp\
 Slider.cpp\
 StageSelect.cpp\
 StageThumb.cpp\

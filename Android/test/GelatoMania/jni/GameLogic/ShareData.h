@@ -9,6 +9,9 @@
 
 #define GAME_FRAME 60.0
 
+
+void ShareDataSaveUser();
+cJSON* ShareDataGetUser();
 VBObjectFile2D* ShareDataGetTitleObjFile();
 const char* ShareDataGetLoadingLibraryName();
 VBTexture* ShareDataGetTitleTexture();

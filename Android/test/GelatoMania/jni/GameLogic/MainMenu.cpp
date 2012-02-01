@@ -90,15 +90,19 @@ void MainMenu::touchMove(CCTouch* _touch, CCPoint _location) {
     
 }
 
-void ErrorHTTP(unsigned char _code);
-void SuccessHTTP(void);
+void ErrorHTTP(VBHTTP* _http, unsigned char _code);
+void SuccessHTTP(VBHTTP* _http);
 
-void ErrorHTTP(unsigned char _code) {
-    printf("\n\nErrorHTTP\n");
+void ErrorHTTP(VBHTTP* _http, unsigned char _code) {
+    printf("\n\nErrorHTTP: %i\n", _code);
+    //printf("%s", _http->response);
+    VBHTTPRelease(&_http);
 }
 
-void SuccessHTTP(void) {
+void SuccessHTTP(VBHTTP* _http) {
     printf("\n\nSuccessHTTP\n");
+    printf("%s", CutHeader(_http->response));
+    VBHTTPRelease(&_http);
 }
 
 void MainMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
@@ -106,17 +110,17 @@ void MainMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
         playBT->gotoAndPlay(6);
         touchPlayBT = NULL;
         ShareDataGetRoot()->ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypePackSelect, 0);
+
+//        /* server off
         
-        //VBHTTP* http = VBHTTPCreateByJS("user.js", "setUser", ErrorHTTP, SuccessHTTP);
-        VBHTTP* http = VBHTTPCreateByJS("user.js", "updateUser?_id=4f261ebe878573ac2f000006&money=100", ErrorHTTP, SuccessHTTP);
-        while(!http->complete) {
-        }
-        VBHTTPRelease(&http);
         
-        http = VBHTTPCreateByJS("user.js", "getUser?_id=4f261ebe878573ac2f000006", ErrorHTTP, SuccessHTTP);
-        while(!http->complete) {
-        }
-        VBHTTPRelease(&http);
+        
+        //VBHTTPCreateByJS("user.js", "setUser?fb=aaa", ErrorHTTP, SuccessHTTP);
+        
+        //VBHTTPCreateByJS("user.js", "updateUser?_id=4f261ebe878573ac2f000006&money=100", ErrorHTTP, SuccessHTTP);
+        //VBHTTPCreateByJS("user.js", "getUser?_id=4f261ebe878573ac2f000006", ErrorHTTP, SuccessHTTP);
+//        */
+
 //        http = VBHTTPCreateByJS("user.js", "addFriend?_id=4f261ebe878573ac2f000006&f_id=4f261ebe878573ac2f000006", ErrorHTTP, SuccessHTTP);
 //        while(!http->complete) {
 //        }
@@ -132,12 +136,25 @@ void MainMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
 //        }
 //        VBHTTPRelease(&http);
         
-        
+
+        /* facebook off
         //PlatformFacebookRequestGraphPath(FacebookGraphPathRequestTypeMe, NULL);
         //PlatformFacebookRequestGraphPath(FacebookGraphPathRequestTypePlatformPosts, NULL);
         PlatformFacebookRequestGraphPath(FacebookGraphPathRequestTypeMeFriends, NULL);
         //PlatformFacebookAppRequest("초대메세지", NULL, NULL, NULL);
         PlatformFacebookFeed("GelatoMania 팬페이지 link", "아이스 크림 퍼즐게임", "재미있어요\n아직은 개발중~!", "https://apps.facebook.com/gelatomania/", "https://fbcdn-photos-a.akamaihd.net/photos-ak-snc1/v85005/196/243309602411008/app_1_243309602411008_3398.gif", NULL);
+        */
+
+        //        /* facebook off
+        if(PlatformFacebookIsSigned()) {
+            //PlatformFacebookRequestGraphPath(FacebookGraphPathRequestTypeMe, NULL);
+            //PlatformFacebookRequestGraphPath(FacebookGraphPathRequestTypePlatformPosts, NULL);
+            //PlatformFacebookRequestGraphPath(FacebookGraphPathRequestTypeMe, NULL);
+            //PlatformFacebookAppRequest("초대메세지", NULL, NULL, NULL);
+            PlatformFacebookFeed("GelatoMania 팬페이지 link", "아이스 크림 퍼즐게임", "재미있어요\n아직은 개발중~!", "https://apps.facebook.com/gelatomania/", "https://fbcdn-photos-a.akamaihd.net/photos-ak-snc1/v85005/196/243309602411008/app_1_243309602411008_3398.gif", NULL);
+        }
+//        */
+
     }
     
     TOUCHENDBT(touchRank, rankBT, _location, _touch, ,rankBT->gotoAndStop(0));

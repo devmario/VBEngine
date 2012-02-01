@@ -23,6 +23,8 @@ cJSON* _shareInAppJSON = NULL;
 
 cJSON* _shareTempJSON = NULL;
 
+cJSON* _shareUser = NULL;
+
 int pid = 0;
 int sid = 0;
 int _getpid(){return pid;}
@@ -369,6 +371,10 @@ Root* ShareDataGetRoot() {
 }
 
 void ShareDataFree() {
+    if(_shareUser) {
+        cJSON_Delete(_shareUser);
+        _shareUser = NULL;
+    }
     if(_shareTitleObj)
         VBObjectFile2DFree(&_shareTitleObj);
     if(_shareTitleTexture)
@@ -409,15 +415,28 @@ void ShareDataFree() {
         }
         VBArrayVectorFree(&_shareStageRoot);
     }
-    if(_shareResJSON)
+    if(_shareResJSON) {
         cJSON_Delete(_shareResJSON);
-    if(_shareTempJSON)
+        _shareResJSON = NULL;
+    }
+    if(_shareTempJSON) {
         cJSON_Delete(_shareTempJSON);
+        _shareResJSON = NULL;
+    }
 }
 
 cJSON* ShareDataGetJSON() {
     if(_shareJSON == NULL) {
-        VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), "data.json");
+        VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetDocumentPath()), "data.json");
+        if(access(VBStringGetCString(_str), F_OK) == 0) {
+            VBString* _tmpStr = VBStringCopy(_str);
+            VBStringFree(&_str);
+            _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), "data.json");
+            rename(VBStringGetCString(_tmpStr), VBStringGetCString(_str));
+        } else {
+            VBStringFree(&_str);
+            _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), "data.json");
+        }
         FILE* _jSONFile = fopen(VBStringGetCString(_str), "r");
         VBStringFree(&_str);
         
@@ -439,6 +458,59 @@ cJSON* ShareDataGetJSON() {
     return _shareJSON;
 }
 
+cJSON* ShareDataGetUser() {
+    if(_shareUser == NULL) {
+        VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetDocumentPath()), "user.json");
+        if(access(VBStringGetCString(_str), F_OK) != 0) {
+            VBString* _tmpStr = VBStringCopy(_str);
+            VBStringFree(&_str);
+            _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), "user.json");
+            FILE* _originF = fopen(VBStringGetCString(_str), "r");
+            FILE* _cpF = fopen(VBStringGetCString(_tmpStr), "w");
+            fseek(_originF, 0, SEEK_END);
+            fseek(_cpF, 0, SEEK_END);
+            size_t _originLen = ftell(_originF);
+            fseek(_originF, 0, SEEK_SET);
+            fseek(_cpF, 0, SEEK_SET);
+            void* buf = malloc(_originLen);
+            fread(buf, 1, _originLen, _originF);
+            fwrite(buf, 1, _originLen, _cpF);
+            fclose(_originF);
+            fclose(_cpF);
+        }
+        FILE* _jSONFile = fopen(VBStringGetCString(_str), "r");
+        VBStringFree(&_str);
+        
+        fseek(_jSONFile, 0, SEEK_END);
+        size_t _len = ftell(_jSONFile);
+        fseek(_jSONFile, 0, SEEK_SET);
+        
+        char* _jSONData = (char*)calloc(1, _len + 1);
+        fread(_jSONData, 1, _len, _jSONFile);
+        
+        fclose(_jSONFile);
+        
+        _shareUser = cJSON_Parse(_jSONData);
+        if(_shareUser == NULL)
+            printf("Error before: [%s]\n",cJSON_GetErrorPtr());
+        
+        free(_jSONData);
+    }
+    return _shareUser;
+}
+
+void ShareDataSaveUser() {
+    VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetDocumentPath()), "user.json");
+    FILE* _jSONFile = fopen(VBStringGetCString(_str), "w");
+    VBStringFree(&_str);
+    
+    char* _json_str = cJSON_Print(ShareDataGetUser());
+    fwrite(_json_str, 1, strlen(_json_str), _jSONFile);
+    free(_json_str);
+    
+    fclose(_jSONFile);
+}
+
 int ShareDataGetPackLength() {
     cJSON* _json = cJSON_GetObjectItem(ShareDataGetJSON(), "pack");
     return cJSON_GetArraySize(_json);
@@ -456,7 +528,7 @@ char* ShareDataGetPackLibraryName(int _idx) {
 }
 
 void ShareDataSave() {
-    VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), "data.json");
+    VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetDocumentPath()), "data.json");
     FILE* _jSONFile = fopen(VBStringGetCString(_str), "w");
     VBStringFree(&_str);
     

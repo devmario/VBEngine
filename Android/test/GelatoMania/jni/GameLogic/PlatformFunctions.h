@@ -8,6 +8,7 @@
 extern "C" {
 #endif
     
+    
     VBImage* PlatformGetTextImage(const char* _txt, const char* _fontName, float _size);
     
     
@@ -25,7 +26,8 @@ extern "C" {
     /********Facebook*****************/
     
 #define FacebookLoginErrorCodeNone 0
-#define FacebookLoginErrorCodeAuthFail 2
+#define FacebookLoginErrorCodeAuthFail 1
+#define FacebookLoginErrorCodeGetMeFail 2
     void* _getFB();
     int PlatformFacebookIsSigned();
     void PlatformFacebookLogin(void (*_completeCallback)(cJSON*));
@@ -47,15 +49,13 @@ extern "C" {
     
     
     
-    
-    
-    
-    
     void PlatformMobageLogin(void (*_completeCallback)(cJSON*));
     
     
     
     void PlatformTwitterLogin(void (*_completeCallback)(cJSON*));
+    
+    
     
     
 #ifdef __cplusplus

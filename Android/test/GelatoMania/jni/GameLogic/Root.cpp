@@ -75,29 +75,21 @@ void Root::OpenPopup(int _type, int _star, int _score) {
     
     free(_newH.args);
     
-    //printf("history len:%i %i %i %i\n", vecHistory->len, _idx, _pidx, _newH.count);
+//    printf("history len:%i %i %i %i\n", vecHistory->len, _idx, _pidx, _newH.count);
 }
 
 void Root::ClosePopup() {
     popup->Close();
     PopHistory(vecHistory->len - 1);
-    //printf("history len:%i\n", vecHistory->len);
-}
-
-void RootGameCenterLoginComplete(cJSON* _info) {
-    printf("%s\n", cJSON_Print(_info));
-}
-
-void RootFacebookLoginComplete(cJSON* _info) {
-    printf("%s\n", cJSON_Print(_info));
+    printf("history len:%i\n", vecHistory->len);
 }
 
 Root::Root() {
+    /* facebook off
+    PlatformGameCenterLogin(RootGameCenterLoginComplete);
     
-    //PlatformGameCenterLogin(RootGameCenterLoginComplete);
-    
-    //PlatformFacebookLogin(RootFacebookLoginComplete);
-    
+    PlatformFacebookLogin(RootFacebookLoginComplete);
+    */
     backHistory = false;
     //CCLayer();
     
@@ -139,15 +131,23 @@ Root::Root() {
     //    cout << documentsPath << '\n';
     
     VBEngineStart(resourcePath, documentsPath, 480, 320, 480, 320);
-
+    
     free(resourcePath);
     free(documentsPath);
 #endif
-
+    
+    social = new Social();
+    social->LoginGameCenter();
     
     gettimeofday(&curTime, NULL);
     
     top = new VBModel();
+
+#ifdef __ANDROID__
+    top->setScaleX(1.67);
+    top->setScaleY(1.5);
+#endif
+
     this->addChild((CCLayer*)top);
 #ifdef __ANDROID__
     ((CCSprite*)top)->setPosition(ccp(0, 480));
@@ -171,6 +171,8 @@ Root::Root() {
 }
 
 Root::~Root() {
+    delete social;
+    
     ResetHistory();
     VBArrayVectorFree(&vecHistory);
     
@@ -321,7 +323,9 @@ void Root::PushHistory(history* _h) {
     _ptr->count = _h->count;
     _ptr->args = (int*)calloc(sizeof(int), _ptr->count);
     
+//    cout << "Push History\n";
     for(int i = 0; i < _ptr->count; i++) {
+//        cout << i << " : " << _h->args[i] << '\n';
         _ptr->args[i] = _h->args[i];
     }
     
@@ -329,19 +333,19 @@ void Root::PushHistory(history* _h) {
 }
 
 void Root::PopHistory(int _idx) {
-    printf("pop history in\n");
+//    printf("pop history in\n");
     history* _h = (history*)VBArrayVectorRemoveAt(vecHistory, _idx);
-    printf("access history\n");
+//    printf("access history\n");
     if(_h) {
-        printf("access args\n");
+//        printf("access args\n");
         if(_h->args) {
-            printf("    free args\n");
+//            printf("    free args\n");
             free(_h->args);
         }
-        printf("    free history\n");
+//        printf("    free history\n");
         free(_h);
     }
-    printf("pop history out\n");
+//    printf("pop history out\n");
 }
 
 history* Root::GetLastHistory() {

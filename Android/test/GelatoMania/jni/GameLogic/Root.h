@@ -7,6 +7,7 @@
 #include "PopupClear.h"
 #include <time.h>
 #include <stdarg.h>
+#include "Social.h"
 
 using namespace cocos2d;
 
@@ -37,6 +38,8 @@ bool IsEqualHistory(history* _h0, history* _h1);
 
 class Root : public cocos2d::CCLayer {
 private:
+    Social* social;
+    
     View* view;
     VBModel* loading;
     

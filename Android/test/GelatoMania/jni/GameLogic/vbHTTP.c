@@ -9,67 +9,165 @@
 #include <arpa/inet.h>
 #include "VBEngine.h"
 
+#ifndef vbHTTPDebug
+
+#define printf(str, ...) \
+
+#endif
+
 #define VBHTTP_MAXTK 0xFF
 #define GET_HEADER "GET /%s HTTP/1.0\nAccept:text/plain\nAccept-Language:en\nConnection:Close\nHost:%s\nUser-Agen:Mozilla/4.0\n\n"
 #define POST_HEADER "POST /%s HTTP/1.0\r\nContent-Length: %ld\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n%s"
 
-char* CutHeader(char *response);
+
 char* CutHeader(char *response) {
-	int i = 0;
-	size_t header_len = strlen(response);
-	while(i < header_len) {
-		if(response[i] == '\0')
-			break;
-		i++;
-	}
-	return response + i + 1;
+    if(response) {
+        int i = 0;
+        char chunk[0xF] = "\r\n\r\n";
+        int cmp = 0;
+        while(cmp < strlen(chunk)) {
+            if(*(response + i) == chunk[cmp]) {
+                cmp++;
+            } else {
+                cmp = 0;
+            }
+            i++;
+        }
+        return response + i;
+    } else {
+        return NULL;
+    }
 }
 
 void* VBHTTPResponseRead(void* _arg);
 
 void* VBHTTPResponseRead(void* _arg) {
     VBHTTP* http = _arg;
+    
+	struct hostent *__hostent_pnt;
+	struct servent *__servent_pnt;
+	struct sockaddr_in __sockaddr_in;
+	memset((void*)&__sockaddr_in, 0, sizeof(__sockaddr_in));
+	__sockaddr_in.sin_family = AF_INET;
+    __servent_pnt = getservbyname("http", "tcp");
+	
+    if(__servent_pnt) {
+		__sockaddr_in.sin_port = __servent_pnt->s_port;
+	} else if((__sockaddr_in.sin_port = htons(atoi(http->port)))==0) {
+        http->complete = 1;
+        if(http->error_handle)
+            http->error_handle(http, 0);
+        printf("포트 없음\n");
+        //fflush(stdout);
+        http->tid = NULL;
+        return NULL;
+    }
+    
+    __hostent_pnt = gethostbyname(http->host_name);
+	if(__hostent_pnt) {
+		memcpy((void*)&__sockaddr_in.sin_addr, (void*)__hostent_pnt->h_addr, __hostent_pnt->h_length);
+	} else if((__sockaddr_in.sin_addr.s_addr = inet_addr(http->host_name)) == INADDR_NONE) {
+        http->complete = 1;
+        if(http->error_handle)
+            http->error_handle(http, 0);
+        printf("호스트 또는 포트 없음\n");
+        //fflush(stdout);
+        http->tid = NULL;
+        return NULL;
+	}
+	
+    if((http->sock = socket(PF_INET,SOCK_STREAM,0)) < 0) {
+        http->complete = 1;
+        if(http->error_handle)
+            http->error_handle(http, 0);
+        printf("소켓 생성 실패\n");
+        //fflush(stdout);
+        http->tid = NULL;
+        return NULL;
+    }
+	
+    if(connect(http->sock,(struct sockaddr*)&__sockaddr_in, sizeof(__sockaddr_in)) < 0) {
+        http->complete = 1;
+        if(http->error_handle)
+            http->error_handle(http, 0);
+        printf("연결 실패\n");
+        //fflush(stdout);
+        http->tid = NULL;
+        return NULL;
+    }
+    
+    if(strcmp(http->method, "GET") == 0) {
+        http->header = calloc(sizeof(char), (strlen(GET_HEADER) + strlen(http->host_name) + strlen(http->request) + VBHTTP_MAXTK));
+        sprintf(http->header, GET_HEADER, http->request, http->host_name);
+        size_t _len = strlen(http->header);
+        if(_len != write(http->sock, http->header, _len)) {
+            http->complete = 1;
+            if(http->error_handle)
+                http->error_handle(http, 0);
+            printf("헤더전송 실패\n");
+            //fflush(stdout);
+            http->tid = NULL;
+            return NULL;
+        }
+    } else if(strcmp(http->method, "POST") == 0) {
+        http->header = calloc(sizeof(char), (strlen(POST_HEADER) + strlen(http->host_name) + (http->request ? strlen(http->request) : 0) + (http->data ? strlen(http->data) : 0) + VBHTTP_MAXTK));
+        sprintf(http->header, POST_HEADER, http->request, http->data_len, http->data);
+        printf("Request Header\n\n%s\n\n\n\n", http->header);
+        fflush(stdout);
+        size_t _len = strlen(http->header);
+        if(_len != write(http->sock, http->header, _len)) {
+            http->complete = 1;
+            if(http->error_handle)
+                http->error_handle(http, 0);
+            printf("헤더전송 실패\n");
+            //fflush(stdout);
+            http->tid = NULL;
+            return NULL;
+        }
+    }
+    
     unsigned int _interval = 0;
     printf("\nResponse Header\n\n");
-    fflush(stdout);
-    unsigned long _tl = 0;
+    //fflush(stdout);
+    unsigned long _total_len = 0;
     while(_interval < http->break_time) {
-        char buf[0xFF] = {'\0',};
-		unsigned long _read_len = read(http->sock, buf, 0xF);
-        _tl += _read_len;
-		if(http->response) {
-			http->response = realloc(http->response, (_tl + 1) * sizeof(char));
-		} else {
-			http->response = calloc((_tl + 1), sizeof(char));
-		}
-		sprintf(http->response + _tl - _read_len, "%s\0", buf);
-        printf("%s", buf);
-        fflush(stdout);
-		if(_read_len < 1) {
-			if(http->tid) {
-                //성공
-                http->complete = 1;
-                http->success_handle();
-				http->tid = NULL;
-                return NULL;
-			}
+        char _buf[0xF] = {'\0',};
+        long _read_len = read(http->sock, _buf, 0xF);
+		if(_read_len > 0) {
+            _total_len += _read_len;
+            if(http->response) {
+                http->response = realloc(http->response, (_total_len + 1) * sizeof(char));
+            } else {
+                http->response = calloc(_total_len + 1, sizeof(char));
+            }
+            memcpy(http->response + _total_len - _read_len, _buf, _read_len);
+        } else {
+            //성공
+            if(http->response && _total_len > 0)
+                http->response[_total_len] = '\0';
+            http->complete = 1;
+            if(http->success_handle)
+                http->success_handle(http);
+            http->tid = NULL;
+            return NULL;
         }
 		_interval += http->read_interval;
         usleep(http->read_interval);
     }
     //타임아웃
     http->complete = 1;
-    http->error_handle(0);
-    printf("포트 없음\n");
-    fflush(stdout);
+    if(http->error_handle)
+        http->error_handle(http, 0);
+    printf("타임아웃\n");
+    //fflush(stdout);
     http->tid = NULL;
     return NULL;
 }
 
 VBHTTP* VBHTTPCreateByJS(const char* _js_fileName,
                          const char* _request,
-                         void (_error_handle)(unsigned char error_code), 
-                         void (_success_handle)(void)) {
+                         void (_error_handle)(VBHTTP* _http, unsigned char error_code), 
+                         void (_success_handle)(VBHTTP* _http)) {
     VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _js_fileName);
     printf("%s\n",_str->data);
     FILE* _f = fopen(VBStringGetCString(_str), "rb");
@@ -95,8 +193,8 @@ VBHTTP* VBHTTPCreate(const char* _host_name,
                      const char* _request, //request
                      const char* _data, //POST시 데이터
                      size_t _data_len, //POST시 데이터 길이
-                     void (_error_handle)(unsigned char error_code), 
-                     void (_success_handle)(void)) {
+                     void (_error_handle)(VBHTTP* _http, unsigned char error_code), 
+                     void (_success_handle)(VBHTTP* _http)) {
     VBHTTP* http = calloc(sizeof(VBHTTP), 1);
 	
     http->host_name = calloc(sizeof(char), (strlen(_host_name) + 1));
@@ -120,79 +218,10 @@ VBHTTP* VBHTTPCreate(const char* _host_name,
     }
     
     if(_data) {
-        http->data = calloc(sizeof(char), (strlen(_data) + 1));
-        memmove(http->data, _data, sizeof(char) * (strlen(_data)));
+        http->data = calloc(sizeof(char), (_data_len + 1));
+        memmove(http->data, _data, sizeof(char) * _data_len);
     }
-    
-	struct hostent *__hostent_pnt;
-	struct servent *__servent_pnt;
-	struct sockaddr_in __sockaddr_in;
-	memset((void*)&__sockaddr_in, 0, sizeof(__sockaddr_in));
-	__sockaddr_in.sin_family = AF_INET;
-    __servent_pnt = getservbyname("http", "tcp");
-	
-    if(__servent_pnt) {
-		__sockaddr_in.sin_port = __servent_pnt->s_port;
-	} else if((__sockaddr_in.sin_port = htons(atoi(http->port)))==0) {
-        http->complete = 1;
-        http->error_handle(0);
-        printf("포트 없음\n");
-        fflush(stdout);
-        return http;
-    }
-    
-    __hostent_pnt = gethostbyname(http->host_name);
-	if(__hostent_pnt) {
-		memcpy((void*)&__sockaddr_in.sin_addr, (void*)__hostent_pnt->h_addr, __hostent_pnt->h_length);
-	} else if((__sockaddr_in.sin_addr.s_addr = inet_addr(http->host_name)) == INADDR_NONE) {
-        http->complete = 1;
-        http->error_handle(0);
-        printf("호스트 또는 포트 없음\n");
-        fflush(stdout);
-        return http;
-	}
-	
-    if((http->sock = socket(PF_INET,SOCK_STREAM,0)) < 0) {
-        http->complete = 1;
-        http->error_handle(0);
-        printf("소켓 생성 실패\n");
-        fflush(stdout);
-        return http;
-    }
-	
-    if(connect(http->sock,(struct sockaddr*)&__sockaddr_in, sizeof(__sockaddr_in)) < 0) {
-        http->complete = 1;
-        http->error_handle(0);
-        printf("연결 실패\n");
-        fflush(stdout);
-        return http;
-    }
-    
-    if(strcmp(http->method, "GET") == 0) {
-        http->header = calloc(sizeof(char), (strlen(GET_HEADER) + strlen(http->host_name) + strlen(http->request) + VBHTTP_MAXTK));
-        sprintf(http->header, GET_HEADER, http->request, http->host_name);
-        size_t _len = strlen(http->header);
-        if(_len != write(http->sock, http->header, _len)) {
-            http->complete = 1;
-            http->error_handle(0);
-            printf("헤더전송 실패\n");
-            fflush(stdout);
-            return http;
-        }
-    } else if(strcmp(http->method, "POST") == 0) {
-        http->header = calloc(sizeof(char), (strlen(POST_HEADER) + strlen(http->host_name) + (http->request ? strlen(http->request) : 0) + (http->data ? strlen(http->data) : 0) + VBHTTP_MAXTK));
-        sprintf(http->header, POST_HEADER, http->request, _data_len, http->data);
-        printf("Request Header\n\n%s\n\n\n\n", http->header);
-        fflush(stdout);
-        size_t _len = strlen(http->header);
-        if(_len != write(http->sock, http->header, _len)) {
-            http->complete = 1;
-            http->error_handle(0);
-            printf("헤더전송 실패\n");
-            fflush(stdout);
-            return http;
-        }
-    }
+    http->data_len = _data_len;
     
 	pthread_create(&http->tid, NULL, VBHTTPResponseRead, http);
     
@@ -215,9 +244,12 @@ void VBHTTPRelease(VBHTTP** http) {
             free((*http)->host_name);
         if((*http)->response)
         	free((*http)->response);
-        if((*http)->tid)
-            pthread_detach((*http)->tid);
+        pthread_t _tId = (*http)->tid;
         free(*http);
         *http = NULL;
+        if(_tId)
+            pthread_detach(_tId);
     }
 }
+
+#undef printf

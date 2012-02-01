@@ -198,6 +198,7 @@ void HintViewer::update(float _deltaTime)
 }
 
 void HintViewer::initStep() {
+    setState(hintStateItem);
     currentSolutionIdx = 1;
     maskStack[0] = -1;
     maskStack[1] = -1;
@@ -215,13 +216,12 @@ bool HintViewer::step(int itemIdx)
     int tempI = 0;
     
     if (itemIdx == -3) {
-        setState(hintStateItem);
         initStep();
         return false;
     }
     
     switch (state) {
-        case hintStateItem:
+        case hintStateItem:case hintStateTop:case hintStateDown:
             if (solution[currentSolutionIdx] == itemIdx) {
                 //check mask
                 if (isMask[itemIdx]) {
@@ -303,7 +303,7 @@ bool HintViewer::step(int itemIdx)
                 returnValue = wrongStep();
             }
             break;
-        case hintStateToppingItem:
+        case hintStateToppingItem:case hintStateLeft:case hintStateRight:
             if (solution[currentSolutionIdx] == itemIdx) {
                 currentSolutionIdx++;
             } else {
@@ -337,10 +337,10 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
         solutionLen += toppingLen;
     }
     
-    if(solution) {
+    if(solutionFlag) {
         free(solution);
+        solution = NULL;
     }
-    solution = NULL;
     solution = (int*)malloc(sizeof(int)*solutionLen);
     
     int idx=0;
@@ -363,12 +363,12 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
         }
     }
     initStep();
-    
-    printf("solution: ");
-    for (int i=0; i<solutionLen; i++) {
-        printf("%d ", solution[i]);
-    }
-    printf("\n");
+    solutionFlag = true;
+//    printf("solution: ");
+//    for (int i=0; i<solutionLen; i++) {
+//        printf("%d ", solution[i]);
+//    }
+//    printf("\n");
     
     if(preFlag)
         show();
@@ -377,8 +377,8 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
 
 bool HintViewer::wrongStep()
 {
-    setState(hintStateReset);
     initStep();
+    setState(hintStateReset);
     return false;
 }
 
