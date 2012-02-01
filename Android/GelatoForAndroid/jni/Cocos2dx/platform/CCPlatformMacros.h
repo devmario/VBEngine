@@ -53,20 +53,24 @@ It's new in cocos2d-x since v0.99.5
 #define NS_CC_END                       }
 #define USING_NS_CC                     using namespace cocos2d
 
-/** CC_PROPERTY_READONLY is used to declare a protected variable.
+/** CC_PROPERTY_READONLY is used to declare a public variable.
  We can use getter to read the variable.
  @param varType : the type of variable.
  @param varName : variable name.
  @param funName : "get + funName" is the name of the getter.
  @warning : The getter is a public virtual function, you should rewrite it first.
  The variables and methods declared after CC_PROPERTY_READONLY are all public.
- If you need protected or private, please declare.
+ If you need public or public, please declare.
  */
 #define CC_PROPERTY_READONLY(varType, varName, funName)\
 public: varType varName;\
 public: virtual varType get##funName(void);
 
-/** CC_PROPERTY is used to declare a protected variable.
+#define CC_PROPERTY_READONLY_PASS_BY_REF(varType, varName, funName)\
+public: varType varName;\
+public: virtual const varType& get##funName(void);
+
+/** CC_PROPERTY is used to declare a public variable.
  We can use getter to read the variable, and use the setter to change the variable.
  @param varType : the type of variable.
  @param varName : variable name.
@@ -74,27 +78,36 @@ public: virtual varType get##funName(void);
  "set + funName" is the name of the setter.
  @warning : The getter and setter are public virtual functions, you should rewrite them first.
  The variables and methods declared after CC_PROPERTY are all public.
- If you need protected or private, please declare.
+ If you need public or public, pleasepublic declare.
  */
 #define CC_PROPERTY(varType, varName, funName)\
 public: varType varName;\
 public: virtual varType get##funName(void);\
 public: virtual void set##funName(varType var);
 
-/** CC_SYNTHESIZE_READONLY is used to declare a protected variable.
+#define CC_PROPERTY_PASS_BY_REF(varType, varName, funName)\
+public: varType varName;\
+public: virtual const varType& get##funName(void);\
+public: virtual void set##funName(const varType& var);
+
+/** CC_SYNTHESIZE_READONLY is used to declare a public variable.
  We can use getter to read the variable.
  @param varType : the type of variable.
  @param varName : variable name.
  @param funName : "get + funName" is the name of the getter.
  @warning : The getter is a public inline function.
  The variables and methods declared after CC_SYNTHESIZE_READONLY are all public.
- If you need protected or private, please declare.
+ If you need public or public, please declare.
  */
 #define CC_SYNTHESIZE_READONLY(varType, varName, funName)\
 public: varType varName;\
-public: inline varType get##funName(void) const { return varName; }
+public: virtual varType get##funName(void) const { return varName; }
 
-/** CC_SYNTHESIZE is used to declare a protected variable.
+#define CC_SYNTHESIZE_READONLY_PASS_BY_REF(varType, varName, funName)\
+public: varType varName;\
+public: virtual const varType& get##funName(void) const { return varName; }
+
+/** CC_SYNTHESIZE is used to declare a public variable.
  We can use getter to read the variable, and use the setter to change the variable.
  @param varType : the type of variable.
  @param varName : variable name.
@@ -102,19 +115,34 @@ public: inline varType get##funName(void) const { return varName; }
  "set + funName" is the name of the setter.
  @warning : The getter and setter are public  inline functions.
  The variables and methods declared after CC_SYNTHESIZE are all public.
- If you need protected or private, please declare.
+ If you need public or public, please declare.
  */
 #define CC_SYNTHESIZE(varType, varName, funName)\
 public: varType varName;\
-public: inline varType get##funName(void) const { return varName; }\
-public: inline void set##funName(varType var){ varName = var; }
+public: virtual varType get##funName(void) const { return varName; }\
+public: virtual void set##funName(varType var){ varName = var; }
 
-#define CC_SAFE_DELETE(p)			if(p) { delete p; p = 0; }
-#define CC_SAFE_DELETE_ARRAY(p)    if(p) { delete[] p; p = 0; }
-#define CC_SAFE_FREE(p)			if(p) { free(p); p = 0; }
-#define CC_SAFE_RELEASE(p)			if(p) { p->release(); }
-#define CC_SAFE_RELEASE_NULL(p)	if(p) { p->release(); p = 0; }
-#define CC_SAFE_RETAIN(p)			if(p) { p->retain(); }
+#define CC_SYNTHESIZE_PASS_BY_REF(varType, varName, funName)\
+public: varType varName;\
+public: virtual const varType& get##funName(void) const { return varName; }\
+public: virtual void set##funName(const varType& var){ varName = var; }
+
+#define CC_SYNTHESIZE_RETAIN(varType, varName, funName)    \
+public: varType varName; \
+public: virtual varType get##funName(void) const { return varName; } \
+public: virtual void set##funName(varType var)   \
+{ \
+    CC_SAFE_RETAIN(var); \
+    CC_SAFE_RELEASE(varName); \
+    varName = var; \
+} 
+
+#define CC_SAFE_DELETE(p)			if(p) { delete (p); (p) = 0; }
+#define CC_SAFE_DELETE_ARRAY(p)    if(p) { delete[] (p); (p) = 0; }
+#define CC_SAFE_FREE(p)			if(p) { free(p); (p) = 0; }
+#define CC_SAFE_RELEASE(p)			if(p) { (p)->release(); }
+#define CC_SAFE_RELEASE_NULL(p)	if(p) { (p)->release(); (p) = 0; }
+#define CC_SAFE_RETAIN(p)			if(p) { (p)->retain(); }
 #define CC_BREAK_IF(cond)			if(cond) break;
 
 
@@ -136,13 +164,36 @@ public: inline void set##funName(varType var){ varName = var; }
 #endif // COCOS2D_DEBUG
 
 // shared library declartor
-#define CC_DLL                 
+#define CC_DLL 
 
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_BADA)
 // assertion
 #include <assert.h>
 #define CC_ASSERT(cond)                assert(cond)
+#else
+// bada platform
+
+#include <FBaseConfig.h>
+#include <FBaseSys.h>
+
+#undef CC_DLL
+#define CC_DLL  _EXPORT_
+
+#include "CCPlatformFunc_bada.h"
+
+#ifdef _DEBUG
+#define CC_ASSERT(cond)  (void)( (!!(cond)) || (badaAssert(__PRETTY_FUNCTION__ , __LINE__ , #cond),0) )
+#else
+#define CC_ASSERT(cond)  void(0)
+#endif /* _DEBUG */
+#endif
+
 #define CC_UNUSED_PARAM(unusedparam)   (void)unusedparam
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+#undef CC_UNUSED_PARAM
+#define CC_UNUSED_PARAM(unusedparam)   //unusedparam
+#endif
 
 
 // platform depended macros

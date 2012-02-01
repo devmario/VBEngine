@@ -76,6 +76,9 @@ public:
     /**
     @brief  Set the ResourcePath,we will find resource in this path
     @param pszResourcePath  The absolute resource path
+	@warning Don't call this function in android and iOS, it has not effect.
+	In android, if you want to read file other than apk, you shoud use invoke getFileData(), and pass the 
+	absolute path.
     */
     static void setResourcePath(const char *pszResourcePath);
 
@@ -85,6 +88,12 @@ public:
     @return  The CCDictionary pointer generated from the file
     */
     static CCDictionary<std::string, CCObject*> *dictionaryWithContentsOfFile(const char *pFileName);
+
+	/*
+	@brief The same meaning as dictionaryWithContentsOfFile(), but it doesn't call autorelease, so the
+	       invoker should call release().
+	*/
+	static CCDictionary<std::string, CCObject*> *dictionaryWithContentsOfFileThreadSafe(const char *pFileName);
 
 	/**
 	@brief   Get the writeable path

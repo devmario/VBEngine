@@ -30,7 +30,7 @@ THE SOFTWARE.
 NS_CC_BEGIN;
 
 /// The max length of CCLog message.
-static const int kMaxLogLen = 255;
+static const int kMaxLogLen = 16*1024;
 
 /**
 @brief Output Debug message.
@@ -58,6 +58,11 @@ typedef enum LanguageType
 {
     kLanguageEnglish = 0,
     kLanguageChinese,
+    kLanguageFrench,
+    kLanguageItalian,
+    kLanguageGerman,
+    kLanguageSpanish,
+    kLanguageRussian
 } ccLanguageType;
 
 NS_CC_END;

@@ -56,7 +56,7 @@ bool CCProgressTimer::initWithFile(const char *pszFileName)
 	return this->initWithTexture(CCTextureCache::sharedTextureCache()->addImage(pszFileName));
 }
 
-CCProgressTimer* CCProgressTimer::progressWithTexture(cocos2d::CCTexture2D *pTexture)
+CCProgressTimer* CCProgressTimer::progressWithTexture(CCTexture2D *pTexture)
 {
 	CCProgressTimer *pProgressTimer = new CCProgressTimer();
 	if (pProgressTimer->initWithTexture(pTexture))
@@ -72,7 +72,7 @@ CCProgressTimer* CCProgressTimer::progressWithTexture(cocos2d::CCTexture2D *pTex
 	return pProgressTimer;
 }
 
-bool CCProgressTimer::initWithTexture(cocos2d::CCTexture2D *pTexture)
+bool CCProgressTimer::initWithTexture(CCTexture2D *pTexture)
 {
 	m_pSprite = CCSprite::spriteWithTexture(pTexture);
 	CC_SAFE_RETAIN(m_pSprite);
@@ -101,7 +101,7 @@ void CCProgressTimer::setPercentage(float fPercentage)
 	}
 }
 
-void CCProgressTimer::setSprite(cocos2d::CCSprite *pSprite)
+void CCProgressTimer::setSprite(CCSprite *pSprite)
 {
 	if (m_pSprite != pSprite)
 	{
@@ -120,7 +120,7 @@ void CCProgressTimer::setSprite(cocos2d::CCSprite *pSprite)
 	}		
 }
 
-void CCProgressTimer::setType(cocos2d::CCProgressTimerType type)
+void CCProgressTimer::setType(CCProgressTimerType type)
 {
 	if (type != m_eType)
 	{
@@ -141,7 +141,7 @@ void CCProgressTimer::setType(cocos2d::CCProgressTimerType type)
 ///
 //	@returns the vertex position from the texture coordinate
 ///
-ccVertex2F CCProgressTimer::vertexFromTexCoord(cocos2d::CCPoint texCoord)
+ccVertex2F CCProgressTimer::vertexFromTexCoord(const CCPoint& texCoord)
 {
     CCPoint tmp;
     ccVertex2F ret;
@@ -343,7 +343,7 @@ void CCProgressTimer::updateRadial(void)
 	{
 		m_nVertexDataCount = index + 3;
 		m_pVertexData = new ccV2F_C4B_T2F[m_nVertexDataCount];
-		assert(m_pVertexData);
+		CCAssert(m_pVertexData, "");
 
 		updateColor();
 	}
@@ -432,7 +432,7 @@ void CCProgressTimer::updateBar(void)
 	{
 		m_nVertexDataCount = kProgressTextureCoordsCount;
 		m_pVertexData = new ccV2F_C4B_T2F[m_nVertexDataCount];
-		assert(m_pVertexData);
+		CCAssert(m_pVertexData, "");
 
 		if (m_eType == kCCProgressTimerTypeHorizontalBarLR)
 		{

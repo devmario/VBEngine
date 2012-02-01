@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "CCNode.h"
 #include "CCProtocols.h"
 #include "selector_protocol.h"
+#include "CCMutableArray.h"
 
 namespace cocos2d{
 
@@ -93,7 +94,7 @@ namespace cocos2d{
 	class CC_DLL CCMenuItemLabel : public CCMenuItem, public CCRGBAProtocol
 	{
 		/** the color that will be used to disable the item */
-		CC_PROPERTY(ccColor3B, m_tDisabledColor, DisabledColor);
+		CC_PROPERTY_PASS_BY_REF(ccColor3B, m_tDisabledColor, DisabledColor);
 		/** Label that is rendered. It can be any CCNode that implements the CCLabelProtocol */
 		CC_PROPERTY(CCNode*, m_pLabel, Label);
 	public:
@@ -120,10 +121,11 @@ namespace cocos2d{
 		virtual void setIsEnabled(bool enabled);
 		virtual void setOpacity(GLubyte opacity);
 		virtual GLubyte getOpacity();
-		virtual void setColor(ccColor3B color);
-		virtual ccColor3B getColor();
+		virtual void setColor(const ccColor3B& color);
+		virtual const ccColor3B& getColor();
 
-		virtual CCRGBAProtocol* convertToRGBAProtocol() { return (CCRGBAProtocol*)this; }
+		virtual void setIsOpacityModifyRGB(bool bValue) {CC_UNUSED_PARAM(bValue);}
+	    virtual bool getIsOpacityModifyRGB(void) { return false;}
 	protected:
 		ccColor3B	m_tColorBackup;
 		float		m_fOriginalScale;
@@ -223,8 +225,8 @@ namespace cocos2d{
 		/** initializes a menu item with a normal, selected  and disabled image with target/selector */
 		bool initFromNormalSprite(CCNode* normalSprite, CCNode* selectedSprite, CCNode* disabledSprite, SelectorProtocol* target, SEL_MenuHandler selector);
 		// super methods
-        virtual void setColor(ccColor3B color);
-        virtual ccColor3B getColor();
+        virtual void setColor(const ccColor3B& color);
+        virtual const ccColor3B& getColor();
         virtual void setOpacity(GLubyte opacity);
         virtual GLubyte getOpacity();
 
@@ -235,7 +237,8 @@ namespace cocos2d{
         virtual void unselected();
         virtual void setIsEnabled(bool bEnabled);
 
-		virtual CCRGBAProtocol* convertToRGBAProtocol() { return (CCRGBAProtocol*)this; }
+		virtual void setIsOpacityModifyRGB(bool bValue) {CC_UNUSED_PARAM(bValue);}
+	    virtual bool getIsOpacityModifyRGB(void) { return false;}
 	};
 
 	/** @brief CCMenuItemImage accepts images as items.
@@ -272,7 +275,7 @@ namespace cocos2d{
 		/** conforms with CCRGBAProtocol protocol */
 		CC_PROPERTY(GLubyte, m_cOpacity, Opacity);
 		/** conforms with CCRGBAProtocol protocol */
-		CC_PROPERTY(ccColor3B, m_tColor, Color);
+		CC_PROPERTY_PASS_BY_REF(ccColor3B, m_tColor, Color);
 		/** returns the selected item */
 		CC_PROPERTY(unsigned int, m_uSelectedIndex, SelectedIndex);
 		/** CCMutableArray that contains the subitems. You can add/remove items in runtime, and you can replace the array with a new one.
@@ -307,7 +310,8 @@ namespace cocos2d{
 		virtual void unselected();
 		virtual void setIsEnabled(bool var);
 
-		virtual CCRGBAProtocol* convertToRGBAProtocol() { return (CCRGBAProtocol*)this; }
+		virtual void setIsOpacityModifyRGB(bool bValue) {CC_UNUSED_PARAM(bValue);}
+	    virtual bool getIsOpacityModifyRGB(void) { return false;}
 	};
 
 }

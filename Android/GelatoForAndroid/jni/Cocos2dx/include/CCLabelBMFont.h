@@ -148,7 +148,7 @@ namespace cocos2d{
 		/** conforms to CCRGBAProtocol protocol */
 		CC_PROPERTY(GLubyte, m_cOpacity, Opacity)
 		/** conforms to CCRGBAProtocol protocol */
-		CC_PROPERTY(ccColor3B, m_tColor, Color)
+		CC_PROPERTY_PASS_BY_REF(ccColor3B, m_tColor, Color)
 		/** conforms to CCRGBAProtocol protocol */
 		CC_PROPERTY(bool, m_bIsOpacityModifyRGB, IsOpacityModifyRGB)
 	protected:
@@ -179,9 +179,8 @@ namespace cocos2d{
 		virtual void setString(const char *label);
 		virtual const char* getString(void);
         virtual void setCString(const char *label);
-		virtual void setAnchorPoint(CCPoint var);
-		virtual CCRGBAProtocol* convertToRGBAProtocol() { return (CCRGBAProtocol*)this; }
-		virtual CCLabelProtocol* convertToLabelProtocol() { return (CCLabelProtocol*)this; }
+		virtual void setAnchorPoint(const CCPoint& var);
+
 #if CC_LABELBMFONT_DEBUG_DRAW
 		virtual void draw();
 #endif // CC_LABELBMFONT_DEBUG_DRAW

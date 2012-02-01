@@ -21,28 +21,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
+#import <UIKit/UIKit.h>
+#include "CCThread.h"
 
-#ifndef __PLATFORM_IPHONE_CCACCELEROMETER_H__
-#define __PLATFORM_IPHONE_CCACCELEROMETER_H__
+NS_CC_BEGIN;
 
-#include "CCAccelerometerDelegate.h"
-
-namespace   cocos2d {
-
-class CC_DLL CCAccelerometer
+CCThread::~CCThread()
 {
-public:
-    CCAccelerometer();
-    ~CCAccelerometer();
+    [(id)m_pAutoreasePool release];
+}
 
-    static CCAccelerometer* sharedAccelerometer();
+void CCThread::createAutoreleasePool()
+{
+    m_pAutoreasePool = [[NSAutoreleasePool alloc] init];
+}
 
-    void setDelegate(CCAccelerometerDelegate* pDelegate);
-    
-private:
-    static CCAccelerometer* m_spUIAccelerometer;
-};
-
-}//namespace   cocos2d 
-
-#endif
+NS_CC_END;

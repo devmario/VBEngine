@@ -1,7 +1,6 @@
 #include "AppDelegate.h"
 
 #include "cocos2d.h"
-#include "HelloWorldScene.h"
 #include "Root.h"
 
 USING_NS_CC;

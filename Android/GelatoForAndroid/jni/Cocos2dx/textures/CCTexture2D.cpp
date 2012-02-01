@@ -41,6 +41,7 @@ THE SOFTWARE.
 #include "support/ccUtils.h"
 #include "platform/CCPlatformMacros.h"
 #include "CCTexturePVR.h"
+#include "CCDirector.h"
 
 #if CC_ENABLE_CACHE_TEXTTURE_DATA
     #include "CCTextureCache.h"
@@ -57,6 +58,9 @@ namespace   cocos2d {
 // If the image has alpha, you can create RGBA8 (32-bit) or RGBA4 (16-bit) or RGB5A1 (16-bit)
 // Default is: RGBA8888 (32-bit textures)
 static CCTexture2DPixelFormat g_defaultAlphaPixelFormat = kCCTexture2DPixelFormat_Default;
+
+// By default PVR images are treated as if they don't have the alpha channel premultiplied
+static bool PVRHaveAlphaPremultiplied_ = false;
 
 CCTexture2D::CCTexture2D()
 : m_uPixelsWide(0)
@@ -102,7 +106,7 @@ GLuint CCTexture2D::getName()
 	return m_uName;
 }
 
-CCSize CCTexture2D::getContentSizeInPixels()
+const CCSize& CCTexture2D::getContentSizeInPixels()
 {
 	return m_tContentSize;
 }
@@ -153,7 +157,7 @@ bool CCTexture2D::getHasPremultipliedAlpha()
 	return m_bHasPremultipliedAlpha;
 }
 
-bool CCTexture2D::initWithData(const void *data, CCTexture2DPixelFormat pixelFormat, unsigned int pixelsWide, unsigned int pixelsHigh, CCSize contentSize)
+bool CCTexture2D::initWithData(const void *data, CCTexture2DPixelFormat pixelFormat, unsigned int pixelsWide, unsigned int pixelsHigh, const CCSize& contentSize)
 {
 	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 	glGenTextures(1, &m_uName);
@@ -229,8 +233,8 @@ bool CCTexture2D::initWithImage(CCImage * uiImage)
 #if CC_TEXTURE_NPOT_SUPPORT
 	if( conf->isSupportsNPOT() ) 
 	{
-		POTWide = uiimage->getWidth();
-		POTHigh = uiimage->getHeight();
+		POTWide = uiImage->getWidth();
+		POTHigh = uiImage->getHeight();
 	}
 	else 
 #endif
@@ -441,7 +445,7 @@ bool CCTexture2D::initWithString(const char *text, const char *fontName, float f
 {
 	return initWithString(text, CCSizeMake(0,0), CCTextAlignmentCenter, fontName, fontSize);
 }
-bool CCTexture2D::initWithString(const char *text, CCSize dimensions, CCTextAlignment alignment, const char *fontName, float fontSize)
+bool CCTexture2D::initWithString(const char *text, const CCSize& dimensions, CCTextAlignment alignment, const char *fontName, float fontSize)
 {
 #if CC_ENABLE_CACHE_TEXTTURE_DATA
     // cache the texture data
@@ -462,7 +466,7 @@ bool CCTexture2D::initWithString(const char *text, CCSize dimensions, CCTextAlig
 
 // implementation CCTexture2D (Drawing)
 
-void CCTexture2D::drawAtPoint(CCPoint point)
+void CCTexture2D::drawAtPoint(const CCPoint& point)
 {
 	GLfloat	coordinates[] = {	
 		0.0f,	m_fMaxT,
@@ -485,7 +489,7 @@ void CCTexture2D::drawAtPoint(CCPoint point)
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-void CCTexture2D::drawInRect(CCRect rect)
+void CCTexture2D::drawInRect(const CCRect& rect)
 {
 	GLfloat	coordinates[] = {	
 		0.0f,	m_fMaxT,
@@ -537,7 +541,7 @@ bool CCTexture2D::initWithPVRTCData(const void *data, int level, int bpp, bool h
 	m_uPixelsHigh = length;
 	m_fMaxS = 1.0f;
 	m_fMaxT = 1.0f;
-    m_bHasPremultipliedAlpha = m_bPVRHaveAlphaPremultiplied;
+    m_bHasPremultipliedAlpha = PVRHaveAlphaPremultiplied_;
     m_ePixelFormat = pixelFormat;
 
 	return true;
@@ -561,8 +565,8 @@ bool CCTexture2D::initWithPVRFile(const char* file)
         m_fMaxT = 1.0f;
         m_uPixelsWide = pvr->getWidth();
         m_uPixelsHigh = pvr->getHeight();
-        m_tContentSize = CCSizeMake(m_uPixelsWide, m_uPixelsHigh);
-        m_bHasPremultipliedAlpha = m_bPVRHaveAlphaPremultiplied;
+        m_tContentSize = CCSizeMake((float)m_uPixelsWide, (float)m_uPixelsHigh);
+        m_bHasPremultipliedAlpha = PVRHaveAlphaPremultiplied_;
         m_ePixelFormat = pvr->getFormat();
                 
         this->setAntiAliasTexParameters();
@@ -576,9 +580,9 @@ bool CCTexture2D::initWithPVRFile(const char* file)
     return bRet;
 }
 
-void CCTexture2D::setPVRImagesHavePremultipliedAlpha(bool haveAlphaPremultiplied)
+void CCTexture2D::PVRImagesHavePremultipliedAlpha(bool haveAlphaPremultiplied)
 {
-    m_bPVRHaveAlphaPremultiplied = haveAlphaPremultiplied;
+    PVRHaveAlphaPremultiplied_ = haveAlphaPremultiplied;
 }
 
     
@@ -672,7 +676,7 @@ unsigned int CCTexture2D::bitsPerPixelForFormat()
             break;
 		default:
 			ret = -1;
-			assert(false);
+			CCAssert(false, "illegal pixel format");
 			CCLOG("bitsPerPixelForFormat: %d, cannot give useful result", m_ePixelFormat);
 			break;
 	}

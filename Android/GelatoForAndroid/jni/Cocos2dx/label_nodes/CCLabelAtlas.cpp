@@ -46,7 +46,7 @@ namespace cocos2d{
 
 	bool CCLabelAtlas::initWithString(const char *label, const char *charMapFile, unsigned int itemWidth, unsigned int itemHeight, unsigned char startCharMap)
 	{
-		assert(label != NULL);
+		CCAssert(label != NULL, "");
 		if (CCAtlasNode::initWithTileFile(charMapFile, itemWidth, itemHeight, strlen(label)))
 		{
 			m_cMapStartChar = startCharMap;
@@ -145,7 +145,7 @@ namespace cocos2d{
 	{
 		CCAtlasNode::draw();
 
-		CCSize s = this->getContentSize();
+		const CCSize& s = this->getContentSize();
 		CCPoint vertices[4]={
 			ccp(0,0),ccp(s.width,0),
 			ccp(s.width,s.height),ccp(0,s.height),

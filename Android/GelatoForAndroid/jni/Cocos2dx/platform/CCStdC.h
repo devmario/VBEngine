@@ -87,7 +87,7 @@ int CC_DLL gettimeofday(struct timeval *, struct timezone *);
 
 #endif  // CC_PLATFORM_WIN32
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_LINUX || CC_TARGET_PLATFORM == CC_PLATFORM_QNX)
 
 #include <sys/time.h>
 
@@ -99,9 +99,19 @@ int CC_DLL gettimeofday(struct timeval *, struct timezone *);
 #define MAX(x,y) (((x) < (y)) ? (y) : (x))
 #endif  // MAX
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+
+// some function linux do not have
+#define tanf tan
+#define sqrtf sqrt
+#define cosf cos
+#define sinf sin
+
+#endif
+
 #endif  // CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_AIRPLAY)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE)
 
 #include <s3e.h>
 #include <sys/time.h>
@@ -114,6 +124,39 @@ int CC_DLL gettimeofday(struct timeval *, struct timezone *);
 #define MAX(x,y) (((x) < (y)) ? (y) : (x))
 #endif  // MAX
 
-#endif  // CC_TARGET_PLATFORM == CC_PLATFORM_AIRPLAY
+#endif  // CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_BADA)
+
+#include <FSysSystemTime.h>
+
+struct timeval
+{
+ 	long tv_sec;		// seconds
+ 	long tv_usec;    // microSeconds
+};
+
+struct timezone
+{
+    int tz_minuteswest;
+    int tz_dsttime;
+};
+
+
+int CC_DLL gettimeofday(struct timeval *, struct timezone *);
+
+#ifndef MIN
+#define MIN(x,y) (((x) > (y)) ? (y) : (x))
+#endif  // MIN
+
+#ifndef MAX
+#define MAX(x,y) (((x) < (y)) ? (y) : (x))
+#endif  // MAX
+
+#ifndef UINT_MAX
+#define UINT_MAX      0xffffffff    /* maximum unsigned int value */
+#endif  // UINT_MAX
+
+#endif  // CC_TARGET_PLATFORM == CC_PLATFORM_BADA
 
 #endif  // __CC_STD_C_H__

@@ -137,8 +137,8 @@ typedef enum {
 class CCLabelTTF;
 class CCScene;
 class CCEGLView;
-class CCNode;
 class CCProjectionProtocol;
+class CCNode;
 
 /**
 @brief Class that creates and handle the main Window and manages how
@@ -211,6 +211,13 @@ public:
 	 */
 	inline bool isSendCleanupToScene(void) { return m_bSendCleanupToScene; }
 
+	/** This object will be visited after the main scene is visited.
+	 This object MUST implement the "visit" selector.
+	 Useful to hook a notification object, like CCNotifications (http://github.com/manucorporat/CCNotifications)
+	 @since v0.99.5
+	 */
+	CCNode* getNotificationNode();
+	void setNotificationNode(CCNode *node);
 
 	// window size
 
@@ -231,17 +238,17 @@ public:
 	CCSize getDisplaySizeInPixels(void);
 
 	/** changes the projection size */
-	void reshapeProjection(CCSize newWindowSize);
+	void reshapeProjection(const CCSize& newWindowSize);
 
 	/** converts a UIKit coordinate to an OpenGL coordinate
 	 Useful to convert (multi) touches coordinates to the current layout (portrait or landscape)
 	 */
-	CCPoint convertToGL(CCPoint obPoint);
+	CCPoint convertToGL(const CCPoint& obPoint);
 
 	/** converts an OpenGL coordinate to a UIKit coordinate
 	 Useful to convert node points to window points for calls such as glScissor
 	 */
-	CCPoint convertToUI(CCPoint obPoint);
+	CCPoint convertToUI(const CCPoint& obPoint);
 
 	/// XXX: missing description 
 	float getZEye(void);
@@ -376,6 +383,7 @@ public:
 public:
 	/** returns a shared instance of the director */
 	static CCDirector* sharedDirector(void);
+	void resetDirector();
 
 protected:
 

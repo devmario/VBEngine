@@ -104,27 +104,21 @@ tileMap_parallax_nodes/CCTileMapAtlas.cpp \
 touch_dispatcher/CCTouchDispatcher.cpp \
 touch_dispatcher/CCTouchHandler.cpp 
 
-
-
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/ \
                     $(LOCAL_PATH)/include \
                     $(LOCAL_PATH)/platform \
                     $(LOCAL_PATH)/platform/third_party/android/iconv \
                     $(LOCAL_PATH)/platform/third_party/android/libpng \
                     $(LOCAL_PATH)/platform/third_party/android/libxml2 \
-                    $(LOCAL_PATH)/platform/third_party/android/libjpeg                 
+                    $(LOCAL_PATH)/platform/third_party/android/libjpeg           
 
-# it is used for ndk-r5  
-# if you build with ndk-r4, comment it   
-# because the new Windows toolchain doesn't support Cygwin's drive
-# mapping (i.e /cygdrive/c/ instead of C:/)  
-LOCAL_LDLIBS := -L$(call host-path, $(LOCAL_PATH)/platform/third_party/android/libraries) \
+LOCAL_LDLIBS := -L$(call host-path, $(LOCAL_PATH)/platform/third_party/android/libraries/$(TARGET_ARCH_ABI)) \
                  -lGLESv1_CM -llog -lz \
                  -lpng \
                  -lxml2 \
                  -ljpeg
 
 # define the macro to compile through support/zip_support/ioapi.c                
-LOCAL_CFLAGS := -DUSE_FILE32API -DGL_GLEXT_PROTOTYPES=1
+LOCAL_CFLAGS := -DUSE_FILE32API
                                  
 include $(BUILD_SHARED_LIBRARY)
