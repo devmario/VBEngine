@@ -171,7 +171,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 				copyFile(in, out);
 			} catch (Exception e) {
 				Log.e("#@#", tmp);
-				Log.e("#@#", "" + e.getMessage());
+				Log.e("#@#", "getMessage :" + e.getMessage());
 			} finally {
 				try {
 					in.close();
@@ -180,8 +180,8 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 					out.close();
 					out = null;
 				} catch (Exception e) {
-					Log.e("#@#", "finally" + tmp);
-					Log.e("#@#", "finally" + e.getMessage());
+					Log.e("#@#", "finally : " + tmp);
+					Log.e("#@#", "finally getMessage :" + e.getMessage());
 				}
 			}
 		}
@@ -220,11 +220,11 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	}
 
 	// PlatformFacebookRequestGraphPath
-	void facebookRequestGraphPath() {
+	private void facebookRequestGraphPath(String str) {
 		if (fbUtil.isLogin()) {
 			fbUtil.request("me/friends", new BaseRequestListener() {
 				public void onComplete(final String response, final Object state) {
-					Log.d("Facebook-fbUtil.request", "Response: " + response.toString());
+					Log.d("java facebookRequestGraphPath", "Response: " + response.toString());
 					nativeFacebookRequestGraphPath(response);
 				}
 			});

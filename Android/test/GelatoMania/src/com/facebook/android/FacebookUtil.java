@@ -26,6 +26,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.android.AsyncFacebookRunner.RequestListener;
 import com.facebook.android.SessionEvents.AuthListener;
 import com.facebook.android.SessionEvents.LogoutListener;
 
@@ -70,6 +71,14 @@ public class FacebookUtil {
 		mAsyncRunner.request(request, listener);
 	}
 
+	public void request(String graphPath, Bundle parameters,  RequestListener listener) {
+		mAsyncRunner.request(graphPath, parameters, listener);
+	}
+	
+	public void request(String graphPath, Bundle parameters, String httpMethod, RequestListener listener) {
+		mAsyncRunner.request(graphPath, parameters, httpMethod, listener, null);
+	}
+	
 	public void update(String request, BaseRequestListener listener) {
 		Bundle params = new Bundle();
 		params.putString("method", "photos.upload");

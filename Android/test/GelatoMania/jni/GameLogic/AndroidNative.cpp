@@ -12,6 +12,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved)
         LOGE("ERROR: GetEnv failed");
         return result;
     }
+		LOGE("ERROR: GetEnv failed");
 
 	env = uenv.env;
 

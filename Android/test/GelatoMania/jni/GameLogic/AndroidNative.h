@@ -21,16 +21,26 @@ typedef union {
     void* venv;
 } UnionJNIEnvToVoid;
 
-// =================================== JAVA Interface =========================================
+// =================================== JAVA Interface (C/C++ -> JAVA) =========================================
 bool facebookLogin();
 
+void facebookRequestGraphPath(const char* _path);
 
+void facebookAppRequest(const char* _msg, const char* _to, const char* _notification_text);
+
+void facebookFeed(const char* _name, const char* _caption, const char* _description, const char* _link, const char* _picture);
+
+// =============================================================================================================
+
+
+
+// =================================== Native Interface (JAVA -> C/C++) =========================================
 JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookRequestGraphPath( JNIEnv* env, jobject thiz, jstring str);
 
 JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookAppRequest( JNIEnv* env, jobject thiz, jstring str);
 
 JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookFeed( JNIEnv* env, jobject thiz, jstring str);
-
+// =============================================================================================================
 
 #ifdef __cplusplus
 }
