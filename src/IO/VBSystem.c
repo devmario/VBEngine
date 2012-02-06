@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
+#include <unistd.h>
 #include "../Util/VBArrayList.h"
 #include "../VBConfig.h"
 #include "../VBEngine.h"
