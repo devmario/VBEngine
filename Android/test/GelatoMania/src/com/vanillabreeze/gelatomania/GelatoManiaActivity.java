@@ -95,47 +95,97 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		return f.mkdir();
 	}
 
+//	private void CopyAssets() {
+//
+//		// makeDir("/sdcard/.vanillaworld/");
+//		// makeDir("/sdcard/.vanillaworld/gelatomania/");
+//		// makeDir("/sdcard/.vanillaworld/gelatomania/resource");
+//		// makeDir("/sdcard/.vanillaworld/gelatomania/document");
+//
+//		makeDir("/data/data/com.vanillabreeze.gelatomania/files/");
+//		makeDir("/data/data/com.vanillabreeze.gelatomania/files/resource");
+//		makeDir("/data/data/com.vanillabreeze.gelatomania/files/document");
+//
+//		AssetManager assetManager = getAssets();
+//		String[] files = null;
+//		InputStream in = null;
+//		OutputStream out = null;
+//		try {
+//			files = assetManager.list("");
+//			for (String filename : files) {
+//				in = assetManager.open(filename);
+//				// String tmp = "/sdcard/.vanillaworld/gelatomania/resource/" + filename;
+//				String tmp = "/data/data/com.vanillabreeze.gelatomania/files/resource/" + filename;
+//				Log.i("#@#", tmp);
+//				out = new FileOutputStream(tmp);
+//				copyFile(in, out);
+//			}
+//		} catch (Exception e) {
+//			Log.e("tag", "try : " + e.getMessage());
+//		} finally {
+//			try {
+//				in.close();
+//				out.flush();
+//				out.close();
+//			} catch (IOException e) {
+//				Log.e("tag", "finally : " + e.getMessage());
+//			}
+//		}
+//		
+//		// 초기 한번만 실행하기 위해서 플래그 세팅
+//		e.putBoolean("isFirst", false);
+//	}
+
+	
 	private void CopyAssets() {
 
-		// makeDir("/sdcard/.vanillaworld/");
-		// makeDir("/sdcard/.vanillaworld/gelatomania/");
-		// makeDir("/sdcard/.vanillaworld/gelatomania/resource");
-		// makeDir("/sdcard/.vanillaworld/gelatomania/document");
+		makeDir("/sdcard/.vanillaworld/");
+		makeDir("/sdcard/.vanillaworld/gelatomania/");
+		makeDir("/sdcard/.vanillaworld/gelatomania/resource");
+		makeDir("/sdcard/.vanillaworld/gelatomania/document");
 
 		makeDir("/data/data/com.vanillabreeze.gelatomania/files/");
 		makeDir("/data/data/com.vanillabreeze.gelatomania/files/resource");
 		makeDir("/data/data/com.vanillabreeze.gelatomania/files/document");
-
+		
 		AssetManager assetManager = getAssets();
 		String[] files = null;
+		String tmp = "";
 		InputStream in = null;
 		OutputStream out = null;
 		try {
 			files = assetManager.list("");
-			for (String filename : files) {
+		} catch (IOException e) {
+			Log.e("assetManager", e.getMessage());
+		}
+		for (String filename : files) {
+			try {
 				in = assetManager.open(filename);
-				// String tmp = "/sdcard/.vanillaworld/gelatomania/resource/" + filename;
-				String tmp = "/data/data/com.vanillabreeze.gelatomania/files/resource/" + filename;
+				tmp = "/data/data/com.vanillabreeze.gelatomania/files/resource/" + filename;
+				// tmp = "/sdcard/.vanillaworld/gelatomania/resource/" + filename;
 				Log.i("#@#", tmp);
 				out = new FileOutputStream(tmp);
 				copyFile(in, out);
-			}
-		} catch (Exception e) {
-			Log.e("tag", "try : " + e.getMessage());
-		} finally {
-			try {
-				in.close();
-				out.flush();
-				out.close();
-			} catch (IOException e) {
-				Log.e("tag", "finally : " + e.getMessage());
+			} catch (Exception e) {
+				Log.e("#@#", tmp);
+				Log.e("#@#", "" + e.getMessage());
+			} finally {
+				try {
+					in.close();
+					in = null;
+					out.flush();
+					out.close();
+					out = null;
+				} catch (Exception e) {
+					Log.e("#@#", "finally" + tmp);
+					Log.e("#@#", "finally" + e.getMessage());
+				}
 			}
 		}
-		
 		// 초기 한번만 실행하기 위해서 플래그 세팅
 		e.putBoolean("isFirst", false);
 	}
-
+	
 	private void copyFile(InputStream in, OutputStream out) throws IOException {
 		byte[] buffer = new byte[1024];
 		int read;
