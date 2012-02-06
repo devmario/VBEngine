@@ -1,6 +1,7 @@
 #ifdef __ANDROID__
 
 #include "PlatformFunctions.h"
+#include "AndroidNative.h"
 
 int PlatformGameCenterIsSigned() {
     return 0;

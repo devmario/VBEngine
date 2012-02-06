@@ -3,7 +3,8 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := gamelogic
 
 LOCAL_SRC_FILES := \
-Android_PlatformFunctions.c\
+AndroidNative.cpp \
+Android_PlatformFunctions.cpp\
 AppDelegate.cpp\
 cJSON.c\
 CppTweener.cpp\
