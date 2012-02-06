@@ -168,7 +168,7 @@ void ToppingContainer::CellUpdate(CellData *_cell, float _deltaTime) {
     if(selectModel == _data->model && selectTweener == NULL) {
         if(!selectModel->is_play) {
             iceCream->AddTopping(_data->type);
-            iceCream->GetClear();
+            //iceCream->GetClear();
             selectModel = NULL;
             SetEnable(true);
         } else {
@@ -230,7 +230,7 @@ void ToppingContainer::Update(float _deltaTime) {
     UpdateSelectTween(_deltaTime);
 }
 
-ToppingContainer::ToppingContainer(GameMain* _gameMain, VBObjectFile2D* _objScroller, VBTexture* _texScroller, VBArrayVector* _data, IceCream* _iceCream) : ScrollerContainer(_objScroller, _texScroller, _data, 80, 270, 90, 5, 5, 5, ScrollerContainerAlign_HI, _data->len * 80 < 270) {
+ToppingContainer::ToppingContainer(GameMain* _gameMain, VBObjectFile2D* _objScroller, VBTexture* _texScroller, VBArrayVector* _data, IceCream* _iceCream) : ScrollerContainer(_objScroller, _texScroller, _data, 80, 270, 90, 5, 5, 5, ScrollerContainerAlign_HI, _data->len * 80 < 270, false) {
     
     gameMain = _gameMain;
     

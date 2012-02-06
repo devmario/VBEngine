@@ -2,9 +2,11 @@
 #include "ShareData.h"
 
 ScrollerContainer::ScrollerContainer(VBObjectFile2D* _objScroller, VBTexture* _texScroller,
-                                     VBArrayVector* _data, float _cellHeight, float _width, float _height, float _margin,
-                                     float _marginDirBegin, float _marginDirEnd,
-                                     ScrollerContainerAlign _align, bool _is_center_cell) : VBModel() {
+                                     VBArrayVector* _data, float _cellHeight, float _width, float _height, 
+                                     float _margin, float _marginDirBegin, float _marginDirEnd,
+                                     ScrollerContainerAlign _align, bool _is_center_cell,
+                                     bool _is_mask) : VBModel() {
+    is_mask = _is_mask;
     data = _data;
     align = _align;
     cellSize = _cellHeight;
@@ -67,9 +69,9 @@ ScrollerContainer::ScrollerContainer(VBObjectFile2D* _objScroller, VBTexture* _t
     
     enable = true;
     touchScroller = NULL;
-    runparam = NULL;
     elapseTime = 0.0;
     prePageValue = pageValue;
+    slideTween = NULL;
 }
 
 ScrollerContainer::~ScrollerContainer() {
@@ -115,33 +117,26 @@ void ScrollerContainer::NextPage() {
     if(IsPossibleNextPage() == false)
         return;
     forceValue = 0.0;
-    if(runparam) {
-        slideTween.removeTween(runparam);
-        runparam = NULL;
-        elapseTime = 0.0;
+    if (slideTween) {
+        delete slideTween;
+        slideTween = NULL;
     }
-    param = TweenerParam(1000 * 0.5, EXPO, EASE_OUT);
+    slideTween = new TweenerWrapper();
+    slideTween->begin(&pageValue, ((pageValue - size) < pageValueMin) ? pageValueMin : (pageValue - size), 0.5f, 0.0f, false);
+    
     elapseTime = 0.0;
-    param.addProperty(&pageValue, ((pageValue - size) < pageValueMin) ? pageValueMin : (pageValue - size));
-    slideTween = Tweener();
-    slideTween.addTween(param);
-    runparam = &param;
 }
 
 void ScrollerContainer::PrevPage() {
     if(IsPossiblePrevPage() == false)
         return;
     forceValue = 0.0;
-    if(runparam) {
-        slideTween.removeTween(runparam);
-        runparam = NULL;
-        elapseTime = 0.0;
+    if (slideTween) {
+        delete slideTween;
+        slideTween = NULL;
     }
-    param = TweenerParam(1000 * 0.5, EXPO, EASE_OUT);
-    runparam = &param;
-    param.addProperty(&pageValue, ((pageValue + size) > 0.0) ? 0.0 : (pageValue + size));
-    slideTween = Tweener();
-    slideTween.addTween(param);
+    slideTween = new TweenerWrapper();
+    slideTween->begin(&pageValue, ((pageValue + size) > 0.0) ? 0.0 : (pageValue + size), 0.5f, 0.0f, false);
     elapseTime = 0.0;
 }
 bool ScrollerContainer::IsPossibleNextPage() {
@@ -168,8 +163,9 @@ void ScrollerContainer::ShowScrollBarMoment(float _time) {
 void ScrollerContainer::ResetData() {
     for(int i = 0; i < VBArrayVectorGetLength(cell); i++) {
         CellData* _cellData = (CellData*)VBArrayVectorGetDataAt(cell, i);
+        _cellData->data = VBArrayVectorGetDataAt(data, i);
+        CellFree(_cellData);
         if(_cellData->index >= 0 && _cellData->index < VBArrayVectorGetLength(data)){
-            CellFree(_cellData);
             CellAlloc(_cellData);
         }
     }
@@ -205,14 +201,9 @@ void ScrollerContainer::ReloadData() {
 
 void ScrollerContainer::Update(float _deltaTime) {
     if(touchScroller == NULL) {
-        if(runparam) {
-            elapseTime += _deltaTime;
-            slideTween.step(1000 * elapseTime);
-            if(elapseTime > 0.5) {
-                slideTween.removeTween(runparam);
-                runparam = NULL;
-                elapseTime = 0.0;
-            }
+        if (slideTween && slideTween->onGoing) {
+            slideTween->update(_deltaTime);
+            scroller_isShow = true;
         } else {
             if(enable) {
                 forceValue *= 0.95;
@@ -227,10 +218,6 @@ void ScrollerContainer::Update(float _deltaTime) {
                     pageValue += (0.0 - pageValue) * 0.25;
                 }
             }
-        }
-        if(runparam) {
-            scroller_isShow = true;
-        } else {
             scroller_isShow = fabsf(forceValue) > 0.1 || fabsf(pageValue - prePageValue) > 0.1;
         }
     } else {
@@ -269,10 +256,10 @@ void ScrollerContainer::touchBegin(CCTouch* _touch, CCPoint _location) {
         return;
     if(touchScroller == NULL) {
         if(container->checkCollisionWithButton(_location)) {
-            if(runparam) {
-                slideTween.removeTween(runparam);
-                runparam = NULL;
-                elapseTime = 0.0;
+            if (slideTween && slideTween->onGoing) {
+                delete slideTween;
+                slideTween = NULL;
+                slideTween = new TweenerWrapper();
             }
             touchScroller = _touch;
             if(enable) {
@@ -290,10 +277,10 @@ void ScrollerContainer::touchBegin(CCTouch* _touch, CCPoint _location) {
 
 void ScrollerContainer::touchMove(CCTouch* _touch, CCPoint _location) {
     if(touchScroller == _touch) {
-        if(runparam) {
-            slideTween.removeTween(runparam);
-            runparam = NULL;
-            elapseTime = 0.0;
+        if (slideTween && slideTween->onGoing) {
+            delete slideTween;
+            slideTween = NULL;
+            slideTween = new TweenerWrapper();
         }
         for(int i = 0; i < VBArrayVectorGetLength(cell); i++) {
             CellData* _cellData = (CellData*)VBArrayVectorGetDataAt(cell, i);
@@ -310,10 +297,10 @@ void ScrollerContainer::touchMove(CCTouch* _touch, CCPoint _location) {
 
 void ScrollerContainer::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
     if(touchScroller == _touch) {
-        if(runparam) {
-            slideTween.removeTween(runparam);
-            runparam = NULL;
-            elapseTime = 0.0;
+        if (slideTween && slideTween->onGoing) {
+            delete slideTween;
+            slideTween = NULL;
+            slideTween = new TweenerWrapper();
         }
         touchScroller = NULL;
     }
@@ -352,4 +339,15 @@ void ScrollerContainer::SetCellValue(CellData* _cell, float _value) {
 
 float ScrollerContainer::GetCellValue(CellData* _cell) {
     return IsVertical() ? -_cell->modelCell->getPosition().y : _cell->modelCell->getPosition().x;
+}
+
+void ScrollerContainer::visit(void) {
+    if(is_mask) {
+        glEnable(GL_SCISSOR_TEST);
+        CCPoint zero = convertToWorldSpace(CCPointMake(0, 0));
+        glScissor(zero.x * CCDirector::sharedDirector()->getContentScaleFactor(), (zero.y - height) * CCDirector::sharedDirector()->getContentScaleFactor(), width * CCDirector::sharedDirector()->getContentScaleFactor(), height * CCDirector::sharedDirector()->getContentScaleFactor());
+    }
+    VBModel::visit();
+    if(is_mask)
+        glDisable(GL_SCISSOR_TEST);
 }

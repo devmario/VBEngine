@@ -2,7 +2,6 @@
 #define gelatomania_PackSelect_h
 
 #include "View.h"
-#include "CppTweener.h"
 #include "Pages.h"
 #include "NumberText.h"
 

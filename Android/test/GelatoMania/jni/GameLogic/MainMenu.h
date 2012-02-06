@@ -2,10 +2,11 @@
 #define gelatomania_MainMenu_h
 
 #include "View.h"
+#include "Social.h"
 
 using namespace cocos2d;
 
-class MainMenu : public View {
+class MainMenu : public View, public SocialProtocol {
     void touchEndAndCancel(CCTouch* _touch, CCPoint _location);
 public:
     VBObjectFile2D* titleintroObj;
@@ -18,11 +19,13 @@ public:
     VBModel* rankBT;
     VBModel* archBT;
     VBModel* infoBT;
+    VBModel* fbBT;
     
     CCTouch* touchPlayBT;
     CCTouch* touchRank;
     CCTouch* touchArch;
     CCTouch* touchInfo;
+    CCTouch* touchFB;
 	
     MainMenu();
 	~MainMenu();

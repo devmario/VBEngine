@@ -8,6 +8,7 @@
 #include <time.h>
 #include <stdarg.h>
 #include "Social.h"
+#include "SelectUser.h"
 
 using namespace cocos2d;
 
@@ -36,10 +37,8 @@ typedef struct history {
 
 bool IsEqualHistory(history* _h0, history* _h1);
 
-class Root : public cocos2d::CCLayer {
+class Root : public cocos2d::CCLayer, public SocialProtocol, public SelectUserProtocol {
 private:
-    Social* social;
-    
     View* view;
     VBModel* loading;
     
@@ -57,6 +56,16 @@ private:
     
     void OpenPopupAlloc(int _type, int _star, int _score);
 public:
+    virtual void SelectUserCallback(cJSON* user);
+    virtual void SelectUserNeedDelete();
+    SelectUser* selectUser;
+    
+    //매니아 서버에서 게임센터아이디 확인을 마추고 확인결과 해당 게임센터 아이디를 쓰는 유저가 여러명이거나 현재 설정된 유저와 다른 아이디일때
+    //즉 유저가 매니아서버의 여러유저 목록에서 하나를 골라야 할때
+    //Social::localSocil()->SelectUserByID 로 해당 유저를 선택해 주어야 함
+    virtual void GameCenterIDCheckNeedSelect(bool success, SocialError error, 
+                                             cJSON* users, cJSON* gameCenterInfo);
+    
     VBModel* top;
     
     Root();

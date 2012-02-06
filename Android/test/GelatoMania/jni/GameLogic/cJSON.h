@@ -71,7 +71,8 @@ extern char  *cJSON_Print(cJSON *item);
 /* Render a cJSON entity to text for transfer/storage without any formatting. Free the char* when finished. */
 extern char  *cJSON_PrintUnformatted(cJSON *item);
 /* Delete a cJSON entity and all subentities. */
-extern void   cJSON_Delete(cJSON *c);
+    extern void   cJSON_Delete(cJSON *c);
+    extern cJSON *cJSON_Copy(cJSON* item);
 
 /* Returns the number of items in an array (or object). */
 extern int	  cJSON_GetArraySize(cJSON *array);
@@ -121,6 +122,12 @@ extern void cJSON_ReplaceItemInObject(cJSON *object,const char *string,cJSON *ne
 #define cJSON_AddFalseToObject(object,name)		cJSON_AddItemToObject(object, name, cJSON_CreateFalse())
 #define cJSON_AddNumberToObject(object,name,n)	cJSON_AddItemToObject(object, name, cJSON_CreateNumber(n))
 #define cJSON_AddStringToObject(object,name,s)	cJSON_AddItemToObject(object, name, cJSON_CreateString(s))
+    
+#define cJSON_IsTrue(object) object->type == cJSON_True
+#define cJSON_IsFalse(object) object->type == cJSON_False
+#define cJSON_GetInt(object) object->valueint
+#define cJSON_GetDouble(object) object->valuedouble
+#define cJSON_GetString(object) object->valuestring
 
 #ifdef __cplusplus
 }

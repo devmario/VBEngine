@@ -718,10 +718,11 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_n
         tex->m_tContentSize.width = _texture->width;
         tex->m_tContentSize.height = _texture->height;
         this->setTexture(tex);
-        this->setTextureRect( cocos2d::CCRectMake(_txc[0].x * tex->getPixelsWide()
-                                                  ,_txc[0].y * tex->getPixelsHigh()
-                                                  ,_txc[2].x * tex->getPixelsWide() - _txc[0].x * tex->getPixelsWide()
-                                                  ,_txc[2].y  * tex->getPixelsHigh() - _txc[0].y * tex->getPixelsHigh() ) );
+        
+        this->setTextureRect( cocos2d::CCRectMake(_txc[0].x * tex->getPixelsWide() / CCDirector::sharedDirector()->getContentScaleFactor()
+                                                  ,_txc[0].y * tex->getPixelsHigh() / CCDirector::sharedDirector()->getContentScaleFactor()
+                                                  ,(_txc[2].x * tex->getPixelsWide() - _txc[0].x * tex->getPixelsWide()) / CCDirector::sharedDirector()->getContentScaleFactor()
+                                                  ,(_txc[2].y  * tex->getPixelsHigh() - _txc[0].y * tex->getPixelsHigh()) / CCDirector::sharedDirector()->getContentScaleFactor() ) );
         
     } else if(VBObjectFile2DLibraryType_Graphic == VBObjectFile2DLibraryGetType(_library) || VBObjectFile2DLibraryType_MovieClip == VBObjectFile2DLibraryGetType(_library)) {
         
@@ -1238,10 +1239,10 @@ VBAABB VBModel::getVBModelSize() {
 
 bool VBModel::checkCollisionWithButton(CCPoint pos) {
     if(is_bitmap) {
-        CCPoint tl = this->convertToWorldSpace(CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y));
-        CCPoint tr = this->convertToWorldSpace(CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y));
-        CCPoint bl = this->convertToWorldSpace(CCPointMake(m_sQuad.bl.vertices.x, m_sQuad.bl.vertices.y));
-        CCPoint br = this->convertToWorldSpace(CCPointMake(m_sQuad.br.vertices.x, m_sQuad.br.vertices.y));
+        CCPoint tl = this->convertToWorldSpace(CCPointMake(m_sQuad.tl.vertices.x / CCDirector::sharedDirector()->getContentScaleFactor(), m_sQuad.tl.vertices.y / CCDirector::sharedDirector()->getContentScaleFactor()));
+        CCPoint tr = this->convertToWorldSpace(CCPointMake(m_sQuad.tr.vertices.x / CCDirector::sharedDirector()->getContentScaleFactor(), m_sQuad.tr.vertices.y / CCDirector::sharedDirector()->getContentScaleFactor()));
+        CCPoint bl = this->convertToWorldSpace(CCPointMake(m_sQuad.bl.vertices.x / CCDirector::sharedDirector()->getContentScaleFactor(), m_sQuad.bl.vertices.y / CCDirector::sharedDirector()->getContentScaleFactor()));
+        CCPoint br = this->convertToWorldSpace(CCPointMake(m_sQuad.br.vertices.x / CCDirector::sharedDirector()->getContentScaleFactor(), m_sQuad.br.vertices.y / CCDirector::sharedDirector()->getContentScaleFactor()));
         if(CheckTriangle(tl, tr, bl, pos))
             return true;
         if(CheckTriangle(bl, tr, br, pos))

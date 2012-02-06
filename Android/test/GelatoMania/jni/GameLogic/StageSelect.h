@@ -2,7 +2,6 @@
 #define gelatomania_StageSelect_h
 
 #include "View.h"
-#include "CppTweener.h"
 #include "Pages.h"
 
 using namespace cocos2d;

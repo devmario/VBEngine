@@ -11,7 +11,7 @@ HintViewer::HintViewer(GameMain *_parentModel, bool _showFlag, VBObjectFile2D *_
         state = hintStateItem;
         rotationR = 0.0;
         solutionFlag = false;
-        initStep();
+        initStep(false);
         
         if (_obj && _tex) {
             object = _obj;
@@ -197,8 +197,10 @@ void HintViewer::update(float _deltaTime)
     }
 }
 
-void HintViewer::initStep() {
-    setState(hintStateItem);
+void HintViewer::initStep(bool isWrongStep) {
+    if (!isWrongStep) {
+        setState(hintStateItem);
+    }
     currentSolutionIdx = 1;
     maskStack[0] = -1;
     maskStack[1] = -1;
@@ -216,7 +218,7 @@ bool HintViewer::step(int itemIdx)
     int tempI = 0;
     
     if (itemIdx == -3) {
-        initStep();
+        initStep(false);
         return false;
     }
     
@@ -362,7 +364,7 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
             idx++;
         }
     }
-    initStep();
+    initStep(false);
     solutionFlag = true;
 //    printf("solution: ");
 //    for (int i=0; i<solutionLen; i++) {
@@ -377,8 +379,8 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
 
 bool HintViewer::wrongStep()
 {
-    initStep();
     setState(hintStateReset);
+    initStep(true);
     return false;
 }
 

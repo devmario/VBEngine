@@ -5,50 +5,32 @@ bool Slider::GetIsMovement() {
 }
 
 void Slider::ClearSliderTween() {
-    if(sliderTweenerParam) {
-        if(sliderTweener)
-            sliderTweener->removeTween(sliderTweenerParam);
-        delete sliderTweenerParam;
-    }
-    sliderTweenerParam = NULL;
-    if(sliderTweener) {
+    if (sliderTweener) {
+        sliderTweener->clear();
         delete sliderTweener;
+        sliderTweener = NULL;
     }
-    sliderTweener = NULL;
 }
 
 void Slider::BeginSliderTween(float _value, float _time, bool _is_elastic, bool _use_callback, float _delayTime) {
-    ClearSliderTween();
-    sliderTweener = new Tweener();
-    sliderTweenerTimeCount = 0.0;
-    sliderTweenerTime = _time + _delayTime;
-    sliderTweenerParam = new TweenerParam(sliderTweenerTime * 1000, _is_elastic ? ELASTIC : EXPO, EASE_OUT, _delayTime * 1000);
-    valueLast = _value;
-    sliderTweenerParam->addProperty(&value, valueLast);
-    sliderTweener->addTween(*sliderTweenerParam);
-    readyTweenCompleteCallback = _use_callback;
-}
-
-void Slider::UpdateSliderTween(float _deltaTime) {
-    if(sliderTweener) {
-        sliderTweenerTimeCount += _deltaTime;
-        sliderTweener->step(sliderTweenerTimeCount * 1000);
-        if(sliderTweenerTimeCount > sliderTweenerTime) {
-            ClearSliderTween();
-            value = valueLast;
-            if(readyTweenCompleteCallback) {
-                if(enable) {
-                    if(enableCompleteCallback)
-                        enableCompleteCallback(callbackObj);
-                } else {
-                    if(disableCompleteCallback)
-                        disableCompleteCallback(callbackObj);
-                }
-            }
-        }
+    if (sliderTweener) {
+        sliderTweener->clear();
+        delete sliderTweener;
+        sliderTweener = NULL;
     }
-}
+    sliderTweener = new TweenerWrapper();
+    if (_use_callback) {
+        if (enable) {
+            sliderTweener->begin(&value, _value, _time, _delayTime, _is_elastic, enableCompleteCallback ? enableCompleteCallback : NULL, callbackObj);
+        } else {
+            sliderTweener->begin(&value, _value, _time, _delayTime, _is_elastic, disableCompleteCallback ? disableCompleteCallback : NULL, callbackObj);
+        }
+    } else {
+        sliderTweener->begin(&value, _value, _time, _delayTime, _is_elastic);
+    }
+    
 
+}
 
 Slider::Slider(VBModel* _sliderModel, bool _enable,
                float _enableValue, float _disableValue, float _slideValue, float _maxSlideValue, 
@@ -58,7 +40,6 @@ Slider::Slider(VBModel* _sliderModel, bool _enable,
                void (*_enableCompleteCallback)(void* _obj), 
                void (*_disableCompleteCallback)(void* _obj)) {
     sliderTweener = NULL;
-    sliderTweenerParam = NULL;
     sliderModel = _sliderModel;
     enableValue = _enableValue;
     disableValue = _disableValue;
@@ -75,6 +56,7 @@ Slider::Slider(VBModel* _sliderModel, bool _enable,
     //printf("0.1 ");
     SetSlideValue(value);
     //printf("0.2 ");
+    
 }
 
 Slider::~Slider() {
@@ -96,7 +78,9 @@ void Slider::Update(float _deltaTime) {
     if(touch)
         SetSlideValue(GetSlideValue() + (value - GetSlideValue()) * 0.2);
     else {
-        UpdateSliderTween(_deltaTime);
+        if(sliderTweener) {
+            sliderTweener->update(_deltaTime);
+        }
         SetSlideValue(value);
     }
 }

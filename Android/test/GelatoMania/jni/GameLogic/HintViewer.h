@@ -56,7 +56,7 @@ public:
     
     void show();
     void hide();
-    void initStep();
+    void initStep(bool isWrongStep);
     bool step(int itemIdx);
     void setSolution(int** recipe, int recipeLen, int* recipeArrLen, int* topping, int toppingLen);
     void setPosition(cocos2d::CCPoint _position);

@@ -11,7 +11,7 @@
 
 using namespace tween;
 
-class GameMain : public View {
+class GameMain : public View, IceCreamProtocol {
 private:
     int packIdx;
     int stageIdx;
@@ -91,10 +91,8 @@ private:
     void InitTopping();
     void FreeTopping();
     
-    Tweener* toppingTweener;
-    TweenerParam* toppingTweenerParam;
-    float toppingTweenerTime;
-    float toppingTweenerTimeCount;
+    TweenerWrapper* toppingTweener;
+
     float toppingTweenerY;
     
     void ClearToppingTween();
@@ -124,6 +122,8 @@ private:
     
     HintViewer *hintViewer;
 public:
+    
+    virtual void GetIceCreamChecker(float per);
     
     GameMain(int _packIdx, int _stageIdx);
     ~GameMain();

@@ -262,6 +262,12 @@ cJSON *cJSON_Parse(const char *value)
 /* Render a cJSON item/entity/structure to text. */
 char *cJSON_Print(cJSON *item)				{return print_value(item,0,1);}
 char *cJSON_PrintUnformatted(cJSON *item)	{return print_value(item,0,0);}
+cJSON *cJSON_Copy(cJSON* item) {
+    char* code = cJSON_Print(item);
+    cJSON* copyItem = cJSON_Parse(code);
+    free(code);
+    return copyItem;
+}
 
 /* Parser core - when encountering text, process appropriately. */
 static const char *parse_value(cJSON *item,const char *value)

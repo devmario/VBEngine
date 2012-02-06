@@ -2,7 +2,7 @@
 #define gelatomania_Pages_h
 
 #include "View.h"
-#include "CppTweener.h"
+#include "Tweener.h"
 
 //실시간 메모리관리 구현 안됨
 
@@ -27,9 +27,7 @@ public:
     float elapseTimeTotal;
     float last;
     
-    Tweener slideTween;
-    TweenerParam param;
-    TweenerParam* runparam;
+    TweenerWrapper *slideTween;
     
     PagesTweenListener* listener;
     
@@ -37,9 +35,7 @@ public:
     float elapseTimeThumbTotal;
     float lastThumb;
     
-    Tweener slideTweenThumb;
-    TweenerParam paramThumb;
-    TweenerParam* runparamThumb;
+    TweenerWrapper *slideTweenThumb;
     
     CCTouch* touchSlide;
     float touchX;
@@ -70,6 +66,8 @@ public:
     virtual void touchMove(CCTouch* _touch, CCPoint _location);
     virtual void touchEnd(CCTouch* _touch, CCPoint _location);
     virtual void touchCancel(CCTouch* _touch, CCPoint _location);
+    
+    
 };
 
 class PagesTweenListener : public TweenerListener {

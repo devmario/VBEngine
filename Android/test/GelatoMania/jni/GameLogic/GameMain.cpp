@@ -93,6 +93,10 @@ void GameMain::UnloadResource() {
         VBObjectFile2DFree(&objBg[i]);
         VBTextureFree(&texBg[i]);
     }
+    free(objBg);
+    free(texBg);
+    objBg = NULL;
+    texBg = NULL;
 }
 
 void GameMain::InitModel(cJSON* _layer, cJSON* _ui) {
@@ -196,6 +200,7 @@ void GameMain::FreeModel() {
         delete modelBg[i];
         modelBg[i] = NULL;
     }
+    free(modelBg);
     modelBg = NULL;
 }
 
@@ -210,7 +215,7 @@ void GameMain::InitCook(int** _rtc, int _rtcLen, int* _rtcArrLen, int* _tc, int 
 #endif
     for(int i = 0; i < _rtcLen; i++) {
         if(i == 0)
-            baseIceCream = new IceCream(this, rdVec, tdVec, NULL, _rtc[i], _rtcArrLen[i]);
+            baseIceCream = new IceCream(this, rdVec, tdVec, NULL, NULL, _rtc[i], _rtcArrLen[i]);
         else
             baseIceCream->AddNextIceCream(_rtc[i], _rtcArrLen[i]);
     }
@@ -223,7 +228,7 @@ void GameMain::InitCook(int** _rtc, int _rtcLen, int* _rtcArrLen, int* _tc, int 
     baseIceCream->setPosition(CCPointMake(40, -90-63));
     top->addChild(baseIceCream);
     
-    iceCream = new IceCream(this, rdVec, tdVec, baseIceCream);
+    iceCream = new IceCream(this, rdVec, tdVec, this, baseIceCream);
     iceCream->setScale(0.5);
     iceCream->setPosition(CCPointMake(-2, 92-63));
     modelRailIce[0]->addChild(iceCream);
@@ -297,10 +302,8 @@ void GameMain::FreeRecipe() {
 }
 
 void GameMain::InitTopping() {
+    
     toppingTweener = NULL;
-    toppingTweenerParam = NULL;
-    toppingTweenerTime = 0.0;
-    toppingTweenerTimeCount = 0.0;
     toppingContainer = NULL;
 #ifdef GAME_MAIN_EMPTY
     return;
@@ -424,6 +427,11 @@ void GameMain::FreeRope() {
         delete toppingRopeSlider;
         toppingRopeSlider = NULL;
     }
+}
+
+//other thread
+void GameMain::GetIceCreamChecker(float per) {
+    printf("아이스크림 일치율: %f\n", per);
 }
 
 GameMain::GameMain(int _packIdx, int _stageIdx) {
@@ -841,37 +849,28 @@ void GameMain::resetOtherStage(int _packIdx, int _stageIdx) {
 }
 
 void GameMain::ClearToppingTween() {
-    if(toppingTweenerParam) {
-        if(toppingTweener)
-            toppingTweener->removeTween(toppingTweenerParam);
-        delete toppingTweenerParam;
-    }
-    toppingTweenerParam = NULL;
     if(toppingTweener) {
         delete toppingTweener;
+        toppingTweener = NULL;
     }
-    toppingTweener = NULL;
-    toppingTweenerTimeCount = 0.0;
 }
 
 void GameMain::UpdateToppingTween(float _deltaTime) {
     if(toppingTweener) {
-        toppingTweenerTimeCount += _deltaTime;
-        toppingTweener->step(toppingTweenerTimeCount * 1000);
-        if(toppingContainer)
-            toppingContainer->setPosition(CCPointMake(0, toppingTweenerY));
-        if(toppingTweenerTimeCount > toppingTweenerTime)
-            ClearToppingTween();
+        toppingTweener->update(_deltaTime);
     }
+    if(toppingContainer)
+        toppingContainer->setPosition(CCPointMake(0, toppingTweenerY));
 }
 
 void GameMain::BeginToppingTween(float _y, float _time, bool _is_ease_out) {
     ClearToppingTween();
-    toppingTweener = new Tweener();
-    toppingTweenerTime = _time;
-    toppingTweenerParam = new TweenerParam(toppingTweenerTime * 1000, EXPO, _is_ease_out ? EASE_OUT : EASE_IN);
+    
+    toppingTweener = new TweenerWrapper();
+    
+    TweenerParam *toppingTweenerParam = new TweenerParam(_time * 1000, EXPO, _is_ease_out ? EASE_OUT : EASE_IN);
     toppingTweenerParam->addProperty(&toppingTweenerY, _y);
-    toppingTweener->addTween(*toppingTweenerParam);
+    toppingTweener->setParamAndBegin(toppingTweenerParam, &toppingTweenerY, _y);
 }
 
 GameMain::~GameMain() {
@@ -992,7 +991,7 @@ void GameMain::NextIceCreamUpdate(float _deltaTime) {
 
 void GameMain::NewIceCream() {
     delIceCream = iceCream;
-    iceCream = new IceCream(this, rdVec, tdVec, baseIceCream);
+    iceCream = new IceCream(this, rdVec, tdVec, this, baseIceCream);
     if(recipeContainer)
         recipeContainer->hitTarget = iceCream;
     if(toppingContainer)
@@ -1111,10 +1110,11 @@ void GameMain::touchBegin(CCTouch* _touch, CCPoint _location) {
     }
     
     if(iceCream) {
+        
         TOUCHBEGINBT(touchCook, iceCream, _location, _touch, 
                      dragIce = iceCream->DragStartMount(top);
                      if(dragIce) {
-                         dragIce->setPosition(CCPointMake(dragIce->getPosition().x + _location.x, dragIce->getPosition().y + (-320 + _location.y)));
+                         dragIce->setPosition(CCPointMake(dragIce->getPosition().x + _location.x, dragIce->getPosition().y + (-CCDirector::sharedDirector()->getDisplaySizeInPixels().height / CCDirector::sharedDirector()->getContentScaleFactor() + _location.y)));
                          dragPre = _location;
                      }
                      );
@@ -1220,7 +1220,7 @@ float GameMain::getRecipePositionY(int recipeIdx)
 
 void GameMain::recipeContainerCallBack(int recipeIdx)
 {
-    iceCream->GetClear();
+    //iceCream->GetClear();
 #ifdef HINT_COMPLETE
     printf("step %s\n", hintViewer->step(recipeIdx) ? "ok" : "no");
 #endif

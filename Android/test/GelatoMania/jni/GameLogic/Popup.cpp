@@ -5,6 +5,8 @@
 #define ENDY_POPUP 320
 #define ENDALPHA_POPUP 0x88
 
+void popUpTweenCallBack(void*);
+
 Popup::Popup(VBObjectFile2D* _obj, VBTexture* _tex, VBModel* _topView) : View() {
     //cout << "new Popup\n";
     isClearPopup = false;
@@ -14,20 +16,18 @@ Popup::Popup(VBObjectFile2D* _obj, VBTexture* _tex, VBModel* _topView) : View() 
     inited = false;
     closeCount = 0;
     isClosed = false;
-    elapseTime = 0.0;
+    showTween = NULL;
 }
 
 void Popup::init() {
     if(inited == false) {
-        showTween = Tweener();
+        ClearTween();
         
         VBObjectFile2DLibraryNameID* _name_id;
         VBString* _str;
         
         popupY = ENDY_POPUP;
         bgAlpha = 0.0;
-        runslideParam = NULL;
-        listner = NULL;
         
         reBT = plBT = meBT = shBT = frBT = NULL;
         reTouch = plTouch = meTouch = shTouch = frTouch = NULL;
@@ -72,11 +72,6 @@ Popup::~Popup() {
 
     //cout << "delete Popup\n";
     ClearTween();
-    if(listner) {
-        showTween.removeListener(listner);
-        delete listner;
-        listner = NULL;
-    }
     
     top->removeChild(popup, false);
     delete popup;
@@ -91,19 +86,17 @@ Popup::~Popup() {
 }
 
 void Popup::ClearTween() {
-    if(runslideParam) {
-        showTween.removeTween(runslideParam);
-        runslideParam = NULL;
+    if(showTween) {
+        delete showTween;
+        showTween = NULL;
     }
     
-    elapseTime = 0.0;
-    
-    showTween = Tweener();
 }
 
 void Popup::Update(float _deltaTime) {
-    elapseTime += 1000 * _deltaTime;
-    showTween.step(elapseTime);
+    if (showTween) {
+        showTween->update(_deltaTime);
+    }
     if(popup)
         popup->setPosition(CCPointMake(0, popupY));
     if(bg)
@@ -133,24 +126,20 @@ void Popup::Open(void (*_closeFunc)(void* _closeFuncRef), void* _closeFuncRef) {
     
     ClearTween();
     
-    slideParam = TweenerParam(1000 * 0.5, EXPO, EASE_OUT);
-    runslideParam = &slideParam;
-    slideParam.addProperty(&bgAlpha, ENDALPHA_POPUP);
-    slideParam.addProperty(&popupY, 0);
-    showTween.addTween(slideParam);
+    TweenerParam *slideParam = new TweenerParam(1000 * 0.5, EXPO, EASE_OUT);
+    slideParam->addProperty(&bgAlpha, ENDALPHA_POPUP);
+    
+    showTween = new TweenerWrapper();
+    showTween->setParamAndBegin(slideParam, &popupY, 0, popUpTweenCallBack, this);
 }
 
 void Popup::Close() {
     ClearTween();
     
-    slideParam = TweenerParam(1000 * 0.5, EXPO, EASE_OUT);
-    runslideParam = &slideParam;
-    slideParam.addProperty(&popupY, ENDY_POPUP);
-    slideParam.addProperty(&bgAlpha, 0x00);
-    showTween.addTween(slideParam);
-    
-    listner = new PopupTweenListener(this);
-    showTween.addListener(listner);
+    TweenerParam *slideParam = new TweenerParam(1000 * 0.5, EXPO, EASE_OUT);
+    slideParam->addProperty(&bgAlpha, 0x00);
+    showTween = new TweenerWrapper();
+    showTween->setParamAndBegin(slideParam, &popupY, ENDY_POPUP, popUpTweenCallBack, this);
     
     closeCount = 0;
     isClosed = true;
@@ -193,4 +182,17 @@ void Popup::playButtonClick() {
     } else {
         ShareDataGetRoot()->ClosePopup();
     }
+}
+
+void popUpTweenCallBack(void* callBackObj)
+{
+    Popup *popup = (Popup*)callBackObj;
+    if (popup->isClosed) {
+        if(popup->closeFunc)
+            popup->closeFunc(popup->closeFuncRef);
+    } else {
+        popup->bgAlpha = ENDALPHA_POPUP;
+        
+    }
+    
 }

@@ -7,6 +7,7 @@
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <arpa/inet.h>
+#include <stdarg.h>
 #include "VBEngine.h"
 
 #ifndef vbHTTPDebug
@@ -19,30 +20,166 @@
 #define GET_HEADER "GET /%s HTTP/1.0\nAccept:text/plain\nAccept-Language:en\nConnection:Close\nHost:%s\nUser-Agen:Mozilla/4.0\n\n"
 #define POST_HEADER "POST /%s HTTP/1.0\r\nContent-Length: %ld\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n%s"
 
+void* VBHTTPResponseRead(void* _arg);
 
-char* CutHeader(char *response) {
-    if(response) {
+char* VBHTTPCutHeader(char* _response) {
+    if(_response) {
         int i = 0;
         char chunk[0xF] = "\r\n\r\n";
-        int cmp = 0;
-        while(cmp < strlen(chunk)) {
-            if(*(response + i) == chunk[cmp]) {
-                cmp++;
+        int chunk_idx = 0;
+        while(chunk_idx < strlen(chunk)) {
+            if(*(_response + i) == chunk[chunk_idx]) {
+                chunk_idx++;
             } else {
-                cmp = 0;
+                chunk_idx = 0;
             }
             i++;
         }
-        return response + i;
+        return _response + i;
     } else {
         return NULL;
     }
 }
 
-void* VBHTTPResponseRead(void* _arg);
+VBHTTP* VBHTTPCreateVALIST(const char* _host_name,
+                           const char* _port,
+                           double _break_time, //최대 응답대기시간
+                           const char* _method, //GET, POST
+                           const char* _data, //POST시 데이터
+                           size_t _data_len, //POST시 데이터 길이
+                           void* _reference,
+                           void (*_success_handle)(VBHTTP* _http, VBHTTPError _error, void* _reference),
+                           bool _auto_release,
+                           const char* _request, //request formatter
+                           va_list _arguments) {
+    VBHTTP* http = calloc(sizeof(VBHTTP), 1);
+	
+    http->host_name = calloc(sizeof(char), (strlen(_host_name) + 1));
+    memmove(http->host_name, _host_name, sizeof(char) * (strlen(_host_name)));
+	
+    http->port = calloc(sizeof(char), (strlen(_port) + 1));
+    memmove(http->port, _port, sizeof(char) * (strlen(_port)));
+    
+    http->break_time = 1000000.0 * _break_time;
+	
+	http->success_handle = _success_handle;
+	
+    http->method = calloc(sizeof(char), (strlen(_method) + 1));
+    memmove(http->method, _method, sizeof(char) * (strlen(_method)));
+    
+    if(_request) {
+        vasprintf(&http->request, _request, _arguments);
+    }
+    
+    if(_data && _data_len > 0) {
+        http->data = calloc(sizeof(char), (_data_len + 1));
+        memmove(http->data, _data, sizeof(char) * _data_len);
+        http->data_len = _data_len;
+    }
+    
+    http->reference = _reference;
+    
+    http->auto_release = _auto_release;
+    
+	pthread_create(&http->tid, NULL, VBHTTPResponseRead, http);
+    pthread_detach(http->tid);
+    
+    return http;
+}
 
-void* VBHTTPResponseRead(void* _arg) {
-    VBHTTP* http = _arg;
+VBHTTP* VBHTTPCreate(const char* _host_name,
+                     const char* _port,
+                     double _break_time, //최대 응답대기시간
+                     const char* _method, //GET, POST
+                     const char* _data, //POST시 데이터
+                     size_t _data_len, //POST시 데이터 길이
+                     void* _reference,
+                     void (*_success_handle)(VBHTTP* _http, VBHTTPError _error, void* _reference),
+                     bool _auto_release,
+                     const char* _request, //request formatter
+                     ...
+                     ) {
+    va_list list;
+    va_start(list, _request);
+    VBHTTP* http = VBHTTPCreateVALIST(_host_name, _port, _break_time, _method, _data, _data_len, _reference, _success_handle, _auto_release, _request, list);
+    va_end(list);
+    return http;
+}
+
+void VBHTTPRelease(VBHTTP** http) {
+    if(*http) {
+        if((*http)->sock)
+            close((*http)->sock);
+        
+        if((*http)->header)
+            free((*http)->header);
+        
+        if((*http)->request)
+            free((*http)->request);
+        
+        if((*http)->method)
+            free((*http)->method);
+        
+        if((*http)->port)
+            free((*http)->port);
+        
+        if((*http)->host_name)
+            free((*http)->host_name);
+        
+        if((*http)->response)
+        	free((*http)->response);
+        
+        if((*http)->data)
+            free((*http)->data);
+        
+        pthread_t _tId = (*http)->tid;
+        
+        memset(*http, 0, sizeof(VBHTTP));
+        free(*http);
+        *http = NULL;
+        
+        if(_tId)
+            pthread_detach(_tId);
+    }
+}
+
+//#ifdef DEBUG
+
+void VBHTTPCreateByJS(const char* _json_file_path,
+                      void* _reference,
+                      void (*_success_handle)(VBHTTP* _http, VBHTTPError _error, void* _reference),
+                      const char* _request,
+                      ...) {
+    VBString* _string = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _json_file_path);
+    FILE* _file = fopen(VBStringGetCString(_string), "rb");
+    VBStringFree(&_string);
+    fseek(_file, 0, SEEK_END);
+    size_t _size = ftell(_file);
+    fseek(_file, 0, SEEK_SET);
+    char* _buffer = (char*)calloc(sizeof(char), _size + 1);
+    fread(_buffer, _size, sizeof(char), _file);
+    fclose(_file);
+    
+    va_list list;
+    va_start(list, _request);
+    VBHTTPCreateVALIST("ec2-23-20-6-240.compute-1.amazonaws.com", "80", 5.0, "POST", _buffer, _size, _reference, _success_handle, true, _request, list);
+    va_end(list);
+    
+    free(_buffer);
+}
+
+//#endif
+
+void VBHTTPComplete(VBHTTP* _http, int _error) {
+    _http->complete = 1;
+    if(_http->success_handle)
+        _http->success_handle(_http, _error, _http->reference);
+    if(_http->auto_release)
+        VBHTTPRelease(&_http);
+}
+
+void* VBHTTPResponseRead(void* _reference) {
+    VBHTTP* http = _reference;
     
 	struct hostent *__hostent_pnt;
 	struct servent *__servent_pnt;
@@ -54,12 +191,7 @@ void* VBHTTPResponseRead(void* _arg) {
     if(__servent_pnt) {
 		__sockaddr_in.sin_port = __servent_pnt->s_port;
 	} else if((__sockaddr_in.sin_port = htons(atoi(http->port)))==0) {
-        http->complete = 1;
-        if(http->error_handle)
-            http->error_handle(http, 0);
-        printf("포트 없음\n");
-        //fflush(stdout);
-        http->tid = NULL;
+        VBHTTPComplete(http, VBHTTPErrorNotFoundLocalPort);
         return NULL;
     }
     
@@ -67,32 +199,17 @@ void* VBHTTPResponseRead(void* _arg) {
 	if(__hostent_pnt) {
 		memcpy((void*)&__sockaddr_in.sin_addr, (void*)__hostent_pnt->h_addr, __hostent_pnt->h_length);
 	} else if((__sockaddr_in.sin_addr.s_addr = inet_addr(http->host_name)) == INADDR_NONE) {
-        http->complete = 1;
-        if(http->error_handle)
-            http->error_handle(http, 0);
-        printf("호스트 또는 포트 없음\n");
-        //fflush(stdout);
-        http->tid = NULL;
+        VBHTTPComplete(http, VBHTTPErrorNotFoundServer);
         return NULL;
 	}
 	
     if((http->sock = socket(PF_INET,SOCK_STREAM,0)) < 0) {
-        http->complete = 1;
-        if(http->error_handle)
-            http->error_handle(http, 0);
-        printf("소켓 생성 실패\n");
-        //fflush(stdout);
-        http->tid = NULL;
+        VBHTTPComplete(http, VBHTTPErrorSocketCreateFail);
         return NULL;
     }
 	
     if(connect(http->sock,(struct sockaddr*)&__sockaddr_in, sizeof(__sockaddr_in)) < 0) {
-        http->complete = 1;
-        if(http->error_handle)
-            http->error_handle(http, 0);
-        printf("연결 실패\n");
-        //fflush(stdout);
-        http->tid = NULL;
+        VBHTTPComplete(http, VBHTTPErrorConnectFail);
         return NULL;
     }
     
@@ -101,34 +218,20 @@ void* VBHTTPResponseRead(void* _arg) {
         sprintf(http->header, GET_HEADER, http->request, http->host_name);
         size_t _len = strlen(http->header);
         if(_len != write(http->sock, http->header, _len)) {
-            http->complete = 1;
-            if(http->error_handle)
-                http->error_handle(http, 0);
-            printf("헤더전송 실패\n");
-            //fflush(stdout);
-            http->tid = NULL;
+            VBHTTPComplete(http, VBHTTPErrorWriteFail);
             return NULL;
         }
     } else if(strcmp(http->method, "POST") == 0) {
         http->header = calloc(sizeof(char), (strlen(POST_HEADER) + strlen(http->host_name) + (http->request ? strlen(http->request) : 0) + (http->data ? strlen(http->data) : 0) + VBHTTP_MAXTK));
         sprintf(http->header, POST_HEADER, http->request, http->data_len, http->data);
-        printf("Request Header\n\n%s\n\n\n\n", http->header);
-        fflush(stdout);
         size_t _len = strlen(http->header);
         if(_len != write(http->sock, http->header, _len)) {
-            http->complete = 1;
-            if(http->error_handle)
-                http->error_handle(http, 0);
-            printf("헤더전송 실패\n");
-            //fflush(stdout);
-            http->tid = NULL;
+            VBHTTPComplete(http, VBHTTPErrorWriteFail);
             return NULL;
         }
     }
     
     unsigned int _interval = 0;
-    printf("\nResponse Header\n\n");
-    //fflush(stdout);
     unsigned long _total_len = 0;
     while(_interval < http->break_time) {
         char _buf[0xF] = {'\0',};
@@ -142,114 +245,15 @@ void* VBHTTPResponseRead(void* _arg) {
             }
             memcpy(http->response + _total_len - _read_len, _buf, _read_len);
         } else {
-            //성공
-            if(http->response && _total_len > 0)
-                http->response[_total_len] = '\0';
-            http->complete = 1;
-            if(http->success_handle)
-                http->success_handle(http);
-            http->tid = NULL;
+            VBHTTPComplete(http, VBHTTPErrorNone);
             return NULL;
         }
-		_interval += http->read_interval;
-        usleep(http->read_interval);
+        usleep(16666);
+        _interval += 16666;
     }
     //타임아웃
-    http->complete = 1;
-    if(http->error_handle)
-        http->error_handle(http, 0);
-    printf("타임아웃\n");
-    //fflush(stdout);
-    http->tid = NULL;
+    VBHTTPComplete(http, VBHTTPErrorTimeOut);
     return NULL;
-}
-
-VBHTTP* VBHTTPCreateByJS(const char* _js_fileName,
-                         const char* _request,
-                         void (_error_handle)(VBHTTP* _http, unsigned char error_code), 
-                         void (_success_handle)(VBHTTP* _http)) {
-    VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _js_fileName);
-    printf("%s\n",_str->data);
-    FILE* _f = fopen(VBStringGetCString(_str), "rb");
-    VBStringFree(&_str);
-    fseek(_f, 0, SEEK_END);
-    size_t _size = ftell(_f);
-    fseek(_f, 0, SEEK_SET);
-    char* _buf = (char*)calloc(sizeof(char), _size + 1);
-    fread(_buf, _size, sizeof(char), _f);
-    fclose(_f);
-    
-    VBHTTP* http = VBHTTPCreate("ec2-23-20-6-240.compute-1.amazonaws.com", "80", 5.0, 0, "POST", _request, _buf, _size, _error_handle, _success_handle);
-    free(_buf);
-    
-    return http;
-}
-
-VBHTTP* VBHTTPCreate(const char* _host_name,
-                     const char* _port,
-                     double _break_time, //최대 응답대기시간
-                     double _read_interval, //응답확인 인터벌
-                     const char* _method, //GET, POST
-                     const char* _request, //request
-                     const char* _data, //POST시 데이터
-                     size_t _data_len, //POST시 데이터 길이
-                     void (_error_handle)(VBHTTP* _http, unsigned char error_code), 
-                     void (_success_handle)(VBHTTP* _http)) {
-    VBHTTP* http = calloc(sizeof(VBHTTP), 1);
-	
-    http->host_name = calloc(sizeof(char), (strlen(_host_name) + 1));
-    memmove(http->host_name, _host_name, sizeof(char) * (strlen(_host_name)));
-	
-    http->port = calloc(sizeof(char), (strlen(_port) + 1));
-    memmove(http->port, _port, sizeof(char) * (strlen(_port)));
-    
-    http->break_time = 1000000.0 * _break_time;
-    http->read_interval = 1000000.0 * _read_interval;
-	
-    http->error_handle = _error_handle;
-	http->success_handle = _success_handle;
-	
-    http->method = calloc(sizeof(char), (strlen(_method) + 1));
-    memmove(http->method, _method, sizeof(char) * (strlen(_method)));
-    
-    if(_request) {
-        http->request = calloc(sizeof(char), (strlen(_request) + 1));
-        memmove(http->request, _request, sizeof(char) * (strlen(_request)));
-    }
-    
-    if(_data) {
-        http->data = calloc(sizeof(char), (_data_len + 1));
-        memmove(http->data, _data, sizeof(char) * _data_len);
-    }
-    http->data_len = _data_len;
-    
-	pthread_create(&http->tid, NULL, VBHTTPResponseRead, http);
-    
-    return http;
-}
-
-void VBHTTPRelease(VBHTTP** http) {
-    if(*http) {
-        if((*http)->sock)
-            close((*http)->sock);
-        if((*http)->header)
-            free((*http)->header);
-        if((*http)->request)
-            free((*http)->request);
-        if((*http)->method)
-            free((*http)->method);
-        if((*http)->port)
-            free((*http)->port);
-        if((*http)->host_name)
-            free((*http)->host_name);
-        if((*http)->response)
-        	free((*http)->response);
-        pthread_t _tId = (*http)->tid;
-        free(*http);
-        *http = NULL;
-        if(_tId)
-            pthread_detach(_tId);
-    }
 }
 
 #undef printf

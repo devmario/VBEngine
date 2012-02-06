@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "PlatformFunctions.h"
+#include "User.h"
 
 bool IsEqualHistory(history* _h0, history* _h1) {
     if(_h0 == NULL || _h1 == NULL)
@@ -30,7 +31,6 @@ void PopupClose(void* _ref) {
 
 void Root::OpenPopupAlloc(int _type, int _star, int _score) {
     popupType = _type;
-//    popupType = PopupTypeClear;
     switch (_type) {
         case PopupTypePause:
             popup = new Popup(NULL, NULL, top);
@@ -84,12 +84,39 @@ void Root::ClosePopup() {
     printf("history len:%i\n", vecHistory->len);
 }
 
+void Root::SelectUserCallback(cJSON* user) {
+    if(selectUser) {
+        User::localUser()->SetJSON(user);
+        selectUser->Hide();
+    }
+}
+
+void Root::SelectUserNeedDelete() {
+    if(selectUser) {
+        delete selectUser;
+        selectUser = NULL;
+    }
+}
+
+void Root::GameCenterIDCheckNeedSelect(bool success,
+                                       SocialError error, 
+                                       cJSON* users, cJSON* gameCenterInfo) {
+    if(selectUser == NULL) {
+        selectUser = new SelectUser(users, top, this, "gameCenterID", gameCenterInfo);
+    } else {
+        selectUser->SetUsers(users, "gameCenterID", gameCenterInfo);
+    }
+    selectUser->Show();
+}
+
 Root::Root() {
+    selectUser = NULL;
     /* facebook off
     PlatformGameCenterLogin(RootGameCenterLoginComplete);
     
     PlatformFacebookLogin(RootFacebookLoginComplete);
     */
+    
     backHistory = false;
     //CCLayer();
     
@@ -130,18 +157,17 @@ Root::Root() {
     strcat(documentsPath, "Documents");
     //    cout << documentsPath << '\n';
     
-    VBEngineStart(resourcePath, documentsPath, 480, 320, 480, 320);
+    VBEngineStart(resourcePath, documentsPath, 480 * CCDirector::sharedDirector()->getContentScaleFactor(), 320 * CCDirector::sharedDirector()->getContentScaleFactor(), 480, 320);
     
     free(resourcePath);
     free(documentsPath);
 #endif
     
-    social = new Social();
-    social->LoginGameCenter();
-    
     gettimeofday(&curTime, NULL);
     
     top = new VBModel();
+    top->setScale(CCDirector::sharedDirector()->getContentScaleFactor());
+    
 
 #ifdef __ANDROID__
     top->setScaleX(1.67);
@@ -152,7 +178,7 @@ Root::Root() {
 #ifdef __ANDROID__
     ((CCSprite*)top)->setPosition(ccp(0, 480));
 #else
-    ((CCSprite*)top)->setPosition(ccp(0, 320));
+    ((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().width));
 #endif
     //top->setScaleY(768.0/320.0);
     //top->setScaleX(1024.0/480.0);
@@ -167,11 +193,15 @@ Root::Root() {
     
     ChangePage(3, LoadingTypeNone, PopupTypeNone, RootPageTypeMainMenu);
     
+    Social::localSocial()->LogInGameCenter(this);
+    
     popup = NULL;
 }
 
 Root::~Root() {
-    delete social;
+    
+    if(selectUser)
+        delete selectUser;
     
     ResetHistory();
     VBArrayVectorFree(&vecHistory);
@@ -207,6 +237,9 @@ void Root::Update() {
                 loadFlag++;
             }
         } else if(loadFlag == 2) {
+            /*
+             loadingFlag가 2로 넘어오면서 loading->is_play가 false로 바뀜.
+             */
             ChangePageARGSonUpdate();
             loading->gotoAndPlay(15);
             loadFlag++;
@@ -215,6 +248,8 @@ void Root::Update() {
                 ((CCSprite*)top)->removeChild((CCSprite*)loading, false);
                 loading = NULL;
                 loadFlag = 0;
+            } else {
+                printf("loading...\n");
             }
         }
     }
@@ -233,6 +268,9 @@ void Root::Update() {
             popup = NULL;
             popupClear = false;
         }
+    }
+    if(selectUser) {
+        selectUser->Update(_deltaTime);
     }
     
     top->VBModelUpdate(_deltaTime);
@@ -257,7 +295,11 @@ void Root::ccTouchesBegan( CCSet *touches, CCEvent *event) {
 	CCPoint location = touch->locationInView(touch->view());
 	location = CCDirector::sharedDirector()->convertToGL(location);
     
-    if(popup)
+    
+    
+    if(selectUser)
+        selectUser->touchBegin(touch, location);
+    else if(popup)
         popup->touchBegin(touch, location);
     else
         view->touchBegin(touch, location);
@@ -271,7 +313,11 @@ void Root::ccTouchesMoved( CCSet *touches, CCEvent *event) {
 	CCPoint location = touch->locationInView(touch->view());
 	location = CCDirector::sharedDirector()->convertToGL(location);
     
-    if(popup)
+    
+    
+    if(selectUser)
+        selectUser->touchMove(touch, location);
+    else if(popup)
         popup->touchMove(touch, location);
     else
         view->touchMove(touch, location);
@@ -285,7 +331,11 @@ void Root::ccTouchesEnded( CCSet *touches, CCEvent *event) {
 	CCPoint location = touch->locationInView(touch->view());
 	location = CCDirector::sharedDirector()->convertToGL(location);
     
-    if(popup)
+    
+    
+    if(selectUser)
+        selectUser->touchEnd(touch, location);
+    else if(popup)
         popup->touchEnd(touch, location);
     else
         view->touchEnd(touch, location);
@@ -299,7 +349,11 @@ void Root::ccTouchesCanceled( CCSet *touches, CCEvent *event) {
 	CCPoint location = touch->locationInView(touch->view());
 	location = CCDirector::sharedDirector()->convertToGL(location);
     
-    if(popup)
+    
+    
+    if(selectUser)
+        selectUser->touchCancel(touch, location);
+    else if(popup)
         popup->touchCancel(touch, location);
     else
         view->touchCancel(touch, location);
@@ -323,9 +377,7 @@ void Root::PushHistory(history* _h) {
     _ptr->count = _h->count;
     _ptr->args = (int*)calloc(sizeof(int), _ptr->count);
     
-//    cout << "Push History\n";
     for(int i = 0; i < _ptr->count; i++) {
-//        cout << i << " : " << _h->args[i] << '\n';
         _ptr->args[i] = _h->args[i];
     }
     
@@ -333,19 +385,13 @@ void Root::PushHistory(history* _h) {
 }
 
 void Root::PopHistory(int _idx) {
-//    printf("pop history in\n");
     history* _h = (history*)VBArrayVectorRemoveAt(vecHistory, _idx);
-//    printf("access history\n");
     if(_h) {
-//        printf("access args\n");
         if(_h->args) {
-//            printf("    free args\n");
             free(_h->args);
         }
-//        printf("    free history\n");
         free(_h);
     }
-//    printf("pop history out\n");
 }
 
 history* Root::GetLastHistory() {
@@ -417,11 +463,16 @@ void Root::ChangePageARGSonUpdate() {
             case PopupTypePause:
             {
                 OpenPopupAlloc(historyNext.args[_argIdx], 0, 0);
+//                top->removeChild(popup->top, false);
+//                top->addChild(popup->top);
             }
                 break;
             case PopupTypeClear:
             {
                 OpenPopupAlloc(historyNext.args[_argIdx], historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2]);
+//                top->removeChild(popup->top, false);
+//                top->addChild(popup->top);
+
             }
                 break;
         }
@@ -643,7 +694,6 @@ void Root::goFowardStage()
         }
         if (_ptr->args[pageStateIndex] == RootPageTypeGameMain) {
             
-//            PopHistory(<#int _idx#>);
             if (_getpid() == ShareDataGetNextPack()) {
                 //reset
                 _setsid(_getsid()+1);
