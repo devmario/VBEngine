@@ -11,17 +11,36 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.facebook.android.BaseRequestListener;
+import com.facebook.android.FacebookUtil;
+import com.facebook.android.LoginManager;
+
 public class GelatoManiaActivity extends Cocos2dxActivity {
+	private static final String TAG = "GelatoManiaActivity";
+
 	private Cocos2dxGLSurfaceView mGLView;
 	private SharedPreferences sp;
 	private SharedPreferences.Editor e;
-	
+
+	// modify lowmans -> use facebook api
+	private FacebookUtil fbUtil;
+	private LoginManager loginMgr;
+
+	static {
+		System.loadLibrary("stlport_shared");
+		System.loadLibrary("cocos2d");
+		System.loadLibrary("cocosdenshion");
+		System.loadLibrary("vanillaworld");
+		System.loadLibrary("gamelogic");
+	}
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -31,24 +50,26 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 
 		sp = getSharedPreferences("pref", Activity.MODE_PRIVATE);
 		e = sp.edit();
-		
-		if(sp.getBoolean("isFirst", true)){
+
+		if (sp.getBoolean("isFirst", true)) {
 			CopyAssets();
 		}
-			
+
 		setContentView(R.layout.game_demo);
 		mGLView = (Cocos2dxGLSurfaceView) findViewById(R.id.game_gl_surfaceview);
 		mGLView.setTextField((EditText) findViewById(R.id.textField));
-
 		// Get the size of the mGLView after the layout happens
 		mGLView.post(new Runnable() {
-
 			@Override
 			public void run() {
 				Cocos2dxActivity.screenHeight = mGLView.getHeight();
 				Cocos2dxActivity.screenWidth = mGLView.getWidth();
 			}
 		});
+
+		// modify lowmans -> facebook instance
+		fbUtil = new FacebookUtil(this);
+		loginMgr = new LoginManager(this, fbUtil.getFacebook());
 
 	}
 
@@ -64,15 +85,8 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		mGLView.onResume();
 	}
 
-	static {
-		System.loadLibrary("stlport_shared");
-		System.loadLibrary("cocos2d");
-		System.loadLibrary("cocosdenshion");
-		System.loadLibrary("vanillaworld");
-		System.loadLibrary("gamelogic");
-	}
-
-	public boolean makeDir(String fname) {// 존재하지 않는 Dir 만들기
+	// modify lowmans -> Assets Copy to <data/data> or <sdcard>
+	private boolean makeDir(String fname) {
 		File f = new File(fname);
 		if (f.isDirectory() && f.exists()) {
 			return false;
@@ -83,10 +97,10 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 
 	private void CopyAssets() {
 
-//		makeDir("/sdcard/.test/");
-//		makeDir("/sdcard/.test/gelatomania/");
-//		makeDir("/sdcard/.test/gelatomania/resource");
-//		makeDir("/sdcard/.test/gelatomania/document");
+		// makeDir("/sdcard/.vanillaworld/");
+		// makeDir("/sdcard/.vanillaworld/gelatomania/");
+		// makeDir("/sdcard/.vanillaworld/gelatomania/resource");
+		// makeDir("/sdcard/.vanillaworld/gelatomania/document");
 
 		makeDir("/data/data/com.vanillabreeze.gelatomania/files/");
 		makeDir("/data/data/com.vanillabreeze.gelatomania/files/resource");
@@ -94,30 +108,31 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 
 		AssetManager assetManager = getAssets();
 		String[] files = null;
+		InputStream in = null;
+		OutputStream out = null;
 		try {
 			files = assetManager.list("");
-		} catch (IOException e) {
-			Log.e("tag", e.getMessage());
-		}
-		for (String filename : files) {
-			InputStream in = null;
-			OutputStream out = null;
-			try {
+			for (String filename : files) {
 				in = assetManager.open(filename);
 				// String tmp = "/sdcard/.vanillaworld/gelatomania/resource/" + filename;
 				String tmp = "/data/data/com.vanillabreeze.gelatomania/files/resource/" + filename;
-				Log.i("#@#" ,tmp);
+				Log.i("#@#", tmp);
 				out = new FileOutputStream(tmp);
 				copyFile(in, out);
+			}
+		} catch (Exception e) {
+			Log.e("tag", "try : " + e.getMessage());
+		} finally {
+			try {
 				in.close();
-				in = null;
 				out.flush();
 				out.close();
-				out = null;
-			} catch (Exception e) {
-				Log.e("tag", e.getMessage());
+			} catch (IOException e) {
+				Log.e("tag", "finally : " + e.getMessage());
 			}
 		}
+		
+		// 초기 한번만 실행하기 위해서 플래그 세팅
 		e.putBoolean("isFirst", false);
 	}
 
@@ -128,4 +143,57 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 			out.write(buffer, 0, read);
 		}
 	}
+
+	// modify lowmans -> facebook dialog feed-back
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		fbUtil.getFacebook().authorizeCallback(requestCode, resultCode, data);
+	}
+
+	// modify lowmans -> facebook method linked JNI Function call
+	private boolean facebookLogin() {
+		return fbUtil.isLogin();
+	}
+
+	// PlatformFacebookRequestGraphPath
+	void facebookRequestGraphPath() {
+		if (fbUtil.isLogin()) {
+			fbUtil.request("me/friends", new BaseRequestListener() {
+				public void onComplete(final String response, final Object state) {
+					Log.d("Facebook-fbUtil.request", "Response: " + response.toString());
+					nativeFacebookRequestGraphPath(response);
+				}
+			});
+		}
+	}
+
+	// PlatformFacebookAppRequest
+	private void facebookAppRequest() {
+		if (fbUtil.isLogin()) {
+			fbUtil.request("me/friends", new BaseRequestListener() {
+				public void onComplete(final String response, final Object state) {
+					Log.d("Facebook-fbUtil.request", "Response: " + response.toString());
+					nativeFacebookAppRequest(response);
+				}
+			});
+		}
+	}
+
+	// PlatformFacebookFeed
+	private void facebookFeed() {
+		if (fbUtil.isLogin()) {
+			fbUtil.request("me/friends", new BaseRequestListener() {
+				public void onComplete(final String response, final Object state) {
+					Log.d("Facebook-fbUtil.request", "Response: " + response.toString());
+					nativeFacebookFeed(response);
+				}
+			});
+		}
+	}
+
+	native void nativeFacebookRequestGraphPath(String response);
+
+	native void nativeFacebookAppRequest(String response);
+
+	native void nativeFacebookFeed(String response);
 }
