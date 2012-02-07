@@ -2,10 +2,19 @@
 #include "../VBConfig.h"
 #include "../VBEngine.h"
 
-#include <OpenGLES/ES1/gl.h>
-#include <OpenGLES/ES1/glext.h>
+
 #include <string.h>
 #include <stdlib.h>
+
+#ifdef _VB_IPHONE_
+#include <OpenGLES/ES1/gl.h>
+#include <OpenGLES/ES1/glext.h> 
+#endif
+
+#ifdef __ANDROID__
+#include <GLES/gl.h>
+#include <GLES/glext.h>
+#endif
 
 VBTexture* VBTextureAlloc(void) {
 	VBTexture* _tex = VBSystemCalloc(1, sizeof(VBTexture));
