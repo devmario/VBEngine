@@ -170,12 +170,6 @@ Root::Root() {
     
     top = new VBModel();
     top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().width / 320);
-    
-
-#ifdef __ANDROID__
-    top->setScaleX(1.67);
-    top->setScaleY(1.5);
-#endif
 
     this->addChild((CCLayer*)top);
     ((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().width));
