@@ -32,10 +32,10 @@ import com.facebook.android.SessionEvents.LogoutListener;
 
 public class FacebookUtil {
 
-	private static final String TAG = "";
-	private static final String APP_ID = "243309602411008";
-	private Facebook mFacebook;
-	private AsyncFacebookRunner mAsyncRunner;
+	public static final String TAG = "";
+	public static final String APP_ID = "243309602411008";
+	public static Facebook mFacebook;
+	public AsyncFacebookRunner mAsyncRunner;
 
 	// private static FacebookUtil instance;
 
@@ -59,10 +59,6 @@ public class FacebookUtil {
 
 	}
 
-	public Facebook getFacebook() {
-		return mFacebook;
-	}
-
 	public boolean isLogin() {
 		return mFacebook.isSessionValid();
 	}
@@ -71,14 +67,18 @@ public class FacebookUtil {
 		mAsyncRunner.request(request, listener);
 	}
 
-	public void request(String graphPath, Bundle parameters,  RequestListener listener) {
+	public void request(Bundle parameters, RequestListener listener) {
+		mAsyncRunner.request(parameters, listener);
+	}
+
+	public void request(String graphPath, Bundle parameters, RequestListener listener) {
 		mAsyncRunner.request(graphPath, parameters, listener);
 	}
-	
+
 	public void request(String graphPath, Bundle parameters, String httpMethod, RequestListener listener) {
 		mAsyncRunner.request(graphPath, parameters, httpMethod, listener, null);
 	}
-	
+
 	public void update(String request, BaseRequestListener listener) {
 		Bundle params = new Bundle();
 		params.putString("method", "photos.upload");

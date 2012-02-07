@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.facebook.android.BaseDialogListener;
 import com.facebook.android.BaseRequestListener;
 import com.facebook.android.FacebookUtil;
 import com.facebook.android.LoginManager;
@@ -78,7 +79,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 
 		// modify lowmans -> facebook instance
 		fbUtil = new FacebookUtil(this);
-		loginMgr = new LoginManager(this, fbUtil.getFacebook());
+		loginMgr = new LoginManager(this, fbUtil.mFacebook);
 
 	}
 
@@ -206,7 +207,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	// modify lowmans -> facebook dialog feed-back
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		fbUtil.getFacebook().authorizeCallback(requestCode, resultCode, data);
+		fbUtil.mFacebook.authorizeCallback(requestCode, resultCode, data);
 	}
 
 	
@@ -234,10 +235,13 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	// PlatformFacebookAppRequest
 	private void facebookAppRequest() {
 		if (fbUtil.isLogin()) {
-			fbUtil.request("me/friends", new BaseRequestListener() {
-				public void onComplete(final String response, final Object state) {
-					Log.d("Facebook-fbUtil.request", "Response: " + response.toString());
-					nativeFacebookAppRequest(response);
+			Bundle parameters = new Bundle();
+			parameters.putString("message", "this is test message");
+			// parameters.putString("to", "");
+			// parameters.putString("notification_text", "");
+			fbUtil.mFacebook.dialog(this, "apprequests", parameters, new BaseDialogListener() {
+				@Override
+				public void onComplete(Bundle values) {
 				}
 			});
 		}
@@ -246,10 +250,15 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	// PlatformFacebookFeed
 	private void facebookFeed() {
 		if (fbUtil.isLogin()) {
-			fbUtil.request("me/friends", new BaseRequestListener() {
-				public void onComplete(final String response, final Object state) {
-					Log.d("Facebook-fbUtil.request", "Response: " + response.toString());
-					nativeFacebookFeed(response);
+			Bundle parameters = new Bundle();
+			parameters.putString("name", "");
+			parameters.putString("caption", "");
+			parameters.putString("description", "");
+			parameters.putString("link", "");
+			parameters.putString("picture", "");
+			fbUtil.mFacebook.dialog(this, "feed", parameters, new BaseDialogListener() {
+				@Override
+				public void onComplete(Bundle values) {
 				}
 			});
 		}

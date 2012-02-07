@@ -772,6 +772,7 @@ public class Facebook {
             parameters.putString(TOKEN, getAccessToken());
         }
         String url = endpoint + "?" + Util.encodeUrl(parameters);
+        Log.i("#@#", "url : "+ url);
         if (context.checkCallingOrSelfPermission(Manifest.permission.INTERNET)
                 != PackageManager.PERMISSION_GRANTED) {
             Util.showAlert(context, "Error",
