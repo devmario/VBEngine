@@ -1,7 +1,13 @@
 #include "AndroidNative.h"
 
+
 static const char *ClassName =
 		"com.vanillabreeze.gelatomania.GelatoManiaActivity";
+
+static PlatformCallback g_FacebookLoginCB;
+static PlatformCallback g_FacebookRequestGraphPathCB;
+static PlatformCallback g_FacebookAppRequestCB;
+static PlatformCallback g_FacebookFeedCB;
 
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 	UnionJNIEnvToVoid uenv;
@@ -24,9 +30,43 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 	return JNI_VERSION_1_4;
 }
 
-bool facebookLogin() {
-	LOGI("facebookLogin");
+bool facebookIsLogin() {
+	LOGI("Native facebookIsLogin() <-- in");
 
+	JNIEnv* env = NULL;
+	if (jvm == NULL) {
+		LOGE("jvm == null : please on load JavaVM");
+		return false;
+	}
+	if (jvm->AttachCurrentThread(&env, NULL) != JNI_OK) {
+		LOGE("%s: AttachCurrentThread() failed", __FUNCTION__);
+		return false;
+	}
+
+	/* invoke the method using the JNI */
+	jclass clazz = env->FindClass(ClassName);
+	if (clazz == NULL) {
+		LOGE("Native registration unable to find class '%s'", ClassName);
+	}
+
+	jmethodID mid = env->GetStaticMethodID(clazz, "facebookIsLogin", "()Z");
+	if (mid == NULL) {
+		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
+				"facebookIsLogin");
+	}
+
+	bool ret = (bool) env->CallStaticBooleanMethod(clazz, mid);
+	env->DeleteLocalRef(clazz);
+
+	LOGI("ret = %d", ret);
+	LOGI("Native facebookIsLogin() --> out");
+
+	return ret;
+}
+
+bool facebookLogin(PlatformCallback _callback) {
+
+	LOGI("Native facebookLogin() <-- in");
 	JNIEnv* env = NULL;
 	if (jvm == NULL) {
 		LOGE("jvm == null : please on load JavaVM");
@@ -49,22 +89,64 @@ bool facebookLogin() {
 				"facebookLogin");
 	}
 
-	bool ret = (bool) env->CallBooleanMethod(clazz, mid);
+	g_FacebookLoginCB = _callback;
+
+	bool ret = (bool) env->CallStaticBooleanMethod(clazz, mid);
 	env->DeleteLocalRef(clazz);
+
+	LOGI("ret = %d", ret);
+	LOGI("Native facebookLogin() --> out");
 
 	return ret;
 }
 
-void facebookRequestGraphPath(const char* _path) {
-	LOGI("facebookRequestGraphPath");
+bool facebookLogout() {
+	LOGI("Native facebookLogout() <-- in");
+
 	JNIEnv* env = NULL;
 	if (jvm == NULL) {
 		LOGE("jvm == null : please on load JavaVM");
 		return false;
 	}
 	if (jvm->AttachCurrentThread(&env, NULL) != JNI_OK) {
-		LOGE("facebookRequestGraphPath -> %s: AttachCurrentThread() failed", __FUNCTION__);
+		LOGE("%s: AttachCurrentThread() failed", __FUNCTION__);
 		return false;
+	}
+
+	/* invoke the method using the JNI */
+	jclass clazz = env->FindClass(ClassName);
+	if (clazz == NULL) {
+		LOGE("Native registration unable to find class '%s'", ClassName);
+	}
+
+	jmethodID mid = env->GetStaticMethodID(clazz, "facebookLogout", "()Z");
+	if (mid == NULL) {
+		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
+				"facebookLogout");
+	}
+
+	bool ret = (bool) env->CallStaticBooleanMethod(clazz, mid);
+	env->DeleteLocalRef(clazz);
+
+	LOGI("ret = %d", ret);
+	LOGI("Native facebookLogout() --> out");
+
+	return ret;
+}
+
+void facebookRequestGraphPath(PlatformFacebookGraphPath type, PlatformCallback _callback) {
+
+	LOGI("Native facebookRequestGraphPath() <-- in");
+
+	JNIEnv* env = NULL;
+	if (jvm == NULL) {
+		LOGE("jvm == null : please on load JavaVM");
+		return ;
+	}
+
+	if (jvm->AttachCurrentThread(&env, NULL) != JNI_OK) {
+		LOGE("facebookRequestGraphPath -> %s: AttachCurrentThread() failed", __FUNCTION__);
+		return ;
 	}
 
 	/* invoke the method using the JNI */
@@ -73,38 +155,35 @@ void facebookRequestGraphPath(const char* _path) {
 		LOGE("facebookRequestGraphPath -> Native registration unable to find class '%s'", ClassName);
 	}
 
-	jmethodID mid = env->GetStaticMethodID(clazz, "facebookRequestGraphPath", "()Z");
+	jmethodID mid = env->GetStaticMethodID(clazz, "facebookRequestGraphPath", "()I");
 	if (mid == NULL) {
 		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 				"facebookLogin");
 	}
 
-	// malloc
-	int size = strlen(_path);
-	char* path =  (char*) malloc();
-	jstring jpath = env->NewStringUTF(_path);
+	g_FacebookRequestGraphPathCB = _callback;
 
-	// call java method
-    env->CallVoidMethod(clazz, mid);
+    env->CallStaticVoidMethod(clazz, mid, type);
 
     // memory release
     env->DeleteLocalRef(clazz);
-    env->ReleaseStringUTFChars(jpath, path);
-    free(path);
 
+    LOGI("Native facebookRequestGraphPath() --> out");
 }
 
 void facebookAppRequest(const char* _msg, const char* _to,
-		const char* _notification_text) {
-	LOGI("facebookAppRequest");
+		const char* _notification_text, PlatformCallback _callback) {
+
+	LOGI("Native facebookAppRequest() <-- in");
+
 	JNIEnv* env = NULL;
 	if (jvm == NULL) {
 		LOGE("jvm == null : please on load JavaVM");
-		return false;
+		return ;
 	}
 	if (jvm->AttachCurrentThread(&env, NULL) != JNI_OK) {
 		LOGE("facebookAppRequest -> %s: AttachCurrentThread() failed", __FUNCTION__);
-		return false;
+		return ;
 	}
 
 	/* invoke the method using the JNI */
@@ -113,27 +192,44 @@ void facebookAppRequest(const char* _msg, const char* _to,
 		LOGE("facebookAppRequest -> Native registration unable to find class '%s'", ClassName);
 	}
 
-	jmethodID mid = env->GetStaticMethodID(clazz, "facebookAppRequest", "()");
+	jmethodID mid = env->GetStaticMethodID(clazz, "facebookAppRequest", "()Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;");
 	if (mid == NULL) {
 		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 				"facebookAppRequest");
 	}
 
-//	bool ret = (bool) env->CallBooleanMethod(clazz, mid);
-//	env->DeleteLocalRef(clazz);
+	g_FacebookRequestGraphPathCB = _callback;
+
+	// malloc
+		jstring msg = env->NewStringUTF(_msg);
+		jstring to = env->NewStringUTF(_to);
+		jstring notification_text = env->NewStringUTF(_notification_text);
+
+		// call java method
+	    env->CallStaticVoidMethod(clazz, mid, msg, to, notification_text);
+
+	    // memory release
+	    env->DeleteLocalRef(clazz);
+	    env->DeleteLocalRef(msg);
+	    env->DeleteLocalRef(to);
+	    env->DeleteLocalRef(notification_text);
+
+	LOGI("Native facebookAppRequest() --> out");
 }
 
 void facebookFeed(const char* _name, const char* _caption,
-		const char* _description, const char* _link, const char* _picture) {
-	LOGI("facebookRequestGraphPath");
+		const char* _description, const char* _link, const char* _picture, PlatformCallback _callback) {
+
+	LOGI("Native facebookRequestGraphPath() <-- in");
+
 	JNIEnv* env = NULL;
 	if (jvm == NULL) {
 		LOGE("jvm == null : please on load JavaVM");
-		return false;
+		return ;
 	}
 	if (jvm->AttachCurrentThread(&env, NULL) != JNI_OK) {
 		LOGE("facebookFeed -> %s: AttachCurrentThread() failed", __FUNCTION__);
-		return false;
+		return ;
 	}
 
 	/* invoke the method using the JNI */
@@ -142,14 +238,33 @@ void facebookFeed(const char* _name, const char* _caption,
 		LOGE("facebookFeed -> Native registration unable to find class '%s'", ClassName);
 	}
 
-	jmethodID mid = env->GetStaticMethodID(clazz, "facebookLogin", "()Z");
+	jmethodID mid = env->GetStaticMethodID(clazz, "facebookLogin", "()Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;");
 	if (mid == NULL) {
 		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 				"facebookFeed");
 	}
 
-//	bool ret = (bool) env->CallBooleanMethod(clazz, mid);
-//	env->DeleteLocalRef(clazz);
+	g_FacebookFeedCB = _callback;
+
+	// malloc
+		jstring name = env->NewStringUTF(_name);
+		jstring caption = env->NewStringUTF(_caption);
+		jstring description = env->NewStringUTF(_description);
+		jstring link = env->NewStringUTF(_link);
+		jstring picture = env->NewStringUTF(_picture);
+
+		// call java method
+	    env->CallStaticVoidMethod(clazz, mid, name, caption, description, link, picture);
+
+	    // memory release
+	    env->DeleteLocalRef(clazz);
+	    env->DeleteLocalRef(name);
+	    env->DeleteLocalRef(caption);
+	    env->DeleteLocalRef(description);
+	    env->DeleteLocalRef(link);
+	    env->DeleteLocalRef(picture);
+
+	LOGI("Native facebookRequestGraphPath() --> out");
 }
 
 // ============================================================================================

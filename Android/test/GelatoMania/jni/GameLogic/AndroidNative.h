@@ -10,6 +10,9 @@
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO   , LOG_TAG, __VA_ARGS__)
 #define LOGW(...) __android_log_print(ANDROID_LOG_WARN   , LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , LOG_TAG, __VA_ARGS__)
+
+#include "PlatformFunctions.h"
+
 #ifdef __cplusplus
 	extern "C" {
 #endif
@@ -22,14 +25,17 @@ typedef union {
 } UnionJNIEnvToVoid;
 
 // =================================== JAVA Interface (C/C++ -> JAVA) =========================================
-bool facebookLogin();
+bool facebookIsLogin();
 
-void facebookRequestGraphPath(const char* _path);
+bool facebookLogin(PlatformCallback _callback);
 
-void facebookAppRequest(const char* _msg, const char* _to, const char* _notification_text);
+bool facebookLogout();
 
-void facebookFeed(const char* _name, const char* _caption, const char* _description, const char* _link, const char* _picture);
+void facebookRequestGraphPath(PlatformFacebookGraphPath type, PlatformCallback _callback);
 
+void facebookAppRequest(const char* _msg, const char* _to, const char* _notification_text, PlatformCallback _callback);
+
+void facebookFeed(const char* _name, const char* _caption, const char* _description, const char* _link, const char* _picture, PlatformCallback _callback);
 // =============================================================================================================
 
 

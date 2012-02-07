@@ -1,6 +1,7 @@
 #ifdef __ANDROID__
 
 #include "PlatformFunctions.h"
+#include "AndroidNative.h"
 
 VBImage* PlatformGetTextImageWithSize(const char* _txt, const char* _fontName, float _text_size, int _width, int _height) {
     return VBImageInitAndClear(VBImageAlloc(), VBColorType_RGBA, 8, _width, _height);
@@ -21,33 +22,36 @@ bool PlatformGameCenterLogIn(PlatformCallback _callback) {
 
 // fb 로그인확인 <자바에서 확인>
 bool PlatformFacebookIsLogIn() {
-    return false;
+    return facebookIsLogin();
 }
 
 // session check -> java 에서 페이스북 서버 연결 체크 확
 bool PlatformFacebookLogIn(PlatformCallback _callback) {
-	return false;
+	return facebookLogin(_callback);
+
 }
 
 // fb 로그아웃 시키는 함수 -> java
 bool PlatformFacebookLogOut(PlatformCallback _callback) {
-    return false;
+	return facebookLogout(_callback);
 }
 
 // "me/frends" = 0 , 1 , 2
 bool PlatformFacebookRequestGraphPath(PlatformFacebookGraphPath _path, PlatformCallback _callback) {
-
-	return false;
+	facebookRequestGraphPath(_path, _callback);
+	return true;
 }
 
 // "Message~!!", "User id" , "앱 요청 보낼때 친구 추가 어찌고저찌고 붙음.."
 bool PlatformFacebookAppRequest(const char* _messege, const char* _to, const char* _notification_text, PlatformCallback _callback) {
-    return false;
+	facebookAppRequest(_messege, _to, _notification_text, _callback);
+    return true;
 }
 
 // "http ~ .jpg" , ASCI , UTF8
 bool PlatformFacebookFeed(const char* _name, const char* _caption, const char* _description, const char* _link, const char* _picture, PlatformCallback _callback) {
-    return false;
+	facebookFeed(_name, _caption, _description, _link, _picture, _callback);
+    return true;
 }
 
 bool PlatformMobageLogIn(PlatformCallback _callback) {

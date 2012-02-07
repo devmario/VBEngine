@@ -212,18 +212,35 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 
 	
 	// modify lowmans -> facebook method linked JNI Function call
-	private static boolean facebookLogin() {
-		Log.d("GelatoManiaActivity", "Call facebookLogin()");
-		if(!fbUtil.isLogin()){
-			handler.sendEmptyMessage(0);
-		}
+	private static boolean facebookIsLogin() {
+		Log.d("GelatoManiaActivity", "facebookIsLogin() ret: " + fbUtil.isLogin());
 		return fbUtil.isLogin();
 	}
 
+	private static boolean facebookLogin() {
+		Log.d("GelatoManiaActivity", "facebookLogin() ret: " + fbUtil.isLogin());
+		loginMgr.login();
+		return fbUtil.isLogin();
+	}
+	
+	private static boolean facebookLogout() {
+		Log.d("GelatoManiaActivity", "facebookLogout() ret: " + fbUtil.isLogin());
+		loginMgr.logout();
+		return fbUtil.isLogin() ? false : true;
+	}
+	
 	// PlatformFacebookRequestGraphPath
-	private void facebookRequestGraphPath(String str) {
+	private static void facebookRequestGraphPath(int type) {
+		String graphPath = "";
+		if(type == 0){
+			graphPath = "me";
+		}else if(type == 1){
+			graphPath = "me/friends";
+		} else {
+			graphPath = "me";
+		}
 		if (fbUtil.isLogin()) {
-			fbUtil.request("me/friends", new BaseRequestListener() {
+			fbUtil.request(graphPath, new BaseRequestListener() {
 				public void onComplete(final String response, final Object state) {
 					Log.d("java facebookRequestGraphPath", "Response: " + response.toString());
 					nativeFacebookRequestGraphPath(response);
@@ -233,13 +250,13 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	}
 
 	// PlatformFacebookAppRequest
-	private void facebookAppRequest() {
+	private static void facebookAppRequest(String message, String to, String notification_text) {
 		if (fbUtil.isLogin()) {
 			Bundle parameters = new Bundle();
-			parameters.putString("message", "this is test message");
-			// parameters.putString("to", "");
-			// parameters.putString("notification_text", "");
-			fbUtil.mFacebook.dialog(this, "apprequests", parameters, new BaseDialogListener() {
+			parameters.putString("message", message);
+			parameters.putString("to", to);
+			parameters.putString("notification_text", notification_text);
+			fbUtil.mFacebook.dialog(activity, "apprequests", parameters, new BaseDialogListener() {
 				@Override
 				public void onComplete(Bundle values) {
 				}
@@ -248,15 +265,15 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	}
 
 	// PlatformFacebookFeed
-	private void facebookFeed() {
+	private static void facebookFeed(String name, String caption, String description, String link, String picture) {
 		if (fbUtil.isLogin()) {
 			Bundle parameters = new Bundle();
-			parameters.putString("name", "");
-			parameters.putString("caption", "");
-			parameters.putString("description", "");
-			parameters.putString("link", "");
-			parameters.putString("picture", "");
-			fbUtil.mFacebook.dialog(this, "feed", parameters, new BaseDialogListener() {
+			parameters.putString("name", name);
+			parameters.putString("caption", caption);
+			parameters.putString("description", description);
+			parameters.putString("link", link);
+			parameters.putString("picture", picture);
+			fbUtil.mFacebook.dialog(activity, "feed", parameters, new BaseDialogListener() {
 				@Override
 				public void onComplete(Bundle values) {
 				}
@@ -264,9 +281,9 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		}
 	}
 
-	native void nativeFacebookRequestGraphPath(String response);
+	native static void nativeFacebookRequestGraphPath(String response);
 
-	native void nativeFacebookAppRequest(String response);
+	native static void nativeFacebookAppRequest(String response);
 
-	native void nativeFacebookFeed(String response);
+	native static void nativeFacebookFeed(String response);
 }
