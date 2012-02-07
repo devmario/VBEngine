@@ -30,7 +30,13 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	private SharedPreferences sp;
 	private SharedPreferences.Editor e;
 
-	public static Handler handler = new Handler();
+	public static Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			if(msg.what == 0){
+				facebookLogin();
+			}
+		};
+	};
 	
 	// modify lowmans -> use facebook api
 	private static FacebookUtil fbUtil;
@@ -203,19 +209,13 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		fbUtil.getFacebook().authorizeCallback(requestCode, resultCode, data);
 	}
 
-	public static Runnable loginProcess = new Runnable(){
-		public void run(){
-			loginMgr.login();	    	
-		}
-	};
 	
 	// modify lowmans -> facebook method linked JNI Function call
 	private static boolean facebookLogin() {
 		Log.d("GelatoManiaActivity", "Call facebookLogin()");
 		if(!fbUtil.isLogin()){
-			handler.post(loginProcess);
+			handler.sendEmptyMessage(0);
 		}
-		//loginMgr.logout();
 		return fbUtil.isLogin();
 	}
 

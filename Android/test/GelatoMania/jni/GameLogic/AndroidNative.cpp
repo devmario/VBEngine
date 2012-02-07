@@ -79,14 +79,18 @@ void facebookRequestGraphPath(const char* _path) {
 				"facebookLogin");
 	}
 
+	// malloc
 	int size = strlen(_path);
 	char* path =  (char*) malloc();
 	jstring jpath = env->NewStringUTF(_path);
 
+	// call java method
     env->CallVoidMethod(clazz, mid);
 
+    // memory release
     env->DeleteLocalRef(clazz);
     env->ReleaseStringUTFChars(jpath, path);
+    free(path);
 
 }
 
@@ -158,6 +162,8 @@ JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_na
 	LOGV("nativeFacebookRequestGraphPath str : %s" , _str);
 	//DON'T FORGET THIS LINE!!!
 	env->ReleaseStringUTFChars(str, _str);
+
+	//callback function call~!!
 }
 
 JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookAppRequest( JNIEnv* env, jobject thiz, jstring str)

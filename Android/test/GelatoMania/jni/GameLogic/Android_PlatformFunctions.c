@@ -19,27 +19,33 @@ bool PlatformGameCenterLogIn(PlatformCallback _callback) {
     return false;
 }
 
+// fb 로그인확인 <자바에서 확인>
 bool PlatformFacebookIsLogIn() {
     return false;
 }
 
+// session check -> java 에서 페이스북 서버 연결 체크 확
 bool PlatformFacebookLogIn(PlatformCallback _callback) {
-    return false;
+	return false;
 }
 
+// fb 로그아웃 시키는 함수 -> java
 bool PlatformFacebookLogOut(PlatformCallback _callback) {
     return false;
 }
 
-
+// "me/frends" = 0 , 1 , 2
 bool PlatformFacebookRequestGraphPath(PlatformFacebookGraphPath _path, PlatformCallback _callback) {
-    return false;
+
+	return false;
 }
 
+// "Message~!!", "User id" , "앱 요청 보낼때 친구 추가 어찌고저찌고 붙음.."
 bool PlatformFacebookAppRequest(const char* _messege, const char* _to, const char* _notification_text, PlatformCallback _callback) {
     return false;
 }
 
+// "http ~ .jpg" , ASCI , UTF8
 bool PlatformFacebookFeed(const char* _name, const char* _caption, const char* _description, const char* _link, const char* _picture, PlatformCallback _callback) {
     return false;
 }
