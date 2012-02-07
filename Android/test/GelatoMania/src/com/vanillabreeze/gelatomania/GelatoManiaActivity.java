@@ -217,10 +217,15 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		return fbUtil.isLogin();
 	}
 
-	private static boolean facebookLogin() {
+	private static void facebookLogin() {
 		Log.d("GelatoManiaActivity", "facebookLogin() ret: " + fbUtil.isLogin());
-		loginMgr.login();
-		return fbUtil.isLogin();
+		loginMgr.login(new BaseDialogListener() {
+			
+			@Override
+			public void onComplete(Bundle values) {
+				nativeFacebookLogin(fbUtil.isLogin());
+			}
+		});
 	}
 	
 	private static boolean facebookLogout() {
@@ -281,6 +286,8 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		}
 	}
 
+	native static void nativeFacebookLogin(boolean isLogin);
+	
 	native static void nativeFacebookRequestGraphPath(String response);
 
 	native static void nativeFacebookAppRequest(String response);

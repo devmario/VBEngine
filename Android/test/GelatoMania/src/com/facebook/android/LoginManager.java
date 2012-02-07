@@ -44,9 +44,9 @@ public class LoginManager {
 		SessionEvents.addLogoutListener(mSessionListener);
 	}
 
-	public void login() {
+	public void login(BaseDialogListener listener) {
 		if (!mFb.isSessionValid()) {
-			mFb.authorize(mActivity, mPermissions, new LoginDialogListener());
+			mFb.authorize(mActivity, mPermissions, listener);
 		}
 	}
 	

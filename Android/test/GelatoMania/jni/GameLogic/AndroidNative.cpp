@@ -83,7 +83,7 @@ bool facebookLogin(PlatformCallback _callback) {
 		LOGE("Native registration unable to find class '%s'", ClassName);
 	}
 
-	jmethodID mid = env->GetStaticMethodID(clazz, "facebookLogin", "()Z");
+	jmethodID mid = env->GetStaticMethodID(clazz, "facebookLogin", "()V");
 	if (mid == NULL) {
 		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 				"facebookLogin");
@@ -155,7 +155,7 @@ void facebookRequestGraphPath(PlatformFacebookGraphPath type, PlatformCallback _
 		LOGE("facebookRequestGraphPath -> Native registration unable to find class '%s'", ClassName);
 	}
 
-	jmethodID mid = env->GetStaticMethodID(clazz, "facebookRequestGraphPath", "()I");
+	jmethodID mid = env->GetStaticMethodID(clazz, "facebookRequestGraphPath", "(I)V");
 	if (mid == NULL) {
 		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 				"facebookLogin");
@@ -192,7 +192,7 @@ void facebookAppRequest(const char* _msg, const char* _to,
 		LOGE("facebookAppRequest -> Native registration unable to find class '%s'", ClassName);
 	}
 
-	jmethodID mid = env->GetStaticMethodID(clazz, "facebookAppRequest", "()Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;");
+	jmethodID mid = env->GetStaticMethodID(clazz, "facebookAppRequest", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 	if (mid == NULL) {
 		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 				"facebookAppRequest");
@@ -238,7 +238,7 @@ void facebookFeed(const char* _name, const char* _caption,
 		LOGE("facebookFeed -> Native registration unable to find class '%s'", ClassName);
 	}
 
-	jmethodID mid = env->GetStaticMethodID(clazz, "facebookLogin", "()Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;");
+	jmethodID mid = env->GetStaticMethodID(clazz, "facebookLogin", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 	if (mid == NULL) {
 		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 				"facebookFeed");
@@ -268,6 +268,14 @@ void facebookFeed(const char* _name, const char* _caption,
 }
 
 // ============================================================================================
+JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookLogin( JNIEnv* env, jobject thiz, bool isLogin)
+{
+	LOGV("nativeFacebookLogin isLogin : %d" , isLogin);
+	g_FacebookLoginCB.function(NULL, g_FacebookLoginCB.reference);
+}
+
+
+
 JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookRequestGraphPath( JNIEnv* env, jobject thiz, jstring str)
 {
 	//Get the native string from javaString

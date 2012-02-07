@@ -41,6 +41,8 @@ void facebookFeed(const char* _name, const char* _caption, const char* _descript
 
 
 // =================================== Native Interface (JAVA -> C/C++) =========================================
+JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookLogin( JNIEnv* env, jobject thiz, bool isLogin);
+
 JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookRequestGraphPath( JNIEnv* env, jobject thiz, jstring str);
 
 JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookAppRequest( JNIEnv* env, jobject thiz, jstring str);
