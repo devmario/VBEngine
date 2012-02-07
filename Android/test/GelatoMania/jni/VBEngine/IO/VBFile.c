@@ -1,7 +1,6 @@
 #include "VBFile.h"
 #include <string.h>
 #include <stdio.h>
-#include <unistd.h>
 #include "../VBEngine.h"
 
 VBFile* VBFileAlloc(void) {

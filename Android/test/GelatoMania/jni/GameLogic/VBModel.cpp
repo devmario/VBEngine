@@ -598,8 +598,8 @@ void VBModel::SetTexture(VBTexture* _tex) {
         tex->m_uName = _tex->tid;
         tex->m_uPixelsWide = _tex->width;
         tex->m_uPixelsHigh = _tex->height;
-        tex->m_tContentSize.width = _tex->width;
-        tex->m_tContentSize.height = _tex->height;
+        tex->m_tContentSize.width = _tex->width * CCDirector::sharedDirector()->getContentScaleFactor();
+        tex->m_tContentSize.height = _tex->height * CCDirector::sharedDirector()->getContentScaleFactor();
     } else {
         tex->m_ePixelFormat = kCCTexture2DPixelFormat_RGBA8888;
         tex->m_uName = 0;
@@ -715,8 +715,8 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_n
         tex->m_fMaxT = 1.0;
         tex->m_uPixelsWide = _texture->width;
         tex->m_uPixelsHigh = _texture->height;
-        tex->m_tContentSize.width = _texture->width;
-        tex->m_tContentSize.height = _texture->height;
+        tex->m_tContentSize.width = _texture->width * CCDirector::sharedDirector()->getContentScaleFactor();
+        tex->m_tContentSize.height = _texture->height * CCDirector::sharedDirector()->getContentScaleFactor();
         this->setTexture(tex);
         
         this->setTextureRect( cocos2d::CCRectMake(_txc[0].x * tex->getPixelsWide() / CCDirector::sharedDirector()->getContentScaleFactor()
@@ -1221,10 +1221,10 @@ bool CheckTriangle(CCPoint p1, CCPoint p2, CCPoint p3, CCPoint cp)
 
 VBAABB VBModel::getVBModelSize() {
     if(is_bitmap) {
-        CCPoint tl = this->convertToWorldSpace(CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y));
-        CCPoint tr = this->convertToWorldSpace(CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y));
-        CCPoint bl = this->convertToWorldSpace(CCPointMake(m_sQuad.bl.vertices.x, m_sQuad.bl.vertices.y));
-        CCPoint br = this->convertToWorldSpace(CCPointMake(m_sQuad.br.vertices.x, m_sQuad.br.vertices.y));
+        CCPoint tl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y), nodeToWorldTransform());
+        CCPoint tr = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y), nodeToWorldTransform());
+        CCPoint bl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.bl.vertices.x, m_sQuad.bl.vertices.y), nodeToWorldTransform());
+        CCPoint br = CCPointApplyAffineTransform(CCPointMake(m_sQuad.br.vertices.x, m_sQuad.br.vertices.y), nodeToWorldTransform());
         VBVector2D vtx[4] = {{tl.x,tl.y}, {tr.x,tr.y}, {bl.x,bl.y}, {br.x,br.y}};
         return VBAABBCreateWithVertex(vtx, 4);
     }
@@ -1239,13 +1239,20 @@ VBAABB VBModel::getVBModelSize() {
 
 bool VBModel::checkCollisionWithButton(CCPoint pos) {
     if(is_bitmap) {
-        CCPoint tl = this->convertToWorldSpace(CCPointMake(m_sQuad.tl.vertices.x / CCDirector::sharedDirector()->getContentScaleFactor(), m_sQuad.tl.vertices.y / CCDirector::sharedDirector()->getContentScaleFactor()));
-        CCPoint tr = this->convertToWorldSpace(CCPointMake(m_sQuad.tr.vertices.x / CCDirector::sharedDirector()->getContentScaleFactor(), m_sQuad.tr.vertices.y / CCDirector::sharedDirector()->getContentScaleFactor()));
-        CCPoint bl = this->convertToWorldSpace(CCPointMake(m_sQuad.bl.vertices.x / CCDirector::sharedDirector()->getContentScaleFactor(), m_sQuad.bl.vertices.y / CCDirector::sharedDirector()->getContentScaleFactor()));
-        CCPoint br = this->convertToWorldSpace(CCPointMake(m_sQuad.br.vertices.x / CCDirector::sharedDirector()->getContentScaleFactor(), m_sQuad.br.vertices.y / CCDirector::sharedDirector()->getContentScaleFactor()));
-        if(CheckTriangle(tl, tr, bl, pos))
+        CCPoint _pos = pos;
+        if(CCDirector::sharedDirector()->isRetinaDisplay()) {
+            float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+            _pos.x *=  scale;
+            _pos.y *=  scale;
+        }
+        CCPoint tl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y), nodeToWorldTransform());
+        CCPoint tr = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y), nodeToWorldTransform());
+        CCPoint bl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.bl.vertices.x, m_sQuad.bl.vertices.y), nodeToWorldTransform());
+        CCPoint br = CCPointApplyAffineTransform(CCPointMake(m_sQuad.br.vertices.x, m_sQuad.br.vertices.y), nodeToWorldTransform());
+        
+        if(CheckTriangle(tl, tr, bl, _pos))
             return true;
-        if(CheckTriangle(bl, tr, br, pos))
+        if(CheckTriangle(bl, tr, br, _pos))
             return true;
     }
     if(this->getChildren()) {
@@ -1260,10 +1267,10 @@ bool VBModel::checkCollisionWithButton(CCPoint pos) {
 int VBModel::getVertex(int _idx, CCPoint* _vert) {
     if(is_bitmap) {
         if(_idx == 0) {
-            CCPoint tl = this->convertToWorldSpace(CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y));
-            CCPoint tr = this->convertToWorldSpace(CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y));
-            CCPoint bl = this->convertToWorldSpace(CCPointMake(m_sQuad.bl.vertices.x, m_sQuad.bl.vertices.y));
-            CCPoint br = this->convertToWorldSpace(CCPointMake(m_sQuad.br.vertices.x, m_sQuad.br.vertices.y));
+            CCPoint tl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y), nodeToWorldTransform());
+            CCPoint tr = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y), nodeToWorldTransform());
+            CCPoint bl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.bl.vertices.x, m_sQuad.bl.vertices.y), nodeToWorldTransform());
+            CCPoint br = CCPointApplyAffineTransform(CCPointMake(m_sQuad.br.vertices.x, m_sQuad.br.vertices.y), nodeToWorldTransform());
             _vert[0] = tl;
             _vert[1] = tr;
             _vert[2] = bl;
@@ -1271,34 +1278,37 @@ int VBModel::getVertex(int _idx, CCPoint* _vert) {
         }
         _idx--;
     }
-    if(_idx < 0)
+    if(_idx < 0) {
+        //성공시 -1 리턴
         return _idx;
+    }
     
     if(this->getChildren()) {
         for(int i = 0; i < this->getChildren()->count(); i++) {
             int _subIdx = ((VBModel*)getChildren()->objectAtIndex(i))->getVertex(_idx, _vert);
             if(_subIdx < 0)
-                return _idx;
+                return _subIdx;
             else
-                _idx -= _subIdx;
+                _idx -= (_idx - _subIdx);
         }
     }
     
+    //실패시 그냥 리턴
     return _idx;
 }
 
 bool VBModel::hitTest(VBModel* _ot) {
     CCPoint vert[4];
     int vertIdx = 0;
-    int remain = -1;
-    while(remain < 0) {
+    int remain = 1;
+    while(remain > 0) {
         remain = getVertex(vertIdx, vert);
         vertIdx++;
         //printf("remain %i\n", remain);
         CCPoint vert2[4];
         int vertIdx2 = 0;
-        int remain2 = -1;
-        while(remain2 < 0) {
+        int remain2 = 1;
+        while(remain2 > 0) {
             remain2 = _ot->getVertex(vertIdx2, vert2);
             vertIdx2++;
             //printf("    remain %i\n", remain2);

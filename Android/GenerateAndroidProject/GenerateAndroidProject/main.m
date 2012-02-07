@@ -589,8 +589,8 @@ void CopyLibs()
     }
     
     
-    isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/Cocos2dx", Android_Jni_Root] isDirectory:&isDir];
-    if (isFile == false && isDir == false) {
+    isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/Cocos2dx", Android_Jni_Root]];
+    if (isFile == false) {
         cmd = [NSString stringWithFormat:@"cp -R %@ %@/Cocos2dx", Cocos2dX_Root, Android_Jni_Root];
         system([cmd UTF8String]);        
     }
@@ -601,8 +601,8 @@ void CopyLibs()
         system([cmd UTF8String]);
     }
     
-    isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/VBEngine", Android_Jni_Root] isDirectory:&isDir];
-    if (isFile == false && isDir == false) {
+    isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/VBEngine", Android_Jni_Root]];
+    if (isFile == false) {
         cmd = [NSString stringWithFormat:@"cp -R %@ %@/VBEngine", VBEngine_Root, Android_Jni_Root];
         system([cmd UTF8String]);
     }

@@ -1,4 +1,5 @@
 #include "VBLine2D.h"
+#include "../../VBEngine.h"
 
 VBLine2D VBLine2DCreate(VBFloat _beginX, VBFloat _beginY, VBFloat _endX, VBFloat _endY) {
     VBLine2D _line;

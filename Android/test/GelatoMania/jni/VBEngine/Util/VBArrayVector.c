@@ -98,7 +98,7 @@ void* VBArrayVectorGetDataAt(VBArrayVector* _vec, VBULong _at) {
     if(_vec->len == 0)
         return NULL;
 	if(_at > _vec->len - 1)
-		_at = _vec->len - 1;
+        return NULL;
 	return *(_vec->data + _at);
 }
 
@@ -288,7 +288,7 @@ void VBArrayVectorReplaceAt(VBArrayVector* _vec, void* _data, VBULong _at) {
     if(_vec->len == 0)
         return;
 	if(_at > _vec->len - 1)
-		_at = _vec->len - 1;
+		return;
     *(_vec->data + _at) = _data;
 }
 
