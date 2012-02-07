@@ -110,6 +110,9 @@ void Root::GameCenterIDCheckNeedSelect(bool success,
 }
 
 Root::Root() {
+    gameMainToShopFlag = false;
+    playedIceCreams[0] = playedIceCreams[1] = playedIceCreams[2] = NULL;
+    
     selectUser = NULL;
     /* facebook off
     PlatformGameCenterLogin(RootGameCenterLoginComplete);
@@ -157,7 +160,7 @@ Root::Root() {
     strcat(documentsPath, "Documents");
     //    cout << documentsPath << '\n';
     
-    VBEngineStart(resourcePath, documentsPath, 480 * CCDirector::sharedDirector()->getContentScaleFactor(), 320 * CCDirector::sharedDirector()->getContentScaleFactor(), 480, 320);
+    VBEngineStart(resourcePath, documentsPath, CCDirector::sharedDirector()->getDisplaySizeInPixels().width, CCDirector::sharedDirector()->getDisplaySizeInPixels().height, 480, 320);
     
     free(resourcePath);
     free(documentsPath);
@@ -166,7 +169,7 @@ Root::Root() {
     gettimeofday(&curTime, NULL);
     
     top = new VBModel();
-    top->setScale(CCDirector::sharedDirector()->getContentScaleFactor());
+    top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().width / 320);
     
 
 #ifdef __ANDROID__
@@ -175,11 +178,7 @@ Root::Root() {
 #endif
 
     this->addChild((CCLayer*)top);
-#ifdef __ANDROID__
-    ((CCSprite*)top)->setPosition(ccp(0, 480));
-#else
     ((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().width));
-#endif
     //top->setScaleY(768.0/320.0);
     //top->setScaleX(1024.0/480.0);
     
@@ -294,8 +293,12 @@ void Root::ccTouchesBegan( CCSet *touches, CCEvent *event) {
 	CCTouch* touch = (CCTouch*)(touches->anyObject());
 	CCPoint location = touch->locationInView(touch->view());
 	location = CCDirector::sharedDirector()->convertToGL(location);
-    
-    
+//    location.x *= CCDirector::sharedDirector()->getContentScaleFactor();
+//    location.y *= CCDirector::sharedDirector()->getContentScaleFactor();
+//    printf("%f %f\n", location.x, location.y);
+//    float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+//    location.x /= scale;
+//    location.y /= scale;
     
     if(selectUser)
         selectUser->touchBegin(touch, location);
@@ -312,8 +315,13 @@ void Root::ccTouchesMoved( CCSet *touches, CCEvent *event) {
 	CCTouch* touch = (CCTouch*)(touches->anyObject());
 	CCPoint location = touch->locationInView(touch->view());
 	location = CCDirector::sharedDirector()->convertToGL(location);
+//    location.x *= CCDirector::sharedDirector()->getContentScaleFactor();
+//    location.y *= CCDirector::sharedDirector()->getContentScaleFactor();
     
     
+//    float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+//    location.x /= scale;
+//    location.y /= scale;
     
     if(selectUser)
         selectUser->touchMove(touch, location);
@@ -330,6 +338,12 @@ void Root::ccTouchesEnded( CCSet *touches, CCEvent *event) {
 	CCTouch* touch = (CCTouch*)(touches->anyObject());
 	CCPoint location = touch->locationInView(touch->view());
 	location = CCDirector::sharedDirector()->convertToGL(location);
+//    location.x *= CCDirector::sharedDirector()->getContentScaleFactor();
+//    location.y *= CCDirector::sharedDirector()->getContentScaleFactor();
+    
+//    float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+//    location.x /= scale;
+//    location.y /= scale;
     
     
     
@@ -349,6 +363,11 @@ void Root::ccTouchesCanceled( CCSet *touches, CCEvent *event) {
 	CCPoint location = touch->locationInView(touch->view());
 	location = CCDirector::sharedDirector()->convertToGL(location);
     
+    float scale = CCDirector::sharedDirector()->getContentScaleFactor();
+    if(!CCDirector::sharedDirector()->isRetinaDisplay())
+        scale *= (CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320);
+    location.x /= scale;
+    location.y /= scale;
     
     
     if(selectUser)
@@ -514,8 +533,18 @@ void Root::ChangePageARGSonUpdate() {
                 delete (MainMenu*)view;
             else if(prePage == RootPageTypeSubMenu)
                 delete (SubMenu*)view;
-            else if(prePage == RootPageTypeGameMain)
+            else if(prePage == RootPageTypeGameMain) {
+                if (historyNext.args[_argIdx+1] == SubMenuTypeShop) {
+                    GameMain *gameMain = (GameMain*)view;
+                    playedIceCreams[0] = gameMain->baseIceCream;
+                    playedIceCreams[1] = gameMain->iceCream;
+                    playedIceCreams[2] = gameMain->nextIceCream;
+                    gameMainToShopFlag = true;
+                    gameMain->retainIceCream();
+                    cout << "?\n";
+                }
                 delete (GameMain*)view;
+            }
             view = NULL;
         }
     }
@@ -528,7 +557,13 @@ void Root::ChangePageARGSonUpdate() {
                 view = (View*)new SubMenu();
                 break;
             case RootPageTypeGameMain:
-                view = (View*)new GameMain(historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2]);
+                if (gameMainToShopFlag) {
+                    view = (View*)new GameMain(historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2], playedIceCreams[0], playedIceCreams[1], playedIceCreams[2]);
+                    gameMainToShopFlag = false;
+                    playedIceCreams[0] = playedIceCreams[1] = playedIceCreams[2] = NULL;
+                } else {
+                    view = (View*)new GameMain(historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2]);
+                }
                 break;
         }
         if(view)

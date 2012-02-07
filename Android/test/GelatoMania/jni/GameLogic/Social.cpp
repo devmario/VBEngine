@@ -42,7 +42,7 @@ bool Social::IsLogIn() {
 
 void Social::LogInGameCenter(SocialProtocol* _protocol) {
 #ifdef _VB_IPHONE_
-    PlatformGameCenterLogIn(PlatformCallbackCreate(_protocol, SocialGameCenterLogInComplete));
+    //PlatformGameCenterLogIn(PlatformCallbackCreate(_protocol, SocialGameCenterLogInComplete));
 #endif
 }
 

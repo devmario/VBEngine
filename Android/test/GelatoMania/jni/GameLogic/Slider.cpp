@@ -97,7 +97,8 @@ void Slider::TouchBegin(CCTouch* _touch, CCPoint _location) {
 
 void Slider::TouchMove(CCTouch* _touch, CCPoint _location) {
     if(touch == _touch) {
-        float _sub = IsHorizontal() ? (_location.x - preLocation.x) : (_location.y - preLocation.y);
+        float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        float _sub = (IsHorizontal() ? (_location.x - preLocation.x) : (_location.y - preLocation.y)) / scale;
         bool _valueDir = GetValueDir();
         if(_valueDir ? (value + _sub > maxSlideValue) : (value + _sub < maxSlideValue)) {
             value = maxSlideValue;

@@ -205,33 +205,51 @@ void GameMain::FreeModel() {
 }
 
 void GameMain::InitCook(int** _rtc, int _rtcLen, int* _rtcArrLen, int* _tc, int _tcLen) {
-    iceCream = NULL;
-    nextIceCream = NULL;
     delIceCream = NULL;
     nextIceCreamMotion = NULL;
     dragIce = NULL;
 #ifdef GAME_MAIN_EMPTY
     return;
 #endif
-    for(int i = 0; i < _rtcLen; i++) {
-        if(i == 0)
-            baseIceCream = new IceCream(this, rdVec, tdVec, NULL, NULL, _rtc[i], _rtcArrLen[i]);
-        else
-            baseIceCream->AddNextIceCream(_rtc[i], _rtcArrLen[i]);
-    }
-    if(_tc && _tcLen) {
-        for(int i = 0; i < _tcLen; i++) {
-            baseIceCream->AddTopping(_tc[i]);
+    if (!initWithIceCream) {
+        for(int i = 0; i < _rtcLen; i++) {
+            if(i == 0)
+                baseIceCream = new IceCream(this, rdVec, tdVec, NULL, NULL, _rtc[i], _rtcArrLen[i]);
+            else
+                baseIceCream->AddNextIceCream(_rtc[i], _rtcArrLen[i]);
         }
+        if(_tc && _tcLen) {
+            for(int i = 0; i < _tcLen; i++) {
+                baseIceCream->AddTopping(_tc[i]);
+            }
+        }
+        baseIceCream->setScale(0.5);
+        baseIceCream->setPosition(CCPointMake(40, -90-63));
+        
+
+        
+
+        iceCream = NULL;
+        iceCream = new IceCream(this, rdVec, tdVec, this, baseIceCream);
+        iceCream->setScale(0.5);
+        iceCream->setPosition(CCPointMake(-2, 92-63));
+        nextIceCream = NULL;
+        modelRailIce[0]->addChild(iceCream);
+        
+    } else {
+        initWithIceCream = false;
+        iceCream->setGameMain(this);
+        baseIceCream->setGameMain(this);
+        modelRailIce[0]->addChild(iceCream);
+        
     }
-    baseIceCream->setScale(0.5);
-    baseIceCream->setPosition(CCPointMake(40, -90-63));
+    
     top->addChild(baseIceCream);
     
-    iceCream = new IceCream(this, rdVec, tdVec, this, baseIceCream);
-    iceCream->setScale(0.5);
-    iceCream->setPosition(CCPointMake(-2, 92-63));
-    modelRailIce[0]->addChild(iceCream);
+    if (nextIceCream) {
+        nextIceCream->setGameMain(this);
+        iceCream->AddNextIceCream(nextIceCream);
+    }
 }
 
 void GameMain::FreeCook() {
@@ -250,12 +268,14 @@ void GameMain::FreeCook() {
         delete delIceCream;
         delIceCream = NULL;
     }
-    delete iceCream;
+    iceCream->release();
     iceCream = NULL;
     
     top->removeChild(baseIceCream, false);
-    delete baseIceCream;
+    cout << baseIceCream->retainCount() << '\n';
+    baseIceCream->release();
     baseIceCream = NULL;
+    
 }
 
 void GameMain::InitRecipe() {
@@ -368,25 +388,6 @@ void GameMain::FreeTopping() {
     VBArrayVectorFree(&toppingData);
 }
 
-void GameMain::CallbackSlideNextRope(void* _obj) {
-    if(reinterpret_cast<GameMain*>(_obj)->IsActiveUI()) {
-        reinterpret_cast<GameMain*>(_obj)->NextIceCream();
-        reinterpret_cast<GameMain*>(_obj)->nextRopeSlider->SetEnable(false);
-        reinterpret_cast<GameMain*>(_obj)->recipeContainerCallBack(-1);
-    }
-}
-
-void GameMain::CallbackSlideToppingRope(void* _obj) {
-    if(reinterpret_cast<GameMain*>(_obj)->IsActiveUI() && 
-       reinterpret_cast<GameMain*>(_obj)->IsRecipeMode()) {
-        reinterpret_cast<GameMain*>(_obj)->SwapRecipeAndToppingMode();
-        reinterpret_cast<GameMain*>(_obj)->toppingRopeSlider->SetEnable(false);
-        if(reinterpret_cast<GameMain*>(_obj)->nextRopeSlider)
-            reinterpret_cast<GameMain*>(_obj)->nextRopeSlider->SetEnable(false);
-        reinterpret_cast<GameMain*>(_obj)->recipeContainerCallBack(-2);
-    }
-}
-
 void GameMain::InitRope() {
     nextRopeSlider = NULL;
     toppingRopeSlider = NULL;
@@ -434,7 +435,9 @@ void GameMain::GetIceCreamChecker(float per) {
     printf("아이스크림 일치율: %f\n", per);
 }
 
-GameMain::GameMain(int _packIdx, int _stageIdx) {
+GameMain::GameMain(int _packIdx, int _stageIdx, IceCream* _baseIceCream, IceCream* _playedIceCream, IceCream* _nextIceCream) {
+    initWithIceCream = false;
+    
     packIdx = _packIdx;
     stageIdx = _stageIdx;
     hintViewer = NULL;
@@ -571,6 +574,24 @@ GameMain::GameMain(int _packIdx, int _stageIdx) {
         }
         if(_t)
             VBArrayVectorAddBack(tdVec, RTInit(false, _td[i], _type, _t));
+    }
+    
+    if (_baseIceCream && _playedIceCream) {
+        initWithIceCream = true;
+        baseIceCream = _baseIceCream;
+        iceCream = _playedIceCream;
+        baseIceCream->rdVec = rdVec;
+        baseIceCream->tdVec = tdVec;
+        iceCream->rdVec = rdVec;
+        iceCream->tdVec = tdVec;
+        
+        if (_nextIceCream) {
+            nextIceCream = _nextIceCream;
+            nextIceCream->rdVec = rdVec;
+            nextIceCream->tdVec = tdVec;
+        } else {
+            nextIceCream = NULL;
+        }
     }
     
     InitCook(_cook_rd, _cook_rdLen, _cook_rdArrLen, _cook_td, _cook_tdLen);
@@ -1004,6 +1025,19 @@ void GameMain::NewIceCream() {
     modelRail->play();
 }
 
+void GameMain::NewIceCreamWithBack() {
+    if(recipeContainer)
+        recipeContainer->hitTarget = iceCream;
+    if(toppingContainer)
+        toppingContainer->SetCook(iceCream);
+    iceCream->setScale(0.5);
+    iceCream->setPosition(CCPointMake(-2, 92-63));
+    modelRailIce[1]->addChild(iceCream);
+    recipeContainer->hitTarget = iceCream;
+    
+    modelRail->play();
+}
+
 void GameMain::NewIceCreamUpdate(float _deltaTime) {
     if(modelRail) {
         if(!modelRail->is_play) {
@@ -1110,11 +1144,10 @@ void GameMain::touchBegin(CCTouch* _touch, CCPoint _location) {
     }
     
     if(iceCream) {
-        
         TOUCHBEGINBT(touchCook, iceCream, _location, _touch, 
                      dragIce = iceCream->DragStartMount(top);
                      if(dragIce) {
-                         dragIce->setPosition(CCPointMake(dragIce->getPosition().x + _location.x, dragIce->getPosition().y + (-CCDirector::sharedDirector()->getDisplaySizeInPixels().height / CCDirector::sharedDirector()->getContentScaleFactor() + _location.y)));
+                         dragIce->setPosition(CCPointMake(dragIce->getPosition().x + _location.x, dragIce->getPosition().y + (-320 + _location.y)));
                          dragPre = _location;
                      }
                      );
@@ -1211,6 +1244,14 @@ void GameMain::touchCancel(CCTouch* _touch, CCPoint _location) {
     touchEndAndCancel(_touch, _location);
 }
 
+void GameMain::retainIceCream()
+{
+    baseIceCream->retain();
+    iceCream->retain();
+    if (nextIceCream) {
+        nextIceCream->retain();
+    }
+}
 
 // for HintViewer
 float GameMain::getRecipePositionY(int recipeIdx)
@@ -1248,3 +1289,23 @@ void GameMain::toppingContainerCallBack(int recipeIdx)
     }
 #endif
 }
+
+void GameMain::CallbackSlideNextRope(void* _obj) {
+    if(reinterpret_cast<GameMain*>(_obj)->IsActiveUI()) {
+        reinterpret_cast<GameMain*>(_obj)->NextIceCream();
+        reinterpret_cast<GameMain*>(_obj)->nextRopeSlider->SetEnable(false);
+        reinterpret_cast<GameMain*>(_obj)->recipeContainerCallBack(-1);
+    }
+}
+
+void GameMain::CallbackSlideToppingRope(void* _obj) {
+    if(reinterpret_cast<GameMain*>(_obj)->IsActiveUI() && 
+       reinterpret_cast<GameMain*>(_obj)->IsRecipeMode()) {
+        reinterpret_cast<GameMain*>(_obj)->SwapRecipeAndToppingMode();
+        reinterpret_cast<GameMain*>(_obj)->toppingRopeSlider->SetEnable(false);
+        if(reinterpret_cast<GameMain*>(_obj)->nextRopeSlider)
+            reinterpret_cast<GameMain*>(_obj)->nextRopeSlider->SetEnable(false);
+        reinterpret_cast<GameMain*>(_obj)->recipeContainerCallBack(-2);
+    }
+}
+

@@ -12,6 +12,8 @@
 
 using namespace cocos2d;
 
+class IceCream;
+
 typedef enum RootPageType {
     RootPageTypeNone = 0,
     RootPageTypeMainMenu = 1,
@@ -39,6 +41,7 @@ bool IsEqualHistory(history* _h0, history* _h1);
 
 class Root : public cocos2d::CCLayer, public SocialProtocol, public SelectUserProtocol {
 private:
+    bool gameMainToShopFlag;
     View* view;
     VBModel* loading;
     
@@ -55,7 +58,9 @@ private:
     void ChangePageVALIST(int _count, int* _args);
     
     void OpenPopupAlloc(int _type, int _star, int _score);
+    
 public:
+    
     virtual void SelectUserCallback(cJSON* user);
     virtual void SelectUserNeedDelete();
     SelectUser* selectUser;
@@ -67,6 +72,8 @@ public:
                                              cJSON* users, cJSON* gameCenterInfo);
     
     VBModel* top;
+    
+    IceCream* playedIceCreams[3];
     
     Root();
 	virtual ~Root();

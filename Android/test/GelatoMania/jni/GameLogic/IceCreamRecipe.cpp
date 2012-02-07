@@ -264,10 +264,14 @@ void* mixThread(void* arg) {
         if(_bitLoop & iceCream->bitmaskMerge) {
             mixType = bitmaskType - 1;
             if(mixFirst) {
-                iceCream->FillCream(_rm->img, _rm->aabb, NULL, VBAABBLoadIndentity(), iceCream->bitmaskMerge, hexToInt(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "fill"), bitmaskType)->valuestring));
+                iceCream->FillCream(_rm->img, _rm->aabb, NULL, VBAABBLoadIndentity(), 
+                                    iceCream->bitmaskMerge, 
+                                    hexToInt(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "fill"), bitmaskType)->valuestring));
                 mixFirst = 0;
             } else {
-                iceCream->FillCream(_rm->img, _rm->aabb, _rm->imgMask[mixType], _rm->aabbMask[mixType], iceCream->bitmaskMerge, hexToInt(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "fill"), mixType)->valuestring));
+                iceCream->FillCream(_rm->img, _rm->aabb, _rm->imgMask[mixType], _rm->aabbMask[mixType], 
+                                    iceCream->bitmaskMerge, 
+                                    hexToInt(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "fill"), bitmaskType)->valuestring));
             }
         }
         bitmaskType++;

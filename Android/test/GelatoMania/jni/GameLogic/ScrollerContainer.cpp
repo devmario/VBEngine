@@ -256,6 +256,7 @@ void ScrollerContainer::touchBegin(CCTouch* _touch, CCPoint _location) {
         return;
     if(touchScroller == NULL) {
         if(container->checkCollisionWithButton(_location)) {
+            CCPoint _tmp = CCPointApplyAffineTransform(_location, worldToNodeTransform());
             if (slideTween && slideTween->onGoing) {
                 delete slideTween;
                 slideTween = NULL;
@@ -264,7 +265,7 @@ void ScrollerContainer::touchBegin(CCTouch* _touch, CCPoint _location) {
             touchScroller = _touch;
             if(enable) {
                 forceValue = 0.0;
-                touchY = IsVertical() ? _location.y : -_location.x;
+                touchY = IsVertical() ? _tmp.y : -_tmp.x;
             }
             for(int i = 0; i < VBArrayVectorGetLength(cell); i++) {
                 CellData* _cellData = (CellData*)VBArrayVectorGetDataAt(cell, i);
@@ -277,6 +278,7 @@ void ScrollerContainer::touchBegin(CCTouch* _touch, CCPoint _location) {
 
 void ScrollerContainer::touchMove(CCTouch* _touch, CCPoint _location) {
     if(touchScroller == _touch) {
+        CCPoint _tmp = CCPointApplyAffineTransform(_location, worldToNodeTransform());
         if (slideTween && slideTween->onGoing) {
             delete slideTween;
             slideTween = NULL;
@@ -288,9 +290,9 @@ void ScrollerContainer::touchMove(CCTouch* _touch, CCPoint _location) {
                 CellTouchMove(_cellData, _touch, _location);
         }
         if(enable) {
-            forceValue = touchY - (IsVertical() ? _location.y : -_location.x);
+            forceValue = touchY - (IsVertical() ? _tmp.y : -_tmp.x);
             pageValue += forceValue;
-            touchY = IsVertical() ? _location.y : -_location.x;
+            touchY = IsVertical() ? _tmp.y : -_tmp.x;
         }
     }
 }
@@ -344,8 +346,10 @@ float ScrollerContainer::GetCellValue(CellData* _cell) {
 void ScrollerContainer::visit(void) {
     if(is_mask) {
         glEnable(GL_SCISSOR_TEST);
-        CCPoint zero = convertToWorldSpace(CCPointMake(0, 0));
-        glScissor(zero.x * CCDirector::sharedDirector()->getContentScaleFactor(), (zero.y - height) * CCDirector::sharedDirector()->getContentScaleFactor(), width * CCDirector::sharedDirector()->getContentScaleFactor(), height * CCDirector::sharedDirector()->getContentScaleFactor());
+        CCPoint zero = CCPointApplyAffineTransform(CCPointMake(0, 0), nodeToWorldTransform());
+        //        printf("%f %f\n", zero.x, zero.y);
+        float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        glScissor(zero.x, (zero.y - height * scale), width * scale, height * scale);
     }
     VBModel::visit();
     if(is_mask)

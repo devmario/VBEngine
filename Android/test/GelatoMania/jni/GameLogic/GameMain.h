@@ -13,6 +13,9 @@ using namespace tween;
 
 class GameMain : public View, IceCreamProtocol {
 private:
+    
+    bool initWithIceCream;
+    
     int packIdx;
     int stageIdx;
     int* rd;
@@ -68,12 +71,6 @@ private:
     CCTouch* touchNew;
     CCTouch* touchCook;
     
-    IceCream* baseIceCream;
-    IceCream* iceCream;
-    IceCream* delIceCream;
-    IceCream* nextIceCream;
-    IceCream* nextIceCreamMotion;
-    
     void InitCook(int** _rtc, int _rtcLen, int* _rtcArrLen, int* _tc, int _tcLen);
     void FreeCook();
     
@@ -112,6 +109,7 @@ private:
     void NextIceCreamUpdate(float _deltaTime);
     
     void NewIceCream();
+    void NewIceCreamWithBack();
     void NewIceCreamUpdate(float _deltaTime);
     
     void SwapRecipeAndToppingMode();
@@ -121,11 +119,17 @@ private:
     bool IsActiveUI();
     
     HintViewer *hintViewer;
+    
 public:
+    IceCream* baseIceCream;
+    IceCream* iceCream;
+    IceCream* delIceCream;
+    IceCream* nextIceCream;
+    IceCream* nextIceCreamMotion;
     
     virtual void GetIceCreamChecker(float per);
     
-    GameMain(int _packIdx, int _stageIdx);
+    GameMain(int _packIdx, int _stageIdx, IceCream* _baseIceCream=NULL, IceCream* _playedIceCream=NULL, IceCream* _nextIceCream=NULL);
     ~GameMain();
     
     void resetOtherStage(int _packIdx, int _stageIdx);
@@ -143,6 +147,8 @@ public:
     virtual void touchEnd(CCTouch* _touch, CCPoint _location);
     virtual void touchCancel(CCTouch* _touch, CCPoint _location);
     virtual void touchEndAndCancel(CCTouch* _touch, CCPoint _location);
+    
+    void retainIceCream();
 };
 
 

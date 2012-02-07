@@ -29,6 +29,7 @@ public:
 
 class IceCream : public VBModel {
 public:
+    
     drawIceCremArg fillArg;
     IceCreamProtocol* protocol;
     
@@ -142,6 +143,7 @@ public:
     bool AddNextIceCream(IceCream* _other);
     
     virtual void VBModelUpdate(float _tick);
+    void setGameMain(GameMain* _gameMain);
 };
 
 #endif

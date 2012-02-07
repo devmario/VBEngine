@@ -26,6 +26,7 @@ IceCream::IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _t
     isRun_draw_pixel_threadReal = false;
     
     gameMain = _gameMain;
+    
     rdVec = _rdVec;
     tdVec = _tdVec;
     
@@ -128,10 +129,8 @@ IceCream::~IceCream() {
         }
     }
     
-    if(next) {
-        delete next;
-        next = NULL;
-    }
+    next->release();
+    next = NULL;
     
     while(VBArrayVectorGetLength(subToppingFlow)) {
         VBArrayVector* _vec = (VBArrayVector*)VBArrayVectorRemoveBack(subToppingFlow);
@@ -377,6 +376,11 @@ bool IceCream::AddNextIceCream(IceCream* _other) {
     if(next)
         return next->AddNextIceCream(_other);
     else {
+        Reshape();
+        while (isRunClearCheck || isRun_mix_thread || isRun_draw_pixel_thread) {
+            usleep(16666);
+        }
+        
         next = _other;
         next->prev = this;
         
@@ -454,3 +458,9 @@ void IceCream::DragEndMount(bool _success) {
         }
     }
 }
+
+void IceCream::setGameMain(GameMain *_gameMain) {
+    gameMain = _gameMain;
+}
+
+
