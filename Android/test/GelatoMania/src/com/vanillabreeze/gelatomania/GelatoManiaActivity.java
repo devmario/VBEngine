@@ -11,11 +11,13 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -30,11 +32,50 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	private Cocos2dxGLSurfaceView mGLView;
 	private SharedPreferences sp;
 	private SharedPreferences.Editor e;
-
+	
+	private static String _message, _to, _notification_text;
+	private static String _name,  _caption,  _description,  _link,  _picture;
+	
+	
 	public static Handler handler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			if(msg.what == 0){
-				facebookLogin();
+				Log.d("GelatoManiaActivity", "facebookLogin() ret: " + fbUtil.isLogin());
+				loginMgr.login(new BaseDialogListener() {
+					
+					@Override
+					public void onComplete(Bundle values) {
+						nativeFacebookLogin(fbUtil.isLogin());
+					}
+				});
+			} else if (msg.what == 1) {
+				if (fbUtil.isLogin()) {
+					Bundle parameters;
+					parameters = new Bundle();
+					parameters.putString("message", _message);
+					parameters.putString("to", _to);
+					parameters.putString("notification_text", _notification_text);
+					fbUtil.mFacebook.dialog(activity, "apprequests", parameters, new BaseDialogListener() {
+						@Override
+						public void onComplete(Bundle values) {
+						}
+					});
+				}
+			} else if (msg.what == 2) {
+				if (fbUtil.isLogin()) {
+					Bundle parameters;
+					parameters = new Bundle();
+					parameters.putString("name", _name);
+					parameters.putString("caption", _caption);
+					parameters.putString("description", _description);
+					parameters.putString("link", _link);
+					parameters.putString("picture", _picture);
+					fbUtil.mFacebook.dialog(activity, "feed", parameters, new BaseDialogListener() {
+						@Override
+						public void onComplete(Bundle values) {
+						}
+					});
+				}
 			}
 		};
 	};
@@ -80,6 +121,8 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		// modify lowmans -> facebook instance
 		fbUtil = new FacebookUtil(this);
 		loginMgr = new LoginManager(this, fbUtil.mFacebook);
+		
+		activity = this;
 
 	}
 
@@ -218,14 +261,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	}
 
 	private static void facebookLogin() {
-		Log.d("GelatoManiaActivity", "facebookLogin() ret: " + fbUtil.isLogin());
-		loginMgr.login(new BaseDialogListener() {
-			
-			@Override
-			public void onComplete(Bundle values) {
-				nativeFacebookLogin(fbUtil.isLogin());
-			}
-		});
+		handler.sendEmptyMessage(0);
 	}
 	
 	private static boolean facebookLogout() {
@@ -240,9 +276,9 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		if(type == 0){
 			graphPath = "me";
 		}else if(type == 1){
-			graphPath = "me/friends";
+			graphPath = "platform/posts";
 		} else {
-			graphPath = "me";
+			graphPath = "me/friends";
 		}
 		if (fbUtil.isLogin()) {
 			fbUtil.request(graphPath, new BaseRequestListener() {
@@ -256,34 +292,45 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 
 	// PlatformFacebookAppRequest
 	private static void facebookAppRequest(String message, String to, String notification_text) {
-		if (fbUtil.isLogin()) {
-			Bundle parameters = new Bundle();
-			parameters.putString("message", message);
-			parameters.putString("to", to);
-			parameters.putString("notification_text", notification_text);
-			fbUtil.mFacebook.dialog(activity, "apprequests", parameters, new BaseDialogListener() {
-				@Override
-				public void onComplete(Bundle values) {
-				}
-			});
-		}
+		Bundle parameters;
+		parameters = new Bundle();
+		parameters.putString("message", message);
+		parameters.putString("to", to);
+		parameters.putString("notification_text", notification_text);
+		
+		Message msg = handler.obtainMessage();
+		msg.what = 1;
+		msg.setData(parameters);
+		
+		_message = message;
+		_to = to;
+		_notification_text = notification_text;
+		
+		handler.sendMessage(msg);
 	}
 
 	// PlatformFacebookFeed
 	private static void facebookFeed(String name, String caption, String description, String link, String picture) {
-		if (fbUtil.isLogin()) {
-			Bundle parameters = new Bundle();
-			parameters.putString("name", name);
-			parameters.putString("caption", caption);
-			parameters.putString("description", description);
-			parameters.putString("link", link);
-			parameters.putString("picture", picture);
-			fbUtil.mFacebook.dialog(activity, "feed", parameters, new BaseDialogListener() {
-				@Override
-				public void onComplete(Bundle values) {
-				}
-			});
-		}
+		Bundle parameters;
+		parameters = new Bundle();
+		parameters.putString("name", name);
+		parameters.putString("caption", caption);
+		parameters.putString("description", description);
+		parameters.putString("link", link);
+		parameters.putString("picture", picture);
+		
+		Message msg = handler.obtainMessage();
+		msg.what = 2;
+		msg.setData(parameters);
+		
+		_name = name;
+		_caption = caption;
+		_description = description;
+		_link = link;
+		_picture = picture;
+		
+		handler.sendMessage(msg);
+		
 	}
 
 	native static void nativeFacebookLogin(boolean isLogin);

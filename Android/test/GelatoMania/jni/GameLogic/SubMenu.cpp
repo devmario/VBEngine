@@ -1,5 +1,17 @@
 #include "SubMenu.h"
 #include "ShareData.h"
+#include "PlatformFunctions.h"
+
+#include <jni.h>
+#include <stdio.h>
+#include <string.h>
+#include <android/log.h>
+#define LOG_TAG  "SubMenu"
+#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , LOG_TAG, __VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO   , LOG_TAG, __VA_ARGS__)
+#define LOGW(...) __android_log_print(ANDROID_LOG_WARN   , LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , LOG_TAG, __VA_ARGS__)
 
 void ChangeView(void* _ref);
 
@@ -203,18 +215,67 @@ void GotoShop(void* _ref) {
 #endif
 }
 
+/*
+ * 	페이스북 연동 테스트 콜백 함수
+ */
+void SubMenuFacebookLogOutComplete(cJSON* _json, void* _reference) {
+	LOGD("#@@# SubMenuFacebookLogOutComplete _json: %x, _reference:%x", _json, _reference);
+}
+
+void SubMenuFacebookRequestGraphPathComplete(cJSON* _json, void* _reference) {
+	LOGD("#@@# SubMenuFacebookRequestGraphPathComplete _json: %x, _reference:%x", _json, _reference);
+}
+
+void SubMenuFacebookAppRequestComplete(cJSON* _json, void* _reference) {
+	LOGD("#@@# SubMenuFacebookAppRequestComplete _json: %x, _reference:%x", _json, _reference);
+}
+
+void SubMenuFacebookFeedComplete(cJSON* _json, void* _reference) {
+	LOGD("#@@# SubMenuFacebookFeedComplete _json: %x, _reference:%x", _json, _reference);
+}
+
+/*
+ * 	페이스북 연동 테스트 함수
+ */
+void facebookLogout(SubMenu* _this) {
+	LOGD("#@@# facebook logout!");
+	PlatformFacebookLogOut(PlatformCallbackCreate(_this, SubMenuFacebookLogOutComplete));
+}
+
+void facebookRequestGraphPath(SubMenu* _this) {
+	LOGD("#@@# facebook request graph path!");
+	PlatformFacebookRequestGraphPath(PlatformFacebookGraphPathMe, PlatformCallbackCreate(_this, SubMenuFacebookRequestGraphPathComplete));
+}
+
+void facebookAppRequest(SubMenu* _this) {
+	LOGD("#@@# facebook app request!");
+	PlatformFacebookAppRequest("Message~!!", "User id" , "앱 요청 보낼때 친구 추가 어찌고저찌고 붙음..", PlatformCallbackCreate(_this, SubMenuFacebookAppRequestComplete));
+}
+
+void facebookFeed(SubMenu* _this) {
+	LOGD("#@@# facebook feed!");
+	PlatformFacebookFeed("test name~", "test caption~", "test description~", "test link~", "test picture~", PlatformCallbackCreate(_this, SubMenuFacebookFeedComplete));
+}
+
 void SubMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
     TOUCHENDBT(btBackTouch, btBack, _location, _touch, 
-               ShareDataGetRoot()->PrevPage(1);,
+               //ShareDataGetRoot()->PrevPage(1);,
+    			facebookLogout(this);,
                btBack->gotoAndStop(0););
-    TOUCHENDBT(btGiftTouch, btGift, _location, _touch, , btGift->gotoAndStop(0));
     
+    TOUCHENDBT(btGiftTouch, btGift, _location, _touch,
+    		facebookRequestGraphPath(this);,
+    		btGift->gotoAndStop(0));
+
     TOUCHENDBT(btShopTouch, btShop, _location, _touch, 
-               ShareDataGetRoot()->ChangePage(4, LoadingTypeNone, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypeShop);
+               //ShareDataGetRoot()->ChangePage(4, LoadingTypeNone, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypeShop);
+    		facebookAppRequest(this);
                , btShop->gotoAndStop(0));
 //    TOUCHENDBT(btShopTouch, btShop, _location, _touch, ShareDataGetRoot()->OpenPopup(rand() % 2 + 1, rand() % 4, rand() % 99999), btShop->gotoAndStop(0));
     
-    TOUCHENDBT(btFreeTouch, btFree, _location, _touch, , btFree->gotoAndStop(0));
+    TOUCHENDBT(btFreeTouch, btFree, _location, _touch,
+    		facebookFeed(this);,
+    		btFree->gotoAndStop(0));
 }
 
 void SubMenu::touchEnd(CCTouch* _touch, CCPoint _location) {

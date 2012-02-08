@@ -169,10 +169,10 @@ Root::Root() {
     gettimeofday(&curTime, NULL);
     
     top = new VBModel();
-    top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().width / 320);
+    top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().width / /*320*/480);
 
     this->addChild((CCLayer*)top);
-    ((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().width));
+    ((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().width - 200));
     //top->setScaleY(768.0/320.0);
     //top->setScaleX(1024.0/480.0);
     

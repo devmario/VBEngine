@@ -238,7 +238,7 @@ void facebookFeed(const char* _name, const char* _caption,
 		LOGE("facebookFeed -> Native registration unable to find class '%s'", ClassName);
 	}
 
-	jmethodID mid = env->GetStaticMethodID(clazz, "facebookLogin", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
+	jmethodID mid = env->GetStaticMethodID(clazz, "facebookFeed", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 	if (mid == NULL) {
 		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 				"facebookFeed");
