@@ -8,6 +8,16 @@
 
 class GameMain;
 
+typedef enum hintStepWrongLevel
+{
+    hintWrongNone = 0,
+    hintWrongReset = 1,
+    hintWrongMaskOn = 2,
+    hintWrongMaskOnDouble = 3,
+    hintWrongMaskOff = 4,
+    hintWrongMaskOffDouble = 5
+} hintStepWrongLevel;
+
 typedef enum hintStateFlag
 {
     hintStateItem = 0,
@@ -24,6 +34,8 @@ typedef enum hintStateFlag
 
 
 class HintViewer {
+    unsigned int retainCount;
+    
     bool* isMask;
     bool maskOn;
     int maskStack[2];
@@ -40,14 +52,15 @@ class HintViewer {
     
     void setState(hintStateFlag newState);
     
-    bool wrongStep();
+    bool wrongStep(hintStepWrongLevel _wrongType, int _wrongIdx=-1);
     void checkAndFinish();
+    
+    hintStepWrongLevel wrongMode;
+    int wrongIdx;
+    int wrongIdxForMask;
     
 public:
     VBModel *arrowModel[HINTSTATELEN];
-    VBModel *pointIceModel;
-    VBModel *pointItemModel;
-    VBModel *pointTopDownModel;
     
     float rotationR;
     
@@ -61,6 +74,10 @@ public:
     void setSolution(int** recipe, int recipeLen, int* recipeArrLen, int* topping, int toppingLen);
     void setPosition(cocos2d::CCPoint _position);
     void update(float _deltaTime);
+    
+    void setGameMain(GameMain* _gameMain);
+    void retain();
+    void release();
     
 };
 

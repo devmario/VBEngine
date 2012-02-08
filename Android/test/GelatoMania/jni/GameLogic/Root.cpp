@@ -110,8 +110,8 @@ void Root::GameCenterIDCheckNeedSelect(bool success,
 }
 
 Root::Root() {
-    gameMainToShopFlag = false;
-    playedIceCreams[0] = playedIceCreams[1] = playedIceCreams[2] = NULL;
+    gameMainHistory = GameMainHistory();
+    gameMainHistory.historyEnable = false;
     
     selectUser = NULL;
     /* facebook off
@@ -128,8 +128,6 @@ Root::Root() {
     loadFlag = 0;
     view = NULL;
     top = NULL;
-    
-    
     
     //    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //    NSString* documentDirectory = [paths objectAtIndex:0];
@@ -169,10 +167,10 @@ Root::Root() {
     gettimeofday(&curTime, NULL);
     
     top = new VBModel();
-    top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().width / /*320*/480);
+    top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().width / 320);
 
     this->addChild((CCLayer*)top);
-    ((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().width - 200));
+    ((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().width));
     //top->setScaleY(768.0/320.0);
     //top->setScaleX(1024.0/480.0);
     
@@ -529,13 +527,8 @@ void Root::ChangePageARGSonUpdate() {
                 delete (SubMenu*)view;
             else if(prePage == RootPageTypeGameMain) {
                 if (historyNext.args[_argIdx+1] == SubMenuTypeShop) {
-                    GameMain *gameMain = (GameMain*)view;
-                    playedIceCreams[0] = gameMain->baseIceCream;
-                    playedIceCreams[1] = gameMain->iceCream;
-                    playedIceCreams[2] = gameMain->nextIceCream;
-                    gameMainToShopFlag = true;
-                    gameMain->retainIceCream();
-                    cout << "?\n";
+                    pushGameMainToHistory();
+                    
                 }
                 delete (GameMain*)view;
             }
@@ -551,10 +544,8 @@ void Root::ChangePageARGSonUpdate() {
                 view = (View*)new SubMenu();
                 break;
             case RootPageTypeGameMain:
-                if (gameMainToShopFlag) {
-                    view = (View*)new GameMain(historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2], playedIceCreams[0], playedIceCreams[1], playedIceCreams[2]);
-                    gameMainToShopFlag = false;
-                    playedIceCreams[0] = playedIceCreams[1] = playedIceCreams[2] = NULL;
+                if (gameMainHistory.historyEnable) {
+                    view = (View*)popGameMainFromHistory(historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2]);
                 } else {
                     view = (View*)new GameMain(historyNext.args[_argIdx + 1], historyNext.args[_argIdx + 2]);
                 }
@@ -737,4 +728,32 @@ void Root::goFowardStage()
     }
     
     PopupClose(this);
+}
+
+void Root::pushGameMainToHistory()
+{
+    GameMain *gameMain = (GameMain*)view;
+    gameMainHistory.baseIceCream = gameMain->baseIceCream;
+    gameMainHistory.iceCream = gameMain->iceCream;
+    gameMainHistory.nextIceCream = gameMain->nextIceCream;
+    gameMainHistory.historyEnable = true;
+    gameMain->retainIceCream();
+    
+    gameMainHistory.rdTd = gameMain->rdTd;
+    gameMain->rdTd->retain();
+    
+    gameMainHistory.hintViewer = gameMain->hintViewer;
+    gameMain->hintViewer->retain();
+    
+    gameMainHistory.isRecipeMode = gameMain->IsRecipeMode();
+}
+
+GameMain* Root::popGameMainFromHistory(int packIdx, int stageIdx)
+{
+    GameMain* gameMain = new GameMain(packIdx, stageIdx, gameMainHistory.baseIceCream, gameMainHistory.iceCream, gameMainHistory.nextIceCream, gameMainHistory.rdTd, gameMainHistory.hintViewer, gameMainHistory.isRecipeMode);
+    gameMainHistory.historyEnable = false;
+    gameMainHistory.baseIceCream = gameMainHistory.iceCream = gameMainHistory.nextIceCream = NULL;
+    gameMainHistory.rdTd = NULL;
+    gameMainHistory.hintViewer = NULL;
+    return gameMain;
 }

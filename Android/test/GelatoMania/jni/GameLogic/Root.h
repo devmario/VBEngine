@@ -13,6 +13,9 @@
 using namespace cocos2d;
 
 class IceCream;
+class GameMain;
+class GameMainRdTd;
+class HintViewer;
 
 typedef enum RootPageType {
     RootPageTypeNone = 0,
@@ -37,11 +40,20 @@ typedef struct history {
     int count;
 } history;
 
+typedef struct GameMainHistory {
+    bool historyEnable;
+    bool isRecipeMode;
+    IceCream* baseIceCream;
+    IceCream* iceCream;
+    IceCream* nextIceCream;
+    GameMainRdTd* rdTd;
+    HintViewer* hintViewer;
+} GameMainHistory;
+
 bool IsEqualHistory(history* _h0, history* _h1);
 
 class Root : public cocos2d::CCLayer, public SocialProtocol, public SelectUserProtocol {
 private:
-    bool gameMainToShopFlag;
     View* view;
     VBModel* loading;
     
@@ -59,6 +71,8 @@ private:
     
     void OpenPopupAlloc(int _type, int _star, int _score);
     
+    void pushGameMainToHistory();
+    GameMain* popGameMainFromHistory(int packIdx, int stageIdx);
 public:
     
     virtual void SelectUserCallback(cJSON* user);
@@ -73,7 +87,7 @@ public:
     
     VBModel* top;
     
-    IceCream* playedIceCreams[3];
+    
     
     Root();
 	virtual ~Root();
@@ -108,6 +122,7 @@ public:
     void ClosePopup();
     
     void goFowardStage();
+    GameMainHistory gameMainHistory;
     
 	LAYER_NODE_FUNC(Root);
 };

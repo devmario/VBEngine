@@ -128,9 +128,11 @@ IceCream::~IceCream() {
             removeChild((VBModel*)getChildren()->objectAtIndex(0), false);
         }
     }
+    if (next) {
+        next->release();
+        next = NULL;
+    }
     
-    next->release();
-    next = NULL;
     
     while(VBArrayVectorGetLength(subToppingFlow)) {
         VBArrayVector* _vec = (VBArrayVector*)VBArrayVectorRemoveBack(subToppingFlow);
@@ -461,6 +463,7 @@ void IceCream::DragEndMount(bool _success) {
 
 void IceCream::setGameMain(GameMain *_gameMain) {
     gameMain = _gameMain;
+    protocol = (IceCreamProtocol*)_gameMain;
 }
 
 
