@@ -198,11 +198,11 @@ void CopyResources()
                     NSDictionary* fileDict = [objectsDict objectForKey:[filesArr objectAtIndex:k]];
                     NSDictionary* source = [objectsDict objectForKey:[fileDict objectForKey:@"fileRef"]];
                     if ([[source objectForKey:@"lastKnownFileType"] isEqualToString:@"image.png"] ||
-                        [[source objectForKey:@"lastKnownFileType"] isEqualToString:@"template.json"] ||
                         [[source objectForKey:@"lastKnownFileType"] isEqualToString:@"file"] ||
                         [[source objectForKey:@"lastKnownFileType"] isEqualToString:@"sourcecode.javascript"] ||
                         [[source objectForKey:@"lastKnownFileType"] isEqualToString:@"text.plist.xml"] ||
-                        [[source objectForKey:@"lastKnownFileType"] isEqualToString:@"text"])
+                        [[source objectForKey:@"lastKnownFileType"] isEqualToString:@"text"] ||
+                        [[source objectForKey:@"lastKnownFileType"] isEqualToString:@"text.json"])
                     {
                         NSString* tmpSrcPath = [[NSString alloc] init];
                         CopyResourceFile(objectsDict, mainKey, [fileDict objectForKey:@"fileRef"], tmpSrcPath);
