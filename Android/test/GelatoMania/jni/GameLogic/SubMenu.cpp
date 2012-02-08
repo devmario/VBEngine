@@ -224,6 +224,8 @@ void SubMenuFacebookLogOutComplete(cJSON* _json, void* _reference) {
 
 void SubMenuFacebookRequestGraphPathComplete(cJSON* _json, void* _reference) {
 	LOGD("#@@# SubMenuFacebookRequestGraphPathComplete _json: %x, _reference:%x", _json, _reference);
+	char* test = cJSON_Print(_json);
+	LOGD("#@@# SubMenuFacebookRequestGraphPathComplete %s", test);
 }
 
 void SubMenuFacebookAppRequestComplete(cJSON* _json, void* _reference) {
@@ -249,7 +251,7 @@ void facebookRequestGraphPath(SubMenu* _this) {
 
 void facebookAppRequest(SubMenu* _this) {
 	LOGD("#@@# facebook app request!");
-	PlatformFacebookAppRequest("Message~!!", "User id" , "앱 요청 보낼때 친구 추가 어찌고저찌고 붙음..", PlatformCallbackCreate(_this, SubMenuFacebookAppRequestComplete));
+	PlatformFacebookAppRequest("Message~!!", "" , "앱 요청 보낼때 친구 추가 어찌고저찌고 붙음..", PlatformCallbackCreate(_this, SubMenuFacebookAppRequestComplete));
 }
 
 void facebookFeed(SubMenu* _this) {

@@ -1,4 +1,5 @@
 #include "AndroidNative.h"
+#include "cJSON.h"
 
 
 static const char *ClassName =
@@ -284,9 +285,12 @@ JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_na
 	//Do something with the nativeString
 	LOGV("nativeFacebookRequestGraphPath str : %s" , _str);
 	//DON'T FORGET THIS LINE!!!
+	cJSON* obj = cJSON_CreateString(_str);
 	env->ReleaseStringUTFChars(str, _str);
 
 	//callback function call~!!
+
+	g_FacebookRequestGraphPathCB.function(obj, g_FacebookRequestGraphPathCB.reference);
 }
 
 JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookAppRequest( JNIEnv* env, jobject thiz, jstring str)
@@ -298,6 +302,8 @@ JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_na
 	LOGV("nativeFacebookAppRequest str : %s" , _str);
 	//DON'T FORGET THIS LINE!!!
 	env->ReleaseStringUTFChars(str, _str);
+
+	g_FacebookAppRequestCB.function(NULL, g_FacebookAppRequestCB.reference);
 }
 
 JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_nativeFacebookFeed( JNIEnv* env, jobject thiz, jstring str)
@@ -309,4 +315,6 @@ JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_na
 	LOGV("nativeFacebookFeed str : %s" , _str);
 	//DON'T FORGET THIS LINE!!!
 	env->ReleaseStringUTFChars(str, _str);
+
+	g_FacebookFeedCB.function(NULL, g_FacebookFeedCB.reference);
 }

@@ -33,57 +33,11 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	private SharedPreferences sp;
 	private SharedPreferences.Editor e;
 	
-	private static String _message, _to, _notification_text;
-	private static String _name,  _caption,  _description,  _link,  _picture;
-	
-	
-	public static Handler handler = new Handler(){
-		public void handleMessage(android.os.Message msg) {
-			if(msg.what == 0){
-				Log.d("GelatoManiaActivity", "facebookLogin() ret: " + fbUtil.isLogin());
-				loginMgr.login(new BaseDialogListener() {
-					
-					@Override
-					public void onComplete(Bundle values) {
-						nativeFacebookLogin(fbUtil.isLogin());
-					}
-				});
-			} else if (msg.what == 1) {
-				if (fbUtil.isLogin()) {
-					Bundle parameters;
-					parameters = new Bundle();
-					parameters.putString("message", _message);
-					parameters.putString("to", _to);
-					parameters.putString("notification_text", _notification_text);
-					fbUtil.mFacebook.dialog(activity, "apprequests", parameters, new BaseDialogListener() {
-						@Override
-						public void onComplete(Bundle values) {
-						}
-					});
-				}
-			} else if (msg.what == 2) {
-				if (fbUtil.isLogin()) {
-					Bundle parameters;
-					parameters = new Bundle();
-					parameters.putString("name", _name);
-					parameters.putString("caption", _caption);
-					parameters.putString("description", _description);
-					parameters.putString("link", _link);
-					parameters.putString("picture", _picture);
-					fbUtil.mFacebook.dialog(activity, "feed", parameters, new BaseDialogListener() {
-						@Override
-						public void onComplete(Bundle values) {
-						}
-					});
-				}
-			}
-		};
-	};
-	
 	// modify lowmans -> use facebook api
 	private static FacebookUtil fbUtil;
 	private static LoginManager loginMgr;
 	private static Activity activity;
+	
 	static {
 		System.loadLibrary("stlport_shared");
 		System.loadLibrary("cocos2d");
@@ -247,6 +201,37 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		}
 	}
 
+	public static Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			if(msg.what == 0){
+				Log.d("GelatoManiaActivity", "facebookLogin() ret: " + fbUtil.isLogin());
+				loginMgr.login(new BaseDialogListener() {
+					
+					@Override
+					public void onComplete(Bundle values) {
+						nativeFacebookLogin(fbUtil.isLogin());
+					}
+				});
+			} else if (msg.what == 1) {
+				if (fbUtil.isLogin()) {
+					fbUtil.mFacebook.dialog(activity, "apprequests", msg.getData(), new BaseDialogListener() {
+						@Override
+						public void onComplete(Bundle values) {
+						}
+					});
+				}
+			} else if (msg.what == 2) {
+				if (fbUtil.isLogin()) {
+					fbUtil.mFacebook.dialog(activity, "feed", msg.getData(), new BaseDialogListener() {
+						@Override
+						public void onComplete(Bundle values) {
+						}
+					});
+				}
+			}
+		};
+	};
+	
 	// modify lowmans -> facebook dialog feed-back
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -265,8 +250,8 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	}
 	
 	private static boolean facebookLogout() {
-		Log.d("GelatoManiaActivity", "facebookLogout() ret: " + fbUtil.isLogin());
 		loginMgr.logout();
+		Log.d("GelatoManiaActivity", "facebookLogout() ret: " + fbUtil.isLogin());
 		return fbUtil.isLogin() ? false : true;
 	}
 	
@@ -301,11 +286,6 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		Message msg = handler.obtainMessage();
 		msg.what = 1;
 		msg.setData(parameters);
-		
-		_message = message;
-		_to = to;
-		_notification_text = notification_text;
-		
 		handler.sendMessage(msg);
 	}
 
@@ -322,13 +302,6 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		Message msg = handler.obtainMessage();
 		msg.what = 2;
 		msg.setData(parameters);
-		
-		_name = name;
-		_caption = caption;
-		_description = description;
-		_link = link;
-		_picture = picture;
-		
 		handler.sendMessage(msg);
 		
 	}
