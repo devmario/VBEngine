@@ -8,23 +8,20 @@
 #include "Slider.h"
 #include "ShareData.h"
 #include "HintViewer.h"
+#include "GameMainRdTd.h"
 
 using namespace tween;
 
-class GameMain : public View {
+class GameMain : public View, IceCreamProtocol {
 private:
+    
+    bool initWithIceCream;
+    
     int packIdx;
     int stageIdx;
-    int* rd;
-    int rdLen;
-    int* td;
-    int tdLen;
     
     int bgLen;
-    
-    VBArrayVector* rdVec;
-    VBArrayVector* tdVec;
-    
+        
     VBObjectFile2D** objBg;
     VBTexture** texBg;
     
@@ -68,13 +65,7 @@ private:
     CCTouch* touchNew;
     CCTouch* touchCook;
     
-    IceCream* baseIceCream;
-    IceCream* iceCream;
-    IceCream* delIceCream;
-    IceCream* nextIceCream;
-    IceCream* nextIceCreamMotion;
-    
-    void InitCook(int** _rtc, int _rtcLen, int* _rtcArrLen, int* _tc, int _tcLen);
+    void InitCook();
     void FreeCook();
     
     bool isRecipeMode;
@@ -91,10 +82,8 @@ private:
     void InitTopping();
     void FreeTopping();
     
-    Tweener* toppingTweener;
-    TweenerParam* toppingTweenerParam;
-    float toppingTweenerTime;
-    float toppingTweenerTimeCount;
+    TweenerWrapper* toppingTweener;
+
     float toppingTweenerY;
     
     void ClearToppingTween();
@@ -114,18 +103,28 @@ private:
     void NextIceCreamUpdate(float _deltaTime);
     
     void NewIceCream();
+    void NewIceCreamWithBack();
     void NewIceCreamUpdate(float _deltaTime);
     
     void SwapRecipeAndToppingMode();
     void SwapRecipeAndToppingModeUpdate(float _deltaTime);
-    bool IsRecipeMode();
     
     bool IsActiveUI();
     
-    HintViewer *hintViewer;
-public:
     
-    GameMain(int _packIdx, int _stageIdx);
+    
+public:
+    HintViewer *hintViewer;
+    GameMainRdTd *rdTd;
+    IceCream* baseIceCream;
+    IceCream* iceCream;
+    IceCream* delIceCream;
+    IceCream* nextIceCream;
+    IceCream* nextIceCreamMotion;
+    
+    virtual void GetIceCreamChecker(float per);
+    
+    GameMain(int _packIdx, int _stageIdx, IceCream* _baseIceCream=NULL, IceCream* _playedIceCream=NULL, IceCream* _nextIceCream=NULL, GameMainRdTd* _rdTd=NULL, HintViewer* _hintViewer=NULL, bool _isRecipeMode=false);
     ~GameMain();
     
     void resetOtherStage(int _packIdx, int _stageIdx);
@@ -143,6 +142,9 @@ public:
     virtual void touchEnd(CCTouch* _touch, CCPoint _location);
     virtual void touchCancel(CCTouch* _touch, CCPoint _location);
     virtual void touchEndAndCancel(CCTouch* _touch, CCPoint _location);
+    
+    void retainIceCream();
+    bool IsRecipeMode();
 };
 
 

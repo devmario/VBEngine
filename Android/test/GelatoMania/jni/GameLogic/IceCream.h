@@ -6,11 +6,41 @@
 #include "VBModel.h"
 #include "ShareData.h"
 #include "RecipeAndToppingData.h"
+#include <pthread.h>
+
+class IceCream;
+
+typedef struct drawIceCremArg {
+    IceCream* iceCream;
+    VBImage* _imgArea;
+    VBAABB _aabbArea;
+    VBImage* _imgMask;
+    VBAABB _aabbMask;
+    int _shiftBit;
+    int _hex;
+} drawIceCremArg;
 
 class GameMain;
 
+class IceCreamProtocol {
+public:
+    virtual void GetIceCreamChecker(float per) {};
+};
+
 class IceCream : public VBModel {
-private:
+public:
+    
+    drawIceCremArg fillArg;
+    IceCreamProtocol* protocol;
+    
+    pthread_t draw_pixel_thread;
+    pthread_t mix_thread;
+    pthread_t checker_thread;
+    bool isRun_draw_pixel_thread;
+    bool isRun_draw_pixel_threadReal;
+    bool isRun_mix_thread;
+    bool isRunClearCheck;
+    
     VBArrayVector* rdVec;
     VBArrayVector* tdVec;
     
@@ -66,7 +96,6 @@ private:
     IceCream* prev;
     
     bool need_update_pixel;
-    bool need_update_bitmask;
     bool need_update_model;
     
     bool Mix();
@@ -76,10 +105,10 @@ private:
     GameMain *gameMain;
     
 public:
-    IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCream* _baseIceCream = NULL, int* _recipe = NULL, int _recipe_len = 0);
+    IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCreamProtocol* _protocol, IceCream* _baseIceCream = NULL, int* _recipe = NULL, int _recipe_len = 0);
     ~IceCream();
     
-    float GetClear();
+    void GetClear();
     
     unsigned int GetHeight();
     
@@ -114,6 +143,7 @@ public:
     bool AddNextIceCream(IceCream* _other);
     
     virtual void VBModelUpdate(float _tick);
+    void setGameMain(GameMain* _gameMain);
 };
 
 #endif

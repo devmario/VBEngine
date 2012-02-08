@@ -219,7 +219,8 @@ void RecipeContainer::touchMove(CCTouch* _touch, CCPoint _location) {
     ScrollerContainer::touchMove(_touch, _location);
     
     if(pour) {
-        pour->setPosition(CCPointMake(_location.x, _location.y-320.0));
+        float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        pour->setPosition(CCPointMake(_location.x/scale, _location.y/scale-320.0));
         if(pour->hitTest(hitTarget)) {
             pour->color.a = 0xFF;
         } else {

@@ -621,10 +621,7 @@ void VolatileTexture::reloadAllTextures()
 
 				if (image.initWithImageData((void*)pBuffer, nSize, vt->m_FmtImage))
 				{
-				       CCTexture2DPixelFormat oldPixelFormat = CCTexture2D::defaultAlphaPixelFormat();
-				       CCTexture2D::setDefaultAlphaPixelFormat(vt->m_PixelFormat);
-					   vt->texture->initWithImage(&image);
-				       CCTexture2D::setDefaultAlphaPixelFormat(oldPixelFormat);
+					vt->texture->initWithImage(&image);
 				}
 			}
 			break;

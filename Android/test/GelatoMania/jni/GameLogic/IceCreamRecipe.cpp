@@ -1,115 +1,166 @@
 #include "IceCream.h"
 #include "GameMain.h"
 
+void* draw_pixel_thread_function(void* argument) {
+    
+    IceCream* iceCream = ((drawIceCremArg*)argument)->iceCream;
+    
+    cout << "draw_pixel_thread_function in\n";
+    
+    VBImage* _imgArea = ((drawIceCremArg*)argument)->_imgArea;
+    VBAABB _aabbArea = ((drawIceCremArg*)argument)->_aabbArea;
+    VBImage* _imgMask = ((drawIceCremArg*)argument)->_imgMask;
+    int _shiftBit = ((drawIceCremArg*)argument)->_shiftBit;
+    int _hex = ((drawIceCremArg*)argument)->_hex;
+    VBAABB _aabbMask = ((drawIceCremArg*)argument)->_aabbMask;
+    VBColorRGBA* _src = (VBColorRGBA*)VBImageGetImageData(iceCream->imgBGOrigin);
+    VBColorRGBA* _dst = (VBColorRGBA*)VBImageGetImageData(iceCream->imgBG);
+    
+    iceCream->bitmaskMerge = 0;
+    
+    iceCream->isClear = 0;
+    iceCream->totalClear = 0;
+    
+    for(int j = 0; j < VBImageGetHeight(iceCream->imgBGOrigin); j++) {
+        for(int i = 0; i < VBImageGetWidth(iceCream->imgBGOrigin); i++) {
+            VBUChar _a = 0xFF;
+            
+            if(VBAABBHitTest(iceCream->aabbBG, _aabbArea)) {
+                VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_imgArea, (float)i + (iceCream->aabbBG.l - _aabbArea.l), (float)j + (iceCream->aabbBG.t - _aabbArea.t));
+                if(_mc)
+                    _a = _a * ((float)_mc->a/0xFF);
+                else
+                    _a = 0x00;
+            } else {
+                _a = 0x00;
+            }
+            
+            if(_imgMask) {
+                if(VBAABBHitTest(iceCream->aabbBG, _aabbMask)) {
+                    VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_imgMask, (float)i + (iceCream->aabbBG.l - _aabbMask.l), (float)j + (iceCream->aabbBG.t - _aabbMask.t));
+                    if(_mc)
+                        _a = _a * ((float)_mc->a/0xFF);
+                    else
+                        _a = 0x00;
+                } else {
+                    _a = 0x00;
+                }
+            }
+            
+            for(int k = 0; k < VBArrayVectorGetLength(iceCream->mask); k++) {
+                RecipeMask* _mask = (RecipeMask*)VBArrayVectorGetDataAt(iceCream->mask, k);
+                if(VBAABBHitTest(iceCream->aabbBG, _mask->aabbMask)) {
+                    VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_mask->imgMask, i + (iceCream->aabbBG.l - _mask->aabbMask.l), j + (iceCream->aabbBG.t - _mask->aabbMask.t));
+                    if(_mc)
+                        _a = _a * ((float)_mc->a/0xFF);
+                    else
+                        _a = 0x00;
+                } else {
+                    _a = 0x00;
+                }
+            }
+            VBColorRGBA _tmp = VBColorRGBADrawColor(*_src, _hex, 0x9E, 0xEE);
+            _tmp.a = (_tmp.a / (float)0xFF) * (_a / (float)0xFF) * 0xFF;
+            *_dst = VBColorRGBADrawNormal(*_dst, _tmp);
+            
+            //비트마스크 덮을때(믹스할때) 마스크영역 무시하고 해야함(필요하다면) : FillCream 인자가 하나 더 필요 할 수도
+            
+            unsigned long* _bmColor = (unsigned long*)VBImageGetPixelColor(iceCream->imgBitmask, i, j);
+            if(_tmp.a > 0x88)
+                *_bmColor = _shiftBit;
+            
+            
+            iceCream->bitmaskMerge |= *_bmColor;
+            if(*_bmColor != 0)
+                iceCream->totalClear++;
+            if(iceCream->baseIceCream) {
+                unsigned long* _base_bm = (unsigned long*)VBImageGetPixelColor(iceCream->baseIceCream->imgBitmask, i, j);
+                if(*_base_bm != 0 && *_bmColor != 0) {
+                    if(*_bmColor == *_base_bm)
+                        iceCream->isClear++;
+                }
+            }
+            
+            _src++;
+            _dst++;
+        }
+    }
+    
+    VBColorRGBA* _srcBrd = (VBColorRGBA*)VBImageGetImageData(iceCream->imgBridgeOrigin);
+    VBColorRGBA* _dstBrd = (VBColorRGBA*)VBImageGetImageData(iceCream->imgBridge);
+    
+    for(int j = 0; j < VBImageGetHeight(iceCream->imgBridgeOrigin); j++) {
+        for(int i = 0; i < VBImageGetWidth(iceCream->imgBridgeOrigin); i++) {
+            VBUChar _a = 0xFF;
+            
+            if(VBAABBHitTest(iceCream->aabbBridge, _aabbArea)) {
+                VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_imgArea, (float)i + (iceCream->aabbBridge.l - _aabbArea.l), (float)j + (iceCream->aabbBridge.t - _aabbArea.t));
+                if(_mc)
+                    _a = _a * ((float)_mc->a/0xFF);
+                else
+                    _a = 0x00;
+            } else {
+                _a = 0x00;
+            }
+            
+            if(_imgMask) {
+                if(VBAABBHitTest(iceCream->aabbBridge, _aabbMask)) {
+                    VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_imgMask, (float)i + (iceCream->aabbBridge.l - _aabbMask.l), (float)j + (iceCream->aabbBridge.t - _aabbMask.t));
+                    if(_mc)
+                        _a = _a * ((float)_mc->a/0xFF);
+                    else
+                        _a = 0x00;
+                } else {
+                    _a = 0x00;
+                }
+            }
+            
+            for(int k = 0; k < VBArrayVectorGetLength(iceCream->mask); k++) {
+                RecipeMask* _mask = (RecipeMask*)VBArrayVectorGetDataAt(iceCream->mask, k);
+                if(VBAABBHitTest(iceCream->aabbBridge, _mask->aabbMask)) {
+                    VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_mask->imgMask, i + (iceCream->aabbBridge.l - _mask->aabbMask.l), j + (iceCream->aabbBridge.t - _mask->aabbMask.t));
+                    if(_mc)
+                        _a = _a * ((float)_mc->a/0xFF);
+                    else
+                        _a = 0x00;
+                } else {
+                    _a = 0x00;
+                }
+            }
+            VBColorRGBA _tmp = VBColorRGBADrawColor(*_srcBrd, _hex, 0x9E, 0xEE);
+            _tmp.a = (_tmp.a / (float)0xFF) * (_a / (float)0xFF) * 0xFF;
+            *_dstBrd = VBColorRGBADrawNormal(*_dstBrd, _tmp);
+            
+            _srcBrd++;
+            _dstBrd++;
+        }
+    }
+    
+    iceCream->need_update_pixel = true;
+    
+    iceCream->isRun_draw_pixel_thread = false;
+    cout << "draw_pixel_thread_function out\n";
+    
+    return NULL;
+}
+
 void IceCream::FillCream(VBImage* _imgArea, VBAABB _aabbArea, VBImage* _imgMask, VBAABB _aabbMask, int _shiftBit, int _hex) {
     if(next) {
         FillCream(_imgArea, _aabbArea, _imgMask, _aabbMask, _shiftBit, _hex);
     } else {
-        VBColorRGBA* _src = (VBColorRGBA*)VBImageGetImageData(imgBGOrigin);
-        VBColorRGBA* _dst = (VBColorRGBA*)VBImageGetImageData(imgBG);
-        
-        for(int j = 0; j < VBImageGetHeight(imgBGOrigin); j++) {
-            for(int i = 0; i < VBImageGetWidth(imgBGOrigin); i++) {
-                VBUChar _a = 0xFF;
-                
-                if(VBAABBHitTest(aabbBG, _aabbArea)) {
-                    VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_imgArea, (float)i + (aabbBG.l - _aabbArea.l), (float)j + (aabbBG.t - _aabbArea.t));
-                    if(_mc)
-                        _a = _a * ((float)_mc->a/0xFF);
-                    else
-                        _a = 0x00;
-                } else {
-                    _a = 0x00;
-                }
-                
-                if(_imgMask) {
-                    if(VBAABBHitTest(aabbBG, _aabbMask)) {
-                        VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_imgMask, (float)i + (aabbBG.l - _aabbMask.l), (float)j + (aabbBG.t - _aabbMask.t));
-                        if(_mc)
-                            _a = _a * ((float)_mc->a/0xFF);
-                        else
-                            _a = 0x00;
-                    } else {
-                        _a = 0x00;
-                    }
-                }
-                
-                for(int k = 0; k < VBArrayVectorGetLength(mask); k++) {
-                    RecipeMask* _mask = (RecipeMask*)VBArrayVectorGetDataAt(mask, k);
-                    if(VBAABBHitTest(aabbBG, _mask->aabbMask)) {
-                        VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_mask->imgMask, i + (aabbBG.l - _mask->aabbMask.l), j + (aabbBG.t - _mask->aabbMask.t));
-                        if(_mc)
-                            _a = _a * ((float)_mc->a/0xFF);
-                        else
-                            _a = 0x00;
-                    } else {
-                        _a = 0x00;
-                    }
-                }
-                VBColorRGBA _tmp = VBColorRGBADrawColor(*_src, _hex, 0x9E, 0xEE);
-                _tmp.a = (_tmp.a / (float)0xFF) * (_a / (float)0xFF) * 0xFF;
-                *_dst = VBColorRGBADrawNormal(*_dst, _tmp);
-                
-                //비트마스크 덮을때(믹스할때) 마스크영역 무시하고 해야함(필요하다면) : FillCream 인자가 하나 더 필요 할 수도
-                
-                unsigned long* _bmColor = (unsigned long*)VBImageGetPixelColor(imgBitmask, i, j);
-                if(_tmp.a > 0x88)
-                    *_bmColor = _shiftBit;
-                
-                _src++;
-                _dst++;
-            }
+        while (isRun_draw_pixel_thread) {
+            usleep(16666);
         }
-        
-        VBColorRGBA* _srcBrd = (VBColorRGBA*)VBImageGetImageData(imgBridgeOrigin);
-        VBColorRGBA* _dstBrd = (VBColorRGBA*)VBImageGetImageData(imgBridge);
-        
-        for(int j = 0; j < VBImageGetHeight(imgBridgeOrigin); j++) {
-            for(int i = 0; i < VBImageGetWidth(imgBridgeOrigin); i++) {
-                VBUChar _a = 0xFF;
-                
-                if(VBAABBHitTest(aabbBridge, _aabbArea)) {
-                    VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_imgArea, (float)i + (aabbBridge.l - _aabbArea.l), (float)j + (aabbBridge.t - _aabbArea.t));
-                    if(_mc)
-                        _a = _a * ((float)_mc->a/0xFF);
-                    else
-                        _a = 0x00;
-                } else {
-                    _a = 0x00;
-                }
-                
-                if(_imgMask) {
-                    if(VBAABBHitTest(aabbBridge, _aabbMask)) {
-                        VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_imgMask, (float)i + (aabbBridge.l - _aabbMask.l), (float)j + (aabbBridge.t - _aabbMask.t));
-                        if(_mc)
-                            _a = _a * ((float)_mc->a/0xFF);
-                        else
-                            _a = 0x00;
-                    } else {
-                        _a = 0x00;
-                    }
-                }
-                
-                for(int k = 0; k < VBArrayVectorGetLength(mask); k++) {
-                    RecipeMask* _mask = (RecipeMask*)VBArrayVectorGetDataAt(mask, k);
-                    if(VBAABBHitTest(aabbBridge, _mask->aabbMask)) {
-                        VBColorRGBA* _mc = (VBColorRGBA*)VBImageGetPixelColor(_mask->imgMask, i + (aabbBridge.l - _mask->aabbMask.l), j + (aabbBridge.t - _mask->aabbMask.t));
-                        if(_mc)
-                            _a = _a * ((float)_mc->a/0xFF);
-                        else
-                            _a = 0x00;
-                    } else {
-                        _a = 0x00;
-                    }
-                }
-                VBColorRGBA _tmp = VBColorRGBADrawColor(*_srcBrd, _hex, 0x9E, 0xEE);
-                _tmp.a = (_tmp.a / (float)0xFF) * (_a / (float)0xFF) * 0xFF;
-                *_dstBrd = VBColorRGBADrawNormal(*_dstBrd, _tmp);
-                
-                _srcBrd++;
-                _dstBrd++;
-            }
-        }
+        fillArg.iceCream = this;
+        fillArg._imgArea = _imgArea;
+        fillArg._aabbArea = _aabbArea;
+        fillArg._imgMask = _imgMask;
+        fillArg._aabbMask = _aabbMask;
+        fillArg._shiftBit = _shiftBit;
+        fillArg._hex = _hex;
+        isRun_draw_pixel_thread = true;
+        pthread_create(&draw_pixel_thread, NULL, draw_pixel_thread_function, &fillArg);
+        pthread_detach(draw_pixel_thread);
     }
 }
 
@@ -192,28 +243,63 @@ bool IceCream::AddSubToppingFlow(RecipeSubToppingFlow* _rstf) {
     }
 }
 
+typedef struct MixThreadArg {
+    IceCream* iceCream;
+    RecipeMix* _rm;
+} MixThreadArg;
+
+void* mixThread(void* arg) {
+    
+    IceCream* iceCream = ((MixThreadArg*)arg)->iceCream;
+    
+    cout << "mixThread in\n";
+    
+    RecipeMix* _rm = ((MixThreadArg*)arg)->_rm;
+    free(arg);
+    unsigned long _bitLoop = 0x01;
+    int mixFirst = 1;
+    int bitmaskType = 0;
+    int mixType = 0;
+    while(_bitLoop <= iceCream->bitmaskMerge) {
+        if(_bitLoop & iceCream->bitmaskMerge) {
+            mixType = bitmaskType - 1;
+            if(mixFirst) {
+                iceCream->FillCream(_rm->img, _rm->aabb, NULL, VBAABBLoadIndentity(), 
+                                    iceCream->bitmaskMerge, 
+                                    hexToInt(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "fill"), bitmaskType)->valuestring));
+                mixFirst = 0;
+            } else {
+                iceCream->FillCream(_rm->img, _rm->aabb, _rm->imgMask[mixType], _rm->aabbMask[mixType], 
+                                    iceCream->bitmaskMerge, 
+                                    hexToInt(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "fill"), bitmaskType)->valuestring));
+            }
+        }
+        bitmaskType++;
+        _bitLoop = _bitLoop << 1;
+    }
+    while (iceCream->isRun_draw_pixel_thread) {
+        usleep(16666);
+    }
+    
+    iceCream->isRun_mix_thread = false;
+    cout << "mixThread out\n";
+    
+    return NULL;
+}
+
 void IceCream::Mix(RecipeMix* _rm) {
     if(next) {
         next->Mix(_rm);
     } else {
-        unsigned long _bitLoop = 0x01;
-        int mixFirst = 1;
-        int bitmaskType = 0;
-        int mixType = 0;
-        while(_bitLoop <= bitmaskMerge) {
-            if(_bitLoop & bitmaskMerge) {
-                mixType = bitmaskType - 1;
-                if(mixFirst) {
-                    FillCream(_rm->img, _rm->aabb, NULL, VBAABBLoadIndentity(), bitmaskMerge, hexToInt(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "fill"), bitmaskType)->valuestring));
-                    mixFirst = 0;
-                } else {
-                    FillCream(_rm->img, _rm->aabb, _rm->imgMask[mixType], _rm->aabbMask[mixType], bitmaskMerge, hexToInt(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "fill"), mixType)->valuestring));
-                }
-            }
-            bitmaskType++;
-            _bitLoop = _bitLoop << 1;
+        while (isRun_mix_thread) {
+            usleep(16666);
         }
-        
+        MixThreadArg* arg = (MixThreadArg*)malloc(sizeof(MixThreadArg));
+        arg->iceCream = this;
+        arg->_rm = _rm;
+        isRun_mix_thread = true;
+        pthread_create(&mix_thread, NULL, mixThread, arg);
+        pthread_detach(mix_thread);
     }
 }
 
@@ -243,13 +329,14 @@ bool IceCream::AddRecipe(int _recipe) {
         }
         
         if(_rtF) {
+            while(isRun_mix_thread || isRun_draw_pixel_thread) {
+                usleep(16666);
+            }
             switch(_rtF->type) {
                 case 0: 
                 {
                     RecipeFill* _rf = (RecipeFill*)_rtF->data;
                     FillCream(_rf, false);
-                    need_update_pixel = true;
-                    need_update_bitmask = true;
                     Reshape();
                 }
                     break;
@@ -282,8 +369,6 @@ bool IceCream::AddRecipe(int _recipe) {
                 {
                     RecipeMix* _rm = (RecipeMix*)_rtF->data;
                     Mix(_rm);
-                    need_update_pixel = true;
-                    need_update_bitmask = true;
                     Reshape();
                 }
                     break;
@@ -296,6 +381,7 @@ bool IceCream::AddRecipe(int _recipe) {
                 }
                     break;
             }
+            GetClear();
         }
         return true;
     }
@@ -314,6 +400,8 @@ bool IceCream::IsHaveSubTopping() {
 }
 
 bool IceCream::IsPossibleRecipe(int _recipe) {
+    if(isRunClearCheck || isRun_mix_thread || isRun_draw_pixel_thread)
+        return false;
     if(next) {
         return next->IsPossibleRecipe(_recipe);
     } else {

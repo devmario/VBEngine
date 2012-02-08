@@ -93,6 +93,10 @@ void GameMain::UnloadResource() {
         VBObjectFile2DFree(&objBg[i]);
         VBTextureFree(&texBg[i]);
     }
+    free(objBg);
+    free(texBg);
+    objBg = NULL;
+    texBg = NULL;
 }
 
 void GameMain::InitModel(cJSON* _layer, cJSON* _ui) {
@@ -196,37 +200,55 @@ void GameMain::FreeModel() {
         delete modelBg[i];
         modelBg[i] = NULL;
     }
+    free(modelBg);
     modelBg = NULL;
 }
 
-void GameMain::InitCook(int** _rtc, int _rtcLen, int* _rtcArrLen, int* _tc, int _tcLen) {
-    iceCream = NULL;
-    nextIceCream = NULL;
+void GameMain::InitCook() {
     delIceCream = NULL;
     nextIceCreamMotion = NULL;
     dragIce = NULL;
 #ifdef GAME_MAIN_EMPTY
     return;
 #endif
-    for(int i = 0; i < _rtcLen; i++) {
-        if(i == 0)
-            baseIceCream = new IceCream(this, rdVec, tdVec, NULL, _rtc[i], _rtcArrLen[i]);
-        else
-            baseIceCream->AddNextIceCream(_rtc[i], _rtcArrLen[i]);
-    }
-    if(_tc && _tcLen) {
-        for(int i = 0; i < _tcLen; i++) {
-            baseIceCream->AddTopping(_tc[i]);
+    if (!initWithIceCream) {
+        for(int i = 0; i < rdTd->cook.rtcLen; i++) {
+            if(i == 0)
+                baseIceCream = new IceCream(this, rdTd->rdVec, rdTd->tdVec, NULL, NULL, rdTd->cook.rtc[i], rdTd->cook.rtcArrLen[i]);
+            else
+                baseIceCream->AddNextIceCream(rdTd->cook.rtc[i], rdTd->cook.rtcArrLen[i]);
         }
+        if(rdTd->cook.tc && rdTd->cook.tcLen) {
+            for(int i = 0; i < rdTd->cook.tcLen; i++) {
+                baseIceCream->AddTopping(rdTd->cook.tc[i]);
+            }
+        }
+        baseIceCream->setScale(0.5);
+        baseIceCream->setPosition(CCPointMake(40, -90-63));
+        
+
+        
+
+        iceCream = NULL;
+        iceCream = new IceCream(this, rdTd->rdVec, rdTd->tdVec, this, baseIceCream);
+        iceCream->setScale(0.5);
+        iceCream->setPosition(CCPointMake(-2, 92-63));
+        nextIceCream = NULL;
+        modelRailIce[0]->addChild(iceCream);
+        
+    } else {
+        initWithIceCream = false;
+        iceCream->setGameMain(this);
+        modelRailIce[0]->addChild(iceCream);
+        
     }
-    baseIceCream->setScale(0.5);
-    baseIceCream->setPosition(CCPointMake(40, -90-63));
+    
     top->addChild(baseIceCream);
     
-    iceCream = new IceCream(this, rdVec, tdVec, baseIceCream);
-    iceCream->setScale(0.5);
-    iceCream->setPosition(CCPointMake(-2, 92-63));
-    modelRailIce[0]->addChild(iceCream);
+    if (nextIceCream) {
+        nextIceCream->setGameMain(this);
+        iceCream->AddNextIceCream(nextIceCream);
+    }
 }
 
 void GameMain::FreeCook() {
@@ -245,12 +267,14 @@ void GameMain::FreeCook() {
         delete delIceCream;
         delIceCream = NULL;
     }
-    delete iceCream;
+    iceCream->release();
     iceCream = NULL;
     
     top->removeChild(baseIceCream, false);
-    delete baseIceCream;
+    cout << baseIceCream->retainCount() << '\n';
+    baseIceCream->release();
     baseIceCream = NULL;
+    
 }
 
 void GameMain::InitRecipe() {
@@ -260,8 +284,8 @@ void GameMain::InitRecipe() {
 #endif
     recipeData = VBArrayVectorInit(VBArrayVectorAlloc());
     //printf("preSort ");
-    for(int i = 0; i < VBArrayVectorGetLength(rdVec); i++) {
-        RT* _rt = (RT*)VBArrayVectorGetDataAt(rdVec, i);
+    for(int i = 0; i < VBArrayVectorGetLength(rdTd->rdVec); i++) {
+        RT* _rt = (RT*)VBArrayVectorGetDataAt(rdTd->rdVec, i);
         VBArrayVectorAddBack(recipeData, RecipeContainerCellDataInit(_rt->idx));
         //printf("%i ", _rd[i]);
     }
@@ -297,17 +321,15 @@ void GameMain::FreeRecipe() {
 }
 
 void GameMain::InitTopping() {
+    
     toppingTweener = NULL;
-    toppingTweenerParam = NULL;
-    toppingTweenerTime = 0.0;
-    toppingTweenerTimeCount = 0.0;
     toppingContainer = NULL;
 #ifdef GAME_MAIN_EMPTY
     return;
 #endif
     toppingData = VBArrayVectorInit(VBArrayVectorAlloc());
-    for(int i = 0; i < VBArrayVectorGetLength(tdVec); i++) {
-        RT* _rt = (RT*)VBArrayVectorGetDataAt(tdVec, i);
+    for(int i = 0; i < VBArrayVectorGetLength(rdTd->tdVec); i++) {
+        RT* _rt = (RT*)VBArrayVectorGetDataAt(rdTd->tdVec, i);
         int _stepTotal = 1;
         switch(_rt->type) {
             case 0://눈깔
@@ -365,25 +387,6 @@ void GameMain::FreeTopping() {
     VBArrayVectorFree(&toppingData);
 }
 
-void GameMain::CallbackSlideNextRope(void* _obj) {
-    if(reinterpret_cast<GameMain*>(_obj)->IsActiveUI()) {
-        reinterpret_cast<GameMain*>(_obj)->NextIceCream();
-        reinterpret_cast<GameMain*>(_obj)->nextRopeSlider->SetEnable(false);
-        reinterpret_cast<GameMain*>(_obj)->recipeContainerCallBack(-1);
-    }
-}
-
-void GameMain::CallbackSlideToppingRope(void* _obj) {
-    if(reinterpret_cast<GameMain*>(_obj)->IsActiveUI() && 
-       reinterpret_cast<GameMain*>(_obj)->IsRecipeMode()) {
-        reinterpret_cast<GameMain*>(_obj)->SwapRecipeAndToppingMode();
-        reinterpret_cast<GameMain*>(_obj)->toppingRopeSlider->SetEnable(false);
-        if(reinterpret_cast<GameMain*>(_obj)->nextRopeSlider)
-            reinterpret_cast<GameMain*>(_obj)->nextRopeSlider->SetEnable(false);
-        reinterpret_cast<GameMain*>(_obj)->recipeContainerCallBack(-2);
-    }
-}
-
 void GameMain::InitRope() {
     nextRopeSlider = NULL;
     toppingRopeSlider = NULL;
@@ -426,7 +429,14 @@ void GameMain::FreeRope() {
     }
 }
 
-GameMain::GameMain(int _packIdx, int _stageIdx) {
+//other thread
+void GameMain::GetIceCreamChecker(float per) {
+    printf("아이스크림 일치율: %f\n", per);
+}
+
+GameMain::GameMain(int _packIdx, int _stageIdx, IceCream* _baseIceCream, IceCream* _playedIceCream, IceCream* _nextIceCream, GameMainRdTd* _rdTd, HintViewer* _hintViewer, bool _isRecipeMode) {
+    initWithIceCream = false;
+    
     packIdx = _packIdx;
     stageIdx = _stageIdx;
     hintViewer = NULL;
@@ -436,164 +446,55 @@ GameMain::GameMain(int _packIdx, int _stageIdx) {
     
     LoadResource(_layer, _ui);
     InitModel(_layer, _ui);
-    
-    cJSON* _stJ = ShareDataGetStageJSONAt(_packIdx, _stageIdx);
-    cJSON* _rcJ = cJSON_GetObjectItem(_stJ, "recipe");
-    
-    
+        
 #ifndef GAME_MAIN_EMPTY
-    rd = NULL;
-    rdLen = 0;
-    td = NULL;
-    tdLen = 0;
-    
-    int* _cook_td = NULL;
-    int _cook_tdLen = 0;
-    int _cook_rdLen = cJSON_GetArraySize(_rcJ) - 1;
-    int** _cook_rd = NULL;
-    int* _cook_rdArrLen = NULL;
-    
-    bool _hasTopping = cJSON_GetArrayItem(cJSON_GetArrayItem(_rcJ, cJSON_GetArraySize(_rcJ) - 1), 0)->valueint != -1;
-    
-    if(_cook_rdLen > 0) {
-        _cook_rd = (int**)calloc(_cook_rdLen, sizeof(int*));
-        _cook_rdArrLen = (int*)calloc(_cook_rdLen, sizeof(int));
+    if (_rdTd) {
+        rdTd = _rdTd;
+    } else {
+        rdTd = new GameMainRdTd(_packIdx, _stageIdx);
     }
-    
-    for(int i = 0; i < _cook_rdLen; i++) {
-        cJSON* _rdData = cJSON_GetArrayItem(_rcJ, i);
-        _cook_rdArrLen[i] = cJSON_GetArraySize(_rdData);
-        _cook_rd[i] = (int*)calloc(_cook_rdArrLen[i], sizeof(int));
-        for(int j = 0; j < _cook_rdArrLen[i]; j++) {
-            int _curT = cJSON_GetArrayItem(_rdData, j)->valueint;
-            bool _hasT = false;
-            for(int k = 0; k < rdLen; k++) {
-                if(rd[k] == _curT) {
-                    _hasT = true;
-                    break;
-                }
-            }
-            if(!_hasT) {
-                if(rd == NULL)
-                    rd = (int*)calloc(rdLen + 1, sizeof(int));
-                else
-                    rd = (int*)realloc(rd, (rdLen + 1) * sizeof(int));
-                rd[rdLen] = _curT;
-                rdLen++;
-            }
-            _cook_rd[i][j] = _curT;
+        
+    if (_baseIceCream && _playedIceCream) {
+        initWithIceCream = true;
+        baseIceCream = _baseIceCream;
+        iceCream = _playedIceCream;
+        baseIceCream->rdVec = rdTd->rdVec;
+        baseIceCream->tdVec = rdTd->tdVec;
+        iceCream->rdVec = rdTd->rdVec;
+        iceCream->tdVec = rdTd->tdVec;
+        
+        if (_nextIceCream) {
+            nextIceCream = _nextIceCream;
+            nextIceCream->rdVec = rdTd->rdVec;
+            nextIceCream->tdVec = rdTd->tdVec;
+        } else {
+            nextIceCream = NULL;
         }
     }
     
-    if(_hasTopping) {
-        cJSON* _tdData = cJSON_GetArrayItem(_rcJ, cJSON_GetArraySize(_rcJ) - 1);
-        _cook_tdLen = cJSON_GetArraySize(_tdData);
-        _cook_td = (int*)calloc(_cook_tdLen, sizeof(int));
-        for(int i = 0; i < _cook_tdLen; i++) {
-            int _curT = cJSON_GetArrayItem(_tdData, i)->valueint;
-            bool _hasT = false;
-            for(int k = 0; k < tdLen; k++) {
-                if(td[k] == _curT) {
-                    _hasT = true;
-                    break;
-                }
-            }
-            if(!_hasT) {
-                if(td == NULL)
-                    td = (int*)calloc(tdLen + 1, sizeof(int));
-                else
-                    td = (int*)realloc(td, (tdLen + 1) * sizeof(int));
-                td[tdLen] = _curT;
-                tdLen++;
-            }
-            _cook_td[i] = _curT;
-        }
-    }
-    
-    int _rdLen = cJSON_GetArraySize(cJSON_GetObjectItem(ShareDataGetRes(), "recipe"));
-    int _rd[_rdLen];
-    for(int i = 0; i < _rdLen; i++)
-        _rd[i] = i;
-    rdVec = VBArrayVectorInit(VBArrayVectorAlloc());
-    for(int i = 0; i < _rdLen; i++) {
-        cJSON* _item = cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "recipe"), _rd[i]);
-        int _type = cJSON_GetArrayItem(_item, 1)->valueint;
-        void* _r = NULL;
-        if(_type == 0) {
-            cJSON* _maskJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2));
-            _r = RecipeFillInit(_maskJS, hexToInt(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "fill"), cJSON_GetArrayItem(_item, 3)->valueint)->valuestring), cJSON_GetArrayItem(_item, 3)->valueint);
-        } else if(_type == 1) {
-            cJSON* _maskJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2));
-            cJSON* _thumbJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 3));
-            _r = RecipeMaskInit(_maskJS, _thumbJS, _rd[i]);
-        } else if(_type == 2) {
-            cJSON* _flowJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2));
-            _r = RecipeSubToppingFlowInit(_flowJS, cJSON_GetArrayItem(_item, 3)->valueint);
-        } else if(_type == 3) {
-            cJSON* _thumbJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2));
-            _r = RecipeSubToppingInit(_thumbJS, cJSON_GetArrayItem(_item, 3)->valueint);
-        } else if(_type == 4) {
-            _r = RecipeMixInit(cJSON_GetArrayItem(_item, 2),cJSON_GetArrayItem(_item, 3));
-        } else if(_type == 5) {
-            cJSON* _lastJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2));
-            cJSON* _lastBridgeJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 3));
-            _r = RecipeLastInit(_lastJS, _lastBridgeJS);
-        }
-        if(_r)
-            VBArrayVectorAddBack(rdVec, RTInit(true, _rd[i], _type, _r));
-    }
-    
-    int _tdLen = cJSON_GetArraySize(cJSON_GetObjectItem(ShareDataGetRes(), "topping"));
-    int _td[_tdLen];
-    for(int i = 0; i < _tdLen; i++)
-        _td[i] = i;
-    tdVec = VBArrayVectorInit(VBArrayVectorAlloc());
-    for(int i = 0; i < _tdLen; i++) {
-        cJSON* _item = cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "topping"), _td[i]);
-        int _type = cJSON_GetArrayItem(_item, 1)->valueint;
-        void* _t = NULL;
-        if(_type == 0) {
-            _t = ToppingSpuitInit(ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2)));
-        } else if(_type == 1) {
-            _t = ToppingFlowInit(ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2)));
-        } else if(_type == 2) {
-            _t = ToppingCreamInit(ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2)));
-        } else if(_type == 3) {
-            _t = ToppingCherryInit(ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2)), ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 3)));
-        }
-        if(_t)
-            VBArrayVectorAddBack(tdVec, RTInit(false, _td[i], _type, _t));
-    }
-    
-    InitCook(_cook_rd, _cook_rdLen, _cook_rdArrLen, _cook_td, _cook_tdLen);
+    InitCook();
 #endif
     
 #ifdef GAME_MAIN_EMPTY
-    InitCook(NULL, 0, NULL, NULL, 0);
+    InitCook();
 #endif
     isRecipeMode = true;
     InitRecipe();
     InitTopping();
     
 #ifdef HINT_COMPLETE
-    hintViewer = new HintViewer(this, true);
-    hintViewer->setSolution(_cook_rd, _cook_rdLen, _cook_rdArrLen, _cook_td, _cook_tdLen);
+    if (_hintViewer) {
+        hintViewer = _hintViewer;
+        hintViewer->setGameMain(this);
+        if (_isRecipeMode)
+            hintViewer->show();
+    } else {
+        hintViewer = new HintViewer(this, IsRecipeMode());
+        hintViewer->setSolution(rdTd->cook.rtc, rdTd->cook.rtcLen, rdTd->cook.rtcArrLen, rdTd->cook.tc, rdTd->cook.tcLen);
+    }
 #endif
     
     InitRope();
-    
-#ifndef GAME_MAIN_EMPTY
-    for(int i = 0; i < _cook_rdLen; i++) {
-        if(_cook_rd[i])
-            free(_cook_rd[i]);
-    }
-    if(_cook_rd)
-        free(_cook_rd);
-    if(_cook_rdArrLen)
-        free(_cook_rdArrLen);
-    if(_cook_td)
-        free(_cook_td);
-#endif
     
     printf("new GameMain\n");
 }
@@ -601,7 +502,7 @@ GameMain::GameMain(int _packIdx, int _stageIdx) {
 void GameMain::resetOtherStage(int _packIdx, int _stageIdx) {
 #ifdef HINT_COMPLETE
     if (hintViewer) {
-        delete hintViewer;
+        hintViewer->release();
         hintViewer = NULL;
     }
 #endif
@@ -612,59 +513,10 @@ void GameMain::resetOtherStage(int _packIdx, int _stageIdx) {
     FreeTopping();
     
 #ifndef GAME_MAIN_EMPTY
-    if(td)
-        free(td);
-    if(rd)
-        free(rd);
-    
-    while(VBArrayVectorGetLength(rdVec)) {
-        RT* _rt = (RT*)VBArrayVectorRemoveBack(rdVec);
-        switch(_rt->type) {
-            case 0:
-                RecipeFillFree((RecipeFill**)&_rt->data);
-                break;
-            case 1:
-                RecipeMaskFree((RecipeMask**)&_rt->data);
-                break;
-            case 2:
-                RecipeSubToppingFlowFree((RecipeSubToppingFlow**)&_rt->data);
-                break;
-            case 3:
-                RecipeSubToppingFree((RecipeSubTopping**)&_rt->data);
-                break;
-            case 4:
-                RecipeMixFree((RecipeMix**)&_rt->data);
-                break;
-            case 5:
-                RecipeLastFree((RecipeLast**)&_rt->data);
-                break;
-        }
-        RTFree(&_rt);
-    }
-    VBArrayVectorFree(&rdVec);
-    
-    while(VBArrayVectorGetLength(tdVec)) {
-        RT* _rt = (RT*)VBArrayVectorRemoveBack(tdVec);
-        switch(_rt->type) {
-            case 0:
-                ToppingSpuitFree((ToppingSpuit**)&_rt->data);
-                break;
-            case 1:
-                ToppingFlowFree((ToppingFlow**)&_rt->data);
-                break;
-            case 2:
-                ToppingCreamFree((ToppingCream**)&_rt->data);
-                break;
-            case 3:
-                ToppingCherryFree((ToppingCherry**)&_rt->data);
-                break;
-        }
-        RTFree(&_rt);
-    }
-    VBArrayVectorFree(&tdVec);
+    delete rdTd;
+    rdTd = NULL;
 #endif
 
-    
     if (packIdx != _packIdx) {
         FreeModel();
         UnloadResource();
@@ -678,200 +530,50 @@ void GameMain::resetOtherStage(int _packIdx, int _stageIdx) {
     }
     
     
-    cJSON* _stJ = ShareDataGetStageJSONAt(_packIdx, _stageIdx);
-    cJSON* _rcJ = cJSON_GetObjectItem(_stJ, "recipe");
-    
-    
 #ifndef GAME_MAIN_EMPTY
-    rd = NULL;
-    rdLen = 0;
-    td = NULL;
-    tdLen = 0;
+    rdTd = new GameMainRdTd(_packIdx, _stageIdx);
     
-    int* _cook_td = NULL;
-    int _cook_tdLen = 0;
-    int _cook_rdLen = cJSON_GetArraySize(_rcJ) - 1;
-    int** _cook_rd = NULL;
-    int* _cook_rdArrLen = NULL;
-    
-    bool _hasTopping = cJSON_GetArrayItem(cJSON_GetArrayItem(_rcJ, cJSON_GetArraySize(_rcJ) - 1), 0)->valueint != -1;
-    
-    if(_cook_rdLen > 0) {
-        _cook_rd = (int**)calloc(_cook_rdLen, sizeof(int*));
-        _cook_rdArrLen = (int*)calloc(_cook_rdLen, sizeof(int));
-    }
-    
-    for(int i = 0; i < _cook_rdLen; i++) {
-        cJSON* _rdData = cJSON_GetArrayItem(_rcJ, i);
-        _cook_rdArrLen[i] = cJSON_GetArraySize(_rdData);
-        _cook_rd[i] = (int*)calloc(_cook_rdArrLen[i], sizeof(int));
-        for(int j = 0; j < _cook_rdArrLen[i]; j++) {
-            int _curT = cJSON_GetArrayItem(_rdData, j)->valueint;
-            bool _hasT = false;
-            for(int k = 0; k < rdLen; k++) {
-                if(rd[k] == _curT) {
-                    _hasT = true;
-                    break;
-                }
-            }
-            if(!_hasT) {
-                if(rd == NULL)
-                    rd = (int*)calloc(rdLen + 1, sizeof(int));
-                else
-                    rd = (int*)realloc(rd, (rdLen + 1) * sizeof(int));
-                rd[rdLen] = _curT;
-                rdLen++;
-            }
-            _cook_rd[i][j] = _curT;
-        }
-    }
-    
-    if(_hasTopping) {
-        cJSON* _tdData = cJSON_GetArrayItem(_rcJ, cJSON_GetArraySize(_rcJ) - 1);
-        _cook_tdLen = cJSON_GetArraySize(_tdData);
-        _cook_td = (int*)calloc(_cook_tdLen, sizeof(int));
-        for(int i = 0; i < _cook_tdLen; i++) {
-            int _curT = cJSON_GetArrayItem(_tdData, i)->valueint;
-            bool _hasT = false;
-            for(int k = 0; k < tdLen; k++) {
-                if(td[k] == _curT) {
-                    _hasT = true;
-                    break;
-                }
-            }
-            if(!_hasT) {
-                if(td == NULL)
-                    td = (int*)calloc(tdLen + 1, sizeof(int));
-                else
-                    td = (int*)realloc(td, (tdLen + 1) * sizeof(int));
-                td[tdLen] = _curT;
-                tdLen++;
-            }
-            _cook_td[i] = _curT;
-        }
-    }
-    
-    int _rdLen = cJSON_GetArraySize(cJSON_GetObjectItem(ShareDataGetRes(), "recipe"));
-    int _rd[_rdLen];
-    for(int i = 0; i < _rdLen; i++)
-        _rd[i] = i;
-    rdVec = VBArrayVectorInit(VBArrayVectorAlloc());
-    for(int i = 0; i < _rdLen; i++) {
-        cJSON* _item = cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "recipe"), _rd[i]);
-        int _type = cJSON_GetArrayItem(_item, 1)->valueint;
-        void* _r = NULL;
-        if(_type == 0) {
-            cJSON* _maskJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2));
-            _r = RecipeFillInit(_maskJS, hexToInt(cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "fill"), cJSON_GetArrayItem(_item, 3)->valueint)->valuestring), cJSON_GetArrayItem(_item, 3)->valueint);
-        } else if(_type == 1) {
-            cJSON* _maskJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2));
-            cJSON* _thumbJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 3));
-            _r = RecipeMaskInit(_maskJS, _thumbJS, _rd[i]);
-        } else if(_type == 2) {
-            cJSON* _flowJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2));
-            _r = RecipeSubToppingFlowInit(_flowJS, cJSON_GetArrayItem(_item, 3)->valueint);
-        } else if(_type == 3) {
-            cJSON* _thumbJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2));
-            _r = RecipeSubToppingInit(_thumbJS, cJSON_GetArrayItem(_item, 3)->valueint);
-        } else if(_type == 4) {
-            _r = RecipeMixInit(cJSON_GetArrayItem(_item, 2),cJSON_GetArrayItem(_item, 3));
-        } else if(_type == 5) {
-            cJSON* _lastJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2));
-            cJSON* _lastBridgeJS = ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 3));
-            _r = RecipeLastInit(_lastJS, _lastBridgeJS);
-        }
-        if(_r)
-            VBArrayVectorAddBack(rdVec, RTInit(true, _rd[i], _type, _r));
-    }
-    
-    int _tdLen = cJSON_GetArraySize(cJSON_GetObjectItem(ShareDataGetRes(), "topping"));
-    int _td[_tdLen];
-    for(int i = 0; i < _tdLen; i++)
-        _td[i] = i;
-    tdVec = VBArrayVectorInit(VBArrayVectorAlloc());
-    for(int i = 0; i < _tdLen; i++) {
-        cJSON* _item = cJSON_GetArrayItem(cJSON_GetObjectItem(ShareDataGetRes(), "topping"), _td[i]);
-        int _type = cJSON_GetArrayItem(_item, 1)->valueint;
-        void* _t = NULL;
-        if(_type == 0) {
-            _t = ToppingSpuitInit(ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2)));
-        } else if(_type == 1) {
-            _t = ToppingFlowInit(ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2)));
-        } else if(_type == 2) {
-            _t = ToppingCreamInit(ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2)));
-        } else if(_type == 3) {
-            _t = ToppingCherryInit(ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2)), ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 3)));
-        }
-        if(_t)
-            VBArrayVectorAddBack(tdVec, RTInit(false, _td[i], _type, _t));
-    }
-    
-    InitCook(_cook_rd, _cook_rdLen, _cook_rdArrLen, _cook_td, _cook_tdLen);
+    InitCook();
 #endif
     
-#ifdef GAME_MAIN_EMPTY
-    InitCook(NULL, 0, NULL, NULL, 0);
-#endif
     isRecipeMode = true;
     InitRecipe();
     InitTopping();
     
 #ifdef HINT_COMPLETE
     hintViewer = new HintViewer(this, true);
-    hintViewer->setSolution(_cook_rd, _cook_rdLen, _cook_rdArrLen, _cook_td, _cook_tdLen);
+    hintViewer->setSolution(rdTd->cook.rtc, rdTd->cook.rtcLen, rdTd->cook.rtcArrLen, rdTd->cook.tc, rdTd->cook.tcLen);
 #endif
     
     InitRope();
-    
-#ifndef GAME_MAIN_EMPTY
-    for(int i = 0; i < _cook_rdLen; i++) {
-        if(_cook_rd[i])
-            free(_cook_rd[i]);
-    }
-    if(_cook_rd)
-        free(_cook_rd);
-    if(_cook_rdArrLen)
-        free(_cook_rdArrLen);
-    if(_cook_td)
-        free(_cook_td);
-#endif
-    
+        
     printf("reset GameMain\n");
 
 }
 
 void GameMain::ClearToppingTween() {
-    if(toppingTweenerParam) {
-        if(toppingTweener)
-            toppingTweener->removeTween(toppingTweenerParam);
-        delete toppingTweenerParam;
-    }
-    toppingTweenerParam = NULL;
     if(toppingTweener) {
         delete toppingTweener;
+        toppingTweener = NULL;
     }
-    toppingTweener = NULL;
-    toppingTweenerTimeCount = 0.0;
 }
 
 void GameMain::UpdateToppingTween(float _deltaTime) {
     if(toppingTweener) {
-        toppingTweenerTimeCount += _deltaTime;
-        toppingTweener->step(toppingTweenerTimeCount * 1000);
-        if(toppingContainer)
-            toppingContainer->setPosition(CCPointMake(0, toppingTweenerY));
-        if(toppingTweenerTimeCount > toppingTweenerTime)
-            ClearToppingTween();
+        toppingTweener->update(_deltaTime);
     }
+    if(toppingContainer)
+        toppingContainer->setPosition(CCPointMake(0, toppingTweenerY));
 }
 
 void GameMain::BeginToppingTween(float _y, float _time, bool _is_ease_out) {
     ClearToppingTween();
-    toppingTweener = new Tweener();
-    toppingTweenerTime = _time;
-    toppingTweenerParam = new TweenerParam(toppingTweenerTime * 1000, EXPO, _is_ease_out ? EASE_OUT : EASE_IN);
+    
+    toppingTweener = new TweenerWrapper();
+    
+    TweenerParam *toppingTweenerParam = new TweenerParam(_time * 1000, EXPO, _is_ease_out ? EASE_OUT : EASE_IN);
     toppingTweenerParam->addProperty(&toppingTweenerY, _y);
-    toppingTweener->addTween(*toppingTweenerParam);
+    toppingTweener->setParamAndBegin(toppingTweenerParam, &toppingTweenerY, _y);
 }
 
 GameMain::~GameMain() {
@@ -881,70 +583,21 @@ GameMain::~GameMain() {
     FreeCook();
     
 #ifndef GAME_MAIN_EMPTY
-    if(td)
-        free(td);
-    if(rd)
-        free(rd);
-    
-    while(VBArrayVectorGetLength(rdVec)) {
-        RT* _rt = (RT*)VBArrayVectorRemoveBack(rdVec);
-        switch(_rt->type) {
-            case 0:
-                RecipeFillFree((RecipeFill**)&_rt->data);
-                break;
-            case 1:
-                RecipeMaskFree((RecipeMask**)&_rt->data);
-                break;
-            case 2:
-                RecipeSubToppingFlowFree((RecipeSubToppingFlow**)&_rt->data);
-                break;
-            case 3:
-                RecipeSubToppingFree((RecipeSubTopping**)&_rt->data);
-                break;
-            case 4:
-                RecipeMixFree((RecipeMix**)&_rt->data);
-                break;
-            case 5:
-                RecipeLastFree((RecipeLast**)&_rt->data);
-                break;
-        }
-        RTFree(&_rt);
-    }
-    VBArrayVectorFree(&rdVec);
-    
-    while(VBArrayVectorGetLength(tdVec)) {
-        RT* _rt = (RT*)VBArrayVectorRemoveBack(tdVec);
-        switch(_rt->type) {
-            case 0:
-                ToppingSpuitFree((ToppingSpuit**)&_rt->data);
-                break;
-            case 1:
-                ToppingFlowFree((ToppingFlow**)&_rt->data);
-                break;
-            case 2:
-                ToppingCreamFree((ToppingCream**)&_rt->data);
-                break;
-            case 3:
-                ToppingCherryFree((ToppingCherry**)&_rt->data);
-                break;
-        }
-        RTFree(&_rt);
-    }
-    VBArrayVectorFree(&tdVec);
+    rdTd->release();
 #endif
     
     FreeModel();
     UnloadResource();
     
 #ifdef HINT_COMPLETE
-    delete hintViewer;
+    hintViewer->release();
 #endif
     
     printf("delete GameMain\n");
 }
 
 void GameMain::NextIceCream() {
-    nextIceCream = new IceCream(this, rdVec, tdVec, NULL);
+    nextIceCream = new IceCream(this, rdTd->rdVec, rdTd->tdVec, NULL);
     nextIceCream->setScale(0.5);
     nextIceCream->setPosition(CCPointMake(0, -63));
     if(modelArm) {
@@ -992,7 +645,20 @@ void GameMain::NextIceCreamUpdate(float _deltaTime) {
 
 void GameMain::NewIceCream() {
     delIceCream = iceCream;
-    iceCream = new IceCream(this, rdVec, tdVec, baseIceCream);
+    iceCream = new IceCream(this, rdTd->rdVec, rdTd->tdVec, this, baseIceCream);
+    if(recipeContainer)
+        recipeContainer->hitTarget = iceCream;
+    if(toppingContainer)
+        toppingContainer->SetCook(iceCream);
+    iceCream->setScale(0.5);
+    iceCream->setPosition(CCPointMake(-2, 92-63));
+    modelRailIce[1]->addChild(iceCream);
+    recipeContainer->hitTarget = iceCream;
+    
+    modelRail->play();
+}
+
+void GameMain::NewIceCreamWithBack() {
     if(recipeContainer)
         recipeContainer->hitTarget = iceCream;
     if(toppingContainer)
@@ -1211,6 +877,14 @@ void GameMain::touchCancel(CCTouch* _touch, CCPoint _location) {
     touchEndAndCancel(_touch, _location);
 }
 
+void GameMain::retainIceCream()
+{
+    baseIceCream->retain();
+    iceCream->retain();
+    if (nextIceCream) {
+        nextIceCream->retain();
+    }
+}
 
 // for HintViewer
 float GameMain::getRecipePositionY(int recipeIdx)
@@ -1220,7 +894,7 @@ float GameMain::getRecipePositionY(int recipeIdx)
 
 void GameMain::recipeContainerCallBack(int recipeIdx)
 {
-    iceCream->GetClear();
+    //iceCream->GetClear();
 #ifdef HINT_COMPLETE
     printf("step %s\n", hintViewer->step(recipeIdx) ? "ok" : "no");
 #endif
@@ -1248,3 +922,23 @@ void GameMain::toppingContainerCallBack(int recipeIdx)
     }
 #endif
 }
+
+void GameMain::CallbackSlideNextRope(void* _obj) {
+    if(reinterpret_cast<GameMain*>(_obj)->IsActiveUI()) {
+        reinterpret_cast<GameMain*>(_obj)->NextIceCream();
+        reinterpret_cast<GameMain*>(_obj)->nextRopeSlider->SetEnable(false);
+        reinterpret_cast<GameMain*>(_obj)->recipeContainerCallBack(-1);
+    }
+}
+
+void GameMain::CallbackSlideToppingRope(void* _obj) {
+    if(reinterpret_cast<GameMain*>(_obj)->IsActiveUI() && 
+       reinterpret_cast<GameMain*>(_obj)->IsRecipeMode()) {
+        reinterpret_cast<GameMain*>(_obj)->SwapRecipeAndToppingMode();
+        reinterpret_cast<GameMain*>(_obj)->toppingRopeSlider->SetEnable(false);
+        if(reinterpret_cast<GameMain*>(_obj)->nextRopeSlider)
+            reinterpret_cast<GameMain*>(_obj)->nextRopeSlider->SetEnable(false);
+        reinterpret_cast<GameMain*>(_obj)->recipeContainerCallBack(-2);
+    }
+}
+

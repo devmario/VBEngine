@@ -1,4 +1,5 @@
 {
+    
     "pack": [
              {"libName":"menu_tutorial",
              "objLayer":["stage_bg0_wall", "stage_bg0"],
@@ -44,4 +45,3 @@
              {"libName":"menu_ad"}
              ]
 }
-

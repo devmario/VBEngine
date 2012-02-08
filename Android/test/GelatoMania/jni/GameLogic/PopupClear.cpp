@@ -121,7 +121,6 @@ VBStringFree(&str)
 }
 
 void PopupClear::Update(float _deltaTime) {
-    clearTween.step(elapseTime);
     if(fbBT)
         fbBT->setPosition(CCPointMake(fbX, FB_Y));
     if(twBT)

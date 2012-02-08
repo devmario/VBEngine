@@ -32,7 +32,6 @@ THE SOFTWARE.
 
 #include <stdlib.h>
 
-
 namespace cocos2d {
 
 CCEGLView::CCEGLView()
@@ -129,7 +128,7 @@ void CCEGLView::setContentScaleFactor(float contentScaleFactor)
 
 void CCEGLView::setViewPortInPoints(float x, float y, float w, float h)
 {
-	if (m_bNotHVGA)
+    if (m_bNotHVGA)
     {
         float factor = m_fScreenScaleFactor / CC_CONTENT_SCALE_FACTOR();
         glViewport((GLint)(x * factor) + m_rcViewPort.origin.x,

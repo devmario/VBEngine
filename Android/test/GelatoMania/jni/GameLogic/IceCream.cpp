@@ -5,12 +5,28 @@
 #include "GameMain.h"
 
 void IceCream::VBModelUpdate(float _tick) {
+    if((isRunClearCheck || isRun_draw_pixel_thread || isRun_mix_thread) && prev == NULL) {
+        //계산중
+        color.a = 0xAA;
+    } else {
+        //계산완료
+        color.a = 0xFF;
+    }
     Reshape();
 }
 
-IceCream::IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCream* _baseIceCream, int* _recipe, int _recipe_len) : VBModel(NULL) {
+IceCream::IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCreamProtocol* _protocol, IceCream* _baseIceCream, int* _recipe, int _recipe_len) : VBModel(NULL) {
+    protocol = _protocol;
+    draw_pixel_thread = NULL;
+    checker_thread = NULL;
+    mix_thread = NULL;
+    isRunClearCheck = false;
+    isRun_draw_pixel_thread = false;
+    isRun_mix_thread = false;
+    isRun_draw_pixel_threadReal = false;
     
     gameMain = _gameMain;
+    
     rdVec = _rdVec;
     tdVec = _tdVec;
     
@@ -93,7 +109,6 @@ IceCream::IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _t
     prev = NULL;
     
     need_update_pixel = false;
-    need_update_bitmask = false;
     need_update_model = false;
     
     if(_recipe) {
@@ -105,16 +120,19 @@ IceCream::IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _t
 }
 
 IceCream::~IceCream() {
+    while(isRun_mix_thread || isRun_draw_pixel_thread || isRunClearCheck) {
+        usleep(16666);
+    }
     if(getChildren()) {
         while(getChildren()->count()) {
             removeChild((VBModel*)getChildren()->objectAtIndex(0), false);
         }
     }
-    
-    if(next) {
-        delete next;
+    if (next) {
+        next->release();
         next = NULL;
     }
+    
     
     while(VBArrayVectorGetLength(subToppingFlow)) {
         VBArrayVector* _vec = (VBArrayVector*)VBArrayVectorRemoveBack(subToppingFlow);
@@ -175,33 +193,7 @@ void IceCream::Reshape() {
         next->Reshape();
     else {
         
-        if(need_update_bitmask) {
-            bitmaskMerge = 0;
-            
-            isClear = 0;
-            totalClear = 0;
-            
-            
-            for(int i = 0; i < VBImageGetWidth(imgBitmask); i++) {
-                for(int j = 0; j < VBImageGetHeight(imgBitmask); j++) {
-                    unsigned long* _bm = (unsigned long*)VBImageGetPixelColor(imgBitmask, i, j);
-                    bitmaskMerge |= *_bm;
-                    if(*_bm != 0)
-                        totalClear++;
-                    if(baseIceCream) {
-                        unsigned long* _base_bm = (unsigned long*)VBImageGetPixelColor(baseIceCream->imgBitmask, i, j);
-                        if(*_base_bm != 0 && *_bm != 0) {
-                            if(*_bm == *_base_bm)
-                                isClear++;
-                        }
-                    }
-                }
-            }
-            
-            need_update_bitmask = false;
-        }
-        
-        if(need_update_pixel) {
+        if(need_update_pixel && !isRun_draw_pixel_thread) {
             VBTextureUnload(texBG);
             VBTextureLoadImage(texBG, imgBG);
             modelBG->SetTexture(texBG);
@@ -376,9 +368,9 @@ bool IceCream::AddNextIceCream(int* _recipe, int _recipe_len) {
         return next->AddNextIceCream(_recipe, _recipe_len);
     else {
         if(baseIceCream)
-            return AddNextIceCream(new IceCream(gameMain, rdVec, tdVec, baseIceCream->next, _recipe, _recipe_len));
+            return AddNextIceCream(new IceCream(gameMain, rdVec, tdVec, protocol, baseIceCream->next, _recipe, _recipe_len));
         else
-            return AddNextIceCream(new IceCream(gameMain, rdVec, tdVec, NULL, _recipe, _recipe_len));
+            return AddNextIceCream(new IceCream(gameMain, rdVec, tdVec, protocol, NULL, _recipe, _recipe_len));
     }
 }
 
@@ -386,6 +378,11 @@ bool IceCream::AddNextIceCream(IceCream* _other) {
     if(next)
         return next->AddNextIceCream(_other);
     else {
+        Reshape();
+        while (isRunClearCheck || isRun_mix_thread || isRun_draw_pixel_thread) {
+            usleep(16666);
+        }
+        
         next = _other;
         next->prev = this;
         
@@ -451,7 +448,7 @@ void IceCream::DragEndMount(bool _success) {
                         
                         if(_success) {
                             ClearMask(NULL, 1);
-                            
+                            GetClear();
                         }
                         
                         need_update_model = true;
@@ -463,3 +460,10 @@ void IceCream::DragEndMount(bool _success) {
         }
     }
 }
+
+void IceCream::setGameMain(GameMain *_gameMain) {
+    gameMain = _gameMain;
+    protocol = (IceCreamProtocol*)_gameMain;
+}
+
+

@@ -158,7 +158,6 @@ void CCDirector::setGLDefaultValues(void)
 	// This method SHOULD be called only after openGLView_ was initialized
 	assert(m_pobOpenGLView);
 
-
 	setAlphaBlending(true);
 	setDepthTest(true);
 	setProjection(m_eProjection);

@@ -2,9 +2,7 @@
 #define gelatomania_Popup_h
 
 #include "View.h"
-#include "CppTweener.h"
-
-using namespace tween;
+#include "Tweener.h"
 
 class PopupTweenListener;
 
@@ -43,11 +41,7 @@ public:
     
     bool isClosed;
     int closeCount;
-    float elapseTime;
-    Tweener showTween;
-    TweenerParam slideParam;
-    TweenerParam* runslideParam;
-    PopupTweenListener* listner;
+    TweenerWrapper *showTween;
     
     VBObjectFile2D* obj;
     VBTexture* tex;

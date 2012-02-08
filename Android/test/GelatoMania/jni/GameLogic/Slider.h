@@ -2,9 +2,7 @@
 #define gelatomania_Slider_h
 
 #include "VBModel.h"
-#include "CppTweener.h"
-
-using namespace tween;
+#include "Tweener.h"
 
 enum SliderDir {
     SliderDir_Horizontal    =   0x01,
@@ -59,12 +57,8 @@ private:
     
     void ClearSliderTween();
     void BeginSliderTween(float _value, float _time, bool _is_elastic, bool _use_callback, float _delayTime = 0.0);
-    void UpdateSliderTween(float _deltaTime);
     
-    Tweener* sliderTweener;
-    TweenerParam* sliderTweenerParam;
-    float sliderTweenerTime;
-    float sliderTweenerTimeCount;
+    TweenerWrapper *sliderTweener;
     
     CCTouch* touch;
     CCPoint preLocation;

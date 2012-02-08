@@ -6,12 +6,13 @@
 HintViewer::HintViewer(GameMain *_parentModel, bool _showFlag, VBObjectFile2D *_obj, VBTexture *_tex)
 {
     if (_parentModel) {
+        retainCount = 1;
         VBObjectFile2DLibraryNameID *_library_name_id = NULL;
         VBString *_str = NULL;
         state = hintStateItem;
         rotationR = 0.0;
         solutionFlag = false;
-        initStep();
+        initStep(false);
         
         if (_obj && _tex) {
             object = _obj;
@@ -197,12 +198,20 @@ void HintViewer::update(float _deltaTime)
     }
 }
 
-void HintViewer::initStep() {
-    setState(hintStateItem);
+void HintViewer::initStep(bool isWrongStep) {
+    if (!isWrongStep) {
+        setState(hintStateItem);
+    } else {
+        setState(hintStateReset);
+    }
     currentSolutionIdx = 1;
     maskStack[0] = -1;
     maskStack[1] = -1;
     maskOn = false;
+    
+    wrongMode = hintWrongNone;
+    wrongIdx = -1;
+    wrongIdxForMask = -1;
 }
 
 
@@ -216,7 +225,7 @@ bool HintViewer::step(int itemIdx)
     int tempI = 0;
     
     if (itemIdx == -3) {
-        initStep();
+        initStep(false);
         return false;
     }
     
@@ -245,7 +254,16 @@ bool HintViewer::step(int itemIdx)
                     setState(hintStateIceCream);
                 }
             } else {
-                returnValue = wrongStep();
+                if (isMask[itemIdx]) {
+                    if (!maskOn) {
+                        returnValue = wrongStep(hintWrongMaskOn, itemIdx);
+                    } else {
+                        returnValue = wrongStep(hintWrongMaskOff, itemIdx);
+                    }
+                    
+                } else {
+                    returnValue = wrongStep(hintWrongReset, itemIdx);
+                }
             }
             break;
         case hintStateAdd:
@@ -268,7 +286,7 @@ bool HintViewer::step(int itemIdx)
                         break;
                 }
             } else {
-                returnValue = wrongStep();
+                returnValue = wrongStep(hintWrongReset, itemIdx);
             }
             break;
         case hintStateIceCream:
@@ -292,7 +310,7 @@ bool HintViewer::step(int itemIdx)
                     setState(hintStateItem);
                 }
             } else {
-                returnValue = wrongStep();
+                returnValue = wrongStep(hintWrongReset, itemIdx);
             }
             break;
         case hintStateTopping:
@@ -300,14 +318,14 @@ bool HintViewer::step(int itemIdx)
                 currentSolutionIdx++;
                 setState(hintStateToppingItem);
             } else {
-                returnValue = wrongStep();
+                returnValue = wrongStep(hintWrongReset, itemIdx);
             }
             break;
         case hintStateToppingItem:case hintStateLeft:case hintStateRight:
             if (solution[currentSolutionIdx] == itemIdx) {
                 currentSolutionIdx++;
             } else {
-                returnValue = wrongStep();
+                returnValue = wrongStep(hintWrongReset, itemIdx);
             }
             break;
         default:
@@ -362,7 +380,6 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
             idx++;
         }
     }
-    initStep();
     solutionFlag = true;
 //    printf("solution: ");
 //    for (int i=0; i<solutionLen; i++) {
@@ -375,10 +392,61 @@ void HintViewer::setSolution(int** recipe, int recipeLen, int* recipeArrLen, int
     
 }
 
-bool HintViewer::wrongStep()
+bool HintViewer::wrongStep(hintStepWrongLevel _wrongType, int _wrongIdx)
 {
-    initStep();
-    setState(hintStateReset);
+    cout << "wrong step: " << _wrongType << '\n';
+    if (wrongMode == hintWrongNone) {   //처음 틀렸을때
+        wrongMode = _wrongType;
+        wrongIdx = _wrongIdx;
+        switch (_wrongType) {
+            case hintWrongReset: //go to reset
+                initStep(true);
+                break;
+            case hintWrongMaskOn: //마스크를 잘못 씌웠을때
+                setState(hintStateIceCream);
+                break;
+            case hintWrongMaskOff: //마스크를 잘못 벗겼을때
+                currentSolutionIdx--;
+                wrongMode = hintWrongNone;
+                setState(hintStateItem);
+                break;
+            default:
+                break;
+        }
+    } else {
+        switch (wrongMode) {
+            case hintWrongMaskOn: //이전에 마스크를 잘못 씌웠을때
+                if (wrongIdx == _wrongIdx) {    //잘못 씌우고 벗겼을때
+                    maskOn = false;
+                    setState(hintStateItem);
+                    wrongMode = hintWrongNone;
+                } else if (isMask[_wrongIdx]) { //마스크를 잘못 씌우고 또 잘못 씌웠을때
+                    wrongIdxForMask = _wrongIdx;
+                    wrongMode = hintWrongMaskOnDouble;
+                } else {    //마스크를 잘못 씌우고 다른걸 칠했을때(reset)
+                    initStep(true);
+                }
+                
+                break;
+            case hintWrongMaskOnDouble: //마스크를 두번 잘못 씌웠을때
+                if (wrongIdxForMask == _wrongIdx) { //하나를 벗겼을때
+                    wrongMode = hintWrongMaskOn;
+                    wrongIdxForMask = -1;
+                } else {    //안벗기고 다른거 칠할때
+                    initStep(true);
+                }
+                break;
+            case hintWrongMaskOff:  //이전에 마스크를 잘못 벗겼을때
+                if (wrongIdx == _wrongIdx) {    //다시 씌웠을때
+                    
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    
     return false;
 }
 
@@ -387,5 +455,24 @@ void HintViewer::checkAndFinish()
     if (currentSolutionIdx >= solutionLen) {
         hide();
         currentSolutionIdx = 0;
+    }
+}
+
+void HintViewer::setGameMain(GameMain* _gameMain) {
+    parent = _gameMain;
+}
+
+void HintViewer::retain() {
+    if (retainCount > 0) {
+        retainCount++;
+    }
+}
+
+void HintViewer::release() {
+    if (retainCount > 1) {
+        hide();
+        retainCount--;
+    } else if (retainCount == 1) {
+        delete this;
     }
 }

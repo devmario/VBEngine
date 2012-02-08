@@ -157,11 +157,14 @@ bool IceCream::AddTopping(int _topping) {
                     break;
             }
         }
+        GetClear();
         return true;
     }
 }
 
 bool IceCream::IsPossibleTopping(int _topping) {
+    if(isRunClearCheck || isRun_mix_thread || isRun_draw_pixel_thread)
+        return false;
     if(next) {
         return next->IsPossibleTopping(_topping);
     } else {

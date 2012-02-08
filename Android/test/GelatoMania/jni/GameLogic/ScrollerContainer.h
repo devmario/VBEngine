@@ -3,9 +3,7 @@
 
 #include "VBModel.h"
 #include "Scroller.h"
-#include "CppTweener.h"
-
-using namespace tween;
+#include "Tweener.h"
 
 typedef struct CellData {
     int index;
@@ -30,6 +28,8 @@ class ScrollerContainer : public VBModel {
     float GetCellValue(CellData* _cell);
 public:
     virtual void ResetData();
+    
+    bool is_mask;
     
     //눈에 보이는 Cell: CellData*가 들어있음
     VBArrayVector* cell;
@@ -65,9 +65,7 @@ public:
     float cellSizeTotal; //스크롤러 컨테이너의 내부에 있는 모든 행또는 열들의 넓이 또는 높이를 더한 값
     
     float elapseTime;
-    Tweener slideTween;
-    TweenerParam param;
-    TweenerParam* runparam;
+    TweenerWrapper *slideTween;
     
     float touchY;
     
@@ -81,7 +79,8 @@ public:
                       float _width = 100.0, float _height = 100.0, 
                       float _margin = 5.0, float _marginDirBegin = 5.0, float _marginDirEnd = 5.0,
                       ScrollerContainerAlign _align = ScrollerContainerAlign_VO,
-                      bool _is_center_cell = false);
+                      bool _is_center_cell = false,
+                      bool _is_mask = true);
     ~ScrollerContainer();
     
     bool enable;
@@ -114,6 +113,8 @@ public:
     virtual void CellTouchEnd(CellData* _cell, CCTouch* _touch, CCPoint _location);
     virtual void CellTouchCancel(CellData* _cell, CCTouch* _touch, CCPoint _location);
     virtual void CellUpdate(CellData* _cell, float _deltaTime);
+    
+	virtual void visit(void);
 };
 
 #endif
