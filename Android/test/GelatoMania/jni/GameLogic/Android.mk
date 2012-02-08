@@ -48,8 +48,9 @@ LOCAL_SRC_FILES := \
 	NewAndSelectUser.cpp\
 	PlatformFriendList.cpp\
 	ManiaFriendList.cpp\
+	GameMainRdTd.cpp\
+	AndroidNative.cpp\
 	main.cpp\
-	AndroidNative.cpp
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../Cocos2dx \

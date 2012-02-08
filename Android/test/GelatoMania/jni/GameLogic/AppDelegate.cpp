@@ -61,7 +61,11 @@ bool AppDelegate::initInstance()
 #endif
 		//CCDirector::sharedDirector()->setDeviceOrientation(kCCDeviceOrientationLandscapeLeft);
         CCDirector::sharedDirector()->setProjection(kCCDirectorProjection2D);
+#ifdef __ANDROID__
+        CCDirector::sharedDirector()->enableRetinaDisplay(false);
+#else
         CCDirector::sharedDirector()->enableRetinaDisplay(true);
+#endif
         
         bRet = true;
     } while (0);

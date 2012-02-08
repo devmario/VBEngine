@@ -5,17 +5,6 @@
 #include "vbHTTP.h"
 #include "PlatformFunctions.h"
 
-#include <jni.h>
-#include <stdio.h>
-#include <string.h>
-#include <android/log.h>
-#define LOG_TAG  "MainMenu"
-#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , LOG_TAG, __VA_ARGS__)
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO   , LOG_TAG, __VA_ARGS__)
-#define LOGW(...) __android_log_print(ANDROID_LOG_WARN   , LOG_TAG, __VA_ARGS__)
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , LOG_TAG, __VA_ARGS__)
-
 MainMenu::MainMenu() {
     //View::View();
     
@@ -104,25 +93,14 @@ void MainMenu::touchBegin(CCTouch* _touch, CCPoint _location) {
 }
 
 void MainMenu::touchMove(CCTouch* _touch, CCPoint _location) {
+    
 }
-
-void MainMenuFacebookLogInComplete(cJSON* _json, void* _reference) {
-	LOGD("#@@# facebook login complete! _json: %x, _reference:%x", _json, _reference);
-}
-
 
 void MainMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
-	if(touchPlayBT == _touch) {
+    if(touchPlayBT == _touch) {
         playBT->gotoAndPlay(6);
         touchPlayBT = NULL;
         ShareDataGetRoot()->ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypePackSelect, 0);
-        bool ret = PlatformFacebookIsLogIn();
-        if (ret == false) {
-        	LOGD("#@@# facebook login start!");
-        	PlatformFacebookLogIn(PlatformCallbackCreate(this, MainMenuFacebookLogInComplete));
-        } else {
-        	LOGD("#@@# facebook already login!");
-        }
     }
     
     TOUCHENDBT(touchRank, rankBT, _location, _touch, ,rankBT->gotoAndStop(0));

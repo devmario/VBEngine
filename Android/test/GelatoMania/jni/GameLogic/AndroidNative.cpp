@@ -1,3 +1,5 @@
+#ifdef __ANDROID__
+
 #include "AndroidNative.h"
 #include "cJSON.h"
 
@@ -318,3 +320,5 @@ JNIEXPORT void JNICALL Java_com_vanillabreeze_gelatomania_GelatoManiaActivity_na
 
 	g_FacebookFeedCB.function(NULL, g_FacebookFeedCB.reference);
 }
+
+#endif /*__ANDROID__*/
