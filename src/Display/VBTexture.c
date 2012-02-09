@@ -7,6 +7,20 @@
 #include <string.h>
 #include <stdlib.h>
 
+
+#ifdef __ANDROID__
+VBArrayVector* _texVec = NULL;
+void VBTextureStackReloadBuffer(void) {
+    for(int i = 0; i < _texVec->len; i++) {
+        VBTexture* _tex = VBArrayVectorGetDataAt(_texVec, i);
+        VBImage* _tmp_img = VBImageCopy(_tex->img_android);
+        VBTextureUnload(_tex);
+        VBTextureLoadImage(_tex, _tmp_img);
+        VBImageFree(&_tmp_img);
+    }
+}
+#endif
+
 VBTexture* VBTextureAlloc(void) {
 	VBTexture* _tex = VBSystemCalloc(1, sizeof(VBTexture));
 	
@@ -16,6 +30,12 @@ VBTexture* VBTextureAlloc(void) {
 										 "VBEngine Log: VBTextureAlloc() - 메모리 할당에 실패하였습니다.");
 #endif
 	
+    #ifdef __ANDROID__
+    if(_texVec == NULL)
+        _texVec = VBArrayVectorInit(VBArrayVectorAlloc());
+    VBArrayVectorAddBack(_texVec, _tex);
+    #endif
+    
 	return _tex;
 }
 
@@ -66,6 +86,12 @@ void VBTextureFree(VBTexture** _tex) {
 	
 	VBTextureInit(*_tex);
 	
+    #ifdef __ANDROID__
+    VBArrayVectorRemove(_texVec, *_tex);
+    if(_texVec->len == 0)
+        VBArrayVectorFree(&_texVec);
+    #endif
+    
 	VBSystemFree(*_tex);
 	*_tex = VBNull;
 }
@@ -77,6 +103,10 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
 										 "VBEngine Log: VBTextureLoadImage() - VBNull인 텍스쳐를 Load 하려고 합니다. VBTextureAlloc하지 않은 이미지를 사용했을 수 있습니다.");
 #endif
 	
+    #ifdef __ANDROID__
+    _tex->img_android = VBImageCopy(_img);
+    #endif
+    
 	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 	GLboolean _state;
 	glGetBooleanv(GL_TEXTURE_2D, &_state);
@@ -193,6 +223,10 @@ void VBTextureUnload(VBTexture* _tex) {
 		_tex->width = 0;
 		_tex->height = 0;
 	}
+#ifdef __ANDROID__
+    if(_tex->img_android)
+        VBImageFree(&_tex->img_android);
+#endif
 }
 
 VBUShort VBTextureGetID(VBTexture* _tex) {

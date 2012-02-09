@@ -25,6 +25,12 @@
 extern "C" {
 #endif
 	
+    
+//#define __ANDROID__
+#ifdef __ANDROID__
+    void VBTextureStackReloadBuffer(void);
+#endif
+    
 	/**
 	 @brief VBTexture의 구조체 타입.
 	 */
@@ -34,6 +40,9 @@ extern "C" {
 	 @brief VBTexture의 구조체.
 	 */	
 	struct VBTexture {
+        #ifdef __ANDROID__
+        VBImage* img_android;
+        #endif
 		/*!
 		 color 타입
 		 */
