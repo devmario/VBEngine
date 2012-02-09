@@ -123,7 +123,12 @@ public:
     
     void goFowardStage();
     GameMainHistory gameMainHistory;
-    
+
+#ifdef __ANDROID__
+    // a selector callback
+    virtual void menuCloseCallback(CCObject* pSender);
+#endif
+
 	LAYER_NODE_FUNC(Root);
 };
 

@@ -181,6 +181,21 @@ Root::Root() {
     ((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().width));
 #endif
 
+#ifdef __ANDROID__
+	// add a "close" icon to exit the progress. it's an autorelease object
+	CCMenuItemImage *pCloseItem = CCMenuItemImage::itemFromNormalImage(
+										"CloseNormal.png",
+										"CloseSelected.png",
+										this,
+										menu_selector(Root::menuCloseCallback) );
+	pCloseItem->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20) );
+
+	// create menu, it's an autorelease object
+	CCMenu* pMenu = CCMenu::menuWithItems(pCloseItem, NULL);
+	pMenu->setPosition( CCPointZero );
+	this->addChild(pMenu, 1);
+#endif
+
 	//top->setScaleY(768.0/320.0);
     //top->setScaleX(1024.0/480.0);
     
@@ -286,7 +301,6 @@ bool Root::init() {
 	if(!CCLayer::init()) {
 		return false;
 	}
-    
 	
 	return true;
 }
@@ -769,3 +783,10 @@ GameMain* Root::popGameMainFromHistory(int packIdx, int stageIdx)
     gameMainHistory.hintViewer = NULL;
     return gameMain;
 }
+
+#ifdef __ANDROID__
+void Root::menuCloseCallback(CCObject* pSender)
+{
+	CCDirector::sharedDirector()->end();
+}
+#endif
