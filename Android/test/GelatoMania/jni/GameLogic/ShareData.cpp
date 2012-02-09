@@ -10,8 +10,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-VBObjectFile2D* _shareTitleObj = NULL;
-VBTexture* _shareTitleTexture = NULL;
+VBObjectFile2D* _shareLoadingObj = NULL;
+VBTexture* _shareLoadingTexture = NULL;
 VBModel* _shareLoadingModel = NULL;
 Root* _shareRoot = NULL;
 VBArrayVector* _sharePackRoot = NULL;
@@ -330,32 +330,32 @@ VBArrayVector* ShareDataGetPackDataJSON() {
     return _sharePackRoot;
 }
 
-VBObjectFile2D* ShareDataGetTitleObjFile() {
-    if(_shareTitleObj == NULL) {
-        VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), "title_ui.obj");
-        _shareTitleObj = VBObjectFile2DInitAndLoad(VBObjectFile2DAlloc(), _str);
+VBObjectFile2D* ShareDataGetLoadingObjFile() {
+    if(_shareLoadingObj == NULL) {
+        VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), "loading.obj");
+        _shareLoadingObj = VBObjectFile2DInitAndLoad(VBObjectFile2DAlloc(), _str);
         VBStringFree(&_str);
     }
-    return _shareTitleObj;
+    return _shareLoadingObj;
 }
 
 const char* ShareDataGetLoadingLibraryName() {
-    return "_dynamic/dyMom_title_loading";
+    return "loading";
 }
 
-VBTexture* ShareDataGetTitleTexture() {
-    if(_shareTitleTexture == NULL) {
-        VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), "title_ui.png");
-        _shareTitleTexture = VBTextureInitAndLoadWithImagePath(VBTextureAlloc(), _str);
+VBTexture* ShareDataGetLoadingTexture() {
+    if(_shareLoadingTexture == NULL) {
+        VBString* _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), "loading.png");
+        _shareLoadingTexture = VBTextureInitAndLoadWithImagePath(VBTextureAlloc(), _str);
         VBStringFree(&_str);
     }
-    return _shareTitleTexture;
+    return _shareLoadingTexture;
 }
 
 VBModel* ShareDataGetLoadingModel() {
     if(_shareLoadingModel == NULL) {
         VBString* _str = VBStringInitWithCString(VBStringAlloc(), ShareDataGetLoadingLibraryName());
-        _shareLoadingModel = new VBModel(ShareDataGetTitleObjFile(), VBObjectFile2DGetLibraryNameIDByName(ShareDataGetTitleObjFile(), _str), ShareDataGetTitleTexture(), true);
+        _shareLoadingModel = new VBModel(ShareDataGetLoadingObjFile(), VBObjectFile2DGetLibraryNameIDByName(ShareDataGetLoadingObjFile(), _str), ShareDataGetLoadingTexture(), true);
         VBStringFree(&_str);
     }
     return _shareLoadingModel;
@@ -375,10 +375,10 @@ void ShareDataFree() {
         cJSON_Delete(_shareUser);
         _shareUser = NULL;
     }
-    if(_shareTitleObj)
-        VBObjectFile2DFree(&_shareTitleObj);
-    if(_shareTitleTexture)
-        VBTextureFree(&_shareTitleTexture);
+    if(_shareLoadingObj)
+        VBObjectFile2DFree(&_shareLoadingObj);
+    if(_shareLoadingTexture)
+        VBTextureFree(&_shareLoadingTexture);
     if(_shareLoadingModel) {
         delete _shareLoadingModel;
         _shareLoadingModel = NULL;

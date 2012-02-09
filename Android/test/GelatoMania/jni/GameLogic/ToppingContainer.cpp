@@ -63,6 +63,8 @@ void ToppingContainerCellDataFree(ToppingContainerCellData** _data) {
 
 void ToppingContainer::CellAlloc(CellData* _cell) {
     ToppingContainerCellData* _data = (ToppingContainerCellData*)_cell->data;
+    if(_data == NULL)
+        return;
     if(_data->model == NULL) {
         FILE* _decompFile = fopen(VBStringGetCString(_data->texPath), "rb");
         fseek(_decompFile, 0, SEEK_END);
@@ -102,6 +104,8 @@ void ToppingContainer::CellAlloc(CellData* _cell) {
 
 void ToppingContainer::CellFree(CellData* _cell) {
     ToppingContainerCellData* _data = (ToppingContainerCellData*)_cell->data;
+    if(_data == NULL)
+        return;
     if(_data->model) {
         _cell->modelCell->removeChild(_data->model, false);
         delete _data->model;
@@ -113,18 +117,24 @@ void ToppingContainer::CellFree(CellData* _cell) {
 
 void ToppingContainer::CellTouchBegin(CellData* _cell, CCTouch* _touch, CCPoint _location) {
     ToppingContainerCellData* _data = (ToppingContainerCellData*)_cell->data;
+    if(_data == NULL)
+        return;
     TOUCHBEGINBT(_data->touch, _data->model, _location, _touch, 
                  );
 }
 
 void ToppingContainer::CellTouchMove(CellData* _cell, CCTouch* _touch, CCPoint _location) {
     ToppingContainerCellData* _data = (ToppingContainerCellData*)_cell->data;
+    if(_data == NULL)
+        return;
     _data->touch = NULL;
 }
 
 void ToppingContainer::CellTouchEnd(CellData* _cell, CCTouch* _touch, CCPoint _location) {
     ToppingContainerCellData* _data = (ToppingContainerCellData*)_cell->data;
     
+    if(_data == NULL)
+        return;
     TOUCHENDBT(_data->touch, _data->model, _location, _touch, 
                if(selectModel == NULL && _data->step < _data->stepTotal && iceCream->IsPossibleTopping(_data->type)) {
                    _data->step++;

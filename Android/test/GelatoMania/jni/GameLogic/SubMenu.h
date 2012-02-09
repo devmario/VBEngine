@@ -5,6 +5,7 @@
 #include "PackSelect.h"
 #include "StageSelect.h"
 #include "Shop.h"
+#include "FrameTweenController.h"
 
 //#define SHOP_EMPTY
 
@@ -28,18 +29,37 @@ public:
     VBObjectFile2D* fontObj;
     VBTexture* fontTex;
     
+    VBObjectFile2D* objRootUI;
+    VBTexture* texRootUI;
+    
     VBModel* bg;
     VBModel* ui;
+    
+    VBModel* modelRootUI;
+    FrameTweenController* frameCTR_friend;
+    FrameTweenController* frameCTR_social;
+    FrameTweenController* frameCTR_shop;
     
     VBModel* btBack;
     VBModel* btGift;
     VBModel* btShop;
-    VBModel* btFree;
+    VBModel* btSocial;
+    bool isOpenSocial;
     
     CCTouch* btBackTouch;
     CCTouch* btGiftTouch;
     CCTouch* btShopTouch;
-    CCTouch* btFreeTouch;
+    CCTouch* btSocialTouch;
+    
+    
+    VBModel* btArch;
+    CCTouch* touchArch;
+    VBModel* btRank;
+    CCTouch* touchRank;
+    VBModel* btFB;
+    CCTouch* touchFB;
+    VBModel* btFriend;
+    CCTouch* touchFriend;
     
     PackSelect* packView;
     StageSelect* stageView;

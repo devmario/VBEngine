@@ -2,7 +2,6 @@
 #include "ShareData.h"
 
 //#define GAME_MAIN_EMPTY
-#define HINT_COMPLETE
 
 int RecipeSort(const void* _a, const void* _b) {
     RecipeContainerCellData** _cd1 = (RecipeContainerCellData**)_a;
@@ -432,9 +431,14 @@ void GameMain::FreeRope() {
 //other thread
 void GameMain::GetIceCreamChecker(float per) {
     printf("아이스크림 일치율: %f\n", per);
+    clearPer = per;
+    if(clearPer > 99) {
+        isClear = true;
+    }
 }
 
 GameMain::GameMain(int _packIdx, int _stageIdx, IceCream* _baseIceCream, IceCream* _playedIceCream, IceCream* _nextIceCream, GameMainRdTd* _rdTd, HintViewer* _hintViewer, bool _isRecipeMode) {
+    isClear = false;
     initWithIceCream = false;
     
     packIdx = _packIdx;
@@ -444,9 +448,10 @@ GameMain::GameMain(int _packIdx, int _stageIdx, IceCream* _baseIceCream, IceCrea
     cJSON* _layer = cJSON_GetObjectItem(_j, "objLayer");
     cJSON* _ui = cJSON_GetObjectItem(_j, "objUI");
     
+    resetAllStep();
     LoadResource(_layer, _ui);
     InitModel(_layer, _ui);
-        
+    
 #ifndef GAME_MAIN_EMPTY
     if (_rdTd) {
         rdTd = _rdTd;
@@ -482,7 +487,6 @@ GameMain::GameMain(int _packIdx, int _stageIdx, IceCream* _baseIceCream, IceCrea
     InitRecipe();
     InitTopping();
     
-#ifdef HINT_COMPLETE
     if (_hintViewer) {
         hintViewer = _hintViewer;
         hintViewer->setGameMain(this);
@@ -492,7 +496,6 @@ GameMain::GameMain(int _packIdx, int _stageIdx, IceCream* _baseIceCream, IceCrea
         hintViewer = new HintViewer(this, IsRecipeMode());
         hintViewer->setSolution(rdTd->cook.rtc, rdTd->cook.rtcLen, rdTd->cook.rtcArrLen, rdTd->cook.tc, rdTd->cook.tcLen);
     }
-#endif
     
     InitRope();
     
@@ -500,12 +503,10 @@ GameMain::GameMain(int _packIdx, int _stageIdx, IceCream* _baseIceCream, IceCrea
 }
 
 void GameMain::resetOtherStage(int _packIdx, int _stageIdx) {
-#ifdef HINT_COMPLETE
     if (hintViewer) {
         hintViewer->release();
         hintViewer = NULL;
     }
-#endif
     
     FreeCook();
     FreeRecipe();
@@ -535,15 +536,13 @@ void GameMain::resetOtherStage(int _packIdx, int _stageIdx) {
     
     InitCook();
 #endif
-    
+    resetAllStep();
     isRecipeMode = true;
     InitRecipe();
     InitTopping();
     
-#ifdef HINT_COMPLETE
     hintViewer = new HintViewer(this, true);
     hintViewer->setSolution(rdTd->cook.rtc, rdTd->cook.rtcLen, rdTd->cook.rtcArrLen, rdTd->cook.tc, rdTd->cook.tcLen);
-#endif
     
     InitRope();
         
@@ -577,6 +576,7 @@ void GameMain::BeginToppingTween(float _y, float _time, bool _is_ease_out) {
 }
 
 GameMain::~GameMain() {
+    resetAllStep();
     FreeRope();
     FreeTopping();
     FreeRecipe();
@@ -589,9 +589,7 @@ GameMain::~GameMain() {
     FreeModel();
     UnloadResource();
     
-#ifdef HINT_COMPLETE
     hintViewer->release();
-#endif
     
     printf("delete GameMain\n");
 }
@@ -732,6 +730,11 @@ bool GameMain::IsActiveUI() {
 void GameMain::Update(float _deltaTime) {
     View::Update(_deltaTime);
     
+    if(isClear) {
+        ShareDataGetRoot()->OpenPopup(PopupTypeClear, 2, 98765);
+        isClear = false;
+    }
+    
     if(recipeContainer)
         recipeContainer->Update(_deltaTime);
     if(toppingContainer)
@@ -753,9 +756,7 @@ void GameMain::Update(float _deltaTime) {
     NewIceCreamUpdate(_deltaTime);
     SwapRecipeAndToppingModeUpdate(_deltaTime);
     
-#ifdef HINT_COMPLETE
     hintViewer->update(_deltaTime);
-#endif
 }
 
 void GameMain::touchBegin(CCTouch* _touch, CCPoint _location) {
@@ -775,13 +776,16 @@ void GameMain::touchBegin(CCTouch* _touch, CCPoint _location) {
         if(toppingContainer)
             toppingContainer->touchBegin(_touch, _location);
     }
-    
     if(iceCream) {
         TOUCHBEGINBT(touchCook, iceCream, _location, _touch, 
                      dragIce = iceCream->DragStartMount(top);
                      if(dragIce) {
-                         dragIce->setPosition(CCPointMake(dragIce->getPosition().x + _location.x, dragIce->getPosition().y + (-320 + _location.y)));
                          dragPre = _location;
+                         if(dragIce->hitTest(recipeContainer)) {
+                             dragIce->color.a = 0xFF;
+                         } else {
+                             dragIce->color.a = 0x88;
+                         }
                      }
                      );
     }
@@ -803,13 +807,24 @@ void GameMain::touchMove(CCTouch* _touch, CCPoint _location) {
         toppingContainer->touchMove(_touch, _location);
     if(dragIce) {
         CCPoint pp = dragIce->getPosition();
-        dragIce->setPosition(CCPointMake(pp.x + (_location.x - dragPre.x), pp.y + (_location.y - dragPre.y)));
+        float scale = 1.0;
+        if(CCDirector::sharedDirector()->isRetinaDisplay() == false)
+            scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        dragIce->setPosition(CCPointMake(pp.x + (_location.x / scale - dragPre.x / scale), pp.y + (_location.y / scale - dragPre.y / scale)));
+        if(dragIce->hitTest(recipeContainer)) {
+            dragIce->color.a = 0xFF;
+        } else {
+            dragIce->color.a = 0x88;
+        }
         //printf("%f %f\n",dragIce->getPosition().x,dragIce->getPosition().y);
         dragPre = _location;
     }
 }
 
 void GameMain::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
+//    TOUCHENDBT(touchDown, modelDownButton, _location, _touch, 
+//               unDo();
+//               ,);
     TOUCHENDBT(touchDown, modelDownButton, _location, _touch, 
                if(recipeContainer) {
                    recipeContainer->NextPage();
@@ -824,6 +839,7 @@ void GameMain::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
         TOUCHENDBT(touchCook, iceCream, _location, _touch, ,
                    if(dragIce) {
                        iceCream->DragEndMount(dragIce->hitTest(recipeContainer));
+                       dragIce->color.a = 0xFF;
                        dragIce = NULL;
                    }
                    );
@@ -840,11 +856,9 @@ void GameMain::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
                    }
                    NewIceCream();
 //for hintviewer
-#ifdef HINT_COMPLETE
                    if(hintViewer) {
-                       hintViewer->step(-3);
+                       hintViewer->resetAction();
                    }
-#endif
                }
                , modelNewButton->gotoAndStop(0.0));
 }
@@ -894,10 +908,11 @@ float GameMain::getRecipePositionY(int recipeIdx)
 
 void GameMain::recipeContainerCallBack(int recipeIdx)
 {
-    //iceCream->GetClear();
-#ifdef HINT_COMPLETE
-    printf("step %s\n", hintViewer->step(recipeIdx) ? "ok" : "no");
-#endif
+    if (hintViewer) {
+        hintViewer->recipeContainerAction(recipeIdx);
+    }
+    printf("****recipeContainerCallBack**** %d\n", recipeIdx);
+//    saveStep();
 }
 
 float GameMain::getToppingPositionX(int toppingIdx)
@@ -907,20 +922,20 @@ float GameMain::getToppingPositionX(int toppingIdx)
 
 void GameMain::iceCreamMaskCallBack(int recipeIdx)
 {
-#ifdef HINT_COMPLETE
     if (hintViewer) {
-        hintViewer->step(recipeIdx);
+        hintViewer->iceCreamAction(recipeIdx);
     }
-#endif
+    printf("****iceCreamMaskCallBack**** %d\n", recipeIdx);
+//    saveStep();
 }
 
 void GameMain::toppingContainerCallBack(int recipeIdx)
 {
-#ifdef HINT_COMPLETE
     if (hintViewer) {
-        hintViewer->step(recipeIdx);
+        hintViewer->toppingAction(recipeIdx);
     }
-#endif
+    printf("****toppingContainerCallBack**** %d\n", recipeIdx);
+//    saveStep();
 }
 
 void GameMain::CallbackSlideNextRope(void* _obj) {
@@ -942,3 +957,111 @@ void GameMain::CallbackSlideToppingRope(void* _obj) {
     }
 }
 
+//for UnDo
+void writeVBImageToFile(VBImage* image, const char* filePath) {
+    int width = VBImageGetWidth(image);
+    int height = VBImageGetHeight(image);
+    int colorBit = VBImageGetColorBit(image);
+    int colorType = VBImageGetColorType(image);
+    
+    FILE* file = fopen(filePath, "w");
+    fwrite(&width, 1, sizeof(int), file);
+    fwrite(&height, 1, sizeof(int), file);
+    fwrite(&colorBit, 1, sizeof(int), file);
+    fwrite(&colorType, 1, sizeof(int), file);
+    fwrite(VBImageGetImageData(image), 1, VBImageGetImageDataSize(image), file);
+    fclose(file);
+}
+
+VBImage* loadVBImageFromFile(const char* filePath) {
+    if (access(filePath, F_OK) != 0) {
+        return NULL;
+    }
+    
+    FILE* file = fopen(filePath, "rb");
+    fseek(file, 0, SEEK_END);
+    size_t fileSize = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    
+    int width, height, colorBit, colorType;
+    fread(&width, 1, sizeof(int), file);
+    fread(&height, 1, sizeof(int), file);
+    fread(&colorBit, 1, sizeof(int), file);
+    fread(&colorType, 1, sizeof(int), file);
+    void* imageData = malloc(fileSize - sizeof(int)*4);
+    fread(imageData, 1, fileSize - sizeof(int)*4, file);
+    fclose(file);
+    
+    VBImage* image = VBImageInitWithData(VBImageAlloc(), colorType, colorBit, width, height, imageData);
+    free(imageData);
+    return image;
+}
+
+bool GameMain::saveStep() {
+    printf("****saveStep()****\n");
+    //save icecream
+    const char* dirPath = VBStringGetCString(VBEngineGetDocumentPath());
+    
+    VBString *filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d.step", dirPath, stepCount);
+    writeVBImageToFile(iceCream->imgBG, VBStringGetCString(filePath));
+    VBStringFree(&filePath);
+    if (nextIceCream) {
+        filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d_1.step", dirPath, stepCount);
+        writeVBImageToFile(iceCream->imgBridge, VBStringGetCString(filePath));
+        VBStringFree(&filePath);
+        filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d_2.step", dirPath, stepCount);
+        writeVBImageToFile(nextIceCream->imgBG, VBStringGetCString(filePath));
+        VBStringFree(&filePath);
+    }
+    //save subtopping
+    //save topping
+    
+    stepCount++;
+    return false;
+}
+
+void GameMain::unDo() {
+    printf("****unDo()****\n");
+    //load icecream
+    VBImage* iceCreamBG = NULL;
+    VBImage* bridgeBG = NULL;
+    VBImage* nextIceCreamBG = NULL;
+    
+    const char* dirPath = VBStringGetCString(VBEngineGetDocumentPath());
+    VBString *filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d.step", dirPath, stepCount-1);
+    iceCreamBG = loadVBImageFromFile(VBStringGetCString(filePath));
+    VBStringFree(&filePath);
+    filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d_1.step", dirPath, stepCount-1);
+    bridgeBG = loadVBImageFromFile(VBStringGetCString(filePath));
+    VBStringFree(&filePath);
+    if (bridgeBG) {
+        filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d_1.step", dirPath, stepCount-1);
+        nextIceCreamBG = loadVBImageFromFile(VBStringGetCString(filePath));
+        VBStringFree(&filePath);
+    }
+    
+    //change icecream
+    VBImage* temp = NULL;
+    temp = iceCream->imgBG;
+    iceCream->imgBG = iceCreamBG;
+    iceCreamBG = NULL;
+    VBImageFree(&temp);
+    if (bridgeBG) {
+        temp = iceCream->imgBridge;
+        iceCream->imgBridge = bridgeBG;
+        bridgeBG = NULL;
+        VBImageFree(&temp);
+        temp = nextIceCream->imgBG;
+        nextIceCream->imgBG = nextIceCreamBG;
+        nextIceCreamBG = NULL;
+        VBImageFree(&temp);
+    }
+    
+    //load subtopping
+    //load topping
+    stepCount--;
+}
+
+void GameMain::resetAllStep() {
+    stepCount = 0;
+}

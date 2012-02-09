@@ -1,6 +1,6 @@
 #include "Tweener.h"
 
-TweenerWrapper::TweenerWrapper()
+TweenerWrapper::TweenerWrapper() : tween::Tweener()
 {
     param = NULL;
     listener = NULL;
@@ -18,15 +18,20 @@ TweenerWrapper::~TweenerWrapper()
 
 void TweenerWrapper::begin(float *currentPosition, float end, float duration, float delay, bool isElastic, void(*callBackFunc)(void* callBackObj), void* callBackObj, bool easeOut)
 {
-    clear();
+    begin(currentPosition, end, duration, delay, isElastic?ELASTIC:EXPO, easeOut?EASE_OUT:EASE_IN, callBackFunc, callBackObj);
     
+}
+
+void TweenerWrapper::begin(float *currentPosition, float end, float duration, float delay, short ptransition, short pequation, void(*callBackFunc)(void* callBackObj), void* callBackObj)
+{
+    clear();
     _currentPosition = currentPosition;
     _end = end;
     _elapsedTime = 0.0f;
-    _duration = (duration+delay)*1000;
-    _delay = delay*1000;
+    _duration = (duration+delay)*1000.0f;
+    _delay = delay*1000.0f;
     
-    param = new TweenerParam(_duration, isElastic?ELASTIC:EXPO, easeOut?EASE_OUT:EASE_IN, delay);
+    param = new TweenerParam(duration * 1000.0, ptransition, pequation, delay * 1000.0);
     param->addProperty(currentPosition, end);
     addTween(*param);
     if (callBackFunc) {
@@ -69,7 +74,6 @@ void TweenerWrapper::update(float deltaTime)
         if (_delay > _elapsedTime) {
             return;
         }
-        step(_elapsedTime);
         if (_elapsedTime >= _duration) {
             *_currentPosition = _end;
             if (listener) {
@@ -81,6 +85,8 @@ void TweenerWrapper::update(float deltaTime)
                 callBack = NULL;
                 callBackObject = NULL;
             }
+        } else {
+            step((long)_elapsedTime);
         }
     }
 }
@@ -98,8 +104,9 @@ void TweenerWrapper::clear()
         param = NULL;
         _currentPosition = NULL;
         onGoing = false;
-        
     }
+    lastTime = 0;
+    
     removeListener();
 }
 

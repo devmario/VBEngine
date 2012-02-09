@@ -136,7 +136,8 @@ float VBAABBGetAmountAtManyBox(int count, VBAABB* _aabb) {
         if(i != 0) {
             VBAABB hit;
             if(VBAABBGetHitAABB(_aabb[i], _aabb[i - 1], &hit)) {
-                hitaabb = VBAABBMemResizeAndSet(hitaabb, hit, hitaabbIdx, ++hitaabbIdx);
+                hitaabb = VBAABBMemResizeAndSet(hitaabb, hit, hitaabbIdx, hitaabbIdx + 1);
+                hitaabbIdx++;
             }
         }
     }

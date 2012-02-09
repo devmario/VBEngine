@@ -15,7 +15,7 @@ void IceCream::VBModelUpdate(float _tick) {
     Reshape();
 }
 
-IceCream::IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCreamProtocol* _protocol, IceCream* _baseIceCream, int* _recipe, int _recipe_len) : VBModel(NULL) {
+IceCream::IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCreamProtocol* _protocol, IceCream* _baseIceCream, int* _recipe, int _recipe_len) : VBModel() {
     protocol = _protocol;
     draw_pixel_thread = NULL;
     checker_thread = NULL;
@@ -412,9 +412,8 @@ VBModel* IceCream::DragStartMount(VBModel* _topView) {
                         
                         need_update_model = true;
                         Reshape();
-                        
                         _t->model->setScale(0.5);
-                        _t->model->setPosition(CCPointMake(-((float)_masking->texThumb->width - (float)_masking->texThumb->shiftX) * 0.25, ((float)_masking->texThumb->height - (float)_masking->texThumb->shiftY) * 0.25));
+                        _t->model->setPosition(CCPointApplyAffineTransform(CCPointApplyAffineTransform(_t->model->getPosition(), nodeToWorldTransform()), modelTop->worldToNodeTransform()));
                         modelTop->addChild(_t->model);
                         return _t->model;
                     }

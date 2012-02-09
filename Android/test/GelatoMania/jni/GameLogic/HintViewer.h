@@ -11,11 +11,12 @@ class GameMain;
 typedef enum hintStepWrongLevel
 {
     hintWrongNone = 0,
-    hintWrongReset = 1,
-    hintWrongMaskOn = 2,
-    hintWrongMaskOnDouble = 3,
-    hintWrongMaskOff = 4,
-    hintWrongMaskOffDouble = 5
+    hintWrongMaskOn = 1,
+    hintWrongMaskOnDouble = 2,
+    hintWrongMaskOff = 3,
+    hintWrongMaskOffDouble = 4,
+    //TODO: when fill other color
+    hintWrongFillFull = 5   
 } hintStepWrongLevel;
 
 typedef enum hintStateFlag
@@ -32,9 +33,20 @@ typedef enum hintStateFlag
     hintStateToppingItem = 9
 } hintStateFlag;
 
+typedef enum actionType
+{
+    actionTypeNone = 0,
+    actionTypeRecipe = 1,
+    actionTypeIceCream = 2,
+    actionTypeTopping = 3
+} actionType;
 
 class HintViewer {
     unsigned int retainCount;
+    
+    VBObjectFile2D *object;
+    VBTexture *texture;
+    VBModel *arrowModel[HINTSTATELEN];
     
     bool* isMask;
     bool maskOn;
@@ -42,43 +54,52 @@ class HintViewer {
     int solutionLen;
     int currentSolutionIdx;
     int* solution;
-    bool solutionFlag;
-    GameMain *parent;
-    VBObjectFile2D *object;
-    VBTexture *texture;
+    GameMain *gameMain;
+    
     CCPoint position[HINTSTATELEN];
-    hintStateFlag state;
+    hintStateFlag hintState;
     bool showFlag;
     
-    void setState(hintStateFlag newState);
-    
-    bool wrongStep(hintStepWrongLevel _wrongType, int _wrongIdx=-1);
-    void checkAndFinish();
+    int pushMask(int maskIdx);
+    int popMask(int* maskIdx=NULL);
     
     hintStepWrongLevel wrongMode;
     int wrongIdx;
     int wrongIdxForMask;
     
+    actionType lastAction;
+    
+    void loadArrowModel();
+    void loadMaskList();
+    
+    void setState(hintStateFlag newState);
+    
+    void step(actionType currentAction, int itemIdx);
+    void initStep(bool isWrongStep);
+    void wrongStep(hintStepWrongLevel _wrongType, int _wrongIdx=-1);
+    void checkAndFinish();
+    
 public:
-    VBModel *arrowModel[HINTSTATELEN];
     
-    float rotationR;
-    
-    HintViewer(GameMain *_parentModel, bool _showFlag=false, VBObjectFile2D *_obj=NULL, VBTexture *_tex=NULL);
+    HintViewer(GameMain *_gameMain, bool _showFlag=false);
     ~HintViewer();
+    
+    void update(float _deltaTime);
+    
+    void setSolution(int** recipe, int recipeLen, int* recipeArrLen, int* topping, int toppingLen);
+    void setGameMain(GameMain* _gameMain);
     
     void show();
     void hide();
-    void initStep(bool isWrongStep);
-    bool step(int itemIdx);
-    void setSolution(int** recipe, int recipeLen, int* recipeArrLen, int* topping, int toppingLen);
-    void setPosition(cocos2d::CCPoint _position);
-    void update(float _deltaTime);
     
-    void setGameMain(GameMain* _gameMain);
     void retain();
     void release();
     
+    actionType getLastActionType();
+    void resetAction();
+    void iceCreamAction(int itemIdx);
+    void recipeContainerAction(int itemIdx);
+    void toppingAction(int itemIdx);
 };
 
 #endif

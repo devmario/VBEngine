@@ -137,6 +137,7 @@ void PopupClear::Update(float _deltaTime) {
         }
     }
     numCountTime += _deltaTime * 1000;
+    clearTween.step(numCountTime);
     if(scoreText) {
         if(numCountTime > 1000)
             scoreText->SetNumber(score);
@@ -173,6 +174,8 @@ void PopupClear::Open(void (*_closeFunc)(void *), void *_closeFuncRef) {
         clearTween.removeTween(runnumParam);
         runnumParam = NULL;
     }
+    
+    clearTween = Tweener();
     
     fbParam = TweenerParam(1000 * 0.5, EXPO, EASE_OUT);
     runfbParam = &fbParam;

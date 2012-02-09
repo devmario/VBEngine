@@ -157,7 +157,10 @@ void Pages::touchBegin(CCTouch* _touch, CCPoint _location) {
         return;
     if(touchSlide == NULL) {
         force = 0.0;
-        touchX = _location.x;
+        float scale = 1.0;
+        if(CCDirector::sharedDirector()->isRetinaDisplay() == false)
+            scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        touchX = _location.x / scale;
         touchSlide = _touch;
     }
 }
@@ -166,9 +169,12 @@ void Pages::touchMove(CCTouch* _touch, CCPoint _location) {
     if(idx < 0)
         return;
     if(touchSlide == _touch) {
-        force = _location.x - touchX;
+        float scale = 1.0;
+        if(CCDirector::sharedDirector()->isRetinaDisplay() == false)
+            scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        force = _location.x / scale - touchX;
         slideX += force;
-        touchX = _location.x;
+        touchX = _location.x / scale;
         ((CCSprite*)slideM)->setPosition(CCPointMake(slideX, startY));
     }
 }

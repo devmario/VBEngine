@@ -41,6 +41,7 @@ void Root::OpenPopupAlloc(int _type, int _star, int _score) {
     }
     popup->Open(PopupClose, this);
     popupClear = false;
+    gettimeofday(&curTime, NULL);
     
 }
 
@@ -167,11 +168,18 @@ Root::Root() {
     gettimeofday(&curTime, NULL);
     
     top = new VBModel();
+#ifdef __ANDROID__
 	top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320);
-
+#else
+    top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().width / 320);
+#endif
 	this->addChild((CCLayer*)top);
-
+    
+#ifdef __ANDROID__
 	((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().height));
+#else
+    ((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().width));
+#endif
 
 	//top->setScaleY(768.0/320.0);
     //top->setScaleX(1024.0/480.0);
@@ -223,29 +231,9 @@ void Root::Update() {
     
     float _deltaTime = (((nextTime.tv_sec * 1000000.0) + nextTime.tv_usec) - ((curTime.tv_sec * 1000000.0) + curTime.tv_usec)) / 1000000.0;
     
-    if(loading) {
-        if(loadFlag == 1) {
-            if(loading->cur_frame + _deltaTime > 15) {
-                loading->gotoAndStop(15);
-                loadFlag++;
-            }
-        } else if(loadFlag == 2) {
-            /*
-             loadingFlag가 2로 넘어오면서 loading->is_play가 false로 바뀜.
-             */
-            ChangePageARGSonUpdate();
-            loading->gotoAndPlay(15);
-            loadFlag++;
-        } else if(loadFlag == 3) {
-            if(!loading->is_play) {
-                ((CCSprite*)top)->removeChild((CCSprite*)loading, false);
-                loading = NULL;
-                loadFlag = 0;
-            } else {
-                printf("loading...\n");
-            }
-        }
-    }
+    
+    curTime = nextTime;
+    
     if(view)
         view->Update(_deltaTime);
     if(popup) {
@@ -265,11 +253,33 @@ void Root::Update() {
     if(selectUser) {
         selectUser->Update(_deltaTime);
     }
-    
     top->VBModelUpdate(_deltaTime);
     top->VBModelUpdateColor(VBColorRGBALoadIdentity());
     
-    curTime = nextTime;
+    if(loading) {
+        if(loadFlag == 1) {
+            if(loading->cur_frame + _deltaTime > 19) {
+                loading->gotoAndStop(19);
+                loadFlag++;
+            }
+        } else if(loadFlag == 2) {
+            /*
+             loadingFlag가 2로 넘어오면서 loading->is_play가 false로 바뀜.
+             */
+            ChangePageARGSonUpdate();
+            loading->gotoAndPlay(19);
+            loadFlag++;
+        } else if(loadFlag == 3) {
+            if(!loading->is_play) {
+                ((CCSprite*)top)->removeChild((CCSprite*)loading, false);
+                loading = NULL;
+                loadFlag = 0;
+            } else {
+                printf("loading...\n");
+            }
+        }
+    }
+    
 }
 
 bool Root::init() {

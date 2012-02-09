@@ -12,9 +12,9 @@
 
 void ShareDataSaveUser();
 cJSON* ShareDataGetUser();
-VBObjectFile2D* ShareDataGetTitleObjFile();
+VBObjectFile2D* ShareDataGetLoadingObjFile();
 const char* ShareDataGetLoadingLibraryName();
-VBTexture* ShareDataGetTitleTexture();
+VBTexture* ShareDataGetLoadingTexture();
 VBModel* ShareDataGetLoadingModel();
 Root* ShareDataGetRoot();
 void ShareDataFree();

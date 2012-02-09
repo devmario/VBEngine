@@ -3,6 +3,7 @@
 
 #include "View.h"
 #include "Social.h"
+#include "FrameTweenController.h"
 
 using namespace cocos2d;
 
@@ -11,21 +12,37 @@ class MainMenu : public View, public SocialProtocol {
 public:
     VBObjectFile2D* titleintroObj;
     VBTexture* titleintroTex;
+    VBObjectFile2D* objTitleUi;
+    VBTexture* texTitleUI;
+    VBObjectFile2D* objBT;
+    VBTexture* texBT;
+    
+    VBModel* modelBTUI;
+    VBModel* socialBT;
+    CCTouch* touchSocial;
+    VBModel* mobageBT;
+    CCTouch* touchMobage;
+    VBModel* settingBT;
+    CCTouch* touchSetting;
+    
+    VBModel* btArch;
+    CCTouch* touchArch;
+    VBModel* btRank;
+    CCTouch* touchRank;
+    VBModel* btFB;
+    CCTouch* touchFB;
+    VBModel* btFriend;
+    CCTouch* touchFriend;
+    
+    FrameTweenController* frameModel;
+    bool openSocial;
     
     VBModel* titlebg;
     VBModel* titleui;
     
     VBModel* playBT;
-    VBModel* rankBT;
-    VBModel* archBT;
-    VBModel* infoBT;
-    VBModel* fbBT;
     
     CCTouch* touchPlayBT;
-    CCTouch* touchRank;
-    CCTouch* touchArch;
-    CCTouch* touchInfo;
-    CCTouch* touchFB;
 	
     MainMenu();
 	~MainMenu();

@@ -158,8 +158,9 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
     
     for(int i = 0; i < _tex->height; i++) {
         int _y = i - _tex->shiftY;
-        if(_y >= 0 && _y < VBImageGetHeight(_img))
+        if(_y >= 0 && _y < VBImageGetHeight(_img)) {
             memcpy(_ptr, VBImageGetPixelColor(_img, 0, _y), VBImageGetWidth(_img) * _byte);
+        }
         _ptr += _tex->width * _byte;
     }
     glTexImage2D(GL_TEXTURE_2D, 0, _format, _tex->width, _tex->height, 0, _format, GL_UNSIGNED_BYTE, _data);

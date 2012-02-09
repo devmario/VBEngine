@@ -26,6 +26,7 @@ public:
     TweenerWrapper();
     ~TweenerWrapper();
     void begin(float *currentPosition, float end, float duration, float delay, bool isElastic, void(*callBackFunc)(void* object)=NULL, void* callBackObj=NULL, bool easeOut=true);
+    void begin(float *currentPosition, float end, float duration, float delay, short ptransition, short pequation, void(*callBackFunc)(void* callBackObj), void* callBackObj);
     void update(float deltaTime);
     void clear();
     

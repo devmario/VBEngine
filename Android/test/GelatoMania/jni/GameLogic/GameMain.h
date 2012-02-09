@@ -12,6 +12,8 @@
 
 using namespace tween;
 
+//typedef enum 
+
 class GameMain : public View, IceCreamProtocol {
 private:
     
@@ -21,7 +23,9 @@ private:
     int stageIdx;
     
     int bgLen;
-        
+    
+    unsigned int stepCount;
+    
     VBObjectFile2D** objBg;
     VBTexture** texBg;
     
@@ -36,6 +40,9 @@ private:
     
     VBObjectFile2D* objFont;
     VBTexture* texFont;
+    
+    bool isClear;
+    float clearPer;
     
     void LoadResource(cJSON* _layer, cJSON* _ui);
     void UnloadResource();
@@ -111,7 +118,8 @@ private:
     
     bool IsActiveUI();
     
-    
+    bool saveStep();
+    void resetAllStep();
     
 public:
     HintViewer *hintViewer;
@@ -145,6 +153,8 @@ public:
     
     void retainIceCream();
     bool IsRecipeMode();
+    
+    void unDo();
 };
 
 

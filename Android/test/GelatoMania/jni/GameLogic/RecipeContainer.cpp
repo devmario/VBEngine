@@ -73,7 +73,7 @@ void RecipeContainer::CellTouchMove(CellData* _data, CCTouch* _touch, CCPoint _l
         _recipe->subVec = VBVector2DSubtract(VBVector2DCreate(_location.x, _location.y), _recipe->startVec);
         VBVector2D stepVec = VBVector2DSubtract(VBVector2DCreate(_location.x, _location.y), _recipe->preVec);
         _recipe->swipe += VBVector2DLength(stepVec);
-        if(_recipe->swipe > 0.0) {
+        if(_recipe->swipe > 0.0 && pour == NULL) {
             float angle = VBVector2DAngle(_recipe->subVec);
             if((angle > M_PI - M_PI_4 && angle <= M_PI) || (angle < -M_PI + M_PI_4 && angle >= -M_PI)) {
                 //Drag시작
@@ -219,7 +219,9 @@ void RecipeContainer::touchMove(CCTouch* _touch, CCPoint _location) {
     ScrollerContainer::touchMove(_touch, _location);
     
     if(pour) {
-        float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        float scale = 1.0;
+        if(CCDirector::sharedDirector()->isRetinaDisplay() == false)
+            scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
         pour->setPosition(CCPointMake(_location.x/scale, _location.y/scale-320.0));
         if(pour->hitTest(hitTarget)) {
             pour->color.a = 0xFF;

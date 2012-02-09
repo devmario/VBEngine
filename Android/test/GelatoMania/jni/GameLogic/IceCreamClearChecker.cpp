@@ -589,7 +589,7 @@ void* checker_thread_func(void* arg) {
     
     /*******************print***********************/
     cout << "\n";
-    int sum = bg_amount + subToppingFlow_amount + subTopping_amount + mask_amount + toppingSpuit_amount + toppingCreamOrCherry_amount;
+    int sum = bg_amount + subToppingFlow_amount + subTopping_amount + mask_amount + toppingSpuit_amount + toppingFlow_amount + toppingCreamOrCherry_amount;
     cout << "bg_amount::" << bg_amount << ", subToppingFlow_amount:" << subToppingFlow_amount << ", subTopping_amount:" << subTopping_amount << ", mask_amount:" << mask_amount << ", toppingSpuit_amount:" << toppingSpuit_amount << ", toppingFlow_amount:" << toppingFlow_amount << ", toppingCreamOrCherry_amount:" << toppingCreamOrCherry_amount << "\n";
     
     cout << "아이스크림 기본 색상 칼라 일치율:" << _bgPer * 100 << "%, 해답영역+현재아이스크림에서의 영역비율:" << (100 * (bg_amount / sum)) << "%\n";

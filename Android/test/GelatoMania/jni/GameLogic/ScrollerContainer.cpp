@@ -163,7 +163,6 @@ void ScrollerContainer::ShowScrollBarMoment(float _time) {
 void ScrollerContainer::ResetData() {
     for(int i = 0; i < VBArrayVectorGetLength(cell); i++) {
         CellData* _cellData = (CellData*)VBArrayVectorGetDataAt(cell, i);
-        _cellData->data = VBArrayVectorGetDataAt(data, i);
         CellFree(_cellData);
         if(_cellData->index >= 0 && _cellData->index < VBArrayVectorGetLength(data)){
             CellAlloc(_cellData);
@@ -256,7 +255,12 @@ void ScrollerContainer::touchBegin(CCTouch* _touch, CCPoint _location) {
         return;
     if(touchScroller == NULL) {
         if(container->checkCollisionWithButton(_location)) {
-            CCPoint _tmp = CCPointApplyAffineTransform(_location, worldToNodeTransform());
+            CCPoint _tmp = _location;
+            float scale = 1.0;
+            if(CCDirector::sharedDirector()->isRetinaDisplay() == false)
+                scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+            _tmp.x /= scale;
+            _tmp.y /= scale;
             if (slideTween && slideTween->onGoing) {
                 delete slideTween;
                 slideTween = NULL;
@@ -278,7 +282,12 @@ void ScrollerContainer::touchBegin(CCTouch* _touch, CCPoint _location) {
 
 void ScrollerContainer::touchMove(CCTouch* _touch, CCPoint _location) {
     if(touchScroller == _touch) {
-        CCPoint _tmp = CCPointApplyAffineTransform(_location, worldToNodeTransform());
+        CCPoint _tmp = _location;
+        float scale = 1.0;
+        if(CCDirector::sharedDirector()->isRetinaDisplay() == false)
+            scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        _tmp.x /= scale;
+        _tmp.y /= scale;
         if (slideTween && slideTween->onGoing) {
             delete slideTween;
             slideTween = NULL;

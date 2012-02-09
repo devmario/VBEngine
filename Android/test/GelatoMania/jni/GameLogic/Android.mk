@@ -50,6 +50,7 @@ LOCAL_SRC_FILES := \
 	ManiaFriendList.cpp\
 	GameMainRdTd.cpp\
 	AndroidNative.cpp\
+	FrameTweenController.cpp\
 	main.cpp\
 
 
