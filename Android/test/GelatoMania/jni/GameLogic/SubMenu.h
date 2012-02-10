@@ -22,6 +22,8 @@ class SubMenu : public View {
     void touchEndAndCancel(CCTouch* _touch, CCPoint _location);
     
 public:
+    bool isSetLayout;
+    
     VBObjectFile2D* stageObj;
     VBObjectFile2D* packObj;
     VBTexture* stageTex;
@@ -29,11 +31,19 @@ public:
     VBObjectFile2D* fontObj;
     VBTexture* fontTex;
     
+    VBObjectFile2D* objSubMenu;
+    VBTexture* texSubMenu;
+    
     VBObjectFile2D* objRootUI;
     VBTexture* texRootUI;
     
     VBModel* bg;
     VBModel* ui;
+    
+    VBModel* bgT;
+    VBModel* bgB;
+    
+    VBModel* shopM;
     
     VBModel* modelRootUI;
     FrameTweenController* frameCTR_friend;
@@ -67,10 +77,6 @@ public:
 	
 #ifndef SHOP_EMPTY
     //shop
-    VBObjectFile2D *shopMaskObj;
-    VBTexture *shopMaskTex;
-    VBModel *shopMaskMask;
-    VBModel *shopMaskBg;
     VBObjectFile2D *shopObj;
     VBTexture *shopTex;
     Shop* shopView;

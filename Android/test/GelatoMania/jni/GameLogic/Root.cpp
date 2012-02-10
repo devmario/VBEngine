@@ -111,6 +111,9 @@ void Root::GameCenterIDCheckNeedSelect(bool success,
 }
 
 Root::Root() {
+    isSetLayout = false;
+    
+    cout << "Root Init";
     gameMainHistory = GameMainHistory();
     gameMainHistory.historyEnable = false;
     
@@ -168,18 +171,8 @@ Root::Root() {
     gettimeofday(&curTime, NULL);
     
     top = new VBModel();
-#ifdef __ANDROID__
-	top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320);
-#else
-    top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().width / 320);
-#endif
 	this->addChild((CCLayer*)top);
     
-#ifdef __ANDROID__
-	((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().height));
-#else
-    ((CCSprite*)top)->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().width));
-#endif
 
 #ifdef __ANDROID__
 	// add a "close" icon to exit the progress. it's an autorelease object
@@ -240,6 +233,11 @@ CCScene* Root::scene() {
 }
 
 void Root::Update() {
+    if(!isSetLayout) {
+        top->setScale(CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320);
+        top->setPosition(ccp(0, CCDirector::sharedDirector()->getDisplaySizeInPixels().height));
+        isSetLayout = true;
+    }
     
     struct timeval nextTime;
     gettimeofday(&nextTime, NULL);
@@ -272,6 +270,8 @@ void Root::Update() {
     top->VBModelUpdateColor(VBColorRGBALoadIdentity());
     
     if(loading) {
+        float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        loading->setPosition(CCPointMake(CCDirector::sharedDirector()->getDisplaySizeInPixels().width / 2 / scale, -CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 2 / scale));
         if(loadFlag == 1) {
             if(loading->cur_frame + _deltaTime > 19) {
                 loading->gotoAndStop(19);
@@ -301,6 +301,7 @@ bool Root::init() {
 	if(!CCLayer::init()) {
 		return false;
 	}
+    
 	
 	return true;
 }

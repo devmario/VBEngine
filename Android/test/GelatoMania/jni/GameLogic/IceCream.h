@@ -92,9 +92,6 @@ public:
     
     VBModel* modelTop;
     
-    IceCream* next;
-    IceCream* prev;
-    
     bool need_update_pixel;
     bool need_update_model;
     
@@ -103,8 +100,10 @@ public:
     void Reshape();
     
     GameMain *gameMain;
-    
 public:
+    IceCream* next;
+    IceCream* prev;
+    
     IceCream(GameMain *_gameMain, VBArrayVector* _rdVec, VBArrayVector* _tdVec, IceCreamProtocol* _protocol, IceCream* _baseIceCream = NULL, int* _recipe = NULL, int _recipe_len = 0);
     ~IceCream();
     

@@ -4,10 +4,10 @@
 #include "SubMenu.h"
 
 PackSelect::PackSelect(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex,
-                       int _totalIdx, SubMenu* _subMenu) : Pages(_obj, _tex, _totalIdx, 60.0, 600.0, -25, 357, 240-85, -280) {
+                       int _totalIdx, SubMenu* _subMenu) : Pages(_obj, _tex, _totalIdx, 60.0 - 240, 600.0, -26, 357, 240-82-240, -280) {
     packs = VBArrayVectorInit(VBArrayVectorAlloc());
     for(int i = 0; i < ShareDataGetPackLength(); i++) {
-        PackThumb* _pack = new PackThumb(obj, tex, _fontObj, _fontTex, i);
+        PackThumb* _pack = new PackThumb(obj, tex, i);
         ((CCSprite*)_pack)->setPosition(CCPointMake(i * pageTh, 0));
         VBArrayVectorAddBack(packs, _pack);
         _pack->is_use_animation = false;
@@ -61,6 +61,7 @@ void PackSelect::touchBegin(CCTouch* _touch, CCPoint _location) {
         for(int i = 0; i < VBArrayVectorGetLength(packs); i++) {
             VBModel* _pack = (VBModel*)VBArrayVectorGetDataAt(packs, i);
             if(_pack->checkCollisionWithButton(_location)) {
+                startLocation = _location;
                 selectedIdx = i;
                 touchM = _touch;
                 _pack->is_use_animation = false;
@@ -79,11 +80,13 @@ void PackSelect::touchMove(CCTouch* _touch, CCPoint _location) {
         return;
     Pages::touchMove(_touch, _location);
     if(touchM == _touch) {
-        touchM = NULL;
-        touchMd->color.r = 0xFF;
-        touchMd->color.g = 0xFF;
-        touchMd->color.b = 0xFF;
-        touchMd = NULL;
+        if(VBVector2DLength(VBVector2DSubtract(VBVector2DCreate(_location.x, _location.y), VBVector2DCreate(startLocation.x, startLocation.y))) > 2.0) {
+            touchM = NULL;
+            touchMd->color.r = 0xFF;
+            touchMd->color.g = 0xFF;
+            touchMd->color.b = 0xFF;
+            touchMd = NULL;
+        }
     }
 }
 

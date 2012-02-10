@@ -140,7 +140,6 @@ void* draw_pixel_thread_function(void* argument) {
     
     iceCream->isRun_draw_pixel_thread = false;
     cout << "draw_pixel_thread_function out\n";
-    
     return NULL;
 }
 
@@ -203,7 +202,7 @@ int IceCream::ClearMask(RecipeMask* _rm, int _num) {
                     }
                 }
                 VBArrayVectorRemoveAt(mask, i);
-                gameMain->iceCreamMaskCallBack(_rmV->idx);
+                gameMain->iceCreamMaskCallBack(this, _rmV->idx);
                 _removed++;
                 if(_removed >= _num)
                     break;

@@ -6,6 +6,7 @@
 #include "PlatformFunctions.h"
 
 MainMenu::MainMenu() {
+    isSetLayout = false;
     //View::View();
     
     touchSocial = touchSetting = touchMobage = touchPlayBT = NULL;
@@ -26,6 +27,13 @@ MainMenu::MainMenu() {
     
     titlebg = new VBModel(titleintroObj, _library_name_id, titleintroTex, true);
     ((CCSprite*)top)->addChild((CCSprite*)titlebg);
+    titlebg->stop();
+    
+    modelB = titlebg->getVBModelByInstanceName("B");
+    modelL = titlebg->getVBModelByInstanceName("L");
+    modelR = titlebg->getVBModelByInstanceName("R");
+    modelBG = titlebg->getVBModelByInstanceName("bg");
+    modelBG->play();
     
     OBJLOAD(objTitleUi, "title_ui.obj", _str);
     TEXLOAD(texTitleUI, "title_ui.png", _str);
@@ -86,6 +94,26 @@ MainMenu::~MainMenu() {
 }
 
 void MainMenu::Update(float _deltaTime) {
+    if(!isSetLayout) {
+        float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        float x = CCDirector::sharedDirector()->getDisplaySizeInPixels().width / scale;
+        float shiftX = -(480 - x);
+        titleui->setPosition(CCPointMake(shiftX * 0.5, 0));
+        titlebg->setPosition(CCPointMake(x * 0.5, 0));
+        settingBT->setPosition(CCPointMake(settingBT->getPosition().x + shiftX, settingBT->getPosition().y));
+        
+        float cur_aspec = (CCDirector::sharedDirector()->getDisplaySizeInPixels().width / CCDirector::sharedDirector()->getDisplaySizeInPixels().height);
+        float origin_aspec = 480.0/320.0;
+        if(origin_aspec < cur_aspec) {
+            modelBG->setScale(modelBG->getScale() / (origin_aspec / cur_aspec));
+        }
+        modelB->setScale(modelB->getScale() / (origin_aspec / cur_aspec));
+        modelL->setPosition(CCPoint(-240 / (origin_aspec / cur_aspec), 0));
+        modelR->setPosition(CCPoint(240 / (origin_aspec / cur_aspec), 0));
+        
+        isSetLayout = true;
+    }
+    
     frameModel->Update(_deltaTime);
 }
 

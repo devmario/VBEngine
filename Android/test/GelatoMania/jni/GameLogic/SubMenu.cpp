@@ -4,36 +4,35 @@
 void ChangeView(void* _ref);
 
 SubMenu::SubMenu() {
+    isSetLayout = false;
     //View::View();
     
     VBString* _str = NULL;
     OBJLOAD(stageObj, "stage_select.obj", _str);
-    OBJLOAD(packObj, "pack_select.obj", _str);
+    OBJLOAD(packObj, "pack.obj", _str);
     TEXLOAD(stageTex, "stage_select.png", _str);
-    TEXLOAD(packTex, "pack_select.png", _str);
+    TEXLOAD(packTex, "pack.png", _str);
     OBJLOAD(fontObj, "font.obj", _str);
     TEXLOAD(fontTex, "font.png", _str);
     OBJLOAD(objRootUI, "root_ui.obj", _str);
     TEXLOAD(texRootUI, "root_ui.png", _str);
+    OBJLOAD(objSubMenu, "sub_menu.obj", _str);
+    TEXLOAD(texSubMenu, "sub_menu.png", _str);
     
     VBObjectFile2DLibraryNameID* _library_name_id = NULL;
-    LIBNAMEFIND(_library_name_id, stageObj, "_dynamic/dy_menu_stage0_bg", _str);
-    bg = new VBModel(stageObj, _library_name_id, stageTex, true);
+    LIBNAMEFIND(_library_name_id, objSubMenu, "bg", _str);
+    bg = new VBModel(objSubMenu, _library_name_id, texSubMenu, true);
     ((CCSprite*)top)->addChild((CCSprite*)bg);
+    bg->stop();
+    
+    bgT = bg->getVBModelByInstanceName("T");
+    bgB = bg->getVBModelByInstanceName("B");
     
     packView = new PackSelect(packObj, packTex, fontObj, fontTex, ShareDataGetPackLength(), this);
     stageView = new StageSelect(stageObj, stageTex, fontObj, fontTex, 2);
     
 #ifndef SHOP_EMPTY
-    //add shop
-    OBJLOAD(shopMaskObj, "shop_mask.obj", _str);
-    TEXLOAD(shopMaskTex, "shop_mask.png", _str);
-    LIBNAMEFIND(_library_name_id, shopMaskObj, "bg", _str);
-    shopMaskBg = new VBModel(shopMaskObj, _library_name_id, shopMaskTex, true);
-    LIBNAMEFIND(_library_name_id, shopMaskObj, "mask", _str);
-    shopMaskMask = new VBModel(shopMaskObj, _library_name_id, shopMaskTex, true);
-    vtShopBack = shopMaskMask->getVBModelByName((char*)"buttonBack");
-    
+    //add shop    
     OBJLOAD(shopObj, "shop.obj", _str);
     TEXLOAD(shopTex, "shop.png", _str);
     shopView = new Shop(shopObj, shopTex);
@@ -54,7 +53,7 @@ SubMenu::SubMenu() {
     btBack->gotoAndStop(0);
     btBackTouch = NULL;
     
-    VBModel* shopM = modelRootUI->getVBModelByInstanceName("shop");
+    shopM = modelRootUI->getVBModelByInstanceName("shop");
     frameCTR_shop = new FrameTweenController(shopM);
     
     VBModel* socialM = modelRootUI->getVBModelByInstanceName("social");
@@ -132,16 +131,9 @@ SubMenu::~SubMenu() {
     delete packView;
     delete stageView;
     
-    //shop
-    //top->removeChild(shopMaskBg, false);
-    //top->removeChild(shopMaskMask, false);
 #ifndef SHOP_EMPTY
-    delete shopMaskMask;
-    delete shopMaskBg;
     VBObjectFile2DFree(&shopObj);
     VBTextureFree(&shopTex);
-    VBObjectFile2DFree(&shopMaskObj);
-    VBTextureFree(&shopMaskTex);
     
     delete shopView;
 #endif
@@ -162,11 +154,30 @@ SubMenu::~SubMenu() {
     delete modelRootUI;
     VBObjectFile2DFree(&objRootUI);
     VBTextureFree(&texRootUI);
+    VBObjectFile2DFree(&objSubMenu);
+    VBTextureFree(&texSubMenu);
     
     //View::~View();
 }
 
 void SubMenu::Update(float _deltaTime) {
+    if(!isSetLayout) {
+        float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        float x = CCDirector::sharedDirector()->getDisplaySizeInPixels().width / scale;
+        float shiftX = -(480 - x);
+        shopM->setPosition(CCPointMake(shopM->getPosition().x + shiftX, shopM->getPosition().y));
+        bg->setPosition(CCPointMake(x * 0.5, 0));
+        packView->top->setPosition(CCPointMake(x * 0.5, 0));
+        
+        float cur_aspec = (CCDirector::sharedDirector()->getDisplaySizeInPixels().width / CCDirector::sharedDirector()->getDisplaySizeInPixels().height);
+        float origin_aspec = 480.0/320.0;
+        if(origin_aspec < cur_aspec) {
+            bgT->setScale(bgT->getScale() / (origin_aspec / cur_aspec));
+            bgB->setScale(bgB->getScale() / (origin_aspec / cur_aspec));
+        }
+        
+        isSetLayout = true;
+    }
     if(currentPage)
         currentPage->Update(_deltaTime);
     frameCTR_shop->Update(_deltaTime);
@@ -247,11 +258,9 @@ void GotoShop(void* _ref) {
     SubMenu *pss = (SubMenu *)_ref;
 #ifndef SHOP_EMPTY
     
-    pss->top->addChild((CCSprite*)pss->shopMaskBg);
-    pss->top->addChild((CCSprite*)pss->shopView->top);
-    pss->top->addChild((CCSprite*)pss->shopMaskMask);
     pss->shopView->GoPage(0, NULL, NULL);
     pss->currentPage = pss->shopView;
+    pss->ui->addChild((CCSprite*)pss->shopView->top);
 #endif
 }
 

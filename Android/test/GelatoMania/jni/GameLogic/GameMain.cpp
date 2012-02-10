@@ -15,6 +15,22 @@ int ToppingSort(const void* _a, const void* _b) {
     return (*_td1)->type - (*_td2)->type; 
 }
 
+bool* loadMaskList() {
+    cJSON *recipeJSON = cJSON_GetObjectItem(ShareDataGetRes(), "recipe");
+    int recipeLen = cJSON_GetArraySize(recipeJSON);
+    
+    bool* isMask = (bool*)malloc(sizeof(bool)*recipeLen);
+    for (int i=0; i<recipeLen; i++) {
+        int temp = cJSON_GetArrayItem(cJSON_GetArrayItem(recipeJSON, i), 1)->valueint;
+        if (temp == 1) {
+            isMask[i] = true;
+        } else {
+            isMask[i] = false;
+        }
+    }
+    return isMask;
+}
+
 void GameMain::LoadResource(cJSON* _layer, cJSON* _ui) {
     VBString* _str;
     
@@ -212,8 +228,11 @@ void GameMain::InitCook() {
 #endif
     if (!initWithIceCream) {
         for(int i = 0; i < rdTd->cook.rtcLen; i++) {
-            if(i == 0)
+            if(i == 0) {
+                callBackStop = true;
                 baseIceCream = new IceCream(this, rdTd->rdVec, rdTd->tdVec, NULL, NULL, rdTd->cook.rtc[i], rdTd->cook.rtcArrLen[i]);
+                callBackStop = false;
+            }
             else
                 baseIceCream->AddNextIceCream(rdTd->cook.rtc[i], rdTd->cook.rtcArrLen[i]);
         }
@@ -440,6 +459,9 @@ void GameMain::GetIceCreamChecker(float per) {
 GameMain::GameMain(int _packIdx, int _stageIdx, IceCream* _baseIceCream, IceCream* _playedIceCream, IceCream* _nextIceCream, GameMainRdTd* _rdTd, HintViewer* _hintViewer, bool _isRecipeMode) {
     isClear = false;
     initWithIceCream = false;
+    callBackStop = false;
+    history = NULL;
+    isMask = loadMaskList();
     
     packIdx = _packIdx;
     stageIdx = _stageIdx;
@@ -581,6 +603,8 @@ GameMain::~GameMain() {
     FreeTopping();
     FreeRecipe();
     FreeCook();
+    
+    free(isMask);
     
 #ifndef GAME_MAIN_EMPTY
     rdTd->release();
@@ -822,9 +846,9 @@ void GameMain::touchMove(CCTouch* _touch, CCPoint _location) {
 }
 
 void GameMain::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
-//    TOUCHENDBT(touchDown, modelDownButton, _location, _touch, 
-//               unDo();
-//               ,);
+    TOUCHENDBT(touchDown, modelDownButton, _location, _touch, 
+               unDo();
+               ,);
     TOUCHENDBT(touchDown, modelDownButton, _location, _touch, 
                if(recipeContainer) {
                    recipeContainer->NextPage();
@@ -859,6 +883,7 @@ void GameMain::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
                    if(hintViewer) {
                        hintViewer->resetAction();
                    }
+                   resetAllStep();
                }
                , modelNewButton->gotoAndStop(0.0));
 }
@@ -911,8 +936,14 @@ void GameMain::recipeContainerCallBack(int recipeIdx)
     if (hintViewer) {
         hintViewer->recipeContainerAction(recipeIdx);
     }
-    printf("****recipeContainerCallBack**** %d\n", recipeIdx);
-//    saveStep();
+
+    if (!callBackStop && iceCream) {
+        if (isMask[recipeIdx]) {
+            saveStep(ActionMaskOn, recipeIdx);
+        } else {
+            saveStep(ActionFill, recipeIdx);
+        }
+    }
 }
 
 float GameMain::getToppingPositionX(int toppingIdx)
@@ -920,13 +951,16 @@ float GameMain::getToppingPositionX(int toppingIdx)
     return toppingContainer->getToppingPositionX(toppingIdx);
 }
 
-void GameMain::iceCreamMaskCallBack(int recipeIdx)
+void GameMain::iceCreamMaskCallBack(IceCream* caller, int recipeIdx)
 {
     if (hintViewer) {
         hintViewer->iceCreamAction(recipeIdx);
     }
-    printf("****iceCreamMaskCallBack**** %d\n", recipeIdx);
-//    saveStep();
+
+    if (!callBackStop && iceCream) {
+        saveStep(ActionMaskOff, recipeIdx);
+
+    }
 }
 
 void GameMain::toppingContainerCallBack(int recipeIdx)
@@ -934,8 +968,11 @@ void GameMain::toppingContainerCallBack(int recipeIdx)
     if (hintViewer) {
         hintViewer->toppingAction(recipeIdx);
     }
-    printf("****toppingContainerCallBack**** %d\n", recipeIdx);
-//    saveStep();
+
+    if (!callBackStop && iceCream) {
+        saveStep(ActionTopping, recipeIdx);
+
+    }
 }
 
 void GameMain::CallbackSlideNextRope(void* _obj) {
@@ -943,6 +980,7 @@ void GameMain::CallbackSlideNextRope(void* _obj) {
         reinterpret_cast<GameMain*>(_obj)->NextIceCream();
         reinterpret_cast<GameMain*>(_obj)->nextRopeSlider->SetEnable(false);
         reinterpret_cast<GameMain*>(_obj)->recipeContainerCallBack(-1);
+//        reinterpret_cast<GameMain*>(_obj)->saveStep();
     }
 }
 
@@ -958,110 +996,270 @@ void GameMain::CallbackSlideToppingRope(void* _obj) {
 }
 
 //for UnDo
-void writeVBImageToFile(VBImage* image, const char* filePath) {
-    int width = VBImageGetWidth(image);
-    int height = VBImageGetHeight(image);
-    int colorBit = VBImageGetColorBit(image);
-    int colorType = VBImageGetColorType(image);
+//
+void writeVBImageToFile(GameMain* gameMain, int step) {
+    cout << "write start\n";
+    VBString* filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d.step", VBStringGetCString(VBEngineGetDocumentPath()), step);
     
-    FILE* file = fopen(filePath, "w");
-    fwrite(&width, 1, sizeof(int), file);
-    fwrite(&height, 1, sizeof(int), file);
-    fwrite(&colorBit, 1, sizeof(int), file);
-    fwrite(&colorType, 1, sizeof(int), file);
-    fwrite(VBImageGetImageData(image), 1, VBImageGetImageDataSize(image), file);
-    fclose(file);
-}
-
-VBImage* loadVBImageFromFile(const char* filePath) {
-    if (access(filePath, F_OK) != 0) {
-        return NULL;
+    bool hasNext = gameMain->iceCream->next != NULL;
+    
+    VBImage* image1 = NULL;
+    VBImage* image2 = NULL;
+    int w1, h1, b1, t1, w2, h2, b2, t2;
+    VBULong s1, s2;
+    if (!hasNext) {
+        image1 = gameMain->iceCream->imgBG;
+        w1 = VBImageGetWidth(image1);
+        h1 = VBImageGetHeight(image1);
+        b1 = VBImageGetColorBit(image1);
+        t1 = VBImageGetColorType(image1);
+        s1 = VBImageGetImageDataSize(image1);
+        image2 = gameMain->iceCream->imgBridge;
+        w2 = VBImageGetWidth(image2);
+        h2 = VBImageGetHeight(image2);
+        b2 = VBImageGetColorBit(image2);
+        t2 = VBImageGetColorType(image2);
+        s2 = VBImageGetImageDataSize(image2);
+    } else {
+        image1 = gameMain->iceCream->next->imgBG;
+        w1 = VBImageGetWidth(image1);
+        h1 = VBImageGetHeight(image1);
+        b1 = VBImageGetColorBit(image1);
+        t1 = VBImageGetColorType(image1);
+        s1 = VBImageGetImageDataSize(image1);
     }
     
-    FILE* file = fopen(filePath, "rb");
-    fseek(file, 0, SEEK_END);
-    size_t fileSize = ftell(file);
-    fseek(file, 0, SEEK_SET);
+    FILE* file = fopen(VBStringGetCString(filePath), "w");
+    VBStringFree(&filePath);
     
+    fwrite(&hasNext, 1, sizeof(bool), file);
+    fwrite(&w1, 1, sizeof(int), file);
+    fwrite(&h1, 1, sizeof(int), file);
+    fwrite(&b1, 1, sizeof(int), file);
+    fwrite(&t1, 1, sizeof(int), file);
+    fwrite(&s1, 1, sizeof(VBULong), file);
+    fwrite(VBImageGetImageData(image1), 1, s1, file);
+    if (!hasNext) {
+        fwrite(&w2, 1, sizeof(int), file);
+        fwrite(&h2, 1, sizeof(int), file);
+        fwrite(&b2, 1, sizeof(int), file);
+        fwrite(&t2, 1, sizeof(int), file);
+        fwrite(&s2, 1, sizeof(VBULong), file);
+        fwrite(VBImageGetImageData(image2), 1, s2, file);
+    }
+    fclose(file);
+    cout << "write end\n";
+}
+
+
+void loadVBImageFromFile(int step, VBImage** _image1, VBImage** _image2) {
+    cout << "load start\n";
+    VBString* filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d.step", VBStringGetCString(VBEngineGetDocumentPath()), step);
+    if (access(VBStringGetCString(filePath), F_OK) != 0) {
+        VBStringFree(&filePath);
+        cout << "file not found\n";
+        return;
+    }
+    
+    FILE* file = fopen(VBStringGetCString(filePath), "rb");
+    
+    bool hasNext = false;
+    VBImage* image1 = NULL;
+    VBImage* image2 = NULL;
     int width, height, colorBit, colorType;
+    VBULong dataSize;
+    
+    fread(&hasNext, 1, sizeof(bool), file);
     fread(&width, 1, sizeof(int), file);
     fread(&height, 1, sizeof(int), file);
     fread(&colorBit, 1, sizeof(int), file);
     fread(&colorType, 1, sizeof(int), file);
-    void* imageData = malloc(fileSize - sizeof(int)*4);
-    fread(imageData, 1, fileSize - sizeof(int)*4, file);
+    fread(&dataSize, 1, sizeof(VBULong), file);
+    void* imageData = malloc(dataSize);
+    fread(imageData, 1, dataSize, file);
+    image1 = VBImageInitWithData(VBImageAlloc(), colorType, colorBit, width, height, imageData);
+    free(imageData);
+    imageData = NULL;
+    if (!hasNext) {
+        fread(&width, 1, sizeof(int), file);
+        fread(&height, 1, sizeof(int), file);
+        fread(&colorBit, 1, sizeof(int), file);
+        fread(&colorType, 1, sizeof(int), file);
+        fread(&dataSize, 1, sizeof(VBULong), file);
+        imageData = malloc(dataSize);
+        fread(imageData, 1, dataSize, file);
+        image2 = VBImageInitWithData(VBImageAlloc(), colorType, colorBit, width, height, imageData);
+        free(imageData);
+    }
     fclose(file);
     
-    VBImage* image = VBImageInitWithData(VBImageAlloc(), colorType, colorBit, width, height, imageData);
-    free(imageData);
-    return image;
+    
+    *_image1 = image1;
+    *_image2 = !hasNext ? image2 : NULL;
+    
+    cout << "load end\n";
+    remove(VBStringGetCString(filePath));
+    VBStringFree(&filePath);
+    cout << "delete end\n";
 }
 
-bool GameMain::saveStep() {
-    printf("****saveStep()****\n");
-    //save icecream
-    const char* dirPath = VBStringGetCString(VBEngineGetDocumentPath());
-    
-    VBString *filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d.step", dirPath, stepCount);
-    writeVBImageToFile(iceCream->imgBG, VBStringGetCString(filePath));
-    VBStringFree(&filePath);
-    if (nextIceCream) {
-        filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d_1.step", dirPath, stepCount);
-        writeVBImageToFile(iceCream->imgBridge, VBStringGetCString(filePath));
-        VBStringFree(&filePath);
-        filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d_2.step", dirPath, stepCount);
-        writeVBImageToFile(nextIceCream->imgBG, VBStringGetCString(filePath));
-        VBStringFree(&filePath);
+bool GameMain::saveStep(ActionType actionType, int itemIdx) {
+    IceCream* iceCreamOnTop = iceCream->next == NULL ? iceCream : iceCream->next;
+    while (iceCreamOnTop->isRun_draw_pixel_thread) {
+        usleep(16666);
     }
+    
+    printf("****saveStep()**** stepCount:%d\n", stepCount);
+    stepCount++;
+    
+    pushHistory(actionType, itemIdx);
+    //save icecream
+    writeVBImageToFile(this, stepCount);
     //save subtopping
     //save topping
     
-    stepCount++;
-    return false;
+    
+    return true;
 }
 
 void GameMain::unDo() {
-    printf("****unDo()****\n");
+    printf("****unDo()**** stepCount:%d\n", stepCount);
+    if (stepCount < 2) {
+        return;
+    }
+    
     //load icecream
-    VBImage* iceCreamBG = NULL;
-    VBImage* bridgeBG = NULL;
-    VBImage* nextIceCreamBG = NULL;
+    VBImage* image1;
+    VBImage* image2;
+    loadVBImageFromFile(stepCount-1, &image1, &image2);
     
-    const char* dirPath = VBStringGetCString(VBEngineGetDocumentPath());
-    VBString *filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d.step", dirPath, stepCount-1);
-    iceCreamBG = loadVBImageFromFile(VBStringGetCString(filePath));
-    VBStringFree(&filePath);
-    filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d_1.step", dirPath, stepCount-1);
-    bridgeBG = loadVBImageFromFile(VBStringGetCString(filePath));
-    VBStringFree(&filePath);
-    if (bridgeBG) {
-        filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d_1.step", dirPath, stepCount-1);
-        nextIceCreamBG = loadVBImageFromFile(VBStringGetCString(filePath));
-        VBStringFree(&filePath);
-    }
-    
+    bool hasNext = image2 == NULL;
     //change icecream
-    VBImage* temp = NULL;
-    temp = iceCream->imgBG;
-    iceCream->imgBG = iceCreamBG;
-    iceCreamBG = NULL;
-    VBImageFree(&temp);
-    if (bridgeBG) {
-        temp = iceCream->imgBridge;
-        iceCream->imgBridge = bridgeBG;
-        bridgeBG = NULL;
+    if (!hasNext) {
+        VBImage* temp = iceCream->imgBG;
+        iceCream->imgBG = image1;
+        image1 = NULL;
         VBImageFree(&temp);
-        temp = nextIceCream->imgBG;
-        nextIceCream->imgBG = nextIceCreamBG;
-        nextIceCreamBG = NULL;
+        temp = iceCream->imgBridge;
+        iceCream->imgBridge = image2;
+        image2 = NULL;
+        VBImageFree(&temp);
+    } else {
+        VBImage* temp = iceCream->next->imgBG;
+        iceCream->next->imgBG = image1;
+        image1 = NULL;
         VBImageFree(&temp);
     }
     
-    //load subtopping
-    //load topping
+    //remove next if previos step doesn't have next
+    if (!hasNext && iceCream->next) {
+        if (iceCream->modelLastRecipeBridge) {
+            iceCream->removeChild(iceCream->modelLastRecipeBridge, false);
+        }
+        iceCream->removeChild(iceCream->modelBridge, false);
+        iceCream->removeChild(iceCream->modelBridgeOutline, false);
+        iceCream->removeChild(iceCream->next, false);
+        
+        delete iceCream->next;
+        iceCream->next = NULL;
+        nextRopeSlider->SetEnable(true);
+        cout << "next icecream removed\n";
+    } else {
+        IceCream* changeSelected = hasNext ? iceCream->next : iceCream;
+        
+        while (changeSelected->isRun_draw_pixel_thread) {
+            usleep(16666);
+        }
+        changeSelected->need_update_pixel = true;
+        changeSelected->Reshape();
+    }
+    //pop history
+    HistoryList lastStep = popHistory();
+    IceCream* changeSelected = hasNext ? iceCream->next : iceCream;
+    //mask, subtopping, topping
+    switch (lastStep.actionType) {
+        case ActionMaskOn:
+            for (int i=0; i<VBArrayVectorGetLength(changeSelected->mask); i++) {
+                RecipeMask *mask = (RecipeMask*)VBArrayVectorGetDataAt(changeSelected->mask, i);
+                if (mask->idx == lastStep.recipeIdx) {
+                    changeSelected->ClearMask(mask, 1);
+                    break;
+                }
+            }
+            break;
+        case ActionMaskOff:
+            for (int i=0; i<VBArrayVectorGetLength(rdTd->rdVec); i++) {
+                RT* _rt = (RT*)VBArrayVectorGetDataAt(rdTd->rdVec, i);
+                if (_rt->type == 1) {
+                    RecipeMask *mask = (RecipeMask*)_rt->data;
+                    printf("%d\n", mask->idx);
+                    if (mask->idx == lastStep.recipeIdx) {
+                        
+                        changeSelected->AddMask(mask);
+                        changeSelected->need_update_model = true;
+                        break;
+                    }
+                }
+            }
+
+            break;
+        case ActionSubTopping:
+            break;
+        case ActionTopping:
+            break;
+            
+        default:
+            break;
+    }
+    
+    hintViewer->backStep();
     stepCount--;
 }
 
 void GameMain::resetAllStep() {
     stepCount = 0;
+    clearHistory();
+    //delete remain files
+    for (int i=1; ; i++) {
+        VBString* filePath = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/gameMain_step_%d.step", VBStringGetCString(VBEngineGetDocumentPath()), i);
+        if (access(VBStringGetCString(filePath), F_OK) != 0) {
+            VBStringFree(&filePath);
+            break;
+        }
+        remove(VBStringGetCString(filePath));
+        printf("remove %d\n", i);
+        VBStringFree(&filePath);
+    }
 }
+
+void GameMain::pushHistory(ActionType _actionType, int _recipeIdx) {
+    HistoryList *newStep = new HistoryList();
+    newStep->actionType = _actionType;
+    newStep->recipeIdx = _recipeIdx;
+    newStep->next = history;
+    history = newStep;
+}
+
+HistoryList GameMain::popHistory() {
+    if (!history) {
+        return HistoryList();
+    }
+    HistoryList *lastStep = history;
+    history = history->next;
+
+    HistoryList returnVar = HistoryList();
+    returnVar.actionType = lastStep->actionType;
+    returnVar.recipeIdx = lastStep->recipeIdx;
+    free(lastStep);
+    return returnVar;
+}
+
+void GameMain::clearHistory() {
+    HistoryList *temp = NULL;
+    while (history) {
+        temp = history;
+        history = history->next;
+        free(temp);
+    }
+}
+

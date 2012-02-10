@@ -54,6 +54,8 @@ bool IsEqualHistory(history* _h0, history* _h1);
 
 class Root : public cocos2d::CCLayer, public SocialProtocol, public SelectUserProtocol {
 private:
+    bool isSetLayout;
+    
     View* view;
     VBModel* loading;
     

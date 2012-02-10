@@ -109,6 +109,7 @@ void StageSelect::touchBegin(CCTouch* _touch, CCPoint _location) {
         for(int i = 0; i < VBArrayVectorGetLength(stages); i++) {
             VBModel* _stage = (VBModel*)VBArrayVectorGetDataAt(stages, i);
             if(_stage->checkCollisionWithButton(_location)) {
+                startLocation = _location;
                 touchM = _touch;
                 _stage->is_use_animation = false;
                 _stage->color.r = 0x88+0x44;
@@ -126,11 +127,13 @@ void StageSelect::touchMove(CCTouch* _touch, CCPoint _location) {
         return;
     Pages::touchMove(_touch, _location);
     if(touchM == _touch) {
-        touchM = NULL;
-        touchMd->color.r = 0xFF;
-        touchMd->color.g = 0xFF;
-        touchMd->color.b = 0xFF;
-        touchMd = NULL;
+        if(VBVector2DLength(VBVector2DSubtract(VBVector2DCreate(_location.x, _location.y), VBVector2DCreate(startLocation.x, startLocation.y))) > 2.0) {
+            touchM = NULL;
+            touchMd->color.r = 0xFF;
+            touchMd->color.g = 0xFF;
+            touchMd->color.b = 0xFF;
+            touchMd = NULL;
+        }
     }
 }
 

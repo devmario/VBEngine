@@ -11,10 +11,20 @@ class PackThumb : public VBModel {
 public:
     int packIdx;
     VBModel* pack;
-    NumberText* scoreText;
-    NumberText* starText;
     
-    PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex, int _packIdx);
+    VBTexture* texTitle;
+    VBModel* modelTitle;
+    
+    VBTexture* texClear;
+    VBModel* modelClear;
+    
+    VBTexture* texStar;
+    VBModel* modelStar;
+    
+    VBTexture* texTime;
+    VBModel* modelTime;
+    
+    PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, int _packIdx);
     ~PackThumb();
     
     void Reset();

@@ -18,6 +18,8 @@ public:
     
     VBModel* bg[2];
     
+    CCPoint startLocation;
+    
     StageSelect(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex, 
                 int _totalIdx);
     ~StageSelect();

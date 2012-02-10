@@ -12,12 +12,27 @@
 
 using namespace tween;
 
-//typedef enum 
+typedef enum ActionType
+{
+    ActionFill,
+    ActionMaskOn,
+    ActionMaskOff,
+    ActionSubTopping,
+    ActionTopping
+} ActionType;
+
+typedef struct HistoryList
+{
+    ActionType actionType;
+    int recipeIdx;
+    HistoryList* next;
+} HistoryList;
 
 class GameMain : public View, IceCreamProtocol {
 private:
     
     bool initWithIceCream;
+    bool callBackStop;
     
     int packIdx;
     int stageIdx;
@@ -25,6 +40,8 @@ private:
     int bgLen;
     
     unsigned int stepCount;
+    bool* isMask;
+    HistoryList *history;
     
     VBObjectFile2D** objBg;
     VBTexture** texBg;
@@ -118,8 +135,12 @@ private:
     
     bool IsActiveUI();
     
-    bool saveStep();
+    
     void resetAllStep();
+    
+    void pushHistory(ActionType _actionType, int _recipeIdx);
+    HistoryList popHistory();
+    void clearHistory();
     
 public:
     HintViewer *hintViewer;
@@ -141,7 +162,9 @@ public:
     void recipeContainerCallBack(int recipeIdx);
     float getToppingPositionX(int toppingIdx);
     void toppingContainerCallBack(int recipeIdx);
-    void iceCreamMaskCallBack(int recipeIdx);
+    void iceCreamMaskCallBack(IceCream* caller, int recipeIdx);
+    
+    void iceCreamStepSave(IceCream* caller, int reciptIdx);
     
     virtual void Update(float _deltaTime);
     
@@ -155,6 +178,7 @@ public:
     bool IsRecipeMode();
     
     void unDo();
+    bool saveStep(ActionType actionType, int itemIdx);
 };
 
 

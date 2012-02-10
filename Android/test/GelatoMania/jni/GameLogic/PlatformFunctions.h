@@ -11,7 +11,7 @@ extern "C" {
     /*****************TextImage*****************/
     
     VBImage* PlatformGetTextImageWithSize(const char* _txt, const char* _fontName, float _text_size, int _width, int _height);
-    
+    VBImage* PlatformGetTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align);
     
     /*****************Callback*****************/
     

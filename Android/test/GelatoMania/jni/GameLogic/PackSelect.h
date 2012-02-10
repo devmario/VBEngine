@@ -19,6 +19,8 @@ public:
     
     VBModel* touchMd;
     
+    CCPoint startLocation;
+    
     int selectedIdx;
     
     PackSelect(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex,
