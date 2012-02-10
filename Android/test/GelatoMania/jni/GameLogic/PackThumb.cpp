@@ -35,7 +35,7 @@ PackThumb::PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, int _packIdx) : VBMo
             modelTitle->setPosition(CCPoint(50, -25));
             pack->addChild(modelTitle);
             VBImageFree(&img);
-            
+
             img = PlatformGetTextImageWithSizeDetail("24 / 36", "ArialRoundedMTBold", 50, 256, 64, "413424FF", "000000FF", VBVector2DCreate(1, 1), -1);
             texClear = VBTextureInitAndLoadWithImage(VBTextureAlloc(), img);
             modelClear = new VBModel(texClear);
@@ -43,7 +43,7 @@ PackThumb::PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, int _packIdx) : VBMo
             modelClear->setPosition(CCPoint(220, -73-15));
             pack->addChild(modelClear);
             VBImageFree(&img);
-            
+
             img = PlatformGetTextImageWithSizeDetail("86 %", "ArialRoundedMTBold", 50, 128, 64, "413424FF", "000000FF", VBVector2DCreate(1, 1), -1);
             texStar = VBTextureInitAndLoadWithImage(VBTextureAlloc(), img);
             modelStar = new VBModel(texStar);
@@ -51,7 +51,7 @@ PackThumb::PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, int _packIdx) : VBMo
             modelStar->setPosition(CCPoint(220, -106-16));
             pack->addChild(modelStar);
             VBImageFree(&img);
-            
+
             if(packIdx == 1)
                 img = PlatformGetTextImageWithSizeDetail("01h 04m 56s", "ArialRoundedMTBold", 32, 207, 64, "413424FF", "000000FF", VBVector2DCreate(1, 1), 0);
             else
@@ -70,13 +70,13 @@ PackThumb::PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, int _packIdx) : VBMo
             modelTitle->setPosition(CCPoint(50, -25));
             pack->addChild(modelTitle);
             VBImageFree(&img);
-            
+
             texClear = NULL;
             modelClear = NULL;
-            
+
             texStar = NULL;
             modelStar = NULL;
-            
+
             texTime = NULL;
             modelTime = NULL;
         }
@@ -89,25 +89,25 @@ PackThumb::~PackThumb() {
     VBTextureFree(&texTitle);
     pack->removeChild(modelTitle, false);
     delete modelTitle;
-    
+
     if(modelClear) {
         VBTextureFree(&texClear);
         pack->removeChild(modelClear, false);
         delete modelClear;
     }
-    
+
     if(modelStar){
         VBTextureFree(&texStar);
         pack->removeChild(modelStar, false);
         delete modelStar;
     }
-    
+
     if(modelTime){
         VBTextureFree(&texTime);
         pack->removeChild(modelTime, false);
         delete modelTime;
     }
-    
+
     this->removeChild(pack, false);
     delete pack;
 }

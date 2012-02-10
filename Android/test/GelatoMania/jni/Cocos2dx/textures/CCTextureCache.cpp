@@ -464,56 +464,101 @@ void CCTextureCache::dumpCachedTextureInfo()
 	vector<string> keys = m_pTextures->allKeys();
 	vector<string>::iterator iter;
 	for (iter = keys.begin(); iter != keys.end(); iter++)
+
 	{
+
 		CCTexture2D *tex = m_pTextures->objectForKey(*iter);
+
 		unsigned int bpp = tex->bitsPerPixelForFormat();
+
         // Each texture takes up width * height * bytesPerPixel bytes.
+
 		unsigned int bytes = tex->getPixelsWide() * tex->getPixelsHigh() * bpp / 8;
+
 		totalBytes += bytes;
+
 		count++;
+
 		CCLOG("cocos2d: \"%s\" rc=%lu id=%lu %lu x %lu @ %ld bpp => %lu KB",
+
 			   (*iter).c_str(),
+
 			   (long)tex->retainCount(),
+
 			   (long)tex->getName(),
+
 			   (long)tex->getPixelsWide(),
+
 			   (long)tex->getPixelsHigh(),
+
 			   (long)bpp,
+
 			   (long)bytes / 1024);
+
 	}
 
+
+
 	CCLOG("cocos2d: CCTextureCache dumpDebugInfo: %ld textures, for %lu KB (%.2f MB)", (long)count, (long)totalBytes / 1024, totalBytes / (1024.0f*1024.0f));
+
 }
 
 #if CC_ENABLE_CACHE_TEXTTURE_DATA
 
 std::list<VolatileTexture*> VolatileTexture::textures;
+
 bool VolatileTexture::isReloading = false;
 
+
 VolatileTexture::VolatileTexture(CCTexture2D *t)
+
 : texture(t)
+
 , m_eCashedImageType(kInvalid)
+
 , m_pTextureData(NULL)
+
 , m_PixelFormat(kTexture2DPixelFormat_RGBA8888)
+
 , m_strFileName("")
+
 , m_FmtImage(CCImage::kFmtPng)
+
 , m_alignment(CCTextAlignmentCenter)
+
 , m_strFontName("")
+
 , m_strText("")
+
 , m_fFontSize(0.0f)
+
 {
+
     m_size = CCSizeMake(0, 0);
+
     textures.push_back(this);
+
 }
+
+
 
 VolatileTexture::~VolatileTexture()
+
 {
+
     textures.remove(this);
+
 }
 
+
 void VolatileTexture::addImageTexture(CCTexture2D *tt, const char* imageFileName, CCImage::EImageFormat format)
+
 {
+
     if (isReloading)
         return;
+
+
 
     VolatileTexture *vt = 0;
     std::list<VolatileTexture *>::iterator i = textures.begin();
@@ -529,15 +574,26 @@ void VolatileTexture::addImageTexture(CCTexture2D *tt, const char* imageFileName
     if (!vt)
         vt = new VolatileTexture(tt);
 
+
+
     vt->m_eCashedImageType = kImageFile;
+
     vt->m_strFileName = imageFileName;
+
     vt->m_FmtImage    = format;
+
 }
 
+
+
 void VolatileTexture::addDataTexture(CCTexture2D *tt, void* data, CCTexture2DPixelFormat pixelFormat, CCSize contentSize)
+
 {
+
 	if (isReloading)
 		return;
+
+
 
 	VolatileTexture *vt = 0;
 	std::list<VolatileTexture *>::iterator i = textures.begin();
@@ -553,11 +609,19 @@ void VolatileTexture::addDataTexture(CCTexture2D *tt, void* data, CCTexture2DPix
 	if (!vt)
 		vt = new VolatileTexture(tt);
 
+
+
 	vt->m_eCashedImageType = kImageData;
+
 	vt->m_pTextureData = data;
+
 	vt->m_PixelFormat = pixelFormat;
+
 	vt->m_TextureSize = contentSize;
+
 }
+
+
 
 void VolatileTexture::addStringTexture(CCTexture2D *tt, const char* text, CCSize dimensions, CCTextAlignment alignment, const char *fontName, float fontSize)
 {
@@ -586,20 +650,35 @@ void VolatileTexture::addStringTexture(CCTexture2D *tt, const char* text, CCSize
     vt->m_strText     = text;
 }
 
+
 void VolatileTexture::removeTexture(CCTexture2D *t) {
 
+
+
     std::list<VolatileTexture *>::iterator i = textures.begin();
+
     while( i != textures.end() )
+
     {
+
         VolatileTexture *vt = *i++;
+
         if (vt->texture == t) {
+
             delete vt;
+
             break;
+
         }
+
     }
+
 }
 
+
+
 void VolatileTexture::reloadAllTextures()
+
 {
     isReloading = true;
 
@@ -630,24 +709,33 @@ void VolatileTexture::reloadAllTextures()
 				unsigned int nPOTWide, nPOTHigh;
 				nPOTWide = ccNextPOT((int)vt->m_TextureSize.width);
 				nPOTHigh = ccNextPOT((int)vt->m_TextureSize.height);
+
 				vt->texture->initWithData(vt->m_pTextureData, vt->m_PixelFormat, nPOTWide, nPOTHigh, vt->m_TextureSize);
 			}
 			break;
 		case kString:
 			{
 				vt->texture->initWithString(vt->m_strText.c_str(),
+
 					vt->m_size,
+
 					vt->m_alignment,
+
 					vt->m_strFontName.c_str(),
+
 					vt->m_fFontSize);
 			}
 			break;
 		default:
 			break;
 		}
+
     }
 
+
+
     isReloading = false;
+
 }
 
 #endif // CC_ENABLE_CACHE_TEXTTURE_DATA

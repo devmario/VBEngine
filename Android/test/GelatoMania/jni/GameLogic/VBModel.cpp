@@ -587,7 +587,40 @@ int _key_sort_func(const void* _a, const void* _b) {
     return sortNum;
 }
 
+#ifdef __ANDROID__
+VBArrayVector* _allocModel = NULL;
+
+void VBModelAllAllocatedReloadTexture() {
+    if(_allocModel) {
+        for(int i = 0; i < _allocModel->len; i++) {
+            VBModel* _m = (VBModel*)_allocModel->data[i];
+            _m->reloadUName_Texture();
+        }
+    }
+}
+
+void AddAllocModel(VBModel* _m) {
+    if(_allocModel == NULL)
+        _allocModel = VBArrayVectorInit(VBArrayVectorAlloc());
+    VBArrayVectorAddBack(_allocModel, _m);
+}
+
+void RemoveAllocModel(VBModel* _m) {
+    if(_allocModel) {
+        VBArrayVectorRemove(_allocModel, _m);
+        if(_allocModel->len == 0)
+            VBArrayVectorFree(&_allocModel);
+    }
+}
+#endif
+
 using namespace cocos2d;
+
+void VBModel::reloadUName_Texture() {
+    if(tex && vb_tex) {
+        tex->m_uName = vb_tex->tid;
+    }
+}
 
 void VBModel::SetTexture(VBTexture* _tex) {
     if(tex == NULL)
@@ -622,6 +655,9 @@ void VBModel::SetTexture(VBTexture* _tex) {
 }
 
 VBModel::VBModel(VBTexture* _tex) {
+#ifdef __ANDROID__
+    AddAllocModel(this);
+#endif
     is_bitmap = true;
     color = mix_color = VBColorRGBALoadIdentity();
     this->setAnchorPoint(ccp(0,0));
@@ -639,10 +675,15 @@ VBModel::VBModel(VBTexture* _tex) {
     frame_current_key_frame = NULL;
     library_name_id = NULL;
     tex = NULL;
+    vb_tex = _tex;
     SetTexture(_tex);
 }
 
 VBModel::VBModel() {
+#ifdef __ANDROID__
+    AddAllocModel(this);
+#endif
+    vb_tex = NULL;
     is_bitmap = false;
     color = mix_color = VBColorRGBALoadIdentity();
     this->setAnchorPoint(ccp(0,0));
@@ -664,6 +705,9 @@ VBModel::VBModel() {
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_name_id, VBTexture* _texture, VBBool _is_realtime_animation) {
+#ifdef __ANDROID__
+    AddAllocModel(this);
+#endif
     tex = NULL;
     is_bitmap = false;
     color = mix_color = VBColorRGBALoadIdentity();
@@ -707,6 +751,7 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_n
             _txc_ptr->y = _uv[_i].y;
             _txc_ptr++;
         }
+        vb_tex = _texture;
         tex = new cocos2d::CCTexture2D();
         
         tex->m_bPVRHaveAlphaPremultiplied = false;
@@ -801,6 +846,9 @@ void VBModel::Link(int _currentIdx, VBModel* _child, VBObjectFile2DKeyFrame* _ke
 
 
 VBModel::~VBModel() {
+#ifdef __ANDROID__
+    RemoveAllocModel(this);
+#endif
     if(getChildren()) {
         while(getChildren()->count())
             removeChild((VBModel*)getChildren()->objectAtIndex(0), false);

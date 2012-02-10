@@ -194,6 +194,7 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
         }
         _ptr += _tex->width * _byte;
     }
+
     glTexImage2D(GL_TEXTURE_2D, 0, _format, _tex->width, _tex->height, 0, _format, GL_UNSIGNED_BYTE, _data);
     free(_data);
     
