@@ -15,6 +15,7 @@
 #include <GLES/glext.h>
 #endif
 
+#ifdef __ANDROID__
 VBArrayVector* _texVec = NULL;
 void VBTextureStackReloadBuffer(void) {
     for(int i = 0; i < _texVec->len; i++) {
