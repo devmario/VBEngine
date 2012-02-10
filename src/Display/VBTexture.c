@@ -22,7 +22,6 @@ void VBTextureStackReloadBuffer(void) {
         VBTexture* _tex = VBArrayVectorGetDataAt(_texVec, i);
         VBImage* _tmp_img = VBImageCopy(_tex->img_android);
         VBTextureUnload(_tex);
-        print_pixel(_tmp_img);
         VBTextureLoadImage(_tex, _tmp_img);
         VBImageFree(&_tmp_img);
     }
