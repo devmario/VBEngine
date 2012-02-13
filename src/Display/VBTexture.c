@@ -84,7 +84,7 @@ void VBTextureFree(VBTexture** _tex) {
 										 "VBEngine Log: VBTextureFree() - VBNull인 텍스쳐를 Free하려고 합니다. 이미 VBTextureFree하였거나 VBTextureAlloc하지 않은 파일을 사용했을 수 있습니다.");
 #endif
 	
-	VBTextureInit(*_tex);
+	*_tex = VBTextureInit(*_tex);
 	
     #ifdef __ANDROID__
     VBArrayVectorRemove(_texVec, *_tex);
@@ -217,7 +217,6 @@ void VBTextureUnload(VBTexture* _tex) {
 	
 	if(_tex->tid != 0) {
 		_tex->color_type = VBColorType_None;
-        glBindTexture(GL_TEXTURE_2D, _tex->tid);
 		glDeleteTextures(1, (GLuint*)&_tex->tid);
 		_tex->tid = 0;
 		_tex->width = 0;

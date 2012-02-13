@@ -217,13 +217,13 @@ void* VBArrayVectorRemoveAt(VBArrayVector* _vec, VBULong _at) {
 #endif
     
     void* _returnData = VBArrayVectorDataAtIndex(_vec, _at);
-    if(_returnData == NULL) 
-        return NULL;
-    VBLong i;
-    for(i = _at; i < _vec->len - 1; i++) {
-          _vec->data[i] = _vec->data[i + 1];
+    if(_at < _vec->len) {
+        VBLong i;
+        for(i = _at; i < _vec->len - 1; i++) {
+            _vec->data[i] = _vec->data[i + 1];
+        }
+        _vec->len--;
     }
-    _vec->len--;
     //데이터가 없어도 프리하지 않고 데이터는 벡터를 소멸시킬때 한번에 소멸한다.
 //    if(_vec->len < 1) {
 //        if(_vec->data) {

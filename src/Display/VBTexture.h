@@ -50,7 +50,7 @@ extern "C" {
 		/*!
 		 texture 인덱스
 		 */
-		VBUShort tid;
+		unsigned int tid;
 		/*!
 		 넓이
 		 */
