@@ -51,6 +51,8 @@ LOCAL_SRC_FILES := \
 	GameMainRdTd.cpp\
 	AndroidNative.cpp\
 	FrameTweenController.cpp\
+	Text.cpp\
+	Language.cpp\
 	main.cpp\
 
 
@@ -71,6 +73,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../Cocos2dx \
 LOCAL_CFLAGS := -DANDROID_NDK
 
 LOCAL_LDLIBS := -L$(call host-path, $(LOCAL_PATH)/../../libs/$(TARGET_ARCH_ABI)) \
-		-lcocos2d -lcocosdenshion -lvanillaworld -llog -lGLESv1_CM
+		-lcocos2d -lcocosdenshion -lvanillaworld -llog -lGLESv1_CM -ljnigraphics
 
 include $(BUILD_SHARED_LIBRARY)

@@ -22,18 +22,26 @@ class SubMenu : public View {
     void touchEndAndCancel(CCTouch* _touch, CCPoint _location);
     
 public:
-    VBObjectFile2D* stageObj;
-    VBObjectFile2D* packObj;
-    VBTexture* stageTex;
-    VBTexture* packTex;
-    VBObjectFile2D* fontObj;
-    VBTexture* fontTex;
+    bool isSetLayout;
+    bool is_need_new_page;
+    bool is_need_pop_root_history;
+    
+    VBTexture* texPageThumbs;
+    VBObjectFile2D* objPageThumbs;
+    
+    VBObjectFile2D* objSubMenu;
+    VBTexture* texSubMenu;
     
     VBObjectFile2D* objRootUI;
     VBTexture* texRootUI;
     
     VBModel* bg;
     VBModel* ui;
+    
+    VBModel* bgT;
+    VBModel* bgB;
+    
+    VBModel* shopM;
     
     VBModel* modelRootUI;
     FrameTweenController* frameCTR_friend;
@@ -67,12 +75,6 @@ public:
 	
 #ifndef SHOP_EMPTY
     //shop
-    VBObjectFile2D *shopMaskObj;
-    VBTexture *shopMaskTex;
-    VBModel *shopMaskMask;
-    VBModel *shopMaskBg;
-    VBObjectFile2D *shopObj;
-    VBTexture *shopTex;
     Shop* shopView;
     
     VBModel *vtShopBack;
@@ -84,10 +86,17 @@ public:
     int arg0;
     int arg1;
     
+    SubMenuType next_type;
+    int next_arg0;
+    int next_arg1;
+    
     SubMenu();
     ~SubMenu();
     
     void SetMenuType(SubMenuType _type, int _arg0, int _arg1);
+    
+    void BackPage();
+    void ChangePage(SubMenuType _type, int _arg0, int _arg1);
     
     virtual void Update(float _deltaTime);
     

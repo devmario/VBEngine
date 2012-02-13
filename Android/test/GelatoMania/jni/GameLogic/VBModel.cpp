@@ -587,12 +587,45 @@ int _key_sort_func(const void* _a, const void* _b) {
     return sortNum;
 }
 
+#ifdef __ANDROID__
+VBArrayVector* _allocModel = NULL;
+
+void VBModelAllAllocatedReloadTexture() {
+    if(_allocModel) {
+        for(int i = 0; i < _allocModel->len; i++) {
+            VBModel* _m = (VBModel*)_allocModel->data[i];
+            _m->reloadUName_Texture();
+        }
+    }
+}
+
+void AddAllocModel(VBModel* _m) {
+    if(_allocModel == NULL)
+        _allocModel = VBArrayVectorInit(VBArrayVectorAlloc());
+    VBArrayVectorAddBack(_allocModel, _m);
+}
+
+void RemoveAllocModel(VBModel* _m) {
+    if(_allocModel) {
+        VBArrayVectorRemove(_allocModel, _m);
+        if(_allocModel->len == 0)
+            VBArrayVectorFree(&_allocModel);
+    }
+}
+#endif
+
 using namespace cocos2d;
+
+void VBModel::reloadUName_Texture() {
+    if(tex && vb_tex) {
+        tex->m_uName = vb_tex->tid;
+    }
+}
 
 void VBModel::SetTexture(VBTexture* _tex) {
     if(tex == NULL)
         tex = new cocos2d::CCTexture2D();
-    
+    is_bitmap = true;
     tex->m_bPVRHaveAlphaPremultiplied = false;
     tex->m_bHasPremultipliedAlpha = false;
     if(_tex) {
@@ -622,6 +655,9 @@ void VBModel::SetTexture(VBTexture* _tex) {
 }
 
 VBModel::VBModel(VBTexture* _tex) {
+#ifdef __ANDROID__
+    AddAllocModel(this);
+#endif
     is_bitmap = true;
     color = mix_color = VBColorRGBALoadIdentity();
     this->setAnchorPoint(ccp(0,0));
@@ -639,10 +675,15 @@ VBModel::VBModel(VBTexture* _tex) {
     frame_current_key_frame = NULL;
     library_name_id = NULL;
     tex = NULL;
+    vb_tex = _tex;
     SetTexture(_tex);
 }
 
 VBModel::VBModel() {
+#ifdef __ANDROID__
+    AddAllocModel(this);
+#endif
+    vb_tex = NULL;
     is_bitmap = false;
     color = mix_color = VBColorRGBALoadIdentity();
     this->setAnchorPoint(ccp(0,0));
@@ -664,6 +705,9 @@ VBModel::VBModel() {
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_name_id, VBTexture* _texture, VBBool _is_realtime_animation) {
+#ifdef __ANDROID__
+    AddAllocModel(this);
+#endif
     tex = NULL;
     is_bitmap = false;
     color = mix_color = VBColorRGBALoadIdentity();
@@ -707,6 +751,7 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_n
             _txc_ptr->y = _uv[_i].y;
             _txc_ptr++;
         }
+        vb_tex = _texture;
         tex = new cocos2d::CCTexture2D();
         
         tex->m_bPVRHaveAlphaPremultiplied = false;
@@ -801,6 +846,9 @@ void VBModel::Link(int _currentIdx, VBModel* _child, VBObjectFile2DKeyFrame* _ke
 
 
 VBModel::~VBModel() {
+#ifdef __ANDROID__
+    RemoveAllocModel(this);
+#endif
     if(getChildren()) {
         while(getChildren()->count())
             removeChild((VBModel*)getChildren()->objectAtIndex(0), false);
@@ -1225,10 +1273,11 @@ bool CheckTriangle(CCPoint p1, CCPoint p2, CCPoint p3, CCPoint cp)
 VBAABB VBModel::getVBModelSize() {
     VBAABB _aabb = VBAABBLoadIndentity();
     if(is_bitmap) {
-        CCPoint tl = CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y);
-        CCPoint tr = CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y);
-        CCPoint bl = CCPointMake(m_sQuad.bl.vertices.x, m_sQuad.bl.vertices.y);
-        CCPoint br = CCPointMake(m_sQuad.br.vertices.x, m_sQuad.br.vertices.y);
+        CCAffineTransform wt = nodeToParentTransform();
+        CCPoint tl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y), wt);
+        CCPoint tr = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y), wt);
+        CCPoint bl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.bl.vertices.x, m_sQuad.bl.vertices.y), wt);
+        CCPoint br = CCPointApplyAffineTransform(CCPointMake(m_sQuad.br.vertices.x, m_sQuad.br.vertices.y), wt);
         VBVector2D vtx[4] = {{tl.x,tl.y}, {tr.x,tr.y}, {bl.x,bl.y}, {br.x,br.y}};
         _aabb = VBAABBMerge(_aabb, VBAABBCreateWithVertex(vtx, 4));
     }

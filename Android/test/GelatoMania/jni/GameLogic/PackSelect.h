@@ -19,10 +19,14 @@ public:
     
     VBModel* touchMd;
     
+    CCPoint startLocation;
+    
     int selectedIdx;
     
-    PackSelect(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex,
-               int _totalIdx, SubMenu* _subMenu);
+    VBObjectFile2D* objPack;
+    VBTexture* texPack;
+    
+    PackSelect(VBObjectFile2D* _thumbs_obj, VBTexture* _thumbs_tex, int _totalIdx, SubMenu* _subMenu);
     ~PackSelect();
     
     void Reset();

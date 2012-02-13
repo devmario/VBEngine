@@ -15,11 +15,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.facebook.android.BaseDialogListener;
 import com.facebook.android.BaseRequestListener;
@@ -238,6 +244,19 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		fbUtil.mFacebook.authorizeCallback(requestCode, resultCode, data);
 	}
 
+	private static Bitmap getTextImageWithSizeDetail(String text, int size, int width, int height) {
+		Log.d("GelatoManiaActivity", "getTextImageWithSizeDetail() text: " + text + " size: " + size +" width: " + width + " height: " + height);
+		
+		Bitmap bm = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bm);
+        Paint p = new Paint();
+        p.setFlags(Paint.ANTI_ALIAS_FLAG);
+		p.setColor(Color.WHITE);
+		p.setTextSize(size);
+		c.drawText(text, 50, 50, p);
+		
+		return bm;
+	}
 	
 	// modify lowmans -> facebook method linked JNI Function call
 	private static boolean facebookIsLogin() {

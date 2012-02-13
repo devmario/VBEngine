@@ -6,6 +6,8 @@ ScrollerContainer::ScrollerContainer(VBObjectFile2D* _objScroller, VBTexture* _t
                                      float _margin, float _marginDirBegin, float _marginDirEnd,
                                      ScrollerContainerAlign _align, bool _is_center_cell,
                                      bool _is_mask) : VBModel() {
+    objScroller = _objScroller;
+    texScroller = _texScroller;
     is_mask = _is_mask;
     data = _data;
     align = _align;
@@ -161,6 +163,15 @@ void ScrollerContainer::ShowScrollBarMoment(float _time) {
 }
 
 void ScrollerContainer::ResetData() {
+    cellSizeTotal = VBArrayVectorGetLength(data) * cellSize;
+    pageValueMin = -cellSizeTotal + size;
+//    CCPoint _scroll_position = scroller->getPosition();
+//    removeChild(scroller, false);
+//    delete scroller;
+//    scroller = new Scroller(objScroller, texScroller, size - marginDirBegin - marginDirEnd);
+//    addChild(scroller);
+//    scroller->setPosition(_scroll_position);
+    
     for(int i = 0; i < VBArrayVectorGetLength(cell); i++) {
         CellData* _cellData = (CellData*)VBArrayVectorGetDataAt(cell, i);
         CellFree(_cellData);

@@ -1,7 +1,9 @@
 #include "PackThumb.h"
 #include "ShareData.h"
+#include "PlatformFunctions.h"
+#include "Language.h"
 
-PackThumb::PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex, int _packIdx) : VBModel() {
+PackThumb::PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, int _packIdx) : VBModel() {
     packIdx = _packIdx;
     
     if(ShareDataGetPackLibraryName(packIdx)) {
@@ -10,53 +12,72 @@ PackThumb::PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fon
         LIBNAMEFIND(_library_name_id, _obj, ShareDataGetPackLibraryName(packIdx), _str);
         
         pack = new VBModel(_obj, _library_name_id, _tex, true);
+        pack->stop();
         
         ((CCSprite*)this)->addChild((CCSprite*)pack);
         
+        textTitle = new Text();
+        textClear = new Text();
+        textStar = new Text();
+        textTime = new Text();
+        
+        Language* l = Language::shareLanguage();
+        
+        textTitle->SetText(l->GetString("si", 2, "packTitle", _packIdx), l->GetFontName("type0"), 25, 256, 32, "fffcf0ff", "000000FF", VBVector2DCreate(-1, -1), 0);
+        
         if(ShareDataGetStageLength(packIdx)) {
-            scoreText = new NumberText(_fontObj, _fontTex, (char*)"dynamic/dy_font_score", 0, -2);
-            ((CCSprite*)scoreText)->setPosition(CCPointMake(243, -130));
-            ((CCSprite*)this)->addChild((CCSprite*)scoreText);
             
-            starText = new NumberText(_fontObj, _fontTex, (char*)"dynamic/dy_font_starscore", -1, -2);
-            ((CCSprite*)starText)->setPosition(CCPointMake(253, -174));
-            ((CCSprite*)this)->addChild((CCSprite*)starText);
-        } else {
-            scoreText = NULL;
-            starText = NULL;
+            textClear->SetText("24 / 36", "ArialRoundedMTBold", 20, 80, 32, "413424FF", "FFFFFFFF", VBVector2DCreate(1, 1), -1);
+            textStar->SetText("86 %", "ArialRoundedMTBold", 20, 80, 32, "413424FF", "FFFFFFFF", VBVector2DCreate(1, 1), -1);
+            
+            char buf[0xFF] = {'\0',};
+            sprintf(buf, "%02d%s %02d%s %02d%s", 1, l->GetString("s", 1, "time"), 4, l->GetString("s", 1, "min"), 5, l->GetString("s", 1, "sec"));
+            textTime->SetText(buf, l->GetFontName("type0"), 15, 128-20, 25, "413424FF", "FFFFFFFF", VBVector2DCreate(1, 1), 0);
         }
-            
+        
+        textTitle->setPosition(CCPoint(50, -25-2));
+        textClear->setPosition(CCPoint(220, -73-15));
+        textStar->setPosition(CCPoint(220, -106-16));
+        textTime->setPosition(CCPoint(190, -147-16 - 5));
+        
+        addChild(textTitle);
+        addChild(textClear);
+        addChild(textStar);
+        addChild(textTime);
+        
         Reset();
     }
 }
 
 PackThumb::~PackThumb() {
-    if(starText) {
-        this->removeChild(starText, false);
-        delete starText;
-    }
-    if(scoreText) {
-        this->removeChild(scoreText, false);
-        delete scoreText;
-    }
-    this->removeChild(pack, false);
+    removeChild(textTitle, false);
+    delete textTitle;
+    
+    removeChild(textClear, false);
+    delete textClear;
+    
+    removeChild(textStar, false);
+    delete textStar;
+    
+    removeChild(textTime, false);
+    delete textTime;
+    
+    removeChild(pack, false);
     delete pack;
 }
 
 void PackThumb::Reset() {
-    if(scoreText) {
+    if(1) {
         int packScore = 0;
         for(int i = 0; i < ShareDataGetStageLength(packIdx); i++) {
             packScore += ShareDataGetStageScoreAt(packIdx, i);
         }
-        scoreText->SetNumber(packScore);
     }
     
-    if(starText) {
+    if(1) {
         int starScore = 0;
         for(int i = 0; i < ShareDataGetStageLength(packIdx); i++) {
             starScore += ShareDataGetStageStarAt(packIdx, i);
         }
-        starText->SetNumber(starScore);
     }
 }

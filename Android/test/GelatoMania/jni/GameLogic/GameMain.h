@@ -12,12 +12,39 @@
 
 using namespace tween;
 
-//typedef enum 
+typedef enum ActionType
+{
+    ActionNone,
+    ActionFill,
+    ActionMaskOn,
+    ActionMaskOff,
+    ActionSubTopping,
+    ActionSubToppingFlow,
+    ActionMix,
+    ActionFreeze,
+    ActionNext,
+    ActionTopping,
+    ActionToppingSpuit,
+    ActionToppingFlow,
+    ActionToppingCream,
+    ActionToppingCherry
+} ActionType;
+
+typedef struct HistoryList
+{
+    ActionType actionType;
+    int recipeIdx;
+    int position;
+    HistoryList* next;
+    drawIceCremArg *mix;
+    unsigned long bitmaskMerge;
+} HistoryList;
 
 class GameMain : public View, IceCreamProtocol {
 private:
     
     bool initWithIceCream;
+    bool callBackStop;
     
     int packIdx;
     int stageIdx;
@@ -25,6 +52,8 @@ private:
     int bgLen;
     
     unsigned int stepCount;
+    int* recipeTypeArr;
+    HistoryList *history;
     
     VBObjectFile2D** objBg;
     VBTexture** texBg;
@@ -118,8 +147,12 @@ private:
     
     bool IsActiveUI();
     
-    bool saveStep();
+    
     void resetAllStep();
+    
+    void pushHistory(ActionType _actionType, int _recipeIdx, int _position=0, drawIceCremArg* _mix=NULL, unsigned long _bitmaskMerge=0);
+    HistoryList popHistory();
+    void clearHistory();
     
 public:
     HintViewer *hintViewer;
@@ -141,7 +174,9 @@ public:
     void recipeContainerCallBack(int recipeIdx);
     float getToppingPositionX(int toppingIdx);
     void toppingContainerCallBack(int recipeIdx);
-    void iceCreamMaskCallBack(int recipeIdx);
+    void iceCreamMaskCallBack(IceCream* caller, int recipeIdx);
+    
+    void iceCreamStepSave(IceCream* caller, int reciptIdx);
     
     virtual void Update(float _deltaTime);
     
@@ -155,6 +190,9 @@ public:
     bool IsRecipeMode();
     
     void unDo();
+    bool saveStep(ActionType actionType, int itemIdx);
+    
+    void initHistory();
 };
 
 

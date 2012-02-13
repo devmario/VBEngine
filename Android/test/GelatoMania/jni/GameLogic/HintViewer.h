@@ -100,6 +100,8 @@ public:
     void iceCreamAction(int itemIdx);
     void recipeContainerAction(int itemIdx);
     void toppingAction(int itemIdx);
+    
+    void backStep();
 };
 
 #endif

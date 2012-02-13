@@ -33,19 +33,91 @@ Pages::Pages(VBObjectFile2D* _obj, VBTexture* _tex,
     slideM = new VBModel();
     ((CCSprite*)slideM)->setPosition(CCPointMake(slideX, startY));
     
+    
     VBString* _str;
     VBObjectFile2DLibraryNameID* _library_name_id;
-    LIBNAMEFIND(_library_name_id, _obj, "thumb", _str);
-    if(_library_name_id) {
-        thumb = new VBModel(obj, _library_name_id, tex, true);
-        thumb->setPosition(CCPointMake(slideXThumb, thumbY));
-        thumb->stop();
-    } else {
-        thumb = NULL;
+    
+    arr_thumbs = VBArrayVectorInit(VBArrayVectorAlloc());
+    thumb = new VBModel();
+    
+    thumb_left = NULL;
+    thumb_center = NULL;
+    thumb_right = NULL;
+    
+    float _thumb_tick = 15;
+    float _thumb_left_tick = 10;
+    float _thumb_right_tick = 10;
+    float _size_left;
+    float _size_right;
+    float _size = _thumb_tick * _totalIdx + _thumb_left_tick + _thumb_right_tick;
+    
+    widthThumbs = 0.0;
+    
+    if(_obj && _tex) {
+        LIBNAMEFIND(_library_name_id, _obj, "pageLeft", _str);
+        if(_library_name_id) {
+            thumb_left = new VBModel(_obj, _library_name_id, _tex, true);
+            thumb->addChild(thumb_left);
+            _size_left = VBAABBGetWidth(thumb_left->getVBModelSize());
+        }
+        
+        LIBNAMEFIND(_library_name_id, _obj, "pageRight", _str);
+        if(_library_name_id) {
+            thumb_right = new VBModel(_obj, _library_name_id, _tex, true);
+            thumb->addChild(thumb_right);
+            _size_right = VBAABBGetWidth(thumb_right->getVBModelSize());
+            thumb_right->setPosition(CCPoint(_size - _size_right, 0));
+        }
+        
+        LIBNAMEFIND(_library_name_id, _obj, "pagePattern", _str);
+        if(_library_name_id) {
+            thumb_center = new VBModel(_obj, _library_name_id, _tex, true);
+            thumb_center->setPosition(CCPoint(_size_left, 0));
+            thumb_center->setScaleX(_size - _size_left - _size_right);
+            thumb->addChild(thumb_center);
+        }
+        
+        for(int i = 0; i < _totalIdx; i++) {
+            char buf[0xFF] = {'\0'};
+            sprintf(buf, "id_mom_page%02d", i+1);
+            LIBNAMEFIND(_library_name_id, _obj, buf, _str);
+            VBModel* _thumb = NULL;
+            if(_library_name_id) {
+                _thumb = new VBModel(_obj, _library_name_id, _tex, true);
+                _thumb->gotoAndStop(0);
+                thumb->addChild(_thumb);
+                float _height_thumb = VBAABBGetHeight(_thumb->getVBModelSize());
+                _thumb->setPosition(CCPoint(_thumb_left_tick + i * _thumb_tick, _height_thumb - 4));
+            }
+            VBArrayVectorAddBack(arr_thumbs, _thumb);
+        }
+        widthThumbs = _size;
+        thumb->setPosition(CCPointMake(slideXThumb - widthThumbs * 0.5, thumbY));
     }
 }
 
 Pages::~Pages() {
+    if(thumb_center) {
+        thumb->removeChild(thumb_center, false);
+        delete thumb_center;
+    }
+    if(thumb_left) {
+        thumb->removeChild(thumb_left, false);
+        delete thumb_left;
+    }
+    if(thumb_right) {
+        thumb->removeChild(thumb_right, false);
+        delete thumb_right;
+    }
+    while (VBArrayVectorGetLength(arr_thumbs)) {
+        VBModel* _thumb = (VBModel*)VBArrayVectorRemoveBack(arr_thumbs);
+        if(_thumb) {
+            thumb->removeChild(_thumb, false);
+            delete _thumb;
+        }
+    }
+    VBArrayVectorFree(&arr_thumbs);
+    
     if (slideTween) {
         delete slideTween;
     }
@@ -117,8 +189,14 @@ void Pages::GoPage(int _idx, void (*_pageFunc)(void* _pageFuncRef), void* _pageF
     slideTweenThumb->setParamAndBegin(paramThumb, &slideXThumb, lastThumb);
     
     if(idx >= 0 && totalIdx > idx) {
-        if(thumb)
-            thumb->gotoAndStop(idx);
+        if(thumb) {
+            for(int i = 0; i < totalIdx; i++) {
+                VBModel* _thumb = (VBModel*)VBArrayVectorGetDataAt(arr_thumbs, i);
+                if(_thumb) {
+                    _thumb->gotoAndStop(i == idx ? 0 : 1);
+                }
+            }
+        }
     }
     if(idx >= 0) {
         if(top->getChildren()) {
@@ -140,15 +218,17 @@ void Pages::GoPage(int _idx, void (*_pageFunc)(void* _pageFuncRef), void* _pageF
 
 void Pages::Update(float _deltaTime) {
     if(touchSlide == NULL) {
-        if (slideTween->onGoing) {
-            slideTween->update(_deltaTime);
-            slideM->setPosition(CCPointMake(slideX, startY));
+        if(slideTween) {
+            if (slideTween->onGoing) {
+                slideTween->update(_deltaTime);
+                slideM->setPosition(CCPointMake(slideX, startY));
+            }
         }
     }
     if(slideTweenThumb) {
         slideTweenThumb->update(_deltaTime);
         if(thumb)
-            thumb->setPosition(CCPointMake(slideXThumb, thumbY));
+            thumb->setPosition(CCPointMake(slideXThumb - widthThumbs * 0.5, thumbY));
     }
 }
 

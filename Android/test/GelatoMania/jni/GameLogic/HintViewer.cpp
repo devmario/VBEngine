@@ -202,6 +202,7 @@ void HintViewer::step(actionType currentAction, int itemIdx)
 {
     // -1: add icecream
     // -2: topping
+//    printf("\n\nstep\ncurrentAction: %d, itemIdx: %d\n\n", currentAction, itemIdx);
     switch (hintState) {
         case hintStateItem:case hintStateTop:case hintStateDown:
             if (solution[currentSolutionIdx] == itemIdx) {
@@ -498,3 +499,9 @@ void HintViewer::release() {
     }
 }
 
+void HintViewer::backStep() {
+    if (hintState == hintStateReset || currentSolutionIdx == 0) {
+        return;
+    }
+    currentSolutionIdx--;
+}

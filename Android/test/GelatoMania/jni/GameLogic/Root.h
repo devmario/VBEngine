@@ -32,7 +32,8 @@ typedef enum PopupType {
 
 typedef enum LoadingType {
     LoadingTypeNone = 0,
-    LoadingTypeFull = 1
+    LoadingTypeFull = 1,
+    LoadingTypeSmall = 2
 } LoadingType;
 
 typedef struct history {
@@ -53,7 +54,12 @@ typedef struct GameMainHistory {
 bool IsEqualHistory(history* _h0, history* _h1);
 
 class Root : public cocos2d::CCLayer, public SocialProtocol, public SelectUserProtocol {
-private:
+public:
+    VBTexture* texMobage;
+    VBModel* modelMobage;
+    
+    bool isSetLayout;
+    
     View* view;
     VBModel* loading;
     

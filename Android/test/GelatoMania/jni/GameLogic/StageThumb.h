@@ -13,14 +13,12 @@ public:
     int packIdx;
     int stageIdx;
     VBModel* stage;
-    NumberText* label;
-    VBModel* star;
     VBObjectFile2D* fontObj;
     VBTexture* fontTex;
     VBObjectFile2D* obj;
     VBTexture* tex;
     
-    StageThumb(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex, int _packIdx, int _stageIdx);
+    StageThumb(VBObjectFile2D* _obj, VBTexture* _tex, int _packIdx, int _stageIdx);
     ~StageThumb();
     
     void Reset(int _packIdx, int _stageIdx);

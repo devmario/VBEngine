@@ -24,6 +24,7 @@ AppDelegate::~AppDelegate()
 
 bool AppDelegate::initInstance()
 {
+    cout << "AppDelegate initInstance\n";
     bool bRet = false;
     do 
     {
@@ -59,13 +60,6 @@ bool AppDelegate::initInstance()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_AIRPLAY)
 		// MaxAksenov said it's NOT a very elegant solution. I agree, haha;
 #endif
-		//CCDirector::sharedDirector()->setDeviceOrientation(kCCDeviceOrientationLandscapeLeft);
-        CCDirector::sharedDirector()->setProjection(kCCDirectorProjection2D);
-#ifdef __ANDROID__
-        CCDirector::sharedDirector()->enableRetinaDisplay(false);
-#else
-        CCDirector::sharedDirector()->enableRetinaDisplay(true);
-#endif
         
         bRet = true;
     } while (0);
@@ -74,6 +68,16 @@ bool AppDelegate::initInstance()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
+    //CCDirector::sharedDirector()->setDeviceOrientation(kCCDeviceOrientationPortrait);
+    CCDirector::sharedDirector()->setProjection(kCCDirectorProjection2D);
+#ifdef __ANDROID__
+    CCDirector::sharedDirector()->enableRetinaDisplay(false);
+#else
+    CCDirector::sharedDirector()->enableRetinaDisplay(true);
+#endif
+    CCDirector::sharedDirector()->setDisplayFPS(true);
+    
+    cout << "AppDelegate applicationDidFinishLaunching\n";
 	// initialize director
 	CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(&CCEGLView::sharedOpenGLView());
@@ -85,10 +89,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 	//pDirector->setDeviceOrientation(kCCDeviceOrientationLandscapeLeft);
     
 	// turn on display FPS
-	pDirector->setDisplayFPS(true);
     
 	// set FPS. the default value is 1.0/60 if you don't call this
-	pDirector->setAnimationInterval(1.0 / 60);
+	//pDirector->setAnimationInterval(1.0 / 60);
     
 	// create a scene. it's an autorelease object
 	CCScene *pScene = Root::scene();//HelloWorld::scene();

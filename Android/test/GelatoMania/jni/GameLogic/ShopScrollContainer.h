@@ -10,42 +10,64 @@
 #define gelatomania_ShopScrollContainer_h
 
 #include "ScrollerContainer.h"
+#include "Text.h"
+#include "cJSON.h"
 /*
  * scroller container class
  */
 class ShopScrollerContainer;
 typedef struct ShopCellData {
     int idx;
-    int price;
-    VBString *title;
-    VBString *description;
+    
     VBString *thumbnailPath;
     
     CCTouch *touch;
     bool scrollFlag;
     
-    VBObjectFile2DLibraryNameID *thumbnailLibNameId;
-    VBObjectFile2D *thumbnailObj;
     VBTexture *thumbnailTex;
     
     VBModel *thumbnailModel;
     VBModel *bgModel;
     
+    char* title;
+    char* descript;
+    char* money;
+    
+    double money_unit;
+    
+    Text* textTitle;
+    Text* textDescript;
+    Text* textMoney;
+    
     ShopScrollerContainer *container;
 } ShopCellData;
-ShopCellData* ShopCellDataInit(int idx, VBObjectFile2D *_obj, VBTexture *_tex);
+ShopCellData* ShopCellDataInit(cJSON* parent, int idx, VBObjectFile2D *_obj, VBTexture *_tex);
 void ShopCellDataFree(ShopCellData **data);
 class ShopScrollerContainer : public ScrollerContainer {
 private:
     
 public:
+    virtual void ResetData();
+    
+    float tap_pageValue[3];
+    
+    VBArrayVector* arr_rope;
+    void ResetRope();
+    
     //for cell
     VBObjectFile2DLibraryNameID *cellLibNameId;
+    VBObjectFile2DLibraryNameID *ropeLibNameId;
     VBObjectFile2D *cellBgObj;
     VBTexture *cellBgTex;
     //
-    ShopScrollerContainer(VBObjectFile2D *_obj, VBTexture *_tex, VBObjectFile2D *_objScroller, VBTexture *_texScroller, VBArrayVector *_data);
+    ShopScrollerContainer(int _tapIdx, VBObjectFile2D *_obj, VBTexture *_tex, VBObjectFile2D *_objScroller, VBTexture *_texScroller, VBArrayVector *_data);
     ~ShopScrollerContainer();
+    
+    VBArrayVector* topData;
+    int tapIdx;
+    void SetTapIdx(int _tapIdx);
+    
+    virtual void Update(float _deltaTime);
     
     virtual void CellAlloc(CellData* _cell);
     virtual void CellFree(CellData* _cell);

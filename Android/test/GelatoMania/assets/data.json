@@ -1,47 +1,33 @@
 {
     
     "pack": [
-             {"libName":"menu_tutorial",
+             {"libName":"p0",
              "objLayer":["stage_bg0_wall", "stage_bg0"],
              "objUI":"stage_bg0ui",
-             "clear":true},
+             "lock":false},
              
-             {"libName":"menu_pack_1",
+             {"libName":"p1",
              "objLayer":["stage_bg0_wall", "stage_bg0"],
              "objUI":"stage_bg0ui",
              "packData":"pack0.json",
-             "clear":true},
+             "lock":false},
              
-             {"libName":"menu_pack_2",
+             {"libName":"p2",
              "objLayer":["stage_bg1_wall", "stage_bg1"],
              "objUI":"stage_bg1ui",
              "packData":"pack1.json",
-             "clear":true},
+             "lock":false},
              
-             {"libName":"menu_pack_3",
+             {"libName":"p3",
              "objLayer":["stage_bg2_wall", "stage_bg2"],
              "objUI":"stage_bg2ui",
              "packData":"pack2.json",
-             "clear":true},
+             "lock":false},
              
-             {"libName":"menu_pack_4",
+             {"libName":"p4",
              "objLayer":["stage_bg3_wall", "stage_bg3"],
              "objUI":"stage_bg3ui",
              "packData":"pack3.json",
-             "clear":true},
-             
-             {"libName":"menu_pack_5",
-             "objLayer":["stage_bg4_wall", "stage_bg4"],
-             "objUI":"stage_bg4ui",
-             "packData":"pack4.json",
-             "clear":true},
-             
-             {"libName":"menu_pack_6",
-             "objLayer":["stage_bg5_wall", "stage_bg5"],
-             "objUI":"stage_bg5ui",
-             "packData":"pack5.json",
-             "clear":true},
-             
-             {"libName":"menu_ad"}
+             "lock":false}
              ]
 }

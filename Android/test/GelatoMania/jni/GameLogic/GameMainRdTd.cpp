@@ -135,8 +135,10 @@ GameMainRdTd::GameMainRdTd(int _packIdx, int _stageIdx)
         } else if(_type == 3) {
             _t = ToppingCherryInit(ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 2)), ShareDataGetTemplateData(cJSON_GetArrayItem(_item, 3)));
         }
-        if(_t)
+        if(_t) {
             VBArrayVectorAddBack(tdVec, RTInit(false, _td[i], _type, _t));
+            printf("tdVec[%d]: _td[%d]-%d, _type-%d\n", i, i, _td[i], _type);
+        }
     }
     
 }

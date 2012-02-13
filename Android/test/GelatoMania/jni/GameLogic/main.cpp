@@ -1,5 +1,8 @@
 #include "AppDelegate.h"
 #include "cocos2d.h"
+#include "VBEngine.h"
+#include "VBModel.h"
+
 #include <jni.h>
 #include <android/log.h>
 
@@ -27,6 +30,11 @@ void Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeInit(JNIEnv*  env, jobject thi
     else
     {
         cocos2d::CCTextureCache::reloadAllTextures();
+
+        VBTextureStackReloadBuffer();
+
+        VBModelAllAllocatedReloadTexture();
+
         cocos2d::CCDirector::sharedDirector()->setGLDefaultValues();
     }
 }

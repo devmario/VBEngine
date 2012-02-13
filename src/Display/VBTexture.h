@@ -25,12 +25,6 @@
 extern "C" {
 #endif
 	
-    
-//#define __ANDROID__
-#ifdef __ANDROID__
-    void VBTextureStackReloadBuffer(void);
-#endif
-    
 	/**
 	 @brief VBTexture의 구조체 타입.
 	 */
@@ -40,9 +34,11 @@ extern "C" {
 	 @brief VBTexture의 구조체.
 	 */	
 	struct VBTexture {
-        #ifdef __ANDROID__
-        VBImage* img_android;
-        #endif
+
+#ifdef __ANDROID__
+		VBImage* img_android;
+#endif
+
 		/*!
 		 color 타입
 		 */
@@ -63,6 +59,10 @@ extern "C" {
         VBULong shiftX, shiftY;
 	};
 	
+#ifdef __ANDROID__
+    void VBTextureStackReloadBuffer(void);
+#endif
+
 	/**
 	 @brief VBTexture의 메모리를 할당합니다.
 	 @return _tex 메모리 할당된 VBTexture를 반환합니다.

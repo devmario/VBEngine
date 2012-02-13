@@ -4,8 +4,10 @@
 #include "SubMenu.h"
 #include "vbHTTP.h"
 #include "PlatformFunctions.h"
+#include "Language.h"
 
 MainMenu::MainMenu() {
+    isSetLayout = false;
     //View::View();
     
     touchSocial = touchSetting = touchMobage = touchPlayBT = NULL;
@@ -26,6 +28,14 @@ MainMenu::MainMenu() {
     
     titlebg = new VBModel(titleintroObj, _library_name_id, titleintroTex, true);
     ((CCSprite*)top)->addChild((CCSprite*)titlebg);
+    titlebg->stop();
+    
+    
+    modelB = titlebg->getVBModelByInstanceName("B");
+    modelL = titlebg->getVBModelByInstanceName("L");
+    modelR = titlebg->getVBModelByInstanceName("R");
+    modelBG = titlebg->getVBModelByInstanceName("bg");
+    modelBG->play();
     
     OBJLOAD(objTitleUi, "title_ui.obj", _str);
     TEXLOAD(texTitleUI, "title_ui.png", _str);
@@ -34,10 +44,22 @@ MainMenu::MainMenu() {
     
     titleui = new VBModel(objTitleUi, _library_name_id, texTitleUI, true);
     ((CCSprite*)top)->addChild((CCSprite*)titleui);
+    titleui->stop();
+    
+    textTitle = new Text();
+    Language* lang = Language::shareLanguage();
+    textTitle->SetText(lang->GetString("s", 1, "title"), lang->GetFontName("type0"), 70, 323, 50, "FFFFFFFF", "000000FF", VBVector2DCreate(-1, -1), 0);
+    titleui->addChild(textTitle);
+    textTitle->setPosition(CCPoint(91-20, -(63-8)));
     
     playBT = titleui->getVBModelByInstanceName("playBT");
     playBT->setIsPlayLoop(false);
     playBT->gotoAndStop(0);
+    
+    textPlay = new Text();
+    textPlay->SetText(lang->GetString("s", 1, "play"), lang->GetFontName("type0"), 40, 116, 43, "502355FF", "FFFFFFFF", VBVector2DCreate(1, 1), 0);
+    playBT->getVBModelByInstanceName("inBT")->addChild(textPlay);
+    textPlay->setPosition(CCPoint(200-183, -(211-190)));
     
     OBJLOAD(objBT, "root_ui.obj", _str);
     TEXLOAD(texBT, "root_ui.png", _str);
@@ -69,6 +91,11 @@ MainMenu::MainMenu() {
 }
 
 MainMenu::~MainMenu() {
+    titleui->removeChild(textTitle, false);
+    delete textTitle;
+    playBT->getVBModelByInstanceName("inBT")->removeChild(textPlay, false);
+    delete textPlay;
+    
     delete frameModel;
     top->removeChild(modelBTUI, false);
     delete modelBTUI;
@@ -86,6 +113,26 @@ MainMenu::~MainMenu() {
 }
 
 void MainMenu::Update(float _deltaTime) {
+    if(!isSetLayout) {
+        float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
+        float x = CCDirector::sharedDirector()->getDisplaySizeInPixels().width / scale;
+        float shiftX = -(480 - x);
+        titleui->setPosition(CCPointMake(shiftX * 0.5, 0));
+        titlebg->setPosition(CCPointMake(x * 0.5, 0));
+        settingBT->setPosition(CCPointMake(settingBT->getPosition().x + shiftX, settingBT->getPosition().y));
+        
+        float cur_aspec = (CCDirector::sharedDirector()->getDisplaySizeInPixels().width / CCDirector::sharedDirector()->getDisplaySizeInPixels().height);
+        float origin_aspec = 480.0/320.0;
+        if(origin_aspec < cur_aspec) {
+            modelBG->setScale(modelBG->getScale() / (origin_aspec / cur_aspec));
+        }
+        modelB->setScale(modelB->getScale() / (origin_aspec / cur_aspec));
+        modelL->setPosition(CCPoint(-240 / (origin_aspec / cur_aspec), 0));
+        modelR->setPosition(CCPoint(240 / (origin_aspec / cur_aspec), 0));
+        
+        isSetLayout = true;
+    }
+    
     frameModel->Update(_deltaTime);
 }
 

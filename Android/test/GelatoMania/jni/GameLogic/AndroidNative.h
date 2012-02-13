@@ -4,7 +4,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <android/log.h>
-#define LOG_TAG  "#@#"
+
+#include "VBEngine.h"
+
+#define LOG_TAG  "AndroidNative"
 #define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , LOG_TAG, __VA_ARGS__)
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO   , LOG_TAG, __VA_ARGS__)
@@ -24,7 +27,11 @@ typedef union {
     void* venv;
 } UnionJNIEnvToVoid;
 
+VBImage* GetTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align);
+
 // =================================== JAVA Interface (C/C++ -> JAVA) =========================================
+VBImage* getTextImageWithSizeDetail(const char* _text, int _text_size, int _width, int _height);
+
 bool facebookIsLogin();
 
 bool facebookLogin(PlatformCallback _callback);

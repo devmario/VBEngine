@@ -3,9 +3,16 @@
 
 #include "Pages.h"
 #include "ShopScrollContainer.h"
+#include "Text.h"
 
 class Shop : public Pages {
 private:  
+    VBObjectFile2D *shopObj;
+    VBTexture *shopTex;
+    
+    Text* textTap[3];
+    CCTouch* touchTap[3];
+    
     VBTexture *backgroundTexture;
     
     VBModel *backgroundModel;
@@ -13,12 +20,16 @@ private:
     VBObjectFile2D *objScroll;
     VBTexture *texScroll;
     
+    int tapIdx;
+    
 public:
     ShopScrollerContainer *container;
     VBArrayVector *inAppDataVector;
     
-    Shop(VBObjectFile2D* _obj, VBTexture* _tex);
+    Shop(int _tapidx);
     ~Shop();
+    
+    void SetTap(int _idx);
     
     virtual void GoPage(int _idx, void (*_pageFunc)(void* _pageFuncRef), void* _pageFuncRef);
     
