@@ -11,7 +11,6 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
@@ -19,13 +18,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.facebook.android.BaseDialogListener;
 import com.facebook.android.BaseRequestListener;
@@ -38,12 +37,12 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	private Cocos2dxGLSurfaceView mGLView;
 	private SharedPreferences sp;
 	private SharedPreferences.Editor e;
-	
+
 	// modify lowmans -> use facebook api
 	private static FacebookUtil fbUtil;
 	private static LoginManager loginMgr;
 	private static Activity activity;
-	
+
 	static {
 		System.loadLibrary("stlport_shared");
 		System.loadLibrary("cocos2d");
@@ -81,7 +80,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		// modify lowmans -> facebook instance
 		fbUtil = new FacebookUtil(this);
 		loginMgr = new LoginManager(this, fbUtil.mFacebook);
-		
+
 		activity = this;
 
 	}
@@ -108,48 +107,47 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		return f.mkdir();
 	}
 
-//	private void CopyAssets() {
-//
-//		// makeDir("/sdcard/.vanillaworld/");
-//		// makeDir("/sdcard/.vanillaworld/gelatomania/");
-//		// makeDir("/sdcard/.vanillaworld/gelatomania/resource");
-//		// makeDir("/sdcard/.vanillaworld/gelatomania/document");
-//
-//		makeDir("/data/data/com.vanillabreeze.gelatomania/files/");
-//		makeDir("/data/data/com.vanillabreeze.gelatomania/files/resource");
-//		makeDir("/data/data/com.vanillabreeze.gelatomania/files/document");
-//
-//		AssetManager assetManager = getAssets();
-//		String[] files = null;
-//		InputStream in = null;
-//		OutputStream out = null;
-//		try {
-//			files = assetManager.list("");
-//			for (String filename : files) {
-//				in = assetManager.open(filename);
-//				// String tmp = "/sdcard/.vanillaworld/gelatomania/resource/" + filename;
-//				String tmp = "/data/data/com.vanillabreeze.gelatomania/files/resource/" + filename;
-//				Log.i("#@#", tmp);
-//				out = new FileOutputStream(tmp);
-//				copyFile(in, out);
-//			}
-//		} catch (Exception e) {
-//			Log.e("tag", "try : " + e.getMessage());
-//		} finally {
-//			try {
-//				in.close();
-//				out.flush();
-//				out.close();
-//			} catch (IOException e) {
-//				Log.e("tag", "finally : " + e.getMessage());
-//			}
-//		}
-//		
-//		// 초기 한번만 실행하기 위해서 플래그 세팅
-//		e.putBoolean("isFirst", false);
-//	}
+	// private void CopyAssets() {
+	//
+	// // makeDir("/sdcard/.vanillaworld/");
+	// // makeDir("/sdcard/.vanillaworld/gelatomania/");
+	// // makeDir("/sdcard/.vanillaworld/gelatomania/resource");
+	// // makeDir("/sdcard/.vanillaworld/gelatomania/document");
+	//
+	// makeDir("/data/data/com.vanillabreeze.gelatomania/files/");
+	// makeDir("/data/data/com.vanillabreeze.gelatomania/files/resource");
+	// makeDir("/data/data/com.vanillabreeze.gelatomania/files/document");
+	//
+	// AssetManager assetManager = getAssets();
+	// String[] files = null;
+	// InputStream in = null;
+	// OutputStream out = null;
+	// try {
+	// files = assetManager.list("");
+	// for (String filename : files) {
+	// in = assetManager.open(filename);
+	// // String tmp = "/sdcard/.vanillaworld/gelatomania/resource/" + filename;
+	// String tmp = "/data/data/com.vanillabreeze.gelatomania/files/resource/" + filename;
+	// Log.i("#@#", tmp);
+	// out = new FileOutputStream(tmp);
+	// copyFile(in, out);
+	// }
+	// } catch (Exception e) {
+	// Log.e("tag", "try : " + e.getMessage());
+	// } finally {
+	// try {
+	// in.close();
+	// out.flush();
+	// out.close();
+	// } catch (IOException e) {
+	// Log.e("tag", "finally : " + e.getMessage());
+	// }
+	// }
+	//
+	// // 초기 한번만 실행하기 위해서 플래그 세팅
+	// e.putBoolean("isFirst", false);
+	// }
 
-	
 	private void CopyAssets() {
 
 		makeDir("/sdcard/.vanillaworld/");
@@ -160,7 +158,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		makeDir("/data/data/com.vanillabreeze.gelatomania/files/");
 		makeDir("/data/data/com.vanillabreeze.gelatomania/files/resource");
 		makeDir("/data/data/com.vanillabreeze.gelatomania/files/document");
-		
+
 		AssetManager assetManager = getAssets();
 		String[] files = null;
 		String tmp = "";
@@ -198,7 +196,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		// 초기 한번만 실행하기 위해서 플래그 세팅
 		e.putBoolean("isFirst", false);
 	}
-	
+
 	private void copyFile(InputStream in, OutputStream out) throws IOException {
 		byte[] buffer = new byte[1024];
 		int read;
@@ -207,12 +205,12 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		}
 	}
 
-	public static Handler handler = new Handler(){
+	public static Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			if(msg.what == 0){
+			if (msg.what == 0) {
 				Log.d("GelatoManiaActivity", "facebookLogin() ret: " + fbUtil.isLogin());
 				loginMgr.login(new BaseDialogListener() {
-					
+
 					@Override
 					public void onComplete(Bundle values) {
 						nativeFacebookLogin(fbUtil.isLogin());
@@ -237,27 +235,56 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 			}
 		};
 	};
-	
+
 	// modify lowmans -> facebook dialog feed-back
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		fbUtil.mFacebook.authorizeCallback(requestCode, resultCode, data);
 	}
 
-	private static Bitmap getTextImageWithSizeDetail(String text, int size, int width, int height) {
-		Log.d("GelatoManiaActivity", "getTextImageWithSizeDetail() text: " + text + " size: " + size +" width: " + width + " height: " + height);
+	private static Bitmap getTextImageWithSizeDetail(String _txt, String _fontName, float _text_size, int _width, int _height,
+			int _colorCode, int _shadowColorCode, float _shadowOffsetX, float _shadowOffsetY, int align) {
+
 		
-		Bitmap bm = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(bm);
-        Paint p = new Paint();
-        p.setFlags(Paint.ANTI_ALIAS_FLAG);
-		p.setColor(Color.WHITE);
-		p.setTextSize(size);
-		c.drawText(text, 50, 50, p);
+		Bitmap textBitmap = Bitmap.createBitmap(_width, _height, Bitmap.Config.ARGB_8888);
+
+		// textBitmap.eraseColor(0x8844ff44);
+		Canvas canvas = new Canvas(textBitmap);
+		Typeface typeface = Typeface.create(_fontName, Typeface.NORMAL);
+		Paint textPaint = new Paint();
+		setAutoTextSize(_text_size, textPaint, _txt, _width);
+		textPaint.setAntiAlias(true);
+		textPaint.setColor(_colorCode);
+		textPaint.setShadowLayer(2f, _shadowOffsetX, _shadowOffsetY, _shadowColorCode);
+		textPaint.setTypeface(typeface);
+		Rect bounds = new Rect();
+		textPaint.getTextBounds(_txt, 0, _txt.length(), bounds);
+		float measureTxt = textPaint.measureText(_txt);
+		float w = 0f, h = Math.abs(bounds.top); // 상단정렬
+		// h = _height - Math.abs(bounds.bottom); //하단정렬
+		if (align == -1) {
+			h += (_height - h - Math.abs(bounds.bottom)) / 2;
+		} else if (align == 0) {
+			w = (_width - measureTxt) / 2;
+			h += (_height - h - Math.abs(bounds.bottom)) / 2;
+		} else if (align == 1) {
+			w = _width - measureTxt;
+			h += (_height - h - Math.abs(bounds.bottom)) / 2;
+		}
+		canvas.drawText(_txt, w, h, textPaint);
+
+		return textBitmap;
 		
-		return bm;
 	}
-	
+
+	static void setAutoTextSize(float textSize, Paint paint, String text, int width) {
+		paint.setTextSize(textSize);
+		float _measureSize = paint.measureText(text);
+		if (_measureSize >= width) {
+			setAutoTextSize(--textSize, paint, text, width);
+		}
+	}
+
 	// modify lowmans -> facebook method linked JNI Function call
 	private static boolean facebookIsLogin() {
 		Log.d("GelatoManiaActivity", "facebookIsLogin() ret: " + fbUtil.isLogin());
@@ -267,19 +294,19 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	private static void facebookLogin() {
 		handler.sendEmptyMessage(0);
 	}
-	
+
 	private static boolean facebookLogout() {
 		loginMgr.logout();
 		Log.d("GelatoManiaActivity", "facebookLogout() ret: " + fbUtil.isLogin());
 		return fbUtil.isLogin() ? false : true;
 	}
-	
+
 	// PlatformFacebookRequestGraphPath
 	private static void facebookRequestGraphPath(int type) {
 		String graphPath = "";
-		if(type == 0){
+		if (type == 0) {
 			graphPath = "me";
-		}else if(type == 1){
+		} else if (type == 1) {
 			graphPath = "platform/posts";
 		} else {
 			graphPath = "me/friends";
@@ -301,7 +328,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		parameters.putString("message", message);
 		parameters.putString("to", to);
 		parameters.putString("notification_text", notification_text);
-		
+
 		Message msg = handler.obtainMessage();
 		msg.what = 1;
 		msg.setData(parameters);
@@ -317,16 +344,16 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		parameters.putString("description", description);
 		parameters.putString("link", link);
 		parameters.putString("picture", picture);
-		
+
 		Message msg = handler.obtainMessage();
 		msg.what = 2;
 		msg.setData(parameters);
 		handler.sendMessage(msg);
-		
+
 	}
 
 	native static void nativeFacebookLogin(boolean isLogin);
-	
+
 	native static void nativeFacebookRequestGraphPath(String response);
 
 	native static void nativeFacebookAppRequest(String response);
