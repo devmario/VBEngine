@@ -183,18 +183,24 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
         _tex->height *= 2;
     _tex->shiftY = _tex->height / 2 - VBImageGetHeight(_img) / 2;
     
-    unsigned char* _data = calloc(_tex->width * _tex->height, _byte);
-    unsigned char* _ptr = _data + _tex->shiftX * _byte;
-    
-    for(int i = 0; i < _tex->height; i++) {
-        int _y = i - _tex->shiftY;
-        if(_y >= 0 && _y < VBImageGetHeight(_img)) {
-            memcpy(_ptr, VBImageGetPixelColor(_img, 0, _y), VBImageGetWidth(_img) * _byte);
-        }
-        _ptr += _tex->width * _byte;
-    }
-    glTexImage2D(GL_TEXTURE_2D, 0, _format, _tex->width, _tex->height, 0, _format, GL_UNSIGNED_BYTE, _data);
-    free(_data);
+    glTexImage2D( GL_TEXTURE_2D, 0, _format, _tex->width, _tex->height, 0, _format, GL_UNSIGNED_BYTE, NULL);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, _tex->shiftX, _tex->shiftY, _img->width, _img->height, _format, GL_UNSIGNED_BYTE, _img->data);
+//    if(_img->width != _tex->width || _img->height != _tex->height) {
+//        unsigned char* _data = calloc(_byte, _tex->width * _tex->height);
+//        unsigned char* _ptr = _data + _tex->shiftX * _byte;
+//        
+//        for(int i = 0; i < _tex->height; i++) {
+//            int _y = i - _tex->shiftY;
+//            if(_y >= 0 && _y < VBImageGetHeight(_img)) {
+//                memcpy(_ptr, VBImageGetPixelColor(_img, 0, _y), VBImageGetWidth(_img) * _byte);
+//            }
+//            _ptr += _tex->width * _byte;
+//        }
+//        glTexImage2D(GL_TEXTURE_2D, 0, _format, _tex->width, _tex->height, 0, _format, GL_UNSIGNED_BYTE, _data);
+//        free(_data);
+//    } else {
+//        glTexImage2D(GL_TEXTURE_2D, 0, _format, _tex->width, _tex->height, 0, _format, GL_UNSIGNED_BYTE, _img->data);
+//    }
     
 #ifdef _VB_DEBUG_
 	if(glGetError() != GL_NO_ERROR)
