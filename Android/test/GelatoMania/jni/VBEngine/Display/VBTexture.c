@@ -126,7 +126,6 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
         glGenTextures(1, (GLuint*)&_tex->tid);
     }
 	glBindTexture(GL_TEXTURE_2D, _tex->tid);
-    
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

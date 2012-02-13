@@ -120,7 +120,7 @@ int main (int argc, const char * argv[])
         [mkStr appendString:@"\t\t$(LOCAL_PATH)/../VBEngine/Util\n\n"];
         [mkStr appendString:@"LOCAL_CFLAGS := -DANDROID_NDK\n\n"];
         [mkStr appendString:@"LOCAL_LDLIBS := -L$(call host-path, $(LOCAL_PATH)/../../libs/$(TARGET_ARCH_ABI)) \\\n"];
-        [mkStr appendString:@"\t\t-lcocos2d -lcocosdenshion -lvanillaworld -llog -lGLESv1_CM -landroid -ljnigraphics\n\n"];
+        [mkStr appendString:@"\t\t-lcocos2d -lcocosdenshion -lvanillaworld -llog -lGLESv1_CM -ljnigraphics\n\n"];
         [mkStr appendString:@"include $(BUILD_SHARED_LIBRARY)"];
         [mkStr writeToFile:[NSString stringWithFormat:@"%s/Android.mk", [Android_Jni_Game_Src_Root UTF8String]] atomically:YES encoding:NSASCIIStringEncoding error:nil];
         

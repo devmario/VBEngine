@@ -7,8 +7,18 @@ VBImage* PlatformGetTextImageWithSize(const char* _txt, const char* _fontName, f
     return VBImageInitAndClear(VBImageAlloc(), VBColorType_RGBA, 8, _width, _height);
 }
 
-VBImage* PlatformGetTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align) {
+VBImage* PlatformGetTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align, int _is_line) {
 	return GetTextImageWithSizeDetail(_txt, _fontName, _text_size, _width, _height, _colorCode, _shadowColorCode, _shadowOffset, align);
+}
+
+bool PlatformIsHaveFont(const char* fontName)
+{
+	return false;
+}
+
+const char* PlatformGetLanguage()
+{
+	return "default";
 }
 
 //로그인 되어있나 검사
