@@ -10,6 +10,10 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+#include "Text.h"
+
+Text* _shareLoadingText = NULL;
+
 VBObjectFile2D* _shareLoadingObj = NULL;
 VBTexture* _shareLoadingTexture = NULL;
 VBModel* _shareLoadingModel = NULL;
@@ -352,10 +356,17 @@ VBTexture* ShareDataGetLoadingTexture() {
     return _shareLoadingTexture;
 }
 
+#include "Language.h"
+
 VBModel* ShareDataGetLoadingModel() {
     if(_shareLoadingModel == NULL) {
         VBString* _str = VBStringInitWithCString(VBStringAlloc(), ShareDataGetLoadingLibraryName());
         _shareLoadingModel = new VBModel(ShareDataGetLoadingObjFile(), VBObjectFile2DGetLibraryNameIDByName(ShareDataGetLoadingObjFile(), _str), ShareDataGetLoadingTexture(), true);
+        _shareLoadingText = new Text();
+        _shareLoadingText->SetText(Language::shareLanguage()->GetString("s", 1, "loading"), Language::shareLanguage()->GetFontName("type0"), 30, 128, 32, "FFFFFFFF", "000000FF", VBVector2DCreate(1,1), -1);
+        _shareLoadingModel->getVBModelByInstanceName("loading")->addChild(_shareLoadingText);
+        _shareLoadingText->setPosition(CCPoint(75,-30));
+        
         VBStringFree(&_str);
     }
     return _shareLoadingModel;
@@ -382,6 +393,9 @@ void ShareDataFree() {
     if(_shareLoadingModel) {
         delete _shareLoadingModel;
         _shareLoadingModel = NULL;
+        _shareLoadingModel->getVBModelByInstanceName("loading")->removeChild(_shareLoadingText, false);
+        delete _shareLoadingText;
+        _shareLoadingText = NULL;
     }
     if(_shareRoot) {
         delete _shareRoot;

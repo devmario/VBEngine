@@ -23,13 +23,11 @@ class SubMenu : public View {
     
 public:
     bool isSetLayout;
+    bool is_need_new_page;
+    bool is_need_pop_root_history;
     
-    VBObjectFile2D* stageObj;
-    VBObjectFile2D* packObj;
-    VBTexture* stageTex;
-    VBTexture* packTex;
-    VBObjectFile2D* fontObj;
-    VBTexture* fontTex;
+    VBTexture* texPageThumbs;
+    VBObjectFile2D* objPageThumbs;
     
     VBObjectFile2D* objSubMenu;
     VBTexture* texSubMenu;
@@ -77,8 +75,6 @@ public:
 	
 #ifndef SHOP_EMPTY
     //shop
-    VBObjectFile2D *shopObj;
-    VBTexture *shopTex;
     Shop* shopView;
     
     VBModel *vtShopBack;
@@ -90,10 +86,17 @@ public:
     int arg0;
     int arg1;
     
+    SubMenuType next_type;
+    int next_arg0;
+    int next_arg1;
+    
     SubMenu();
     ~SubMenu();
     
     void SetMenuType(SubMenuType _type, int _arg0, int _arg1);
+    
+    void BackPage();
+    void ChangePage(SubMenuType _type, int _arg0, int _arg1);
     
     virtual void Update(float _deltaTime);
     

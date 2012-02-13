@@ -7,7 +7,7 @@ Scroller::Scroller(VBObjectFile2D* _objScroller, VBTexture* _texScroller, float 
     
     maxHeight = _maxHeight;
     
-    LIBNAMEFIND(_name_id, _objScroller, "bgTop.png", _str);
+    LIBNAMEFIND(_name_id, _objScroller, "bgTop", _str);
     if(_name_id) {
         modelBGThumbTop = new VBModel(_objScroller, _name_id, _texScroller, true);
         addChild(modelBGThumbTop);
@@ -16,7 +16,7 @@ Scroller::Scroller(VBObjectFile2D* _objScroller, VBTexture* _texScroller, float 
         modelBGThumbTop = NULL;
     }
     
-    LIBNAMEFIND(_name_id, _objScroller, "bgMiddle.png", _str);
+    LIBNAMEFIND(_name_id, _objScroller, "bgMiddle", _str);
     if(_name_id) {
         modelBGThumb = new VBModel(_objScroller, _name_id, _texScroller, true);
         addChild(modelBGThumb);
@@ -25,7 +25,7 @@ Scroller::Scroller(VBObjectFile2D* _objScroller, VBTexture* _texScroller, float 
         modelBGThumb = NULL;
     }
     
-    LIBNAMEFIND(_name_id, _objScroller, "bgBottom.png", _str);
+    LIBNAMEFIND(_name_id, _objScroller, "bgBottom", _str);
     if(_name_id) {
         modelBGThumbBottom = new VBModel(_objScroller, _name_id, _texScroller, true);
         addChild(modelBGThumbBottom);
@@ -42,15 +42,15 @@ Scroller::Scroller(VBObjectFile2D* _objScroller, VBTexture* _texScroller, float 
         modelBGThumbBottom = NULL;
     }
     
-    LIBNAMEFIND(_name_id, _objScroller, "top.png", _str);
+    LIBNAMEFIND(_name_id, _objScroller, "top", _str);
     modelThumbTop = new VBModel(_objScroller, _name_id, _texScroller, true);
     addChild(modelThumbTop);
     
-    LIBNAMEFIND(_name_id, _objScroller, "middle.png", _str);
+    LIBNAMEFIND(_name_id, _objScroller, "middle", _str);
     modelThumb = new VBModel(_objScroller, _name_id, _texScroller, true);
     addChild(modelThumb);
     
-    LIBNAMEFIND(_name_id, _objScroller, "bottom.png", _str);
+    LIBNAMEFIND(_name_id, _objScroller, "bottom", _str);
     modelThumbBottom = new VBModel(_objScroller, _name_id, _texScroller, true);
     addChild(modelThumbBottom);
     

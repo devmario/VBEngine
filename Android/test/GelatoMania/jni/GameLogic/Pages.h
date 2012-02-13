@@ -17,10 +17,18 @@ public:
     int idx;
     int preIdx;
     
+    float widthThumbs;
+    
     VBObjectFile2D* obj;
     VBTexture* tex;
     
     VBModel* thumb;
+    
+    VBModel* thumb_left;
+    VBModel* thumb_center;
+    VBModel* thumb_right;
+    VBArrayVector* arr_thumbs;
+    
     VBModel* slideM;
     
     float elapseTime;

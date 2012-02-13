@@ -23,6 +23,8 @@ enum ScrollerContainerAlign{
 };
 
 class ScrollerContainer : public VBModel {
+    VBObjectFile2D* objScroller;
+    VBTexture* texScroller;
     void ReloadData();
     void SetCellValue(CellData* _cell, float _value);
     float GetCellValue(CellData* _cell);

@@ -4,6 +4,7 @@
 #include "VBModel.h"
 #include "NumberText.h"
 #include "cocos2d.h"
+#include "Text.h"
 
 using namespace cocos2d;
 
@@ -12,17 +13,10 @@ public:
     int packIdx;
     VBModel* pack;
     
-    VBTexture* texTitle;
-    VBModel* modelTitle;
-    
-    VBTexture* texClear;
-    VBModel* modelClear;
-    
-    VBTexture* texStar;
-    VBModel* modelStar;
-    
-    VBTexture* texTime;
-    VBModel* modelTime;
+    Text* textTitle;
+    Text* textClear;
+    Text* textStar;
+    Text* textTime;
     
     PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, int _packIdx);
     ~PackThumb();

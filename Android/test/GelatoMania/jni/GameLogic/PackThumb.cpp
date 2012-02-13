@@ -1,6 +1,7 @@
 #include "PackThumb.h"
 #include "ShareData.h"
 #include "PlatformFunctions.h"
+#include "Language.h"
 
 PackThumb::PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, int _packIdx) : VBModel() {
     packIdx = _packIdx;
@@ -15,100 +16,53 @@ PackThumb::PackThumb(VBObjectFile2D* _obj, VBTexture* _tex, int _packIdx) : VBMo
         
         ((CCSprite*)this)->addChild((CCSprite*)pack);
         
+        textTitle = new Text();
+        textClear = new Text();
+        textStar = new Text();
+        textTime = new Text();
         
+        Language* l = Language::shareLanguage();
+        
+        textTitle->SetText(l->GetString("si", 2, "packTitle", _packIdx), l->GetFontName("type0"), 25, 256, 32, "fffcf0ff", "000000FF", VBVector2DCreate(-1, -1), 0);
         
         if(ShareDataGetStageLength(packIdx)) {
-            VBImage* img;
-            if(packIdx == 1)
-                img = PlatformGetTextImageWithSizeDetail("1.波光粼粼的冰霜", "ArialRoundedMTBold", 55, 512, 64, "fffcf0ff", "000000FF", VBVector2DCreate(3, 3), 0);
-            if(packIdx == 2)
-                img = PlatformGetTextImageWithSizeDetail("2.Delightful Gelato", "ArialRoundedMTBold", 55, 512, 64, "fffcf0ff", "000000FF", VBVector2DCreate(3, 3), 0);
-            if(packIdx == 3)
-                img = PlatformGetTextImageWithSizeDetail("3.반짝거리는 아이스크림", "ArialRoundedMTBold", 55, 512, 64, "fffcf0ff", "000000FF", VBVector2DCreate(3, 3), 0);
-            if(packIdx == 4)
-                img = PlatformGetTextImageWithSizeDetail("4.キラキラアイスクリーム", "ArialRoundedMTBold", 55, 512, 64, "fffcf0ff", "000000FF", VBVector2DCreate(3, 3), 0);
-            if(packIdx == 5)
-                img = PlatformGetTextImageWithSizeDetail("5.Crème de glace pétillant", "ArialRoundedMTBold", 55, 512, 64, "fffcf0ff", "000000FF", VBVector2DCreate(3, 3), 0);
-            texTitle = VBTextureInitAndLoadWithImage(VBTextureAlloc(), img);
-            modelTitle = new VBModel(texTitle);
-            modelTitle->setScale(0.5);
-            modelTitle->setPosition(CCPoint(50, -25));
-            pack->addChild(modelTitle);
-            VBImageFree(&img);
-
-            img = PlatformGetTextImageWithSizeDetail("24 / 36", "ArialRoundedMTBold", 50, 256, 64, "413424FF", "000000FF", VBVector2DCreate(1, 1), -1);
-            texClear = VBTextureInitAndLoadWithImage(VBTextureAlloc(), img);
-            modelClear = new VBModel(texClear);
-            modelClear->setScale(0.5);
-            modelClear->setPosition(CCPoint(220, -73-15));
-            pack->addChild(modelClear);
-            VBImageFree(&img);
-
-            img = PlatformGetTextImageWithSizeDetail("86 %", "ArialRoundedMTBold", 50, 128, 64, "413424FF", "000000FF", VBVector2DCreate(1, 1), -1);
-            texStar = VBTextureInitAndLoadWithImage(VBTextureAlloc(), img);
-            modelStar = new VBModel(texStar);
-            modelStar->setScale(0.5);
-            modelStar->setPosition(CCPoint(220, -106-16));
-            pack->addChild(modelStar);
-            VBImageFree(&img);
-
-            if(packIdx == 1)
-                img = PlatformGetTextImageWithSizeDetail("01h 04m 56s", "ArialRoundedMTBold", 32, 207, 64, "413424FF", "000000FF", VBVector2DCreate(1, 1), 0);
-            else
-                img = PlatformGetTextImageWithSizeDetail("01시 04분 56초", "ArialRoundedMTBold", 32, 207, 64, "413424FF", "000000FF", VBVector2DCreate(1, 1), 0);
-            texTime = VBTextureInitAndLoadWithImage(VBTextureAlloc(), img);
-            modelTime = new VBModel(texTime);
-            modelTime->setScale(0.5);
-            modelTime->setPosition(CCPoint(180, -147-16));
-            pack->addChild(modelTime);
-            VBImageFree(&img);
-        } else {
-            VBImage* img = PlatformGetTextImageWithSizeDetail("연습하기", "ArialRoundedMTBold", 55, 512, 64, "fffcf0ff", "000000FF", VBVector2DCreate(3, 3), 0);
-            texTitle = VBTextureInitAndLoadWithImage(VBTextureAlloc(), img);
-            modelTitle = new VBModel(texTitle);
-            modelTitle->setScale(0.5);
-            modelTitle->setPosition(CCPoint(50, -25));
-            pack->addChild(modelTitle);
-            VBImageFree(&img);
-
-            texClear = NULL;
-            modelClear = NULL;
-
-            texStar = NULL;
-            modelStar = NULL;
-
-            texTime = NULL;
-            modelTime = NULL;
-        }
             
+            textClear->SetText("24 / 36", "ArialRoundedMTBold", 20, 80, 32, "413424FF", "FFFFFFFF", VBVector2DCreate(1, 1), -1);
+            textStar->SetText("86 %", "ArialRoundedMTBold", 20, 80, 32, "413424FF", "FFFFFFFF", VBVector2DCreate(1, 1), -1);
+            
+            char buf[0xFF] = {'\0',};
+            sprintf(buf, "%02d%s %02d%s %02d%s", 1, l->GetString("s", 1, "time"), 4, l->GetString("s", 1, "min"), 5, l->GetString("s", 1, "sec"));
+            textTime->SetText(buf, l->GetFontName("type0"), 15, 128-20, 25, "413424FF", "FFFFFFFF", VBVector2DCreate(1, 1), 0);
+        }
+        
+        textTitle->setPosition(CCPoint(50, -25-2));
+        textClear->setPosition(CCPoint(220, -73-15));
+        textStar->setPosition(CCPoint(220, -106-16));
+        textTime->setPosition(CCPoint(190, -147-16 - 5));
+        
+        addChild(textTitle);
+        addChild(textClear);
+        addChild(textStar);
+        addChild(textTime);
+        
         Reset();
     }
 }
 
 PackThumb::~PackThumb() {
-    VBTextureFree(&texTitle);
-    pack->removeChild(modelTitle, false);
-    delete modelTitle;
-
-    if(modelClear) {
-        VBTextureFree(&texClear);
-        pack->removeChild(modelClear, false);
-        delete modelClear;
-    }
-
-    if(modelStar){
-        VBTextureFree(&texStar);
-        pack->removeChild(modelStar, false);
-        delete modelStar;
-    }
-
-    if(modelTime){
-        VBTextureFree(&texTime);
-        pack->removeChild(modelTime, false);
-        delete modelTime;
-    }
-
-    this->removeChild(pack, false);
+    removeChild(textTitle, false);
+    delete textTitle;
+    
+    removeChild(textClear, false);
+    delete textClear;
+    
+    removeChild(textStar, false);
+    delete textStar;
+    
+    removeChild(textTime, false);
+    delete textTime;
+    
+    removeChild(pack, false);
     delete pack;
 }
 

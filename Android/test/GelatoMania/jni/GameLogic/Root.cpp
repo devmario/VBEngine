@@ -204,10 +204,19 @@ Root::Root() {
     
     Social::localSocial()->LogInGameCenter(this);
     
+    VBString* _str;
+    TEXLOAD(texMobage, "mobage_logo.png", _str);
+    modelMobage = new VBModel(texMobage);
+    modelMobage->setPosition(CCPoint(-1,1));
+    modelMobage->setScale(0.5);
+    top->addChild(modelMobage);
+    
     popup = NULL;
 }
 
 Root::~Root() {
+    top->removeChild(modelMobage, false);
+    delete modelMobage;
     
     if(selectUser)
         delete selectUser;
@@ -636,6 +645,20 @@ void Root::ChangePageVALIST(int _count, int* _args) {
     if(_loadingType == LoadingTypeFull) {
         if(loading == NULL) {
             loading = ShareDataGetLoadingModel();
+            loading->stop();
+            loading->getVBModelByInstanceName("bg")->getVBModelByInstanceName("bg")->is_use_animation = true;
+            loading->getVBModelByInstanceName("bg")->getVBModelByInstanceName("bg")->color.a = 0xFF;
+            ((CCSprite*)top)->addChild((CCSprite*)loading);
+        }
+        loading->setIsPlayLoop(false);
+        loading->gotoAndPlay(0.0);
+        loadFlag = 1;
+    } else if(_loadingType == LoadingTypeSmall) {
+        if(loading == NULL) {
+            loading = ShareDataGetLoadingModel();
+            loading->stop();
+            loading->getVBModelByInstanceName("bg")->getVBModelByInstanceName("bg")->is_use_animation = false;
+            loading->getVBModelByInstanceName("bg")->getVBModelByInstanceName("bg")->color.a = 0x88;
             ((CCSprite*)top)->addChild((CCSprite*)loading);
         }
         loading->setIsPlayLoop(false);

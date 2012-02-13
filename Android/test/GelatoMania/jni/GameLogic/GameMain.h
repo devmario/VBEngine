@@ -14,18 +14,30 @@ using namespace tween;
 
 typedef enum ActionType
 {
+    ActionNone,
     ActionFill,
     ActionMaskOn,
     ActionMaskOff,
     ActionSubTopping,
-    ActionTopping
+    ActionSubToppingFlow,
+    ActionMix,
+    ActionFreeze,
+    ActionNext,
+    ActionTopping,
+    ActionToppingSpuit,
+    ActionToppingFlow,
+    ActionToppingCream,
+    ActionToppingCherry
 } ActionType;
 
 typedef struct HistoryList
 {
     ActionType actionType;
     int recipeIdx;
+    int position;
     HistoryList* next;
+    drawIceCremArg *mix;
+    unsigned long bitmaskMerge;
 } HistoryList;
 
 class GameMain : public View, IceCreamProtocol {
@@ -40,7 +52,7 @@ private:
     int bgLen;
     
     unsigned int stepCount;
-    bool* isMask;
+    int* recipeTypeArr;
     HistoryList *history;
     
     VBObjectFile2D** objBg;
@@ -138,7 +150,7 @@ private:
     
     void resetAllStep();
     
-    void pushHistory(ActionType _actionType, int _recipeIdx);
+    void pushHistory(ActionType _actionType, int _recipeIdx, int _position=0, drawIceCremArg* _mix=NULL, unsigned long _bitmaskMerge=0);
     HistoryList popHistory();
     void clearHistory();
     
@@ -179,6 +191,8 @@ public:
     
     void unDo();
     bool saveStep(ActionType actionType, int itemIdx);
+    
+    void initHistory();
 };
 
 

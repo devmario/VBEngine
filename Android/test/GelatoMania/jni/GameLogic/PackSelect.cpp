@@ -3,11 +3,13 @@
 #include "PackThumb.h"
 #include "SubMenu.h"
 
-PackSelect::PackSelect(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex,
-                       int _totalIdx, SubMenu* _subMenu) : Pages(_obj, _tex, _totalIdx, 60.0 - 240, 600.0, -26, 357, 240-82-240, -280) {
+PackSelect::PackSelect(VBObjectFile2D* _thumbs_obj, VBTexture* _thumbs_tex, int _totalIdx, SubMenu* _subMenu) : Pages(_thumbs_obj, _thumbs_tex, _totalIdx, 60.0 - 240, 240, -26, 357, 0, -280) {
+    VBString* _str;
+    OBJLOAD(objPack, "pack.obj", _str);
+    TEXLOAD(texPack, "pack.png", _str);
     packs = VBArrayVectorInit(VBArrayVectorAlloc());
     for(int i = 0; i < ShareDataGetPackLength(); i++) {
-        PackThumb* _pack = new PackThumb(obj, tex, i);
+        PackThumb* _pack = new PackThumb(objPack, texPack, i);
         ((CCSprite*)_pack)->setPosition(CCPointMake(i * pageTh, 0));
         VBArrayVectorAddBack(packs, _pack);
         _pack->is_use_animation = false;
@@ -26,6 +28,8 @@ PackSelect::~PackSelect() {
         delete _pack;
     }
     VBArrayVectorFree(&packs);
+    VBObjectFile2DFree(&objPack);
+    VBTextureFree(&texPack);
 }
 
 void PackSelect::Reset() {
@@ -109,7 +113,7 @@ void PackSelect::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
                     break;
                 }
             }
-            ShareDataGetRoot()->ChangePage(6, LoadingTypeNone, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypeStageSelect, selectedIdx, _lastLockedStage / 18);
+            subMenu->ChangePage(SubMenuTypeStageSelect, selectedIdx, _lastLockedStage / 18);
         }
     } else {
         Pages::touchEndAndCancel(_touch, _location);

@@ -9,31 +9,25 @@
              {"libName":"p1",
              "objLayer":["stage_bg0_wall", "stage_bg0"],
              "objUI":"stage_bg0ui",
-             "packData":"pack1.json",
+             "packData":"pack0.json",
              "lock":false},
              
              {"libName":"p2",
              "objLayer":["stage_bg1_wall", "stage_bg1"],
              "objUI":"stage_bg1ui",
-             "packData":"pack2.json",
+             "packData":"pack1.json",
              "lock":false},
              
              {"libName":"p3",
              "objLayer":["stage_bg2_wall", "stage_bg2"],
              "objUI":"stage_bg2ui",
-             "packData":"pack3.json",
+             "packData":"pack2.json",
              "lock":false},
              
              {"libName":"p4",
              "objLayer":["stage_bg3_wall", "stage_bg3"],
              "objUI":"stage_bg3ui",
-             "packData":"pack4.json",
-             "lock":false},
-             
-             {"libName":"p5",
-             "objLayer":["stage_bg4_wall", "stage_bg4"],
-             "objUI":"stage_bg4ui",
-             "packData":"pack5.json",
+             "packData":"pack3.json",
              "lock":false}
              ]
 }

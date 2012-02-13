@@ -1,5 +1,7 @@
 #ifdef __ANDROID__
 
+#include <android/bitmap.h>
+
 #include "AndroidNative.h"
 #include "cJSON.h"
 
@@ -31,6 +33,67 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 	}
 
 	return JNI_VERSION_1_4;
+}
+
+VBImage* GetTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align)
+{
+	return getTextImageWithSizeDetail(_txt, _text_size, _width, _height);
+
+	//return VBImageInitAndClear(VBImageAlloc(), VBColorType_RGBA, 8, _width, _height);
+}
+
+VBImage* getTextImageWithSizeDetail(const char* _text, int _text_size, int _width, int _height)
+{
+		JNIEnv* env = NULL;
+		AndroidBitmapInfo info;
+		void* pixels;
+		int ret;
+
+		if (jvm == NULL) {
+			LOGE("jvm == null : please on load JavaVM");
+			return false;
+		}
+		if (jvm->AttachCurrentThread(&env, NULL) != JNI_OK) {
+			LOGE("%s: AttachCurrentThread() failed", __FUNCTION__);
+			return false;
+		}
+
+		/* invoke the method using the JNI */
+		jclass clazz = env->FindClass(ClassName);
+		if (clazz == NULL) {
+			LOGE("Native registration unable to find class '%s'", ClassName);
+		}
+
+		jmethodID mid = env->GetStaticMethodID(clazz, "getTextImageWithSizeDetail", "(Ljava/lang/String;III)Landroid/graphics/Bitmap;");
+		if (mid == NULL) {
+			LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
+					"getTextImageWithSizeDetail");
+		}
+
+		jstring text = env->NewStringUTF(_text);
+
+		jobject bitmap = env->CallStaticObjectMethod(clazz, mid, text, _text_size, _width, _height);
+
+		if ((ret = AndroidBitmap_getInfo(env, bitmap, &info)) < 0) {
+			LOGE("AndroidBitmap_getInfo() failed! error=%d", ret);
+			return false;
+		}
+
+		LOGD("AndroidBitmap_getInfo() bitmap: %x, width: %d, height: %d", bitmap, info.width, info.height);
+
+		if ((ret = AndroidBitmap_lockPixels(env, bitmap, &pixels)) < 0) {
+					LOGE("AndroidBitmap_lockPixels() failed! error=%d", ret);
+					return false;
+		}
+
+		VBImage* image = VBImageInitWithData(VBImageAlloc(), VBColorType_RGBA, 8, _width, _height, pixels);
+
+		AndroidBitmap_unlockPixels(env, bitmap);
+
+		env->DeleteLocalRef(clazz);
+		env->DeleteLocalRef(text);
+
+		return image;
 }
 
 bool facebookIsLogin() {

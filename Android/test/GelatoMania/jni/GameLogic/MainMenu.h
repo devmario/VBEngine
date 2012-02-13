@@ -4,12 +4,16 @@
 #include "View.h"
 #include "Social.h"
 #include "FrameTweenController.h"
+#include "Text.h"
 
 using namespace cocos2d;
 
 class MainMenu : public View, public SocialProtocol {
     void touchEndAndCancel(CCTouch* _touch, CCPoint _location);
 public:
+    Text* textTitle;
+    Text* textPlay;
+    
     bool isSetLayout;
     
     VBObjectFile2D* titleintroObj;

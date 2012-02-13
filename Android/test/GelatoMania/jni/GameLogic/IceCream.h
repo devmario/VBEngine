@@ -100,6 +100,8 @@ public:
     void Reshape();
     
     GameMain *gameMain;
+    
+    
 public:
     IceCream* next;
     IceCream* prev;
@@ -143,6 +145,7 @@ public:
     
     virtual void VBModelUpdate(float _tick);
     void setGameMain(GameMain* _gameMain);
+    
 };
 
 #endif

@@ -625,7 +625,7 @@ void VBModel::reloadUName_Texture() {
 void VBModel::SetTexture(VBTexture* _tex) {
     if(tex == NULL)
         tex = new cocos2d::CCTexture2D();
-    
+    is_bitmap = true;
     tex->m_bPVRHaveAlphaPremultiplied = false;
     tex->m_bHasPremultipliedAlpha = false;
     if(_tex) {
@@ -1273,10 +1273,11 @@ bool CheckTriangle(CCPoint p1, CCPoint p2, CCPoint p3, CCPoint cp)
 VBAABB VBModel::getVBModelSize() {
     VBAABB _aabb = VBAABBLoadIndentity();
     if(is_bitmap) {
-        CCPoint tl = CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y);
-        CCPoint tr = CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y);
-        CCPoint bl = CCPointMake(m_sQuad.bl.vertices.x, m_sQuad.bl.vertices.y);
-        CCPoint br = CCPointMake(m_sQuad.br.vertices.x, m_sQuad.br.vertices.y);
+        CCAffineTransform wt = nodeToParentTransform();
+        CCPoint tl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y), wt);
+        CCPoint tr = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y), wt);
+        CCPoint bl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.bl.vertices.x, m_sQuad.bl.vertices.y), wt);
+        CCPoint br = CCPointApplyAffineTransform(CCPointMake(m_sQuad.br.vertices.x, m_sQuad.br.vertices.y), wt);
         VBVector2D vtx[4] = {{tl.x,tl.y}, {tr.x,tr.y}, {bl.x,bl.y}, {br.x,br.y}};
         _aabb = VBAABBMerge(_aabb, VBAABBCreateWithVertex(vtx, 4));
     }

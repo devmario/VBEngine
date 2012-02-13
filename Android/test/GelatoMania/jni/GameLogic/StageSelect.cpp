@@ -3,20 +3,21 @@
 #include "StageThumb.h"
 #include "SubMenu.h"
 
-StageSelect::StageSelect(VBObjectFile2D* _obj, VBTexture* _tex, VBObjectFile2D* _fontObj, VBTexture* _fontTex, 
-                         int _totalIdx) : Pages(_obj, _tex, _totalIdx, 30, 600.0, -40, 480, 240, -280 + 8) {
-    fontObj = _fontObj;
-    fontTex = _fontTex;
+StageSelect::StageSelect(VBObjectFile2D* _obj, VBTexture* _tex, 
+                         int _totalIdx) : Pages(_obj, _tex, _totalIdx, 30 - 240, 240, -40, 480, 0, -280 + 8) {
+    VBString* _str;
+    VBObjectFile2DLibraryNameID* _library_name_id;
+    OBJLOAD(objStage, "stage_select.obj", _str);
+    TEXLOAD(texStage, "stage_select.png", _str);
     
-    VBString* _str = VBStringInitWithCString(VBStringAlloc(), "_dynamic/dy_menu_stage0_bgStage");
-    VBObjectFile2DLibraryNameID* _library_name_id = VBObjectFile2DGetLibraryNameIDByName(obj, _str);
-    VBStringFree(&_str);
+    LIBNAMEFIND(_library_name_id, objStage, "stageRope", _str);
     
-    bg[0] = new VBModel(obj, _library_name_id, tex, true);
-    ((CCSprite*)bg[0])->setPosition(CCPointMake(-30, 30));
+    bg[0] = new VBModel(objStage, _library_name_id, texStage, true);
+    ((CCSprite*)bg[0])->setPosition(CCPointMake(40, -65));
     ((CCSprite*)slideM)->addChild((CCSprite*)bg[0]);
-    bg[1] = new VBModel(obj, _library_name_id, tex, true);
-    ((CCSprite*)bg[1])->setPosition(CCPointMake(-30 + pageTh, 30));
+    
+    bg[1] = new VBModel(objStage, _library_name_id, texStage, true);
+    ((CCSprite*)bg[1])->setPosition(CCPointMake(40 + pageTh, -65));
     ((CCSprite*)slideM)->addChild((CCSprite*)bg[1]);
     
     stages = VBArrayVectorInit(VBArrayVectorAlloc());
@@ -37,6 +38,9 @@ StageSelect::~StageSelect() {
         delete _stage;
     }
     VBArrayVectorFree(&stages);
+    
+    VBObjectFile2DFree(&objStage);
+    VBTextureFree(&texStage);
 }
 
 void StageSelect::SetPack(int _idx) {
@@ -53,8 +57,8 @@ void StageSelect::SetPack(int _idx) {
         int ynum = 0;
         int pnum = 0;
         for(int i = 0; i < ShareDataGetStageLength(packIdx); i++) {
-            StageThumb* _stage = new StageThumb(obj, tex, fontObj, fontTex, _idx, i);
-            ((CCSprite*)_stage)->setPosition(CCPointMake(xnum * 70 + pnum * pageTh, -ynum * 70));
+            StageThumb* _stage = new StageThumb(objStage, texStage, _idx, i);
+            ((CCSprite*)_stage)->setPosition(CCPointMake(40 + xnum * 70 + pnum * pageTh, -20 -ynum * 70));
             VBArrayVectorAddBack(stages, _stage);
             
             ((CCSprite*)slideM)->addChild((CCSprite*)_stage);
@@ -68,23 +72,11 @@ void StageSelect::SetPack(int _idx) {
                 }
             }
         }
-        int thumbFrame = (packIdx - 1) * 2;
-        if(thumbFrame > thumb->frame->total_frame - 2) {
-            thumbFrame = thumb->frame->total_frame - 2;
-        }
-        thumb->gotoAndStop(thumbFrame + idx);
     }
 }
 
 void StageSelect::GoPage(int _idx, void (*_pageFunc)(void* _pageFuncRef), void* _pageFuncRef) {
     Pages::GoPage(_idx, _pageFunc, _pageFuncRef);
-    if(idx >= 0 && totalIdx > idx) {
-        int thumbFrame = (packIdx - 1) * 2;
-        if(thumbFrame > thumb->frame->total_frame - 2) {
-            thumbFrame = thumb->frame->total_frame - 2;
-        }
-        thumb->gotoAndStop(thumbFrame + idx);
-    }
     if(_idx != -1) {
         history* _preH = ShareDataGetRoot()->GetLastHistory();
         int _hi = 0;
