@@ -67,17 +67,4 @@ PackThumb::~PackThumb() {
 }
 
 void PackThumb::Reset() {
-    if(1) {
-        int packScore = 0;
-        for(int i = 0; i < ShareDataGetStageLength(packIdx); i++) {
-            packScore += ShareDataGetStageScoreAt(packIdx, i);
-        }
-    }
-    
-    if(1) {
-        int starScore = 0;
-        for(int i = 0; i < ShareDataGetStageLength(packIdx); i++) {
-            starScore += ShareDataGetStageStarAt(packIdx, i);
-        }
-    }
 }

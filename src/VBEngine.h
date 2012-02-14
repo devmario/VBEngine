@@ -97,10 +97,21 @@
 #include "Other/zlib/zlib.h"
 #include "Other/png/png.h"
 
+#ifdef __ANDROID__
+#include <jni.h>
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
     
+#ifdef __ANDROID__
+static JavaVM *g_jvm = NULL;
+bool android_fcheck(const char* filename);
+bool fileCopy(const char* _srcPath, const char* _dstPath);
+FILE* android_fopen(const char* filename, const char* mode);
+#endif
+
     
     VBVector2D VBEngineGetScreenResoulution(void);
     /**

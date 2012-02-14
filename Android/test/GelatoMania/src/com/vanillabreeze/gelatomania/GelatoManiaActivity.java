@@ -42,7 +42,8 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	private static FacebookUtil fbUtil;
 	private static LoginManager loginMgr;
 	private static Activity activity;
-
+	private static AssetManager mAsset;
+	
 	static {
 		System.loadLibrary("stlport_shared");
 		System.loadLibrary("cocos2d");
@@ -54,6 +55,8 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		mAsset = getAssets();
+		
 		// get the packageName,it's used to set the resource path
 		String packageName = getApplication().getPackageName();
 		super.setPackageName(packageName);
@@ -62,7 +65,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		e = sp.edit();
 
 		if (sp.getBoolean("isFirst", true)) {
-			CopyAssets();
+			//CopyAssets();
 		}
 
 		setContentView(R.layout.game_demo);
@@ -197,7 +200,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		e.putBoolean("isFirst", false);
 	}
 
-	private void copyFile(InputStream in, OutputStream out) throws IOException {
+	private static void copyFile(InputStream in, OutputStream out) throws IOException {
 		byte[] buffer = new byte[1024];
 		int read;
 		while ((read = in.read(buffer)) != -1) {
@@ -242,6 +245,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		fbUtil.mFacebook.authorizeCallback(requestCode, resultCode, data);
 	}
 
+	/* Native 함수와 매개변수 형식이 맞이 않아서 주석처리 확인필요!
 	private static Bitmap getTextImageWithSizeDetail(String _txt, String _fontName, float _text_size, int _width, int _height,
 			int _colorCode, int _shadowColorCode, float _shadowOffsetX, float _shadowOffsetY, int align) {
 
@@ -276,7 +280,22 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		return textBitmap;
 		
 	}
+	*/
+	private static Bitmap getTextImageWithSizeDetail(String _txt, int _text_size, int _width, int _height) {
+		
+		Bitmap textBitmap = Bitmap.createBitmap(_width, _height, Bitmap.Config.ARGB_8888);
 
+		// textBitmap.eraseColor(0x8844ff44);
+		Canvas canvas = new Canvas(textBitmap);
+		Paint textPaint = new Paint();
+		setAutoTextSize(_text_size, textPaint, _txt, _width);
+		textPaint.setAntiAlias(true);
+		canvas.drawText(_txt, 50, 50, textPaint);
+
+		return textBitmap;
+		
+	}
+	
 	static void setAutoTextSize(float textSize, Paint paint, String text, int width) {
 		paint.setTextSize(textSize);
 		float _measureSize = paint.measureText(text);
@@ -352,6 +371,38 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 
 	}
 
+	private static boolean fileCopy(String srcPath, String dstPath) {
+		InputStream in = null;
+		OutputStream out = null;
+		boolean ret = false;
+		
+		try {
+			in = mAsset.open(srcPath, AssetManager.ACCESS_RANDOM);
+			out = new FileOutputStream(dstPath);
+			copyFile(in, out);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ret = false;
+		} finally {
+			try {
+				in.close();
+				in = null;
+				out.flush();
+				out.close();
+				out = null;
+				ret = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				ret = false;
+			}
+			
+		}
+		
+		Log.d(TAG, "fileCopy() src: " + srcPath + " dst: " + dstPath +" ret: " + ret);
+		
+		return ret;
+	}
+	
 	native static void nativeFacebookLogin(boolean isLogin);
 
 	native static void nativeFacebookRequestGraphPath(String response);

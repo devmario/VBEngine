@@ -6,8 +6,11 @@
 #include "StageSelect.h"
 #include "Shop.h"
 #include "FrameTweenController.h"
+#include "Friends.h"
 
 //#define SHOP_EMPTY
+VBObjectFile2D* LoadThumbObj(VBObjectFile2D** _obj);
+VBTexture* LoadThumbTex(VBTexture** _tex);
 
 using namespace cocos2d;
 
@@ -15,7 +18,8 @@ typedef enum SubMenuType {
     SubMenuTypeNone = 0,
     SubMenuTypePackSelect = 1,
     SubMenuTypeStageSelect = 2,
-    SubMenuTypeShop = 3
+    SubMenuTypeShop = 3,
+    SubMenuTypeFriends = 4
 } SubMenuType;
 
 class SubMenu : public View {
@@ -25,12 +29,16 @@ public:
     bool isSetLayout;
     bool is_need_new_page;
     bool is_need_pop_root_history;
+    bool is_sub_menu_transition;
     
     VBTexture* texPageThumbs;
     VBObjectFile2D* objPageThumbs;
     
     VBObjectFile2D* objSubMenu;
     VBTexture* texSubMenu;
+    
+    VBObjectFile2D* objSubMenuContainer;
+    VBTexture* texSubMenuContainer;
     
     VBObjectFile2D* objRootUI;
     VBTexture* texRootUI;
@@ -76,6 +84,8 @@ public:
 #ifndef SHOP_EMPTY
     //shop
     Shop* shopView;
+    
+    Friends* friendsView;
     
     VBModel *vtShopBack;
     VBModel *vtShopRecipe;

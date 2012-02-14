@@ -14,20 +14,21 @@ using namespace tween;
 
 typedef enum ActionType
 {
-    ActionNone,
-    ActionFill,
-    ActionMaskOn,
-    ActionMaskOff,
-    ActionSubTopping,
-    ActionSubToppingFlow,
-    ActionMix,
-    ActionFreeze,
-    ActionNext,
-    ActionTopping,
-    ActionToppingSpuit,
-    ActionToppingFlow,
-    ActionToppingCream,
-    ActionToppingCherry
+    ActionNone = 0,
+    ActionFill = 1,
+    ActionMaskOn = 2,
+    ActionMaskOff = 3,
+    ActionSubTopping = 4,
+    ActionSubToppingFlow = 5,
+    ActionMix = 6,
+    ActionFreeze = 7,
+    ActionNext = 8,
+    ActionToppingRope = 9,
+    ActionTopping = 10,
+    ActionToppingSpuit = 11,
+    ActionToppingFlow = 12,
+    ActionToppingCream = 13,
+    ActionToppingCherry = 14
 } ActionType;
 
 typedef struct HistoryList
@@ -35,9 +36,9 @@ typedef struct HistoryList
     ActionType actionType;
     int recipeIdx;
     int position;
-    HistoryList* next;
     drawIceCremArg *mix;
     unsigned long bitmaskMerge;
+    HistoryList* next;
 } HistoryList;
 
 class GameMain : public View, IceCreamProtocol {
@@ -112,7 +113,7 @@ private:
     void InitRecipe();
     void FreeRecipe();
     
-    VBArrayVector* toppingData;
+    
     ToppingContainer* toppingContainer;
     
     void InitTopping();
@@ -142,7 +143,7 @@ private:
     void NewIceCreamWithBack();
     void NewIceCreamUpdate(float _deltaTime);
     
-    void SwapRecipeAndToppingMode();
+    
     void SwapRecipeAndToppingModeUpdate(float _deltaTime);
     
     bool IsActiveUI();
@@ -155,6 +156,8 @@ private:
     void clearHistory();
     
 public:
+    VBArrayVector* toppingData;
+    
     HintViewer *hintViewer;
     GameMainRdTd *rdTd;
     IceCream* baseIceCream;
@@ -193,6 +196,14 @@ public:
     bool saveStep(ActionType actionType, int itemIdx);
     
     void initHistory();
+    
+    bool getNextRopeEnable();
+    bool getToppingRopeEnable();
+    
+    void setNextRopeEnable(bool);
+    void setToppingRopeEnable(bool);
+    
+    void SwapRecipeAndToppingMode();
 };
 
 

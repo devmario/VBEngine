@@ -11,6 +11,7 @@ using namespace cocos2d;
 
 class PackSelect : public Pages {
 public:
+    
     SubMenu* subMenu;
     
     VBArrayVector* packs;
@@ -26,7 +27,7 @@ public:
     VBObjectFile2D* objPack;
     VBTexture* texPack;
     
-    PackSelect(VBObjectFile2D* _thumbs_obj, VBTexture* _thumbs_tex, int _totalIdx, SubMenu* _subMenu);
+    PackSelect(VBObjectFile2D** _thumbs_obj, VBTexture** _thumbs_tex, int _totalIdx, SubMenu* _subMenu);
     ~PackSelect();
     
     void Reset();

@@ -75,7 +75,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 #else
     CCDirector::sharedDirector()->enableRetinaDisplay(true);
 #endif
-    CCDirector::sharedDirector()->setDisplayFPS(true);
+//    CCDirector::sharedDirector()->setDisplayFPS(true);
     
     cout << "AppDelegate applicationDidFinishLaunching\n";
 	// initialize director

@@ -27,8 +27,10 @@ typedef union {
     void* venv;
 } UnionJNIEnvToVoid;
 
+VBImage* GetTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align);
+
 // =================================== JAVA Interface (C/C++ -> JAVA) =========================================
-VBImage* getTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align);
+VBImage* getTextImageWithSizeDetail(const char* _text, int _text_size, int _width, int _height);
 
 bool facebookIsLogin();
 

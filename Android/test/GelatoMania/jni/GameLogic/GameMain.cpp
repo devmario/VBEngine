@@ -935,6 +935,8 @@ void GameMain::recipeContainerCallBack(int recipeIdx)
     if (!callBackStop && iceCream) {
         if (recipeIdx == -1) {
             saveStep(ActionNext, recipeIdx);
+        } else if (recipeIdx == -2) {
+            saveStep(ActionToppingRope, recipeIdx);
         } else {
             switch (recipeTypeArr[recipeIdx]) {
                 case 1:
@@ -1150,29 +1152,21 @@ void loadVBImageFromFile(int step, VBImage** _image1, VBImage** _image2, VBImage
         
 }
 
-//ToppingContainerCellData* findToppingCellPosition(ToppingContainer* toppingContainer, int type) {
-//    VBArrayVector* cells = toppingContainer->cell;
-//    ToppingContainerCellData* cell;
-//    for (int i=0; i<VBArrayVectorGetLength(cells); i++) {
-//        cell = (ToppingContainerCellData*)VBArrayVectorGetDataAt(cells, i);
-//        if (cell->type == type) {
-//            return cell;
-////            break;
-//        }
-//    }
-//    
-//    return NULL;
-//}
-
-void moveToppingCellStateBack(GameMain* gameMain, int toppingIdx) {
+void moveToppingCellStateBack(VBArrayVector* toppingData, int toppingIdx) {
     
-//    VBArrayVector* cells = gameMain->toppingContainer->cell;
-//    
-//    if (cell->innerModel) {
-//        cell->innerModel->cur_frame = cell->innerModel->cur_frame - 1;
-//    } else {
-//        cell->model->cur_frame = cell->model->cur_frame - 1;
-//    }
+    ToppingContainerCellData* cell;
+    for (int i=0; i<VBArrayVectorGetLength(toppingData); i++) {
+        cell = (ToppingContainerCellData*)VBArrayVectorGetDataAt(toppingData, i);
+        if (cell->type == toppingIdx) {
+            cell->step = cell->step-1;
+            if (cell->innerModel) {
+                cell->innerModel->gotoAndStop(cell->innerModel->cur_frame - 1);
+            } else {
+                cell->model->gotoAndStop(0);
+            }
+        }
+    }
+    
 }
 
 bool GameMain::saveStep(ActionType actionType, int itemIdx) {
@@ -1200,17 +1194,6 @@ bool GameMain::saveStep(ActionType actionType, int itemIdx) {
             int type = cJSON_GetArrayItem(item, 1)->valueint;
             if (type == 0) {
                 // count spuitL, spuitR
-                for (int i=0; i < changeSelected->toppingSpuitL->len; i++) {
-                    TS_idx* ts = (TS_idx*)VBArrayVectorGetDataAt(changeSelected->toppingSpuitL, i);
-                    printf("\n\n!@#!@#!@#!@#!# ts idx in toppingSpuitL %d\n", ts->_idx);
-                    if (ts->_idx == itemIdx) {
-                        printf("\n\n!@#!@#!@#!@#!# found spuit %d\n", itemIdx);
-                    }
-                }
-                for (int i=0; i < changeSelected->toppingSpuitR->len; i++) {
-                    
-                }
-                
                 pushHistory(ActionToppingSpuit, itemIdx);
             }
             else if (type == 1)
@@ -1264,19 +1247,18 @@ void GameMain::unDo() {
             VBImageFree(&image1);
             VBImageFree(&image2);
             VBImageFree(&image3);
-            loadVBImageFromFile(0, &image1, &image2, &image3, true);
-            VBImage* temp = iceCream->next->imgBG;
-            iceCream->next->imgBG = image1;
-            image1 = NULL;
-            VBImageFree(&temp);
-            temp = iceCream->next->imgBridge;
-            iceCream->next->imgBridge = image2;
-            image2 = NULL;
-            VBImageFree(&temp);
-            temp = iceCream->next->imgBitmask;
-            iceCream->next->imgBitmask = image3;
-            VBImageFree(&temp);
-            hasNext = true;
+            if (iceCream->modelLastRecipeBridge) {
+                iceCream->removeChild(iceCream->modelLastRecipeBridge, false);
+            }
+            iceCream->removeChild(iceCream->modelBridge, false);
+            iceCream->removeChild(iceCream->modelBridgeOutline, false);
+            iceCream->removeChild(iceCream->next, false);
+            
+            delete iceCream->next;
+            iceCream->next = NULL;
+            
+            nextRopeSlider->SetEnable(true);
+            cout << "next icecream removed\n";
         } else {
             VBImage* temp = iceCream->imgBG;
             iceCream->imgBG = image1;
@@ -1304,19 +1286,25 @@ void GameMain::unDo() {
     
     //remove next if previos step doesn't have next
     if (!hasNext && iceCream->next) {
-        if (iceCream->modelLastRecipeBridge) {
-            iceCream->removeChild(iceCream->modelLastRecipeBridge, false);
-        }
-        iceCream->removeChild(iceCream->modelBridge, false);
-        iceCream->removeChild(iceCream->modelBridgeOutline, false);
-        iceCream->removeChild(iceCream->next, false);
-        
-        delete iceCream->next;
-        iceCream->next = NULL;
-        
-        nextRopeSlider->SetEnable(true);
-        cout << "next icecream removed\n";
-
+        printf("\niceCream->next init\n");
+        VBImageFree(&image1);
+        VBImageFree(&image2);
+        VBImageFree(&image3);
+        loadVBImageFromFile(1, &image1, &image2, &image3, true);
+        VBImage* temp = iceCream->next->imgBG;
+        iceCream->next->imgBG = image1;
+        image1 = NULL;
+        VBImageFree(&temp);
+        temp = iceCream->next->imgBridge;
+        iceCream->next->imgBridge = image2;
+        image2 = NULL;
+        VBImageFree(&temp);
+        temp = iceCream->next->imgBitmask;
+        iceCream->next->imgBitmask = image3;
+        VBImageFree(&temp);
+        hasNext = true;
+        iceCream->next->need_update_pixel = true;
+        iceCream->next->Reshape();
     } else {
         IceCream* changeSelected = hasNext ? iceCream->next : iceCream;
         
@@ -1362,7 +1350,9 @@ void GameMain::unDo() {
             for (int i=0; i<VBArrayVectorGetLength(changeSelected->mask); i++) {
                 RecipeMask *mask = (RecipeMask*)VBArrayVectorGetDataAt(changeSelected->mask, i);
                 if (mask->idx == lastStep.recipeIdx) {
+                    callBackStop = true;
                     changeSelected->ClearMask(mask, 1);
+                    callBackStop = false;
                     break;
                 }
             }
@@ -1386,7 +1376,6 @@ void GameMain::unDo() {
          * subTopping
          */
         case ActionSubToppingFlow:
-            printf("lastStep.position: %d\n", lastStep.position);
             VBArrayVectorRemoveBack((VBArrayVector*)VBArrayVectorGetDataAt(changeSelected->subToppingFlow, lastStep.position));
             VBArrayVectorRemoveBack(changeSelected->thumbs);
             changeSelected->need_update_model = true;
@@ -1400,16 +1389,24 @@ void GameMain::unDo() {
         /**
          * topping
          */
+        case ActionToppingRope:
+            toppingRopeSlider->SetEnable(true);
+            SwapRecipeAndToppingMode();
+            if (!iceCream->next) {
+                nextRopeSlider->SetEnable(true);
+            }
+            break;
         case ActionToppingSpuit:
         {
-            if (lastStep.position == 1) {
+            ToppingContainerCellData* cell = (ToppingContainerCellData*)VBArrayVectorGetDataAt(toppingData, lastStep.recipeIdx);
+            if (cell->step % 2 == 0) {
                 VBArrayVectorRemoveBack(changeSelected->toppingSpuitR);
             } else {
                 VBArrayVectorRemoveBack(changeSelected->toppingSpuitL);
             }
             VBArrayVectorRemoveBack(changeSelected->thumbs);
             changeSelected->need_update_model = true;
-            moveToppingCellStateBack(this, lastStep.recipeIdx);
+            moveToppingCellStateBack(toppingData, lastStep.recipeIdx);
         }
             break;
         case ActionToppingFlow:
@@ -1417,25 +1414,31 @@ void GameMain::unDo() {
             VBArrayVectorRemoveBack(changeSelected->toppingFlow);
             VBArrayVectorRemoveBack(changeSelected->thumbs);
             changeSelected->need_update_model = true;
-            moveToppingCellStateBack(this, lastStep.recipeIdx);
+            moveToppingCellStateBack(toppingData, lastStep.recipeIdx);
         }
             break;
         case ActionToppingCherry:
         {
+            for (int i=0; i<changeSelected->thumbs->len; i++) {
+                Thumbs* _t = (Thumbs*)VBArrayVectorGetDataAt(changeSelected->thumbs, i);
+                if (_t->type == 2) {
+                    changeSelected->addChild(_t->model);
+                    break;
+                }
+            }
+            
             changeSelected->toppingCherry = NULL;
             VBArrayVectorRemoveBack(changeSelected->thumbs);
             changeSelected->need_update_model = true;
             
-            moveToppingCellStateBack(this, lastStep.recipeIdx);
+            moveToppingCellStateBack(toppingData, lastStep.recipeIdx);
         }
             break;
         case ActionToppingCream:
-        {
             changeSelected->toppingCream = NULL;
             VBArrayVectorRemoveBack(changeSelected->thumbs);
             changeSelected->need_update_model = true;
-            moveToppingCellStateBack(this, lastStep.recipeIdx);
-        }
+            moveToppingCellStateBack(toppingData, lastStep.recipeIdx);
             break;
         default:
             break;
@@ -1444,6 +1447,7 @@ void GameMain::unDo() {
     
     hintViewer->backStep();
     stepCount--;
+    printf("reduce stepCount\n");
 }
 
 void GameMain::resetAllStep() {
@@ -1510,4 +1514,22 @@ void GameMain::initHistory() {
     clearHistory();
     writeVBImageToFile(this, 0);
     pushHistory(ActionNone, 0);
+}
+
+bool GameMain::getNextRopeEnable()
+{
+    return nextRopeSlider->GetEnable();
+}
+
+bool GameMain::getToppingRopeEnable()
+{
+    return toppingRopeSlider->GetEnable();
+}
+
+void GameMain::setNextRopeEnable(bool flag) {
+    nextRopeSlider->SetEnable(flag);
+}
+
+void GameMain::setToppingRopeEnable(bool flag) {
+    toppingRopeSlider->SetEnable(flag);
 }

@@ -14,26 +14,6 @@ static PlatformCallback g_FacebookRequestGraphPathCB;
 static PlatformCallback g_FacebookAppRequestCB;
 static PlatformCallback g_FacebookFeedCB;
 
-int hexToInt(const char* szHex) {
-    int hex = 0;
-    int nibble;
-    while (*szHex) {
-        hex <<= 4;
-        if (*szHex >= '0' && *szHex <= '9') {
-            nibble = *szHex - '0';
-        } else if (*szHex >= 'a' && *szHex <= 'f') {
-            nibble = *szHex - 'a' + 10;
-        } else if (*szHex >= 'A' && *szHex <= 'F') {
-            nibble = *szHex - 'A' + 10;
-        } else {
-            nibble = 0;
-        }
-        hex |= nibble;
-        szHex++;
-    }
-    return hex;
-}
-
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 	UnionJNIEnvToVoid uenv;
 	uenv.venv = NULL;
@@ -55,8 +35,14 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 	return JNI_VERSION_1_4;
 }
 
+VBImage* GetTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align)
+{
+	return getTextImageWithSizeDetail(_txt, _text_size, _width, _height);
 
-VBImage* getTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align)
+	//return VBImageInitAndClear(VBImageAlloc(), VBColorType_RGBA, 8, _width, _height);
+}
+
+VBImage* getTextImageWithSizeDetail(const char* _text, int _text_size, int _width, int _height)
 {
 		JNIEnv* env = NULL;
 		AndroidBitmapInfo info;
@@ -78,18 +64,15 @@ VBImage* getTextImageWithSizeDetail(const char* _txt, const char* _fontName, flo
 			LOGE("Native registration unable to find class '%s'", ClassName);
 		}
 
-		jmethodID mid = env->GetStaticMethodID(clazz, "getTextImageWithSizeDetail", "(Ljava/lang/String;Ljava/lang/String;FIIIIFFI)Landroid/graphics/Bitmap;");
+		jmethodID mid = env->GetStaticMethodID(clazz, "getTextImageWithSizeDetail", "(Ljava/lang/String;III)Landroid/graphics/Bitmap;");
 		if (mid == NULL) {
 			LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 					"getTextImageWithSizeDetail");
 		}
 
-		jstring text = env->NewStringUTF(_txt);
-		jstring fontName = env->NewStringUTF(_fontName);
-		int colorCode = hexToInt(_colorCode);
-		int shadowColorCode = hexToInt(_shadowColorCode);
+		jstring text = env->NewStringUTF(_text);
 
-		jobject bitmap = env->CallStaticObjectMethod(clazz, mid, text, fontName, _text_size, _width, _height, colorCode, shadowColorCode, VBVector2DGetX(_shadowOffset), VBVector2DGetY(_shadowOffset), align);
+		jobject bitmap = env->CallStaticObjectMethod(clazz, mid, text, _text_size, _width, _height);
 
 		if ((ret = AndroidBitmap_getInfo(env, bitmap, &info)) < 0) {
 			LOGE("AndroidBitmap_getInfo() failed! error=%d", ret);
@@ -109,7 +92,6 @@ VBImage* getTextImageWithSizeDetail(const char* _txt, const char* _fontName, flo
 
 		env->DeleteLocalRef(clazz);
 		env->DeleteLocalRef(text);
-		env->DeleteLocalRef(fontName);
 
 		return image;
 }

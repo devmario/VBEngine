@@ -1,6 +1,7 @@
 #include <iostream>
 #include "User.h"
 #include "VBEngine.h"
+#include "ShareData.h"
 
 User* rootUser = NULL;
 
@@ -73,6 +74,9 @@ void User::Init() {
     m_mobageID = (char*)calloc(1, 1);
     
     m_money = 0;
+    item_undo = 0;
+    item_hint = 0;
+    star = 0;
     
     SetJSON(json);
     
@@ -194,5 +198,36 @@ void User::SetMoney(int _value) {
         m_money = _value;
         cJSON_ReplaceItemInObject(json, "money", cJSON_CreateNumber(_value));
         Save();
+    }
+}
+
+int User::GetUndo() {
+    return item_undo;
+}
+void User::SetUndo(int _value) {
+    if (_value != item_undo) {
+        item_undo = _value;
+        cJSON_ReplaceItemInObject(json, "itemUndo", cJSON_CreateNumber(_value));
+    }
+}
+
+int User::GetHint() {
+    return item_hint;
+}
+void User::SetHint(int _value) {
+    if (_value != item_hint) {
+        item_hint = _value;
+        cJSON_ReplaceItemInObject(json, "itemHint", cJSON_CreateNumber(_value));
+    }
+}
+
+int User::GetStar() {
+    return star;
+}
+
+void User::SetStar(int _value) {
+    if (_value != star) {
+        star = _value;
+        cJSON_ReplaceItemInObject(json, "star", cJSON_CreateNumber(_value));
     }
 }

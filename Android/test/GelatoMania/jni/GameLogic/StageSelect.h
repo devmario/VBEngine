@@ -8,6 +8,7 @@ using namespace cocos2d;
 
 class StageSelect : public Pages {
 public:
+    
     VBObjectFile2D* objStage;
     VBTexture* texStage;
     
@@ -16,11 +17,11 @@ public:
     CCTouch* touchM;
     VBModel* touchMd;
     
-    VBModel* bg[2];
+    VBModel* bg;
     
     CCPoint startLocation;
     
-    StageSelect(VBObjectFile2D* _obj, VBTexture* _tex, 
+    StageSelect(/*VBObjectFile2D** _thumbs_obj, VBTexture** _thumbs_tex,*/ 
                 int _totalIdx);
     ~StageSelect();
     

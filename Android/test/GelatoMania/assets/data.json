@@ -28,6 +28,30 @@
              "objLayer":["stage_bg3_wall", "stage_bg3"],
              "objUI":"stage_bg3ui",
              "packData":"pack3.json",
+             "lock":false},
+             
+             {"libName":"p5",
+             "objLayer":["stage_bg3_wall", "stage_bg3"],
+             "objUI":"stage_bg3ui",
+             "packData":"pack4.json",
+             "lock":false},
+             
+             {"libName":"p6",
+             "objLayer":["stage_bg3_wall", "stage_bg3"],
+             "objUI":"stage_bg3ui",
+             "packData":"pack5.json",
+             "lock":false},
+             
+             {"libName":"p7",
+             "objLayer":["stage_bg3_wall", "stage_bg3"],
+             "objUI":"stage_bg3ui",
+             "packData":"pack6.json",
+             "lock":false},
+             
+             {"libName":"p8",
+             "objLayer":["stage_bg3_wall", "stage_bg3"],
+             "objUI":"stage_bg3ui",
+             "packData":"pack7.json",
              "lock":false}
              ]
 }

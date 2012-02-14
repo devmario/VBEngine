@@ -151,7 +151,11 @@ void VBHTTPCreateByJS(const char* _json_file_path,
                       const char* _request,
                       ...) {
     VBString* _string = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _json_file_path);
+#ifdef __ANDROID__
+    FILE* _file = android_fopen(VBStringGetCString(_string), "rb");
+#else
     FILE* _file = fopen(VBStringGetCString(_string), "rb");
+#endif
     VBStringFree(&_string);
     fseek(_file, 0, SEEK_END);
     size_t _size = ftell(_file);

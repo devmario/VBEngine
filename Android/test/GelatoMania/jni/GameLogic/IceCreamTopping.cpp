@@ -99,8 +99,8 @@ void IceCream::AddToppingCherry(ToppingCherry* _tc) {
                     if(getChildren()->indexOfObject(_tt->model) != UINT_MAX)
                         removeChild(_tt->model, false);
                 }
-                VBArrayVectorRemove(thumbs, _tt);
-                ThumbsFree(&_tt);
+//                VBArrayVectorRemove(thumbs, _tt);
+//                ThumbsFree(&_tt);
             }
             VBArrayVectorAddBack(thumbs, ThumbsInit(_tc->texThumb[_t_count], _tc->aabbThumb[_t_count], 3, _tc, false));
             toppingCherry = _tc;

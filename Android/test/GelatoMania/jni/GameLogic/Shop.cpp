@@ -2,25 +2,60 @@
 #include "Scroller.h"
 #include "ShareData.h"
 #include "Language.h"
+#include "User.h"
 
-Shop::Shop(int _tapidx) : Pages(NULL, NULL, 1, 0.0, 600.0, 0, 357, 240-85, -280) {
+Shop::Shop(VBObjectFile2D** objSubMenuContainer, VBTexture** texSubMenuContainer, int _tapidx) : Pages(NULL, NULL, 1, 0.0, 480, 0, 357, 240-85, -280) {
     VBString* _str;
     VBObjectFile2DLibraryNameID* _library_name_id;
+    
+    if(*objSubMenuContainer == NULL) {
+        OBJLOAD(*objSubMenuContainer, "sub_menu_container.obj", _str);
+    }
+    if(*texSubMenuContainer == NULL) {
+        TEXLOAD(*texSubMenuContainer, "sub_menu_container.png", _str);
+    }
     
     OBJLOAD(shopObj, "shop.obj", _str);
     TEXLOAD(shopTex, "shop.png", _str);
     
-    LIBNAMEFIND(_library_name_id, shopObj, "shop", _str);
+    LIBNAMEFIND(_library_name_id, shopObj, "tap", _str);
+    modelTap = new VBModel(shopObj, _library_name_id, shopTex, true);
     
-    backgroundModel = new VBModel(shopObj, _library_name_id, shopTex, true);
+    LIBNAMEFIND(_library_name_id, *objSubMenuContainer, "container", _str);
+    
+    backgroundModel = new VBModel(*objSubMenuContainer, _library_name_id, *texSubMenuContainer, true);
     backgroundModel->stop();
     slideM->addChild(backgroundModel);
     backgroundModel->setPosition(CCPointMake(0, 0));
     
+    //add star, item count
+    User* user = User::localUser();
+    VBString* star = VBStringInitWithCStringFormat(VBStringAlloc(), "%03d", user->GetStar());
+    VBString* undo = VBStringInitWithCStringFormat(VBStringAlloc(), "x %02d", user->GetUndo());
+    VBString* hint = VBStringInitWithCStringFormat(VBStringAlloc(), "x %02d", user->GetHint());
+    
+    Language* l = Language::shareLanguage();
+    
+    starCount = new Text();
+    starCount->SetText(VBStringGetCString(star), l->GetFontName("type0"), 20, 40, 20, "000000ff", "ffffffff", VBVector2DCreate(0, 0), -1);
+    undoCount = new Text();
+    undoCount->SetText(VBStringGetCString(undo), l->GetFontName("type0"), 20, 40, 20, "000000ff", "ffffffff", VBVector2DCreate(0, 0), -1);
+    hintCount = new Text();
+    hintCount->SetText(VBStringGetCString(hint), l->GetFontName("type0"), 20, 40, 20, "000000ff", "ffffffff", VBVector2DCreate(0, 0), -1);
+    backgroundModel->getVBModelByInstanceName("starCount")->addChild(starCount);
+    backgroundModel->getVBModelByInstanceName("undoCount")->addChild(undoCount);
+    backgroundModel->getVBModelByInstanceName("hintCount")->addChild(hintCount);
+    //
+    
+    
+    backgroundModel->addChild(modelTap);
+    modelTap->stop();
+    modelTap->setPosition(CCPoint(35, -5));
+    
     for(int i = 0; i < 3; i++) {
         textTap[i] = new Text();
         textTap[i]->setPosition(CCPoint(167 + (i*77) - 189.50 - 85.50 , -33));
-        backgroundModel->addChild(textTap[i]);
+        modelTap->addChild(textTap[i]);
         touchTap[i] = NULL;
     }
     
@@ -63,10 +98,21 @@ void Shop::SetTap(int _idx) {
 }
 
 Shop::~Shop() {
+    
     for(int i = 0; i < 3; i++) {
-        backgroundModel->removeChild(textTap[i], false);
+        modelTap->removeChild(textTap[i], false);
         delete textTap[i];
     }
+    
+    backgroundModel->getVBModelByInstanceName("starCount")->removeChild(starCount, false);
+    backgroundModel->getVBModelByInstanceName("undoCount")->removeChild(undoCount, false);
+    backgroundModel->getVBModelByInstanceName("hintCount")->removeChild(hintCount, false);
+    delete starCount;
+    delete undoCount;
+    delete hintCount;
+    
+    backgroundModel->removeChild(modelTap, false);
+    delete modelTap;
     
     containerModel->removeChild(container, false);
     delete container;

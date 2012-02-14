@@ -11,7 +11,7 @@ VBFile* VBFileAlloc(void) {
 	if(_file == VBNull)
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBTrue, 
-										 "VBEngine Log: VBFileAlloc() - ë©”ëª¨ë¦¬í• ?¹ì— ?¤íŒ¨?˜ì??µë‹ˆ??");
+										 "VBEngine Log: VBFileAlloc() - ë©”ëª¨ë¦¬í• ?ï¿½ì— ?ï¿½íŒ¨?ï¿½ï¿½??ï¿½ë‹ˆ??");
 #endif
     
 	return _file;
@@ -33,7 +33,7 @@ VBFile* VBFileInit(VBFile* _file) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), 
 										 VBFalse, 
-										 "VBEngine Log: VBFileInit() - VBNull???Œì¼??ì´ˆê¸°???˜ë ¤ê³??©ë‹ˆ?? VBFileAlloc?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileInit() - VBNull???ï¿½ì¼??ì´ˆê¸°???ï¿½ë ¤ï¿½??ï¿½ë‹ˆ?? VBFileAlloc?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 	return _file;
@@ -54,7 +54,7 @@ void VBFileFree(VBFile** _file) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileInitWithOpen() - VBNull???Œì¼??Free?˜ë ¤ê³??©ë‹ˆ?? ?´ë? VBFileFree?˜ì?ê±°ë‚˜ VBFileAlloc?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileInitWithOpen() - VBNull???ï¿½ì¼??Free?ï¿½ë ¤ï¿½??ï¿½ë‹ˆ?? ?ï¿½ï¿½? VBFileFree?ï¿½ï¿½?ê±°ë‚˜ VBFileAlloc?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 }
@@ -64,26 +64,38 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 		if(_file->file == VBNull) {
 			switch(_mode) {
 				case VBFileMode_Read:
+#ifdef __ANDROID__
+					_file->file = android_fopen(VBStringGetCString(_path), "r");
+#else
 					_file->file = fopen(VBStringGetCString(_path), "r");
+#endif
 					break;
 				case VBFileMode_Write:
+#ifdef __ANDROID__
+					_file->file = android_fopen(VBStringGetCString(_path), "w");
+#else
 					_file->file = fopen(VBStringGetCString(_path), "w");
+#endif
 					break;
 				case VBFileMode_ReadWrite:
+#ifdef __ANDROID__
+					_file->file = android_fopen(VBStringGetCString(_path), "a+");
+#else
 					_file->file = fopen(VBStringGetCString(_path), "a+");
+#endif
 					break;
 				case VBFileMode_None:
 #ifdef _VB_DEBUG_
 					VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 													 VBFalse,
-													 "VBEngine Log: VBFileOpen() - VBFileMode_Noneëª¨ë“œë¡œëŠ” ?Œì¼???????†ìŠµ?ˆë‹¤.");
+													 "VBEngine Log: VBFileOpen() - VBFileMode_Noneëª¨ë“œë¡œëŠ” ?ï¿½ì¼???????ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 					break;
 				default:
 #ifdef _VB_DEBUG_
 					VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 													 VBFalse,
-													 "VBEngine Log: VBFileOpen() - VBFileMode??ì§€?•ë˜ì§€ ?Šì? ëª¨ë“œë¥??¬ìš©?˜ì—¬???Œì¼???????†ìŠµ?ˆë‹¤.");
+													 "VBEngine Log: VBFileOpen() - VBFileMode??ì§€?ï¿½ë˜ì§€ ?ï¿½ï¿½? ëª¨ë“œï¿½??ï¿½ìš©?ï¿½ì—¬???ï¿½ì¼???????ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 					break;
 					
@@ -102,7 +114,7 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 												 VBFalse, 
-												 "VBEngine Log: VBFileOpen() - ?Œì¼???´ë¦¬ì§€ ?ŠìŠµ?ˆë‹¤. ê²½ë¡œ??ê¶Œí•œ??ë¬¸ì œê°€ ?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+												 "VBEngine Log: VBFileOpen() - ?ï¿½ì¼???ï¿½ë¦¬ì§€ ?ï¿½ìŠµ?ï¿½ë‹¤. ê²½ë¡œ??ê¶Œí•œ??ë¬¸ì œê°€ ?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 			}
 		}
@@ -110,7 +122,7 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileOpen() - VBNull???Œì¼??Open?˜ë ¤ê³??©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileOpen() - VBNull???ï¿½ì¼??Open?ï¿½ë ¤ï¿½??ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 #ifdef __ANDROID__
@@ -156,14 +168,14 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 						VBFalse,
-						"VBEngine Log: VBFileOpen() - VBFileMode_Noneëª¨ë“œë¡œëŠ” ?Œì¼???????†ìŠµ?ˆë‹¤.");
+						"VBEngine Log: VBFileOpen() - VBFileMode_Noneëª¨ë“œë¡œëŠ” ?ï¿½ì¼???????ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 				break;
 			default:
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 						VBFalse,
-						"VBEngine Log: VBFileOpen() - VBFileMode??ì§€?•ë˜ì§€ ?Šì? ëª¨ë“œë¥??¬ìš©?˜ì—¬???Œì¼???????†ìŠµ?ˆë‹¤.");
+						"VBEngine Log: VBFileOpen() - VBFileMode??ì§€?ï¿½ë˜ì§€ ?ï¿½ï¿½? ëª¨ë“œï¿½??ï¿½ìš©?ï¿½ì—¬???ï¿½ì¼???????ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 				break;
 
@@ -181,7 +193,7 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 						VBFalse,
-						"VBEngine Log: VBFileOpen() - ?Œì¼???´ë¦¬ì§€ ?ŠìŠµ?ˆë‹¤. ê²½ë¡œ??ê¶Œí•œ??ë¬¸ì œê°€ ?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+						"VBEngine Log: VBFileOpen() - ?ï¿½ì¼???ï¿½ë¦¬ì§€ ?ï¿½ìŠµ?ï¿½ë‹¤. ê²½ë¡œ??ê¶Œí•œ??ë¬¸ì œê°€ ?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 			}
 		}
@@ -189,7 +201,7 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileOpen() - VBNull???Œì¼??Open?˜ë ¤ê³??©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileOpen() - VBNull???ï¿½ì¼??Open?ï¿½ë ¤ï¿½??ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 #endif
@@ -201,14 +213,14 @@ void VBFileClose(VBFile* _file) {
 #ifdef _VB_DEBUG_
 			VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 											 VBFalse,
-											 "VBEngine Log: VBFileClose() - ?´ë ¤?ˆì? ?Šì? ?Œì¼??Close?˜ë ¤ê³??©ë‹ˆ??\n");
+											 "VBEngine Log: VBFileClose() - ?ï¿½ë ¤?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼??Close?ï¿½ë ¤ï¿½??ï¿½ë‹ˆ??\n");
 #endif
 		_file = VBFileInit(_file);
 	} else {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse,
-										 "VBEngine Log: VBFileClose() - VBNull???Œì¼??Close?˜ë ¤ê³??©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileClose() - VBNull???ï¿½ì¼??Close?ï¿½ë ¤ï¿½??ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 }
@@ -221,7 +233,7 @@ VBBool VBFileGetIsOpen(VBFile* _file) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetIsOpen() - VBNull???Œì¼??Open?¬ë?ë¥?ê°€?¸ì˜¤?¤ê³  ?©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileGetIsOpen() - VBNull???ï¿½ì¼??Open?ï¿½ï¿½?ï¿½?ê°€?ï¿½ì˜¤?ï¿½ê³  ?ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 	return VBFalse;
@@ -234,7 +246,7 @@ VBFileMode VBFileGetMode(VBFile* _file) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetMode() - VBNull???Œì¼??ëª¨ë“œë¥?ê°€?¸ì˜¤?¤ê³  ?©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileGetMode() - VBNull???ï¿½ì¼??ëª¨ë“œï¿½?ê°€?ï¿½ì˜¤?ï¿½ê³  ?ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 	return VBFileMode_None;
@@ -247,7 +259,7 @@ void VBFileSetEndian(VBFile* _file, VBSystemEndian _endian) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileSetEndian() - VBNull???Œì¼???¸ë””?ˆì„ ?¤ì •?˜ë ¤ê³??©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileSetEndian() - VBNull???ï¿½ì¼???ï¿½ë””?ï¿½ì„ ?ï¿½ì •?ï¿½ë ¤ï¿½??ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 }
@@ -258,7 +270,7 @@ VBSystemEndian VBFileGetEndian(VBFile* _file) {
 	} else {
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetEndian() - VBNull???Œì¼???¸ë””?ˆì„ ê°€?¸ì˜¤?¤ê³  ?©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileGetEndian() - VBNull???ï¿½ì¼???ï¿½ë””?ï¿½ì„ ê°€?ï¿½ì˜¤?ï¿½ê³  ?ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 	}
 	return VBSystemEndian_None;
 }
@@ -273,21 +285,21 @@ void VBFileSetOffset(VBFile* _file, VBUShort _offset) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 												 VBFalse,
-												 "VBEngine Log: VBFileSetOffset() - ?Œì¼???¬ì´ì¦ˆë? ë²—ì–´?˜ëŠ” ?¤í”„?‹ì„ ?¤ì •?˜ì??µë‹ˆ??(?´ê²½???¤í”„?‹ì˜ ë³€?”ëŠ” ?†ìŠµ?ˆë‹¤.)");
+												 "VBEngine Log: VBFileSetOffset() - ?ï¿½ì¼???ï¿½ì´ì¦ˆï¿½? ë²—ì–´?ï¿½ëŠ” ?ï¿½í”„?ï¿½ì„ ?ï¿½ì •?ï¿½ï¿½??ï¿½ë‹ˆ??(?ï¿½ê²½???ï¿½í”„?ï¿½ì˜ ë³€?ï¿½ëŠ” ?ï¿½ìŠµ?ï¿½ë‹¤.)");
 #endif
 			}
 		} else {
 #ifdef _VB_DEBUG_
 			VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 											 VBFalse,
-											 "VBEngine Log: VBFileSetOffset() - ?Œì¼???´ë ¤?ˆì–´???©ë‹ˆ??");
+											 "VBEngine Log: VBFileSetOffset() - ?ï¿½ì¼???ï¿½ë ¤?ï¿½ì–´???ï¿½ë‹ˆ??");
 #endif
 		}
 	} else {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileSetOffset() - VBNull???Œì¼???¤í”„?‹ì„ ?¤ì •?˜ë ¤ê³??©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileSetOffset() - VBNull???ï¿½ì¼???ï¿½í”„?ï¿½ì„ ?ï¿½ì •?ï¿½ë ¤ï¿½??ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 }
@@ -298,7 +310,7 @@ VBUShort VBFileGetOffset(VBFile* _file) {
 	else
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetOffset() - VBNull???Œì¼???¤í”„?‹ì„ ê°€?¸ì˜¤?¤ê³  ?©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileGetOffset() - VBNull???ï¿½ì¼???ï¿½í”„?ï¿½ì„ ê°€?ï¿½ì˜¤?ï¿½ê³  ?ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 	return 0;
 }
 
@@ -309,7 +321,7 @@ VBUShort VBFileGetSize(VBFile* _file) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetSize() - VBNull???Œì¼???¬ì´ì¦ˆë? ê°€?¸ì˜¤?¤ê³  ?©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileGetSize() - VBNull???ï¿½ì¼???ï¿½ì´ì¦ˆï¿½? ê°€?ï¿½ì˜¤?ï¿½ê³  ?ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
     }
 	return 0;
@@ -329,21 +341,21 @@ VBUShort VBFileWrite(VBFile* _file, void* _ptr, VBUShort _size, VBUShort _len) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 												 VBFalse, 
-												 "VBEngine Log: VBFileWrite() - Write?????†ìŠµ?ˆë‹¤. ?Œì¼ëª¨ë“œ ?•ì¸???´ì£¼?¸ìš”.");
+												 "VBEngine Log: VBFileWrite() - Write?????ï¿½ìŠµ?ï¿½ë‹¤. ?ï¿½ì¼ëª¨ë“œ ?ï¿½ì¸???ï¿½ì£¼?ï¿½ìš”.");
 #endif
 			}
 		} else {
 #ifdef _VB_DEBUG_
 			VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 											 VBFalse, 
-											 "VBEngine Log: VBFileWrite() - ?´ë ¤?ˆì? ?Šì? ?Œì¼??Write?????†ìŠµ?ˆë‹¤.");
+											 "VBEngine Log: VBFileWrite() - ?ï¿½ë ¤?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼??Write?????ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 		}
 	} else {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileWrite() - VBNull???Œì¼??Write?˜ë ¤ê³??©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileWrite() - VBNull???ï¿½ì¼??Write?ï¿½ë ¤ï¿½??ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 	return 0;
@@ -362,21 +374,21 @@ VBUShort VBFileRead(VBFile* _file, void* _ptr, VBUShort _size, VBUShort _len) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 												 VBFalse, 
-												 "VBEngine Log: VBFileRead() - Write?????†ìŠµ?ˆë‹¤. ?Œì¼ëª¨ë“œ ?•ì¸???´ì£¼?¸ìš”.");
+												 "VBEngine Log: VBFileRead() - Write?????ï¿½ìŠµ?ï¿½ë‹¤. ?ï¿½ì¼ëª¨ë“œ ?ï¿½ì¸???ï¿½ì£¼?ï¿½ìš”.");
 #endif
 			}
 		} else {
 #ifdef _VB_DEBUG_
 			VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 											 VBFalse, 
-											 "VBEngine Log: VBFileRead() - ?´ë ¤?ˆì? ?Šì? ?Œì¼?€ Read?????†ìŠµ?ˆë‹¤.");
+											 "VBEngine Log: VBFileRead() - ?ï¿½ë ¤?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼?ï¿½ Read?????ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 		}
 	} else {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileRead() - VBNull???Œì¼??Read?˜ë ¤ê³??©ë‹ˆ?? VBFileInit(VBFileAlloc())?˜ì? ?Šì? ?Œì¼???¬ìš©?ˆì„ ???ˆìŠµ?ˆë‹¤.");
+										 "VBEngine Log: VBFileRead() - VBNull???ï¿½ì¼??Read?ï¿½ë ¤ï¿½??ï¿½ë‹ˆ?? VBFileInit(VBFileAlloc())?ï¿½ï¿½? ?ï¿½ï¿½? ?ï¿½ì¼???ï¿½ìš©?ï¿½ì„ ???ï¿½ìŠµ?ï¿½ë‹¤.");
 #endif
 	}
 	return 0;
@@ -396,7 +408,7 @@ void VBFileCopy(VBString* _src, VBString* _des) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileCopy() - _src(source file) VBFileOpen???¤íŒ¨?˜ì??µë‹ˆ??");
+										 "VBEngine Log: VBFileCopy() - _src(source file) VBFileOpen???ï¿½íŒ¨?ï¿½ï¿½??ï¿½ë‹ˆ??");
 #endif
 		return;
 	}
@@ -431,7 +443,7 @@ VBSize VBFileCopyToMemory(VBString* _src, void** _buffer) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileCopyToMemory() - _src(source file) VBFileOpen???¤íŒ¨?˜ì??µë‹ˆ??");
+										 "VBEngine Log: VBFileCopyToMemory() - _src(source file) VBFileOpen???ï¿½íŒ¨?ï¿½ï¿½??ï¿½ë‹ˆ??");
 #endif
 		return 0;
 	}
@@ -444,7 +456,7 @@ VBSize VBFileCopyToMemory(VBString* _src, void** _buffer) {
 #ifdef _VB_DEBUG_
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileCopyToMemory() - _src(source file) VBFileRead???¤íŒ¨?˜ì??µë‹ˆ??");
+										 "VBEngine Log: VBFileCopyToMemory() - _src(source file) VBFileRead???ï¿½íŒ¨?ï¿½ï¿½??ï¿½ë‹ˆ??");
 #endif
 		return 0;
 	}

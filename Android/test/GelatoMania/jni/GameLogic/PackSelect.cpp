@@ -3,7 +3,9 @@
 #include "PackThumb.h"
 #include "SubMenu.h"
 
-PackSelect::PackSelect(VBObjectFile2D* _thumbs_obj, VBTexture* _thumbs_tex, int _totalIdx, SubMenu* _subMenu) : Pages(_thumbs_obj, _thumbs_tex, _totalIdx, 60.0 - 240, 240, -26, 357, 0, -280) {
+
+
+PackSelect::PackSelect(VBObjectFile2D** _thumbs_obj, VBTexture** _thumbs_tex, int _totalIdx, SubMenu* _subMenu) : Pages(LoadThumbObj(_thumbs_obj), LoadThumbTex(_thumbs_tex), _totalIdx, 60.0 - 240, 240, -26, 357, 0, -280) {
     VBString* _str;
     OBJLOAD(objPack, "pack.obj", _str);
     TEXLOAD(texPack, "pack.png", _str);
@@ -84,7 +86,7 @@ void PackSelect::touchMove(CCTouch* _touch, CCPoint _location) {
         return;
     Pages::touchMove(_touch, _location);
     if(touchM == _touch) {
-        if(VBVector2DLength(VBVector2DSubtract(VBVector2DCreate(_location.x, _location.y), VBVector2DCreate(startLocation.x, startLocation.y))) > 2.0) {
+        if(VBVector2DLength(VBVector2DSubtract(VBVector2DCreate(_location.x, _location.y), VBVector2DCreate(startLocation.x, startLocation.y))) > 10) {
             touchM = NULL;
             touchMd->color.r = 0xFF;
             touchMd->color.g = 0xFF;

@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include "PlatformFunctions.h"
 #include "User.h"
+#include "Language.h"
 
 bool IsEqualHistory(history* _h0, history* _h1) {
     if(_h0 == NULL || _h1 == NULL)
@@ -139,8 +140,8 @@ Root::Root() {
     // instead of nsdocumentdirectory
     // get resource, document path
 #ifdef __ANDROID__
-    // VBEngineStart("/mnt/sdcard/GelatoMania/resource", "/mnt/sdcard/GelatoMania/document", 800, 480, 480, 320);
-    VBEngineStart("/data/data/com.vanillabreeze.gelatomania/files/resource", "/data/data/com.vanillabreeze.gelatomania/files/document", 800, 480, 480, 320);
+    VBEngineStart("/mnt/sdcard/GelatoMania/resource", "/mnt/sdcard/GelatoMania/document", 800, 480, 480, 320);
+    // VBEngineStart("/data/data/com.vanillabreeze.gelatomania/files/resource", "/data/data/com.vanillabreeze.gelatomania/files/document", 800, 480, 480, 320);
 #else
     const char* appName = "GelatoMania.app";
     int appNameLen = strlen(appName);
@@ -211,10 +212,25 @@ Root::Root() {
     modelMobage->setScale(0.5);
     top->addChild(modelMobage);
     
+    touchDeveloper = NULL;
+    textDeveloperMode = new Text();
+    textDeveloperMode->SetText("개발자모드켜기", Language::shareLanguage()->GetFontName("type0"), 16, 128, 32, "FFFFFFFF", "000000FF", VBVector2DCreate(1,1), 1, false);
+    textDeveloperMode->setPosition(CCPoint(CCDirector::sharedDirector()->getDisplaySizeInPixels().height/ CCDirector::sharedDirector()->getContentScaleFactor() - 128, 0));
+    top->addChild(textDeveloperMode);
+    is_developer_mode = false;
+    
     popup = NULL;
+    
+    ShareDataGetLoadingModel()->VBModelUpdate(0);
 }
 
 Root::~Root() {
+    if(textDeveloperMode) {
+        top->removeChild(textDeveloperMode, false);
+        delete textDeveloperMode;
+        textDeveloperMode = NULL;
+    }
+    
     top->removeChild(modelMobage, false);
     delete modelMobage;
     
@@ -291,6 +307,7 @@ void Root::Update() {
              loadingFlag가 2로 넘어오면서 loading->is_play가 false로 바뀜.
              */
             ChangePageARGSonUpdate();
+            gettimeofday(&curTime, NULL);
             loading->gotoAndPlay(19);
             loadFlag++;
         } else if(loadFlag == 3) {
@@ -328,6 +345,9 @@ void Root::ccTouchesBegan( CCSet *touches, CCEvent *event) {
 //    location.x /= scale;
 //    location.y /= scale;
     
+    if(textDeveloperMode) {
+        TOUCHBEGINBT(touchDeveloper, textDeveloperMode, location, touch, textDeveloperMode->color.a = 0x88);
+    }
     if(selectUser)
         selectUser->touchBegin(touch, location);
     else if(popup)
@@ -375,6 +395,12 @@ void Root::ccTouchesEnded( CCSet *touches, CCEvent *event) {
     
     
     
+    if(textDeveloperMode) {
+        TOUCHENDBT(touchDeveloper, textDeveloperMode, location, touch, 
+                   is_developer_mode = !is_developer_mode;
+                   textDeveloperMode->SetText(is_developer_mode ? "개발자모드끄기" : "개발자모드켜기", Language::shareLanguage()->GetFontName("type0"), 16, 128, 32, "FFFFFFFF", "000000FF", VBVector2DCreate(1,1), 1, false);
+                   , textDeveloperMode->color.a = 0xFF);
+    }
     if(selectUser)
         selectUser->touchEnd(touch, location);
     else if(popup)
@@ -391,12 +417,19 @@ void Root::ccTouchesCanceled( CCSet *touches, CCEvent *event) {
 	CCPoint location = touch->locationInView(touch->view());
 	location = CCDirector::sharedDirector()->convertToGL(location);
     
-    float scale = CCDirector::sharedDirector()->getContentScaleFactor();
-    if(!CCDirector::sharedDirector()->isRetinaDisplay())
-        scale *= (CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320);
-    location.x /= scale;
-    location.y /= scale;
     
+    if(textDeveloperMode) {
+        TOUCHENDBT(touchDeveloper, textDeveloperMode, location, touch, 
+                   is_developer_mode = !is_developer_mode;
+                   textDeveloperMode->SetText(is_developer_mode ? "개발자모드끄기" : "개발자모드켜기", Language::shareLanguage()->GetFontName("type0"), 16, 128, 32, "FFFFFFFF", "000000FF", VBVector2DCreate(1,1), 1, false);
+                   , textDeveloperMode->color.a = 0xFF);
+    }
+//    float scale = CCDirector::sharedDirector()->getContentScaleFactor();
+//    if(!CCDirector::sharedDirector()->isRetinaDisplay())
+//        scale *= (CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320);
+//    location.x /= scale;
+//    location.y /= scale;
+//    
     
     if(selectUser)
         selectUser->touchCancel(touch, location);
@@ -647,7 +680,7 @@ void Root::ChangePageVALIST(int _count, int* _args) {
             loading = ShareDataGetLoadingModel();
             loading->stop();
             loading->getVBModelByInstanceName("bg")->getVBModelByInstanceName("bg")->is_use_animation = true;
-            loading->getVBModelByInstanceName("bg")->getVBModelByInstanceName("bg")->color.a = 0xFF;
+            loading->getVBModelByInstanceName("bg")->getVBModelByInstanceName("bg")->color.a = 0x00;
             ((CCSprite*)top)->addChild((CCSprite*)loading);
         }
         loading->setIsPlayLoop(false);
@@ -796,6 +829,10 @@ void Root::pushGameMainToHistory()
     gameMain->hintViewer->retain();
     
     gameMainHistory.isRecipeMode = gameMain->IsRecipeMode();
+    gameMainHistory.isNextRopeEnable = gameMain->getNextRopeEnable();
+    gameMainHistory.isToppingRopeEnable = gameMain->getToppingRopeEnable();
+    
+    //TODO: topping data save, load
 }
 
 GameMain* Root::popGameMainFromHistory(int packIdx, int stageIdx)
@@ -805,6 +842,13 @@ GameMain* Root::popGameMainFromHistory(int packIdx, int stageIdx)
     gameMainHistory.baseIceCream = gameMainHistory.iceCream = gameMainHistory.nextIceCream = NULL;
     gameMainHistory.rdTd = NULL;
     gameMainHistory.hintViewer = NULL;
+    
+    gameMain->setNextRopeEnable(gameMainHistory.isNextRopeEnable);
+    if (!gameMainHistory.isToppingRopeEnable) {
+        gameMain->setToppingRopeEnable(gameMainHistory.isToppingRopeEnable);
+        gameMain->SwapRecipeAndToppingMode();
+    }
+    
     return gameMain;
 }
 

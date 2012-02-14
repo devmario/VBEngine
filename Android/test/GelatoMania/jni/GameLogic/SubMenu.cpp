@@ -1,24 +1,40 @@
 #include "SubMenu.h"
 #include "ShareData.h"
 
+VBObjectFile2D* LoadThumbObj(VBObjectFile2D** _obj) {
+    VBString* _str;
+    if(*_obj == NULL) {
+        OBJLOAD(*_obj, "page_thumbs.obj", _str);
+    }
+    return *_obj;
+}
+VBTexture* LoadThumbTex(VBTexture** _tex) {
+    VBString* _str;
+    if(*_tex == NULL) {
+        TEXLOAD(*_tex, "page_thumbs.png", _str);
+    }
+    return *_tex;
+}
+
 void ChangeView(void* _ref) {
     SubMenu* _sub_menu = (SubMenu*)_ref;
     _sub_menu->is_need_new_page = true;
 }
 
 SubMenu::SubMenu() {
+    objPageThumbs = objSubMenuContainer = NULL;
+    texPageThumbs = texSubMenuContainer = NULL;
+    
     is_need_new_page = false;
     isSetLayout = false;
     is_need_pop_root_history = false;
+    is_sub_menu_transition = false;
     
     VBString* _str = NULL;
     OBJLOAD(objRootUI, "root_ui.obj", _str);
     TEXLOAD(texRootUI, "root_ui.png", _str);
     OBJLOAD(objSubMenu, "sub_menu.obj", _str);
     TEXLOAD(texSubMenu, "sub_menu.png", _str);
-    
-    OBJLOAD(objPageThumbs, "page_thumbs.obj", _str);
-    TEXLOAD(texPageThumbs, "page_thumbs.png", _str);
     
     VBObjectFile2DLibraryNameID* _library_name_id = NULL;
     LIBNAMEFIND(_library_name_id, objSubMenu, "bg", _str);
@@ -32,6 +48,7 @@ SubMenu::SubMenu() {
     packView = NULL;
     stageView = NULL;
     shopView = NULL;
+    friendsView = NULL;
     
     ui = new VBModel();
     ((CCSprite*)top)->addChild((CCSprite*)ui);
@@ -50,6 +67,7 @@ SubMenu::SubMenu() {
     frameCTR_shop = new FrameTweenController(shopM);
     
     VBModel* socialM = modelRootUI->getVBModelByInstanceName("social");
+    frameCTR_friend = new FrameTweenController(socialM);
     VBModel* socialBT = socialM->getVBModelByInstanceName("btSocial");
     VBModel* socialBTTop = socialBT->getVBModelByInstanceName("btIn");
     frameCTR_social = new FrameTweenController(socialBTTop);
@@ -88,6 +106,7 @@ SubMenu::SubMenu() {
 }
 
 SubMenu::~SubMenu() {
+    delete frameCTR_friend;
     delete frameCTR_social;
     delete frameCTR_shop;
     
@@ -100,14 +119,13 @@ SubMenu::~SubMenu() {
         delete stageView;
     if(shopView)
         delete shopView;
+    if(friendsView)
+        delete friendsView;
     
     top->removeChild(ui, false);
     delete ui;
     top->removeChild(bg, false);
     delete bg;
-    
-    VBObjectFile2DFree(&objPageThumbs);
-    VBTextureFree(&texPageThumbs);
     
     top->removeChild(modelRootUI, false);
     delete modelRootUI;
@@ -115,6 +133,15 @@ SubMenu::~SubMenu() {
     VBTextureFree(&texRootUI);
     VBObjectFile2DFree(&objSubMenu);
     VBTextureFree(&texSubMenu);
+    
+    if(objSubMenuContainer)
+        VBObjectFile2DFree(&objSubMenuContainer);
+    if(texSubMenuContainer)
+        VBTextureFree(&texSubMenuContainer);
+    if(objPageThumbs)
+        VBObjectFile2DFree(&objPageThumbs);
+    if(texPageThumbs)
+        VBTextureFree(&texPageThumbs);
 }
 
 
@@ -124,50 +151,53 @@ void SubMenu::SetMenuType(SubMenuType _type, int _arg0, int _arg1) {
         if(currentPage) {
             ui->removeChild(currentPage->top, false);
             currentPage = NULL;
-            switch (type) {
-                case SubMenuTypePackSelect:
-                    delete packView;
-                    packView = NULL;
-                    break;
-                case SubMenuTypeStageSelect:
-                    delete stageView;
-                    stageView = NULL;
-                    break;
-                case SubMenuTypeShop:
-                    delete shopView;
-                    shopView = NULL;
-                    break;
-                default:
-                    break;
-            }
         }
         
         type = _type;
         
         switch (type) {
             case SubMenuTypePackSelect:
-                packView = new PackSelect(objPageThumbs, texPageThumbs, ShareDataGetPackLength(), this);
+                if(packView == NULL)
+                    packView = new PackSelect(&objPageThumbs, &texPageThumbs, ShareDataGetPackLength(), this);
+                packView->Reset();
                 currentPage = packView;
                 ui->addChild(currentPage->top,0);
                 break;
             case SubMenuTypeStageSelect:
-                stageView = new StageSelect(objPageThumbs, texPageThumbs, 2);
+                if(stageView == NULL)
+                    stageView = new StageSelect(/*&objPageThumbs, &texPageThumbs,*/ 1);
                 currentPage = stageView;
                 ui->addChild(currentPage->top,0);
                 break;
             case SubMenuTypeShop:
-                shopView = new Shop(_arg0);
+                if(shopView == NULL)
+                    shopView = new Shop(&objSubMenuContainer, &texSubMenuContainer ,_arg0);
                 currentPage = shopView;
                 ui->addChild(currentPage->top,0);
                 break;
+            case SubMenuTypeFriends:
+                if(friendsView == NULL)
+                    friendsView = new Friends(&objSubMenuContainer, &texSubMenuContainer,  (FriendsMenuType)_arg0, modelRootUI->getVBModelByInstanceName("social")->getVBModelByInstanceName("friend"), this);
+                friendsView->GoPage(0, NULL, NULL);
+                currentPage = friendsView;
+                ui->addChild(currentPage->top,0);
             default:
                 break;
+        }
+        
+        frameCTR_shop->playTo((currentPage == shopView ||  currentPage == friendsView)? 29 : 0, 0.7, 0, EXPO, EASE_OUT, NULL, NULL);
+        frameCTR_friend->playTo(currentPage == friendsView ? 29 : 0, 0.7, 0, EXPO, EASE_OUT, NULL, NULL);
+        if(currentPage == friendsView && isOpenSocial) {
+            isOpenSocial = false;
+            frameCTR_social->playTo(0, 1.0, 0, EXPO, EASE_OUT, NULL, NULL);
         }
         
         float scale = CCDirector::sharedDirector()->getDisplaySizeInPixels().height / 320;
         float x = CCDirector::sharedDirector()->getDisplaySizeInPixels().width / scale;
         currentPage->top->setPosition(CCPointMake(x * 0.5, 0));
         currentPage->top->setPosition(CCPointMake(x * 0.5, 0));
+        
+        is_sub_menu_transition = false;
     }
     
     if(pre_type != _type || _arg0 != arg0 || _arg1 != arg1) {
@@ -186,6 +216,8 @@ void SubMenu::SetMenuType(SubMenuType _type, int _arg0, int _arg1) {
                 shopView->SetTap(_arg0);
                 shopView->GoPage(0, NULL, NULL);
                 break;
+            case SubMenuTypeFriends:
+                friendsView->SetType((FriendsMenuType)_arg0);
             default:
                 break;
         }
@@ -204,6 +236,7 @@ void SubMenu::ChangePage(SubMenuType _type, int _arg0, int _arg1) {
     next_arg1 = _arg1;
     
     if(type != _type) {
+        is_sub_menu_transition = true;
         if(currentPage) {
             switch (type) {
                 case SubMenuTypePackSelect:
@@ -215,6 +248,8 @@ void SubMenu::ChangePage(SubMenuType _type, int _arg0, int _arg1) {
                 case SubMenuTypeShop:
                     shopView->GoPage(-1, ChangeView, this);
                     break;
+                case SubMenuTypeFriends:
+                    friendsView->GoPage(-1, ChangeView, this);
                 default:
                     break;
             }
@@ -241,7 +276,6 @@ void SubMenu::BackPage() {
         ShareDataGetRoot()->PrevPage(1);
     } else {
         i++;
-        if(args[i] != type) {
             SubMenuType _type = (SubMenuType)(args[i]);
             i++;
             int _arg0 = 0;
@@ -253,7 +287,6 @@ void SubMenu::BackPage() {
                 _arg1 = args[i];
             is_need_pop_root_history = true;
             ChangePage(_type, _arg0, _arg1);
-        }
     }
 }
 
@@ -278,94 +311,99 @@ void SubMenu::Update(float _deltaTime) {
         currentPage->Update(_deltaTime);
     frameCTR_shop->Update(_deltaTime);
     frameCTR_social->Update(_deltaTime);
+    frameCTR_friend->Update(_deltaTime);
     
     if(is_need_new_page) {
-        ShareDataGetRoot()->ChangePage(6, LoadingTypeSmall, PopupTypeNone, RootPageTypeSubMenu, next_type, next_arg0, next_arg1);
+        LoadingType loadType = LoadingTypeNone;
+        switch (next_type) {
+            case SubMenuTypePackSelect:
+                if(packView == NULL)
+                    loadType = LoadingTypeSmall;
+                break;
+            case SubMenuTypeStageSelect:
+                if(stageView == NULL)
+                    loadType = LoadingTypeSmall;
+                break;
+            case SubMenuTypeShop:
+                if(shopView == NULL)
+                    loadType = LoadingTypeSmall;
+                break;
+            case SubMenuTypeFriends:
+                if(friendsView == NULL)
+                    loadType = LoadingTypeSmall;
+                break;
+            default:
+                break;
+        }
+        ShareDataGetRoot()->ChangePage(6, loadType, PopupTypeNone, RootPageTypeSubMenu, next_type, next_arg0, next_arg1);
         is_need_new_page = false;
     }
 }
 
 void SubMenu::touchBegin(CCTouch* _touch, CCPoint _location) {
+    if(is_sub_menu_transition)
+        return;
     TOUCHBEGINBT(btBackTouch, btBack, _location, _touch, btBack->gotoAndStop(1));
+    if(btBackTouch)
+        return;
     TOUCHBEGINBT(btGiftTouch, btGift, _location, _touch, btGift->gotoAndStop(1));
-    TOUCHBEGINBT(btShopTouch, btShop, _location, _touch, btShop->gotoAndStop(1));
-    TOUCHBEGINBT(btSocialTouch, btSocial, _location, _touch, btSocial->gotoAndStop(1));
-    
-    if(!frameCTR_social->getIsRun() && isOpenSocial) {
-        TOUCHBEGINBT(touchArch, btArch, _location, _touch, btArch->gotoAndStop(1););
-        if(touchArch)
+    if(btGiftTouch)
+        return;
+    if(currentPage != shopView) {
+        TOUCHBEGINBT(btShopTouch, btShop, _location, _touch, btShop->gotoAndStop(1));
+        if(btShopTouch)
             return;
-        TOUCHBEGINBT(touchRank, btRank, _location, _touch, btRank->gotoAndStop(1););
-        if(touchRank)
-            return;
-        TOUCHBEGINBT(touchFB, btFB, _location, _touch, btFB->gotoAndStop(1););
-        if(touchFB)
-            return;
-        TOUCHBEGINBT(touchFriend, btFriend, _location, _touch, btFriend->gotoAndStop(1););
-        if(touchFriend)
+    }
+    if(currentPage != friendsView) {
+        TOUCHBEGINBT(btSocialTouch, btSocial, _location, _touch, btSocial->gotoAndStop(1));
+        if(btSocialTouch)
             return;
     }
     
     if(btBackTouch != _touch && btGiftTouch != _touch && btShopTouch != _touch && btSocialTouch != _touch) {
-        currentPage->touchBegin(_touch, _location);
+        if(currentPage)
+            currentPage->touchBegin(_touch, _location);
     }
 }
 
 void SubMenu::touchMove(CCTouch* _touch, CCPoint _location) {
-    if(btBackTouch != _touch && btGiftTouch != _touch && btShopTouch != _touch && btSocialTouch != _touch &&
-       touchArch != _touch && touchRank != _touch && touchFB != _touch && touchFriend != _touch) {
-        currentPage->touchMove(_touch, _location);
+    if(btBackTouch != _touch && btGiftTouch != _touch && btShopTouch != _touch && btSocialTouch != _touch) {
+        if(currentPage)
+            currentPage->touchMove(_touch, _location);
     }
 }
 
 void SubMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
     TOUCHENDBT(btBackTouch, btBack, _location, _touch, 
-               BackPage();
-               if(currentPage == shopView) {
-                   frameCTR_shop->playTo(0, 0.7, 0, EXPO, EASE_OUT, NULL, NULL);
-               },
+               BackPage();,
                btBack->gotoAndStop(0););
     TOUCHENDBT(btGiftTouch, btGift, _location, _touch, , btGift->gotoAndStop(0));
     
-    TOUCHENDBT(btShopTouch, btShop, _location, _touch, 
-               ChangePage(SubMenuTypeShop, 0, 0);
-               frameCTR_shop->playTo(29, 0.7, 0, EXPO, EASE_OUT, NULL, NULL);
-               , btShop->gotoAndStop(0));
+    if(currentPage != shopView) {
+        TOUCHENDBT(btShopTouch, btShop, _location, _touch, 
+                   ChangePage(SubMenuTypeShop, shopView ? shopView->tapIdx : 0, 0);
+                   , btShop->gotoAndStop(0));
+    }
     
-    TOUCHENDBT(btSocialTouch, btSocial, _location, _touch,
-               isOpenSocial = !isOpenSocial;
-               frameCTR_social->playTo(isOpenSocial ? 29 : 0, 1.0, 0, EXPO, EASE_OUT, NULL, NULL);
-               , btSocial->gotoAndStop(0));
-    
-    if(!frameCTR_social->getIsRun() && isOpenSocial) {
-        TOUCHENDBT(touchArch, btArch, _location, _touch, ,btArch->gotoAndStop(0););
-        TOUCHENDBT(touchRank, btRank, _location, _touch, ,btRank->gotoAndStop(0););
-        TOUCHENDBT(touchFB, btFB, _location, _touch, ,btFB->gotoAndStop(0););
-        TOUCHENDBT(touchFriend, btFriend, _location, _touch, ,btFriend->gotoAndStop(0););
-    } else {
-        touchArch = NULL;
-        touchRank = NULL;
-        touchFB = NULL;
-        touchFriend = NULL;
-        btArch->gotoAndStop(0);
-        btRank->gotoAndStop(0);
-        btFB->gotoAndStop(0);
-        btFriend->gotoAndStop(0);
+    if(currentPage != friendsView) {
+        TOUCHENDBT(btSocialTouch, btSocial, _location, _touch,
+                   ChangePage(SubMenuTypeFriends, friendsView ? friendsView->type : 0, 0);
+                   , btSocial->gotoAndStop(0));
     }
 }
 
 void SubMenu::touchEnd(CCTouch* _touch, CCPoint _location) {
     touchEndAndCancel(_touch, _location);
-    if(btBackTouch != _touch && btGiftTouch != _touch && btShopTouch != _touch && btSocialTouch != _touch &&
-       touchArch != _touch && touchRank != _touch && touchFB != _touch && touchFriend != _touch) {
-        currentPage->touchEnd(_touch, _location);
+    if(btBackTouch != _touch && btGiftTouch != _touch && btShopTouch != _touch && btSocialTouch != _touch) {
+        if(currentPage)
+            currentPage->touchEnd(_touch, _location);
     }
 }
 
 void SubMenu::touchCancel(CCTouch* _touch, CCPoint _location) {
     touchEndAndCancel(_touch, _location);
-    if(btBackTouch != _touch && btGiftTouch != _touch && btShopTouch != _touch && btSocialTouch != _touch &&
-       touchArch != _touch && touchRank != _touch && touchFB != _touch && touchFriend != _touch) {
-        currentPage->touchCancel(_touch, _location);
+    if(btBackTouch != _touch && btGiftTouch != _touch && btShopTouch != _touch && btSocialTouch != _touch) {
+        if(currentPage)
+            currentPage->touchCancel(_touch, _location);
     }
 }

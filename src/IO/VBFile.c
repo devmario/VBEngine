@@ -64,13 +64,25 @@ void VBFileOpen(VBFile* _file, VBString* _path, VBFileMode _mode) {
 		if(_file->file == VBNull) {
 			switch(_mode) {
 				case VBFileMode_Read:
+#ifdef __ANDROID__
+					_file->file = android_fopen(VBStringGetCString(_path), "r");
+#else
 					_file->file = fopen(VBStringGetCString(_path), "r");
+#endif
 					break;
 				case VBFileMode_Write:
+#ifdef __ANDROID__
+					_file->file = android_fopen(VBStringGetCString(_path), "w");
+#else
 					_file->file = fopen(VBStringGetCString(_path), "w");
+#endif
 					break;
 				case VBFileMode_ReadWrite:
+#ifdef __ANDROID__
+					_file->file = android_fopen(VBStringGetCString(_path), "a+");
+#else
 					_file->file = fopen(VBStringGetCString(_path), "a+");
+#endif
 					break;
 				case VBFileMode_None:
 #ifdef _VB_DEBUG_

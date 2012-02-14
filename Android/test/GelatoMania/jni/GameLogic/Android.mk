@@ -53,6 +53,9 @@ LOCAL_SRC_FILES := \
 	FrameTweenController.cpp\
 	Text.cpp\
 	Language.cpp\
+	Friends.cpp\
+	FriendScrollContainer.cpp\
+	FriendScrollCell.cpp\
 	main.cpp\
 
 
