@@ -245,7 +245,6 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		fbUtil.mFacebook.authorizeCallback(requestCode, resultCode, data);
 	}
 
-	/* Native 함수와 매개변수 형식이 맞이 않아서 주석처리 확인필요!
 	private static Bitmap getTextImageWithSizeDetail(String _txt, String _fontName, float _text_size, int _width, int _height,
 			int _colorCode, int _shadowColorCode, float _shadowOffsetX, float _shadowOffsetY, int align) {
 
@@ -276,21 +275,6 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 			h += (_height - h - Math.abs(bounds.bottom)) / 2;
 		}
 		canvas.drawText(_txt, w, h, textPaint);
-
-		return textBitmap;
-		
-	}
-	*/
-	private static Bitmap getTextImageWithSizeDetail(String _txt, int _text_size, int _width, int _height) {
-		
-		Bitmap textBitmap = Bitmap.createBitmap(_width, _height, Bitmap.Config.ARGB_8888);
-
-		// textBitmap.eraseColor(0x8844ff44);
-		Canvas canvas = new Canvas(textBitmap);
-		Paint textPaint = new Paint();
-		setAutoTextSize(_text_size, textPaint, _txt, _width);
-		textPaint.setAntiAlias(true);
-		canvas.drawText(_txt, 50, 50, textPaint);
 
 		return textBitmap;
 		

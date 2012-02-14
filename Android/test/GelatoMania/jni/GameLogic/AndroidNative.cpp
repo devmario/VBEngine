@@ -14,6 +14,43 @@ static PlatformCallback g_FacebookRequestGraphPathCB;
 static PlatformCallback g_FacebookAppRequestCB;
 static PlatformCallback g_FacebookFeedCB;
 
+static int hexToInt(char* szHex) {
+    int hex = 0;
+    int nibble;
+    while (*szHex) {
+        hex <<= 4;
+        if (*szHex >= '0' && *szHex <= '9') {
+            nibble = *szHex - '0';
+        } else if (*szHex >= 'a' && *szHex <= 'f') {
+            nibble = *szHex - 'a' + 10;
+        } else if (*szHex >= 'A' && *szHex <= 'F') {
+            nibble = *szHex - 'A' + 10;
+        } else {
+            nibble = 0;
+        }
+        hex |= nibble;
+        szHex++;
+    }
+    return hex;
+}
+
+
+int hexToIntARGB(const char* szHex) {
+	int len = strlen(szHex);
+	LOGV("len = %d , sizeof(char) = %d", len , sizeof(char));
+	char _szHex[len+1];
+	if(len == 8 ) { // #FFFFFFFF
+		strcat(_szHex, szHex + len-2);
+		strncat(_szHex, szHex, len-2);
+	}
+	LOGV("szHex = %s", szHex);
+	LOGV("_szHex = %s", _szHex);
+	int ret = hexToInt(_szHex);
+	return ret;
+}
+
+
+
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 	UnionJNIEnvToVoid uenv;
 	uenv.venv = NULL;
@@ -34,6 +71,61 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 
 	return JNI_VERSION_1_4;
 }
+
+
+VBImage* getTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align)
+{
+	JNIEnv* env = NULL;
+	AndroidBitmapInfo info;
+	void* pixels;
+	int ret;
+
+	if (jvm == NULL) {
+		LOGE("jvm == null : please on load JavaVM");
+		return false;
+	}
+	if (jvm->AttachCurrentThread(&env, NULL) != JNI_OK) {
+		LOGE("%s: AttachCurrentThread() failed", __FUNCTION__);
+		return false;
+	}
+
+	/* invoke the method using the JNI */
+	jclass clazz = env->FindClass(ClassName);
+	if (clazz == NULL) {
+		LOGE("Native registration unable to find class '%s'", ClassName);
+	}
+
+	jmethodID mid = env->GetStaticMethodID(clazz, "getTextImageWithSizeDetail", "(Ljava/lang/String;Ljava/lang/String;FIIIIFFI)Landroid/graphics/Bitmap;");
+	if (mid == NULL) {
+		LOGE("Native registration unable to find GetStaticMethodID '%s'  ","getTextImageWithSizeDetail");
+	}
+
+	jstring text = env->NewStringUTF(_txt);
+	jstring fontName = env->NewStringUTF(_fontName);
+	int colorCode = hexToIntARGB(_colorCode);
+	int shadowColorCode = hexToIntARGB(_shadowColorCode);
+	jobject bitmap = env->CallStaticObjectMethod(clazz, mid, text, fontName, _text_size, _width, _height, colorCode, shadowColorCode, VBVector2DGetX(_shadowOffset), VBVector2DGetY(_shadowOffset), align);
+
+	if ((ret = AndroidBitmap_getInfo(env, bitmap, &info)) < 0) {
+		LOGE("AndroidBitmap_getInfo() failed! error=%d", ret);
+		return false;
+	}
+
+	// LOGD("AndroidBitmap_getInfo() bitmap: %x, width: %d, height: %d", bitmap, info.width, info.height);
+	if ((ret = AndroidBitmap_lockPixels(env, bitmap, &pixels)) < 0) {
+		LOGE("AndroidBitmap_lockPixels() failed! error=%d", ret);
+		return false;
+	}
+
+	VBImage* image = VBImageInitWithData(VBImageAlloc(), VBColorType_RGBA, 8, _width, _height, pixels);
+
+	AndroidBitmap_unlockPixels(env, bitmap);
+
+	env->DeleteLocalRef(clazz);
+	env->DeleteLocalRef(text);
+	env->DeleteLocalRef(fontName);
+
+	return image;
 
 VBImage* GetTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align)
 {
@@ -207,12 +299,12 @@ void facebookRequestGraphPath(PlatformFacebookGraphPath type, PlatformCallback _
 	JNIEnv* env = NULL;
 	if (jvm == NULL) {
 		LOGE("jvm == null : please on load JavaVM");
-		return ;
+		return;
 	}
 
 	if (jvm->AttachCurrentThread(&env, NULL) != JNI_OK) {
 		LOGE("facebookRequestGraphPath -> %s: AttachCurrentThread() failed", __FUNCTION__);
-		return ;
+		return;
 	}
 
 	/* invoke the method using the JNI */
@@ -229,12 +321,12 @@ void facebookRequestGraphPath(PlatformFacebookGraphPath type, PlatformCallback _
 
 	g_FacebookRequestGraphPathCB = _callback;
 
-    env->CallStaticVoidMethod(clazz, mid, type);
+	env->CallStaticVoidMethod(clazz, mid, type);
 
-    // memory release
-    env->DeleteLocalRef(clazz);
+	// memory release
+	env->DeleteLocalRef(clazz);
 
-    LOGI("Native facebookRequestGraphPath() --> out");
+	LOGI("Native facebookRequestGraphPath() --> out");
 }
 
 void facebookAppRequest(const char* _msg, const char* _to,
@@ -267,18 +359,18 @@ void facebookAppRequest(const char* _msg, const char* _to,
 	g_FacebookRequestGraphPathCB = _callback;
 
 	// malloc
-		jstring msg = env->NewStringUTF(_msg);
-		jstring to = env->NewStringUTF(_to);
-		jstring notification_text = env->NewStringUTF(_notification_text);
+	jstring msg = env->NewStringUTF(_msg);
+	jstring to = env->NewStringUTF(_to);
+	jstring notification_text = env->NewStringUTF(_notification_text);
 
-		// call java method
-	    env->CallStaticVoidMethod(clazz, mid, msg, to, notification_text);
+	// call java method
+	env->CallStaticVoidMethod(clazz, mid, msg, to, notification_text);
 
-	    // memory release
-	    env->DeleteLocalRef(clazz);
-	    env->DeleteLocalRef(msg);
-	    env->DeleteLocalRef(to);
-	    env->DeleteLocalRef(notification_text);
+	// memory release
+	env->DeleteLocalRef(clazz);
+	env->DeleteLocalRef(msg);
+	env->DeleteLocalRef(to);
+	env->DeleteLocalRef(notification_text);
 
 	LOGI("Native facebookAppRequest() --> out");
 }
@@ -313,22 +405,22 @@ void facebookFeed(const char* _name, const char* _caption,
 	g_FacebookFeedCB = _callback;
 
 	// malloc
-		jstring name = env->NewStringUTF(_name);
-		jstring caption = env->NewStringUTF(_caption);
-		jstring description = env->NewStringUTF(_description);
-		jstring link = env->NewStringUTF(_link);
-		jstring picture = env->NewStringUTF(_picture);
+	jstring name = env->NewStringUTF(_name);
+	jstring caption = env->NewStringUTF(_caption);
+	jstring description = env->NewStringUTF(_description);
+	jstring link = env->NewStringUTF(_link);
+	jstring picture = env->NewStringUTF(_picture);
 
-		// call java method
-	    env->CallStaticVoidMethod(clazz, mid, name, caption, description, link, picture);
+	// call java method
+	env->CallStaticVoidMethod(clazz, mid, name, caption, description, link, picture);
 
-	    // memory release
-	    env->DeleteLocalRef(clazz);
-	    env->DeleteLocalRef(name);
-	    env->DeleteLocalRef(caption);
-	    env->DeleteLocalRef(description);
-	    env->DeleteLocalRef(link);
-	    env->DeleteLocalRef(picture);
+	// memory release
+	env->DeleteLocalRef(clazz);
+	env->DeleteLocalRef(name);
+	env->DeleteLocalRef(caption);
+	env->DeleteLocalRef(description);
+	env->DeleteLocalRef(link);
+	env->DeleteLocalRef(picture);
 
 	LOGI("Native facebookRequestGraphPath() --> out");
 }
