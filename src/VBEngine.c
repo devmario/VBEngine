@@ -191,7 +191,7 @@ bool android_fcheck(const char* filename)
 		}
 	}
 
-	LOGD("android_fcheck() filename: %s, ret: %x", filename, ret);
+	//LOGD("android_fcheck() filename: %s, ret: %x", filename, ret);
 
 	return ret;
 }
@@ -275,7 +275,7 @@ FILE* android_fopen(const char* filename, const char* mode)
 		fp = fopen(filename, mode);
 	}
 
-	LOGD("android_fopen() filename: %s, fp: %x", filename, fp);
+	//LOGD("android_fopen() filename: %s, fp: %x", filename, fp);
 
 	return fp;
 }
