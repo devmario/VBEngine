@@ -20,10 +20,12 @@ VBArrayVector* _texVec = NULL;
 void VBTextureStackReloadBuffer(void) {
     for(int i = 0; i < _texVec->len; i++) {
         VBTexture* _tex = VBArrayVectorGetDataAt(_texVec, i);
-        VBImage* _tmp_img = VBImageCopy(_tex->img_android);
-        VBTextureUnload(_tex);
-        VBTextureLoadImage(_tex, _tmp_img);
-        VBImageFree(&_tmp_img);
+        if (_tex->img_android != NULL) {
+			VBImage* _tmp_img = VBImageCopy(_tex->img_android);
+			VBTextureUnload(_tex);
+			VBTextureLoadImage(_tex, _tmp_img);
+			VBImageFree(&_tmp_img);
+        }
     }
 }
 #endif
