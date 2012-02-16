@@ -854,7 +854,8 @@ VBModel::~VBModel() {
             removeChild((VBModel*)getChildren()->objectAtIndex(0), false);
     }
     if(tex) {
-        m_pobTexture->release();
+        while(m_pobTexture->retainCount() > 1)
+            m_pobTexture->release();
         m_pobTexture = NULL;
         tex->m_uName = 0;
         delete tex;

@@ -60,7 +60,7 @@ public:
     VBObjectFile2D *cellBgObj;
     VBTexture *cellBgTex;
     //
-    ShopScrollerContainer(int _tapIdx, VBObjectFile2D *_obj, VBTexture *_tex, VBObjectFile2D *_objScroller, VBTexture *_texScroller, VBArrayVector *_data);
+    ShopScrollerContainer(int _tapIdx, VBObjectFile2D *_obj_shop, VBTexture *_tex_shop, VBObjectFile2D *_objScroller, VBTexture *_texScroller, VBArrayVector *_data);
     ~ShopScrollerContainer();
     
     VBArrayVector* topData;

@@ -11,6 +11,17 @@
 #ifdef __ANDROID__
 #include <GLES/gl.h>
 #include <GLES/glext.h>
+#include <unistd.h>
+#endif
+
+#ifdef __ANDROID__
+#include <android/log.h>
+#define LOG_TAG  "VBEngine"
+#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , LOG_TAG, __VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO   , LOG_TAG, __VA_ARGS__)
+#define LOGW(...) __android_log_print(ANDROID_LOG_WARN   , LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , LOG_TAG, __VA_ARGS__)
 #endif
 
 VBString* _vb_engine_default_res_path = VBNull;
@@ -122,7 +133,153 @@ VBVector2D VBEngineGetDefaultResourceScreenSize(void) {
     return VBVector2DCreate(_vb_engine_default_resource_screen_width, _vb_engine_default_resource_screen_height);
 }
 
+#ifdef __ANDROID__
+static const char *ClassName =
+		"com.vanillabreeze.gelatomania.GelatoManiaActivity";
+JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
+{
+	jint result = -1;
+	JNIEnv* env = NULL;
+	LOGI("JNI_OnLoad");
+	if ((*vm)->GetEnv(vm, (void**)&env, JNI_VERSION_1_4) != JNI_OK) {
+		LOGE("ERROR: GetEnv failed");
+		return result;
+	}
 
+	if ((*env)->GetJavaVM(env, &g_jvm) < 0) {
+		LOGE("Could not get handle to the VM");
+		return result;
+	}
+
+	LOGD("## JNI_OnLoad VBEngine ## g_jvm: %x", g_jvm);
+
+	return JNI_VERSION_1_4;
+}
+
+bool android_fcheck(const char* filename)
+{
+	bool ret = false;
+	if ( strstr(filename, "/mnt/sdcard/GelatoMania/resource") )
+	{
+		if (access(filename, R_OK) == 0)
+		{
+			ret = true;
+		}
+		else
+		{
+			char name[128] = {0,};
+			char temp[256] = {0,};
+			char* p = NULL;
+			const char* delim = "/";
+			strcpy(temp, filename);
+			p = strtok((char*)temp, delim);
+			if (p) {
+				strcpy(name, p);
+			}
+			while (p) {
+				p = strtok(NULL, delim);
+				if (p) {
+					strcpy(name, p);
+				}
+			}
+
+			if (fileCopy(name, filename)) {
+				ret = true;
+			} else {
+				ret = false;
+			}
+		}
+	}
+
+	//LOGD("android_fcheck() filename: %s, ret: %x", filename, ret);
+
+	return ret;
+}
+
+bool fileCopy(const char* _srcPath, const char* _dstPath)
+{
+	JNIEnv* env = NULL;
+	if (g_jvm == NULL) {
+		LOGE("g_jvm == null : please on load JavaVM");
+		return false;
+	}
+	if ((*g_jvm)->AttachCurrentThread(g_jvm, &env, NULL) != JNI_OK) {
+		LOGE("facebookAppRequest -> %s: AttachCurrentThread() failed", __FUNCTION__);
+		return false;
+	}
+
+	/* invoke the method using the JNI */
+	jclass clazz = (*env)->FindClass(env, ClassName);
+	if (clazz == NULL) {
+		LOGE("facebookAppRequest -> Native registration unable to find class '%s'", ClassName);
+		return false;
+	}
+
+	jmethodID mid = (*env)->GetStaticMethodID(env, clazz, "fileCopy", "(Ljava/lang/String;Ljava/lang/String;)Z");
+	if (mid == NULL) {
+		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
+				"fileCopy");
+		return false;
+	}
+
+	jstring srcPath = (*env)->NewStringUTF(env, _srcPath);
+	jstring dstPath = (*env)->NewStringUTF(env, _dstPath);
+
+	// call java method
+	bool ret = (*env)->CallStaticBooleanMethod(env, clazz, mid, srcPath, dstPath);
+
+	// memory release
+	(*env)->DeleteLocalRef(env, clazz);
+	(*env)->DeleteLocalRef(env, srcPath);
+	(*env)->DeleteLocalRef(env, dstPath);
+
+	return ret;
+}
+
+FILE* android_fopen(const char* filename, const char* mode)
+{
+	FILE* fp = NULL;
+	if ( strstr(filename, "/mnt/sdcard/GelatoMania/resource") )
+	{
+		if (access(filename, R_OK) == 0)
+		{
+			fp = fopen(filename, mode);
+		}
+		else
+		{
+			char name[128] = {0,};
+			char temp[256] = {0,};
+			char* p = NULL;
+			const char* delim = "/";
+			strcpy(temp, filename);
+			p = strtok((char*)temp, delim);
+			if (p) {
+				strcpy(name, p);
+			}
+			while (p) {
+				p = strtok(NULL, delim);
+				if (p) {
+					strcpy(name, p);
+				}
+			}
+
+			if (fileCopy(name, filename)) {
+				fp = fopen(filename, mode);
+			} else {
+				return fp;
+			}
+		}
+	}
+	else
+	{
+		fp = fopen(filename, mode);
+	}
+
+	//LOGD("android_fopen() filename: %s, fp: %x", filename, fp);
+
+	return fp;
+}
+#endif
 
 
 

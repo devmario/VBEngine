@@ -158,7 +158,6 @@ void ToppingContainer::CellTouchEnd(CellData* _cell, CCTouch* _touch, CCPoint _l
                            BeginSelectTween(_at, fabsf(_at / (size * 0.5) * 0.75), true);
                        }
                    }
-                   
                    gameMain->toppingContainerCallBack(_data->type);
                }
                , );

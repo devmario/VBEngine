@@ -27,6 +27,7 @@ typedef union {
     void* venv;
 } UnionJNIEnvToVoid;
 
+
 // =================================== JAVA Interface (C/C++ -> JAVA) =========================================
 VBImage* getTextImageWithSizeDetail(const char* _txt, const char* _fontName, float _text_size, int _width, int _height, const char* _colorCode, const char* _shadowColorCode, VBVector2D _shadowOffset, int align);
 

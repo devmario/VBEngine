@@ -19,6 +19,9 @@ protected:
     char* m_gameCenterAlias;
     char* m_mobageID;
     int m_money;
+    int item_undo;
+    int item_hint;
+    int star;
     
     void SetString(char** ptr, const char* name, const char* str);
 public:
@@ -53,6 +56,15 @@ public:
     
     int GetMoney();
     void SetMoney(int _value);
+    
+    int GetUndo();
+    void SetUndo(int _value);
+    
+    int GetHint();
+    void SetHint(int _value);
+    
+    int GetStar();
+    void SetStar(int _value);
 };
 
 #endif

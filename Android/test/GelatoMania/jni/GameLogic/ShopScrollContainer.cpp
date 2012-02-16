@@ -44,18 +44,18 @@ void ShopScrollerContainer::CellAlloc(CellData *data) {
         cellData->thumbnailModel = new VBModel(cellData->thumbnailTex);
         cellData->thumbnailModel->setScale(0.5);
         data->modelCell->addChild(cellData->thumbnailModel);
-        cellData->thumbnailModel->setPosition(CCPointMake(-2, 4));
+        cellData->thumbnailModel->setPosition(CCPointMake(2, 4));
         
         Language* l = Language::shareLanguage();
         cellData->textTitle = new Text();
         cellData->textTitle->SetText(cellData->title, l->GetFontName("type0"), 20, 216/2, 40/2, "350803FF", "FFFFFFFF", VBVector2DCreate(1, 1), 0);
-        cellData->textTitle->setPosition(CCPoint(222/2, -54/2));
+        cellData->textTitle->setPosition(CCPoint(222/2 + 2, -54/2));
         cellData->textDescript = new Text();
         cellData->textDescript->SetText(cellData->descript, l->GetFontName("type0"), 8, 324/2-2, 66/2, "FFFFFFFF", "000000FF", VBVector2DCreate(-1, -1), 0, 1);
-        cellData->textDescript->setPosition(CCPoint(222/2, -115/2-1));
+        cellData->textDescript->setPosition(CCPoint(222/2 + 2, -115/2-1));
         cellData->textMoney = new Text();
         cellData->textMoney->SetText(cellData->money, l->GetFontName("type0"), 15, 43+1, 16, "350803FF", "FFFFFFFF", VBVector2DCreate(1, 1), 0);
-        cellData->textMoney->setPosition(CCPoint(455/2, -60/2));
+        cellData->textMoney->setPosition(CCPoint(455/2 + 2, -60/2));
         data->modelCell->addChild(cellData->textTitle);
         data->modelCell->addChild(cellData->textDescript);
         data->modelCell->addChild(cellData->textMoney);
@@ -80,21 +80,18 @@ void ShopScrollerContainer::CellFree(CellData *data) {
         data->modelCell->removeChild(cellData->textTitle, false);
         data->modelCell->removeChild(cellData->textDescript, false);
         data->modelCell->removeChild(cellData->textMoney, false);
-        delete cellData->textTitle;
-        delete cellData->textDescript;
-        delete cellData->textMoney;
         
         data->modelCell->removeChild(cellData->thumbnailModel, false);
-        delete cellData->thumbnailModel;
-        cellData->thumbnailModel = NULL;
-        VBTextureFree(&cellData->thumbnailTex);
         
         data->modelCell->removeChild(cellData->bgModel, false);
-        delete cellData->bgModel;
-        cellData->bgModel = NULL;
-        
         _container = NULL;
     }
+    delete cellData->textTitle;
+    delete cellData->textDescript;
+    delete cellData->textMoney;
+    delete cellData->thumbnailModel;
+    VBTextureFree(&cellData->thumbnailTex);
+    delete cellData->bgModel;
 }
 void ShopScrollerContainer::CellTouchBegin(CellData *data, CCTouch *touch, CCPoint location) {
     ShopCellData *cellData = (ShopCellData *)data->data;
@@ -257,10 +254,10 @@ void ShopScrollerContainer::ResetRope() {
     }
     for(int i = 0; i < VBArrayVectorGetLength(data) - 1; i++) {
         VBModel* ropeL = new VBModel(this->cellBgObj, this->ropeLibNameId, this->cellBgTex, true);
-        ropeL->setPosition(CCPoint(123/2, -200/2-(i*this->cellSize)));
+        ropeL->setPosition(CCPoint(123/2 + 7, -200/2-(i*this->cellSize)));
         addChild(ropeL);
         VBModel* ropeR = new VBModel(this->cellBgObj, this->ropeLibNameId, this->cellBgTex, true);
-        ropeR->setPosition(CCPoint(123/2 + 350/2, -200/2-(i*this->cellSize)));
+        ropeR->setPosition(CCPoint(123/2 + 350/2 + 7, -200/2-(i*this->cellSize)));
         addChild(ropeR);
         VBArrayVectorAddBack(arr_rope, ropeL);
         VBArrayVectorAddBack(arr_rope, ropeR);
@@ -268,7 +265,7 @@ void ShopScrollerContainer::ResetRope() {
 }
 
 ShopScrollerContainer::
-ShopScrollerContainer(int _tapIdx, VBObjectFile2D *_obj, VBTexture *_tex, VBObjectFile2D *_objScroller, VBTexture *_texScroller, VBArrayVector *_data) 
+ShopScrollerContainer(int _tapIdx, VBObjectFile2D *_obj_shop, VBTexture *_tex_shop, VBObjectFile2D *_objScroller, VBTexture *_texScroller, VBArrayVector *_data) 
 : ScrollerContainer(_objScroller, _texScroller, (VBArrayVector*)VBArrayVectorGetDataAt(_data, _tapIdx), 105, 310, 224, 5) {
     //cellHeight, width, height, margin
     tapIdx = _tapIdx;
@@ -276,8 +273,8 @@ ShopScrollerContainer(int _tapIdx, VBObjectFile2D *_obj, VBTexture *_tex, VBObje
     arr_rope = VBArrayVectorInit(VBArrayVectorAlloc());
     
     VBString *_str;
-    cellBgObj = _obj;
-    cellBgTex = _tex;
+    cellBgObj = _obj_shop;
+    cellBgTex = _tex_shop;
     LIBNAMEFIND(cellLibNameId, cellBgObj, "cell", _str);
     LIBNAMEFIND(ropeLibNameId, cellBgObj, "rope", _str);
     

@@ -5,6 +5,7 @@
 #include <string.h>
 #include "PlatformFunctions.h"
 #include <stdarg.h>
+#include "ShareData.h"
 
 Language* _rootLang = NULL;
 

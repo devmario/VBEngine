@@ -143,23 +143,31 @@ void MainMenu::touchBegin(CCTouch* _touch, CCPoint _location) {
             touchPlayBT = _touch;
         }
     }
+    if(touchPlayBT)
+        return;
     
     TOUCHBEGINBT(touchSocial, socialBT, _location, _touch, socialBT->gotoAndStop(1););
+    if(touchSocial)
+        return;
     TOUCHBEGINBT(touchSetting, settingBT, _location, _touch, settingBT->gotoAndStop(1););
+    if(touchSetting)
+        return;
     TOUCHBEGINBT(touchMobage, mobageBT, _location, _touch, mobageBT->gotoAndStop(1););
-    
-    if(!frameModel->getIsRun() && openSocial) {
-        TOUCHBEGINBT(touchArch, btArch, _location, _touch, btArch->gotoAndStop(1););
-        if(touchArch)
-            return;
-        TOUCHBEGINBT(touchRank, btRank, _location, _touch, btRank->gotoAndStop(1););
-        if(touchRank)
-            return;
-        TOUCHBEGINBT(touchFB, btFB, _location, _touch, btFB->gotoAndStop(1););
-        if(touchFB)
-            return;
-        TOUCHBEGINBT(touchFriend, btFriend, _location, _touch, btFriend->gotoAndStop(1););
-    }
+    if(touchMobage)
+        return;
+//    
+//    if(!frameModel->getIsRun() && openSocial) {
+//        TOUCHBEGINBT(touchArch, btArch, _location, _touch, btArch->gotoAndStop(1););
+//        if(touchArch)
+//            return;
+//        TOUCHBEGINBT(touchRank, btRank, _location, _touch, btRank->gotoAndStop(1););
+//        if(touchRank)
+//            return;
+//        TOUCHBEGINBT(touchFB, btFB, _location, _touch, btFB->gotoAndStop(1););
+//        if(touchFB)
+//            return;
+//        TOUCHBEGINBT(touchFriend, btFriend, _location, _touch, btFriend->gotoAndStop(1););
+//    }
 }
 
 void MainMenu::touchMove(CCTouch* _touch, CCPoint _location) {
@@ -174,29 +182,27 @@ void MainMenu::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
         playBT->gotoAndStop(0);
         touchPlayBT = NULL;
     }
-    
     TOUCHENDBT(touchSocial, socialBT, _location, _touch,
-               openSocial = !openSocial;
-               frameModel->playTo((openSocial ? 29.0 : 0.0), 1.0, 0.0, EXPO, EASE_OUT, NULL, NULL);,
+               ShareDataGetRoot()->ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeSubMenu, SubMenuTypeFriends, 0);,
                socialBT->gotoAndStop(0););
     TOUCHENDBT(touchSetting, settingBT, _location, _touch, ,settingBT->gotoAndStop(0););
     TOUCHENDBT(touchMobage, mobageBT, _location, _touch, ,mobageBT->gotoAndStop(0););
     
-    if(!frameModel->getIsRun() && openSocial) {
-        TOUCHENDBT(touchArch, btArch, _location, _touch, ,btArch->gotoAndStop(0););
-        TOUCHENDBT(touchRank, btRank, _location, _touch, ,btRank->gotoAndStop(0););
-        TOUCHENDBT(touchFB, btFB, _location, _touch, ,btFB->gotoAndStop(0););
-        TOUCHENDBT(touchFriend, btFriend, _location, _touch, ,btFriend->gotoAndStop(0););
-    } else {
-        touchArch = NULL;
-        touchRank = NULL;
-        touchFB = NULL;
-        touchFriend = NULL;
-        btArch->gotoAndStop(0);
-        btRank->gotoAndStop(0);
-        btFB->gotoAndStop(0);
-        btFriend->gotoAndStop(0);
-    }
+//    if(!frameModel->getIsRun() && openSocial) {
+//        TOUCHENDBT(touchArch, btArch, _location, _touch, ,btArch->gotoAndStop(0););
+//        TOUCHENDBT(touchRank, btRank, _location, _touch, ,btRank->gotoAndStop(0););
+//        TOUCHENDBT(touchFB, btFB, _location, _touch, ,btFB->gotoAndStop(0););
+//        TOUCHENDBT(touchFriend, btFriend, _location, _touch, ,btFriend->gotoAndStop(0););
+//    } else {
+//        touchArch = NULL;
+//        touchRank = NULL;
+//        touchFB = NULL;
+//        touchFriend = NULL;
+//        btArch->gotoAndStop(0);
+//        btRank->gotoAndStop(0);
+//        btFB->gotoAndStop(0);
+//        btFriend->gotoAndStop(0);
+//    }
 }
 
 void MainMenu::touchEnd(CCTouch* _touch, CCPoint _location) {

@@ -8,17 +8,12 @@ void tweenCallback(void* obj);
 Pages::Pages(VBObjectFile2D* _obj, VBTexture* _tex, 
              int _totalIdx, float _startX, float _endX, float _startY, float _pageTh,
              float _thumbX, float _thumbY) : View() {
-    slideTween = slideTweenThumb = NULL;
-    
     touchSlide = NULL;
     force = 0;
     endX = _endX;
     slideXThumb = targetX = slideX = endX;
     totalIdx = _totalIdx;
     preIdx = idx = -1;
-    elapseTimeTotal = elapseTime = 0.0;
-    elapseTimeThumbTotal = elapseTimeThumb = 0.0;
-    listener = NULL;
     pageFunc = NULL;
     pageFuncRef = NULL;
     startX = _startX;
@@ -94,6 +89,11 @@ Pages::Pages(VBObjectFile2D* _obj, VBTexture* _tex,
         widthThumbs = _size;
         thumb->setPosition(CCPointMake(slideXThumb - widthThumbs * 0.5, thumbY));
     }
+    slideTween = new TweenerWrapper();
+    slideTweenThumb = new TweenerWrapper();
+    top->addChild(slideM);
+    if(thumb)
+        top->addChild(thumb);
 }
 
 Pages::~Pages() {
@@ -154,39 +154,8 @@ void Pages::GoPage(int _idx, void (*_pageFunc)(void* _pageFuncRef), void* _pageF
     else
         targetX = startX - pageTh * idx;
     
-    if (slideTween) {
-        delete slideTween;
-        slideTween = NULL;
-    }
-    if (slideTweenThumb) {
-        delete slideTweenThumb;
-        slideTweenThumb = NULL;
-    }
-    
-    
-    elapseTime = 0.0;
-    elapseTimeTotal = _idx < 0 ? 0.25 : 0.5;
-    
-    TweenerParam *param = new TweenerParam(1000 * elapseTimeTotal, EXPO, _idx < 0 ? EASE_IN : EASE_OUT);
-    
-    slideTween = new TweenerWrapper();
-    
-    last = targetX;
-    slideTween->setParamAndBegin(param, &slideX, last, tweenCallback, this);
-    
-    if(idx < 0) {
-        listener = new PagesTweenListener(this);
-        slideTween->addListener(listener);
-    }
-    
-    slideTweenThumb = new TweenerWrapper();
-    
-    elapseTimeThumb = 0.0;
-    elapseTimeThumbTotal = _idx < 0 ? 0.25 : 0.5;
-    TweenerParam *paramThumb = new TweenerParam(1000 * elapseTimeThumbTotal, EXPO, _idx < 0 ? EASE_IN : EASE_OUT);
-    lastThumb = _idx < 0 ? endX : thumbX;
-    
-    slideTweenThumb->setParamAndBegin(paramThumb, &slideXThumb, lastThumb);
+    slideTween->begin(&slideX, targetX, (_idx < 0 ? 0.25 : 0.5), 0, EXPO, _idx < 0 ? EASE_IN : EASE_OUT, _pageFunc, _pageFuncRef);
+    slideTweenThumb->begin(&slideXThumb, _idx < 0 ? endX : thumbX, (_idx < 0 ? 0.25 : 0.5), 0, EXPO, _idx < 0 ? EASE_IN : EASE_OUT, _pageFunc, _pageFuncRef);
     
     if(idx >= 0 && totalIdx > idx) {
         if(thumb) {
@@ -198,38 +167,16 @@ void Pages::GoPage(int _idx, void (*_pageFunc)(void* _pageFuncRef), void* _pageF
             }
         }
     }
-    if(idx >= 0) {
-        if(top->getChildren()) {
-            if(!top->getChildren()->containsObject(slideM)) {
-                top->addChild(slideM);
-            }
-            if(thumb) {
-                if(!top->getChildren()->containsObject(thumb)) {
-                    top->addChild(thumb);
-                }
-            }
-        } else {
-            top->addChild(slideM);
-            if(thumb)
-                top->addChild(thumb);
-        }
-    }
 }
 
 void Pages::Update(float _deltaTime) {
     if(touchSlide == NULL) {
-        if(slideTween) {
-            if (slideTween->onGoing) {
-                slideTween->update(_deltaTime);
-                slideM->setPosition(CCPointMake(slideX, startY));
-            }
-        }
+        slideTween->update(_deltaTime);
+        slideM->setPosition(CCPointMake(slideX, startY));
     }
-    if(slideTweenThumb) {
-        slideTweenThumb->update(_deltaTime);
-        if(thumb)
-            thumb->setPosition(CCPointMake(slideXThumb - widthThumbs * 0.5, thumbY));
-    }
+    slideTweenThumb->update(_deltaTime);
+    if(thumb)
+        thumb->setPosition(CCPointMake(slideXThumb - widthThumbs * 0.5, thumbY));
 }
 
 void Pages::touchBegin(CCTouch* _touch, CCPoint _location) {

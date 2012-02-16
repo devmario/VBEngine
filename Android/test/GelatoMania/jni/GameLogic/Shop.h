@@ -20,13 +20,18 @@ private:
     VBObjectFile2D *objScroll;
     VBTexture *texScroll;
     
-    int tapIdx;
+    VBModel* modelTap;
     
+    Text* starCount;
+    Text* undoCount;
+    Text* hintCount;
 public:
+    
+    int tapIdx;
     ShopScrollerContainer *container;
     VBArrayVector *inAppDataVector;
     
-    Shop(int _tapidx);
+    Shop(VBObjectFile2D** objSubMenuContainer, VBTexture** texSubMenuContainer, int _tapidx);
     ~Shop();
     
     void SetTap(int _idx);

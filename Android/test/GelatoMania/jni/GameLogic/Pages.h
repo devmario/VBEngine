@@ -9,8 +9,6 @@
 using namespace cocos2d;
 using namespace tween;
 
-class PagesTweenListener;
-
 class Pages : public View {
 public:
     int totalIdx;
@@ -31,18 +29,7 @@ public:
     
     VBModel* slideM;
     
-    float elapseTime;
-    float elapseTimeTotal;
-    float last;
-    
     TweenerWrapper *slideTween;
-    
-    PagesTweenListener* listener;
-    
-    float elapseTimeThumb;
-    float elapseTimeThumbTotal;
-    float lastThumb;
-    
     TweenerWrapper *slideTweenThumb;
     
     CCTouch* touchSlide;
@@ -76,32 +63,6 @@ public:
     virtual void touchCancel(CCTouch* _touch, CCPoint _location);
     
     
-};
-
-class PagesTweenListener : public TweenerListener {
-public:
-    Pages* page;
-    
-    PagesTweenListener(Pages* _page) {
-        page = _page;
-    };
-    
-    void onStart(TweenerParam& param) {
-        
-    }
-    
-    void onStep(TweenerParam& param) {
-        
-    }
-    
-    void onComplete(TweenerParam& param) {
-        if(page->idx < 0) {
-            ((CCSprite*)page->top)->removeChild((CCSprite*)page->slideM, false);
-            ((CCSprite*)page->top)->removeChild((CCSprite*)page->thumb, false);
-        }
-        if(page->pageFunc)
-            page->pageFunc(page->pageFuncRef);
-    };
 };
 
 #endif

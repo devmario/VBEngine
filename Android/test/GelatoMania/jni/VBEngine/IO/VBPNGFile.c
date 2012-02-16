@@ -71,7 +71,11 @@ void VBPNGFileLoad(VBPNGFile* _png, VBString* _path) {
 		} else {
 			_png->path = VBStringInitWithCString(VBStringAlloc(), VBStringGetCString(_path));
 			
+#ifdef __ANDROID__
+			FILE* _file = android_fopen(VBStringGetCString(_png->path), "r");
+#else
 			FILE* _file = fopen(VBStringGetCString(_png->path), "r");
+#endif
 			if(_file == VBNull) {
 #ifdef _VB_DEBUG_
 				VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 

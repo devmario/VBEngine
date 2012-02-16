@@ -42,7 +42,8 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	private static FacebookUtil fbUtil;
 	private static LoginManager loginMgr;
 	private static Activity activity;
-
+	private static AssetManager mAsset;
+	
 	static {
 		System.loadLibrary("stlport_shared");
 		System.loadLibrary("cocos2d");
@@ -54,6 +55,8 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		mAsset = getAssets();
+		
 		// get the packageName,it's used to set the resource path
 		String packageName = getApplication().getPackageName();
 		super.setPackageName(packageName);
@@ -62,7 +65,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		e = sp.edit();
 
 		if (sp.getBoolean("isFirst", true)) {
-			CopyAssets();
+			//CopyAssets();
 		}
 
 		setContentView(R.layout.game_demo);
@@ -197,7 +200,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		e.putBoolean("isFirst", false);
 	}
 
-	private void copyFile(InputStream in, OutputStream out) throws IOException {
+	private static void copyFile(InputStream in, OutputStream out) throws IOException {
 		byte[] buffer = new byte[1024];
 		int read;
 		while ((read = in.read(buffer)) != -1) {
@@ -276,7 +279,7 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 		return textBitmap;
 		
 	}
-
+	
 	static void setAutoTextSize(float textSize, Paint paint, String text, int width) {
 		paint.setTextSize(textSize);
 		float _measureSize = paint.measureText(text);
@@ -352,6 +355,38 @@ public class GelatoManiaActivity extends Cocos2dxActivity {
 
 	}
 
+	private static boolean fileCopy(String srcPath, String dstPath) {
+		InputStream in = null;
+		OutputStream out = null;
+		boolean ret = false;
+		
+		try {
+			in = mAsset.open(srcPath, AssetManager.ACCESS_RANDOM);
+			out = new FileOutputStream(dstPath);
+			copyFile(in, out);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ret = false;
+		} finally {
+			try {
+				in.close();
+				in = null;
+				out.flush();
+				out.close();
+				out = null;
+				ret = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				ret = false;
+			}
+			
+		}
+		
+		Log.d(TAG, "fileCopy() src: " + srcPath + " dst: " + dstPath +" ret: " + ret);
+		
+		return ret;
+	}
+	
 	native static void nativeFacebookLogin(boolean isLogin);
 
 	native static void nativeFacebookRequestGraphPath(String response);

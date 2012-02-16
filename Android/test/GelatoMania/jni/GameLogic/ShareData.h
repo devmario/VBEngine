@@ -50,6 +50,7 @@ int hexToInt(char* szHex);
 VBAABB JStoAABB(cJSON* _js);
 int ShareDataGetNextPack();
 
+
 #define TOUCHBEGINBT(touchPtr, modelPtr, location, touch, code) \
 if(touchPtr == NULL) {\
 if(modelPtr->checkCollisionWithButton(location)) {\
@@ -67,6 +68,16 @@ code;\
 touchPtr = NULL;\
 }
 
+#ifdef __ANDROID__
+#define OBJLOAD(_obj, _resChar, _str)\
+_str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
+if(access(VBStringGetCString(_str), F_OK) == 0 || android_fcheck(VBStringGetCString(_str)) == true) {\
+_obj = VBObjectFile2DInitAndLoad(VBObjectFile2DAlloc(), _str);\
+} else {\
+_obj = NULL;\
+}\
+VBStringFree(&_str)
+#else
 #define OBJLOAD(_obj, _resChar, _str)\
 _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
 if(access(VBStringGetCString(_str), F_OK) == 0) {\
@@ -75,7 +86,18 @@ _obj = VBObjectFile2DInitAndLoad(VBObjectFile2DAlloc(), _str);\
 _obj = NULL;\
 }\
 VBStringFree(&_str)
+#endif
 
+#ifdef __ANDROID__
+#define TEXLOAD(_tex, _resChar, _str)\
+_str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
+if(access(VBStringGetCString(_str), F_OK) == 0 || android_fcheck(VBStringGetCString(_str)) == true) {\
+_tex = VBTextureInitAndLoadWithImagePath(VBTextureAlloc(), _str);\
+} else {\
+_tex = NULL;\
+}\
+VBStringFree(&_str)
+#else
 #define TEXLOAD(_tex, _resChar, _str)\
 _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
 if(access(VBStringGetCString(_str), F_OK) == 0) {\
@@ -84,12 +106,25 @@ _tex = VBTextureInitAndLoadWithImagePath(VBTextureAlloc(), _str);\
 _tex = NULL;\
 }\
 VBStringFree(&_str)
+#endif
 
 #define IMGLOAD(_img, _resChar, _str)\
 _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
 _img = VBImageInitWithPath(VBImageAlloc(), _str);\
 VBStringFree(&_str)
 
+#ifdef __ANDROID__
+#define TEXLOADANDWRITE(_resChar, _str, _outResChar, _outStr)\
+_str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
+VBImage* _img = VBImageInitWithPath(VBImageAlloc(), _str);\
+assert(_img == NULL);\
+VBStringFree(&_str);\
+_outStr = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _outResChar);\
+FILE* _file = android_fopen(VBStringGetCString(_outStr), "w+");\
+assert(_file == NULL);\
+fwrite(VBImageGetImageData(_img), 1, VBImageGetImageDataSize(_img), _file);\
+fclose(_file)
+#else
 #define TEXLOADANDWRITE(_resChar, _str, _outResChar, _outStr)\
 _str = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(VBEngineGetResourcePath()), _resChar);\
 VBImage* _img = VBImageInitWithPath(VBImageAlloc(), _str);\
@@ -100,6 +135,7 @@ FILE* _file = fopen(VBStringGetCString(_outStr), "w+");\
 assert(_file == NULL);\
 fwrite(VBImageGetImageData(_img), 1, VBImageGetImageDataSize(_img), _file);\
 fclose(_file)
+#endif
 
 #define LIBNAMEFIND(_library_name_id, _obj, _resChar, _str)\
 if(_obj) {\
@@ -109,5 +145,10 @@ VBStringFree(&_str);\
 } else {\
 _library_name_id = NULL;\
 }
+
+#ifdef __ANDROID__
+#define fopen(filename, mode)\
+android_fopen(filename, mode)
+#endif
 
 #endif

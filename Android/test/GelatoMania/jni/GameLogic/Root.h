@@ -9,6 +9,7 @@
 #include <stdarg.h>
 #include "Social.h"
 #include "SelectUser.h"
+#include "Text.h"
 
 using namespace cocos2d;
 
@@ -44,6 +45,8 @@ typedef struct history {
 typedef struct GameMainHistory {
     bool historyEnable;
     bool isRecipeMode;
+    bool isNextRopeEnable;
+    bool isToppingRopeEnable;
     IceCream* baseIceCream;
     IceCream* iceCream;
     IceCream* nextIceCream;
@@ -55,6 +58,10 @@ bool IsEqualHistory(history* _h0, history* _h1);
 
 class Root : public cocos2d::CCLayer, public SocialProtocol, public SelectUserProtocol {
 public:
+    CCTouch* touchDeveloper;
+    Text* textDeveloperMode;
+    bool is_developer_mode;
+    
     VBTexture* texMobage;
     VBModel* modelMobage;
     

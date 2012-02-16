@@ -3,8 +3,9 @@
 #include "StageThumb.h"
 #include "SubMenu.h"
 
-StageSelect::StageSelect(VBObjectFile2D* _obj, VBTexture* _tex, 
-                         int _totalIdx) : Pages(_obj, _tex, _totalIdx, 30 - 240, 240, -40, 480, 0, -280 + 8) {
+
+StageSelect::StageSelect(/*VBObjectFile2D** _thumbs_obj, VBTexture** _thumbs_tex,*/ 
+                         int _totalIdx) : Pages(/*LoadThumbObj(_thumbs_obj), LoadThumbTex(_thumbs_tex)*/ NULL, NULL, _totalIdx, 30 - 240, 240, -40, 480, 0, -280 + 8) {
     VBString* _str;
     VBObjectFile2DLibraryNameID* _library_name_id;
     OBJLOAD(objStage, "stage_select.obj", _str);
@@ -12,13 +13,9 @@ StageSelect::StageSelect(VBObjectFile2D* _obj, VBTexture* _tex,
     
     LIBNAMEFIND(_library_name_id, objStage, "stageRope", _str);
     
-    bg[0] = new VBModel(objStage, _library_name_id, texStage, true);
-    ((CCSprite*)bg[0])->setPosition(CCPointMake(40, -65));
-    ((CCSprite*)slideM)->addChild((CCSprite*)bg[0]);
-    
-    bg[1] = new VBModel(objStage, _library_name_id, texStage, true);
-    ((CCSprite*)bg[1])->setPosition(CCPointMake(40 + pageTh, -65));
-    ((CCSprite*)slideM)->addChild((CCSprite*)bg[1]);
+    bg = new VBModel(objStage, _library_name_id, texStage, true);
+    ((CCSprite*)bg)->setPosition(CCPointMake(40, -65));
+    ((CCSprite*)slideM)->addChild((CCSprite*)bg);
     
     stages = VBArrayVectorInit(VBArrayVectorAlloc());
     
@@ -28,10 +25,9 @@ StageSelect::StageSelect(VBObjectFile2D* _obj, VBTexture* _tex,
 }
 
 StageSelect::~StageSelect() {
-    slideM->removeChild(bg[0], false);
-    slideM->removeChild(bg[1], false);
-    delete bg[0];
-    delete bg[1];
+    slideM->removeChild(bg, false);
+    delete bg;
+    
     while(VBArrayVectorGetLength(stages)) {
         StageThumb* _stage = (StageThumb*)VBArrayVectorRemoveBack(stages);
         slideM->removeChild(_stage, false);
@@ -119,7 +115,7 @@ void StageSelect::touchMove(CCTouch* _touch, CCPoint _location) {
         return;
     Pages::touchMove(_touch, _location);
     if(touchM == _touch) {
-        if(VBVector2DLength(VBVector2DSubtract(VBVector2DCreate(_location.x, _location.y), VBVector2DCreate(startLocation.x, startLocation.y))) > 2.0) {
+        if(VBVector2DLength(VBVector2DSubtract(VBVector2DCreate(_location.x, _location.y), VBVector2DCreate(startLocation.x, startLocation.y))) > 10) {
             touchM = NULL;
             touchMd->color.r = 0xFF;
             touchMd->color.g = 0xFF;
@@ -137,13 +133,19 @@ void StageSelect::touchEndAndCancel(CCTouch* _touch, CCPoint _location) {
             if(touchMd == VBArrayVectorGetDataAt(stages, i))
                 _setsid(i);
         }
+        if(ShareDataGetRoot()->is_developer_mode) {
+            ShareDataGetRoot()->ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeGameMain, _getpid(), _getsid());
+        } else {
+            StageThumb* _t = (StageThumb*)touchMd;
+            if(_t->locked == false)
+                ShareDataGetRoot()->ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeGameMain, _getpid(), _getsid());
+        }
         touchM = NULL;
         touchSlide = NULL;
         touchMd->color.r = 0xFF;
         touchMd->color.g = 0xFF;
         touchMd->color.b = 0xFF;
         touchMd = NULL;
-        ShareDataGetRoot()->ChangePage(5, LoadingTypeFull, PopupTypeNone, RootPageTypeGameMain, _getpid(), _getsid());
     } else {
         Pages::touchEndAndCancel(_touch, _location);
     }

@@ -5,5 +5,9 @@
     "gameCenterID"      : "",
     "gameCenterAlias"   : "",
     "mobageID"          : "",
-    "money"             : 0
+    "money"             : 0,
+    "itemUndo"          : 0,
+    "itemHint"          : 0,
+    "star"              : 0
+    
 }
