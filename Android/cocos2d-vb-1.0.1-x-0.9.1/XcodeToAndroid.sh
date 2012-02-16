@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # set environment parameters
-XCODE_PROJECT_ROOT="/Users/younkyuna/github/GelatoMania/GelatoManiaNew"
+XCODE_PROJECT_ROOT="/Users/vb/github/GelatoMania/GelatoManiaNew"
 XCODE_PROJECT_FILE_NAME="gelatomania.xcodeproj"
 ANDROID_PROJECT_ROOT="/Users/vb/github/GelatoManiaAndroid/GelatoManiaTest"
 COCOS2DX_ROOT="/Users/vb/github/VBEngine/Android/Cocos2dx-version/cocos2d-1.0.1-x-0.9.1"
