@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GelatoMania</string>
+	<string name="app_name">GelatoMania</string>
+	<color name="white">#fff</color>
+	<color name="green">#94cb08</color>
+	<color name="gray">#ECECEC</color>
+	<color name="blue">#7A8EA9</color>
+	<color name="black">#003F87</color>
+	<style name="CodeFont">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">#4573A7</item>
+		<item name="android:textSize">15sp</item>
+	</style>
+	<style name="MainContent">
+		<item name="android:background">@color/white</item>
+		<item name="android:orientation">vertical</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:weightSum">1</item>
+		<item name="android:textSize">16sp</item>
+	</style>
+	<style name="TableContent">
+		<item name="android:padding">10dip</item>
+		<item name="android:orientation">vertical</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:stretchColumns">1</item>
+		<item name="android:shrinkColumns">1</item>
+	</style>
 </resources>
