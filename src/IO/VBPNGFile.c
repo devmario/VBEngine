@@ -119,8 +119,11 @@ void VBPNGFileLoad(VBPNGFile* _png, VBString* _path) {
 			png_set_sig_bytes(_png_ptr, 8);
 			
 			png_read_info(_png_ptr, _info_ptr);
-			
+            
 			VBUChar _type = png_get_color_type(_png_ptr, _info_ptr);
+            
+            if(_type == PNG_COLOR_TYPE_PALETTE)
+                png_set_palette_to_rgb(_png_ptr);
 			switch(_type) {
 				case PNG_COLOR_TYPE_GRAY:
 					_png->color_type = VBColorType_G;
@@ -134,6 +137,11 @@ void VBPNGFileLoad(VBPNGFile* _png, VBString* _path) {
 				case PNG_COLOR_TYPE_RGBA:
 					_png->color_type = VBColorType_RGBA;
 					break;
+                case PNG_COLOR_TYPE_PALETTE:
+                {
+//                    printf("no support!\n");
+					_png->color_type = VBColorType_RGB;
+                }
 				default:
 #ifdef _VB_DEBUG_
 					VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
@@ -152,8 +160,25 @@ void VBPNGFileLoad(VBPNGFile* _png, VBString* _path) {
 												 "VBEngine Log: VBPNGFileLoad() - PNG파일의 해당 PNG가 Interlacing입니다. 엔진에서 지원하지 않습니다.");
 #endif
             }
-			
-			png_read_update_info(_png_ptr, _info_ptr);
+			if(_type == PNG_COLOR_TYPE_PALETTE)
+                png_set_palette_to_rgb(_png_ptr);
+            
+            if(_type == PNG_COLOR_TYPE_GRAY && _png->color_bit < 8)
+                png_set_gray_1_2_4_to_8(_png_ptr);
+            
+            if(png_get_valid(_png_ptr, _info_ptr, PNG_INFO_tRNS))
+                png_set_tRNS_to_alpha(_png_ptr);
+            
+            if(_png->color_bit == 16)
+                png_set_strip_16(_png_ptr);
+            else if(_png->color_bit < 8)
+                png_set_packing(_png_ptr);
+            
+            png_read_update_info(_png_ptr, _info_ptr);
+            
+            png_uint_32 width, height;
+            int bit, type;
+            png_get_IHDR(_png_ptr, _info_ptr, &width, &height, &bit, &type, NULL, NULL, NULL);
 			
 			if(setjmp(png_jmpbuf(_png_ptr))) {
 #ifdef _VB_DEBUG_
