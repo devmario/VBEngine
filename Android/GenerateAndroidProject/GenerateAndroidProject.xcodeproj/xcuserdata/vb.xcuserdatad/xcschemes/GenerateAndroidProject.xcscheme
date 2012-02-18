@@ -55,6 +55,24 @@
             ReferencedContainer = "container:GenerateAndroidProject.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "&quot;/Users/vb/github/GelatoMania/GelatoManiaNew&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "&quot;/Users/vb/github/GelatoManiaAndroid/GelatoManiaTest&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "&quot;/Users/vb/github/VBEngine/Android/Cocos2dx-version/cocos2d-1.0.1-x-0.9.1&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "&quot;/Users/vb/github/VBEngine/src&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

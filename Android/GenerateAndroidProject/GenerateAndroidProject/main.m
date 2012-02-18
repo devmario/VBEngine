@@ -130,7 +130,7 @@ int main (int argc, const char * argv[])
         // TODO: 라이브러리 소스 파일들 복사(Cocos2dx, CocosDenshion, VBEngine)
         CopyLibs();
         
-        CreateTemplate();
+        // CreateTemplate();
         
         [dict release];
         [mkStr release];
@@ -230,6 +230,7 @@ bool CopyResourceFile(NSDictionary* _objectsDict, NSString* _mainKey, NSString* 
         for (int i=0; i<[children count]; i++)
         {
             NSString* childKey = [children objectAtIndex:i];
+            
             bool success = CopyResourceFile(_objectsDict, childKey, fileRefKey, pathPtr);
             if (success)
             {
