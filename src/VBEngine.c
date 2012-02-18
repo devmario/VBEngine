@@ -135,7 +135,7 @@ VBVector2D VBEngineGetDefaultResourceScreenSize(void) {
 
 #ifdef __ANDROID__
 static const char *ClassName =
-		"com.vanillabreeze.gelatomania.GelatoManiaActivity";
+		"kr.daum_mobage.am_db.g12009230.GelatoManiaActivity";
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 {
 	jint result = -1;
