@@ -565,6 +565,12 @@ void CopyLibs()
         system([cmd UTF8String]);
     }
     
+    isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/mongoDBUtil.h", Android_Jni_Game_Src_Root]];
+    if (!isFile) {
+        cmd = [NSString stringWithFormat:@"cp -a libs/mongoDBUtil.h %@", Android_Jni_Game_Src_Root];
+        system([cmd UTF8String]);
+    }
+    
     isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/project.properties", Android_Project_Root]];
     if (!isFile) {
         cmd = [NSString stringWithFormat:@"cp -a libs/project.properties %@", Android_Project_Root];
