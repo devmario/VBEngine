@@ -104,8 +104,7 @@ int main (int argc, const char * argv[])
         CopySources();
         
         // TODO: 게임로직 make파일 저장(Android.mk)
-        [mkStr appendString:@"\tmain.cpp\\\n"];
-        [mkStr appendString:@"\n\nLOCAL_C_INCLUDES := $(LOCAL_PATH)/../Cocos2dx \\\n"];
+        [mkStr appendString:@"\n\n\nLOCAL_C_INCLUDES := $(LOCAL_PATH)/../Cocos2dx \\\n"];
         [mkStr appendString:@"\t\t$(LOCAL_PATH)/../Cocos2dx/platform \\\n"];
         [mkStr appendString:@"\t\t$(LOCAL_PATH)/../Cocos2dx/include \\\n"];
         [mkStr appendString:@"\t\t$(LOCAL_PATH)/../CocosDenshion \\\n"];
@@ -130,7 +129,7 @@ int main (int argc, const char * argv[])
         // TODO: 라이브러리 소스 파일들 복사(Cocos2dx, CocosDenshion, VBEngine)
         CopyLibs();
         
-        CreateTemplate();
+        // CreateTemplate();
         
         [dict release];
         [mkStr release];
@@ -230,6 +229,7 @@ bool CopyResourceFile(NSDictionary* _objectsDict, NSString* _mainKey, NSString* 
         for (int i=0; i<[children count]; i++)
         {
             NSString* childKey = [children objectAtIndex:i];
+            
             bool success = CopyResourceFile(_objectsDict, childKey, fileRefKey, pathPtr);
             if (success)
             {
@@ -564,6 +564,12 @@ void CopyLibs()
         system([cmd UTF8String]);
     }
     
+    isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/mongoDBUtil.h", Android_Jni_Game_Src_Root]];
+    if (!isFile) {
+        cmd = [NSString stringWithFormat:@"cp -a libs/mongoDBUtil.h %@", Android_Jni_Game_Src_Root];
+        system([cmd UTF8String]);
+    }
+    
     isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/project.properties", Android_Project_Root]];
     if (!isFile) {
         cmd = [NSString stringWithFormat:@"cp -a libs/project.properties %@", Android_Project_Root];
@@ -582,11 +588,11 @@ void CopyLibs()
         system([cmd UTF8String]);
     }
     
-    isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/main.cpp", Android_Jni_Game_Src_Root]];
+    /*isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/main.cpp", Android_Jni_Game_Src_Root]];
     if (!isFile) {
         cmd = [NSString stringWithFormat:@"cp -a libs/main.cpp %@", Android_Jni_Game_Src_Root];
         system([cmd UTF8String]);
-    }
+    }*/
     
     
     isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/Cocos2dx", Android_Jni_Root]];
@@ -614,6 +620,9 @@ void CopyLibs()
     }
     
     cmd = [NSString stringWithFormat:@"cp -r libs/res %@", Android_Project_Root];
+    system([cmd UTF8String]);
+    
+    cmd = [NSString stringWithFormat:@"cp -a libs/MobageSDK/images/* %@", Android_Res_Root];
     system([cmd UTF8String]);
     
     NSLog(@">>>>> Copy Libs End <<<<<");

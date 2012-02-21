@@ -14,16 +14,6 @@
 #include <unistd.h>
 #endif
 
-#ifdef __ANDROID__
-#include <android/log.h>
-#define LOG_TAG  "VBEngine"
-#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , LOG_TAG, __VA_ARGS__)
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO   , LOG_TAG, __VA_ARGS__)
-#define LOGW(...) __android_log_print(ANDROID_LOG_WARN   , LOG_TAG, __VA_ARGS__)
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , LOG_TAG, __VA_ARGS__)
-#endif
-
 VBString* _vb_engine_default_res_path = VBNull;
 VBString* _vb_engine_default_rw_doc_path = VBNull;
 
@@ -135,7 +125,7 @@ VBVector2D VBEngineGetDefaultResourceScreenSize(void) {
 
 #ifdef __ANDROID__
 static const char *ClassName =
-		"com.vanillabreeze.gelatomania.GelatoManiaActivity";
+		"kr.daum_mobage.am_db.g12009230.GelatoManiaActivity";
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 {
 	jint result = -1;
@@ -156,10 +146,43 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 	return JNI_VERSION_1_4;
 }
 
+char* getResourcePath()
+{
+	JNIEnv* env = NULL;
+	if (g_jvm == NULL) {
+		LOGE("g_jvm == null : please on load JavaVM");
+		return NULL;
+	}
+
+	if ((*g_jvm)->AttachCurrentThread(g_jvm, &env, NULL) != JNI_OK) {
+		LOGE("%s: AttachCurrentThread() failed", __FUNCTION__);
+		return NULL;
+	}
+
+	/* invoke the method using the JNI */
+	jclass clazz = (*env)->FindClass(env, ClassName);
+	if (clazz == NULL) {
+		LOGE("Native registration unable to find class '%s'", ClassName);
+		return NULL;
+	}
+
+	jmethodID mid = (*env)->GetStaticMethodID(env, clazz, "getResourcePath", "()Ljava/lang/String;");
+	if (mid == NULL) {
+		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
+				"getResourcePath");
+		return NULL;
+	}
+
+	jstring path = (jstring)(*env)->CallStaticObjectMethod(env, clazz, mid);
+	(*env)->DeleteLocalRef(env, clazz);
+	return (char*)(*env)->GetStringUTFChars(env, path, false);
+}
+
 bool android_fcheck(const char* filename)
 {
 	bool ret = false;
-	if ( strstr(filename, "/mnt/sdcard/GelatoMania/resource") )
+	char* resPath = getResourcePath();
+	if ( strstr(filename, (const char*)getResourcePath) )
 	{
 		if (access(filename, R_OK) == 0)
 		{
@@ -239,7 +262,8 @@ bool fileCopy(const char* _srcPath, const char* _dstPath)
 FILE* android_fopen(const char* filename, const char* mode)
 {
 	FILE* fp = NULL;
-	if ( strstr(filename, "/mnt/sdcard/GelatoMania/resource") )
+	char* resPath = getResourcePath();
+	if ( strstr(filename, resPath) )
 	{
 		if (access(filename, R_OK) == 0)
 		{

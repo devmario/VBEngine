@@ -17,6 +17,19 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+    /* Converts a hex character to its integer value */
+    char from_hex(char ch);
+    
+    /* Converts an integer value to its hex character*/
+    char to_hex(char code);
+    
+    /* Returns a url-encoded version of str */
+    /* IMPORTANT: be sure to free() the returned string after use */
+    char *url_encode(char *str);
+    
+    /* Returns a url-decoded version of str */
+    /* IMPORTANT: be sure to free() the returned string after use */
+    char *url_decode(char *str);
     
     typedef enum VBHTTPError {
         //에러없음
@@ -61,6 +74,7 @@ extern "C" {
         bool auto_release;
     };
     
+    char* VBHTTPCutHeaderByOffset(char* _response, int* offset);
     //HTTP 응답에서 헤더를 제거한 문자열 리턴(응답 문자열 포인터에서 해더길이만큼 이동된 값을 전달해줌) 
     char* VBHTTPCutHeader(char* _response);
     
