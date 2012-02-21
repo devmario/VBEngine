@@ -623,6 +623,9 @@ void CopyLibs()
     cmd = [NSString stringWithFormat:@"cp -r libs/res %@", Android_Project_Root];
     system([cmd UTF8String]);
     
+    cmd = [NSString stringWithFormat:@"cp -a libs/MobageSDK/images/* %@", Android_Res_Root];
+    system([cmd UTF8String]);
+    
     NSLog(@">>>>> Copy Libs End <<<<<");
 }
 
