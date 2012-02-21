@@ -104,8 +104,7 @@ int main (int argc, const char * argv[])
         CopySources();
         
         // TODO: 게임로직 make파일 저장(Android.mk)
-        [mkStr appendString:@"\tmain.cpp\\\n"];
-        [mkStr appendString:@"\n\nLOCAL_C_INCLUDES := $(LOCAL_PATH)/../Cocos2dx \\\n"];
+        [mkStr appendString:@"\n\n\nLOCAL_C_INCLUDES := $(LOCAL_PATH)/../Cocos2dx \\\n"];
         [mkStr appendString:@"\t\t$(LOCAL_PATH)/../Cocos2dx/platform \\\n"];
         [mkStr appendString:@"\t\t$(LOCAL_PATH)/../Cocos2dx/include \\\n"];
         [mkStr appendString:@"\t\t$(LOCAL_PATH)/../CocosDenshion \\\n"];
@@ -589,11 +588,11 @@ void CopyLibs()
         system([cmd UTF8String]);
     }
     
-    isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/main.cpp", Android_Jni_Game_Src_Root]];
+    /*isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/main.cpp", Android_Jni_Game_Src_Root]];
     if (!isFile) {
         cmd = [NSString stringWithFormat:@"cp -a libs/main.cpp %@", Android_Jni_Game_Src_Root];
         system([cmd UTF8String]);
-    }
+    }*/
     
     
     isFile = [fileMgr fileExistsAtPath:[NSString stringWithFormat:@"%@/Cocos2dx", Android_Jni_Root]];
