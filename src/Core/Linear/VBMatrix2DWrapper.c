@@ -195,8 +195,12 @@ VBMatrix2DWrapper VBMatrix2DWrapperInterpolate(VBMatrix2DWrapper _wrapp1, VBMatr
         _wrapp.anchor = _wrapp1.anchor;
     }
     _wrapp.scale = VBVector2DInterpolate(VBMatrix2DWrapperGetScale(_wrapp1), VBMatrix2DWrapperGetScale(_wrapp2), _num);
-    _wrapp.rotation = VBMatrix2DWrapperGetRotation(_wrapp1) + (VBMatrix2DWrapperGetRotation(_wrapp2) - VBMatrix2DWrapperGetRotation(_wrapp1)) * _num;
-    _wrapp.shear = VBVector2DInterpolate(VBMatrix2DWrapperGetShear(_wrapp1), VBMatrix2DWrapperGetShear(_wrapp2), _num);
+    if(isnan(_wrapp1.rotation) || isnan(_wrapp2.rotation)) {
+        _wrapp.rotation = NAN;
+        _wrapp.shear = VBVector2DInterpolate(VBMatrix2DWrapperGetShear(_wrapp1), VBMatrix2DWrapperGetShear(_wrapp2), _num);
+    } else {
+        _wrapp.rotation = VBMatrix2DWrapperGetRotation(_wrapp1) + (VBMatrix2DWrapperGetRotation(_wrapp2) - VBMatrix2DWrapperGetRotation(_wrapp1)) * _num;
+    }
     _wrapp.need_update = VBTrue;
 	return _wrapp;
 }
