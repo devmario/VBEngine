@@ -182,7 +182,7 @@ bool android_fcheck(const char* filename)
 {
 	bool ret = false;
 	char* resPath = getResourcePath();
-	if ( strstr(filename, getResourcePath) )
+	if ( strstr(filename, (const char*)getResourcePath) )
 	{
 		if (access(filename, R_OK) == 0)
 		{
