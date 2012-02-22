@@ -126,6 +126,8 @@ VBVector2D VBEngineGetDefaultResourceScreenSize(void) {
 #ifdef __ANDROID__
 static const char *ClassName =
 		"kr/daum_mobage/am_db/g12009230/GelatoManiaActivity";
+static jclass g_clazz;// use java static call method
+
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 {
 	jint result = -1;
@@ -133,6 +135,12 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 	LOGI("JNI_OnLoad");
 	if ((*vm)->GetEnv(vm, (void**)&env, JNI_VERSION_1_4) != JNI_OK) {
 		LOGE("ERROR: GetEnv failed");
+		return result;
+	}
+
+	g_clazz = (*env)->FindClass(env, ClassName);
+	if (g_clazz == NULL) {
+		LOGE("Native JNI_OnLoad unable to find class '%s'", ClassName);
 		return result;
 	}
 
@@ -159,22 +167,19 @@ char* getResourcePath()
 		return NULL;
 	}
 
-	/* invoke the method using the JNI */
-	jclass clazz = (*env)->FindClass(env, ClassName);
-	if (clazz == NULL) {
+	if (g_clazz == NULL) {
 		LOGE("Native registration unable to find class '%s'", ClassName);
 		return NULL;
 	}
 
-	jmethodID mid = (*env)->GetStaticMethodID(env, clazz, "getResourcePath", "()Ljava/lang/String;");
+	jmethodID mid = (*env)->GetStaticMethodID(env, g_clazz, "getResourcePath", "()Ljava/lang/String;");
 	if (mid == NULL) {
 		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 				"getResourcePath");
 		return NULL;
 	}
 
-	jstring path = (jstring)(*env)->CallStaticObjectMethod(env, clazz, mid);
-	(*env)->DeleteLocalRef(env, clazz);
+	jstring path = (jstring)(*env)->CallStaticObjectMethod(env, g_clazz, mid);
 	return (char*)(*env)->GetStringUTFChars(env, path, false);
 }
 
@@ -231,14 +236,12 @@ bool fileCopy(const char* _srcPath, const char* _dstPath)
 		return false;
 	}
 
-	/* invoke the method using the JNI */
-	jclass clazz = (*env)->FindClass(env, ClassName);
-	if (clazz == NULL) {
-		LOGE("facebookAppRequest -> Native registration unable to find class '%s'", ClassName);
+	if (g_clazz == NULL) {
+		LOGE("Native registration unable to find class '%s'", ClassName);
 		return false;
 	}
 
-	jmethodID mid = (*env)->GetStaticMethodID(env, clazz, "fileCopy", "(Ljava/lang/String;Ljava/lang/String;)Z");
+	jmethodID mid = (*env)->GetStaticMethodID(env, g_clazz, "fileCopy", "(Ljava/lang/String;Ljava/lang/String;)Z");
 	if (mid == NULL) {
 		LOGE("Native registration unable to find GetStaticMethodID '%s'  ",
 				"fileCopy");
@@ -249,10 +252,9 @@ bool fileCopy(const char* _srcPath, const char* _dstPath)
 	jstring dstPath = (*env)->NewStringUTF(env, _dstPath);
 
 	// call java method
-	bool ret = (*env)->CallStaticBooleanMethod(env, clazz, mid, srcPath, dstPath);
+	bool ret = (*env)->CallStaticBooleanMethod(env, g_clazz, mid, srcPath, dstPath);
 
 	// memory release
-	(*env)->DeleteLocalRef(env, clazz);
 	(*env)->DeleteLocalRef(env, srcPath);
 	(*env)->DeleteLocalRef(env, dstPath);
 
