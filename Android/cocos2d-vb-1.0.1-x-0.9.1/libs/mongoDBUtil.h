@@ -11,7 +11,7 @@
 
 #include <time.h>
 
-time_t nodejsDateToTime(char* nodeJSdateSTR);
+time_t nodejsDateToTime(const char* nodeJSdateSTR);
 char* timeToNodejsDate(time_t _time);
 void printTime(time_t _time);
 
