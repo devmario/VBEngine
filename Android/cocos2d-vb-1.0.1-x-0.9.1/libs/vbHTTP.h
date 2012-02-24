@@ -60,6 +60,8 @@ extern "C" {
         char* host_name;
         char* port;
         unsigned long break_time;
+        unsigned long interval;
+        int readBufLen;
         void (*success_handle)(VBHTTP* _http, VBHTTPError _error, void* _reference);
         int sock;
         char* method;
@@ -82,6 +84,8 @@ extern "C" {
     VBHTTP* VBHTTPCreate(const char* _host_name, //서버주소
                          const char* _port, //서버포트
                          double _break_time, //최대 응답대기시간
+                         double _read_interval, //하나의 read인터벌
+                         int _read_buf_len, //read buf len
                          const char* _method, //GET, POST
                          const char* _data, //POST시 데이터
                          size_t _data_len, //POST시 데이터 길이
