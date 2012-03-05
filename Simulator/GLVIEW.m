@@ -41,42 +41,42 @@ double dz = -415.0;
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    if ([theEvent modifierFlags] & NSControlKeyMask)
-		[self rightMouseDown:theEvent];
-	else if ([theEvent modifierFlags] & NSAlternateKeyMask)
-		[self otherMouseDown:theEvent];
-	else {
-		NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-		dx = location.x;
-		dy = location.y;
-	}
+//    if ([theEvent modifierFlags] & NSControlKeyMask)
+//		[self rightMouseDown:theEvent];
+//	else if ([theEvent modifierFlags] & NSAlternateKeyMask)
+//		[self otherMouseDown:theEvent];
+//	else {
+//		NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+//		dx = location.x;
+//		dy = location.y;
+//	}
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent // pan
 {
-	NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+//	NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 }
 
 - (void)otherMouseDown:(NSEvent *)theEvent //dolly
 {
-	NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+//	NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 { 
-	if ([theEvent modifierFlags] & NSControlKeyMask) {
-		[self rightMouseDown:theEvent];
-	} else if ([theEvent modifierFlags] & NSAlternateKeyMask) {
-	} else {
-		NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-		x -= (dx - location.x);
-		y -= (dy - location.y);
-		dx = location.x;
-		dy = location.y;
-        VBCamera2D* c = VBDisplay2DGetCamera(display);
-        VBCamera2DSetPosition(c, VBVector2DCreate(x, y));
-        VBCamera2DSetZoom(c, z);
-	}
+//	if ([theEvent modifierFlags] & NSControlKeyMask) {
+//		[self rightMouseDown:theEvent];
+//	} else if ([theEvent modifierFlags] & NSAlternateKeyMask) {
+//	} else {
+//		NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+//		x -= (dx - location.x);
+//		y -= (dy - location.y);
+//		dx = location.x;
+//		dy = location.y;
+//        VBCamera2D* c = VBDisplay2DGetCamera(display);
+//        VBCamera2DSetPosition(c, VBVector2DCreate(x, y));
+//        VBCamera2DSetZoom(c, z);
+//	}
 }
 
 - (void)rightMouseUp:(NSEvent *)theEvent
@@ -92,23 +92,23 @@ double dz = -415.0;
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-	NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-	x -= (dx - location.x);
-	y -= (dy - location.y);
-	dx = location.x;
-	dy = location.y;
-    VBCamera2D* c = VBDisplay2DGetCamera(display);
-    VBCamera2DSetPosition(c, VBVector2DCreate(x, y));
-    VBCamera2DSetZoom(c, z);
+//	NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+//	x -= (dx - location.x);
+//	y -= (dy - location.y);
+//	dx = location.x;
+//	dy = location.y;
+//    VBCamera2D* c = VBDisplay2DGetCamera(display);
+//    VBCamera2DSetPosition(c, VBVector2DCreate(x, y));
+//    VBCamera2DSetZoom(c, z);
 }
 
 - (void)scrollWheel:(NSEvent *)theEvent
 {
-	float wheelDelta = [theEvent deltaX] +[theEvent deltaY] + [theEvent deltaZ];
-	z += wheelDelta * 2;
-    VBCamera2D* c = VBDisplay2DGetCamera(display);
-    VBCamera2DSetPosition(c, VBVector2DCreate(x, y));
-    VBCamera2DSetZoom(c, z);
+//	float wheelDelta = [theEvent deltaX] +[theEvent deltaY] + [theEvent deltaZ];
+//	z += wheelDelta * 2;
+//    VBCamera2D* c = VBDisplay2DGetCamera(display);
+//    VBCamera2DSetPosition(c, VBVector2DCreate(x, y));
+//    VBCamera2DSetZoom(c, z);
 }
 
 - (void)rightMouseDragged:(NSEvent *)theEvent
@@ -124,16 +124,12 @@ double dz = -415.0;
 - (void) drawRect:(NSRect)rect
 {	
     [[self openGLContext] makeCurrentContext];
-    if(display == NULL) {
-        VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [[[NSBundle mainBundle] resourcePath] UTF8String], 1024,1024, 1024, 1024);
-        display = VBDisplay2DInit(VBDisplay2DAlloc());
+    
+    if (display) {
+        VBEngineClearDisplay();
+        VBDisplay2DUpdate(display, 1.0/60);
+        VBDisplay2DDraw(display);
     }
-    
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-    
-    VBDisplay2DUpdate(display, 1.0/60);
-    VBDisplay2DDraw(display);
 	[[self openGLContext] flushBuffer];
 }
 
@@ -149,6 +145,16 @@ double dz = -415.0;
 
 - (void)dealloc {
 	
+    if (display)
+        VBDisplay2DFree(&display);
+    if (model)
+        VBModel2DFree(&model);
+    if (obj)
+        VBObjectFile2DFree(&obj);
+    if (tex)
+        VBTextureFree(&tex);
+    VBEngineShutdown();
+    
 	[super dealloc];
 }
 
@@ -247,17 +253,34 @@ char *replaceAll(char *s, const char *olds, const char *news) {
 		// Loop through all the files and process them.
 		for( i = 0; i < [files count]; i++ )
 		{
-			NSString* fileName = [files objectAtIndex:i];
+            NSString* fileName = [files objectAtIndex:i];
+            
+            char tmp_path[256] = {0,};
+            strcpy(tmp_path, [fileName UTF8String]);
+            
+            char* image_path = replaceAll(tmp_path, "obj", "png");
+            
+            printf("image_path: %s\n",image_path);
+            
+            if(display == NULL) 
+            {   
+                NSImage* image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%s", image_path]];
+                VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [[[NSBundle mainBundle] resourcePath] UTF8String], image.size.width, image.size.height, image.size.width, image.size.height);
+                display = VBDisplay2DInit(VBDisplay2DAlloc());
+                [image release];
+            } 
+            else 
+            {   
+                VBEngineShutdown();
+                
+                NSImage* image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%s", image_path]];
+                VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [[[NSBundle mainBundle] resourcePath] UTF8String], image.size.width, image.size.height, image.size.width, image.size.height);
+                display = VBDisplay2DInit(VBDisplay2DAlloc());
+                [image release];
+            }
 			
             VBString* _str = VBStringInitWithCString(VBStringAlloc(), [fileName UTF8String]);
             obj = VBObjectFile2DInitAndLoad(VBObjectFile2DAlloc(), _str);
-            
-            char tmp_path[256] = {0,};
-            strcpy(tmp_path, VBStringGetCString(_str));
-            VBStringFree(&_str);
-            
-            char* image_path = replaceAll(tmp_path, "obj", "png");
-            printf("image_path : %s\n", image_path);
             
             _str = VBStringInitWithCString(VBStringAlloc(), image_path);
             tex = VBTextureInitAndLoadWithImagePath(VBTextureAlloc(), _str);
@@ -306,7 +329,15 @@ char *replaceAll(char *s, const char *olds, const char *news) {
     }
     
     model = VBModel2DInitWithLibraryNameIDAndTexture(VBModel2DAlloc(), obj, _library_name_id, tex, true);
-    VBModel2DSetPosition(model, VBVector2DCreate(1024/2-200, 1024/2-200));
+    
+    VBVector2D _screen = VBEngineGetScreenSize();
+    VBVector2D _screen_center = VBVector2DMultiply(_screen, 0.5f);
+    
+//    printf("%f, %f\n", VBVector2DGetX(_screen_center), VBVector2DGetY(_screen_center));
+//    printf("%f, %f\n", VBModel2DGetOriginWidth(model)/2, VBModel2DGetOriginHeight(model)/2);
+    
+    VBModel2DSetPosition(model, VBVector2DCreate(VBVector2DGetX(_screen_center) - VBModel2DGetOriginWidth(model)/2, VBVector2DGetY(_screen_center) - VBModel2DGetOriginHeight(model)/2));
+    
     VBModel2DAddChildModel(VBDisplay2DGetTopModel(display), model);
     
     //	if(self->model) {
