@@ -4,6 +4,11 @@
 #include "VBModel2D.h"
 #include "cocos2d.h"
 
+
+#ifdef __ANDROID__
+void VBModelAllAllocatedReloadTexture();
+#endif
+
 using namespace cocos2d;
 
 class VBModel : public cocos2d::CCSprite {
@@ -28,14 +33,22 @@ public:
     VBMatrix2DWrapper mat;
     VBObjectFile2DLibraryNameID* library_name_id;
     
+    VBTexture* vb_tex;
     CCTexture2D* tex;
+    
+    
+    VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, const char* _lib_name);
+    
+    void InitVBModelWithLibName(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_name_id, VBTexture* _texture, VBBool _is_realtime_animation);
     
     VBModel();
     VBModel(VBTexture* _tex);
     VBModel(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _library_name_id, VBTexture* _texture, VBBool _is_realtime_animation);
     ~VBModel();
     
-    void SetTexture(VBTexture* _tex);
+    void reloadUName_Texture();
+    
+    virtual void SetTexture(VBTexture* _tex);
     
     VBModel* getVBModelByName(char* name);
     VBModel* getVBModelByInstanceName(const char* _name);
@@ -58,6 +71,8 @@ public:
     
     int getVertex(int _idx, CCPoint* _vert);
     bool hitTest(VBModel* _ot);
+    
+    CCPoint convertVBModelToWorldSpace(CCPoint _point);
 };
 
 #endif
