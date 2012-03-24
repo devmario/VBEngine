@@ -71,6 +71,7 @@ VBColorRGBA VBColorRGBADrawNormal(VBColorRGBA _color1, VBColorRGBA _color2) {
     _color1.g = (_color2.g * _a) + (_color1.g * _aI);
     _color1.b = (_color2.b * _a) + (_color1.b * _aI);
     _color1.a = _ap;
+    
     return _color1;
 }
 

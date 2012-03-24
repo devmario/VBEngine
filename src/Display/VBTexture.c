@@ -115,7 +115,8 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
 #endif
 	
 #ifdef __ANDROID__
-	_tex->img_android = VBImageCopy(_img);
+    if(_img)
+		_tex->img_android = VBImageCopy(_img);
 #endif
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT,1);

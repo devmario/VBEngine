@@ -2,6 +2,10 @@
 #include "VBSystem.h"
 #include "../VBEngine.h"
 
+VBObjectFile2DLibraryNameID* VBObjectFile2DKeyFrameGetLibraryNameID(VBObjectFile2DKeyFrame* _key_frame) {
+    return _key_frame->library_id;
+}
+
 VBObjectFile2DKeyFrame* VBObjectFile2DKeyFrameAlloc(void) {
     VBObjectFile2DKeyFrame* _key_frame = VBSystemCalloc(1, sizeof(VBObjectFile2DKeyFrame));
 #ifdef _VB_DEBUG_

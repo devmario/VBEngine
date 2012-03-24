@@ -60,6 +60,10 @@ extern "C" {
      @param _frame 메모리가 할당된 VBObjectFile2DFrame**
      */
     void VBObjectFile2DFrameFree(VBObjectFile2DFrame** _frame);
+    
+    VBULong VBObjectFile2DFrameGetTotalFrame(VBObjectFile2DFrame* _frame);
+    
+    VBArrayVector* VBObjectFile2DFrameGetKeyFrames(VBObjectFile2DFrame* _frame);
 
 #ifdef __cplusplus
 }

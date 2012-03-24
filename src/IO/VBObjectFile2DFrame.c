@@ -37,3 +37,11 @@ void VBObjectFile2DFrameFree(VBObjectFile2DFrame** _frame) {
     VBSystemFree(*_frame);
     *_frame = VBNull;
 }
+
+VBULong VBObjectFile2DFrameGetTotalFrame(VBObjectFile2DFrame* _frame) {
+    return _frame->total_frame;
+}
+
+VBArrayVector* VBObjectFile2DFrameGetKeyFrames(VBObjectFile2DFrame* _frame) {
+    return _frame->key_frame;
+}

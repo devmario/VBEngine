@@ -58,6 +58,8 @@ extern "C" {
         VBObjectFile2DKeyFrameElement* element;
     };
     
+    VBObjectFile2DLibraryNameID* VBObjectFile2DKeyFrameGetLibraryNameID(VBObjectFile2DKeyFrame* _key_frame);
+    
     /**
      @brief VBObjectFile2DKeyFrame의 메모리를 할당합니다.
      @return 메모리가 할당된 VBObjectFile2DKeyFrame를 반환합니다.
