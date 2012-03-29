@@ -1,11 +1,14 @@
 #include "VBModel.h"
 
-VBAABB VBModel::GetAABB(bool _recursion) {
+VBAABB VBModel::GetAABB(bool _world, bool _recursion) {
     VBAABB _aabb = VBAABBLoadIndentity();
     if(is_bitmap) {
         CCAffineTransform wt;
         
-        wt = nodeToWorldTransform();
+        if(_world)
+        	wt = nodeToWorldTransform();
+        else
+            wt = nodeToParentTransform();
         
         CCPoint tl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y), wt);
         CCPoint tr = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y), wt);

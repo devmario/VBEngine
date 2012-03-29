@@ -27,6 +27,9 @@ void VBModel::Init() {
     frame_willFree_child_models = NULL;
     frame_current_key_frame = NULL;
     
+    is_exist_empty_frame = false;
+    empty_frame = 0.0f;
+    
     setAnchorPoint(ccp(0,0));
 }
 
@@ -114,7 +117,7 @@ void VBModel::InitWithLibName(VBObjectFile2D* _obj2D, VBTexture* _texture, VBObj
     Update(0.0f);
 }
 
-void VBModel::LinkChildKeyFrames(int _currentIdx, VBModel* _child, VBObjectFile2DKeyFrame* _key_frame) {
+bool VBModel::LinkChildKeyFrames(int _currentIdx, VBModel* _child, VBObjectFile2DKeyFrame* _key_frame) {
     int j;
     if(_key_frame->element->element_type == VBObjectFile2DKeyFrameElementType_Graphic) {
         VBObjectFile2DKeyFrameElementGraphic* _grap = (VBObjectFile2DKeyFrameElementGraphic*)_key_frame->element->element;
@@ -127,7 +130,7 @@ void VBModel::LinkChildKeyFrames(int _currentIdx, VBModel* _child, VBObjectFile2
                         frame_all_allocated_child_models->data[j] = _child;
                         if(j + 1 < frame->key_frame->len)
                             LinkChildKeyFrames(j + 1, _child, _key_frame_ot);
-                        break;
+                        return true;
                     }
                 }
             }
@@ -144,10 +147,11 @@ void VBModel::LinkChildKeyFrames(int _currentIdx, VBModel* _child, VBObjectFile2
                         frame_all_allocated_child_models->data[j] = _child;
                         if(j + 1 < frame->key_frame->len)
                             LinkChildKeyFrames(j + 1, _child, _key_frame_ot);
-                        break;
+                        return true;
                     }
                 }
             }
         }
     }
+    return false;
 }

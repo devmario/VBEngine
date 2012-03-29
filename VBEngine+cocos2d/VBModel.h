@@ -17,14 +17,14 @@ private:
     VBColorRGBA color;
     VBColorRGBA mix_color;
     
-    VBBool is_real_time_animation;
-    VBBool is_animation_update;
-    VBBool is_use_animation;
-    VBBool is_play_loop;
-    VBBool is_play;
-    VBFloat frame_rate;
-    VBFloat update_frame;
-    VBFloat cur_frame;
+    bool is_real_time_animation;
+    bool is_animation_update;
+    bool is_use_animation;
+    bool is_play_loop;
+    bool is_play;
+    float frame_rate;
+    float update_frame;
+    float cur_frame;
     
     VBMatrix2DWrapper mat;
     
@@ -39,6 +39,9 @@ private:
     VBArrayVector* frame_willFree_child_models;
     VBArrayVector* frame_current_key_frame;
     
+    bool is_exist_empty_frame;
+    float empty_frame;
+    
 #pragma mark -
 #pragma mark function(private)
     
@@ -46,7 +49,7 @@ private:
     void InitWithLibName(VBObjectFile2D* _obj2D, VBTexture* _texture, 
                          VBObjectFile2DLibraryNameID* _library_name_id, 
                          bool _is_realtime_animation = true);
-    void LinkChildKeyFrames(int _current_idx, VBModel* _child, VBObjectFile2DKeyFrame* _key_frame);
+    bool LinkChildKeyFrames(int _current_idx, VBModel* _child, VBObjectFile2DKeyFrame* _key_frame);
     
 public:
     
@@ -91,7 +94,7 @@ public:
 #pragma mark -
 #pragma mark Vertex
     
-    VBAABB GetAABB(bool _recursion = true);
+    VBAABB GetAABB(bool _world = true, bool _recursion = true);
     int GetVertex(int _idx, CCPoint* _vertex, bool _recursion = true);
     float GetWidth(bool _recursion = true);
     float GetHeight(bool _recursion = true);
