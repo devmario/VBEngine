@@ -94,7 +94,7 @@ public:
 #pragma mark -
 #pragma mark Vertex
     
-    VBAABB GetAABB(bool _world = true, bool _recursion = true);
+    VBAABB GetAABB(bool _world = false, bool _recursion = true);
     int GetVertex(int _idx, CCPoint* _vertex, bool _recursion = true);
     float GetWidth(bool _recursion = true);
     float GetHeight(bool _recursion = true);
