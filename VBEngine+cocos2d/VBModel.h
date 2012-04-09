@@ -132,7 +132,7 @@ public:
     //AABB박스를 리턴
     //_world:실제 스크린에서의 사이즈 인가, 아니면 부모 Sprite에서의 사이즈 인가
     //_recursion:하위 Sprite까지 전부 AABB에 포함시킬것인가의 여부
-    VBAABB GetAABB(bool _world = true, bool _recursion = true);
+    VBAABB GetAABB(bool _world = false, bool _recursion = true);
     //정점좌표 가져오기(성공시 -1리턴)
     //_idx:몇번째 Sprite의 정점좌표를 가져올 것인가
     //_vertex:가져온 정점좌표를 담을 CCPoint[4]배열 포인터
