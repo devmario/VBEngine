@@ -9,8 +9,8 @@ VBArrayVector* _allocModel = NULL;
 
 void VBModelAllAllocatedReloadTexture() {
     if(_allocModel) {
-        for(int i = 0; i < _allocModel->len; i++) {
-            VBModel* _m = (VBModel*)_allocModel->data[i];
+        for(int i = 0; i < VBArrayVectorGetLength(_allocModel); i++) {
+            VBModel* _m = (VBModel*)VBArrayVectorGetDataAt(_allocModel);
             _m->ReloadTexture();
         }
     }

@@ -222,6 +222,7 @@ void* VBArrayVectorRemoveAt(VBArrayVector* _vec, VBULong _at) {
         for(i = _at; i < _vec->len - 1; i++) {
             _vec->data[i] = _vec->data[i + 1];
         }
+		_vec->data[i] = NULL;
         _vec->len--;
     }
     //데이터가 없어도 프리하지 않고 데이터는 벡터를 소멸시킬때 한번에 소멸한다.
