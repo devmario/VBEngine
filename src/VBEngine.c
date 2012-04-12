@@ -125,7 +125,7 @@ VBVector2D VBEngineGetDefaultResourceScreenSize(void) {
 
 #ifdef __ANDROID__
 static const char *ClassName =
-		"kr/daum_mobage/am_db/g12009230/GelatoManiaActivity";
+		"kr/daum_mobage/am_db/g13000041/GelatoManiaActivity";
 static jclass g_clazz;// use java static call method
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)

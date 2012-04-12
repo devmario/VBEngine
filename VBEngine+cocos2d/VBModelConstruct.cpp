@@ -5,6 +5,17 @@
 #include "OverlapTester.h"
 
 #ifdef __ANDROID_TEX__
+#include <jni.h>
+#include <android/log.h>
+#define LOG_TAG  "VBModelConstructor"
+#ifdef __DEBUG__
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , LOG_TAG, __VA_ARGS__)
+#else
+#define LOGD(...);
+#endif
+#endif
+
+#ifdef __ANDROID_TEX__
 VBArrayVector* _allocModel = NULL;
 
 void VBModelAllAllocatedReloadTexture() {

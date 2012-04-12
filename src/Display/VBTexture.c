@@ -119,15 +119,15 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
 		_tex->img_android = VBImageCopy(_img);
 #endif
 
-//	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 	GLboolean _state;
 	glGetBooleanv(GL_TEXTURE_2D, &_state);
 	if(_state == VBFalse)
 		glEnable(GL_TEXTURE_2D);
 	
-//    if(_tex->tid == 0) {
+    if(_tex->tid == 0) {
         glGenTextures(1, (GLuint*)&_tex->tid);
-//    }
+    }
 	glBindTexture(GL_TEXTURE_2D, _tex->tid);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
