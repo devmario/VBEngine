@@ -4,13 +4,13 @@
 #include "cocos2d.h"
 #include "OverlapTester.h"
 
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
 VBArrayVector* _allocModel = NULL;
 
 void VBModelAllAllocatedReloadTexture() {
     if(_allocModel) {
         for(int i = 0; i < VBArrayVectorGetLength(_allocModel); i++) {
-            VBModel* _m = (VBModel*)VBArrayVectorGetDataAt(_allocModel);
+            VBModel* _m = (VBModel*)VBArrayVectorGetDataAt(_allocModel, i);
             _m->ReloadTexture();
         }
     }
@@ -31,7 +31,7 @@ void RemoveAllocModel(VBModel* _m) {
 
 
 VBModel::VBModel(VBTexture* _tex) {
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
     AddAllocModel(this);
 #endif
     Init();
@@ -39,14 +39,14 @@ VBModel::VBModel(VBTexture* _tex) {
 }
 
 VBModel::VBModel() : CCSprite() {
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
     AddAllocModel(this);
 #endif
     Init();
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, const char* _lib_name, bool _is_realtime_animation) : CCSprite() {
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
     AddAllocModel(this);
 #endif
     
@@ -61,7 +61,7 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, const char* _lib_n
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, VBObjectFile2DLibraryNameID* _library_name_id, bool _is_realtime_animation) : CCSprite() {
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
     AddAllocModel(this);
 #endif
     InitWithLibName(_obj2D, _texture, _library_name_id, _is_realtime_animation);
@@ -69,7 +69,7 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, VBObjectFile2DLibr
 
 
 VBModel::~VBModel() {
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
     RemoveAllocModel(this);
 #endif
     if(getChildren()) {

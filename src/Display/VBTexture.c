@@ -15,7 +15,7 @@
 #include <GLES/glext.h>
 #endif
 
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
 VBArrayVector* _texVec = NULL;
 void VBTextureStackReloadBuffer(void) {
     for(int i = 0; i < _texVec->len; i++) {
@@ -39,7 +39,7 @@ VBTexture* VBTextureAlloc(void) {
 										 "VBEngine Log: VBTextureAlloc() - 메모리 할당에 실패하였습니다.");
 #endif
 	
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
 	if(_texVec == NULL) {
 		_texVec = VBArrayVectorInit(VBArrayVectorAlloc());
 	}
@@ -96,7 +96,7 @@ void VBTextureFree(VBTexture** _tex) {
 	
 	*_tex = VBTextureInit(*_tex);
 	
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
 	VBArrayVectorRemove(_texVec, *_tex);
 	if(_texVec->len == 0)
 		VBArrayVectorFree(&_texVec);
@@ -114,20 +114,20 @@ void VBTextureLoadImage(VBTexture* _tex, VBImage* _img) {
 										 "VBEngine Log: VBTextureLoadImage() - VBNull인 텍스쳐를 Load 하려고 합니다. VBTextureAlloc하지 않은 이미지를 사용했을 수 있습니다.");
 #endif
 	
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
     if(_img)
 		_tex->img_android = VBImageCopy(_img);
 #endif
 
-	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+//	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 	GLboolean _state;
 	glGetBooleanv(GL_TEXTURE_2D, &_state);
 	if(_state == VBFalse)
 		glEnable(GL_TEXTURE_2D);
 	
-    if(_tex->tid == 0) {
+//    if(_tex->tid == 0) {
         glGenTextures(1, (GLuint*)&_tex->tid);
-    }
+//    }
 	glBindTexture(GL_TEXTURE_2D, _tex->tid);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -241,7 +241,7 @@ void VBTextureUnload(VBTexture* _tex) {
 		_tex->height = 0;
 	}
 
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
     if(_tex->img_android)
         VBImageFree(&_tex->img_android);
 #endif

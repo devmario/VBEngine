@@ -201,7 +201,7 @@ public:
 #pragma mark -
 #pragma mark Android
 
-#ifdef __ANDROID__
+#ifdef __ANDROID_TEX__
 void VBModelAllAllocatedReloadTexture();
 #endif
 
