@@ -311,9 +311,9 @@ void VBArrayVectorSwapAt(VBArrayVector* _vec, VBULong _at_1, VBULong _at_2) {
 			VBArrayVector** _vec_data = *_vec->data;
 			for (_i = 0; _i < _max; _i++) {
 				if (_i == _at_1) {
-					_vec_data = _data_1;
+					_data_1 = _vec_data;
 				} else if (_i == _at_2) {
-					_vec_data = _data_2;
+					_data_2 = _vec_data;
 				}
 				_vec_data = *_vec->data;
 			}
