@@ -16,7 +16,6 @@ void VBModel::Init() {
     
     mat = VBMatrix2DWrapperLoadIdentity();
     
-    vb_tex = NULL;
     tex = NULL;
     
     model_parent = NULL;
@@ -62,26 +61,12 @@ void VBModel::InitWithLibName(VBObjectFile2D* _obj2D, VBTexture* _texture, VBObj
             _txc_ptr->y = _uv[_i].y;
             _txc_ptr++;
         }
-        vb_tex = _texture;
-        tex = new cocos2d::CCTexture2D();
+        tex = _texture;
         
-        tex->m_bPVRHaveAlphaPremultiplied = false;
-        tex->m_bHasPremultipliedAlpha = false;
-        if(_texture->color_type == VBColorType_RGBA)
-            tex->m_ePixelFormat = kCCTexture2DPixelFormat_RGBA8888;
-        tex->m_uName = _texture->tid;
-        tex->m_fMaxS = 1.0;
-        tex->m_fMaxT = 1.0;
-        tex->m_uPixelsWide = _texture->width;
-        tex->m_uPixelsHigh = _texture->height;
-        tex->m_tContentSize.width = _texture->width;
-        tex->m_tContentSize.height = _texture->height;
-        setTexture(tex);
-        
-        setTextureRect( cocos2d::CCRectMake(_txc[0].x * tex->getPixelsWide() / CCDirector::sharedDirector()->getContentScaleFactor()
-                                            ,_txc[0].y * tex->getPixelsHigh() / CCDirector::sharedDirector()->getContentScaleFactor()
-                                            ,(_txc[2].x * tex->getPixelsWide() - _txc[0].x * tex->getPixelsWide()) / CCDirector::sharedDirector()->getContentScaleFactor()
-                                            ,(_txc[2].y  * tex->getPixelsHigh() - _txc[0].y * tex->getPixelsHigh()) / CCDirector::sharedDirector()->getContentScaleFactor() ) );
+        setTextureRect(CCRectMake(_txc[0].x * _texture->width / CCDirector::sharedDirector()->getContentScaleFactor()
+                                            ,_txc[0].y * _texture->height / CCDirector::sharedDirector()->getContentScaleFactor()
+                                            ,(_txc[2].x * _texture->width - _txc[0].x * _texture->width) / CCDirector::sharedDirector()->getContentScaleFactor()
+                                            ,(_txc[2].y  * _texture->height - _txc[0].y * _texture->height) / CCDirector::sharedDirector()->getContentScaleFactor() ) );
         
     } else if(VBObjectFile2DLibraryType_Graphic == VBObjectFile2DLibraryGetType(_library) || VBObjectFile2DLibraryType_MovieClip == VBObjectFile2DLibraryGetType(_library)) {
         

@@ -36,14 +36,12 @@ void VBModel::setTextureRectInPixels(CCRect rect, bool rotated, CCSize size) {
 }
 
 void VBModel::updateTextureCoords(CCRect rect) {
-    CCTexture2D *tex = m_bUsesBatchNode ? m_pobTextureAtlas->getTexture() : m_pobTexture;
-	if (! tex)
-	{
+	if(!tex) {
 		return;
 	}
     
-	float atlasWidth = (float)tex->getPixelsWide();
-	float atlasHeight = (float)tex->getPixelsHigh();
+	float atlasWidth = tex->width;
+	float atlasHeight = tex->height;
     
 	float left, right, top, bottom;
     
@@ -64,7 +62,7 @@ void VBModel::updateTextureCoords(CCRect rect) {
 }
 
 CCAffineTransform VBModel::nodeToParentTransform(void) {
-	if (m_bIsTransformDirty) {
+	if(m_bIsTransformDirty) {
         mat = VBMatrix2DWrapperLoadIdentity();
 		
         mat = VBMatrix2DWrapperSetPosition(mat, VBVector2DCreate(m_tPosition.x, m_tPosition.y));
@@ -84,4 +82,68 @@ CCAffineTransform VBModel::nodeToParentTransform(void) {
 	}
     
 	return m_tTransform;
+}
+
+void VBModel::draw() {
+	//CCSprint의 draw함수를 copy하여 수정한 코드
+	CCAssert(! m_bUsesBatchNode, "");
+	
+	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+	// Needed states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+	// Unneeded states: -
+	bool newBlend = GL_SRC_ALPHA != CC_BLEND_SRC || GL_ONE_MINUS_SRC_ALPHA != CC_BLEND_DST;
+	if (newBlend)
+	{
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+	
+#define kQuadSize sizeof(m_sQuad.bl)
+    if (tex)
+    {
+        glBindTexture(GL_TEXTURE_2D, VBTextureGetID(tex));
+    }
+    else
+    {
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+	
+	long offset = (long)&m_sQuad;
+	
+	// vertex
+	int diff = offsetof(ccV3F_C4B_T2F, vertices);
+	glVertexPointer(3, GL_FLOAT, kQuadSize, (void*)(offset + diff));
+	
+	// color
+	diff = offsetof( ccV3F_C4B_T2F, colors);
+	glColorPointer(4, GL_UNSIGNED_BYTE, kQuadSize, (void*)(offset + diff));
+	
+	// tex coords
+	diff = offsetof( ccV3F_C4B_T2F, texCoords);
+	glTexCoordPointer(2, GL_FLOAT, kQuadSize, (void*)(offset + diff));
+	
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	
+	if( newBlend )
+	{
+		glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
+	}
+	
+#if CC_SPRITE_DEBUG_DRAW == 1
+    // draw bounding box
+    CCSize s = m_tContentSize;
+    CCPoint vertices[4] = {
+        ccp(0,0), ccp(s.width,0),
+        ccp(s.width,s.height), ccp(0,s.height)
+    };
+    ccDrawPoly(vertices, 4, true);
+#elif CC_SPRITE_DEBUG_DRAW == 2
+    // draw texture box
+    const CCSize& s = m_obRect.size;
+    const CCPoint& offsetPix = getOffsetPositionInPixels();
+    CCPoint vertices[4] = {
+        ccp(offsetPix.x,offsetPix.y), ccp(offsetPix.x+s.width,offsetPix.y),
+        ccp(offsetPix.x+s.width,offsetPix.y+s.height), ccp(offsetPix.x,offsetPix.y+s.height)
+    };
+    ccDrawPoly(vertices, 4, true);
+#endif // CC_SPRITE_DEBUG_DRAW
 }

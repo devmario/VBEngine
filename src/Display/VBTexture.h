@@ -35,7 +35,7 @@ extern "C" {
 	 */	
 	struct VBTexture {
 
-#ifdef __ANDROID_TEX__
+#ifdef __ANDROID__
 		VBImage* img_android;
 #endif
 
@@ -59,7 +59,7 @@ extern "C" {
         VBULong shiftX, shiftY;
 	};
 	
-#ifdef __ANDROID_TEX__
+#ifdef __ANDROID__
     void VBTextureStackReloadBuffer(void);
 #endif
 

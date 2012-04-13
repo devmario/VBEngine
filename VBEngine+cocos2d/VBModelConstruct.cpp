@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "OverlapTester.h"
 
-#ifdef __ANDROID_TEX__
+#ifdef __ANDROID__
 #include <jni.h>
 #include <android/log.h>
 #define LOG_TAG  "VBModelConstructor"
@@ -15,7 +15,7 @@
 #endif
 #endif
 
-#ifdef __ANDROID_TEX__
+#ifdef __ANDROID__
 VBArrayVector* _allocModel = NULL;
 
 void VBModelAllAllocatedReloadTexture() {
@@ -42,7 +42,7 @@ void RemoveAllocModel(VBModel* _m) {
 
 
 VBModel::VBModel(VBTexture* _tex) {
-#ifdef __ANDROID_TEX__
+#ifdef __ANDROID__
     AddAllocModel(this);
 #endif
     Init();
@@ -50,14 +50,14 @@ VBModel::VBModel(VBTexture* _tex) {
 }
 
 VBModel::VBModel() : CCSprite() {
-#ifdef __ANDROID_TEX__
+#ifdef __ANDROID__
     AddAllocModel(this);
 #endif
     Init();
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, const char* _lib_name, bool _is_realtime_animation) : CCSprite() {
-#ifdef __ANDROID_TEX__
+#ifdef __ANDROID__
     AddAllocModel(this);
 #endif
     
@@ -72,7 +72,7 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, const char* _lib_n
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, VBObjectFile2DLibraryNameID* _library_name_id, bool _is_realtime_animation) : CCSprite() {
-#ifdef __ANDROID_TEX__
+#ifdef __ANDROID__
     AddAllocModel(this);
 #endif
     InitWithLibName(_obj2D, _texture, _library_name_id, _is_realtime_animation);
@@ -80,28 +80,12 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, VBObjectFile2DLibr
 
 
 VBModel::~VBModel() {
-#ifdef __ANDROID_TEX__
+#ifdef __ANDROID__
     RemoveAllocModel(this);
 #endif
     if(getChildren()) {
         while(getChildren()->count())
             removeChild((VBModel*)getChildren()->objectAtIndex(0), false);
-    }
-    
-    if(m_pobTexture) {
-        m_pobTexture->m_uName = 0;
-        if(m_pobTexture->retainCount() > 0) {
-            m_pobTexture->release();
-        }
-        m_pobTexture = NULL;
-    }
-    
-    if(tex) {
-        tex->m_uName = 0;
-        if(tex->retainCount() > 0) {
-            tex->release();
-        }
-        tex = NULL;
     }
     
     if(frame_current_key_frame) {

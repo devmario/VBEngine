@@ -28,8 +28,7 @@ private:
     
     VBMatrix2DWrapper mat;
     
-    VBTexture* vb_tex;
-    CCTexture2D* tex;
+    VBTexture* tex;
     
     VBModel* model_parent;
     
@@ -195,6 +194,7 @@ public:
     virtual void setTextureRectInPixels(CCRect rect, bool rotated, CCSize size);
 	virtual void updateTextureCoords(CCRect rect);
     virtual CCAffineTransform nodeToParentTransform(void);
+	virtual void draw();
     
 };
 
