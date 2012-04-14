@@ -30,6 +30,13 @@ void VBTextureStackReloadBuffer(void) {
 }
 #endif
 
+VBTexture* VBTextureMake(const char* _file_name, bool _is_document) {
+	VBString* _path = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(_is_document ? VBEngineGetDocumentPath() : VBEngineGetResourcePath()), _file_name);
+	VBTexture* _tex = VBTextureInitAndLoadWithImagePath(VBTextureAlloc(), _path);
+	VBStringFree(&_path);
+	return _tex;
+}
+
 VBTexture* VBTextureAlloc(void) {
 	VBTexture* _tex = VBSystemCalloc(1, sizeof(VBTexture));
 	

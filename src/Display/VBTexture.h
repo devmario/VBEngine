@@ -63,6 +63,8 @@ extern "C" {
     void VBTextureStackReloadBuffer(void);
 #endif
 
+	VBTexture* VBTextureMake(const char* _file_name, bool _is_document);
+	
 	/**
 	 @brief VBTexture의 메모리를 할당합니다.
 	 @return _tex 메모리 할당된 VBTexture를 반환합니다.

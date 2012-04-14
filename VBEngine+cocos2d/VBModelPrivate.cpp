@@ -1,39 +1,7 @@
 #include "VBModel.h"
 
-void VBModel::Init() {
-    is_bitmap = false;
-    
-    color = mix_color = VBColorRGBALoadIdentity();
-    
-    is_real_time_animation = false;
-    is_animation_update = false;
-    is_use_animation = false;
-    is_play_loop = false;
-    is_play = false;
-    frame_rate = 0.0f;
-    update_frame = 0.0f;
-    cur_frame = 0.0f;
-    
-    mat = VBMatrix2DWrapperLoadIdentity();
-    
-    tex = NULL;
-    
-    model_parent = NULL;
-    
-    frame = NULL;
-    
-    frame_all_allocated_child_models = NULL;
-    frame_willFree_child_models = NULL;
-    frame_current_key_frame = NULL;
-    
-    is_exist_empty_frame = false;
-    empty_frame = 0.0f;
-    
-    setAnchorPoint(ccp(0,0));
-}
-
-void VBModel::InitWithLibName(VBObjectFile2D* _obj2D, VBTexture* _texture, VBObjectFile2DLibraryNameID* _library_name_id, bool _is_realtime_animation) {
-    Init();
+void VBModel::InitWithLibName(VBObjectFile2D* _obj2D, CCTexture2D* _texture, VBObjectFile2DLibraryNameID* _library_name_id, bool _is_realtime_animation) {
+    init();
     
     is_use_animation = true;
     is_play_loop = true;
@@ -54,22 +22,19 @@ void VBModel::InitWithLibName(VBObjectFile2D* _obj2D, VBTexture* _texture, VBObj
         
         VBVector2D* _txc_ptr = _txc;
         
-        VBULong _i;
-        
-        for(_i = 0; _i < _poly_len; _i++) {
+        for(int _i = 0; _i < _poly_len; _i++) {
             _txc_ptr->x = _uv[_i].x;
             _txc_ptr->y = _uv[_i].y;
             _txc_ptr++;
         }
-        tex = _texture;
-        
-        setTextureRect(CCRectMake(_txc[0].x * _texture->width / CCDirector::sharedDirector()->getContentScaleFactor()
-                                            ,_txc[0].y * _texture->height / CCDirector::sharedDirector()->getContentScaleFactor()
-                                            ,(_txc[2].x * _texture->width - _txc[0].x * _texture->width) / CCDirector::sharedDirector()->getContentScaleFactor()
-                                            ,(_txc[2].y  * _texture->height - _txc[0].y * _texture->height) / CCDirector::sharedDirector()->getContentScaleFactor() ) );
-        
+		
+		setTexture(_texture);
+        setTextureRect(CCRect(_txc[0].x * _texture->getPixelsWide() / CCDirector::sharedDirector()->getContentScaleFactor(),
+							  _txc[0].y * _texture->getPixelsHigh() / CCDirector::sharedDirector()->getContentScaleFactor(),
+							  (_txc[2].x * _texture->getPixelsWide() - _txc[0].x * _texture->getPixelsWide()) / CCDirector::sharedDirector()->getContentScaleFactor(),
+							  (_txc[2].y  * _texture->getPixelsHigh() - _txc[0].y * _texture->getPixelsHigh()) / CCDirector::sharedDirector()->getContentScaleFactor())
+					   );
     } else if(VBObjectFile2DLibraryType_Graphic == VBObjectFile2DLibraryGetType(_library) || VBObjectFile2DLibraryType_MovieClip == VBObjectFile2DLibraryGetType(_library)) {
-        
         frame_all_allocated_child_models = VBArrayVectorInit(VBArrayVectorAlloc());
         frame_willFree_child_models = VBArrayVectorInit(VBArrayVectorAlloc());
         frame_current_key_frame = VBArrayVectorInit(VBArrayVectorAlloc());

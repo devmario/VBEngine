@@ -36,8 +36,8 @@ void VBModel::Update(float _tick, bool _is_top) {
             }
             //모델의 애니메이션이 업데이트 되었음을 설정한다.
             is_animation_update = VBTrue;
-        }else{
-            if ( update_frame ){
+        } else {
+            if(update_frame) {
                 is_animation_update = VBTrue;
             }
         }
@@ -154,7 +154,7 @@ void VBModel::Update(float _tick, bool _is_top) {
         setColor(_color3B);
         setOpacity(mix_color.a);
     }
-    
+	
     if(getChildren()) {
         for(int i = 0; i < getChildren()->count(); i++) {
             VBModel* _child =  (VBModel*)getChildren()->objectAtIndex(i);

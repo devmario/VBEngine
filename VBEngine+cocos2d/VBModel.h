@@ -28,8 +28,6 @@ private:
     
     VBMatrix2DWrapper mat;
     
-    VBTexture* tex;
-    
     VBModel* model_parent;
     
     VBObjectFile2DFrame* frame;
@@ -43,9 +41,8 @@ private:
     
 #pragma mark -
 #pragma mark function(private)
-    
-    void Init();
-    void InitWithLibName(VBObjectFile2D* _obj2D, VBTexture* _texture, 
+	
+    void InitWithLibName(VBObjectFile2D* _obj2D, CCTexture2D* _texture, 
                          VBObjectFile2DLibraryNameID* _library_name_id, 
                          bool _is_realtime_animation = true);
     bool LinkChildKeyFrames(int _current_idx, VBModel* _child, VBObjectFile2DKeyFrame* _key_frame);
@@ -58,13 +55,13 @@ public:
     //비어있는 Sprite생성
     VBModel();
     //해당텍스쳐로 Sprite를 생성
-    VBModel(VBTexture* _tex);
+    VBModel(CCTexture2D* _tex);
     //해당 에니메이션과 텍스쳐로 Sprite를 생성 
     //_obj2D:에니메이션 구조체 포인터
     //_texture:텍스쳐 구조체 포인터
     //_lib_name:가져올 플래쉬 라이브러리 name
     //_is_realtime_animation:실시간 에니메이션 지원(false일 경우 frame단위로 에니메이션 계산, 테스팅 안됨)
-    VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, 
+    VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, 
             const char* _lib_name, 
             bool _is_realtime_animation = true);
     //해당 에니메이션과 텍스쳐로 Sprite를 생성 
@@ -72,7 +69,7 @@ public:
     //_texture:텍스쳐 구조체 포인터
     //_library_name_id:가져올 플래쉬 라이브러리 id
     //_is_realtime_animation:실시간 에니메이션 지원(false일 경우 frame단위로 에니메이션 계산, 테스팅 안됨)
-    VBModel(VBObjectFile2D* _obj2D, VBTexture* _texture, 
+    VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, 
             VBObjectFile2DLibraryNameID* _library_name_id, 
             bool _is_realtime_animation = true);
     
@@ -183,27 +180,13 @@ public:
 #pragma mark -
 #pragma mark Texture
     
-    //텍스쳐 리로드(VBTexture의 내용이 바뀌면 다음을 호출하여야 함)
-    void ReloadTexture();
-    //텍스쳐 설정
-    virtual void SetTexture(VBTexture* _tex);
-    
 #pragma mark -
 #pragma mark Virtual(CCSprite)
     
-    virtual void setTextureRectInPixels(CCRect rect, bool rotated, CCSize size);
-	virtual void updateTextureCoords(CCRect rect);
-    virtual CCAffineTransform nodeToParentTransform(void);
-	virtual void draw();
+    virtual bool init(void);
+	virtual CCAffineTransform nodeToParentTransform(void);
     
 };
-
-#pragma mark -
-#pragma mark Android
-
-#ifdef __ANDROID_TEX__
-void VBModelAllAllocatedReloadTexture();
-#endif
 
 #pragma mark -
 #pragma mark Depth Struct
