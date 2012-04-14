@@ -34,7 +34,7 @@ private:
     VBModel* model_parent;
     
     VBObjectFile2DFrame* frame;
-    
+     
     VBArrayVector* frame_all_allocated_child_models;
     VBArrayVector* frame_willFree_child_models;
     VBArrayVector* frame_current_key_frame;
