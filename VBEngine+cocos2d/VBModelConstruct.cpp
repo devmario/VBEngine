@@ -21,7 +21,7 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, const char* _lib
     if(_name_id) {
         InitWithLibName(_obj2D, _texture, _name_id, _is_realtime_animation);
         Stop();
-    }
+    } 
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, VBObjectFile2DLibraryNameID* _library_name_id, bool _is_realtime_animation) : CCSprite() {
