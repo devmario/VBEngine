@@ -38,7 +38,7 @@ bool VBModel::init(void) {
 }
 
 CCAffineTransform VBModel::nodeToParentTransform(void) {
-	if(m_bIsTransformDirty) {
+	if (m_bIsTransformDirty) {
         mat = VBMatrix2DWrapperLoadIdentity();
 		
         mat = VBMatrix2DWrapperSetPosition(mat, VBVector2DCreate(m_tPosition.x, m_tPosition.y));

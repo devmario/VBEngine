@@ -67,7 +67,7 @@ extern "C" {
         VBLong uv_w, uv_h, fl_w, fl_h;
     };
 	
-	VBObjectFile2D* VBObjectFile2DMake(const char* _file_name, bool _is_document);
+	VBObjectFile2D* VBObjectFile2DMake(const char* _file_name);
 	
     /**
      @brief VBObjectFile2D의 메모리를 할당합니다. 

@@ -22,6 +22,10 @@ CCTouch* VBButton::GetTouch() {
     return touch;
 }
 
+VBModel* VBButton::GetModel() {
+	return model;
+}
+
 void VBButton::TouchBegin(CCTouch* _touch) {
 	VBResponder::TouchBegin(_touch);
     if(!protocol)

@@ -181,6 +181,10 @@ FILE* android_fopen(const char* filename, const char* mode);
      @return 도큐먼트 경로.
      */
 	VBString* VBEngineGetDocumentPath(void);
+	
+	
+	const char* VBEngineGetDocumentPathCString(void);
+	const char* VBEngineGetResourcePathCString(void);
     
 	/**
      @brief 엔진의 기본 배경 색상을 설정합니다.

@@ -95,11 +95,19 @@ VBString* VBEngineGetResourcePath(void) {
 	return _vb_engine_default_res_path;
 }
 
+const char* VBEngineGetResourcePathCString(void) {
+	return VBStringGetCString(VBEngineGetResourcePath());
+}
+
 VBString* VBEngineGetDocumentPath(void) {
 	if(_vb_engine_default_rw_doc_path == VBNull)
 		VBDebugPrintAbort(VBNull, VBTrue, "VBEngine Log: 엔진이 초기화 되지 않아 기본도큐먼트패스를 가져올수 없습니다.");
 	
 	return _vb_engine_default_rw_doc_path;
+}
+
+const char* VBEngineGetDocumentPathCString(void) {
+	return VBStringGetCString(VBEngineGetDocumentPath());
 }
 
 void VBEngineSetClearColor(VBColorRGBA _clear_color) {

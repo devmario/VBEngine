@@ -63,7 +63,7 @@ extern "C" {
     void VBTextureStackReloadBuffer(void);
 #endif
 
-	VBTexture* VBTextureMake(const char* _file_name, bool _is_document);
+	VBTexture* VBTextureMake(const char* _file_name);
 	
 	/**
 	 @brief VBTexture의 메모리를 할당합니다.

@@ -13,17 +13,19 @@ public:
 };
 
 class VBButton : public VBResponder {
-public:
+protected:
     VBButtonProtocol* protocol;
     VBModel* model;
     VBModel* model_area;
     CCTouch* touch;
     
+public:
     VBButton(VBModel* _model, VBButtonProtocol* _protocol);
     ~VBButton();
     
     bool GetIsDown();
     CCTouch* GetTouch();
+	VBModel* GetModel();
     
     virtual void TouchBegin(CCTouch* _touch);
     virtual void TouchEnd(CCTouch* _touch);

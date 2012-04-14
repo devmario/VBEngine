@@ -96,7 +96,7 @@ void VBModel::Update(float _tick, bool _is_top) {
                                 if(t > 1.0)
                                     t = 1.0;
                                 VBObjectFile2DKeyFrameElementGraphicGetTransitionProperties(_graphic, t, &mat, &child->color);
-                                child->setPosition(CCPoint(mat.position.x, -mat.position.y));
+                                child->setPosition(CCPoint(mat.position.x , -mat.position.y));
                                 child->setAnchorPoint(CCPoint(mat.anchor.x, -mat.anchor.y));
                                 child->setScaleX(mat.scale.x);
                                 child->setScaleY(mat.scale.y);
@@ -113,8 +113,8 @@ void VBModel::Update(float _tick, bool _is_top) {
                                 VBFloat t = (_e - _b) == 0.0f ? 0.0 : (cur_frame - _b) / (_e - _b);
                                 if(t > 1.0)
                                     t = 1.0;
-                                VBObjectFile2DKeyFrameElementMovieClipGetTransitionProperties(_movie_clip, t, &mat, &child->color); 
-                                child->setPosition(CCPoint(mat.position.x, -mat.position.y));
+                                VBObjectFile2DKeyFrameElementMovieClipGetTransitionProperties(_movie_clip, t, &mat, &child->color);
+                                child->setPosition(CCPoint(mat.position.x , -mat.position.y));
                                 child->setAnchorPoint(CCPoint(mat.anchor.x, -mat.anchor.y));
                                 child->setScaleX(mat.scale.x);
                                 child->setScaleY(mat.scale.y);

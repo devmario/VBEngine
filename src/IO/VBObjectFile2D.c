@@ -2,8 +2,8 @@
 #include "../VBEngine.h"
 #include <stdio.h>
 
-VBObjectFile2D* VBObjectFile2DMake(const char* _file_name, bool _is_document) {
-	VBString* _path = VBStringInitWithCStringFormat(VBStringAlloc(), "%s/%s", VBStringGetCString(_is_document ? VBEngineGetDocumentPath() : VBEngineGetResourcePath()), _file_name);
+VBObjectFile2D* VBObjectFile2DMake(const char* _file_name) {
+	VBString* _path = VBStringInitWithCString(VBStringAlloc(), _file_name);
 	VBObjectFile2D* _obj = VBObjectFile2DInitAndLoad(VBObjectFile2DAlloc(), _path);
 	VBStringFree(&_path);
 	return _obj;

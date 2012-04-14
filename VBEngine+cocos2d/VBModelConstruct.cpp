@@ -21,7 +21,7 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, const char* _lib
     if(_name_id) {
         InitWithLibName(_obj2D, _texture, _name_id, _is_realtime_animation);
         Stop();
-    } 
+    }
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, VBObjectFile2DLibraryNameID* _library_name_id, bool _is_realtime_animation) : CCSprite() {
@@ -30,11 +30,6 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, VBObjectFile2DLi
 
 
 VBModel::~VBModel() {
-    if(getChildren()) {
-        while(getChildren()->count())
-            removeChild((VBModel*)getChildren()->objectAtIndex(0), false);
-    }
-    
     if(frame_current_key_frame) {
         while(VBArrayVectorGetLength(frame_current_key_frame)) {
             VBModelDepthSorter* _sorter = (VBModelDepthSorter*)VBArrayVectorRemoveBack(frame_current_key_frame);
