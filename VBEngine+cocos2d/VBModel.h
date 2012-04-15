@@ -185,6 +185,8 @@ public:
     
     virtual bool init(void);
 	virtual CCAffineTransform nodeToParentTransform(void);
+	virtual void updateTextureCoords(const CCRect& rect);
+	virtual void setTextureRectInPixels(const CCRect& rect, bool rotated, const CCSize& size);
     
 };
 
