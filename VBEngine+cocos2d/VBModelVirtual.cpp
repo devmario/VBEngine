@@ -49,7 +49,7 @@ CCAffineTransform VBModel::nodeToParentTransform(void) {
         } else {
             mat = VBMatrix2DWrapperSetRotation(mat, m_fRotation);
         }
-        mat = VBMatrix2DWrapperSetAnchor(mat, VBVector2DCreate(m_tAnchorPoint.x, -m_tAnchorPoint.y));
+        mat = VBMatrix2DWrapperSetAnchor(mat, VBVector2DCreate(m_tAnchorPoint.x, m_tAnchorPoint.y));
         mat = VBMatrix2DWrapperUpdate(mat);
         
 		m_tTransform = CCAffineTransformMake(mat.mat.m11, mat.mat.m21, mat.mat.m12, mat.mat.m22, mat.mat.m13, mat.mat.m23);
