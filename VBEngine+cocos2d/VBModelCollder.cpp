@@ -4,11 +4,11 @@
 bool VBModel::IsHitByPoint(CCPoint pos, bool _recursion) {
     if(is_bitmap) {
         CCPoint _pos = pos;
-		_pos.y = CCDirector::sharedDirector()->getDisplaySizeInPixels().height - _pos.y;
         if(CCDirector::sharedDirector()->isRetinaDisplay()) {
             _pos.x *=  2;
             _pos.y *=  2;
         }
+		_pos.y = CCDirector::sharedDirector()->getDisplaySizeInPixels().height - _pos.y;
         CCAffineTransform wt = nodeToWorldTransform();
         CCPoint tl = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tl.vertices.x, m_sQuad.tl.vertices.y), wt);
         CCPoint tr = CCPointApplyAffineTransform(CCPointMake(m_sQuad.tr.vertices.x, m_sQuad.tr.vertices.y), wt);
