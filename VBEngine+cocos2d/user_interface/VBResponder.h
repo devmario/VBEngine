@@ -10,6 +10,8 @@ class VBResponder {
 private:
 	list<VBResponder*>::iterator responder_iterator;
 public:
+	bool is_active;
+	
 	void RegistResponder();
 	void UnregistResponder();
 	
