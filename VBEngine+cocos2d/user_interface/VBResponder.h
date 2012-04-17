@@ -9,8 +9,16 @@ using namespace cocos2d;
 class VBResponder {
 private:
 	list<VBResponder*>::iterator responder_iterator;
-public:
 	bool is_active;
+	
+public:
+	void SetIsActive(bool _value) {
+		is_active = _value;
+	};
+	
+	bool GetIsActive() {
+		return is_active;
+	}
 	
 	void RegistResponder();
 	void UnregistResponder();
