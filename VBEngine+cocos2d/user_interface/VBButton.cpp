@@ -1,7 +1,6 @@
 #include "VBButton.h"
 
-VBButton::VBButton(VBModel* _model, VBButtonProtocol* _protocol) {
-	RegistResponder();
+VBButton::VBButton(VBModel* _model, VBButtonProtocol* _protocol) : VBResponder() {
     model = _model;
     model_area = _model->GetChildByInstanceName("area");
     if(!model_area)
@@ -11,7 +10,6 @@ VBButton::VBButton(VBModel* _model, VBButtonProtocol* _protocol) {
 }
 
 VBButton::~VBButton() {
-    UnregistResponder();
 }
 
 bool VBButton::GetIsDown() {

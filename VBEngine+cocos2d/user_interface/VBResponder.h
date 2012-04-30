@@ -12,6 +12,13 @@ private:
 	bool is_active;
 	
 public:
+	VBResponder() {
+		RegistResponder();
+	};
+	~VBResponder() {
+		UnregistResponder();
+	}
+	
 	void SetIsActive(bool _value) {
 		is_active = _value;
 	};
