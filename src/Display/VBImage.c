@@ -64,7 +64,12 @@ VBImage* VBImageInitWithData(VBImage* _img, VBColorType _color_type, VBUChar _co
 											 "VBEngine Log: VBImageInitWithData() - 이미지 사이즈가 1픽셀 이미지 보다 작습니다. 이미지를 초기화를 할수 없습니다.");
 #endif
 		
-		_img->data = VBSystemMalloc(_size);
+		if(_img->data) {
+			_img->data = realloc(_img->data, _size);
+		} else {
+			_img->data = malloc(_size);
+		}
+		
 #ifdef _VB_DEBUG_
 		if(_img->data == VBNull)
 			VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 

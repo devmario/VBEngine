@@ -4,15 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>VBPhotoshopPlugIn.xcscheme</key>
+		<key>GenerateAndroidProject.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>8DC2EF4F0486A6940098B216</key>
+		<key>F2C64CA014DA728800F325E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
