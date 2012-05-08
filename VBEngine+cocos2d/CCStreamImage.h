@@ -21,12 +21,15 @@ namespace cocos2d {
 		typedef enum PIXELTYPE {
 			PIXELTYPE_RGB_24	=	0,
 			PIXELTYPE_BGRA_32	=	1,
-			PIXELTYPE_RGBA_32	=	2
+			PIXELTYPE_RGBA_32	=	2,
+			PIXELTYPE_ARGB_32	=	3
 		} PIXELTYPE;
 		
 		CCStreamImage();
 		void resetStreamData(void * data, int nWidth, int nHeight, PIXELTYPE type);
 		void flip();
+		void drawRect(CCRect _rect);
+		void drawPoint(CCPoint _point);
 	};
 };
 

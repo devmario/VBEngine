@@ -20,6 +20,7 @@ namespace cocos2d {
 	public:
 		CCStreamTexture2D();
 		void reload(CCImage* img);
+		void reload(const void *data, CCTexture2DPixelFormat pixelFormat, unsigned int pixelsWide, unsigned int pixelsHigh);
 	};
 };
 
