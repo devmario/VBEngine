@@ -7,6 +7,10 @@
 VBModel::VBModel(CCTexture2D* _tex) {
     init();
     setTexture(_tex);
+	
+	CCRect rect = CCRectZero;
+	rect.size = _tex->getContentSize();
+	setTextureRect(rect);
 }
 
 VBModel::VBModel() : CCSprite() {
