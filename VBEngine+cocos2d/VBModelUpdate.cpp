@@ -78,8 +78,8 @@ void VBModel::Update(float _tick, bool _is_top) {
                             if(VBObjectFile2DKeyFrameElementType_Bitmap == VBObjectFile2DKeyFrameElementGetType(_element)) {
                                 VBObjectFile2DKeyFrameElementBitmap* _bitmap = (VBObjectFile2DKeyFrameElementBitmap*)VBObjectFile2DKeyFrameElementGetBaseElement(_element);
                                 VBMatrix2DWrapper mat = _bitmap->matrix;
-                                child->setPosition(CCPoint(mat.position.x , mat.position.y));
-                                child->setAnchorPoint(CCPoint(mat.anchor.x, mat.anchor.y));
+                                child->setPosition(CCPoint(mat.position.x , -mat.position.y));
+                                child->setAnchorPoint(CCPoint(mat.anchor.x, -mat.anchor.y));
                                 child->setScaleX(mat.scale.x);
                                 child->setScaleY(mat.scale.y);
                                 if(isnan(mat.rotation)) {
@@ -96,8 +96,8 @@ void VBModel::Update(float _tick, bool _is_top) {
                                 if(t > 1.0)
                                     t = 1.0;
                                 VBObjectFile2DKeyFrameElementGraphicGetTransitionProperties(_graphic, t, &mat, &child->color);
-								child->setPosition(CCPoint(mat.position.x , mat.position.y));
-                                child->setAnchorPoint(CCPoint(mat.anchor.x, mat.anchor.y));
+								child->setPosition(CCPoint(mat.position.x , -mat.position.y));
+                                child->setAnchorPoint(CCPoint(mat.anchor.x, -mat.anchor.y));
                                 child->setScaleX(mat.scale.x);
                                 child->setScaleY(mat.scale.y);
                                 if(isnan(mat.rotation)) {
@@ -114,8 +114,8 @@ void VBModel::Update(float _tick, bool _is_top) {
                                 if(t > 1.0)
                                     t = 1.0;
                                 VBObjectFile2DKeyFrameElementMovieClipGetTransitionProperties(_movie_clip, t, &mat, &child->color);
-                                child->setPosition(CCPoint(mat.position.x , mat.position.y));
-                                child->setAnchorPoint(CCPoint(mat.anchor.x, mat.anchor.y));
+                                child->setPosition(CCPoint(mat.position.x , -mat.position.y));
+                                child->setAnchorPoint(CCPoint(mat.anchor.x, -mat.anchor.y));
                                 child->setScaleX(mat.scale.x);
                                 child->setScaleY(mat.scale.y);
                                 if(isnan(mat.rotation)) {
