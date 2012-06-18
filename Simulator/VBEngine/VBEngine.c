@@ -107,7 +107,10 @@ VBString* VBEngineGetDocumentPath(void) {
 
 void VBEngineSetClearColor(VBColorRGBA _clear_color) {
     _vb_engine_clear_color = _clear_color;
-    glClearColor(_vb_engine_clear_color.r, _vb_engine_clear_color.g, _vb_engine_clear_color.b, _vb_engine_clear_color.a);
+    glClearColor((float)_vb_engine_clear_color.r/0xFF, 
+                 (float)_vb_engine_clear_color.g/0xFF, 
+                 (float)_vb_engine_clear_color.b/0xFF, 
+                 (float)_vb_engine_clear_color.a/0xFF);
 }
 
 VBColorRGBA VBEngineGetClearColor(void) {

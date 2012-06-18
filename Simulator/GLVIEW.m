@@ -9,10 +9,10 @@
 
 double x = 0.0;
 double y = 0.0;
-double z = -415.0;
+double z = 1;
 double dx = 0.0;
 double dy = 0.0;
-double dz = -415.0;
+double dz = 1;
 
 + (NSOpenGLPixelFormat*) basicPixelFormat
 {
@@ -41,15 +41,17 @@ double dz = -415.0;
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-//    if ([theEvent modifierFlags] & NSControlKeyMask)
-//		[self rightMouseDown:theEvent];
-//	else if ([theEvent modifierFlags] & NSAlternateKeyMask)
-//		[self otherMouseDown:theEvent];
-//	else {
-//		NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-//		dx = location.x;
-//		dy = location.y;
-//	}
+    if(display == NULL)
+        return;
+    if ([theEvent modifierFlags] & NSControlKeyMask)
+		[self rightMouseDown:theEvent];
+	else if ([theEvent modifierFlags] & NSAlternateKeyMask)
+		[self otherMouseDown:theEvent];
+	else {
+		NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+		dx = location.x;
+		dy = location.y;
+	}
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent // pan
@@ -64,19 +66,21 @@ double dz = -415.0;
 
 - (void)mouseUp:(NSEvent *)theEvent
 { 
-//	if ([theEvent modifierFlags] & NSControlKeyMask) {
-//		[self rightMouseDown:theEvent];
-//	} else if ([theEvent modifierFlags] & NSAlternateKeyMask) {
-//	} else {
-//		NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-//		x -= (dx - location.x);
-//		y -= (dy - location.y);
-//		dx = location.x;
-//		dy = location.y;
-//        VBCamera2D* c = VBDisplay2DGetCamera(display);
-//        VBCamera2DSetPosition(c, VBVector2DCreate(x, y));
-//        VBCamera2DSetZoom(c, z);
-//	}
+    if(display == NULL)
+        return;
+	if ([theEvent modifierFlags] & NSControlKeyMask) {
+		[self rightMouseDown:theEvent];
+	} else if ([theEvent modifierFlags] & NSAlternateKeyMask) {
+	} else {
+		NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+		x -= (dx - location.x);
+		y -= (dy - location.y);
+		dx = location.x;
+		dy = location.y;
+        VBCamera2D* c = VBDisplay2DGetCamera(display);
+        VBCamera2DSetPosition(c, VBVector2DCreate(-x, y));
+        VBCamera2DSetZoom(c, z);
+	}
 }
 
 - (void)rightMouseUp:(NSEvent *)theEvent
@@ -92,23 +96,27 @@ double dz = -415.0;
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-//	NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-//	x -= (dx - location.x);
-//	y -= (dy - location.y);
-//	dx = location.x;
-//	dy = location.y;
-//    VBCamera2D* c = VBDisplay2DGetCamera(display);
-//    VBCamera2DSetPosition(c, VBVector2DCreate(x, y));
-//    VBCamera2DSetZoom(c, z);
+    if(display == NULL)
+        return;
+	NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+	x -= (dx - location.x);
+	y -= (dy - location.y);
+	dx = location.x;
+	dy = location.y;
+    VBCamera2D* c = VBDisplay2DGetCamera(display);
+    VBCamera2DSetPosition(c, VBVector2DCreate(-x, y));
+    VBCamera2DSetZoom(c, z);
 }
 
 - (void)scrollWheel:(NSEvent *)theEvent
 {
-//	float wheelDelta = [theEvent deltaX] +[theEvent deltaY] + [theEvent deltaZ];
-//	z += wheelDelta * 2;
-//    VBCamera2D* c = VBDisplay2DGetCamera(display);
-//    VBCamera2DSetPosition(c, VBVector2DCreate(x, y));
-//    VBCamera2DSetZoom(c, z);
+    if(display == NULL)
+        return;
+	float wheelDelta = [theEvent deltaX] +[theEvent deltaY] + [theEvent deltaZ];
+	z += wheelDelta * 0.1;
+    VBCamera2D* c = VBDisplay2DGetCamera(display);
+    VBCamera2DSetPosition(c, VBVector2DCreate(-x, y));
+    VBCamera2DSetZoom(c, z);
 }
 
 - (void)rightMouseDragged:(NSEvent *)theEvent
@@ -125,11 +133,15 @@ double dz = -415.0;
 {	
     [[self openGLContext] makeCurrentContext];
     
+	glViewport(0, 0, (GLsizei)self.frame.size.width, (GLsizei)self.frame.size.height);
+    
+    VBEngineClearDisplay();
     if (display) {
-        VBEngineClearDisplay();
+        
         VBDisplay2DUpdate(display, 1.0/60);
         VBDisplay2DDraw(display);
     }
+    
 	[[self openGLContext] flushBuffer];
 }
 
@@ -138,9 +150,6 @@ double dz = -415.0;
     long swapInt = 1;
 	
     [[self openGLContext] setValues:&swapInt forParameter:NSOpenGLCPSwapInterval];
-
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 - (void)dealloc {
@@ -258,15 +267,21 @@ char *replaceAll(char *s, const char *olds, const char *news) {
             char tmp_path[256] = {0,};
             strcpy(tmp_path, [fileName UTF8String]);
             
-            char* image_path = replaceAll(tmp_path, "obj", "png");
-            
+            char image_path[256] = {0,};
+            sprintf(image_path, "%s", tmp_path);
+            image_path[strlen(tmp_path) - 3] = 'p';
+            image_path[strlen(tmp_path) - 2] = 'n';
+            image_path[strlen(tmp_path) - 1] = 'g';
+            //            
             printf("image_path: %s\n",image_path);
+            
             
             if(display == NULL) 
             {   
                 NSImage* image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%s", image_path]];
-                VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [[[NSBundle mainBundle] resourcePath] UTF8String], image.size.width, image.size.height, image.size.width, image.size.height);
+                VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [[[NSBundle mainBundle] resourcePath] UTF8String], self.frame.size.width, self.frame.size.height, image.size.width, image.size.height);
                 display = VBDisplay2DInit(VBDisplay2DAlloc());
+                VBEngineSetClearColor(VBColorRGBACreate(0xff, 0xff, 0xff, 0xff));
                 [image release];
             } 
             else 
@@ -274,8 +289,9 @@ char *replaceAll(char *s, const char *olds, const char *news) {
                 VBEngineShutdown();
                 
                 NSImage* image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%s", image_path]];
-                VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [[[NSBundle mainBundle] resourcePath] UTF8String], image.size.width, image.size.height, image.size.width, image.size.height);
+                VBEngineStart([[[NSBundle mainBundle] resourcePath] UTF8String], [[[NSBundle mainBundle] resourcePath] UTF8String], self.frame.size.width, self.frame.size.height, image.size.width, image.size.height);
                 display = VBDisplay2DInit(VBDisplay2DAlloc());
+                VBEngineSetClearColor(VBColorRGBACreate(0xff, 0xff, 0xff, 0xff));
                 [image release];
             }
 			
@@ -312,10 +328,6 @@ char *replaceAll(char *s, const char *olds, const char *news) {
 
 
 - (IBAction)addLibraryModel:(id)sender {
-
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-    
     NSComboBox* _comboBox = (NSComboBox*)sender;
     NSString* str = (NSString*)[_comboBox objectValueOfSelectedItem];
     
@@ -330,13 +342,13 @@ char *replaceAll(char *s, const char *olds, const char *news) {
     
     model = VBModel2DInitWithLibraryNameIDAndTexture(VBModel2DAlloc(), obj, _library_name_id, tex, true);
     
-    VBVector2D _screen = VBEngineGetScreenSize();
-    VBVector2D _screen_center = VBVector2DMultiply(_screen, 0.5f);
-    
+//    VBVector2D _screen = VBEngineGetScreenSize();
+//    VBVector2D _screen_center = VBVector2DMultiply(_screen, 0.5f);
+//    
 //    printf("%f, %f\n", VBVector2DGetX(_screen_center), VBVector2DGetY(_screen_center));
 //    printf("%f, %f\n", VBModel2DGetOriginWidth(model)/2, VBModel2DGetOriginHeight(model)/2);
     
-    VBModel2DSetPosition(model, VBVector2DCreate(VBVector2DGetX(_screen_center) - VBModel2DGetOriginWidth(model)/2, VBVector2DGetY(_screen_center) - VBModel2DGetOriginHeight(model)/2));
+//    VBModel2DSetPosition(model, VBVector2DCreate(VBVector2DGetX(_screen_center) - VBModel2DGetOriginWidth(model)/2, VBVector2DGetY(_screen_center) - VBModel2DGetOriginHeight(model)/2));
     
     VBModel2DAddChildModel(VBDisplay2DGetTopModel(display), model);
     
@@ -351,10 +363,23 @@ char *replaceAll(char *s, const char *olds, const char *news) {
     //		ModelAdd(tutorial->topModel, self->model);
     //		[self IFplay:self->model];
     //	}
+    dz = z = 1;
+    dx = x = 0;
+    dy = y = 0;
+    VBCamera2D* c = VBDisplay2DGetCamera(display);
+    VBCamera2DSetPosition(c, VBVector2DCreate(0,0));
+    VBCamera2DSetZoom(c, 1);
 }
 
 - (IBAction)setBackgroundColor:(id)sender {
 	NSColorWell* cw = (NSColorWell*)sender;
+    NSLog(@"%i %i %i", (unsigned char)(0xFF*[[cw color] redComponent]), 
+          (unsigned char)(0xFF*[[cw color] greenComponent]), 
+          (unsigned char)(0xFF*[[cw color] blueComponent]));
+    VBEngineSetClearColor(VBColorRGBACreate((unsigned char)(0xFF*[[cw color] redComponent]), 
+                                            (unsigned char)(0xFF*[[cw color] greenComponent]), 
+                                            (unsigned char)(0xFF*[[cw color] blueComponent]), 
+                                            0xFF));
     //	ModelManagerSetClearColor(tutorial->manager, ColorRGBAInit((unsigned char)(0xFF*[[cw color] redComponent]), 
     //																(unsigned char)(0xFF*[[cw color] greenComponent]), 
     //																(unsigned char)(0xFF*[[cw color] blueComponent]), 

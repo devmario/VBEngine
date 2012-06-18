@@ -200,6 +200,7 @@ void VBDisplay2DUpdate(VBDisplay2D* _display, VBFloat _tick) {
 }
 
 void VBDisplay2DDraw(VBDisplay2D* _display) {
+    
     //OpenGL 좌표계 설정
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -212,7 +213,36 @@ void VBDisplay2DDraw(VBDisplay2D* _display) {
     
     //ModelView전환
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();  
+    glLoadIdentity();
+    
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
+    glEnable(GL_COLOR_MATERIAL);
+    glPushMatrix();
+    glLoadIdentity();
+    VBMatrix2D mat = VBCamera2DGetMatrix(_display->camera);
+    float m[16] = {
+        mat.m11, mat.m21, 0, mat.m31,
+        mat.m12, mat.m22, 0, mat.m32,
+        0, 0, 1, 0,
+        mat.m13, mat.m23, 0, mat.m33,
+    };
+    glMultMatrixf(m);
+    glBegin(GL_LINE_STRIP);
+    glLineWidth(5);
+    glColor4b(0xFF, 0xFF, 0xFF,0xFF);
+    glVertex3f(0, -1000000,0);
+    glVertex3f(0, 1000000,0);
+    glVertex3f(-1000000,0,0);
+    glVertex3f(1000000,0,0);
+    glEnd();
+    glPopMatrix();
+    glLoadIdentity();
+        
     
     //병합된 모든 Drawable을 그린다.
     VBArrayListNode* node = VBArrayListGetNodeAt(_display->drawable_list, 0);
