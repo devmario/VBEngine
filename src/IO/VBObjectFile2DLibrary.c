@@ -255,8 +255,9 @@ VBObjectFile2DLibraryType VBObjectFile2DLibraryGetType(VBObjectFile2DLibrary* _l
         VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
                                          "VBEngine Log: VBObjectFile2DLibraryGetType() - VBNull인 라이브러리의 타입을 구할 수 없습니다.");
 #endif
-    
-    return _library->type;
+    if(_library)
+    	return _library->type;
+	return VBObjectFile2DLibraryType_None;
 }
 
 void* VBObjectFile2DLibraryGetBase(VBObjectFile2DLibrary* _library) {

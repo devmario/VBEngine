@@ -6,15 +6,19 @@
 
 VBModel::VBModel(CCTexture2D* _tex) {
     init();
+	
+	is_bitmap = true;
     setTexture(_tex);
 	
 	CCRect rect = CCRectZero;
 	rect.size = _tex->getContentSize();
 	setTextureRect(rect);
+	setBlendFunc((ccBlendFunc){GL_ONE, GL_ONE_MINUS_SRC_ALPHA});
 }
 
 VBModel::VBModel() : CCSprite() {
     init();
+	setBlendFunc((ccBlendFunc){GL_ONE, GL_ONE_MINUS_SRC_ALPHA});
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, const char* _lib_name, bool _is_realtime_animation) : CCSprite() {
@@ -26,10 +30,12 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, const char* _lib
         InitWithLibName(_obj2D, _texture, _name_id, _is_realtime_animation);
         Stop();
     }
+	setBlendFunc((ccBlendFunc){GL_ONE, GL_ONE_MINUS_SRC_ALPHA});
 }
 
 VBModel::VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, VBObjectFile2DLibraryNameID* _library_name_id, bool _is_realtime_animation) : CCSprite() {
     InitWithLibName(_obj2D, _texture, _library_name_id, _is_realtime_animation);
+	setBlendFunc((ccBlendFunc){GL_ONE, GL_ONE_MINUS_SRC_ALPHA});
 }
 
 

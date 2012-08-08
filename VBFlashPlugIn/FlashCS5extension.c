@@ -10,6 +10,7 @@
 
 #pragma mark -
 #pragma mark 유니크 아이디를 위한 네임 아이디
+void writelog(char* format, ...);
 
 //테스트
 
@@ -54,8 +55,6 @@ char* FindLibraryName(unsigned int id) {
 
 //라이브러리 아이디에 네임을 추가
 unsigned int PushLibraryName(const char* name) {
-	if(name[0] < 32 || name[0] > 126)
-		return 0;
 	if(strlen(name) == 0)
 		return 0;
 	unsigned int id = FindLybraryID(name);
@@ -72,6 +71,7 @@ unsigned int PushLibraryName(const char* name) {
 	
 	nameID->name = calloc(strlen(name) + 1, sizeof(char));
 	sprintf(nameID->name, "%s", name);
+	writelog("++++++++++++++++ %s %i +++++++++++", nameID->name, strlen(nameID->name));
 	
 	nameID->id = ++root_library_id;
 	return nameID->id;
@@ -79,7 +79,7 @@ unsigned int PushLibraryName(const char* name) {
 
 //라이브러리 이름 변경
 void ChangeLibraryName(const char* name, const char* anothername) {
-    int anothername_len = strlen(anothername);
+    int anothername_len = strlen(anothername) + 1;
     if(anothername_len == 0)
         return;
     
@@ -87,7 +87,9 @@ void ChangeLibraryName(const char* name, const char* anothername) {
     for(i = 0; i < root_library_name_id_len; ++i) {
         if(strcmp(root_library_name_id[i].name, name) == 0) {
             root_library_name_id[i].name = realloc(root_library_name_id[i].name, anothername_len * sizeof(char));
+			memset(root_library_name_id[i].name, 0x00, anothername_len * sizeof(char));
             sprintf(root_library_name_id[i].name, "%s", anothername);
+			writelog("=========== %s %i ===========", root_library_name_id[i].name, strlen(root_library_name_id[i].name));
         }
     }
 }
@@ -118,7 +120,7 @@ void writelog(char* format, ...) {
     if(logfile == 0)
         return;
     
-    char buffer[256];
+    char buffer[0xFFF];
     va_list args;
     va_start (args, format);
     vsprintf (buffer,format, args);
@@ -137,7 +139,7 @@ void startlog() {
         fclose(logfile);
         logfile = NULL;
     }
-    logfile = fopen("/log.txt", "a");
+    logfile = fopen("/VBEngine/tmp/log.txt", "a");
 }
 
 void endlog() {
@@ -148,8 +150,6 @@ void endlog() {
 }
 
 void clearlog() {
-    logfile = fopen("/log.txt", "w");
-    fclose(logfile);
     logfile = 0;
 }
 
@@ -233,7 +233,7 @@ long ReadUVdata(FILE* uvFile, char* slicePath) {
 	char* str = calloc(len + 1, sizeof(char));
 	result += fread(str, sizeof(char), len, uvFile) * sizeof(char);
     
-    char libName[256];
+    char libName[0xFFF] = {'\0', };
     sprintf(libName, "%s%s.png", slicePath, str);
     
 	uv_data_len++;
@@ -430,12 +430,18 @@ return ReturnString(cx, errorstr, rval)
 #undef BreakStartMakeObjectFile
 	
 	*rval = JS_BooleanToValue(JS_TRUE);
+	for(int i = 0; i < root_library_name_id_len; i++) {
+		writelog("??????????????????????????libname info length = %i data = %s??????????????????????????", strlen(root_library_name_id[i].name), root_library_name_id[i].name);
+	}
 	
 	return JS_TRUE;
 }
 
 //FlashCS5extension.EndMakeObjectFile()
 JSBool EndMakeObjectFile(JSContext *cx, JSObject *obj, unsigned int argc, jsval *argv, jsval *rval) {
+	for(int i = 0; i < root_library_name_id_len; i++) {
+		writelog("??????????????????????????libname info length = %i data = %s??????????????????????????", strlen(root_library_name_id[i].name), root_library_name_id[i].name);
+	}
     if(argc != 2)
         return JS_FALSE;
 	
@@ -465,7 +471,7 @@ JSBool EndMakeObjectFile(JSContext *cx, JSObject *obj, unsigned int argc, jsval 
             
             char* bitmapName = GetString(cx, bitmapObj, 0);
             char* bitmapPath = GetString(cx, bitmapObj, 1);
-            
+			writelog("@@@@@@@@@@ %s %s @@@@@@@@@", bitmapPath, bitmapName);
             ChangeLibraryName(bitmapPath, bitmapName);
         }
         
@@ -494,6 +500,7 @@ JSBool EndMakeObjectFile(JSContext *cx, JSObject *obj, unsigned int argc, jsval 
 		fwrite(&root_library_name_id_len, sizeof(unsigned int), 1, pObjectFile);
 		for(i = 0; i < root_library_name_id_len; i++) {
 			name_len = strlen(root_library_name_id[i].name);
+			writelog("libname info length = %i data = %s", name_len, root_library_name_id[i].name);
 			fwrite(&name_len, sizeof(unsigned int), 1, pObjectFile);
 			fwrite(root_library_name_id[i].name, sizeof(char), name_len, pObjectFile);
 			fwrite(&root_library_name_id[i].id, sizeof(unsigned int), 1, pObjectFile);

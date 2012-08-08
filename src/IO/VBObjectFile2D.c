@@ -12,8 +12,8 @@ VBObjectFile2D* VBObjectFile2DMake(const char* _file_name) {
 VBObjectFile2D* VBObjectFile2DAlloc(void) {
     VBObjectFile2D* _obj2D = VBSystemCalloc(1, sizeof(VBObjectFile2D));
 #ifdef _VB_DEBUG_
-    if(_obj2D == VBNull) 
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+    if(_obj2D == VBNull)
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DAlloc() - 메모리를 할당 할 수 없습니다.");
 #endif
     if(_obj2D) {
@@ -42,9 +42,9 @@ VBObjectFile2D* VBObjectFile2DAlloc(void) {
 VBObjectFile2D* VBObjectFile2DInit(VBObjectFile2D* _obj2D) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DInit() - 초기화에 실패하였습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용하고 있을 수 있습니다.");
-#endif 
+#endif
     if(_obj2D) {
         _obj2D->file = VBFileInit(_obj2D->file);
         
@@ -75,8 +75,8 @@ VBObjectFile2D* VBObjectFile2DInitAndLoad(VBObjectFile2D* _obj2D, VBString* _pat
 
 void VBObjectFile2DFree(VBObjectFile2D** _obj2D) {
 #ifdef _VB_DEBUG_
-    if(*_obj2D == VBNull) 
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+    if(*_obj2D == VBNull)
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DFree() - VBNull인 오브첵트 파일은 해제 할수 없습니다. VBObjectFile2DAlloc() 하지 않았거나 이미 VBObjectFile2DFree()했을 수 있습니다.");
 #endif
     
@@ -84,49 +84,49 @@ void VBObjectFile2DFree(VBObjectFile2D** _obj2D) {
         void* _data = VBArrayListRemoveBack((*_obj2D)->transition);
         while(_data) {
             VBObjectFile2DTransitionFree((VBObjectFile2DTransition**)&_data);
-            _data = VBArrayListRemoveBack((*_obj2D)->transition); 
+            _data = VBArrayListRemoveBack((*_obj2D)->transition);
         }
         VBArrayListFree(&(*_obj2D)->transition);
         
         _data = VBArrayListRemoveBack((*_obj2D)->element_movie_clip);
         while(_data) {
             VBObjectFile2DKeyFrameElementMovieClipFree((VBObjectFile2DKeyFrameElementMovieClip**)&_data);
-            _data = VBArrayListRemoveBack((*_obj2D)->element_movie_clip); 
+            _data = VBArrayListRemoveBack((*_obj2D)->element_movie_clip);
         }
         VBArrayListFree(&(*_obj2D)->element_movie_clip);
         
         _data = VBArrayListRemoveBack((*_obj2D)->element_graphic);
         while(_data) {
             VBObjectFile2DKeyFrameElementGraphicFree((VBObjectFile2DKeyFrameElementGraphic**)&_data);
-            _data = VBArrayListRemoveBack((*_obj2D)->element_graphic); 
+            _data = VBArrayListRemoveBack((*_obj2D)->element_graphic);
         }
         VBArrayListFree(&(*_obj2D)->element_graphic);
         
         _data = VBArrayListRemoveBack((*_obj2D)->element_bitmap);
         while(_data) {
             VBObjectFile2DKeyFrameElementBitmapFree((VBObjectFile2DKeyFrameElementBitmap**)&_data);
-            _data = VBArrayListRemoveBack((*_obj2D)->element_bitmap); 
+            _data = VBArrayListRemoveBack((*_obj2D)->element_bitmap);
         }
         VBArrayListFree(&(*_obj2D)->element_bitmap);
         
         _data = VBArrayListRemoveBack((*_obj2D)->element);
         while(_data) {
             VBObjectFile2DKeyFrameElementFree((VBObjectFile2DKeyFrameElement**)&_data);
-            _data = VBArrayListRemoveBack((*_obj2D)->element); 
+            _data = VBArrayListRemoveBack((*_obj2D)->element);
         }
         VBArrayListFree(&(*_obj2D)->element);
         
         _data = VBArrayListRemoveBack((*_obj2D)->key_frame);
         while(_data) {
             VBObjectFile2DKeyFrameFree((VBObjectFile2DKeyFrame**)&_data);
-            _data = VBArrayListRemoveBack((*_obj2D)->key_frame); 
+            _data = VBArrayListRemoveBack((*_obj2D)->key_frame);
         }
         VBArrayListFree(&(*_obj2D)->key_frame);
         
         _data = VBArrayListRemoveBack((*_obj2D)->frame);
         while(_data) {
             VBObjectFile2DFrameFree((VBObjectFile2DFrame**)&_data);
-            _data = VBArrayListRemoveBack((*_obj2D)->frame); 
+            _data = VBArrayListRemoveBack((*_obj2D)->frame);
         }
         VBArrayListFree(&(*_obj2D)->frame);
         
@@ -139,14 +139,14 @@ void VBObjectFile2DFree(VBObjectFile2D** _obj2D) {
         _data = VBArrayListRemoveBack((*_obj2D)->library_movie_clip);
         while(_data) {
             VBObjectFile2DLibraryMovieClipFree((VBObjectFile2DLibraryMovieClip**)&_data);
-            _data = VBArrayListRemoveBack((*_obj2D)->library_movie_clip); 
+            _data = VBArrayListRemoveBack((*_obj2D)->library_movie_clip);
         }
         VBArrayListFree(&(*_obj2D)->library_movie_clip);
         
         _data = VBArrayListRemoveBack((*_obj2D)->library_graphic);
         while(_data) {
             VBObjectFile2DLibraryGraphicFree((VBObjectFile2DLibraryGraphic**)&_data);
-            _data = VBArrayListRemoveBack((*_obj2D)->library_graphic); 
+            _data = VBArrayListRemoveBack((*_obj2D)->library_graphic);
         }
         VBArrayListFree(&(*_obj2D)->library_graphic);
         
@@ -166,16 +166,16 @@ void VBObjectFile2DFree(VBObjectFile2D** _obj2D) {
         
         VBSystemFree(*_obj2D);
         *_obj2D = VBNull;
-    } 
+    }
 }
 
 void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
 #ifdef _VB_DEBUG_
-    if(_obj2D == VBNull) 
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+    if(_obj2D == VBNull)
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DLoad() - VBNull인 오브첵트 파일은 로드할 수 없습니다. VBObject2DAlloc()하지 않은 파일을 사용하고 있을 수 있습니다.");
     if(_path == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DLoad() - VBNull인 파일패스로는 오브첵트 파일을 로드할 수 없습니다.                                         유효하지 않은 패스를 사용하고 있을 수 있습니다.");
 #endif
     
@@ -470,7 +470,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                                 VBFileReadULong(_obj2D->file, &_transition_single_bezier_vector_length);
                                 //printf("    transition length %ld\n", _transition_single_bezier_vector_length);
                                 VBSize _bezier_data_size;
-                                if(_transition_single_bezier_vector_length) { 
+                                if(_transition_single_bezier_vector_length) {
                                     _bezier_data_size = _transition_single_bezier_vector_length * sizeof(VBVector2D);
                                     _transition_single_bezier_vector = VBSystemMalloc(_bezier_data_size);
                                     //베지어 곡선 벡터 읽기
@@ -583,7 +583,7 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
                     VBArrayListAddBack(_obj2D->library_movie_clip, _library_base);
                 }
                 
-                //라이브러리 생성후 내부 키프레임 요소가 그래픽이나 무비클립일 경우 
+                //라이브러리 생성후 내부 키프레임 요소가 그래픽이나 무비클립일 경우
                 //에니메이션을 위한 링크드 리스트 연결
                 for(_j = 0; _j < _key_frame_length; _j++) {
                     VBObjectFile2DKeyFrameElement* _element = VBObjectFile2DKeyFrameGetElement(_key_frame_arr[_j]);
@@ -666,10 +666,10 @@ void VBObjectFile2DLoad(VBObjectFile2D* _obj2D, VBString* _path) {
 VBObjectFile2DLibraryNameID* VBObjectFile2DGetLibraryNameIDByName(VBObjectFile2D* _obj2D, VBString* _name) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryNameIDByName() - VBNull인 오브첵트 파일로는 라이브러리 네임 아아이디를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다.");
     if(_name == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryNameIDByName() - VBNull인 이름으로는 라이브러리 네임 아이디를 구할 수 없습니다.");
 #endif
     
@@ -686,7 +686,7 @@ VBObjectFile2DLibraryNameID* VBObjectFile2DGetLibraryNameIDByName(VBObjectFile2D
 VBObjectFile2DLibraryNameID* VBObjectFile2DGetLibraryNameIDByID(VBObjectFile2D* _obj2D, VBULong _id) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryNameIDByID() - VBNull인 오브첵트 파일로는 라이브러리 네임 아아이디를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다.");
 #endif
     
@@ -704,9 +704,9 @@ VBObjectFile2DLibraryNameID* VBObjectFile2DGetLibraryNameIDByID(VBObjectFile2D* 
 VBULong VBObjectFile2DGetLibraryNameIDLength(VBObjectFile2D* _obj2D) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryNameIDLength() - VBNull인 오브첵트 파일로는 라이브러리 네임 아아이디의 길이를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다.");
-#endif  
+#endif
     
     return VBArrayVectorGetLength(_obj2D->library_name_id);
 }
@@ -714,9 +714,9 @@ VBULong VBObjectFile2DGetLibraryNameIDLength(VBObjectFile2D* _obj2D) {
 VBObjectFile2DLibraryNameID* VBObjectFile2DGetLibraryNameAt(VBObjectFile2D* _obj2D, VBULong _at) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryNameAt() - VBNull인 오브첵트 파일로는 라이브러리 네임의 위치를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     return VBArrayVectorGetDataAt(_obj2D->library_name_id, _at);
 }
@@ -724,9 +724,9 @@ VBObjectFile2DLibraryNameID* VBObjectFile2DGetLibraryNameAt(VBObjectFile2D* _obj
 VBULong VBObjectFile2DGetLibraryLength(VBObjectFile2D* _obj2D) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryLength() - VBNull인 오브첵트 파일로는 라이브러리의 길이를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     return VBArrayVectorGetLength(_obj2D->library);
 }
@@ -734,9 +734,9 @@ VBULong VBObjectFile2DGetLibraryLength(VBObjectFile2D* _obj2D) {
 VBULong VBObjectFile2DGetLibraryBitmapLength(VBObjectFile2D* _obj2D) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryBitmapLength() - VBNull인 오브첵트 파일로는 라이브러리 비트맵의 길이를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     return VBArrayVectorGetLength(_obj2D->library_bitmap);
 }
@@ -744,9 +744,9 @@ VBULong VBObjectFile2DGetLibraryBitmapLength(VBObjectFile2D* _obj2D) {
 VBULong VBObjectFile2DGetLibraryGraphicLength(VBObjectFile2D* _obj2D) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryGraphicLength() - VBNull인 오브첵트 파일로는 라이브러리 그래픽의 길이를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     return VBArrayListGetLength(_obj2D->library_graphic);
 }
@@ -754,9 +754,9 @@ VBULong VBObjectFile2DGetLibraryGraphicLength(VBObjectFile2D* _obj2D) {
 VBULong VBObjectFile2DGetLibraryMovieClipLength(VBObjectFile2D* _obj2D) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryMovieClipLength() - VBNull인 오브첵트 파일로는 라이브러리 무비클립의 길이를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     return VBArrayListGetLength(_obj2D->library_movie_clip);
 }
@@ -764,9 +764,9 @@ VBULong VBObjectFile2DGetLibraryMovieClipLength(VBObjectFile2D* _obj2D) {
 VBObjectFile2DLibrary* VBObjectFile2DGetLibraryAt(VBObjectFile2D* _obj2D, VBULong _at) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryAt() - VBNull인 오브첵트 파일로는 라이브러리의 위치를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     return VBArrayVectorGetDataAt(_obj2D->library, _at);
 }
@@ -774,9 +774,9 @@ VBObjectFile2DLibrary* VBObjectFile2DGetLibraryAt(VBObjectFile2D* _obj2D, VBULon
 VBObjectFile2DLibraryBitmap* VBObjectFile2DGetLibraryBitmapAt(VBObjectFile2D* _obj2D, VBULong _at) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryBitmapAt() - VBNull인 오브첵트 파일로는 라이브러리 비트맴의 위치를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     return VBArrayVectorGetDataAt(_obj2D->library_bitmap, _at);
 }
@@ -784,9 +784,9 @@ VBObjectFile2DLibraryBitmap* VBObjectFile2DGetLibraryBitmapAt(VBObjectFile2D* _o
 VBObjectFile2DLibraryGraphic* VBObjectFile2DGetLibraryGraphicAt(VBObjectFile2D* _obj2D, VBULong _at) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryGraphicAt() - VBNull인 오브첵트 파일로는 라이브러리 그래픽의 위치를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     return VBArrayListNodeGetData(VBArrayListGetNodeAt(_obj2D->library_graphic, _at));
 }
@@ -794,9 +794,9 @@ VBObjectFile2DLibraryGraphic* VBObjectFile2DGetLibraryGraphicAt(VBObjectFile2D* 
 VBObjectFile2DLibraryMovieClip* VBObjectFile2DGetLibraryMovieClipAt(VBObjectFile2D* _obj2D, VBULong _at) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryMovieClipAt() - VBNull인 오브첵트 파일로는 라이브러리 무비클립의 위치를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     return VBArrayListNodeGetData(VBArrayListGetNodeAt(_obj2D->library_movie_clip, _at));
 }
@@ -804,13 +804,13 @@ VBObjectFile2DLibraryMovieClip* VBObjectFile2DGetLibraryMovieClipAt(VBObjectFile
 VBObjectFile2DLibrary* VBObjectFile2DGetLibraryByName(VBObjectFile2D* _obj2D, VBString* _name) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryByName() - VBNull인 오브첵트 파일로는 라이브러리를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
     
     if(_name == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryByName() - VBNull인 이름으로 라이브러리를 구할 수 없습니다");
-#endif  
+#endif
     
     VBObjectFile2DLibraryNameID* _name_id = VBObjectFile2DGetLibraryNameIDByName(_obj2D, _name);
     return VBObjectFile2DGetLibraryByNameID(_obj2D, _name_id);
@@ -819,12 +819,12 @@ VBObjectFile2DLibrary* VBObjectFile2DGetLibraryByName(VBObjectFile2D* _obj2D, VB
 VBObjectFile2DLibraryBitmap* VBObjectFile2DGetLibraryBitmapByName(VBObjectFile2D* _obj2D, VBString* _name) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryBitmapByName() - VBNull인 오브첵트 파일로는 라이브러리 비트맵을 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
     if(_name == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: - VBNull인 이름으로 라이브러리 비트맵을 구할 수 없습니다");
-#endif  
+#endif
     
     VBObjectFile2DLibrary* _library = VBObjectFile2DGetLibraryByName(_obj2D, _name);
     if(VBObjectFile2DLibraryGetType(_library) == VBObjectFile2DLibraryType_Bitmap)
@@ -835,13 +835,13 @@ VBObjectFile2DLibraryBitmap* VBObjectFile2DGetLibraryBitmapByName(VBObjectFile2D
 VBObjectFile2DLibraryGraphic* VBObjectFile2DGetLibraryGraphicByName(VBObjectFile2D* _obj2D, VBString* _name) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryGraphicByName() - VBNull인 오브첵트 파일로는 라이브러리 그래픽을 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
     
-    if(_name == VBNull) 
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+    if(_name == VBNull)
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryGraphicByName() - VBNull인 이름으로 라이브러리 그래픽을 구할 수 없습니다");
-#endif  
+#endif
     
     VBObjectFile2DLibrary* _library = VBObjectFile2DGetLibraryByName(_obj2D, _name);
     if(VBObjectFile2DLibraryGetType(_library) == VBObjectFile2DLibraryType_Graphic)
@@ -852,13 +852,13 @@ VBObjectFile2DLibraryGraphic* VBObjectFile2DGetLibraryGraphicByName(VBObjectFile
 VBObjectFile2DLibraryMovieClip* VBObjectFile2DGetLibraryMovieClipByName(VBObjectFile2D* _obj2D, VBString* _name) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryMovieClipByName() - VBNull인 오브첵트 파일로는 라이브러리 무비클립을 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
     
     if(_name == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryMovieClipByName() - VBNull인 이름으로 라이브러리 그래픽을 구할 수 없습니다");
-#endif  
+#endif
     
     VBObjectFile2DLibrary* _library = VBObjectFile2DGetLibraryByName(_obj2D, _name);
     if(VBObjectFile2DLibraryGetType(_library) == VBObjectFile2DLibraryType_MovieClip)
@@ -869,9 +869,9 @@ VBObjectFile2DLibraryMovieClip* VBObjectFile2DGetLibraryMovieClipByName(VBObject
 VBObjectFile2DLibrary* VBObjectFile2DGetLibraryByID(VBObjectFile2D* _obj2D, VBULong _id) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryByID() - VBNull인 오브첵트 파일로는 라이브러리를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     VBObjectFile2DLibraryNameID* _name_id = VBObjectFile2DGetLibraryNameIDByID(_obj2D, _id);
     return VBObjectFile2DGetLibraryByNameID(_obj2D, _name_id);
@@ -880,9 +880,9 @@ VBObjectFile2DLibrary* VBObjectFile2DGetLibraryByID(VBObjectFile2D* _obj2D, VBUL
 VBObjectFile2DLibraryBitmap* VBObjectFile2DGetLibraryBitmapByID(VBObjectFile2D* _obj2D, VBULong _id) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryBitmapByID() - VBNull인 오브첵트 파일로는 라이브러리 비트맵을 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     VBObjectFile2DLibrary* _library = VBObjectFile2DGetLibraryByID(_obj2D, _id);
     if(VBObjectFile2DLibraryGetType(_library) == VBObjectFile2DLibraryType_Bitmap)
@@ -893,9 +893,9 @@ VBObjectFile2DLibraryBitmap* VBObjectFile2DGetLibraryBitmapByID(VBObjectFile2D* 
 VBObjectFile2DLibraryGraphic* VBObjectFile2DGetLibraryGraphicByID(VBObjectFile2D* _obj2D, VBULong _id) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryGraphicByID() - VBNull인 오브첵트 파일로는 라이브러리 그래픽을 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     VBObjectFile2DLibrary* _library = VBObjectFile2DGetLibraryByID(_obj2D, _id);
     if(VBObjectFile2DLibraryGetType(_library) == VBObjectFile2DLibraryType_Graphic)
@@ -906,9 +906,9 @@ VBObjectFile2DLibraryGraphic* VBObjectFile2DGetLibraryGraphicByID(VBObjectFile2D
 VBObjectFile2DLibraryMovieClip* VBObjectFile2DGetLibraryMovieClipByID(VBObjectFile2D* _obj2D, VBULong _id) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryMovieClipByID() - VBNull인 오브첵트 파일로는 라이브러리 무비클립을  구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-#endif  
+#endif
     
     VBObjectFile2DLibrary* _library = VBObjectFile2DGetLibraryByID(_obj2D, _id);
     if(VBObjectFile2DLibraryGetType(_library) == VBObjectFile2DLibraryType_MovieClip)
@@ -919,12 +919,12 @@ VBObjectFile2DLibraryMovieClip* VBObjectFile2DGetLibraryMovieClipByID(VBObjectFi
 VBObjectFile2DLibrary* VBObjectFile2DGetLibraryByNameID(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _name_id) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryByNameID() - VBNull인 오브첵트 파일로는 라이브러리를 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-    if(_name_id == 0) 
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+    if(_name_id == 0)
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryByNameID() - VBNull인 이름 아이디로 라이브러리를 구할 수 없습니다.");
-#endif  
+#endif
     
     VBULong _i;
     for(_i = 0; _i < VBObjectFile2DGetLibraryLength(_obj2D); _i++) {
@@ -938,12 +938,12 @@ VBObjectFile2DLibrary* VBObjectFile2DGetLibraryByNameID(VBObjectFile2D* _obj2D, 
 VBObjectFile2DLibraryBitmap* VBObjectFile2DGetLibraryBitmapByNameID(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _name_id) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryBitmapByNameID() - VBNull인 오브첵트 파일로는 라이브러리 비트맵을 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-    if(_name_id == 0) 
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+    if(_name_id == 0)
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryBitmapByNameID() - VBNull인 이름 아이디로 라이브러리 비트맵을  구할 수 없습니다.");
-#endif  
+#endif
     
     VBObjectFile2DLibrary* _library = VBObjectFile2DGetLibraryByNameID(_obj2D, _name_id);
     if(VBObjectFile2DLibraryGetType(_library) == VBObjectFile2DLibraryType_Bitmap)
@@ -954,12 +954,12 @@ VBObjectFile2DLibraryBitmap* VBObjectFile2DGetLibraryBitmapByNameID(VBObjectFile
 VBObjectFile2DLibraryGraphic* VBObjectFile2DGetLibraryGraphicByNameID(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _name_id) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryGraphicByNameID() - VBNull인 오브첵트 파일로는 라이브러리 그래픽을 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-    if(_name_id == 0) 
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+    if(_name_id == 0)
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryGraphicByNameID() - VBNull인 이름 아이디로 라이브러리 그래픽을 구할 수 없습니다.");
-#endif  
+#endif
     
     VBObjectFile2DLibrary* _library = VBObjectFile2DGetLibraryByNameID(_obj2D, _name_id);
     if(VBObjectFile2DLibraryGetType(_library) == VBObjectFile2DLibraryType_Graphic)
@@ -970,12 +970,12 @@ VBObjectFile2DLibraryGraphic* VBObjectFile2DGetLibraryGraphicByNameID(VBObjectFi
 VBObjectFile2DLibraryMovieClip* VBObjectFile2DGetLibraryMovieClipByNameID(VBObjectFile2D* _obj2D, VBObjectFile2DLibraryNameID* _name_id) {
 #ifdef _VB_DEBUG_
     if(_obj2D == VBNull)
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryMovieClipByNameID() - VBNull인 오브첵트 파일로는 라이브러리 무비클립을 구할 수 없습니다. VBObjectFile2DAlloc()하지 않은 파일을 사용했을 수 있습니다");
-    if(_name_id == 0) 
-        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue, 
+    if(_name_id == 0)
+        VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(), VBTrue,
                                          "VBEngine Log: VBObjectFile2DGetLibraryByID() - VBNull인 이름 아이디로 라이브러리 무비클립을 구할 수 없습니다.");
-#endif  
+#endif
     
     VBObjectFile2DLibrary* _library = VBObjectFile2DGetLibraryByNameID(_obj2D, _name_id);
     if(VBObjectFile2DLibraryGetType(_library) == VBObjectFile2DLibraryType_MovieClip)

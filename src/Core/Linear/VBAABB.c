@@ -52,25 +52,25 @@ VBAABB VBAABBCreate(VBFloat _l, VBFloat _t, VBFloat _r, VBFloat _b) {
 }
 
 VBBool VBAABBHitTestWithVector2D(VBAABB _aabb, VBVector2D _position) {
-    if(_position.x < _aabb.l)
+    if(_position.x <= _aabb.l)
         return VBFalse;
-    if(_position.x > _aabb.r)
+    if(_position.x >= _aabb.r)
         return VBFalse;
-    if(_position.y < _aabb.t)
+    if(_position.y <= _aabb.t)
         return VBFalse;
-    if(_position.y > _aabb.b)
+    if(_position.y >= _aabb.b)
         return VBFalse;
     return VBTrue;
 }
 
 VBBool VBAABBHitTest(VBAABB _aabb1, VBAABB _aabb2) {
-    if(_aabb1.r < _aabb2.l)
+    if(_aabb1.r <= _aabb2.l)
         return VBFalse;
-    if(_aabb1.l > _aabb2.r)
+    if(_aabb1.l >= _aabb2.r)
         return VBFalse;
-    if(_aabb1.b < _aabb2.t)
+    if(_aabb1.b <= _aabb2.t)
         return VBFalse;
-    if(_aabb1.t > _aabb2.b)
+    if(_aabb1.t >= _aabb2.b)
         return VBFalse;
     return VBTrue;
 }
@@ -162,6 +162,16 @@ VBAABB VBAABBMerge(VBAABB _aabb1, VBAABB _aabb2) {
         _aabb1.b = _aabb2.b;
     
     return _aabb1;
+}
+
+VBAABB VBAABBHitArea(VBAABB _aabb1, VBAABB _aabb2) {
+	VBAABB _aabb;
+	_aabb.l = _aabb1.l > _aabb2.l ? _aabb1.l : _aabb2.l;
+	_aabb.t = _aabb1.t > _aabb2.t ? _aabb1.t : _aabb2.t;
+	_aabb.r = _aabb1.r < _aabb2.r ? _aabb1.r : _aabb2.r;
+	_aabb.b = _aabb1.b < _aabb2.b ? _aabb1.b : _aabb2.b;
+    
+    return _aabb;
 }
 
 VBBool VBAABBIsIn(VBAABB _aabb1, VBAABB _aabb2) {

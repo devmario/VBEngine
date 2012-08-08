@@ -49,16 +49,13 @@ int VBModel::GetVertex(int _idx, CCPoint* _vertex, bool _recursion) {
     if(_recursion) {
         if(getChildren()) {
             for(int i = 0; i < getChildren()->count(); i++) {
-                int _subIdx = ((VBModel*)getChildren()->objectAtIndex(i))->GetVertex(_idx, _vertex);
-                if(_subIdx < 0)
-                    return _subIdx;
-                else
-                    _idx -= (_idx - _subIdx);
+                _idx = ((VBModel*)getChildren()->objectAtIndex(i))->GetVertex(_idx, _vertex, _recursion);
+				if(_idx == -1)
+					return _idx;
             }
         }
     }
     
-    //실패시 그냥 리턴
     return _idx;
 }
 

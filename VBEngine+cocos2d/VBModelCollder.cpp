@@ -39,7 +39,9 @@ bool VBModel::IsHit(VBModel* _model_tester, bool _recursion) {
         CCPoint vert[4];
         double p[4][2];
         remain = GetVertex(vertIdx, vert, _recursion);
+		
         vertIdx++;
+		
         if(remain > -1)
             break;
         

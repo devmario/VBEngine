@@ -39,6 +39,8 @@ extern "C" {
     float VBAABBGetAmountAtManyBox(int count, VBAABB* _aabb);
     
     VBAABB VBAABBMerge(VBAABB _aabb1, VBAABB _aabb2);
+	
+	VBAABB VBAABBHitArea(VBAABB _aabb1, VBAABB _aabb2);
     
     VBBool VBAABBIsIn(VBAABB _aabb1, VBAABB _aabb2);
 
