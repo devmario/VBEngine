@@ -62,17 +62,31 @@ VBColorRGBA VBColorRGBAMultiply(VBColorRGBA _color1, VBColorRGBA _color2) {
 
 
 
-VBColorRGBA VBColorRGBADrawNormal(VBColorRGBA _color1, VBColorRGBA _color2) {
-    float _ap = _color1.a + (_color2.a/(float)0xFF)*(0xFF-_color1.a);
-    float _a = _color2.a / _ap;
-    float _aI = 1.0 - _a;
+VBColorRGBA VBColorRGBADraw_ONE_MINUS_SRC_ALPHA(VBColorRGBA _src, VBColorRGBA _dst) {
+	float _as = 1.0;
+	float _ad = 1.0 - ((float)_dst.a / (float)0xFF);
     
-    _color1.r = (_color2.r * _a) + (_color1.r * _aI);
-    _color1.g = (_color2.g * _a) + (_color1.g * _aI);
-    _color1.b = (_color2.b * _a) + (_color1.b * _aI);
-    _color1.a = _ap;
+    float _r = _ad * _src.r + _dst.r * _as;
+    float _g = _ad * _src.g + _dst.g * _as;
+    float _b = _ad * _src.b + _dst.b * _as;
+	
+	_src.r = _r > 0xFF ? 0xFF : _r;
+	_src.g = _g > 0xFF ? 0xFF : _g;
+	_src.b = _b > 0xFF ? 0xFF : _b;
+	_src.a = _src.a > _dst.a ? _src.a : _dst.a;
     
-    return _color1;
+    return _src;
+}
+
+VBColorRGBA VBColorRGBADraw_SRC_ALPHA(VBColorRGBA _src, VBColorRGBA _dst) {
+    float _ad = (float)_dst.a / ((float)_src.a + ((float)_dst.a / (float)0xFF) * ((float)0xFF - (float)_src.a));
+    float _as = 1.0 - _ad;
+    
+    _src.r = (_dst.r * _ad) + (_src.r * _as);
+    _src.g = (_dst.g * _ad) + (_src.g * _as);
+    _src.b = (_dst.b * _ad) + (_src.b * _as);
+    
+    return _src;
 }
 
 VBColorRGBA VBColorRGBADrawColor(VBColorRGBA _color1, int _hex, int _maxDark, int _minDark) {

@@ -15,7 +15,9 @@ private:
     bool is_bitmap;
     
     VBColorRGBA color;
-    VBColorRGBA mix_color;
+protected:
+	VBColorRGBA mix_color;
+private:
     
     bool is_real_time_animation;
     bool is_animation_update;
@@ -73,7 +75,7 @@ public:
             VBObjectFile2DLibraryNameID* _library_name_id, 
             bool _is_realtime_animation = true);
     
-    ~VBModel();
+    virtual ~VBModel();
     
 #pragma mark -
 #pragma mark Animation

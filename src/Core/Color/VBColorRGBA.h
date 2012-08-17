@@ -129,7 +129,8 @@ extern "C" {
     
     
     
-    VBColorRGBA VBColorRGBADrawNormal(VBColorRGBA _color1, VBColorRGBA _color2);
+    VBColorRGBA VBColorRGBADraw_ONE_MINUS_SRC_ALPHA(VBColorRGBA _src, VBColorRGBA _dst);
+    VBColorRGBA VBColorRGBADraw_SRC_ALPHA(VBColorRGBA _src, VBColorRGBA _dst);
     
     VBColorRGBA VBColorRGBADrawColor(VBColorRGBA _color1, int _hex, int _maxDark, int _minDark);
 	
