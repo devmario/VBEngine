@@ -140,19 +140,19 @@ void VBModel::Update(float _tick, bool _is_top) {
     } else {
         VBModel* _parent = (VBModel*)getParent();
         if(_parent) {
-            mix_color = VBColorRGBAMultiply(color, _parent->mix_color);
+			if(_parent->use_mix_color) {
+				mix_color = VBColorRGBAMultiply(color, _parent->mix_color);
+			} else {
+				mix_color = VBColorRGBAMultiply(color, _parent->color);
+			}
         } else {
             mix_color = VBColorRGBAMultiply(color, VBColorRGBALoadIdentity());
         }
     }
     
     if(is_bitmap) {
-        ccColor3B _color3B;
-        _color3B.r = mix_color.r;
-        _color3B.g = mix_color.g;
-        _color3B.b = mix_color.b;
-        setColor(_color3B);
-        setOpacity(mix_color.a);
+		setColor((ccColor3B){mix_color.r, mix_color.g, mix_color.b});
+		setOpacity(mix_color.a);
     }
 	
     if(getChildren()) {

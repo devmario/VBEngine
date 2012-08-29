@@ -7,6 +7,8 @@
 VBModel::VBModel(CCTexture2D* _tex) {
     init();
 	
+	use_mix_color = true;
+	
 	is_bitmap = true;
     setTexture(_tex);
 	
@@ -18,6 +20,8 @@ VBModel::VBModel(CCTexture2D* _tex) {
 
 VBModel::VBModel() : CCSprite() {
     init();
+	
+	use_mix_color = true;
 	setBlendFunc((ccBlendFunc){GL_ONE, GL_ONE_MINUS_SRC_ALPHA});
 }
 

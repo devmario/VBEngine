@@ -17,6 +17,7 @@ private:
     VBColorRGBA color;
 protected:
 	VBColorRGBA mix_color;
+	bool use_mix_color;
 private:
     
     bool is_real_time_animation;
@@ -170,6 +171,8 @@ public:
     void SetBrightness(unsigned char _brightness);
     //밝기 가져오기
     unsigned char GetBrightness();
+	
+	void SetUseMixColor(bool _value);
     
 #pragma mark -
 #pragma mark Update

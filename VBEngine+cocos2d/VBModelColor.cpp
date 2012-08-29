@@ -25,3 +25,7 @@ void VBModel::SetBrightness(unsigned char _brightness) {
 unsigned char VBModel::GetBrightness() {
     return color.r;
 }
+
+void VBModel::SetUseMixColor(bool _value) {
+	use_mix_color = _value;
+}

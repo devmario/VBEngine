@@ -2,6 +2,8 @@
 
 void VBModel::InitWithLibName(VBObjectFile2D* _obj2D, CCTexture2D* _texture, VBObjectFile2DLibraryNameID* _library_name_id, bool _is_realtime_animation) {
     init();
+	
+	use_mix_color = true;
     
     is_use_animation = true;
     is_play_loop = true;

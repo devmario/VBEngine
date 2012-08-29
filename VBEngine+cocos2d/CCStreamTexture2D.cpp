@@ -14,15 +14,19 @@
 CCStreamTexture2D::CCStreamTexture2D() : CCTexture2D() {
 	
 }
+CCStreamTexture2D::~CCStreamTexture2D() {
+}
 void CCStreamTexture2D::reload(CCImage* img) {
 	if(m_uName)
 		glDeleteTextures(1, &m_uName);
+	m_uName = 0;
 	initWithImage(img);
 }
 
 void CCStreamTexture2D::reload(const void *data, CCTexture2DPixelFormat pixelFormat, unsigned int pixelsWide, unsigned int pixelsHigh) {
 	if(m_uName)
 		glDeleteTextures(1, &m_uName);
+	m_uName = 0;
 	
 	unsigned int POTWide, POTHigh;
 	
