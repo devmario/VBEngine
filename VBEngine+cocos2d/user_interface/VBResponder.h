@@ -10,9 +10,11 @@ class VBResponder {
 private:
 	list<VBResponder*>::iterator responder_iterator;
 	bool is_active;
+	std::string tag;
 	
 public:
-	VBResponder() {
+	VBResponder(std::string _tag = "") {
+		tag = _tag;
 		RegistResponder();
 	};
 	~VBResponder() {
@@ -27,6 +29,10 @@ public:
 		return is_active;
 	}
 	
+	std::string GetResponderTag() {
+		return tag;
+	}
+	
 	void RegistResponder();
 	void UnregistResponder();
 	
@@ -36,9 +42,9 @@ public:
 	virtual void TouchCancel(CCTouch* _touch) {};
 };
 
-void VBResponderTouchBegin(CCTouch* _touch);
-void VBResponderTouchMove(CCTouch* _touch);
-void VBResponderTouchEnd(CCTouch* _touch);
-void VBResponderTouchCancel(CCTouch* _touch);
+void VBResponderTouchBegin(CCTouch* _touch, std::string _tag = "");
+void VBResponderTouchMove(CCTouch* _touch, std::string _tag = "");
+void VBResponderTouchEnd(CCTouch* _touch, std::string _tag = "");
+void VBResponderTouchCancel(CCTouch* _touch, std::string _tag = "");
 
 #endif

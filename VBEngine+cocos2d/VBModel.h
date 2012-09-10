@@ -181,6 +181,10 @@ public:
     //_tick:경과시간(1.0 == 1sec)
     //_is_top:최상위 model의 경우에만 true
     virtual void Update(float _tick, bool _is_top = false);
+	
+	VBColorRGBA GetMixColor() {
+		return mix_color;
+	}
     
 #pragma mark -
 #pragma mark Texture

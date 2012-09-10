@@ -1,6 +1,6 @@
 #include "VBButton.h"
 
-VBButton::VBButton(VBModel* _model, VBButtonProtocol* _protocol) : VBResponder() {
+VBButton::VBButton(VBModel* _model, VBButtonProtocol* _protocol, std::string _responder_tag) : VBResponder(_responder_tag) {
     model = _model;
     model_area = _model->GetChildByInstanceName("area");
     if(!model_area)

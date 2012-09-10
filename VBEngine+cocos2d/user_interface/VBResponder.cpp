@@ -14,42 +14,50 @@ void VBResponder::UnregistResponder() {
 	_responders->erase(responder_iterator);
 }
 
-void VBResponderTouchBegin(CCTouch* _touch) {
+void VBResponderTouchBegin(CCTouch* _touch, std::string _tag) {
 	list<VBResponder*>::iterator _it = _responders->begin();
 	while(_it != _responders->end()) {
 		VBResponder* _responder = *_it;
-		if(_responder->GetIsActive())
-			_responder->TouchBegin(_touch);
+		if(_responder->GetResponderTag() == _tag) {
+			if(_responder->GetIsActive())
+				_responder->TouchBegin(_touch);
+		}
 		_it++;
 	}
 }
 
-void VBResponderTouchMove(CCTouch* _touch) {
+void VBResponderTouchMove(CCTouch* _touch, std::string _tag) {
 	list<VBResponder*>::iterator _it = _responders->begin();
 	while(_it != _responders->end()) {
 		VBResponder* _responder = *_it;
-		if(_responder->GetIsActive())
-			_responder->TouchMove(_touch);
+		if(_responder->GetResponderTag() == _tag) {
+			if(_responder->GetIsActive())
+				_responder->TouchMove(_touch);
+		}
 		_it++;
 	}
 }
 
-void VBResponderTouchEnd(CCTouch* _touch) {
+void VBResponderTouchEnd(CCTouch* _touch, std::string _tag) {
 	list<VBResponder*>::iterator _it = _responders->begin();
 	while(_it != _responders->end()) {
 		VBResponder* _responder = *_it;
-		if(_responder->GetIsActive())
-			_responder->TouchEnd(_touch);
+		if(_responder->GetResponderTag() == _tag) {
+			if(_responder->GetIsActive())
+				_responder->TouchEnd(_touch);
+		}
 		_it++;
 	}
 }
 
-void VBResponderTouchCancel(CCTouch* _touch) {
+void VBResponderTouchCancel(CCTouch* _touch, std::string _tag) {
 	list<VBResponder*>::iterator _it = _responders->begin();
 	while(_it != _responders->end()) {
 		VBResponder* _responder = *_it;
-		if(_responder->GetIsActive())
-			_responder->TouchCancel(_touch);
+		if(_responder->GetResponderTag() == _tag) {
+			if(_responder->GetIsActive())
+				_responder->TouchCancel(_touch);
+		}
 		_it++;
 	}
 }

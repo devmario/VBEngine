@@ -20,7 +20,7 @@ protected:
     CCTouch* touch;
     
 public:
-    VBButton(VBModel* _model, VBButtonProtocol* _protocol);
+    VBButton(VBModel* _model, VBButtonProtocol* _protocol, std::string _responder_tag = "");
     ~VBButton();
     
     bool GetIsDown();
