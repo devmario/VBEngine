@@ -162,9 +162,10 @@ void VBPNGFileLoad(VBPNGFile* _png, VBString* _path) {
             }
 			if(_type == PNG_COLOR_TYPE_PALETTE)
                 png_set_palette_to_rgb(_png_ptr);
-            
+#ifdef _VB_IPHONE_
             if(_type == PNG_COLOR_TYPE_GRAY && _png->color_bit < 8)
                 png_set_gray_1_2_4_to_8(_png_ptr);
+#endif
             
             if(png_get_valid(_png_ptr, _info_ptr, PNG_INFO_tRNS))
                 png_set_tRNS_to_alpha(_png_ptr);

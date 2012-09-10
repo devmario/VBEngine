@@ -136,6 +136,7 @@ static const char *ClassName =
 		"kr/daum_mobage/am_db/g13000041/GelatoManiaActivity";
 static jclass g_clazz;// use java static call method
 
+/*
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 {
 	jint result = -1;
@@ -161,6 +162,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 
 	return JNI_VERSION_1_4;
 }
+*/
 
 char* getResourcePath()
 {
@@ -272,7 +274,7 @@ bool fileCopy(const char* _srcPath, const char* _dstPath)
 FILE* android_fopen(const char* filename, const char* mode)
 {
 	FILE* fp = NULL;
-	char* resPath = getResourcePath();
+	char* resPath = VBStringGetCString(VBEngineGetResourcePath());//getResourcePath();
 	if ( strstr(filename, resPath) )
 	{
 		if (access(filename, R_OK) == 0)
