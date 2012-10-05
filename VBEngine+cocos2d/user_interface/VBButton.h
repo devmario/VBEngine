@@ -8,8 +8,8 @@ class VBButton;
 
 class VBButtonProtocol {
 public:
-    virtual void ButtonTouchDown(VBButton* _button, bool _is_inside) {};
-    virtual void ButtonTouchUp(VBButton* _button, bool _is_inside) {};
+    virtual void ButtonTouchDown(VBButton* _button, bool _is_inside) = 0;
+    virtual void ButtonTouchUp(VBButton* _button, bool _is_inside) = 0;
 };
 
 class VBButton : public VBResponder {

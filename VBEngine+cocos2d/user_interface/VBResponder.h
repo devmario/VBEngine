@@ -17,7 +17,7 @@ public:
 		tag = _tag;
 		RegistResponder();
 	};
-	~VBResponder() {
+	virtual ~VBResponder() {
 		UnregistResponder();
 	}
 	

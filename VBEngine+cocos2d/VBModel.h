@@ -152,7 +152,7 @@ public:
     virtual bool IsHitByPoint(CCPoint _point, bool _recursion = true);
     //Sprite와 Sprite의 충돌체크
     //_recursion:하위 트리 모두를 계산할 것인가의 여부
-    bool IsHit(VBModel* _model_tester, bool _recursion = true);
+    virtual bool IsHit(VBModel* _model_tester, bool _recursion = true);
     
 #pragma mark -
 #pragma mark Color
