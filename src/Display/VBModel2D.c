@@ -375,8 +375,8 @@ VBModel2D* VBModel2DInitWithLibraryNameIDAndTexture(VBModel2D* _model, VBObjectF
         }
         
         VBVector2D _lt;
-        _lt.x = __FLT_MAX__;
-        _lt.y = __FLT_MAX__;
+        _lt.x = 9999999999;
+        _lt.y = 9999999999;
         for(_i = 0; _i < VBObjectFile2DLibraryBitmapGetUVInfoLength(_bitmap); _i++) {
             if(_uv[_i].x < _lt.x)
                 _lt.x = _uv[_i].x;
@@ -979,8 +979,8 @@ VBFloat VBModel2DGetOriginWidth(VBModel2D* _model) {
     VBVector2D* _vtx = VBDrawable2DGetVertex(_model->origin_drawable);
     VBULong _len = VBDrawable2DGetPolygonLength(_model->origin_drawable);
     VBULong _i;
-    VBFloat _max = __FLT_MIN__;
-    VBFloat _min = __FLT_MAX__;
+    VBFloat _max = -9999999999;
+    VBFloat _min = 9999999999;
     if(_vtx) {
         for(_i = 0; _i < _len; _i++) {
             if(_max < _vtx[_i].x)
@@ -998,8 +998,8 @@ VBFloat VBModel2DGetOriginHeight(VBModel2D* _model) {
     VBVector2D* _vtx = VBDrawable2DGetVertex(_model->origin_drawable);
     VBULong _len = VBDrawable2DGetPolygonLength(_model->origin_drawable);
     VBULong _i;
-    VBFloat _max = __FLT_MIN__;
-    VBFloat _min = __FLT_MAX__;
+    VBFloat _max = -9999999999;
+    VBFloat _min = 9999999999;
     if(_vtx) {
         for(_i = 0; _i < _len; _i++) {
             if(_max < _vtx[_i].y)

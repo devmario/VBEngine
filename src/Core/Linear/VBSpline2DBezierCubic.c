@@ -132,7 +132,7 @@ VBBool VBSpline2DBezierCubicIsNearestCollisionLine2D(VBSpline2DBezierCubic* _bez
     _abcd[3] = _a.y * _v[3].x - _a.x * _v[3].y - _a.y * _b.x + _a.x * _b.y;
         
     //시작지점에 가장가까운 _s
-    VBFloat _min_s = FLT_MAX;
+    VBFloat _min_s = 9999999999;
     VBBool _is_found_result = VBFalse;
     
     //근의 공식을 이용한 베지어곡선의 t구하기

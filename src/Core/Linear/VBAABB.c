@@ -2,6 +2,7 @@
 #include <limits.h>
 #include <math.h>
 #include <stdlib.h>
+#include <float.h>
 
 VBAABB* VBAABBMemResizeAndSet(VBAABB* aabb, VBAABB aabbVal, int idx, int size) {
     if(aabb == NULL)
@@ -39,7 +40,7 @@ float VBAABBGetHeight(VBAABB _aabb) {
 }
 
 VBAABB VBAABBLoadIndentity(void) {
-    return VBAABBCreate(__FLT_MAX__, __FLT_MAX__, __FLT_MIN__, __FLT_MIN__);
+    return VBAABBCreate(9999999999, 9999999999, -9999999999, -9999999999);
 }
 
 VBAABB VBAABBCreate(VBFloat _l, VBFloat _t, VBFloat _r, VBFloat _b) {
