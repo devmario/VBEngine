@@ -33,7 +33,9 @@ VBModel::VBModel(VBObjectFile2D* _obj2D, CCTexture2D* _texture, const char* _lib
     if(_name_id) {
         InitWithLibName(_obj2D, _texture, _name_id, _is_realtime_animation);
         Stop();
-    }
+    } else {
+		assert(!(std::string("not found ") + _lib_name).c_str());
+	}
 	setBlendFunc((ccBlendFunc){GL_ONE, GL_ONE_MINUS_SRC_ALPHA});
 }
 

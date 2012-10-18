@@ -1,12 +1,17 @@
 #include "VBButton.h"
 
-VBButton::VBButton(VBModel* _model, VBButtonProtocol* _protocol, std::string _responder_tag) : VBResponder(_responder_tag) {
+VBButton::VBButton(VBModel* _model,
+				   VBButtonProtocol* _protocol,
+				   std::string _responder_tag,
+				   bool _is_always_event) :
+VBResponder(_responder_tag) {
     model = _model;
     model_area = _model->GetChildByInstanceName("area");
     if(!model_area)
         model_area = model;
     touch = NULL;
     protocol = _protocol;
+	is_always_event = _is_always_event;
 }
 
 VBButton::~VBButton() {
@@ -30,12 +35,17 @@ void VBButton::TouchBegin(CCTouch* _touch) {
         return;
     if(!model)
         return;
-    if(touch)
-        return;
-    bool _hit = model_area->IsHitByPoint(_touch->locationInView());
-    if(_hit)
-    	touch = _touch;
-    protocol->ButtonTouchDown(this, _hit);
+	if(is_always_event) {
+		touch = _touch;
+		protocol->ButtonTouchDown(this, model_area->IsHitByPoint(_touch->locationInView()));
+	} else {
+		if(touch)
+			return;
+		bool _hit = model_area->IsHitByPoint(_touch->locationInView());
+		if(_hit)
+			touch = _touch;
+		protocol->ButtonTouchDown(this, _hit);
+	}
 }
 
 void VBButton::TouchEnd(CCTouch* _touch) {
@@ -44,8 +54,12 @@ void VBButton::TouchEnd(CCTouch* _touch) {
         return;
     if(!model)
         return;
-    if(_touch != touch)
-        return;
-    protocol->ButtonTouchUp(this, model_area->IsHitByPoint(_touch->locationInView()));
-    touch = NULL;
+	if(is_always_event) {
+		protocol->ButtonTouchUp(this, model_area->IsHitByPoint(_touch->locationInView()));
+	} else {
+		if(_touch != touch)
+			return;
+		protocol->ButtonTouchUp(this, model_area->IsHitByPoint(_touch->locationInView()));
+	}
+	touch = NULL;
 }

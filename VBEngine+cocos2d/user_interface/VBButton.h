@@ -18,9 +18,13 @@ protected:
     VBModel* model;
     VBModel* model_area;
     CCTouch* touch;
+	bool is_always_event;
     
 public:
-    VBButton(VBModel* _model, VBButtonProtocol* _protocol, std::string _responder_tag = "");
+    VBButton(VBModel* _model,
+			 VBButtonProtocol* _protocol,
+			 std::string _responder_tag = "",
+			 bool _is_always_event = false);
     ~VBButton();
     
     bool GetIsDown();
