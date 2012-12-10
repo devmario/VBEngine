@@ -19,13 +19,22 @@ protected:
     VBModel* model_area;
     CCTouch* touch;
 	bool is_always_event;
+	bool act_enable;
     
 public:
     VBButton(VBModel* _model,
 			 VBButtonProtocol* _protocol,
 			 std::string _responder_tag = "",
 			 bool _is_always_event = false);
-    ~VBButton();
+    virtual ~VBButton();
+	
+	void SetActEnable(bool _enable) {
+		act_enable = _enable;
+	}
+	
+	bool GetActEnable() {
+		return act_enable;
+	}
     
     bool GetIsDown();
     CCTouch* GetTouch();

@@ -5,6 +5,7 @@ VBButton::VBButton(VBModel* _model,
 				   std::string _responder_tag,
 				   bool _is_always_event) :
 VBResponder(_responder_tag) {
+	act_enable = true;
     model = _model;
     model_area = _model->GetChildByInstanceName("area");
     if(!model_area)
@@ -30,6 +31,9 @@ VBModel* VBButton::GetModel() {
 }
 
 void VBButton::TouchBegin(CCTouch* _touch) {
+	if(!act_enable)
+		return;
+	
 	VBResponder::TouchBegin(_touch);
     if(!protocol)
         return;
@@ -49,6 +53,9 @@ void VBButton::TouchBegin(CCTouch* _touch) {
 }
 
 void VBButton::TouchEnd(CCTouch* _touch) {
+	if(!act_enable)
+		return;
+	
 	VBResponder::TouchEnd(_touch);
     if(!protocol)
         return;

@@ -13,10 +13,12 @@ private:
 #pragma mark member(private)
     
     bool is_bitmap;
-    
+	
+public:
     VBColorRGBA color;
-protected:
 	VBColorRGBA mix_color;
+    
+protected:
 	bool use_mix_color;
 private:
     
