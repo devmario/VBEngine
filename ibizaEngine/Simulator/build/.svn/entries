@@ -1,37 +1,0 @@
-10
-
-dir
-22
-http://svn.v-b.kr/repos/ibiza/branch/ibizaSimulator/build
-http://svn.v-b.kr/repos/ibiza
-
-
-
-2011-01-10T02:26:42.761901Z
-19
-mario
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2891efda-b6b8-4838-91a6-1a5445073ebb
-
-Debug
-dir
-
-ibizaXcodeForMac.build
-dir
-
-ibizaSimulator.build
-dir
-

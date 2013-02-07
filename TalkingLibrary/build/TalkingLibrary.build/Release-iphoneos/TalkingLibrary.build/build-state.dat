@@ -1,505 +1,0 @@
-TTalkingLibrary
-v7
-r0
-t318735536.413942
-cCheck dependencies
-cProcessPCH /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch.gch TalkingLibrary_Prefix.pch normal armv6 c com.apple.compilers.gcc.4_2
-cProcessPCH /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch.gch TalkingLibrary_Prefix.pch normal armv7 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioInput.o /Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c normal armv6 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/Talking.o /Users/jangwonhee/Documents/TalkingLibrary/Talking.c normal armv6 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioRecoder.o /Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c normal armv6 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioPlayer.o /Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c normal armv6 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/Equalizer.o /Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c normal armv6 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/chuck_fft.o /Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c normal armv6 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioInput.o /Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c normal armv7 c com.apple.compilers.gcc.4_2
-cLibtool /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/libTalkingLibrary.a normal armv6
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/Talking.o /Users/jangwonhee/Documents/TalkingLibrary/Talking.c normal armv7 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioRecoder.o /Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c normal armv7 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioPlayer.o /Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c normal armv7 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/Equalizer.o /Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c normal armv7 c com.apple.compilers.gcc.4_2
-cCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/chuck_fft.o /Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c normal armv7 c com.apple.compilers.gcc.4_2
-cLibtool /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/libTalkingLibrary.a normal armv7
-cCreateUniversalBinary /Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/libTalkingLibrary.a normal "armv6 armv7"
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk
-c000000004D33AE0B0000000000000110
-t1295232523
-s272
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AVFoundation.framework/AVFoundation
-c000000004D30355D0000000000248DC0
-t1295005021
-s2395584
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
-c000000004D3033550000000000453300
-t1295004501
-s4535040
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AudioToolbox.framework/Headers/AudioQueue.h
-c000000004D30333000000000000126F8
-t1295004464
-s75512
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AudioToolbox.framework/Headers/AudioToolbox.h
-c000000004D3033310000000000000A23
-t1295004465
-s2595
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AudioUnit.framework/AudioUnit
-c00000000000000000000000000000000
-t2
-s0
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AudioUnit.framework/Headers/AudioComponent.h
-c000000004D30332C00000000000044DA
-t1295004460
-s17626
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AudioUnit.framework/Headers/AudioUnit.h
-c000000004D30332C000000000000041E
-t1295004460
-s1054
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004D2BF8E200000000003E2290
-t1294727394
-s4072080
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004D2BF8C30000000000001466
-t1294727363
-s5222
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/math.h
-c000000004D2BE9B000000000000004F1
-t1294723504
-s1265
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/stdio.h
-c000000004D2BE9F30000000000004763
-t1294723571
-s18275
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/stdlib.h
-c000000004D2BE9F300000000000030A7
-t1294723571
-s12455
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/string.h
-c000000004D2BE9F30000000000001A3A
-t1294723571
-s6714
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/gcc/arm-apple-darwin10/4.2.1/include/limits.h
-c000000004D09AC6C0000000000000C7E
-t1292479596
-s3198
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/gcc/arm-apple-darwin10/4.2.1/include/stdbool.h
-c000000004D09AC6C0000000000000644
-t1292479596
-s1604
-
-N/Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c
-c000000004D4F4D1A0000000000002C8C
-t1297042714
-s11404
-i"AudioInput.h"
-
-N/Users/jangwonhee/Documents/TalkingLibrary/AudioInput.h
-c000000004D37C24500000000000008F4
-t1295499845
-s2292
-i<stdbool.h>
-i<AudioToolbox/AudioToolbox.h>
-i<AudioUnit/AudioUnit.h>
-i<AudioUnit/AudioComponent.h>
-i<AudioToolbox/AudioQueue.h>
-
-N/Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c
-c000000004D4F4D2F0000000000001478
-t1297042735
-s5240
-i"AudioPlayer.h"
-i<stdlib.h>
-i<string.h>
-
-N/Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.h
-c000000004D3518C0000000000000055A
-t1295325376
-s1370
-i<stdio.h>
-i<stdbool.h>
-i<AudioToolbox/AudioToolbox.h>
-i<AudioUnit/AudioUnit.h>
-i<AudioUnit/AudioComponent.h>
-i<AudioToolbox/AudioQueue.h>
-
-N/Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c
-c000000004D35636400000000000005AC
-t1295344484
-s1452
-i"AudioRecoder.h"
-i<stdlib.h>
-i<string.h>
-
-N/Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.h
-c000000004D352F6E0000000000000254
-t1295331182
-s596
-i<stdio.h>
-i<stdbool.h>
-
-N/Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c
-c000000004D37E1EE0000000000000477
-t1295507950
-s1143
-i"Equalizer.h"
-i<stdlib.h>
-i"chuck_fft.h"
-i<limits.h>
-i<math.h>
-
-N/Users/jangwonhee/Documents/TalkingLibrary/Equalizer.h
-c000000004D4F4CC200000000000002B8
-t1297042626
-s696
-
-N/Users/jangwonhee/Documents/TalkingLibrary/Talking.c
-c000000004D37C36B00000000000022D6
-t1295500139
-s8918
-i"Talking.h"
-i<stdlib.h>
-i"AudioInput.h"
-i"Equalizer.h"
-i"AudioRecoder.h"
-i"AudioPlayer.h"
-i<AudioToolbox/AudioToolbox.h>
-i<AudioUnit/AudioUnit.h>
-i<AudioUnit/AudioComponent.h>
-i<AudioToolbox/AudioQueue.h>
-
-N/Users/jangwonhee/Documents/TalkingLibrary/Talking.h
-c000000004D37C9A500000000000012D8
-t1295501733
-s4824
-i<stdio.h>
-i<stdbool.h>
-
-N/Users/jangwonhee/Documents/TalkingLibrary/TalkingLibrary_Prefix.pch
-c000000004D356FB800000000000000BC
-t1295347640
-s188
-i<Foundation/Foundation.h>
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/libTalkingLibrary.a
-t1297042736
-s149816
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioInput.o
-t1297042736
-s23184
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioPlayer.o
-t1297042736
-s13268
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioRecoder.o
-t1295497858
-s6720
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/Equalizer.o
-t1297042707
-s4600
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/Talking.o
-t1297042707
-s16888
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/TalkingLibrary.LinkFileList
-c000000004D37BA810000000000000352
-t1295497857
-s850
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/chuck_fft.o
-t1295497858
-s10988
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/libTalkingLibrary.a
-t1297042736
-s77440
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioInput.o
-t1297042736
-s22800
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioPlayer.o
-t1297042736
-s12916
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioRecoder.o
-t1295497858
-s6208
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/Equalizer.o
-t1297042708
-s4152
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/Talking.o
-t1297042708
-s16012
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/TalkingLibrary.LinkFileList
-c000000004D37BA810000000000000352
-t1295497857
-s850
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/chuck_fft.o
-t1295497858
-s8448
-
-N/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/libTalkingLibrary.a
-t1297042736
-s72328
-
-N/Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c
-c000000004B035ACC0000000000001E8E
-t1258511052
-s7822
-i"chuck_fft.h"
-i<stdlib.h>
-i<math.h>
-
-N/Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.h
-c000000004D2AA1D60000000000000505
-t1294639574
-s1285
-
-N/var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch.gch
-t1295497857
-s1261796
-
-N/var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch.gch
-t1295497857
-s1716452
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies318735535#318735535#0(0"0(0#1#0"8638505088#0"0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioInput.o /Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c normal armv6 c com.apple.compilers.gcc.4_2
-s318735535.934862
-e318735536.214798
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioInput.o
-x/Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@63"Compile /Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c318735535#318735536#0(0"0(0#0#55"/Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c8639437984#1908"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv6 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioInput.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioPlayer.o /Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c normal armv6 c com.apple.compilers.gcc.4_2
-s318735535.936090
-e318735536.132776
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioPlayer.o
-x/Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@64"Compile /Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c318735535#318735536#0(0"0(0#0#56"/Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c8638017824#1910"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv6 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioPlayer.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioRecoder.o /Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c normal armv6 c com.apple.compilers.gcc.4_2
-s317190658.114952
-e317190658.188168
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioRecoder.o
-x/Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@65"Compile /Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c317190658#317190658#0(0"0(0#0#57"/Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c8607995520#1912"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv6 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/AudioRecoder.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/Equalizer.o /Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c normal armv6 c com.apple.compilers.gcc.4_2
-s318735507.604381
-e318735507.668484
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/Equalizer.o
-x/Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@62"Compile /Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c318735507#318735507#0(0"0(0#0#54"/Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c8636040384#1906"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv6 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/Equalizer.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/Talking.o /Users/jangwonhee/Documents/TalkingLibrary/Talking.c normal armv6 c com.apple.compilers.gcc.4_2
-s318735507.338135
-e318735507.564229
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/Talking.o
-x/Users/jangwonhee/Documents/TalkingLibrary/Talking.c
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@60"Compile /Users/jangwonhee/Documents/TalkingLibrary/Talking.c318735507#318735507#0(0"0(0#0#52"/Users/jangwonhee/Documents/TalkingLibrary/Talking.c8641900352#1902"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv6 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/Talking.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/Talking.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/chuck_fft.o /Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c normal armv6 c com.apple.compilers.gcc.4_2
-s317190658.266669
-e317190658.439349
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/chuck_fft.o
-x/Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@62"Compile /Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c317190658#317190658#0(0"0(0#0#54"/Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c8608251040#1906"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv6 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/chuck_fft.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioInput.o /Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c normal armv7 c com.apple.compilers.gcc.4_2
-s318735536.133069
-e318735536.400206
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioInput.o
-x/Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c
-xnormal
-xarmv7
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@63"Compile /Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c318735536#318735536#0(0"0(0#0#55"/Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c8639669312#1908"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv7 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/AudioInput.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioInput.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioPlayer.o /Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c normal armv7 c com.apple.compilers.gcc.4_2
-s318735536.220344
-e318735536.398268
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioPlayer.o
-x/Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c
-xnormal
-xarmv7
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@64"Compile /Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c318735536#318735536#0(0"0(0#0#56"/Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c8638311168#1910"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv7 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/AudioPlayer.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioPlayer.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioRecoder.o /Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c normal armv7 c com.apple.compilers.gcc.4_2
-s317190658.664536
-e317190658.742072
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioRecoder.o
-x/Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c
-xnormal
-xarmv7
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@65"Compile /Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c317190658#317190658#0(0"0(0#0#57"/Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c8602306848#1912"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv7 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/AudioRecoder.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/AudioRecoder.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/Equalizer.o /Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c normal armv7 c com.apple.compilers.gcc.4_2
-s318735508.032709
-e318735508.102629
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/Equalizer.o
-x/Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c
-xnormal
-xarmv7
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@62"Compile /Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c318735508#318735508#0(0"0(0#0#54"/Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c8640928864#1906"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv7 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/Equalizer.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/Equalizer.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/Talking.o /Users/jangwonhee/Documents/TalkingLibrary/Talking.c normal armv7 c com.apple.compilers.gcc.4_2
-s318735507.777116
-e318735508.032609
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/Talking.o
-x/Users/jangwonhee/Documents/TalkingLibrary/Talking.c
-xnormal
-xarmv7
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@60"Compile /Users/jangwonhee/Documents/TalkingLibrary/Talking.c318735507#318735508#0(0"0(0#0#52"/Users/jangwonhee/Documents/TalkingLibrary/Talking.c8638338240#1902"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv7 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/Talking.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/Talking.o0#
-
-CCompileC build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/chuck_fft.o /Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c normal armv7 c com.apple.compilers.gcc.4_2
-s317190658.820428
-e317190658.939209
-r1
-xCompileC
-xbuild/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/chuck_fft.o
-x/Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c
-xnormal
-xarmv7
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@62"Compile /Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c317190658#317190658#0(0"0(0#0#54"/Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c8607929600#1906"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv7 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -include /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch -c /Users/jangwonhee/Documents/TalkingLibrary/chuck_fft.c -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/chuck_fft.o0#
-
-CCreateUniversalBinary /Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/libTalkingLibrary.a normal "armv6 armv7"
-s318735536.405775
-e318735536.413898
-r1
-xCreateUniversalBinary
-x/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/libTalkingLibrary.a
-xnormal
-xarmv6 armv7
-lSLF07#2@85"CreateUniversalBinary build/Release-iphoneos/libTalkingLibrary.a normal "armv6 armv7"318735536#318735536#0(0"0(0#0#54"/Users/jangwonhee/Documents/TalkingLibrary/armv6 armv78636388704#638"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/libTalkingLibrary.a /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/libTalkingLibrary.a -o /Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/libTalkingLibrary.a0#
-
-CLibtool /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/libTalkingLibrary.a normal armv6
-s318735536.214893
-e318735536.220070
-r1
-xLibtool
-x/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/libTalkingLibrary.a
-xnormal
-xarmv6
-o/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
-lSLF07#2@126"Libtool build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/libTalkingLibrary.a normal armv6318735536#318735536#0(129"/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 0(0#0#0"8638916992#831"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv IPHONEOS_DEPLOYMENT_TARGET 4.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static -arch_only armv6 -syslibroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -filelist /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/TalkingLibrary.LinkFileList -ObjC -framework Foundation -framework AVFoundation -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv6/libTalkingLibrary.a0#
-
-CLibtool /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/libTalkingLibrary.a normal armv7
-s318735536.400283
-e318735536.405692
-r1
-xLibtool
-x/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/libTalkingLibrary.a
-xnormal
-xarmv7
-o/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
-lSLF07#2@126"Libtool build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/libTalkingLibrary.a normal armv7318735536#318735536#0(129"/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 0(0#0#0"8636779424#831"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv IPHONEOS_DEPLOYMENT_TARGET 4.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static -arch_only armv7 -syslibroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -filelist /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/TalkingLibrary.LinkFileList -ObjC -framework Foundation -framework AVFoundation -o /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/Objects-normal/armv7/libTalkingLibrary.a0#
-
-CProcessPCH /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch.gch TalkingLibrary_Prefix.pch normal armv6 c com.apple.compilers.gcc.4_2
-s317190657.790141
-e317190657.857284
-r1
-xProcessPCH
-x/var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch.gch
-xTalkingLibrary_Prefix.pch
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@36"Precompile TalkingLibrary_Prefix.pch317190657#317190657#0(0"0(0#0#68"/Users/jangwonhee/Documents/TalkingLibrary/TalkingLibrary_Prefix.pch8608645536#1781"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c-header -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv6 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -c /Users/jangwonhee/Documents/TalkingLibrary/TalkingLibrary_Prefix.pch -o /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-cisdluldftswddepbdwuytgkgefd/TalkingLibrary_Prefix.pch.gch0#
-
-CProcessPCH /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch.gch TalkingLibrary_Prefix.pch normal armv7 c com.apple.compilers.gcc.4_2
-s317190657.791171
-e317190657.871805
-r1
-xProcessPCH
-x/var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch.gch
-xTalkingLibrary_Prefix.pch
-xnormal
-xarmv7
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@36"Precompile TalkingLibrary_Prefix.pch317190657#317190657#0(0"0(0#0#68"/Users/jangwonhee/Documents/TalkingLibrary/TalkingLibrary_Prefix.pch8606108832#1781"    cd /Users/jangwonhee/Documents/TalkingLibrary    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c-header -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-generated-files.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-own-target-headers.hmap -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-all-target-headers.hmap -iquote /Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/TalkingLibrary-project-headers.hmap -F/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos -I/Users/jangwonhee/Documents/TalkingLibrary/build/Release-iphoneos/include -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources/armv7 -I/Users/jangwonhee/Documents/TalkingLibrary/build/TalkingLibrary.build/Release-iphoneos/TalkingLibrary.build/DerivedSources -c /Users/jangwonhee/Documents/TalkingLibrary/TalkingLibrary_Prefix.pch -o /var/folders/dW/dWW8-eeTEni4J-HWMKTwf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TalkingLibrary_Prefix-drnhqfyldhczwicccykoregcudoe/TalkingLibrary_Prefix.pch.gch0#
-

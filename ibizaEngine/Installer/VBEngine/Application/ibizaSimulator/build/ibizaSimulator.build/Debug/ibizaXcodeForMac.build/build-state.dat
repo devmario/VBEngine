@@ -1,1511 +1,0 @@
-TibizaXcodeForMac
-v7
-r0
-t311065594.183395
-cCheck dependencies
-cProcessInfoPlistFile /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/Info.plist ibizaXcodeForMac-Info.plist
-cCopyStringsFile /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
-cCompileXIB /Users/mario/ibiza1.0/ibizaSimulator/English.lproj/MainMenu.xib
-cCpResource build/Debug/ibizaXcodeForMac.app/Contents/Resources/ibiza.obj ../ibiza.obj
-cProcessPCH /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch.gch ibizaXcodeForMac_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cProcessPCH /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch.gch ibizaXcodeForMac_Prefix.pch normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/main.o /Users/mario/ibiza1.0/ibizaSimulator/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ibizaXcodeForMacAppDelegate.o /Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMacAppDelegate.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Tutorial.o /Users/mario/ibiza1.0/ibizaSimulator/../Tutorial.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Color.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Color.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Matrix.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Matrix.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Plane.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Plane.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Polygon.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Polygon.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Quaternion.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Quaternion.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Vector.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Vector.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Camera.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Camera.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/LayoutAndAnimationData.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/LayoutAndAnimationData.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Light.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Light.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Model.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Model.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelCollision.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelCollision.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelEvent.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelEvent.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelManager.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelManager.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelMatrix.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelMatrix.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelTree.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelTree.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Object2D.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object2D.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Object3D.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object3D.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ObjFileForModel.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ObjFileForModel.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Button.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Button.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/CoverFlow.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/CoverFlow.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Font.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Font.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Keyboard.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Keyboard.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Popup.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Popup.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Table.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Table.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Text.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Text.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/TextInput.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/TextInput.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/pngLoad.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/pngLoad.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Array.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Array.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Tween.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Tween.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLVIEW.o /Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/drawInfo.o /Users/mario/ibiza1.0/ibizaSimulator/glutil/drawInfo.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLCheck.o /Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLString.o /Users/mario/ibiza1.0/ibizaSimulator/glutil/GLString.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/trackball.o /Users/mario/ibiza1.0/ibizaSimulator/glutil/trackball.c normal x86_64 c com.apple.compilers.gcc.4_2
-cLd /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/MacOS/ibizaXcodeForMac normal x86_64
-cTouch /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app
-
-N/Developer/SDKs/MacOSX10.6.sdk
-c000000004CAA740B00000000000000EE
-t1286239243
-s238
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.h
-c000000004A12050C0000000000000475
-t1242694924
-s1141
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
-c0000000040C4AA6800000000000001E5
-t1086630504
-s485
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/OpenGL.framework/Headers/CGLContext.h
-c000000004BD2501F000000000000022D
-t1272074271
-s557
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/OpenGL.framework/Headers/OpenGL.h
-c000000004BD2501F0000000000001659
-t1272074271
-s5721
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/OpenGL.framework/Headers/gl.h
-c000000004BD2501F0000000000025B59
-t1272074271
-s154457
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glext.h
-c000000004BD2501F0000000000042ACF
-t1272074271
-s273103
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glu.h
-c000000004BD2501F0000000000003F84
-t1272074271
-s16260
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/OpenGL.framework/OpenGL
-c000000004CAA7405000000000000DB14
-t1286239237
-s56084
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdio.h
-c000000004BBD2CE90000000000004174
-t1270689001
-s16756
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdlib.h
-c000000004BBD2CE90000000000002DF5
-t1270689001
-s11765
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/string.h
-c000000004BBD2CE90000000000001731
-t1270689001
-s5937
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/sys/stat.h
-c000000004C2399480000000000004A1D
-t1277401416
-s18973
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/lib/gcc/i686-apple-darwin10/4.2.1/include/stdbool.h
-c000000004A11EB240000000000000644
-t1242688292
-s1604
-
-N/System/Library/Frameworks/Cocoa.framework/Cocoa
-c000000004A1F2D63000000000000A5E0
-t1243557219
-s42464
-
-N/Users/mario/ibiza1.0/Tutorial.h
-c000000004CDA3BDD0000000000000288
-t1289370589
-s648
-i"Model.h"
-i"ObjFileForModel.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Core/Color.h
-c000000004C85EB84000000000000034A
-t1283844996
-s842
-i<stdbool.h>
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Core/Math.h
-c000000004CBF97F700000000000000DB
-t1287624695
-s219
-i<math.h>
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Core/Matrix.h
-c000000004CD4F2370000000000000848
-t1289024055
-s2120
-i<stdbool.h>
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Core/Plane.h
-c000000004C3559C5000000000000010E
-t1278564805
-s270
-i<stdbool.h>
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Core/Polygon.h
-c000000004C3559C5000000000000015D
-t1278564805
-s349
-i<stdbool.h>
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Core/Quaternion.h
-c000000004C7BCFA200000000000005CA
-t1283182498
-s1482
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Core/Vector.h
-c000000004C3559C500000000000009BB
-t1278564805
-s2491
-i<stdbool.h>
-i"Vector.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Object/Camera.h
-c000000004C7CB41D0000000000000232
-t1283240989
-s562
-i"Vector.h"
-i"Matrix.h"
-i"tween.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Object/LayoutAndAnimationData.h
-c000000004CCE78D200000000000003F1
-t1288599762
-s1009
-i"Model.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Object/Light.h
-c000000004C3559C500000000000002AC
-t1278564805
-s684
-i<stdbool.h>
-i"Array.h"
-i"Vector.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Object/Model.h
-c000000004CD8F60500000000000030EB
-t1289287173
-s12523
-i<stdbool.h>
-i"../Core/Color.h"
-i"../Core/Vector.h"
-i"../Core/Matrix.h"
-i"../Core/Quaternion.h"
-i"../Core/Polygon.h"
-i"../../Util/Array.h"
-i"Camera.h"
-i"Light.h"
-i"Object2D.h"
-i"Object3D.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Object/ObjFileForModel.h
-c000000004CD93AFA00000000000008CF
-t1289304826
-s2255
-i<OpenGLES/ES1/gl.h>
-i<OpenGL/OpenGL.h>
-i"Model.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Object/Object2D.h
-c000000004CCE65B60000000000000461
-t1288594870
-s1121
-i<stdbool.h>
-i"../../Util/Array.h"
-i"../Core/Vector.h"
-i<stdio.h>
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/Object/Object3D.h
-c000000004C3559C5000000000000038F
-t1278564805
-s911
-i<stdbool.h>
-i"../Core/Vector.h"
-i"../Core/Polygon.h"
-i"../../Util/Array.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/UI/Button.h
-c000000004C876D6800000000000004F4
-t1283943784
-s1268
-i"../Object/Model.h"
-i"../../Util/Tween.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/UI/CoverFlow.h
-c000000004C5286A60000000000000714
-t1280476838
-s1812
-i<stdbool.h>
-i"Model.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/UI/Font.h
-c000000004C3559C50000000000000269
-t1278564805
-s617
-i"../Core/Vector.h"
-i"../Object/Object2D.h"
-i<stdbool.h>
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/UI/Keyboard.h
-c000000004C3559C50000000000000189
-t1278564805
-s393
-i<stdbool.h>
-i"Model.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/UI/Popup.h
-c000000004C3559C5000000000000030C
-t1278564805
-s780
-i<stdbool.h>
-i"Model.h"
-i"Tween.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/UI/Table.h
-c000000004C527EEF0000000000001A8A
-t1280474863
-s6794
-i<stdbool.h>
-i"Model.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/UI/Text.h
-c000000004C3559C500000000000004BF
-t1278564805
-s1215
-i"../Object/Model.h"
-i"../../Util/Array.h"
-i<stdbool.h>
-i"Font.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Display/UI/TextInput.h
-c000000004C3559C500000000000005FA
-t1278564805
-s1530
-i"Text.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Util/Array.h
-c000000004C3559C500000000000002A1
-t1278564805
-s673
-i<stdbool.h>
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/Util/Tween.h
-c000000004C3559C50000000000001BF5
-t1278564805
-s7157
-i<stdbool.h>
-i"Array.h"
-
-N/Users/mario/ibiza1.0/ibizaRenderengine/pngLoad.h
-c000000004CD9179A0000000000000264
-t1289295770
-s612
-i<OpenGLES/ES1/gl.h>
-i<OpenGL/OpenGL.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../Tutorial.c
-c000000004CDA42BA0000000000001838
-t1289372346
-s6200
-i"Tutorial.h"
-i<stdlib.h>
-i<stdio.h>
-i<string.h>
-i<math.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibiza.obj
-c000000004CD908740000000000031962
-t1289291892
-s203106
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Color.c
-c000000004C85E9FD0000000000000497
-t1283844605
-s1175
-i"Color.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Math.h
-c000000004CBF97F700000000000000DB
-t1287624695
-s219
-i<math.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Matrix.c
-c000000004CBBB4090000000000001E4E
-t1287369737
-s7758
-i"Vector.h"
-i"Matrix.h"
-i"Quaternion.h"
-i<math.h>
-i"Math.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Plane.c
-c000000004C3559C500000000000000A0
-t1278564805
-s160
-i"Plane.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Polygon.c
-c000000004C3559C500000000000000BC
-t1278564805
-s188
-i"Polygon.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Quaternion.c
-c000000004C7BD0170000000000001423
-t1283182615
-s5155
-i"Vector.h"
-i"Matrix.h"
-i"Quaternion.h"
-i<math.h>
-i<stdlib.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Vector.c
-c000000004C7C5EA20000000000000D7D
-t1283219106
-s3453
-i"Vector.h"
-i"Matrix.h"
-i"Quaternion.h"
-i<math.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Camera.c
-c000000004CD9179400000000000006DD
-t1289295764
-s1757
-i"Camera.h"
-i<stdlib.h>
-i<OpenGLES/ES1/gl.h>
-i<OpenGL/OpenGL.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/LayoutAndAnimationData.c
-c000000004CCE78580000000000000288
-t1288599640
-s648
-i"LayoutAndAnimationData.h"
-i<stdlib.h>
-i<stdio.h>
-i<string.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Light.c
-c000000004CD917AD000000000000087D
-t1289295789
-s2173
-i"Light.h"
-i<OpenGLES/ES1/gl.h>
-i<OpenGL/OpenGL.h>
-i<stdlib.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Model.c
-c000000004CD871AD0000000000001FA8
-t1289253293
-s8104
-i"Model.h"
-i<stdlib.h>
-i<math.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Model.h
-c000000004CD8F60500000000000030EB
-t1289287173
-s12523
-i<stdbool.h>
-i"../Core/Color.h"
-i"../Core/Vector.h"
-i"../Core/Matrix.h"
-i"../Core/Quaternion.h"
-i"../Core/Polygon.h"
-i"../../Util/Array.h"
-i"Camera.h"
-i"Light.h"
-i"Object2D.h"
-i"Object3D.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelCollision.c
-c000000004CD917B20000000000001217
-t1289295794
-s4631
-i"Model.h"
-i<OpenGLES/ES1/gl.h>
-i<OpenGL/OpenGL.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelEvent.c
-c000000004CAEB7B30000000000000ED9
-t1286518707
-s3801
-i"Model.h"
-i<stdlib.h>
-i<string.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelManager.c
-c000000004CDA144B0000000000004B9D
-t1289360459
-s19357
-i"Model.h"
-i<math.h>
-i<stdlib.h>
-i<OpenGLES/ES1/gl.h>
-i<OpenGL/OpenGL.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelMatrix.c
-c000000004CAEB6760000000000000DC3
-t1286518390
-s3523
-i"Model.h"
-i<math.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelTree.c
-c000000004CD8E9D00000000000000978
-t1289284048
-s2424
-i"Model.h"
-i<stdlib.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ObjFileForModel.c
-c000000004CDA127300000000000031C9
-t1289359987
-s12745
-i"ObjFileForModel.h"
-i<stdlib.h>
-i<stdio.h>
-i<string.h>
-i"pngLoad.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ObjFileForModel.h
-c000000004CD93AFA00000000000008CF
-t1289304826
-s2255
-i<OpenGLES/ES1/gl.h>
-i<OpenGL/OpenGL.h>
-i"Model.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object2D.c
-c000000004CD917A0000000000000174F
-t1289295776
-s5967
-i"Object2D.h"
-i<stdio.h>
-i<stdlib.h>
-i<string.h>
-i<OpenGLES/ES1/gl.h>
-i<OpenGL/OpenGL.h>
-i"pngLoad.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object3D.c
-c000000004C6938310000000000000D53
-t1281964081
-s3411
-i"Object3D.h"
-i<string.h>
-i<stdio.h>
-i<stdlib.h>
-i<sys/stat.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Button.c
-c000000004CA341230000000000001001
-t1285767459
-s4097
-i"Button.h"
-i<stdlib.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/CoverFlow.c
-c000000004CAD60420000000000001DB8
-t1286430786
-s7608
-i"CoverFlow.h"
-i<stdlib.h>
-i<math.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Font.c
-c0000000048A8DE950000000000000412
-t1219026581
-s1042
-i"Font.h"
-i<stdlib.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Keyboard.c
-c000000004C3559C50000000000000070
-t1278564805
-s112
-i"Keyboard.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Popup.c
-c000000004C3559C50000000000000426
-t1278564805
-s1062
-i"Popup.h"
-i<stdlib.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Table.c
-c000000004C7CA9A80000000000003BFB
-t1283238312
-s15355
-i"Table.h"
-i<math.h>
-i<stdlib.h>
-i<stdio.h>
-i<string.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Text.c
-c000000004C7CA985000000000000163A
-t1283238277
-s5690
-i"Text.h"
-i<string.h>
-i<stdlib.h>
-i<math.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/TextInput.c
-c000000004C7CA97700000000000012E9
-t1283238263
-s4841
-i"TextInput.h"
-i<stdlib.h>
-i<string.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Array.c
-c000000004C6B54860000000000000761
-t1282102406
-s1889
-i"Array.h"
-i<stdlib.h>
-i<string.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Tween.c
-c000000004C3D79AE000000000000495C
-t1279097262
-s18780
-i"Tween.h"
-i<math.h>
-i<stdlib.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Tween.h
-c000000004C3559C50000000000001BF5
-t1278564805
-s7157
-i<stdbool.h>
-i"Array.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/pngLoad.h
-c000000004CD9179A0000000000000264
-t1289295770
-s612
-i<OpenGLES/ES1/gl.h>
-i<OpenGL/OpenGL.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/pngLoad.m
-c000000004CDA0C5400000000000009D9
-t1289358420
-s2521
-i<stdio.h>
-i<stdlib.h>
-i"pngLoad.h"
-i<Cocoa/Cocoa.h>
-i<UIKit/UIKit.h>
-i<CoreGraphics/CoreGraphics.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/English.lproj/InfoPlist.strings
-c000000004CD8B2C8000000000000002D
-t1289269960
-s45
-
-N/Users/mario/ibiza1.0/ibizaSimulator/English.lproj/MainMenu.xib
-c000000004CDA3819000000000002CED6
-t1289369625
-s184022
-
-N/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.h
-c000000004CDA4463000000000000044A
-t1289372771
-s1098
-i<OpenGL/gl.h>
-i<OpenGL/glext.h>
-i<OpenGL/glu.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m
-c000000004CDA43770000000000000BE7
-t1289372535
-s3047
-i"Tutorial.h"
-i"GLVIEW.h"
-i"GLCheck.h"
-i"trackball.h"
-i"drawinfo.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app
-t1289372772
-s102
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/Info.plist
-t1289295456
-s913
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/MacOS/ibizaXcodeForMac
-t1289372772
-s282864
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/PkgInfo
-t1289295456
-s8
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/Resources/English.lproj/InfoPlist.strings
-t1289295456
-s92
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/Resources/English.lproj/MainMenu.nib
-t1289369656
-s35085
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/Resources/ibiza.obj
-t1289295634
-s203106
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Array.o
-t1289372351
-s6768
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Button.o
-t1289372351
-s12712
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Camera.o
-t1289372350
-s6336
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Color.o
-t1289372350
-s6004
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/CoverFlow.o
-t1289372351
-s16416
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Font.o
-t1289372351
-s6028
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLCheck.o
-t1289372352
-s40056
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLString.o
-t1289372352
-s98492
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLVIEW.o
-t1289372772
-s39828
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Keyboard.o
-t1289372351
-s2916
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/LayoutAndAnimationData.o
-t1289372350
-s7740
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Light.o
-t1289372350
-s6108
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Matrix.o
-t1289372350
-s17728
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Model.o
-t1289372350
-s22044
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelCollision.o
-t1289372350
-s10844
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelEvent.o
-t1289372350
-s12928
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelManager.o
-t1289372350
-s26828
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelMatrix.o
-t1289372350
-s15292
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelTree.o
-t1289372351
-s12896
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ObjFileForModel.o
-t1289372351
-s28496
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Object2D.o
-t1289372351
-s14216
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Object3D.o
-t1289372351
-s10544
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Plane.o
-t1289372350
-s2644
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Polygon.o
-t1289372350
-s2748
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Popup.o
-t1289372351
-s9828
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Quaternion.o
-t1289372350
-s13776
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Table.o
-t1289372351
-s24652
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Text.o
-t1289372351
-s14836
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/TextInput.o
-t1289372351
-s16872
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Tutorial.o
-t1289372350
-s14300
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Tween.o
-t1289372351
-s44840
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Vector.o
-t1289372350
-s12148
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/drawInfo.o
-t1289372352
-s97744
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ibizaXcodeForMac.LinkFileList
-c000000004CDA42BA0000000000001242
-t1289372346
-s4674
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ibizaXcodeForMacAppDelegate.o
-t1289372768
-s13620
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/main.o
-t1289372350
-s4984
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/pngLoad.o
-t1289372351
-s15280
-
-N/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/trackball.o
-t1289372352
-s8628
-
-N/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c
-c00000000471D35B9000000000000766D
-t1193096633
-s30317
-i"GLCheck.h"
-i<OpenGL/OpenGL.h>
-i<OpenGL/gl.h>
-i<OpenGL/glu.h>
-i<OpenGL/glext.h>
-i<string.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.h
-c00000000471D35B9000000000000341F
-t1193096633
-s13343
-i<ApplicationServices/ApplicationServices.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLString.h
-c00000000471D35B90000000000001918
-t1193096633
-s6424
-i<Cocoa/Cocoa.h>
-i<OpenGL/gl.h>
-i<OpenGL/glext.h>
-i<OpenGL/OpenGL.h>
-i<OpenGL/CGLContext.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLString.m
-c00000000471D35B900000000000034F2
-t1193096633
-s13554
-i"GLString.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/glutil/drawInfo.h
-c00000000471D35B90000000000000C42
-t1193096633
-s3138
-i<OpenGL/gl.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/glutil/drawInfo.m
-c00000000471D35B90000000000009EDC
-t1193096633
-s40668
-i"GLCheck.h"
-i"GLString.h"
-i"drawInfo.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/glutil/trackball.c
-c00000000471D35B9000000000000264E
-t1193096633
-s9806
-i"trackball.h"
-i<math.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/glutil/trackball.h
-c00000000471D35B90000000000000CB2
-t1193096633
-s3250
-
-N/Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMacAppDelegate.h
-c000000004CDA43C1000000000000010A
-t1289372609
-s266
-i<Cocoa/Cocoa.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMacAppDelegate.m
-c000000004CDA34F00000000000000179
-t1289368816
-s377
-i"ibizaXcodeForMacAppDelegate.h"
-
-N/Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMac_Prefix.pch
-c000000004CD917F500000000000000B6
-t1289295861
-s182
-i<Cocoa/Cocoa.h>
-
-N/Users/mario/ibiza1.0/ibizaSimulator/main.m
-c000000004CD8B2C800000000000000FF
-t1289269960
-s255
-i<Cocoa/Cocoa.h>
-
-N/var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch.gch
-t1289372347
-s2195824
-
-N/var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch.gch
-t1289372350
-s54306576
-
-NibizaXcodeForMac-Info.plist
-c000000004CD8B2C800000000000003EA
-t1289269960
-s1002
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies311065594#311065594#0(0"0(0#1#0"8622115552#0"0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Array.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Array.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.499974
-e311065151.556226
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Array.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Array.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@78"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Array.c311065151#311065151#0(0"0(0#0#70"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Array.c8659876192#1612"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Array.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Array.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Button.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Button.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.099779
-e311065151.168855
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Button.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Button.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@85"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Button.c311065151#311065151#0(0"0(0#0#77"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Button.c8659802848#1620"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Button.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Button.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Camera.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Camera.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.587514
-e311065150.713935
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Camera.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Camera.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@89"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Camera.c311065150#311065150#0(0"0(0#0#81"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Camera.c8658203808#1624"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Camera.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Camera.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Color.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Color.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.377115
-e311065150.416586
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Color.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Color.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@86"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Color.c311065150#311065150#0(0"0(0#0#78"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Color.c8660536032#1620"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Color.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Color.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/CoverFlow.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/CoverFlow.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.168961
-e311065151.269823
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/CoverFlow.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/CoverFlow.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@88"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/CoverFlow.c311065151#311065151#0(0"0(0#0#80"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/CoverFlow.c8659710912#1626"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/CoverFlow.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/CoverFlow.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Font.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Font.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.227343
-e311065151.283023
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Font.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Font.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@83"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Font.c311065151#311065151#0(0"0(0#0#75"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Font.c8659013120#1616"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Font.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Font.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLCheck.o /Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.891781
-e311065152.501767
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLCheck.o
-x/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c: In function 'HaveOpenGLCapsChanged':
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:130: warning: 'CGDisplayCurrentMode' is deprecated (declared at /Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/ApplicationServices.framework/Frameworks/CoreGraphics.framework/Headers/CGDirectDisplay.h:507)
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:157: warning: passing argument 3 of 'CGLQueryRendererInfo' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:159: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:162: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:165: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:169: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c: In function 'CheckOpenGLCaps':
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:244: warning: 'CGDisplayCurrentMode' is deprecated (declared at /Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/ApplicationServices.framework/Frameworks/CoreGraphics.framework/Headers/CGDirectDisplay.h:507)
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:262: warning: passing argument 3 of 'CGLQueryRendererInfo' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:264: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:267: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:271: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:273: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:277: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:280: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:297: warning: passing argument 3 of 'CGLChoosePixelFormat' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:332: warning: passing argument 2 of 'glGetIntegerv' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:334: warning: passing argument 2 of 'glGetIntegerv' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:336: warning: passing argument 2 of 'glGetIntegerv' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:338: warning: passing argument 2 of 'glGetIntegerv' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:637: warning: passing argument 2 of 'glGetIntegerv' from incompatible pointer type
-lSLF07#2@61"Compile /Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c311065151#311065152#0(3265"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c: In function 'HaveOpenGLCapsChanged':/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:130: warning: 'CGDisplayCurrentMode' is deprecated (declared at /Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/ApplicationServices.framework/Frameworks/CoreGraphics.framework/Headers/CGDirectDisplay.h:507)/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:157: warning: passing argument 3 of 'CGLQueryRendererInfo' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:159: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:162: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:165: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:169: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c: In function 'CheckOpenGLCaps':/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:244: warning: 'CGDisplayCurrentMode' is deprecated (declared at /Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/ApplicationServices.framework/Frameworks/CoreGraphics.framework/Headers/CGDirectDisplay.h:507)/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:262: warning: passing argument 3 of 'CGLQueryRendererInfo' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:264: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:267: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:271: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:273: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:277: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:280: warning: passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:297: warning: passing argument 3 of 'CGLChoosePixelFormat' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:332: warning: passing argument 2 of 'glGetIntegerv' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:334: warning: passing argument 2 of 'glGetIntegerv' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:336: warning: passing argument 2 of 'glGetIntegerv' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:338: warning: passing argument 2 of 'glGetIntegerv' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c:637: warning: passing argument 2 of 'glGetIntegerv' from incompatible pointer type20(22@201"'CGDisplayCurrentMode' is deprecated (declared at /Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/ApplicationServices.framework/Frameworks/CoreGraphics.framework/Headers/CGDirectDisplay.h:507)311065152#92#270#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#130#0#130#0#33"'*' is deprecated (declared at *)0(22@75"Passing argument 3 of 'CGLQueryRendererInfo' from incompatible pointer type311065152#362#144#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#157#0#157#0#56"passing argument * of '*' from incompatible pointer type0(22@74"Passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type311065152#506#143#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#159#0#159#0#56"passing argument * of '*' from incompatible pointer type0(22@74"Passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type311065152#649#143#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#162#0#162#0#56"passing argument * of '*' from incompatible pointer type0(22@74"Passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type311065152#792#143#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#165#0#165#0#56"passing argument * of '*' from incompatible pointer type0(22@74"Passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type311065152#935#143#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#169#0#169#0#56"passing argument * of '*' from incompatible pointer type0(22@201"'CGDisplayCurrentMode' is deprecated (declared at /Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/ApplicationServices.framework/Frameworks/CoreGraphics.framework/Headers/CGDirectDisplay.h:507)311065152#1164#270#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#244#0#244#0#33"'*' is deprecated (declared at *)0(22@75"Passing argument 3 of 'CGLQueryRendererInfo' from incompatible pointer type311065152#1434#144#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#262#0#262#0#56"passing argument * of '*' from incompatible pointer type0(22@74"Passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type311065152#1578#143#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#264#0#264#0#56"passing argument * of '*' from incompatible pointer type0(22@74"Passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type311065152#1721#143#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#267#0#267#0#56"passing argument * of '*' from incompatible pointer type0(22@74"Passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type311065152#1864#143#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#271#0#271#0#56"passing argument * of '*' from incompatible pointer type0(22@74"Passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type311065152#2007#143#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#273#0#273#0#56"passing argument * of '*' from incompatible pointer type0(22@74"Passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type311065152#2150#143#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#277#0#277#0#56"passing argument * of '*' from incompatible pointer type0(22@74"Passing argument 4 of 'CGLDescribeRenderer' from incompatible pointer type311065152#2293#143#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#280#0#280#0#56"passing argument * of '*' from incompatible pointer type0(22@75"Passing argument 3 of 'CGLChoosePixelFormat' from incompatible pointer type311065152#2436#144#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#297#0#297#0#56"passing argument * of '*' from incompatible pointer type0(22@68"Passing argument 2 of 'glGetIntegerv' from incompatible pointer type311065152#2580#137#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#332#0#332#0#56"passing argument * of '*' from incompatible pointer type0(22@68"Passing argument 2 of 'glGetIntegerv' from incompatible pointer type311065152#2717#137#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#334#0#334#0#56"passing argument * of '*' from incompatible pointer type0(22@68"Passing argument 2 of 'glGetIntegerv' from incompatible pointer type311065152#2854#137#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#336#0#336#0#56"passing argument * of '*' from incompatible pointer type0(22@68"Passing argument 2 of 'glGetIntegerv' from incompatible pointer type311065152#2991#137#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#338#0#338#0#56"passing argument * of '*' from incompatible pointer type0(22@68"Passing argument 2 of 'glGetIntegerv' from incompatible pointer type311065152#3128#137#0(6@53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c214789433#637#0#637#0#56"passing argument * of '*' from incompatible pointer type0(0#0#53"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c8661160928#1597"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/glutil/GLCheck.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLCheck.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLString.o /Users/mario/ibiza1.0/ibizaSimulator/glutil/GLString.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s311065152.148792
-e311065152.433022
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLString.o
-x/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLString.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@62"Compile /Users/mario/ibiza1.0/ibizaSimulator/glutil/GLString.m311065152#311065152#0(0"0(0#0#54"/Users/mario/ibiza1.0/ibizaSimulator/glutil/GLString.m8657989568#1609"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/glutil/GLString.m -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLString.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLVIEW.o /Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s311065572.223015
-e311065572.456876
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLVIEW.o
-x/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '+[GLVIEW basicPixelFormat]':
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:17: warning: cast from pointer to integer of different size
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW keyDown:]':
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:31: warning: unused variable 'character'
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW mouseDown:]':
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:42: warning: unused variable 'location'
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW rightMouseDown:]':
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:48: warning: unused variable 'location'
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW otherMouseDown:]':
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:53: warning: unused variable 'location'
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW mouseDragged:]':
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:72: warning: unused variable 'location'
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW scrollWheel:]':
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:77: warning: unused variable 'wheelDelta'
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW prepareOpenGL]':
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:101: warning: passing argument 1 of 'setValues:forParameter:' from incompatible pointer type
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: At top level:
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:108: warning: method possibly missing a [super dealloc] call
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:147: warning: incomplete implementation of class 'GLVIEW'
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:147: warning: method definition for '-hidePolugon:' not found
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:147: warning: method definition for '-showPlygon:' not found
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:147: warning: method definition for '-addLibraryModel:' not found
-o/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:147: warning: method definition for '-loadObj:' not found
-lSLF07#2@53"Compile /Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065572#311065572#0(2153"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '+[GLVIEW basicPixelFormat]':/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:17: warning: cast from pointer to integer of different size/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW keyDown:]':/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:31: warning: unused variable 'character'/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW mouseDown:]':/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:42: warning: unused variable 'location'/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW rightMouseDown:]':/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:48: warning: unused variable 'location'/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW otherMouseDown:]':/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:53: warning: unused variable 'location'/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW mouseDragged:]':/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:72: warning: unused variable 'location'/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW scrollWheel:]':/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:77: warning: unused variable 'wheelDelta'/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: In function '-[GLVIEW prepareOpenGL]':/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:101: warning: passing argument 1 of 'setValues:forParameter:' from incompatible pointer type/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m: At top level:/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:108: warning: method possibly missing a [super dealloc] call/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:147: warning: incomplete implementation of class 'GLVIEW'/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:147: warning: method definition for '-hidePolugon:' not found/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:147: warning: method definition for '-showPlygon:' not found/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:147: warning: method definition for '-addLibraryModel:' not found/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m:147: warning: method definition for '-loadObj:' not found15(22@46"Cast from pointer to integer of different size311065572#89#106#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#17#0#17#0#46"cast from pointer to integer of different size0(22@27"Unused variable 'character'311065572#276#87#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#31#0#31#0#19"unused variable '*'0(22@26"Unused variable 'location'311065572#446#86#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#42#0#42#0#19"unused variable '*'0(22@26"Unused variable 'location'311065572#620#86#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#48#0#48#0#19"unused variable '*'0(22@26"Unused variable 'location'311065572#794#86#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#53#0#53#0#19"unused variable '*'0(22@26"Unused variable 'location'311065572#966#86#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#72#0#72#0#19"unused variable '*'0(22@28"Unused variable 'wheelDelta'311065572#1137#88#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#77#0#77#0#19"unused variable '*'0(22@78"Passing argument 1 of 'setValues:forParameter:' from incompatible pointer type311065572#1311#139#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#101#0#101#0#56"passing argument * of '*' from incompatible pointer type0(23@13"At top level:311065572#1450#61#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#0#0#0#0#0"0(22@46"Method possibly missing a [super dealloc] call311065572#1511#107#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#108#0#108#0#46"method possibly missing a [super dealloc] call0(22@43"Incomplete implementation of class 'GLVIEW'311065572#1618#104#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#147#0#147#0#38"incomplete implementation of class '*'0(22@47"Method definition for '-hidePolugon:' not found311065572#1722#108#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#147#0#147#0#35"method definition for '*' not found0(22@46"Method definition for '-showPlygon:' not found311065572#1830#107#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#147#0#147#0#35"method definition for '*' not found0(22@51"Method definition for '-addLibraryModel:' not found311065572#1937#112#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#147#0#147#0#35"method definition for '*' not found0(22@43"Method definition for '-loadObj:' not found311065572#2049#104#0(6@45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m311065335#147#0#147#0#35"method definition for '*' not found0(0#0#45"/Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m8623418784#1598"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/GLVIEW.m -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/GLVIEW.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Keyboard.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Keyboard.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.269919
-e311065151.307386
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Keyboard.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Keyboard.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@87"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Keyboard.c311065151#311065151#0(0"0(0#0#79"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Keyboard.c8634804864#1624"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Keyboard.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Keyboard.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/LayoutAndAnimationData.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/LayoutAndAnimationData.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.590299
-e311065150.674136
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/LayoutAndAnimationData.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/LayoutAndAnimationData.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@105"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/LayoutAndAnimationData.c311065150#311065150#0(0"0(0#0#97"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/LayoutAndAnimationData.c8657504608#1656"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/LayoutAndAnimationData.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/LayoutAndAnimationData.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Light.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Light.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.674237
-e311065150.751055
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Light.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Light.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@88"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Light.c311065150#311065150#0(0"0(0#0#80"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Light.c8656379136#1622"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Light.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Light.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Matrix.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Matrix.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.416688
-e311065150.513271
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Matrix.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Matrix.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@87"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Matrix.c311065150#311065150#0(0"0(0#0#79"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Matrix.c8660357888#1622"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Matrix.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Matrix.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Model.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Model.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.714029
-e311065150.800293
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Model.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Model.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@88"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Model.c311065150#311065150#0(0"0(0#0#80"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Model.c8660927520#1622"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Model.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Model.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelCollision.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelCollision.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.751166
-e311065150.832875
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelCollision.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelCollision.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@97"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelCollision.c311065150#311065150#0(0"0(0#0#89"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelCollision.c8660756576#1640"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelCollision.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelCollision.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelEvent.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelEvent.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.800396
-e311065150.878816
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelEvent.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelEvent.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@93"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelEvent.c311065150#311065150#0(0"0(0#0#85"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelEvent.c8660482016#1632"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelEvent.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelEvent.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelManager.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelManager.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.832979
-e311065150.974782
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelManager.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelManager.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@95"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelManager.c311065150#311065150#0(0"0(0#0#87"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelManager.c8659669088#1636"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelManager.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelManager.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelMatrix.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelMatrix.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.878919
-e311065150.942847
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelMatrix.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelMatrix.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@94"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelMatrix.c311065150#311065150#0(0"0(0#0#86"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelMatrix.c8659405632#1634"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelMatrix.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelMatrix.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelTree.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelTree.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.943023
-e311065151.031949
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelTree.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelTree.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@92"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelTree.c311065150#311065151#0(0"0(0#0#84"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelTree.c8659102400#1630"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ModelTree.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ModelTree.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ObjFileForModel.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ObjFileForModel.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.093956
-e311065151.227245
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ObjFileForModel.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ObjFileForModel.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@98"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ObjFileForModel.c311065151#311065151#0(0"0(0#0#90"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ObjFileForModel.c8659903552#1642"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/ObjFileForModel.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ObjFileForModel.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Object2D.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object2D.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.974947
-e311065151.099675
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Object2D.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object2D.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@91"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object2D.c311065150#311065151#0(0"0(0#0#83"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object2D.c8634822624#1628"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object2D.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Object2D.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Object3D.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object3D.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.032054
-e311065151.093859
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Object3D.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object3D.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@91"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object3D.c311065151#311065151#0(0"0(0#0#83"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object3D.c8661177760#1628"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Object/Object3D.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Object3D.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Plane.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Plane.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.460271
-e311065150.490167
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Plane.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Plane.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@86"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Plane.c311065150#311065150#0(0"0(0#0#78"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Plane.c8659927808#1620"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Plane.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Plane.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Polygon.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Polygon.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.490261
-e311065150.533716
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Polygon.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Polygon.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@88"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Polygon.c311065150#311065150#0(0"0(0#0#80"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Polygon.c8659698496#1624"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Polygon.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Polygon.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Popup.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Popup.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.283126
-e311065151.339046
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Popup.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Popup.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Popup.c311065151#311065151#0(0"0(0#0#76"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Popup.c8631495104#1618"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Popup.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Popup.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Quaternion.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Quaternion.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.513378
-e311065150.590200
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Quaternion.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Quaternion.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@91"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Quaternion.c311065150#311065150#0(0"0(0#0#83"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Quaternion.c8659426048#1630"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Quaternion.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Quaternion.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Table.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Table.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.307487
-e311065151.447266
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Table.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Table.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Table.c311065151#311065151#0(0"0(0#0#76"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Table.c8623881664#1618"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Table.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Table.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Text.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Text.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.339149
-e311065151.425405
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Text.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Text.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@83"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Text.c311065151#311065151#0(0"0(0#0#75"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Text.c8618859552#1616"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/Text.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Text.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/TextInput.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/TextInput.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.425510
-e311065151.499871
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/TextInput.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/TextInput.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@88"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/TextInput.c311065151#311065151#0(0"0(0#0#80"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/TextInput.c8660588384#1626"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/UI/TextInput.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/TextInput.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Tutorial.o /Users/mario/ibiza1.0/ibizaSimulator/../Tutorial.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.357180
-e311065150.460174
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Tutorial.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../Tutorial.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@58"Compile /Users/mario/ibiza1.0/ibizaSimulator/../Tutorial.c311065150#311065150#0(0"0(0#0#50"/Users/mario/ibiza1.0/ibizaSimulator/../Tutorial.c8661075840#1595"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../Tutorial.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Tutorial.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Tween.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Tween.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065151.556323
-e311065151.710545
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Tween.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Tween.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@78"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Tween.c311065151#311065151#0(0"0(0#0#70"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Tween.c8659668832#1612"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Util/Tween.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Tween.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Vector.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Vector.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065150.533817
-e311065150.587415
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Vector.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Vector.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@87"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Vector.c311065150#311065150#0(0"0(0#0#79"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Vector.c8659056736#1622"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/Display/Core/Vector.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/Vector.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/drawInfo.o /Users/mario/ibiza1.0/ibizaSimulator/glutil/drawInfo.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s311065151.710685
-e311065152.148694
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/drawInfo.o
-x/Users/mario/ibiza1.0/ibizaSimulator/glutil/drawInfo.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@62"Compile /Users/mario/ibiza1.0/ibizaSimulator/glutil/drawInfo.m311065151#311065152#0(0"0(0#0#54"/Users/mario/ibiza1.0/ibizaSimulator/glutil/drawInfo.m8622501024#1609"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/glutil/drawInfo.m -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/drawInfo.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ibizaXcodeForMacAppDelegate.o /Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMacAppDelegate.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s311065568.292217
-e311065568.511029
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ibizaXcodeForMacAppDelegate.o
-x/Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMacAppDelegate.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@74"Compile /Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMacAppDelegate.m311065568#311065568#0(0"0(0#0#66"/Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMacAppDelegate.m8655271680#1640"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMacAppDelegate.m -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ibizaXcodeForMacAppDelegate.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/main.o /Users/mario/ibiza1.0/ibizaSimulator/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s311065150.192804
-e311065150.357074
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/main.o
-x/Users/mario/ibiza1.0/ibizaSimulator/main.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@51"Compile /Users/mario/ibiza1.0/ibizaSimulator/main.m311065150#311065150#0(0"0(0#0#43"/Users/mario/ibiza1.0/ibizaSimulator/main.m8617951072#1594"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/main.m -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/main.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/pngLoad.o /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/pngLoad.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s311065151.447408
-e311065151.651326
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/pngLoad.o
-x/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/pngLoad.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@75"Compile /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/pngLoad.m311065151#311065151#0(0"0(0#0#67"/Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/pngLoad.m8660292160#1621"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/../ibizaRenderengine/pngLoad.m -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/pngLoad.o0#
-
-CCompileC build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/trackball.o /Users/mario/ibiza1.0/ibizaSimulator/glutil/trackball.c normal x86_64 c com.apple.compilers.gcc.4_2
-s311065152.433123
-e311065152.483530
-r1
-xCompileC
-xbuild/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/trackball.o
-x/Users/mario/ibiza1.0/ibizaSimulator/glutil/trackball.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@63"Compile /Users/mario/ibiza1.0/ibizaSimulator/glutil/trackball.c311065152#311065152#0(0"0(0#0#55"/Users/mario/ibiza1.0/ibizaSimulator/glutil/trackball.c8655764320#1601"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -include /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch -c /Users/mario/ibiza1.0/ibizaSimulator/glutil/trackball.c -o /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/trackball.o0#
-
-CCompileXIB /Users/mario/ibiza1.0/ibizaSimulator/English.lproj/MainMenu.xib
-r0
-
-CCopyStringsFile /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
-r0
-
-CCpResource build/Debug/ibizaXcodeForMac.app/Contents/Resources/ibiza.obj ../ibiza.obj
-r0
-
-CLd /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/MacOS/ibizaXcodeForMac normal x86_64
-s311065572.456966
-e311065572.516244
-r1
-xLd
-x/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/MacOS/ibizaXcodeForMac
-xnormal
-xx86_64
-lSLF07#2@106"Link /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/MacOS/ibizaXcodeForMac311065572#311065572#0(0"0(0#0#0"8661075584#593"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -filelist /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/Objects-normal/x86_64/ibizaXcodeForMac.LinkFileList -mmacosx-version-min=10.6 -framework Cocoa -framework OpenGL -o /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/MacOS/ibizaXcodeForMac0#
-
-CProcessInfoPlistFile /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app/Contents/Info.plist ibizaXcodeForMac-Info.plist
-r0
-
-CProcessPCH /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch.gch ibizaXcodeForMac_Prefix.pch normal x86_64 c com.apple.compilers.gcc.4_2
-s311065146.978209
-e311065147.052032
-r1
-xProcessPCH
-x/var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch.gch
-xibizaXcodeForMac_Prefix.pch
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@38"Precompile ibizaXcodeForMac_Prefix.pch311065146#311065147#0(0"0(0#0#64"/Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMac_Prefix.pch8636207488#1485"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c-header -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -c /Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMac_Prefix.pch -o /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dnxiqnbhwgycjnfbwiohklbcgcou/ibizaXcodeForMac_Prefix.pch.gch0#
-
-CProcessPCH /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch.gch ibizaXcodeForMac_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s311065146.977351
-e311065150.192567
-r1
-xProcessPCH
-x/var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch.gch
-xibizaXcodeForMac_Prefix.pch
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@38"Precompile ibizaXcodeForMac_Prefix.pch311065146#311065150#0(0"0(0#0#64"/Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMac_Prefix.pch8636933344#1495"    cd /Users/mario/ibiza1.0/ibizaSimulator    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-generated-files.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-own-target-headers.hmap -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/ibizaXcodeForMac-project-headers.hmap -F/Users/mario/ibiza1.0/ibizaSimulator/build/Debug -I/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/include -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/ibizaSimulator/build/ibizaSimulator.build/Debug/ibizaXcodeForMac.build/DerivedSources -c /Users/mario/ibiza1.0/ibizaSimulator/ibizaXcodeForMac_Prefix.pch -o /var/folders/iJ/iJuYEFDYEvCDLZepjN4zcE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ibizaXcodeForMac_Prefix-dxklnzmfnjyqevdpoyzfzkflozwe/ibizaXcodeForMac_Prefix.pch.gch0#
-
-CTouch /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app
-s311065572.516337
-e311065572.518860
-r1
-xTouch
-x/Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app
-lSLF07#2@75"Touch /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app311065572#311065572#0(0"0(0#0#0"8620020352#136"    cd /Users/mario/ibiza1.0/ibizaSimulator    /usr/bin/touch -c /Users/mario/ibiza1.0/ibizaSimulator/build/Debug/ibizaXcodeForMac.app0#
-
