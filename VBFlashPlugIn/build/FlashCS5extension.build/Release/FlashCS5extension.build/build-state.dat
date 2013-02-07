@@ -1,697 +1,0 @@
-TFlashCS5extension
-v7
-r0
-t315981983.687821
-cCheck dependencies
-cProcessInfoPlistFile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Info.plist Info.plist
-cCopyStringsFile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
-cCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/mm_jsapi.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/CAPIUtil.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c normal i386 c com.apple.compilers.gcc.4_2
-cLd /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension normal x86_64
-cCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/mm_jsapi.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c normal i386 c com.apple.compilers.gcc.4_2
-cCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/CAPIUtil.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c normal i386 c com.apple.compilers.gcc.4_2
-cCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c normal ppc c com.apple.compilers.gcc.4_2
-cLd /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension normal i386
-cCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/mm_jsapi.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c normal ppc c com.apple.compilers.gcc.4_2
-cCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/CAPIUtil.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c normal ppc c com.apple.compilers.gcc.4_2
-cLd /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension normal ppc
-cCreateUniversalBinary /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension normal "x86_64 i386 ppc"
-cGenerateDSYMFile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle.dSYM /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension
-cTouch /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle
-
-N/Developer/SDKs/MacOSX10.6.sdk
-c000000004CAA740B00000000000000EE
-t1286239243
-s238
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdio.h
-c000000004BBD2CE90000000000004174
-t1270689001
-s16756
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdlib.h
-c000000004BBD2CE90000000000002DF5
-t1270689001
-s11765
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/string.h
-c000000004BBD2CE90000000000001731
-t1270689001
-s5937
-
-N/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
-c000000004CD606A40000000000781330
-t1289094820
-s7869232
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c
-c000000004D2548530000000000000432
-t1294288979
-s1074
-i"CAPIUtil.h"
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.h
-c000000004D25485300000000000001B2
-t1294288979
-s434
-i<stdio.h>
-i<stdlib.h>
-i<string.h>
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/English.lproj/InfoPlist.strings
-c000000004D2548530000000000000030
-t1294288979
-s48
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c
-c000000004D2548530000000000004C9B
-t1294288979
-s19611
-i"FlashCS5extension.h"
-i<stdio.h>
-i<stdlib.h>
-i<string.h>
-i"CAPIUtil.h"
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.h
-c000000004D254853000000000000030E
-t1294288979
-s782
-i"mm_jsapi.h"
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/CAPIUtil.o
-t1294289182
-s4828
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension
-t1294289182
-s21284
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.LinkFileList
-c000000004D25491D00000000000001BC
-t1294289181
-s444
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.o
-t1294289182
-s31368
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/mm_jsapi.o
-t1294289182
-s5408
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/CAPIUtil.o
-t1294289183
-s4812
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension
-t1294289183
-s20472
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.LinkFileList
-c000000004D25491D00000000000001B9
-t1294289181
-s441
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.o
-t1294289183
-s32784
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/mm_jsapi.o
-t1294289183
-s5660
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/CAPIUtil.o
-t1294289181
-s5928
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension
-t1294289182
-s21864
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.LinkFileList
-c000000004D25491D00000000000001C2
-t1294289181
-s450
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.o
-t1294289182
-s36388
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/mm_jsapi.o
-t1294289181
-s6344
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle
-t1294289183
-s136
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle.dSYM
-t1294289183
-s136
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Info.plist
-t1294288979
-s1227
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension
-t1294289183
-s73720
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Resources/English.lproj/InfoPlist.strings
-t1294288979
-s92
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c
-c000000004D25485300000000000005C5
-t1294288979
-s1477
-i<stdlib.h>
-i<string.h>
-i<stdio.h>
-i"mm_jsapi.h"
-i"FlashCS5extension.h"
-
-N/Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.h
-c000000004D25485300000000000018F3
-t1294288979
-s6387
-i<stdio.h>
-
-N/Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c
-c000000004CEB45040000000000000432
-t1290487044
-s1074
-i"CAPIUtil.h"
-
-N/Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.h
-c000000004CD5080500000000000001B2
-t1289029637
-s434
-i<stdio.h>
-i<stdlib.h>
-i<string.h>
-
-N/Users/mario/ibiza1.0/FlashCS5extension/English.lproj/InfoPlist.strings
-c000000004CCEBE330000000000000030
-t1288617523
-s48
-
-N/Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c
-c000000004CEB48980000000000004C9B
-t1290487960
-s19611
-i"FlashCS5extension.h"
-i<stdio.h>
-i<stdlib.h>
-i<string.h>
-i"CAPIUtil.h"
-
-N/Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.h
-c000000004CD17404000000000000030E
-t1288795140
-s782
-i"mm_jsapi.h"
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/CAPIUtil.o
-t1290487257
-s4804
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension
-t1290487257
-s21212
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.LinkFileList
-c000000004CEB45D80000000000000198
-t1290487256
-s408
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.o
-t1290487257
-s31324
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/mm_jsapi.o
-t1290487257
-s5384
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/CAPIUtil.o
-t1290487258
-s4788
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension
-t1290487258
-s20400
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.LinkFileList
-c000000004CEB45D80000000000000195
-t1290487256
-s405
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.o
-t1290487258
-s32724
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/mm_jsapi.o
-t1290487258
-s5636
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/CAPIUtil.o
-t1290487257
-s5904
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension
-t1290487257
-s21792
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.LinkFileList
-c000000004CEB45D8000000000000019E
-t1290487256
-s414
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.o
-t1290487257
-s36340
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/mm_jsapi.o
-t1290487254
-s6320
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle
-t1290487259
-s102
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle.dSYM
-t1290487259
-s102
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Info.plist
-t1290487256
-s1227
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension
-t1290487259
-s73648
-
-N/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Resources/English.lproj/InfoPlist.strings
-t1290487257
-s92
-
-N/Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c
-c000000004CEB45D600000000000005C5
-t1290487254
-s1477
-i<stdlib.h>
-i<string.h>
-i<stdio.h>
-i"mm_jsapi.h"
-i"FlashCS5extension.h"
-
-N/Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.h
-c000000004CCFA05600000000000018F3
-t1288675414
-s6387
-i<stdio.h>
-
-NInfo.plist
-c000000004D254853000000000000050A
-t1294288979
-s1290
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies315981981#315981981#0(0"0(0#1#0"8693956416#0"0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/CAPIUtil.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c normal i386 c com.apple.compilers.gcc.4_2
-s315981982.303532
-e315981982.355170
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/CAPIUtil.o
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@70"Compile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c315981982#315981982#0(0"0(0#0#62"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c8680154432#1594"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/include -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/i386 -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/CAPIUtil.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/CAPIUtil.o /Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c normal i386 c com.apple.compilers.gcc.4_2
-s312180057.744056
-e312180057.790214
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/CAPIUtil.o
-x/Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@58"Compile /Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c312180057#312180057#0(0"0(0#0#50"/Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c8625202720#1462"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -I/Users/mario/ibiza1.0/FlashCS5extension/build/Release/include -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/i386 -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/CAPIUtil.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c normal i386 c com.apple.compilers.gcc.4_2
-s315981981.801958
-e315981982.333387
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.o
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@79"Compile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c315981981#315981982#0(0"0(0#0#71"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c8685781024#1612"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/include -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/i386 -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.o /Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c normal i386 c com.apple.compilers.gcc.4_2
-s312180057.164220
-e312180057.668654
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.o
-x/Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@67"Compile /Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c312180057#312180057#0(0"0(0#0#59"/Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c8623980544#1480"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -I/Users/mario/ibiza1.0/FlashCS5extension/build/Release/include -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/i386 -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/mm_jsapi.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c normal i386 c com.apple.compilers.gcc.4_2
-s315981982.246787
-e315981982.303417
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/mm_jsapi.o
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@70"Compile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c315981982#315981982#0(0"0(0#0#62"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c8681318176#1594"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/include -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/i386 -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/mm_jsapi.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/mm_jsapi.o /Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c normal i386 c com.apple.compilers.gcc.4_2
-s312180057.668761
-e312180057.743952
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/mm_jsapi.o
-x/Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@58"Compile /Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c312180057#312180057#0(0"0(0#0#50"/Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c8625939072#1462"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -I/Users/mario/ibiza1.0/FlashCS5extension/build/Release/include -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/i386 -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/mm_jsapi.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/CAPIUtil.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c normal ppc c com.apple.compilers.gcc.4_2
-s315981983.062138
-e315981983.119745
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/CAPIUtil.o
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c
-xnormal
-xppc
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@70"Compile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c315981983#315981983#0(0"0(0#0#62"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c8691978656#1601"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch ppc -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mtune=G5 -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/include -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/ppc -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/CAPIUtil.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/CAPIUtil.o /Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c normal ppc c com.apple.compilers.gcc.4_2
-s312180058.448150
-e312180058.495956
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/CAPIUtil.o
-x/Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c
-xnormal
-xppc
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@58"Compile /Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c312180058#312180058#0(0"0(0#0#50"/Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c8624982784#1469"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch ppc -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mtune=G5 -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -I/Users/mario/ibiza1.0/FlashCS5extension/build/Release/include -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/ppc -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/CAPIUtil.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c normal ppc c com.apple.compilers.gcc.4_2
-s315981982.333488
-e315981983.441513
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.o
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c
-xnormal
-xppc
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@79"Compile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c315981982#315981983#0(0"0(0#0#71"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c8677829216#1619"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch ppc -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mtune=G5 -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/include -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/ppc -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.o /Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c normal ppc c com.apple.compilers.gcc.4_2
-s312180057.842438
-e312180058.844909
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.o
-x/Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c
-xnormal
-xppc
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@67"Compile /Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c312180057#312180058#0(0"0(0#0#59"/Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c8619064640#1487"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch ppc -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mtune=G5 -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -I/Users/mario/ibiza1.0/FlashCS5extension/build/Release/include -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/ppc -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/mm_jsapi.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c normal ppc c com.apple.compilers.gcc.4_2
-s315981982.529464
-e315981983.062044
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/mm_jsapi.o
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c
-xnormal
-xppc
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@70"Compile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c315981982#315981983#0(0"0(0#0#62"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c8683899520#1601"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch ppc -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mtune=G5 -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/include -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/ppc -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/mm_jsapi.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/mm_jsapi.o /Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c normal ppc c com.apple.compilers.gcc.4_2
-s312180057.851918
-e312180058.447965
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/mm_jsapi.o
-x/Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c
-xnormal
-xppc
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@58"Compile /Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c312180057#312180058#0(0"0(0#0#50"/Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c8619203360#1469"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch ppc -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mtune=G5 -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -I/Users/mario/ibiza1.0/FlashCS5extension/build/Release/include -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/ppc -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/mm_jsapi.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/CAPIUtil.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c normal x86_64 c com.apple.compilers.gcc.4_2
-s315981981.745752
-e315981981.801866
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/CAPIUtil.o
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@70"Compile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c315981981#315981981#0(0"0(0#0#62"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c8687750848#1600"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/include -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/x86_64 -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/Desktop/ibiza/branch/FlashCS5extension/CAPIUtil.c -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/CAPIUtil.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/CAPIUtil.o /Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c normal x86_64 c com.apple.compilers.gcc.4_2
-s312180057.107998
-e312180057.164112
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/CAPIUtil.o
-x/Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@58"Compile /Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c312180057#312180057#0(0"0(0#0#50"/Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c8624966592#1468"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -I/Users/mario/ibiza1.0/FlashCS5extension/build/Release/include -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/ibiza1.0/FlashCS5extension/CAPIUtil.c -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/CAPIUtil.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c normal x86_64 c com.apple.compilers.gcc.4_2
-s315981981.643887
-e315981982.227713
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.o
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@79"Compile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c315981981#315981982#0(0"0(0#0#71"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c8681057248#1618"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/include -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/x86_64 -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/Desktop/ibiza/branch/FlashCS5extension/FlashCS5extension.c -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.o /Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c normal x86_64 c com.apple.compilers.gcc.4_2
-s312180057.105416
-e312180057.552148
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.o
-x/Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@67"Compile /Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c312180057#312180057#0(0"0(0#0#59"/Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c8625112256#1486"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -I/Users/mario/ibiza1.0/FlashCS5extension/build/Release/include -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/ibiza1.0/FlashCS5extension/FlashCS5extension.c -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/mm_jsapi.o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c normal x86_64 c com.apple.compilers.gcc.4_2
-s315981981.646916
-e315981981.743197
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/mm_jsapi.o
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@70"Compile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c315981981#315981981#0(0"0(0#0#62"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c8676576416#1600"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/include -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/x86_64 -I/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/Desktop/ibiza/branch/FlashCS5extension/mm_jsapi.c -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/mm_jsapi.o0#
-
-CCompileC build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/mm_jsapi.o /Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c normal x86_64 c com.apple.compilers.gcc.4_2
-s312180057.106603
-e312180057.107915
-r1
-xCompileC
-xbuild/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/mm_jsapi.o
-x/Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@58"Compile /Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c312180057#312180057#0(0"0(0#0#50"/Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c8625000352#1468"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-generated-files.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-own-target-headers.hmap -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-all-target-headers.hmap -iquote /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/FlashCS5extension-project-headers.hmap -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -I/Users/mario/ibiza1.0/FlashCS5extension/build/Release/include -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources/x86_64 -I/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/DerivedSources -c /Users/mario/ibiza1.0/FlashCS5extension/mm_jsapi.c -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/mm_jsapi.o0#
-
-CCopyStringsFile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
-r0
-
-CCopyStringsFile /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
-s312180056.782013
-e312180057.105290
-r1
-xCopyStringsFile
-x/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Resources/English.lproj/InfoPlist.strings
-xEnglish.lproj/InfoPlist.strings
-lSLF07#2@36"Copy English.lproj/InfoPlist.strings312180056#312180057#0(0"0(0#0#71"/Users/mario/ibiza1.0/FlashCS5extension/English.lproj/InfoPlist.strings8625825472#382"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Resources/English.lproj0#
-
-CCreateUniversalBinary /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension normal "x86_64 i386 ppc"
-s315981983.605828
-e315981983.631165
-r1
-xCreateUniversalBinary
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension
-xnormal
-xx86_64 i386 ppc
-lSLF07#2@118"CreateUniversalBinary build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension normal "x86_64 i386 ppc"315981983#315981983#0(0"0(0#0#67"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/x86_64 i386 ppc8685353568#674"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    /usr/bin/lipo -create /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension -output /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension0#
-
-CCreateUniversalBinary /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension normal "x86_64 i386 ppc"
-s312180059.001282
-e312180059.038738
-r1
-xCreateUniversalBinary
-x/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension
-xnormal
-xx86_64 i386 ppc
-lSLF07#2@118"CreateUniversalBinary build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension normal "x86_64 i386 ppc"312180059#312180059#0(0"0(0#0#55"/Users/mario/ibiza1.0/FlashCS5extension/x86_64 i386 ppc8603154112#614"    cd /Users/mario/ibiza1.0/FlashCS5extension    /usr/bin/lipo -create /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension -output /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension0#
-
-CGenerateDSYMFile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle.dSYM /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension
-s315981983.631299
-e315981983.685292
-r1
-xGenerateDSYMFile
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle.dSYM
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension
-lSLF07#2@132"GenerateDSYMFile build/Release/FlashCS5extension.bundle.dSYM build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension315981983#315981983#0(0"0(0#0#123"/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension8684141088#314"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    /Developer/usr/bin/dsymutil /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle.dSYM0#
-
-CGenerateDSYMFile /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle.dSYM /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension
-s312180059.038861
-e312180059.095808
-r1
-xGenerateDSYMFile
-x/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle.dSYM
-x/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension
-lSLF07#2@132"GenerateDSYMFile build/Release/FlashCS5extension.bundle.dSYM build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension312180059#312180059#0(0"0(0#0#111"/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension8617903808#278"    cd /Users/mario/ibiza1.0/FlashCS5extension    /Developer/usr/bin/dsymutil /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/MacOS/FlashCS5extension -o /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle.dSYM0#
-
-CLd /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension normal i386
-s315981982.355259
-e315981982.529362
-r1
-xLd
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension
-xnormal
-xi386
-lSLF07#2@156"Link /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension315981982#315981982#0(0"0(0#0#0"8666261568#709"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch i386 -bundle -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -filelist /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.LinkFileList -mmacosx-version-min=10.6 -framework CoreFoundation -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension0#
-
-CLd /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension normal ppc
-s315981983.441756
-e315981983.605707
-r1
-xLd
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension
-xnormal
-xppc
-lSLF07#2@155"Link /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension315981983#315981983#0(0"0(0#0#0"8688053760#706"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch ppc -bundle -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -filelist /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.LinkFileList -mmacosx-version-min=10.6 -framework CoreFoundation -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension0#
-
-CLd /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension normal x86_64
-s315981982.227804
-e315981982.246691
-r1
-xLd
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension
-xnormal
-xx86_64
-lSLF07#2@158"Link /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension315981982#315981982#0(0"0(0#0#0"8685757824#715"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -bundle -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -F/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release -filelist /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.LinkFileList -mmacosx-version-min=10.6 -framework CoreFoundation -o /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension0#
-
-CLd /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension normal i386
-s312180057.790319
-e312180057.842327
-r1
-xLd
-x/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension
-xnormal
-xi386
-lSLF07#2@144"Link /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension312180057#312180057#0(0"0(0#0#0"8625060480#649"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch i386 -bundle -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/mario/ibiza1.0/FlashCS5extension/build/Release -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -filelist /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension.LinkFileList -mmacosx-version-min=10.6 -framework CoreFoundation -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/i386/FlashCS5extension0#
-
-CLd /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension normal ppc
-s312180058.845027
-e312180059.001173
-r1
-xLd
-x/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension
-xnormal
-xppc
-lSLF07#2@143"Link /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension312180058#312180059#0(0"0(0#0#0"8620652288#646"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch ppc -bundle -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/mario/ibiza1.0/FlashCS5extension/build/Release -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -filelist /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension.LinkFileList -mmacosx-version-min=10.6 -framework CoreFoundation -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/ppc/FlashCS5extension0#
-
-CLd /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension normal x86_64
-s312180057.552245
-e312180057.851812
-r1
-xLd
-x/Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension
-xnormal
-xx86_64
-lSLF07#2@146"Link /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension312180057#312180057#0(0"0(0#0#0"8626593184#655"    cd /Users/mario/ibiza1.0/FlashCS5extension    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -bundle -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/mario/ibiza1.0/FlashCS5extension/build/Release -F/Users/mario/ibiza1.0/FlashCS5extension/build/Release -filelist /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension.LinkFileList -mmacosx-version-min=10.6 -framework CoreFoundation -o /Users/mario/ibiza1.0/FlashCS5extension/build/FlashCS5extension.build/Release/FlashCS5extension.build/Objects-normal/x86_64/FlashCS5extension0#
-
-CProcessInfoPlistFile /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Info.plist Info.plist
-r0
-
-CProcessInfoPlistFile /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Info.plist Info.plist
-s312180056.735311
-e312180056.781884
-r1
-xProcessInfoPlistFile
-x/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Info.plist
-xInfo.plist
-lSLF07#2@18"Process Info.plist312180056#312180056#0(0"0(0#0#50"/Users/mario/ibiza1.0/FlashCS5extension/Info.plist8629201920#227"    cd /Users/mario/ibiza1.0/FlashCS5extension    builtin-infoPlistUtility Info.plist -expandbuildsettings -platform macosx -o /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle/Contents/Info.plist0#
-
-CTouch /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle
-s315981983.685386
-e315981983.687784
-r1
-xTouch
-x/Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle
-lSLF07#2@96"Touch /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle315981983#315981983#0(0"0(0#0#0"8684039168#172"    cd /Users/mario/Desktop/ibiza/branch/FlashCS5extension    /usr/bin/touch -c /Users/mario/Desktop/ibiza/branch/FlashCS5extension/build/Release/FlashCS5extension.bundle0#
-
-CTouch /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle
-s312180059.095891
-e312180059.098725
-r1
-xTouch
-x/Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle
-lSLF07#2@84"Touch /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle312180059#312180059#0(0"0(0#0#0"8619000384#148"    cd /Users/mario/ibiza1.0/FlashCS5extension    /usr/bin/touch -c /Users/mario/ibiza1.0/FlashCS5extension/build/Release/FlashCS5extension.bundle0#
-

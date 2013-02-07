@@ -1,9 +1,0 @@
-{
-    "localize": [ "en", "ko" ],
-    "items":[
-             ["shop_itemUnlock", "Unlock All Stage", 9, "This item will open up all stages."],
-             ["shop_itemUnlock", "Unlock All Stage", 9, "This item will open up all stages."],
-             ["shop_itemUnlock", "Unlock All Stage", 9, "This item will open up all stages."],
-             ["shop_itemRecipe", "50 Gelato Recipe", 10, "This item provides 50 walk-throughs."]
-             ]
-}

@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'GenerateAndroidProject' target in the 'GenerateAndroidProject' project
-//
-
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-#endif
