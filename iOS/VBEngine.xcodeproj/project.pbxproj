@@ -1,0 +1,1017 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AC83A6C416C4F1A10091D69A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC83A6C316C4F1A10091D69A /* Foundation.framework */; };
+		AC83A6D316C4F1A10091D69A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC83A6D216C4F1A10091D69A /* SenTestingKit.framework */; };
+		AC83A6D516C4F1A10091D69A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC83A6D416C4F1A10091D69A /* UIKit.framework */; };
+		AC83A6D616C4F1A10091D69A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC83A6C316C4F1A10091D69A /* Foundation.framework */; };
+		AC83A6D916C4F1A10091D69A /* libVBEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC83A6C016C4F1A10091D69A /* libVBEngine.a */; };
+		AC83A6DF16C4F1A10091D69A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC83A6DD16C4F1A10091D69A /* InfoPlist.strings */; };
+		AC83A6E216C4F1A10091D69A /* VBEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6E116C4F1A10091D69A /* VBEngineTests.m */; };
+		AC83A77116C4F1BF0091D69A /* VBColor.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6EF16C4F1BF0091D69A /* VBColor.c */; };
+		AC83A77216C4F1BF0091D69A /* VBColor.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6EF16C4F1BF0091D69A /* VBColor.c */; };
+		AC83A77316C4F1BF0091D69A /* VBColorG.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6F116C4F1BF0091D69A /* VBColorG.c */; };
+		AC83A77416C4F1BF0091D69A /* VBColorG.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6F116C4F1BF0091D69A /* VBColorG.c */; };
+		AC83A77516C4F1BF0091D69A /* VBColorGA.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6F316C4F1BF0091D69A /* VBColorGA.c */; };
+		AC83A77616C4F1BF0091D69A /* VBColorGA.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6F316C4F1BF0091D69A /* VBColorGA.c */; };
+		AC83A77716C4F1BF0091D69A /* VBColorRGB.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6F516C4F1BF0091D69A /* VBColorRGB.c */; };
+		AC83A77816C4F1BF0091D69A /* VBColorRGB.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6F516C4F1BF0091D69A /* VBColorRGB.c */; };
+		AC83A77916C4F1BF0091D69A /* VBColorRGBA.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6F716C4F1BF0091D69A /* VBColorRGBA.c */; };
+		AC83A77A16C4F1BF0091D69A /* VBColorRGBA.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6F716C4F1BF0091D69A /* VBColorRGBA.c */; };
+		AC83A77B16C4F1BF0091D69A /* VBAABB.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6FA16C4F1BF0091D69A /* VBAABB.c */; };
+		AC83A77C16C4F1BF0091D69A /* VBAABB.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6FA16C4F1BF0091D69A /* VBAABB.c */; };
+		AC83A77D16C4F1BF0091D69A /* VBLine2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6FC16C4F1BF0091D69A /* VBLine2D.c */; };
+		AC83A77E16C4F1BF0091D69A /* VBLine2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6FC16C4F1BF0091D69A /* VBLine2D.c */; };
+		AC83A77F16C4F1BF0091D69A /* VBMatrix2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6FE16C4F1BF0091D69A /* VBMatrix2D.c */; };
+		AC83A78016C4F1BF0091D69A /* VBMatrix2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A6FE16C4F1BF0091D69A /* VBMatrix2D.c */; };
+		AC83A78116C4F1BF0091D69A /* VBMatrix2DWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70016C4F1BF0091D69A /* VBMatrix2DWrapper.c */; };
+		AC83A78216C4F1BF0091D69A /* VBMatrix2DWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70016C4F1BF0091D69A /* VBMatrix2DWrapper.c */; };
+		AC83A78316C4F1BF0091D69A /* VBSpline2DBezierCubic.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70216C4F1BF0091D69A /* VBSpline2DBezierCubic.c */; };
+		AC83A78416C4F1BF0091D69A /* VBSpline2DBezierCubic.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70216C4F1BF0091D69A /* VBSpline2DBezierCubic.c */; };
+		AC83A78516C4F1BF0091D69A /* VBTriangle2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70416C4F1BF0091D69A /* VBTriangle2D.c */; };
+		AC83A78616C4F1BF0091D69A /* VBTriangle2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70416C4F1BF0091D69A /* VBTriangle2D.c */; };
+		AC83A78716C4F1BF0091D69A /* VBVector2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70616C4F1BF0091D69A /* VBVector2D.c */; };
+		AC83A78816C4F1BF0091D69A /* VBVector2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70616C4F1BF0091D69A /* VBVector2D.c */; };
+		AC83A78916C4F1BF0091D69A /* VBCamera2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70916C4F1BF0091D69A /* VBCamera2D.c */; };
+		AC83A78A16C4F1BF0091D69A /* VBCamera2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70916C4F1BF0091D69A /* VBCamera2D.c */; };
+		AC83A78B16C4F1BF0091D69A /* VBDisplay2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70B16C4F1BF0091D69A /* VBDisplay2D.c */; };
+		AC83A78C16C4F1BF0091D69A /* VBDisplay2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70B16C4F1BF0091D69A /* VBDisplay2D.c */; };
+		AC83A78D16C4F1BF0091D69A /* VBDrawable2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70D16C4F1BF0091D69A /* VBDrawable2D.c */; };
+		AC83A78E16C4F1BF0091D69A /* VBDrawable2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70D16C4F1BF0091D69A /* VBDrawable2D.c */; };
+		AC83A78F16C4F1BF0091D69A /* VBImage.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70F16C4F1BF0091D69A /* VBImage.c */; };
+		AC83A79016C4F1BF0091D69A /* VBImage.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A70F16C4F1BF0091D69A /* VBImage.c */; };
+		AC83A79116C4F1BF0091D69A /* VBModel2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71116C4F1BF0091D69A /* VBModel2D.c */; };
+		AC83A79216C4F1BF0091D69A /* VBModel2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71116C4F1BF0091D69A /* VBModel2D.c */; };
+		AC83A79316C4F1BF0091D69A /* VBTexture.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71316C4F1BF0091D69A /* VBTexture.c */; };
+		AC83A79416C4F1BF0091D69A /* VBTexture.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71316C4F1BF0091D69A /* VBTexture.c */; };
+		AC83A79516C4F1BF0091D69A /* VBEngineFileInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71616C4F1BF0091D69A /* VBEngineFileInfo.c */; };
+		AC83A79616C4F1BF0091D69A /* VBEngineFileInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71616C4F1BF0091D69A /* VBEngineFileInfo.c */; };
+		AC83A79716C4F1BF0091D69A /* VBFile.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71816C4F1BF0091D69A /* VBFile.c */; };
+		AC83A79816C4F1BF0091D69A /* VBFile.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71816C4F1BF0091D69A /* VBFile.c */; };
+		AC83A79916C4F1BF0091D69A /* VBObjectFile2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71A16C4F1BF0091D69A /* VBObjectFile2D.c */; };
+		AC83A79A16C4F1BF0091D69A /* VBObjectFile2D.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71A16C4F1BF0091D69A /* VBObjectFile2D.c */; };
+		AC83A79B16C4F1BF0091D69A /* VBObjectFile2DFrame.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71C16C4F1BF0091D69A /* VBObjectFile2DFrame.c */; };
+		AC83A79C16C4F1BF0091D69A /* VBObjectFile2DFrame.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71C16C4F1BF0091D69A /* VBObjectFile2DFrame.c */; };
+		AC83A79D16C4F1BF0091D69A /* VBObjectFile2DKeyFrame.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71E16C4F1BF0091D69A /* VBObjectFile2DKeyFrame.c */; };
+		AC83A79E16C4F1BF0091D69A /* VBObjectFile2DKeyFrame.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A71E16C4F1BF0091D69A /* VBObjectFile2DKeyFrame.c */; };
+		AC83A79F16C4F1BF0091D69A /* VBObjectFile2DKeyFrameElement.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72016C4F1BF0091D69A /* VBObjectFile2DKeyFrameElement.c */; };
+		AC83A7A016C4F1BF0091D69A /* VBObjectFile2DKeyFrameElement.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72016C4F1BF0091D69A /* VBObjectFile2DKeyFrameElement.c */; };
+		AC83A7A116C4F1BF0091D69A /* VBObjectFile2DLibrary.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72216C4F1BF0091D69A /* VBObjectFile2DLibrary.c */; };
+		AC83A7A216C4F1BF0091D69A /* VBObjectFile2DLibrary.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72216C4F1BF0091D69A /* VBObjectFile2DLibrary.c */; };
+		AC83A7A316C4F1BF0091D69A /* VBObjectFile2DLibraryNameID.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72416C4F1BF0091D69A /* VBObjectFile2DLibraryNameID.c */; };
+		AC83A7A416C4F1BF0091D69A /* VBObjectFile2DLibraryNameID.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72416C4F1BF0091D69A /* VBObjectFile2DLibraryNameID.c */; };
+		AC83A7A516C4F1BF0091D69A /* VBObjectFile2DTexcoord.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72616C4F1BF0091D69A /* VBObjectFile2DTexcoord.c */; };
+		AC83A7A616C4F1BF0091D69A /* VBObjectFile2DTexcoord.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72616C4F1BF0091D69A /* VBObjectFile2DTexcoord.c */; };
+		AC83A7A716C4F1BF0091D69A /* VBObjectFile2DTransition.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72816C4F1BF0091D69A /* VBObjectFile2DTransition.c */; };
+		AC83A7A816C4F1BF0091D69A /* VBObjectFile2DTransition.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72816C4F1BF0091D69A /* VBObjectFile2DTransition.c */; };
+		AC83A7A916C4F1BF0091D69A /* VBPNGFile.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72A16C4F1BF0091D69A /* VBPNGFile.c */; };
+		AC83A7AA16C4F1BF0091D69A /* VBPNGFile.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72A16C4F1BF0091D69A /* VBPNGFile.c */; };
+		AC83A7AB16C4F1BF0091D69A /* VBSystem.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72C16C4F1BF0091D69A /* VBSystem.c */; };
+		AC83A7AC16C4F1BF0091D69A /* VBSystem.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72C16C4F1BF0091D69A /* VBSystem.c */; };
+		AC83A7AD16C4F1BF0091D69A /* VBTouch.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72E16C4F1BF0091D69A /* VBTouch.c */; };
+		AC83A7AE16C4F1BF0091D69A /* VBTouch.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A72E16C4F1BF0091D69A /* VBTouch.c */; };
+		AC83A7AF16C4F1BF0091D69A /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73216C4F1BF0091D69A /* png.c */; };
+		AC83A7B016C4F1BF0091D69A /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73216C4F1BF0091D69A /* png.c */; };
+		AC83A7B116C4F1BF0091D69A /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73516C4F1BF0091D69A /* pngerror.c */; };
+		AC83A7B216C4F1BF0091D69A /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73516C4F1BF0091D69A /* pngerror.c */; };
+		AC83A7B316C4F1BF0091D69A /* pnggccrd.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73616C4F1BF0091D69A /* pnggccrd.c */; };
+		AC83A7B416C4F1BF0091D69A /* pnggccrd.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73616C4F1BF0091D69A /* pnggccrd.c */; };
+		AC83A7B516C4F1BF0091D69A /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73716C4F1BF0091D69A /* pngget.c */; };
+		AC83A7B616C4F1BF0091D69A /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73716C4F1BF0091D69A /* pngget.c */; };
+		AC83A7B716C4F1BF0091D69A /* pngmem.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73816C4F1BF0091D69A /* pngmem.c */; };
+		AC83A7B816C4F1BF0091D69A /* pngmem.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73816C4F1BF0091D69A /* pngmem.c */; };
+		AC83A7B916C4F1BF0091D69A /* pngpread.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73916C4F1BF0091D69A /* pngpread.c */; };
+		AC83A7BA16C4F1BF0091D69A /* pngpread.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73916C4F1BF0091D69A /* pngpread.c */; };
+		AC83A7BB16C4F1BF0091D69A /* pngread.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73A16C4F1BF0091D69A /* pngread.c */; };
+		AC83A7BC16C4F1BF0091D69A /* pngread.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73A16C4F1BF0091D69A /* pngread.c */; };
+		AC83A7BD16C4F1BF0091D69A /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73B16C4F1BF0091D69A /* pngrio.c */; };
+		AC83A7BE16C4F1BF0091D69A /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73B16C4F1BF0091D69A /* pngrio.c */; };
+		AC83A7BF16C4F1BF0091D69A /* pngrtran.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73C16C4F1BF0091D69A /* pngrtran.c */; };
+		AC83A7C016C4F1BF0091D69A /* pngrtran.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73C16C4F1BF0091D69A /* pngrtran.c */; };
+		AC83A7C116C4F1BF0091D69A /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73D16C4F1BF0091D69A /* pngrutil.c */; };
+		AC83A7C216C4F1BF0091D69A /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73D16C4F1BF0091D69A /* pngrutil.c */; };
+		AC83A7C316C4F1BF0091D69A /* pngset.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73E16C4F1BF0091D69A /* pngset.c */; };
+		AC83A7C416C4F1BF0091D69A /* pngset.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73E16C4F1BF0091D69A /* pngset.c */; };
+		AC83A7C516C4F1BF0091D69A /* pngtrans.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73F16C4F1BF0091D69A /* pngtrans.c */; };
+		AC83A7C616C4F1BF0091D69A /* pngtrans.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A73F16C4F1BF0091D69A /* pngtrans.c */; };
+		AC83A7C716C4F1BF0091D69A /* pngvcrd.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74016C4F1BF0091D69A /* pngvcrd.c */; };
+		AC83A7C816C4F1BF0091D69A /* pngvcrd.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74016C4F1BF0091D69A /* pngvcrd.c */; };
+		AC83A7C916C4F1BF0091D69A /* pngwio.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74116C4F1BF0091D69A /* pngwio.c */; };
+		AC83A7CA16C4F1BF0091D69A /* pngwio.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74116C4F1BF0091D69A /* pngwio.c */; };
+		AC83A7CB16C4F1BF0091D69A /* pngwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74216C4F1BF0091D69A /* pngwrite.c */; };
+		AC83A7CC16C4F1BF0091D69A /* pngwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74216C4F1BF0091D69A /* pngwrite.c */; };
+		AC83A7CD16C4F1BF0091D69A /* pngwtran.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74316C4F1BF0091D69A /* pngwtran.c */; };
+		AC83A7CE16C4F1BF0091D69A /* pngwtran.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74316C4F1BF0091D69A /* pngwtran.c */; };
+		AC83A7CF16C4F1BF0091D69A /* pngwutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74416C4F1BF0091D69A /* pngwutil.c */; };
+		AC83A7D016C4F1BF0091D69A /* pngwutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74416C4F1BF0091D69A /* pngwutil.c */; };
+		AC83A7D116C4F1BF0091D69A /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74616C4F1BF0091D69A /* adler32.c */; };
+		AC83A7D216C4F1BF0091D69A /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74616C4F1BF0091D69A /* adler32.c */; };
+		AC83A7D316C4F1BF0091D69A /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74716C4F1BF0091D69A /* compress.c */; };
+		AC83A7D416C4F1BF0091D69A /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74716C4F1BF0091D69A /* compress.c */; };
+		AC83A7D516C4F1BF0091D69A /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74816C4F1BF0091D69A /* crc32.c */; };
+		AC83A7D616C4F1BF0091D69A /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74816C4F1BF0091D69A /* crc32.c */; };
+		AC83A7D716C4F1BF0091D69A /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74B16C4F1BF0091D69A /* deflate.c */; };
+		AC83A7D816C4F1BF0091D69A /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74B16C4F1BF0091D69A /* deflate.c */; };
+		AC83A7D916C4F1BF0091D69A /* gzio.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74D16C4F1BF0091D69A /* gzio.c */; };
+		AC83A7DA16C4F1BF0091D69A /* gzio.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74D16C4F1BF0091D69A /* gzio.c */; };
+		AC83A7DB16C4F1BF0091D69A /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74E16C4F1BF0091D69A /* infback.c */; };
+		AC83A7DC16C4F1BF0091D69A /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74E16C4F1BF0091D69A /* infback.c */; };
+		AC83A7DD16C4F1BF0091D69A /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74F16C4F1BF0091D69A /* inffast.c */; };
+		AC83A7DE16C4F1BF0091D69A /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A74F16C4F1BF0091D69A /* inffast.c */; };
+		AC83A7DF16C4F1BF0091D69A /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75216C4F1BF0091D69A /* inflate.c */; };
+		AC83A7E016C4F1BF0091D69A /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75216C4F1BF0091D69A /* inflate.c */; };
+		AC83A7E116C4F1BF0091D69A /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75416C4F1BF0091D69A /* inftrees.c */; };
+		AC83A7E216C4F1BF0091D69A /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75416C4F1BF0091D69A /* inftrees.c */; };
+		AC83A7E316C4F1BF0091D69A /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75616C4F1BF0091D69A /* ioapi.c */; };
+		AC83A7E416C4F1BF0091D69A /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75616C4F1BF0091D69A /* ioapi.c */; };
+		AC83A7E516C4F1BF0091D69A /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75816C4F1BF0091D69A /* trees.c */; };
+		AC83A7E616C4F1BF0091D69A /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75816C4F1BF0091D69A /* trees.c */; };
+		AC83A7E716C4F1BF0091D69A /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75A16C4F1BF0091D69A /* uncompr.c */; };
+		AC83A7E816C4F1BF0091D69A /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75A16C4F1BF0091D69A /* uncompr.c */; };
+		AC83A7E916C4F1BF0091D69A /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75B16C4F1BF0091D69A /* unzip.c */; };
+		AC83A7EA16C4F1BF0091D69A /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75B16C4F1BF0091D69A /* unzip.c */; };
+		AC83A7EB16C4F1BF0091D69A /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75F16C4F1BF0091D69A /* zutil.c */; };
+		AC83A7EC16C4F1BF0091D69A /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A75F16C4F1BF0091D69A /* zutil.c */; };
+		AC83A7ED16C4F1BF0091D69A /* VBArrayList.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76216C4F1BF0091D69A /* VBArrayList.c */; };
+		AC83A7EE16C4F1BF0091D69A /* VBArrayList.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76216C4F1BF0091D69A /* VBArrayList.c */; };
+		AC83A7EF16C4F1BF0091D69A /* VBArrayVector.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76416C4F1BF0091D69A /* VBArrayVector.c */; };
+		AC83A7F016C4F1BF0091D69A /* VBArrayVector.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76416C4F1BF0091D69A /* VBArrayVector.c */; };
+		AC83A7F116C4F1BF0091D69A /* VBDebug.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76616C4F1BF0091D69A /* VBDebug.c */; };
+		AC83A7F216C4F1BF0091D69A /* VBDebug.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76616C4F1BF0091D69A /* VBDebug.c */; };
+		AC83A7F316C4F1BF0091D69A /* VBMath.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76816C4F1BF0091D69A /* VBMath.c */; };
+		AC83A7F416C4F1BF0091D69A /* VBMath.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76816C4F1BF0091D69A /* VBMath.c */; };
+		AC83A7F516C4F1BF0091D69A /* VBString.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76A16C4F1BF0091D69A /* VBString.c */; };
+		AC83A7F616C4F1BF0091D69A /* VBString.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76A16C4F1BF0091D69A /* VBString.c */; };
+		AC83A7F716C4F1BF0091D69A /* VBEngine.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76D16C4F1BF0091D69A /* VBEngine.c */; };
+		AC83A7F816C4F1BF0091D69A /* VBEngine.c in Sources */ = {isa = PBXBuildFile; fileRef = AC83A76D16C4F1BF0091D69A /* VBEngine.c */; };
+		AC83A7FA16C4F1F10091D69A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC83A7F916C4F1F10091D69A /* OpenGLES.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AC83A6D716C4F1A10091D69A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC83A6B816C4F1A00091D69A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC83A6BF16C4F1A00091D69A;
+			remoteInfo = VBEngine;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AC83A6BE16C4F1A00091D69A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AC83A6C016C4F1A10091D69A /* libVBEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libVBEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC83A6C316C4F1A10091D69A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AC83A6C716C4F1A10091D69A /* VBEngine-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VBEngine-Prefix.pch"; sourceTree = "<group>"; };
+		AC83A6D116C4F1A10091D69A /* VBEngineTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VBEngineTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC83A6D216C4F1A10091D69A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		AC83A6D416C4F1A10091D69A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		AC83A6DC16C4F1A10091D69A /* VBEngineTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VBEngineTests-Info.plist"; sourceTree = "<group>"; };
+		AC83A6DE16C4F1A10091D69A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AC83A6E016C4F1A10091D69A /* VBEngineTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VBEngineTests.h; sourceTree = "<group>"; };
+		AC83A6E116C4F1A10091D69A /* VBEngineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VBEngineTests.m; sourceTree = "<group>"; };
+		AC83A6EF16C4F1BF0091D69A /* VBColor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBColor.c; sourceTree = "<group>"; };
+		AC83A6F016C4F1BF0091D69A /* VBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBColor.h; sourceTree = "<group>"; };
+		AC83A6F116C4F1BF0091D69A /* VBColorG.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBColorG.c; sourceTree = "<group>"; };
+		AC83A6F216C4F1BF0091D69A /* VBColorG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBColorG.h; sourceTree = "<group>"; };
+		AC83A6F316C4F1BF0091D69A /* VBColorGA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBColorGA.c; sourceTree = "<group>"; };
+		AC83A6F416C4F1BF0091D69A /* VBColorGA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBColorGA.h; sourceTree = "<group>"; };
+		AC83A6F516C4F1BF0091D69A /* VBColorRGB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBColorRGB.c; sourceTree = "<group>"; };
+		AC83A6F616C4F1BF0091D69A /* VBColorRGB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBColorRGB.h; sourceTree = "<group>"; };
+		AC83A6F716C4F1BF0091D69A /* VBColorRGBA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBColorRGBA.c; sourceTree = "<group>"; };
+		AC83A6F816C4F1BF0091D69A /* VBColorRGBA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBColorRGBA.h; sourceTree = "<group>"; };
+		AC83A6FA16C4F1BF0091D69A /* VBAABB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBAABB.c; sourceTree = "<group>"; };
+		AC83A6FB16C4F1BF0091D69A /* VBAABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBAABB.h; sourceTree = "<group>"; };
+		AC83A6FC16C4F1BF0091D69A /* VBLine2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBLine2D.c; sourceTree = "<group>"; };
+		AC83A6FD16C4F1BF0091D69A /* VBLine2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBLine2D.h; sourceTree = "<group>"; };
+		AC83A6FE16C4F1BF0091D69A /* VBMatrix2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBMatrix2D.c; sourceTree = "<group>"; };
+		AC83A6FF16C4F1BF0091D69A /* VBMatrix2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBMatrix2D.h; sourceTree = "<group>"; };
+		AC83A70016C4F1BF0091D69A /* VBMatrix2DWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBMatrix2DWrapper.c; sourceTree = "<group>"; };
+		AC83A70116C4F1BF0091D69A /* VBMatrix2DWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBMatrix2DWrapper.h; sourceTree = "<group>"; };
+		AC83A70216C4F1BF0091D69A /* VBSpline2DBezierCubic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBSpline2DBezierCubic.c; sourceTree = "<group>"; };
+		AC83A70316C4F1BF0091D69A /* VBSpline2DBezierCubic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBSpline2DBezierCubic.h; sourceTree = "<group>"; };
+		AC83A70416C4F1BF0091D69A /* VBTriangle2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBTriangle2D.c; sourceTree = "<group>"; };
+		AC83A70516C4F1BF0091D69A /* VBTriangle2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBTriangle2D.h; sourceTree = "<group>"; };
+		AC83A70616C4F1BF0091D69A /* VBVector2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBVector2D.c; sourceTree = "<group>"; };
+		AC83A70716C4F1BF0091D69A /* VBVector2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBVector2D.h; sourceTree = "<group>"; };
+		AC83A70916C4F1BF0091D69A /* VBCamera2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBCamera2D.c; sourceTree = "<group>"; };
+		AC83A70A16C4F1BF0091D69A /* VBCamera2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBCamera2D.h; sourceTree = "<group>"; };
+		AC83A70B16C4F1BF0091D69A /* VBDisplay2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBDisplay2D.c; sourceTree = "<group>"; };
+		AC83A70C16C4F1BF0091D69A /* VBDisplay2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBDisplay2D.h; sourceTree = "<group>"; };
+		AC83A70D16C4F1BF0091D69A /* VBDrawable2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBDrawable2D.c; sourceTree = "<group>"; };
+		AC83A70E16C4F1BF0091D69A /* VBDrawable2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBDrawable2D.h; sourceTree = "<group>"; };
+		AC83A70F16C4F1BF0091D69A /* VBImage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBImage.c; sourceTree = "<group>"; };
+		AC83A71016C4F1BF0091D69A /* VBImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBImage.h; sourceTree = "<group>"; };
+		AC83A71116C4F1BF0091D69A /* VBModel2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBModel2D.c; sourceTree = "<group>"; };
+		AC83A71216C4F1BF0091D69A /* VBModel2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBModel2D.h; sourceTree = "<group>"; };
+		AC83A71316C4F1BF0091D69A /* VBTexture.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBTexture.c; sourceTree = "<group>"; };
+		AC83A71416C4F1BF0091D69A /* VBTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBTexture.h; sourceTree = "<group>"; };
+		AC83A71616C4F1BF0091D69A /* VBEngineFileInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBEngineFileInfo.c; sourceTree = "<group>"; };
+		AC83A71716C4F1BF0091D69A /* VBEngineFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBEngineFileInfo.h; sourceTree = "<group>"; };
+		AC83A71816C4F1BF0091D69A /* VBFile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBFile.c; sourceTree = "<group>"; };
+		AC83A71916C4F1BF0091D69A /* VBFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBFile.h; sourceTree = "<group>"; };
+		AC83A71A16C4F1BF0091D69A /* VBObjectFile2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBObjectFile2D.c; sourceTree = "<group>"; };
+		AC83A71B16C4F1BF0091D69A /* VBObjectFile2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBObjectFile2D.h; sourceTree = "<group>"; };
+		AC83A71C16C4F1BF0091D69A /* VBObjectFile2DFrame.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBObjectFile2DFrame.c; sourceTree = "<group>"; };
+		AC83A71D16C4F1BF0091D69A /* VBObjectFile2DFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBObjectFile2DFrame.h; sourceTree = "<group>"; };
+		AC83A71E16C4F1BF0091D69A /* VBObjectFile2DKeyFrame.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBObjectFile2DKeyFrame.c; sourceTree = "<group>"; };
+		AC83A71F16C4F1BF0091D69A /* VBObjectFile2DKeyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBObjectFile2DKeyFrame.h; sourceTree = "<group>"; };
+		AC83A72016C4F1BF0091D69A /* VBObjectFile2DKeyFrameElement.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBObjectFile2DKeyFrameElement.c; sourceTree = "<group>"; };
+		AC83A72116C4F1BF0091D69A /* VBObjectFile2DKeyFrameElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBObjectFile2DKeyFrameElement.h; sourceTree = "<group>"; };
+		AC83A72216C4F1BF0091D69A /* VBObjectFile2DLibrary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBObjectFile2DLibrary.c; sourceTree = "<group>"; };
+		AC83A72316C4F1BF0091D69A /* VBObjectFile2DLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBObjectFile2DLibrary.h; sourceTree = "<group>"; };
+		AC83A72416C4F1BF0091D69A /* VBObjectFile2DLibraryNameID.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBObjectFile2DLibraryNameID.c; sourceTree = "<group>"; };
+		AC83A72516C4F1BF0091D69A /* VBObjectFile2DLibraryNameID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBObjectFile2DLibraryNameID.h; sourceTree = "<group>"; };
+		AC83A72616C4F1BF0091D69A /* VBObjectFile2DTexcoord.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBObjectFile2DTexcoord.c; sourceTree = "<group>"; };
+		AC83A72716C4F1BF0091D69A /* VBObjectFile2DTexcoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBObjectFile2DTexcoord.h; sourceTree = "<group>"; };
+		AC83A72816C4F1BF0091D69A /* VBObjectFile2DTransition.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBObjectFile2DTransition.c; sourceTree = "<group>"; };
+		AC83A72916C4F1BF0091D69A /* VBObjectFile2DTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBObjectFile2DTransition.h; sourceTree = "<group>"; };
+		AC83A72A16C4F1BF0091D69A /* VBPNGFile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBPNGFile.c; sourceTree = "<group>"; };
+		AC83A72B16C4F1BF0091D69A /* VBPNGFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBPNGFile.h; sourceTree = "<group>"; };
+		AC83A72C16C4F1BF0091D69A /* VBSystem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBSystem.c; sourceTree = "<group>"; };
+		AC83A72D16C4F1BF0091D69A /* VBSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBSystem.h; sourceTree = "<group>"; };
+		AC83A72E16C4F1BF0091D69A /* VBTouch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBTouch.c; sourceTree = "<group>"; };
+		AC83A72F16C4F1BF0091D69A /* VBTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBTouch.h; sourceTree = "<group>"; };
+		AC83A73216C4F1BF0091D69A /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
+		AC83A73316C4F1BF0091D69A /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
+		AC83A73416C4F1BF0091D69A /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
+		AC83A73516C4F1BF0091D69A /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngerror.c; sourceTree = "<group>"; };
+		AC83A73616C4F1BF0091D69A /* pnggccrd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pnggccrd.c; sourceTree = "<group>"; };
+		AC83A73716C4F1BF0091D69A /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngget.c; sourceTree = "<group>"; };
+		AC83A73816C4F1BF0091D69A /* pngmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngmem.c; sourceTree = "<group>"; };
+		AC83A73916C4F1BF0091D69A /* pngpread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngpread.c; sourceTree = "<group>"; };
+		AC83A73A16C4F1BF0091D69A /* pngread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngread.c; sourceTree = "<group>"; };
+		AC83A73B16C4F1BF0091D69A /* pngrio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrio.c; sourceTree = "<group>"; };
+		AC83A73C16C4F1BF0091D69A /* pngrtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrtran.c; sourceTree = "<group>"; };
+		AC83A73D16C4F1BF0091D69A /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrutil.c; sourceTree = "<group>"; };
+		AC83A73E16C4F1BF0091D69A /* pngset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngset.c; sourceTree = "<group>"; };
+		AC83A73F16C4F1BF0091D69A /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngtrans.c; sourceTree = "<group>"; };
+		AC83A74016C4F1BF0091D69A /* pngvcrd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngvcrd.c; sourceTree = "<group>"; };
+		AC83A74116C4F1BF0091D69A /* pngwio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwio.c; sourceTree = "<group>"; };
+		AC83A74216C4F1BF0091D69A /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwrite.c; sourceTree = "<group>"; };
+		AC83A74316C4F1BF0091D69A /* pngwtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwtran.c; sourceTree = "<group>"; };
+		AC83A74416C4F1BF0091D69A /* pngwutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwutil.c; sourceTree = "<group>"; };
+		AC83A74616C4F1BF0091D69A /* adler32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = adler32.c; sourceTree = "<group>"; };
+		AC83A74716C4F1BF0091D69A /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compress.c; sourceTree = "<group>"; };
+		AC83A74816C4F1BF0091D69A /* crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crc32.c; sourceTree = "<group>"; };
+		AC83A74916C4F1BF0091D69A /* crc32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crc32.h; sourceTree = "<group>"; };
+		AC83A74A16C4F1BF0091D69A /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		AC83A74B16C4F1BF0091D69A /* deflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = deflate.c; sourceTree = "<group>"; };
+		AC83A74C16C4F1BF0091D69A /* deflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deflate.h; sourceTree = "<group>"; };
+		AC83A74D16C4F1BF0091D69A /* gzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzio.c; sourceTree = "<group>"; };
+		AC83A74E16C4F1BF0091D69A /* infback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = infback.c; sourceTree = "<group>"; };
+		AC83A74F16C4F1BF0091D69A /* inffast.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inffast.c; sourceTree = "<group>"; };
+		AC83A75016C4F1BF0091D69A /* inffast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inffast.h; sourceTree = "<group>"; };
+		AC83A75116C4F1BF0091D69A /* inffixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inffixed.h; sourceTree = "<group>"; };
+		AC83A75216C4F1BF0091D69A /* inflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inflate.c; sourceTree = "<group>"; };
+		AC83A75316C4F1BF0091D69A /* inflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inflate.h; sourceTree = "<group>"; };
+		AC83A75416C4F1BF0091D69A /* inftrees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inftrees.c; sourceTree = "<group>"; };
+		AC83A75516C4F1BF0091D69A /* inftrees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inftrees.h; sourceTree = "<group>"; };
+		AC83A75616C4F1BF0091D69A /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		AC83A75716C4F1BF0091D69A /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		AC83A75816C4F1BF0091D69A /* trees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = trees.c; sourceTree = "<group>"; };
+		AC83A75916C4F1BF0091D69A /* trees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trees.h; sourceTree = "<group>"; };
+		AC83A75A16C4F1BF0091D69A /* uncompr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = uncompr.c; sourceTree = "<group>"; };
+		AC83A75B16C4F1BF0091D69A /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		AC83A75C16C4F1BF0091D69A /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		AC83A75D16C4F1BF0091D69A /* zconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zconf.h; sourceTree = "<group>"; };
+		AC83A75E16C4F1BF0091D69A /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
+		AC83A75F16C4F1BF0091D69A /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
+		AC83A76016C4F1BF0091D69A /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
+		AC83A76216C4F1BF0091D69A /* VBArrayList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBArrayList.c; sourceTree = "<group>"; };
+		AC83A76316C4F1BF0091D69A /* VBArrayList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBArrayList.h; sourceTree = "<group>"; };
+		AC83A76416C4F1BF0091D69A /* VBArrayVector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBArrayVector.c; sourceTree = "<group>"; };
+		AC83A76516C4F1BF0091D69A /* VBArrayVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBArrayVector.h; sourceTree = "<group>"; };
+		AC83A76616C4F1BF0091D69A /* VBDebug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBDebug.c; sourceTree = "<group>"; };
+		AC83A76716C4F1BF0091D69A /* VBDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBDebug.h; sourceTree = "<group>"; };
+		AC83A76816C4F1BF0091D69A /* VBMath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBMath.c; sourceTree = "<group>"; };
+		AC83A76916C4F1BF0091D69A /* VBMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBMath.h; sourceTree = "<group>"; };
+		AC83A76A16C4F1BF0091D69A /* VBString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBString.c; sourceTree = "<group>"; };
+		AC83A76B16C4F1BF0091D69A /* VBString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBString.h; sourceTree = "<group>"; };
+		AC83A76C16C4F1BF0091D69A /* VBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBConfig.h; sourceTree = "<group>"; };
+		AC83A76D16C4F1BF0091D69A /* VBEngine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VBEngine.c; sourceTree = "<group>"; };
+		AC83A76E16C4F1BF0091D69A /* VBEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBEngine.h; sourceTree = "<group>"; };
+		AC83A76F16C4F1BF0091D69A /* VBType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBType.h; sourceTree = "<group>"; };
+		AC83A7F916C4F1F10091D69A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC83A6BD16C4F1A00091D69A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC83A7FA16C4F1F10091D69A /* OpenGLES.framework in Frameworks */,
+				AC83A6C416C4F1A10091D69A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC83A6CD16C4F1A10091D69A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC83A6D316C4F1A10091D69A /* SenTestingKit.framework in Frameworks */,
+				AC83A6D516C4F1A10091D69A /* UIKit.framework in Frameworks */,
+				AC83A6D616C4F1A10091D69A /* Foundation.framework in Frameworks */,
+				AC83A6D916C4F1A10091D69A /* libVBEngine.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AC83A6B716C4F1A00091D69A = {
+			isa = PBXGroup;
+			children = (
+				AC83A7F916C4F1F10091D69A /* OpenGLES.framework */,
+				AC83A6C516C4F1A10091D69A /* VBEngine */,
+				AC83A6DA16C4F1A10091D69A /* VBEngineTests */,
+				AC83A6C216C4F1A10091D69A /* Frameworks */,
+				AC83A6C116C4F1A10091D69A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AC83A6C116C4F1A10091D69A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A6C016C4F1A10091D69A /* libVBEngine.a */,
+				AC83A6D116C4F1A10091D69A /* VBEngineTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AC83A6C216C4F1A10091D69A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A6C316C4F1A10091D69A /* Foundation.framework */,
+				AC83A6D216C4F1A10091D69A /* SenTestingKit.framework */,
+				AC83A6D416C4F1A10091D69A /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AC83A6C516C4F1A10091D69A /* VBEngine */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A6EB16C4F1BF0091D69A /* src */,
+				AC83A6C616C4F1A10091D69A /* Supporting Files */,
+			);
+			path = VBEngine;
+			sourceTree = "<group>";
+		};
+		AC83A6C616C4F1A10091D69A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A6C716C4F1A10091D69A /* VBEngine-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AC83A6DA16C4F1A10091D69A /* VBEngineTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A6E016C4F1A10091D69A /* VBEngineTests.h */,
+				AC83A6E116C4F1A10091D69A /* VBEngineTests.m */,
+				AC83A6DB16C4F1A10091D69A /* Supporting Files */,
+			);
+			path = VBEngineTests;
+			sourceTree = "<group>";
+		};
+		AC83A6DB16C4F1A10091D69A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A6DC16C4F1A10091D69A /* VBEngineTests-Info.plist */,
+				AC83A6DD16C4F1A10091D69A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AC83A6EB16C4F1BF0091D69A /* src */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A6ED16C4F1BF0091D69A /* Core */,
+				AC83A70816C4F1BF0091D69A /* Display */,
+				AC83A71516C4F1BF0091D69A /* IO */,
+				AC83A73016C4F1BF0091D69A /* Other */,
+				AC83A76116C4F1BF0091D69A /* Util */,
+				AC83A76C16C4F1BF0091D69A /* VBConfig.h */,
+				AC83A76D16C4F1BF0091D69A /* VBEngine.c */,
+				AC83A76E16C4F1BF0091D69A /* VBEngine.h */,
+				AC83A76F16C4F1BF0091D69A /* VBType.h */,
+			);
+			name = src;
+			path = ../../src;
+			sourceTree = "<group>";
+		};
+		AC83A6ED16C4F1BF0091D69A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A6EE16C4F1BF0091D69A /* Color */,
+				AC83A6F916C4F1BF0091D69A /* Linear */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		AC83A6EE16C4F1BF0091D69A /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A6EF16C4F1BF0091D69A /* VBColor.c */,
+				AC83A6F016C4F1BF0091D69A /* VBColor.h */,
+				AC83A6F116C4F1BF0091D69A /* VBColorG.c */,
+				AC83A6F216C4F1BF0091D69A /* VBColorG.h */,
+				AC83A6F316C4F1BF0091D69A /* VBColorGA.c */,
+				AC83A6F416C4F1BF0091D69A /* VBColorGA.h */,
+				AC83A6F516C4F1BF0091D69A /* VBColorRGB.c */,
+				AC83A6F616C4F1BF0091D69A /* VBColorRGB.h */,
+				AC83A6F716C4F1BF0091D69A /* VBColorRGBA.c */,
+				AC83A6F816C4F1BF0091D69A /* VBColorRGBA.h */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		AC83A6F916C4F1BF0091D69A /* Linear */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A6FA16C4F1BF0091D69A /* VBAABB.c */,
+				AC83A6FB16C4F1BF0091D69A /* VBAABB.h */,
+				AC83A6FC16C4F1BF0091D69A /* VBLine2D.c */,
+				AC83A6FD16C4F1BF0091D69A /* VBLine2D.h */,
+				AC83A6FE16C4F1BF0091D69A /* VBMatrix2D.c */,
+				AC83A6FF16C4F1BF0091D69A /* VBMatrix2D.h */,
+				AC83A70016C4F1BF0091D69A /* VBMatrix2DWrapper.c */,
+				AC83A70116C4F1BF0091D69A /* VBMatrix2DWrapper.h */,
+				AC83A70216C4F1BF0091D69A /* VBSpline2DBezierCubic.c */,
+				AC83A70316C4F1BF0091D69A /* VBSpline2DBezierCubic.h */,
+				AC83A70416C4F1BF0091D69A /* VBTriangle2D.c */,
+				AC83A70516C4F1BF0091D69A /* VBTriangle2D.h */,
+				AC83A70616C4F1BF0091D69A /* VBVector2D.c */,
+				AC83A70716C4F1BF0091D69A /* VBVector2D.h */,
+			);
+			path = Linear;
+			sourceTree = "<group>";
+		};
+		AC83A70816C4F1BF0091D69A /* Display */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A70916C4F1BF0091D69A /* VBCamera2D.c */,
+				AC83A70A16C4F1BF0091D69A /* VBCamera2D.h */,
+				AC83A70B16C4F1BF0091D69A /* VBDisplay2D.c */,
+				AC83A70C16C4F1BF0091D69A /* VBDisplay2D.h */,
+				AC83A70D16C4F1BF0091D69A /* VBDrawable2D.c */,
+				AC83A70E16C4F1BF0091D69A /* VBDrawable2D.h */,
+				AC83A70F16C4F1BF0091D69A /* VBImage.c */,
+				AC83A71016C4F1BF0091D69A /* VBImage.h */,
+				AC83A71116C4F1BF0091D69A /* VBModel2D.c */,
+				AC83A71216C4F1BF0091D69A /* VBModel2D.h */,
+				AC83A71316C4F1BF0091D69A /* VBTexture.c */,
+				AC83A71416C4F1BF0091D69A /* VBTexture.h */,
+			);
+			path = Display;
+			sourceTree = "<group>";
+		};
+		AC83A71516C4F1BF0091D69A /* IO */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A71616C4F1BF0091D69A /* VBEngineFileInfo.c */,
+				AC83A71716C4F1BF0091D69A /* VBEngineFileInfo.h */,
+				AC83A71816C4F1BF0091D69A /* VBFile.c */,
+				AC83A71916C4F1BF0091D69A /* VBFile.h */,
+				AC83A71A16C4F1BF0091D69A /* VBObjectFile2D.c */,
+				AC83A71B16C4F1BF0091D69A /* VBObjectFile2D.h */,
+				AC83A71C16C4F1BF0091D69A /* VBObjectFile2DFrame.c */,
+				AC83A71D16C4F1BF0091D69A /* VBObjectFile2DFrame.h */,
+				AC83A71E16C4F1BF0091D69A /* VBObjectFile2DKeyFrame.c */,
+				AC83A71F16C4F1BF0091D69A /* VBObjectFile2DKeyFrame.h */,
+				AC83A72016C4F1BF0091D69A /* VBObjectFile2DKeyFrameElement.c */,
+				AC83A72116C4F1BF0091D69A /* VBObjectFile2DKeyFrameElement.h */,
+				AC83A72216C4F1BF0091D69A /* VBObjectFile2DLibrary.c */,
+				AC83A72316C4F1BF0091D69A /* VBObjectFile2DLibrary.h */,
+				AC83A72416C4F1BF0091D69A /* VBObjectFile2DLibraryNameID.c */,
+				AC83A72516C4F1BF0091D69A /* VBObjectFile2DLibraryNameID.h */,
+				AC83A72616C4F1BF0091D69A /* VBObjectFile2DTexcoord.c */,
+				AC83A72716C4F1BF0091D69A /* VBObjectFile2DTexcoord.h */,
+				AC83A72816C4F1BF0091D69A /* VBObjectFile2DTransition.c */,
+				AC83A72916C4F1BF0091D69A /* VBObjectFile2DTransition.h */,
+				AC83A72A16C4F1BF0091D69A /* VBPNGFile.c */,
+				AC83A72B16C4F1BF0091D69A /* VBPNGFile.h */,
+				AC83A72C16C4F1BF0091D69A /* VBSystem.c */,
+				AC83A72D16C4F1BF0091D69A /* VBSystem.h */,
+				AC83A72E16C4F1BF0091D69A /* VBTouch.c */,
+				AC83A72F16C4F1BF0091D69A /* VBTouch.h */,
+			);
+			path = IO;
+			sourceTree = "<group>";
+		};
+		AC83A73016C4F1BF0091D69A /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A73116C4F1BF0091D69A /* png */,
+				AC83A74516C4F1BF0091D69A /* zlib */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		AC83A73116C4F1BF0091D69A /* png */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A73216C4F1BF0091D69A /* png.c */,
+				AC83A73316C4F1BF0091D69A /* png.h */,
+				AC83A73416C4F1BF0091D69A /* pngconf.h */,
+				AC83A73516C4F1BF0091D69A /* pngerror.c */,
+				AC83A73616C4F1BF0091D69A /* pnggccrd.c */,
+				AC83A73716C4F1BF0091D69A /* pngget.c */,
+				AC83A73816C4F1BF0091D69A /* pngmem.c */,
+				AC83A73916C4F1BF0091D69A /* pngpread.c */,
+				AC83A73A16C4F1BF0091D69A /* pngread.c */,
+				AC83A73B16C4F1BF0091D69A /* pngrio.c */,
+				AC83A73C16C4F1BF0091D69A /* pngrtran.c */,
+				AC83A73D16C4F1BF0091D69A /* pngrutil.c */,
+				AC83A73E16C4F1BF0091D69A /* pngset.c */,
+				AC83A73F16C4F1BF0091D69A /* pngtrans.c */,
+				AC83A74016C4F1BF0091D69A /* pngvcrd.c */,
+				AC83A74116C4F1BF0091D69A /* pngwio.c */,
+				AC83A74216C4F1BF0091D69A /* pngwrite.c */,
+				AC83A74316C4F1BF0091D69A /* pngwtran.c */,
+				AC83A74416C4F1BF0091D69A /* pngwutil.c */,
+			);
+			path = png;
+			sourceTree = "<group>";
+		};
+		AC83A74516C4F1BF0091D69A /* zlib */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A74616C4F1BF0091D69A /* adler32.c */,
+				AC83A74716C4F1BF0091D69A /* compress.c */,
+				AC83A74816C4F1BF0091D69A /* crc32.c */,
+				AC83A74916C4F1BF0091D69A /* crc32.h */,
+				AC83A74A16C4F1BF0091D69A /* crypt.h */,
+				AC83A74B16C4F1BF0091D69A /* deflate.c */,
+				AC83A74C16C4F1BF0091D69A /* deflate.h */,
+				AC83A74D16C4F1BF0091D69A /* gzio.c */,
+				AC83A74E16C4F1BF0091D69A /* infback.c */,
+				AC83A74F16C4F1BF0091D69A /* inffast.c */,
+				AC83A75016C4F1BF0091D69A /* inffast.h */,
+				AC83A75116C4F1BF0091D69A /* inffixed.h */,
+				AC83A75216C4F1BF0091D69A /* inflate.c */,
+				AC83A75316C4F1BF0091D69A /* inflate.h */,
+				AC83A75416C4F1BF0091D69A /* inftrees.c */,
+				AC83A75516C4F1BF0091D69A /* inftrees.h */,
+				AC83A75616C4F1BF0091D69A /* ioapi.c */,
+				AC83A75716C4F1BF0091D69A /* ioapi.h */,
+				AC83A75816C4F1BF0091D69A /* trees.c */,
+				AC83A75916C4F1BF0091D69A /* trees.h */,
+				AC83A75A16C4F1BF0091D69A /* uncompr.c */,
+				AC83A75B16C4F1BF0091D69A /* unzip.c */,
+				AC83A75C16C4F1BF0091D69A /* unzip.h */,
+				AC83A75D16C4F1BF0091D69A /* zconf.h */,
+				AC83A75E16C4F1BF0091D69A /* zlib.h */,
+				AC83A75F16C4F1BF0091D69A /* zutil.c */,
+				AC83A76016C4F1BF0091D69A /* zutil.h */,
+			);
+			path = zlib;
+			sourceTree = "<group>";
+		};
+		AC83A76116C4F1BF0091D69A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				AC83A76216C4F1BF0091D69A /* VBArrayList.c */,
+				AC83A76316C4F1BF0091D69A /* VBArrayList.h */,
+				AC83A76416C4F1BF0091D69A /* VBArrayVector.c */,
+				AC83A76516C4F1BF0091D69A /* VBArrayVector.h */,
+				AC83A76616C4F1BF0091D69A /* VBDebug.c */,
+				AC83A76716C4F1BF0091D69A /* VBDebug.h */,
+				AC83A76816C4F1BF0091D69A /* VBMath.c */,
+				AC83A76916C4F1BF0091D69A /* VBMath.h */,
+				AC83A76A16C4F1BF0091D69A /* VBString.c */,
+				AC83A76B16C4F1BF0091D69A /* VBString.h */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AC83A6BF16C4F1A00091D69A /* VBEngine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC83A6E516C4F1A10091D69A /* Build configuration list for PBXNativeTarget "VBEngine" */;
+			buildPhases = (
+				AC83A6BC16C4F1A00091D69A /* Sources */,
+				AC83A6BD16C4F1A00091D69A /* Frameworks */,
+				AC83A6BE16C4F1A00091D69A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VBEngine;
+			productName = VBEngine;
+			productReference = AC83A6C016C4F1A10091D69A /* libVBEngine.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		AC83A6D016C4F1A10091D69A /* VBEngineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC83A6E816C4F1A10091D69A /* Build configuration list for PBXNativeTarget "VBEngineTests" */;
+			buildPhases = (
+				AC83A6CC16C4F1A10091D69A /* Sources */,
+				AC83A6CD16C4F1A10091D69A /* Frameworks */,
+				AC83A6CE16C4F1A10091D69A /* Resources */,
+				AC83A6CF16C4F1A10091D69A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC83A6D816C4F1A10091D69A /* PBXTargetDependency */,
+			);
+			name = VBEngineTests;
+			productName = VBEngineTests;
+			productReference = AC83A6D116C4F1A10091D69A /* VBEngineTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AC83A6B816C4F1A00091D69A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = vanillabreeze;
+			};
+			buildConfigurationList = AC83A6BB16C4F1A00091D69A /* Build configuration list for PBXProject "VBEngine" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AC83A6B716C4F1A00091D69A;
+			productRefGroup = AC83A6C116C4F1A10091D69A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC83A6BF16C4F1A00091D69A /* VBEngine */,
+				AC83A6D016C4F1A10091D69A /* VBEngineTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC83A6CE16C4F1A10091D69A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC83A6DF16C4F1A10091D69A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AC83A6CF16C4F1A10091D69A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC83A6BC16C4F1A00091D69A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC83A77116C4F1BF0091D69A /* VBColor.c in Sources */,
+				AC83A77316C4F1BF0091D69A /* VBColorG.c in Sources */,
+				AC83A77516C4F1BF0091D69A /* VBColorGA.c in Sources */,
+				AC83A77716C4F1BF0091D69A /* VBColorRGB.c in Sources */,
+				AC83A77916C4F1BF0091D69A /* VBColorRGBA.c in Sources */,
+				AC83A77B16C4F1BF0091D69A /* VBAABB.c in Sources */,
+				AC83A77D16C4F1BF0091D69A /* VBLine2D.c in Sources */,
+				AC83A77F16C4F1BF0091D69A /* VBMatrix2D.c in Sources */,
+				AC83A78116C4F1BF0091D69A /* VBMatrix2DWrapper.c in Sources */,
+				AC83A78316C4F1BF0091D69A /* VBSpline2DBezierCubic.c in Sources */,
+				AC83A78516C4F1BF0091D69A /* VBTriangle2D.c in Sources */,
+				AC83A78716C4F1BF0091D69A /* VBVector2D.c in Sources */,
+				AC83A78916C4F1BF0091D69A /* VBCamera2D.c in Sources */,
+				AC83A78B16C4F1BF0091D69A /* VBDisplay2D.c in Sources */,
+				AC83A78D16C4F1BF0091D69A /* VBDrawable2D.c in Sources */,
+				AC83A78F16C4F1BF0091D69A /* VBImage.c in Sources */,
+				AC83A79116C4F1BF0091D69A /* VBModel2D.c in Sources */,
+				AC83A79316C4F1BF0091D69A /* VBTexture.c in Sources */,
+				AC83A79516C4F1BF0091D69A /* VBEngineFileInfo.c in Sources */,
+				AC83A79716C4F1BF0091D69A /* VBFile.c in Sources */,
+				AC83A79916C4F1BF0091D69A /* VBObjectFile2D.c in Sources */,
+				AC83A79B16C4F1BF0091D69A /* VBObjectFile2DFrame.c in Sources */,
+				AC83A79D16C4F1BF0091D69A /* VBObjectFile2DKeyFrame.c in Sources */,
+				AC83A79F16C4F1BF0091D69A /* VBObjectFile2DKeyFrameElement.c in Sources */,
+				AC83A7A116C4F1BF0091D69A /* VBObjectFile2DLibrary.c in Sources */,
+				AC83A7A316C4F1BF0091D69A /* VBObjectFile2DLibraryNameID.c in Sources */,
+				AC83A7A516C4F1BF0091D69A /* VBObjectFile2DTexcoord.c in Sources */,
+				AC83A7A716C4F1BF0091D69A /* VBObjectFile2DTransition.c in Sources */,
+				AC83A7A916C4F1BF0091D69A /* VBPNGFile.c in Sources */,
+				AC83A7AB16C4F1BF0091D69A /* VBSystem.c in Sources */,
+				AC83A7AD16C4F1BF0091D69A /* VBTouch.c in Sources */,
+				AC83A7AF16C4F1BF0091D69A /* png.c in Sources */,
+				AC83A7B116C4F1BF0091D69A /* pngerror.c in Sources */,
+				AC83A7B316C4F1BF0091D69A /* pnggccrd.c in Sources */,
+				AC83A7B516C4F1BF0091D69A /* pngget.c in Sources */,
+				AC83A7B716C4F1BF0091D69A /* pngmem.c in Sources */,
+				AC83A7B916C4F1BF0091D69A /* pngpread.c in Sources */,
+				AC83A7BB16C4F1BF0091D69A /* pngread.c in Sources */,
+				AC83A7BD16C4F1BF0091D69A /* pngrio.c in Sources */,
+				AC83A7BF16C4F1BF0091D69A /* pngrtran.c in Sources */,
+				AC83A7C116C4F1BF0091D69A /* pngrutil.c in Sources */,
+				AC83A7C316C4F1BF0091D69A /* pngset.c in Sources */,
+				AC83A7C516C4F1BF0091D69A /* pngtrans.c in Sources */,
+				AC83A7C716C4F1BF0091D69A /* pngvcrd.c in Sources */,
+				AC83A7C916C4F1BF0091D69A /* pngwio.c in Sources */,
+				AC83A7CB16C4F1BF0091D69A /* pngwrite.c in Sources */,
+				AC83A7CD16C4F1BF0091D69A /* pngwtran.c in Sources */,
+				AC83A7CF16C4F1BF0091D69A /* pngwutil.c in Sources */,
+				AC83A7D116C4F1BF0091D69A /* adler32.c in Sources */,
+				AC83A7D316C4F1BF0091D69A /* compress.c in Sources */,
+				AC83A7D516C4F1BF0091D69A /* crc32.c in Sources */,
+				AC83A7D716C4F1BF0091D69A /* deflate.c in Sources */,
+				AC83A7D916C4F1BF0091D69A /* gzio.c in Sources */,
+				AC83A7DB16C4F1BF0091D69A /* infback.c in Sources */,
+				AC83A7DD16C4F1BF0091D69A /* inffast.c in Sources */,
+				AC83A7DF16C4F1BF0091D69A /* inflate.c in Sources */,
+				AC83A7E116C4F1BF0091D69A /* inftrees.c in Sources */,
+				AC83A7E316C4F1BF0091D69A /* ioapi.c in Sources */,
+				AC83A7E516C4F1BF0091D69A /* trees.c in Sources */,
+				AC83A7E716C4F1BF0091D69A /* uncompr.c in Sources */,
+				AC83A7E916C4F1BF0091D69A /* unzip.c in Sources */,
+				AC83A7EB16C4F1BF0091D69A /* zutil.c in Sources */,
+				AC83A7ED16C4F1BF0091D69A /* VBArrayList.c in Sources */,
+				AC83A7EF16C4F1BF0091D69A /* VBArrayVector.c in Sources */,
+				AC83A7F116C4F1BF0091D69A /* VBDebug.c in Sources */,
+				AC83A7F316C4F1BF0091D69A /* VBMath.c in Sources */,
+				AC83A7F516C4F1BF0091D69A /* VBString.c in Sources */,
+				AC83A7F716C4F1BF0091D69A /* VBEngine.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC83A6CC16C4F1A10091D69A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC83A6E216C4F1A10091D69A /* VBEngineTests.m in Sources */,
+				AC83A77216C4F1BF0091D69A /* VBColor.c in Sources */,
+				AC83A77416C4F1BF0091D69A /* VBColorG.c in Sources */,
+				AC83A77616C4F1BF0091D69A /* VBColorGA.c in Sources */,
+				AC83A77816C4F1BF0091D69A /* VBColorRGB.c in Sources */,
+				AC83A77A16C4F1BF0091D69A /* VBColorRGBA.c in Sources */,
+				AC83A77C16C4F1BF0091D69A /* VBAABB.c in Sources */,
+				AC83A77E16C4F1BF0091D69A /* VBLine2D.c in Sources */,
+				AC83A78016C4F1BF0091D69A /* VBMatrix2D.c in Sources */,
+				AC83A78216C4F1BF0091D69A /* VBMatrix2DWrapper.c in Sources */,
+				AC83A78416C4F1BF0091D69A /* VBSpline2DBezierCubic.c in Sources */,
+				AC83A78616C4F1BF0091D69A /* VBTriangle2D.c in Sources */,
+				AC83A78816C4F1BF0091D69A /* VBVector2D.c in Sources */,
+				AC83A78A16C4F1BF0091D69A /* VBCamera2D.c in Sources */,
+				AC83A78C16C4F1BF0091D69A /* VBDisplay2D.c in Sources */,
+				AC83A78E16C4F1BF0091D69A /* VBDrawable2D.c in Sources */,
+				AC83A79016C4F1BF0091D69A /* VBImage.c in Sources */,
+				AC83A79216C4F1BF0091D69A /* VBModel2D.c in Sources */,
+				AC83A79416C4F1BF0091D69A /* VBTexture.c in Sources */,
+				AC83A79616C4F1BF0091D69A /* VBEngineFileInfo.c in Sources */,
+				AC83A79816C4F1BF0091D69A /* VBFile.c in Sources */,
+				AC83A79A16C4F1BF0091D69A /* VBObjectFile2D.c in Sources */,
+				AC83A79C16C4F1BF0091D69A /* VBObjectFile2DFrame.c in Sources */,
+				AC83A79E16C4F1BF0091D69A /* VBObjectFile2DKeyFrame.c in Sources */,
+				AC83A7A016C4F1BF0091D69A /* VBObjectFile2DKeyFrameElement.c in Sources */,
+				AC83A7A216C4F1BF0091D69A /* VBObjectFile2DLibrary.c in Sources */,
+				AC83A7A416C4F1BF0091D69A /* VBObjectFile2DLibraryNameID.c in Sources */,
+				AC83A7A616C4F1BF0091D69A /* VBObjectFile2DTexcoord.c in Sources */,
+				AC83A7A816C4F1BF0091D69A /* VBObjectFile2DTransition.c in Sources */,
+				AC83A7AA16C4F1BF0091D69A /* VBPNGFile.c in Sources */,
+				AC83A7AC16C4F1BF0091D69A /* VBSystem.c in Sources */,
+				AC83A7AE16C4F1BF0091D69A /* VBTouch.c in Sources */,
+				AC83A7B016C4F1BF0091D69A /* png.c in Sources */,
+				AC83A7B216C4F1BF0091D69A /* pngerror.c in Sources */,
+				AC83A7B416C4F1BF0091D69A /* pnggccrd.c in Sources */,
+				AC83A7B616C4F1BF0091D69A /* pngget.c in Sources */,
+				AC83A7B816C4F1BF0091D69A /* pngmem.c in Sources */,
+				AC83A7BA16C4F1BF0091D69A /* pngpread.c in Sources */,
+				AC83A7BC16C4F1BF0091D69A /* pngread.c in Sources */,
+				AC83A7BE16C4F1BF0091D69A /* pngrio.c in Sources */,
+				AC83A7C016C4F1BF0091D69A /* pngrtran.c in Sources */,
+				AC83A7C216C4F1BF0091D69A /* pngrutil.c in Sources */,
+				AC83A7C416C4F1BF0091D69A /* pngset.c in Sources */,
+				AC83A7C616C4F1BF0091D69A /* pngtrans.c in Sources */,
+				AC83A7C816C4F1BF0091D69A /* pngvcrd.c in Sources */,
+				AC83A7CA16C4F1BF0091D69A /* pngwio.c in Sources */,
+				AC83A7CC16C4F1BF0091D69A /* pngwrite.c in Sources */,
+				AC83A7CE16C4F1BF0091D69A /* pngwtran.c in Sources */,
+				AC83A7D016C4F1BF0091D69A /* pngwutil.c in Sources */,
+				AC83A7D216C4F1BF0091D69A /* adler32.c in Sources */,
+				AC83A7D416C4F1BF0091D69A /* compress.c in Sources */,
+				AC83A7D616C4F1BF0091D69A /* crc32.c in Sources */,
+				AC83A7D816C4F1BF0091D69A /* deflate.c in Sources */,
+				AC83A7DA16C4F1BF0091D69A /* gzio.c in Sources */,
+				AC83A7DC16C4F1BF0091D69A /* infback.c in Sources */,
+				AC83A7DE16C4F1BF0091D69A /* inffast.c in Sources */,
+				AC83A7E016C4F1BF0091D69A /* inflate.c in Sources */,
+				AC83A7E216C4F1BF0091D69A /* inftrees.c in Sources */,
+				AC83A7E416C4F1BF0091D69A /* ioapi.c in Sources */,
+				AC83A7E616C4F1BF0091D69A /* trees.c in Sources */,
+				AC83A7E816C4F1BF0091D69A /* uncompr.c in Sources */,
+				AC83A7EA16C4F1BF0091D69A /* unzip.c in Sources */,
+				AC83A7EC16C4F1BF0091D69A /* zutil.c in Sources */,
+				AC83A7EE16C4F1BF0091D69A /* VBArrayList.c in Sources */,
+				AC83A7F016C4F1BF0091D69A /* VBArrayVector.c in Sources */,
+				AC83A7F216C4F1BF0091D69A /* VBDebug.c in Sources */,
+				AC83A7F416C4F1BF0091D69A /* VBMath.c in Sources */,
+				AC83A7F616C4F1BF0091D69A /* VBString.c in Sources */,
+				AC83A7F816C4F1BF0091D69A /* VBEngine.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC83A6D816C4F1A10091D69A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC83A6BF16C4F1A00091D69A /* VBEngine */;
+			targetProxy = AC83A6D716C4F1A10091D69A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AC83A6DD16C4F1A10091D69A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC83A6DE16C4F1A10091D69A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AC83A6E316C4F1A10091D69A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AC83A6E416C4F1A10091D69A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AC83A6E616C4F1A10091D69A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/VBEngine.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VBEngine/VBEngine-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					_VB_IPHONE_,
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AC83A6E716C4F1A10091D69A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/VBEngine.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VBEngine/VBEngine-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = _VB_IPHONE_;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AC83A6E916C4F1A10091D69A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VBEngine/VBEngine-Prefix.pch";
+				INFOPLIST_FILE = "VBEngineTests/VBEngineTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		AC83A6EA16C4F1A10091D69A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VBEngine/VBEngine-Prefix.pch";
+				INFOPLIST_FILE = "VBEngineTests/VBEngineTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC83A6BB16C4F1A00091D69A /* Build configuration list for PBXProject "VBEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC83A6E316C4F1A10091D69A /* Debug */,
+				AC83A6E416C4F1A10091D69A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC83A6E516C4F1A10091D69A /* Build configuration list for PBXNativeTarget "VBEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC83A6E616C4F1A10091D69A /* Debug */,
+				AC83A6E716C4F1A10091D69A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC83A6E816C4F1A10091D69A /* Build configuration list for PBXNativeTarget "VBEngineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC83A6E916C4F1A10091D69A /* Debug */,
+				AC83A6EA16C4F1A10091D69A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AC83A6B816C4F1A00091D69A /* Project object */;
+}
