@@ -268,9 +268,10 @@ VBSystemEndian VBFileGetEndian(VBFile* _file) {
 	if(_file) {
 		return _file->endian;
 	} else {
+		//VBNull???์ผ???ธ๋””?์ ๊ฐ€?ธ์ค?ค๊ณ  ?ฉ๋?? VBFileInit(VBFileAlloc())?์? ?์? ?์ผ???ฌ์ฉ?์ ???์ต?๋ค.
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetEndian() - VBNull???์ผ???ธ๋””?์ ๊ฐ€?ธ์ค?ค๊ณ  ?ฉ๋?? VBFileInit(VBFileAlloc())?์? ?์? ?์ผ???ฌ์ฉ?์ ???์ต?๋ค.");
+										 "VBEngine Log: VBFileGetEndian() - VBNull-");
 	}
 	return VBSystemEndian_None;
 }
@@ -305,12 +306,13 @@ void VBFileSetOffset(VBFile* _file, VBUShort _offset) {
 }
 
 VBUShort VBFileGetOffset(VBFile* _file) {
+	//VBNull???์ผ???คํ”?์ ๊ฐ€?ธ์ค?ค๊ณ  ?ฉ๋?? VBFileInit(VBFileAlloc())?์? ?์? ?์ผ???ฌ์ฉ?์ ???์ต?๋ค.
 	if(_file)
 		return _file->offset;
 	else
 		VBDebugPrintAndPrintLogFileAbort(VBEngineGetDefaultDebuger(),
 										 VBFalse, 
-										 "VBEngine Log: VBFileGetOffset() - VBNull???์ผ???คํ”?์ ๊ฐ€?ธ์ค?ค๊ณ  ?ฉ๋?? VBFileInit(VBFileAlloc())?์? ?์? ?์ผ???ฌ์ฉ?์ ???์ต?๋ค.");
+										 "VBEngine Log: VBFileGetOffset() - ");
 	return 0;
 }
 
