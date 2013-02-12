@@ -338,7 +338,6 @@
 		AC83A6B716C4F1A00091D69A = {
 			isa = PBXGroup;
 			children = (
-				AC83A7F916C4F1F10091D69A /* OpenGLES.framework */,
 				AC83A6C516C4F1A10091D69A /* VBEngine */,
 				AC83A6DA16C4F1A10091D69A /* VBEngineTests */,
 				AC83A6C216C4F1A10091D69A /* Frameworks */,
@@ -358,6 +357,7 @@
 		AC83A6C216C4F1A10091D69A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC83A7F916C4F1F10091D69A /* OpenGLES.framework */,
 				AC83A6C316C4F1A10091D69A /* Foundation.framework */,
 				AC83A6D216C4F1A10091D69A /* SenTestingKit.framework */,
 				AC83A6D416C4F1A10091D69A /* UIKit.framework */,
