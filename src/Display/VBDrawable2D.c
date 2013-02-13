@@ -6,7 +6,6 @@
 
 #ifdef _VB_IPHONE_
 #include <OpenGLES/ES1/gl.h>
-#include <OpenGLEs/ES2/gl.h>
 #endif
 
 #ifdef __ANDROID__
