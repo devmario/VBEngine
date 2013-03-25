@@ -53,11 +53,12 @@ VBAABB VBAABBCreate(VBFloat _l, VBFloat _t, VBFloat _r, VBFloat _b) {
 }
 
 VBBool VBAABBHitTestWithVector2D(VBAABB _aabb, VBVector2D _position) {
-    if(_position.x <= _aabb.l)
+	//for bitmap point test
+    if(_position.x < _aabb.l)
         return VBFalse;
     if(_position.x >= _aabb.r)
         return VBFalse;
-    if(_position.y <= _aabb.t)
+    if(_position.y < _aabb.t)
         return VBFalse;
     if(_position.y >= _aabb.b)
         return VBFalse;
