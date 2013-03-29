@@ -66,13 +66,13 @@ VBBool VBAABBHitTestWithVector2D(VBAABB _aabb, VBVector2D _position) {
 }
 
 VBBool VBAABBHitTest(VBAABB _aabb1, VBAABB _aabb2) {
-    if(_aabb1.r <= _aabb2.l)
+    if(_aabb1.r < _aabb2.l)
         return VBFalse;
-    if(_aabb1.l >= _aabb2.r)
+    if(_aabb1.l > _aabb2.r)
         return VBFalse;
-    if(_aabb1.b <= _aabb2.t)
+    if(_aabb1.b < _aabb2.t)
         return VBFalse;
-    if(_aabb1.t >= _aabb2.b)
+    if(_aabb1.t > _aabb2.b)
         return VBFalse;
     return VBTrue;
 }
