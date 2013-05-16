@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/repos/ibiza/!svn/ver/19/branch/ibizaSimulator
+END
+ibizaXcodeForMac_Prefix.pch
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/ibiza/!svn/ver/10/branch/ibizaSimulator/ibizaXcodeForMac_Prefix.pch
+END
+main.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/repos/ibiza/!svn/ver/10/branch/ibizaSimulator/main.m
+END
+ibizaXcodeForMacAppDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/ibiza/!svn/ver/10/branch/ibizaSimulator/ibizaXcodeForMacAppDelegate.m
+END
+GLVIEW.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/repos/ibiza/!svn/ver/10/branch/ibizaSimulator/GLVIEW.h
+END
+Tutorial.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/repos/ibiza/!svn/ver/10/branch/ibizaSimulator/Tutorial.c
+END
+GLVIEW.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/repos/ibiza/!svn/ver/16/branch/ibizaSimulator/GLVIEW.m
+END
+Tutorial.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/repos/ibiza/!svn/ver/10/branch/ibizaSimulator/Tutorial.h
+END
+ibizaXcodeForMacAppDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/ibiza/!svn/ver/10/branch/ibizaSimulator/ibizaXcodeForMacAppDelegate.h
+END
+ibizaXcodeForMac-Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/ibiza/!svn/ver/10/branch/ibizaSimulator/ibizaXcodeForMac-Info.plist
+END
