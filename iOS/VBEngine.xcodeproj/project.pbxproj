@@ -924,6 +924,7 @@
 		AC83A6E616C4F1A10091D69A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				DSTROOT = /tmp/VBEngine.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VBEngine/VBEngine-Prefix.pch";
@@ -942,6 +943,7 @@
 		AC83A6E716C4F1A10091D69A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				DSTROOT = /tmp/VBEngine.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VBEngine/VBEngine-Prefix.pch";
